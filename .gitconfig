@@ -1,0 +1,19 @@
+[user]
+	email = alex.jang@samsung.com
+	name = Kyoungdon Jang
+[color]
+	ui = auto
+	status = auto
+	branch = auto
+[alias]
+        br = branch -av
+        ci = commit -v -s
+        co = checkout
+        dc = diff -b --cached
+        d = diff -b
+        fix = commit --amend -C HEAD
+        glog = log --graph --abbrev-commit --decorate=full --stat
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+        l = log --abbrev-commit --decorate=full --stat
+        st = status
+        top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration

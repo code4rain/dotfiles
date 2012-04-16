@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/alex.jang/T0_kernel/arch/arm/configs'
+let g:netrw_dirhist_2='/home/alex.jang/T0_kernel/arch/arm'
+let g:netrw_dirhist_3='/home/alex.jang/NOTE10/android/bootable/recovery'
+let g:netrw_dirhist_4='/home/alex.jang/P4G-ICS/buildscript'
+let g:netrw_dirhist_5='/home/alex.jang/ide/ide-screenshots'
+let g:netrw_dirhist_6='/home/alex.jang/T0_kernel/arch/arm/configs'
+let g:netrw_dirhist_7='/home/alex.jang/T0_kernel/arch/arm/mach-exynos'
+let g:netrw_dirhist_8='/home/alex.jang/T0_kernel/sound/soc/samsung'

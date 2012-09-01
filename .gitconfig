@@ -8,6 +8,7 @@
 [alias]
         br = branch -av
         ci = commit -v -s
+        cm = commit -v -s -a -m 
         co = checkout
         dc = diff -b --cached
         d = diff -b

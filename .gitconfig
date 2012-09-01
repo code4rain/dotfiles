@@ -17,3 +17,5 @@
         l = log --abbrev-commit --decorate=full --stat
         st = status
         top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration
+[core]
+	editor = vim

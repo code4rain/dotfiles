@@ -4,7 +4,7 @@ filetype off                   " required!
 """"""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/vundle/
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -332,7 +332,7 @@ function SetCscope()
 	endwhile
 
 	if filereadable("cscope.out")
-		execute "cs add " . getcwd() . "/cscope.out"
+		execute "silent cs add " . getcwd() . "/cscope.out"
 	endif
 
 	execute "cd " . curdir
@@ -358,19 +358,18 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <silent> <Leader>t :CommandT<CR>
 nmap <silent> <Leader>b :CommandTBuffer<CR>
-map <silent> <C-O> :CommandT<CR>
 
 let g:CommandTMaxFiles=1000000
 let g:CommandTMaxDepth=25
 
-set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,
+set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tag List
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:Tlist_Inc_Winwidth=0
 let g:Tlist_Exit_OnlyWindow = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
-map ^[l :TlistToggle<CR>
+map <F11> :TlistToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -382,25 +381,18 @@ map <F9> :RgrepAdd <cword><CR>
 " Bufexplorer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F12> <leader>be
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EnhancedJumps
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <C-9> :<Plug>EnhancedJumpsFarFallbackChangeNewer
+map <C-0> :<Plug>EnhancedJumpsFarFallbackChangeOlder
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Navigation
-noremap ^[, <C-O>
-noremap ^[. <C-I>
-
 "Tab 열기/닫기
 map <silent><C-N> :tabnew<CR>
 map <silent><C-H> :tabp<CR>
 map <silent><C-L> :tabn<CR>
-
-
-" 영역이 지정된 상태에서 Tab 과 Shift-Tab 으로 들여쓰기/내어쓰기를 할 수 있도록 함.
-vmap <Tab> >g
-vmap <S-Tab> <gv
-noremap <Tab> <C-W>w
-nnoremap <S-Tab> <C-W>p
 
 " Ctrl + j,k 키로 현재 라인을 위아래로 move
 nnoremap <C-j> :m+<CR>==
@@ -409,3 +401,4 @@ inoremap <C-j> <Esc>:m+<CR>==gi
 inoremap <C-k> <Esc>:m-2<CR>==gi
 vnoremap <C-j> :m'>+<CR>gv=gv
 vnoremap <C-k> :m-2<CR>gv=gv
+

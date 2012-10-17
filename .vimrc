@@ -361,6 +361,9 @@ nmap <silent> <Leader>b :CommandTBuffer<CR>
 
 let g:CommandTMaxFiles=1000000
 let g:CommandTMaxDepth=25
+" For my terminal. <C-H> and <BS> has same keymap in my terminal.
+let g:CommandTCursorLeftMap='<Left>'
+let g:CommandTBackspaceMap='<C-H>'
 
 set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -402,3 +405,4 @@ inoremap <C-k> <Esc>:m-2<CR>==gi
 vnoremap <C-j> :m'>+<CR>gv=gv
 vnoremap <C-k> :m-2<CR>gv=gv
 
+cnoremap <C-D> <cword>

@@ -32,6 +32,7 @@ Bundle 'SuperTab'
 Bundle 'git://github.com/slack/vim-bufexplorer.git'
 Bundle 'git://github.com/hallison/vim-markdown.git'
 Bundle 'git://github.com/matthias-guenther/hammer.vim.git'
+Bundle 'AutoComplPop'
 
 filetype plugin indent on     " required!
 "
@@ -251,6 +252,9 @@ au FileType ,jsp setl cin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 편리한 기능
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지v않아도(hidden) 된다 
+set hidden
+
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wmnu
 
@@ -262,6 +266,13 @@ set iminsert=0
 set imsearch=0
 
 set comments=sl:/*,mb:\ *,elx:*/
+
+"unix format으로 변경하고,"trailing space 지우기
+func! FUNC_dos2unix()
+    %s///g
+    %s/\s\+$//
+endfunc
+nmap  <LocalLeader>unix :call FUNC_dos2unix()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 기타 설정
@@ -319,7 +330,7 @@ ab erturn return
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
+" command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
 command! -bang Q quitall<bang>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
@@ -361,11 +372,15 @@ nmap <silent> <Leader>b :CommandTBuffer<CR>
 
 let g:CommandTMaxFiles=1000000
 let g:CommandTMaxDepth=25
+let g:CommandTMaxCachedDirectories=5 "1 " multiple cache size 
 " For my terminal. <C-H> and <BS> has same keymap in my terminal.
 let g:CommandTCursorLeftMap='<Left>'
 let g:CommandTBackspaceMap='<C-H>'
 
 set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
+set wildignore+=*.jar,*.so,*.a,*.class,*.apk,*.
+set wildignore+=*.js,*.html,*.jpg,*.png,*.gif,*.htm,*.jd,*.txvi,*.zip,*.exe,*.swp
+set wildignore+=cts/**,docs/**,ndk/**,sdk/**,external/**,out/product/**,
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tag List
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -376,7 +391,7 @@ map <F11> :TlistToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let Grep_Skip_Files = '*.bak *~ *.o *.cmd .git *.obj *.builtin *.d *.module tags cscope.* vmlinux System.map *.patch'
+let Grep_Skip_Files = '*.bak *~ *.o *.cmd .git *.obj *.builtin *.d *.module tags cscope.* vmlinux *System.map *.patch *.a Image .tmp* *.ko *.swp'
 map <C-/> :Rgrep <cword><CR>
 map <F9> :RgrepAdd <cword><CR>
 
@@ -389,6 +404,17 @@ map <F12> <leader>be
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <C-9> :<Plug>EnhancedJumpsFarFallbackChangeNewer
 map <C-0> :<Plug>EnhancedJumpsFarFallbackChangeOlder
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Fugitive
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <F4>hh :help my_git<CR>
+nnoremap <silent> <F4> :Gstatus<CR>
+nnoremap <silent> <F4>s :Gstatus<CR>
+nnoremap <silent> <F4>b :Gblame<CR>
+nnoremap <silent> <F4>c :Gcommit<CR>
+nnoremap <silent> <F4>l :Glog --oneline<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -406,3 +432,5 @@ vnoremap <C-j> :m'>+<CR>gv=gv
 vnoremap <C-k> :m-2<CR>gv=gv
 
 cnoremap <C-D> <cword>
+cnoreab W w
+cnoreab removeblankline g/^$/d

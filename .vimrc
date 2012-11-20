@@ -220,6 +220,10 @@ endif
 set background=dark
 colorscheme railscasts
 
+"Enable Word wrap
+set wrap
+set linebreak
+set nolist
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " filetype 기능 & Syntax Highlighting 기능
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -320,6 +324,7 @@ ab prit print
 ab fales false
 ab treu true
 ab teur true
+ab ture true
 ab nulll null
 ab nuii null
 ab retrun return
@@ -413,7 +418,7 @@ nnoremap <silent> <F4> :Gstatus<CR>
 nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
-nnoremap <silent> <F4>l :Glog --oneline<CR>
+nnoremap <silent> <F4>l :Git l %<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
@@ -433,4 +438,8 @@ vnoremap <C-k> :m-2<CR>gv=gv
 
 cnoremap <C-D> <cword>
 cnoreab W w
-cnoreab removeblankline g/^$/d
+cnoreab rmblank g/^$/d
+cnoreab Wq wq
+
+imap jk <Esc>   
+cmap jk <Esc>

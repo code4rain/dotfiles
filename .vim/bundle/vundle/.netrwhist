@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_1='/home/alex.jang/BUILD/J_DEV/android/vendor/samsung/common/sepolicy'
+let g:netrw_dirhist_2='/home/alex.jang/BUILD/J_DEV/android/vendor/samsung/common'
+let g:netrw_dirhist_3='/home/alex.jang/BUILD/J_LTE_DEV/android/bootable/bootloader/smdk4212'
+let g:netrw_dirhist_4='/home/alex.jang/BUILD/J_DEV/android/device/samsung/adonis3g_common/sepolicy'
+let g:netrw_dirhist_5='/home/alex.jang/BUILD/J_LTE_DEV/android/device/samsung/adonislte_common/sepolicy'
+let g:netrw_dirhist_6='/home/alex.jang/BUILD/J_LTE_DEV/android/external/sepolicy'

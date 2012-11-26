@@ -32,7 +32,8 @@ Bundle 'SuperTab'
 Bundle 'git://github.com/slack/vim-bufexplorer.git'
 Bundle 'git://github.com/hallison/vim-markdown.git'
 Bundle 'git://github.com/matthias-guenther/hammer.vim.git'
-Bundle 'AutoComplPop'
+Bundle 'http://github.com/sjl/gundo.vim.git'
+Bundle 'http://github.com/petdance/ack.git'
 
 filetype plugin indent on     " required!
 "
@@ -420,6 +421,10 @@ nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Gundo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+noremap <F5> :GundoToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

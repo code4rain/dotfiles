@@ -67,8 +67,12 @@ highlight Title                     guifg=#FFFFFF ctermfg=15
 highlight Type                      guifg=#DA4939 ctermfg=167 gui=NONE cterm=NONE
 highlight Visual                    guibg=#5A647E ctermbg=60
 
-highlight DiffAdd                   guifg=#E6E1DC ctermfg=7 guibg=#519F50 ctermbg=71
-highlight DiffDelete                guifg=#E6E1DC ctermfg=7 guibg=#660000 ctermbg=52
+highlight DiffAdd                   guifg=#00d7af ctermfg=43 cterm=bold ctermbg=16 guibg=#000000
+highlight DiffChange                guifg=#ff00af ctermfg=199 ctermbg=16 guibg=#000000
+"highlight DiffText                  guifg=#CC7833 ctermfg=107 ctermbg=16 guibg=#000000
+highlight DiffDelete                ctermfg=131 guifg=#af5f5f cterm=bold ctermbg=16 guibg=#000000
+"highlight DiffAdd                   guifg=#E6E1DC ctermfg=7 guibg=#519F50 ctermbg=71
+"highlight DiffDelete                guifg=#E6E1DC ctermfg=7 guibg=#660000 ctermbg=52
 highlight Special                   guifg=#DA4939 ctermfg=167 
 
 highlight pythonBuiltin             guifg=#6D9CBE ctermfg=73 gui=NONE cterm=NONE

@@ -1,0 +1,452 @@
+#Thu Dec 20 04:34:40 KST 2012
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_paren_in_cast=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.specsFile.run.arguments=-E -P -v -dD "${plugin_state_location}/${specs_file}"
+@org.eclipse.ui.editors=3.8.0.v20120523-1540
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.BOP.parser.enabled=true
+@org.eclipse.debug.ui=3.8.1.v20120718-192144
+@org.eclipse.core.net=1.2.200.v20120522-1148
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedVariableDeclarationProblem=Warning
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectProblem=Warning
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_colon_in_case=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_colon_in_conditional=insert
+/instance/org.eclipse.ui.workbench/ColorsAndFontsPreferencePage.selectedElement=Forg.eclipse.egit.ui.CommitMessageFont
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_question_in_conditional=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.NonVirtualDestructorProblem=Warning
+/instance/org.eclipse.cdt.ui/nameStyle.method.prefix=
+/instance/org.eclipse.cdt.dsf.ui/useAnnotationsPrefPage=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_catch=do not insert
+@org.eclipse.tm.terminal=3.2.1.201209191030
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.NamingConventionFunctionChecker.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},pattern\=>"^[a-z]",macro\=>true,exceptions\=>()}
+@org.eclipse.mylyn.monitor.ui=3.8.2.v20120916-1200
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_namespace_declaration=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_else_in_if_statement=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.format_guardian_clause_on_one_line=false
+/instance/org.eclipse.ui.editors/lineNumberRuler=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.specsFile.run.useDefault=true
+/instance/org.eclipse.rse.core/org.eclipse.rse.systemtype.local.systemType.defaultUserId=alex
+/instance/org.eclipse.cdt.make.core/org.eclipse.cdt.make.core.scanner.discovery.console.enabled=false
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.LabelStatementNotFoundProblem=Error
+/instance/org.eclipse.cdt.core/indexer/indexerId=org.eclipse.cdt.core.fastIndexer
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.keep_empty_array_initializer_on_one_line=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_parens_in_method_declaration=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_method_invocation=do not insert
+/configuration/org.eclipse.ui.ide/SHOW_WORKSPACE_SELECTION_DIALOG=false
+@org.eclipse.cdt.make.core=7.2.0.201209170703
+/instance/org.eclipse.ui.ide/quickStart=false
+/instance/org.eclipse.cdt.ui/nameStyle.field.suffix=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_base_types=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_colon_in_base_clause=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_colon_in_labeled_statement=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CircularReferenceProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_closing_brace_in_array_initializer=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AssignmentToItselfProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.lineSplit=80
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.tabulation.size=4
+/instance/org.eclipse.cdt.managedbuilder.core/properties/my_kernel.cdt.managedbuild.target.gnu.exe.1212900907/cdt.managedbuild.config.gnu.exe.debug.1744223084=\#\n\#Thu Dec 20 03\:54\:48 KST 2012\ncdt.managedbuild.toolchain.gnu.exe.debug.1982117969\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.assembler.exe.debug.1571767539\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.c.linker.exe.debug.2130352127\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.cpp.linker.exe.debug.357800427\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.1591655357\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.c.compiler.exe.debug.1397623268\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.archiver.base.1194259485\=\\\#\\n\\\#Thu Dec 20 03\\\:54\\\:48 KST 2012\\nrebuildState\\\=true\\n\n
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.OverloadProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.InvalidTemplateArgumentsProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.core.resources/version=1
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.noreturn=Error
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_parens_in_exception_specification=do not insert
+@org.eclipse.ui=3.103.0.v20120705-114351
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.FunctionResolutionProblem=Error
+@org.eclipse.mylyn.wikitext.ui=1.7.2.v20120916-1200
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_method_declaration=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_conditional_expression_chain=18
+/instance/org.eclipse.cdt.ui/nameStyle.constant.wordDelimiter=_
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_after_template_declaration=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_template_parameters=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_in_empty_block=insert
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/preferenceScope=1
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AssignmentInConditionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.makefileGenerator.run.useDefault=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.specsFile.run.useDefault=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.enabled=true
+/instance/org.eclipse.ui.workbench/RUN_IN_BACKGROUND=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.specsFile.parser.enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.specsFile.parser.enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.continuation_indentation_for_array_initializer=2
+@org.eclipse.cdt.codan.core=2.1.0.201209170703
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_while_in_do_statement=do not insert
+/instance/org.eclipse.debug.ui/preferredTargets=org.eclipse.cdt.debug.ui.toggleCBreakpointTarget\:org.eclipse.cdt.debug.ui.toggleCBreakpointTarget|
+/instance/org.eclipse.cdt.make.core/SCD.instanceIds=preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider
+/instance/org.eclipse.debug.core//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.attachLaunchType=org.eclipse.cdt.dsf.gdb.launch.attachCLaunch,debug
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_switch=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.enabled=true
+/instance/org.eclipse.ui.editors/overviewRuler_migration=migrated_3.1
+@org.eclipse.mylyn.context.core=3.8.2.v20120916-1200
+/instance/org.eclipse.cdt.ui/nameStyle.getter.suffix=
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.enabled=true
+/instance/org.eclipse.cdt.core/indexer/skipReferences=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_expression_list=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_while=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_statements_compare_to_body=true
+@org.eclipse.cdt.dsf.ui=2.3.0.201209170703
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.errnoreturn.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},implicit\=>false}
+/instance/org.eclipse.cdt.ui/formatter_profile=org.eclipse.cdt.ui.default.kandr_profile
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.noreturn.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},implicit\=>false}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.showSourceRootsAtTopLevelOfProject=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_for=insert
+/instance/org.eclipse.rse.ui/org.eclipse.rse.preferences.order.connections=alex-VirtualBox.Local
+@org.eclipse.rse.ui=3.3.1.201209191030
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_member_access=0
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.test.prefix=
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/skipTypeReferences=false
+/instance/org.eclipse.cdt.ui/editor_folding_preprocessor_enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_enum_declarations=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.specsFile.run.command=sh
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_for=do not insert
+/configuration/org.eclipse.ui.ide/RECENT_WORKSPACES=/home/alex/workspace
+/instance/org.eclipse.cdt.ui/nameStyle.getter.wordDelimiter=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_brace_in_array_initializer=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_cast=do not insert
+/instance/org.eclipse.cdt.ui/spelling_locale_initialized=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_brackets=do not insert
+/instance/org.eclipse.cdt.core/indexer/skipImplicitReferences=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_angle_bracket_in_template_arguments=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.MethodResolutionProblem=Error
+/instance/org.eclipse.ui.workbench/org.eclipse.egit.ui.CommitMessageFont=1|Ubuntu Mono|10.0|0|GTK|1|;
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.StatementHasNoEffectProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},macro\=>true,exceptions\=>()}
+/instance/org.eclipse.ui.workbench/org.eclipse.ui.commands=<?xml version\="1.0" encoding\="UTF-8"?>\n<org.eclipse.ui.commands/>
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.header.suffix=.h
+/instance/org.eclipse.cdt.debug.core/org.eclipse.cdt.debug.corecDebug.default_variable_format=0
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.specsFile.run.arguments=-E -P -v -dD "${plugin_state_location}/specs.c"
+/instance/org.eclipse.cdt.debug.core/org.eclipse.cdt.debug.core.cDebug.default_source_containers=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<sourceLookupDirector>\n<sourceContainers duplicates\="false">\n<container memento\="AbsolutePath" typeId\="org.eclipse.cdt.debug.core.containerType.absolutePath"/>\n<container memento\="programRelativePath" typeId\="org.eclipse.cdt.debug.core.containerType.programRelativePath"/>\n<container memento\="&lt;?xml version\=&quot;1.0&quot; encoding\=&quot;UTF-8&quot; standalone\=&quot;no&quot;?&gt;&\#10;&lt;project referencedProjects\=&quot;true&quot;/&gt;&\#10;" typeId\="org.eclipse.cdt.debug.core.containerType.project"/>\n</sourceContainers>\n</sourceLookupDirector>\n
+/instance/org.eclipse.cdt.ui/Refactoring.savealleditors=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_arguments_in_method_invocation=16
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedStaticFunctionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},macro\=>true}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_compact_if=16
+/instance/org.eclipse.cdt.ui/nameStyle.variable.prefix=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_exception_specification=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ClassMembersInitialization.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},skip\=>true}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.FunctionResolutionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.errreturnvalue.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.compare/org.eclipse.compare.IgnoreWhitespace=true
+@org.eclipse.team.cvs.ui=3.3.500.v20120522-1148
+/instance/org.eclipse.cdt.core/indexer/updatePolicy=0
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_switch=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CircularReferenceProblem=Error
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.specsFile.run.useDefault=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.number_of_empty_lines_to_preserve=1
+/instance/org.eclipse.cdt.debug.core/org.eclipse.cdt.debug.corecDebug.default_register_format=0
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_throws_clause_in_method_declaration=16
+/instance/org.eclipse.linuxtools.systemtap.ui.ide/ExcludedKernelSource=CVS/\:.svn/\:{arch}/\:.arch-ids/\:.bzr/\:debian/\:.git/\:
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.taskPriorities=normal,normal,normal
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedStaticFunctionProblem=Warning
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.VariableResolutionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_catch_in_try_statement=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_semicolon_in_for=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_unary_operator=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.comment.min_distance_between_code_and_line_comment=1
+@org.eclipse.cdt.managedbuilder.core=8.1.0.201209170703
+/instance/org.eclipse.ui.workbench/resourcetypes=<?xml version\="1.0" encoding\="UTF-8"?>\n<editors version\="3.1">\n<info extension\="in" name\="Makefile">\n<editor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n</info>\n<info extension\="data" name\="perf">\n<editor id\="org.eclipse.linuxtools.perf.editor"/>\n<defaultEditor id\="org.eclipse.linuxtools.perf.editor"/>\n</info>\n<info extension\="ac" name\="configure">\n<editor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n</info>\n<info extension\="am" name\="Makefile">\n<editor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n</info>\n<info extension\="sum" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="shtml" name\="*">\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\n</info>\n<info extension\="out.014" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.015" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.012" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.013" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="h" name\="*">\n<editor id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.c.CEditor"/>\n</info>\n<info extension\="html" name\="*">\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\n</info>\n<info extension\="htm" name\="*">\n<editor id\="org.eclipse.ui.browser.editorSupport"/>\n</info>\n<info extension\="out.016" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="supp" name\="*">\n<editor id\="org.eclipse.linuxtools.valgrind.editor.suppEditor"/>\n</info>\n<info extension\="out.010" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.011" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="in" name\="configure">\n<editor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n</info>\n<info extension\="gcda" name\="*">\n<editor id\="org.eclipse.linuxtools.gcov.editor"/>\n<defaultEditor id\="org.eclipse.linuxtools.gcov.editor"/>\n</info>\n<info extension\="cpp" name\="*">\n<editor id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.c.CEditor"/>\n</info>\n<info extension\="outICACHE" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="sum.xyz" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="" name\="ChangeLog">\n<editor id\="org.eclipse.linuxtools.changelog.core.editor6"/>\n<defaultEditor id\="org.eclipse.linuxtools.changelog.core.editor6"/>\n</info>\n<info extension\="out.009" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="c" name\="*">\n<editor id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.c.CEditor"/>\n</info>\n<info extension\="sumICACHE" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="gcno" name\="*">\n<editor id\="org.eclipse.linuxtools.gcov.editor"/>\n<defaultEditor id\="org.eclipse.linuxtools.gcov.editor"/>\n</info>\n<info extension\="stp" name\="*">\n<editor id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.stp.STPEditor"/>\n<defaultEditor id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.stp.STPEditor"/>\n</info>\n<info extension\="out.003" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.004" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.001" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="outDCACHE" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.002" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.007" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.008" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.005" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="sumDCACHE" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out.006" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="out" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="data.old" name\="perf">\n<editor id\="org.eclipse.linuxtools.perf.editor"/>\n<defaultEditor id\="org.eclipse.linuxtools.perf.editor"/>\n</info>\n<info extension\="am" name\="*">\n<editor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor"/>\n</info>\n<info extension\="out.000" name\="gmon">\n<editor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n<defaultEditor id\="org.eclipse.linuxtools.gprof.editor.single"/>\n</info>\n<info extension\="spec" name\="*">\n<editor id\="org.eclipse.linuxtools.rpm.ui.editor.SpecfileEditor"/>\n<editor id\="org.eclipse.linuxtools.rpm.ui.editor.forms.SpecfileFormEditor"/>\n</info>\n<info extension\="m4" name\="*">\n<editor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n<defaultEditor id\="org.eclipse.cdt.autotools.ui.editor.autoconf"/>\n</info>\n</editors>
+/instance/org.eclipse.cdt.core/indexer/indexUnusedHeadersWithDefaultLang=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.RedeclarationProblem=Error
+/instance/org.eclipse.ui.ide/platformState=1355943096224
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AssignmentInConditionProblem=Warning
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_declarator_list=16
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_switch=do not insert
+/instance/org.eclipse.cdt.debug.core/org.eclipse.cdt.debug.corecDebug.default_expression_format=0
+/instance/org.eclipse.mylyn.monitor.ui/org.eclipse.mylyn.monitor.activity.tracking.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_binary_expression=16
+@org.eclipse.e4.ui.css.swt.theme=0.9.3.v20120806-170624
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.use_tabs_only_for_leading_indentations=false
+/instance/org.eclipse.ui.workbench/OPEN_ON_SINGLE_CLICK=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.SuspiciousSemicolonProblem=Warning
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.errnoreturn=Warning
+/instance/org.eclipse.ui.editors/quickdiff.defaultProvider=org.eclipse.egit.ui.internal.decorators.GitQuickDiffProvider
+/instance/org.eclipse.debug.core//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.remoteApplicationLaunchType=org.eclipse.rse.remotecdt.dsf.debug,debug
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_template_arguments=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_switch=end_of_line
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_after_opening_brace_in_array_initializer=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.field.wordDelimiter=
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_parenthesized_expression=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.msw.build.clScannerInfo.enabled=true
+/instance/org.eclipse.cdt.ui/hoverModifiers=org.eclipse.cdt.ui.BestMatchHover;0;org.eclipse.cdt.debug.internal.ui.editors.DebugTextHover;\!0;org.eclipse.cdt.ui.ProblemHover;\!0;org.eclipse.cdt.ui.CDocHover;\!0;org.eclipse.cdt.ui.CMacroExpansionHover;\!0;org.eclipse.cdt.ui.CSourceHover;Shift;org.eclipse.cdt.ui.AnnotationHover;\!0;
+/instance/org.eclipse.e4.ui.css.swt.theme/themeid=org.eclipse.e4.ui.css.theme.e4_default
+@org.eclipse.debug.core=3.7.100.v20120521-2012
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_statements_compare_to_block=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.comment.preserve_white_space_between_code_and_line_comments=true
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.source.prefix=
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/skipMacroReferences=false
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.specsFile.run.command=gcc
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.RedeclarationProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.ui/showIntro=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.keep_else_statement_on_same_line=false
+@org.eclipse.mylyn.tasks.ui=3.8.2.v20120916-1200
+/instance/org.eclipse.cdt.ui/nameStyle.setter.prefix=set
+@org.eclipse.team.ui=3.6.200.v20120522-1148
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_angle_bracket_in_template_parameters=do not insert
+/configuration/org.eclipse.ui.ide/MAX_RECENT_WORKSPACES=5
+@org.eclipse.core.resources=3.8.1.v20120802-154922
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/indexerId=org.eclipse.cdt.core.fastIndexer
+/instance/org.eclipse.mylyn.wikitext.ui/org.eclipse.mylyn.wikitext.ui.customtemplates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_angle_bracket_in_template_parameters=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_block=end_of_line
+/instance/org.eclipse.ui.workbench/PLUGINS_NOT_ACTIVATED_ON_STARTUP=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_braces_in_array_initializer=do not insert
+@org.eclipse.cdt.core=5.4.1.201209170703
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.specsFile.run.useDefault=true
+/instance/org.eclipse.cdt.ui/properties.sd.page.enable=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_method_declaration=do not insert
+/instance/org.eclipse.cdt.ui/content_assist_proposals_timeout=5000
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.specsFile.run.command=sh
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.specsFile.run.command=sh
+/instance/org.eclipse.cdt.core/indexer/indexAllFiles=true
+/instance/org.eclipse.cdt.ui/hoverModifierMasks=org.eclipse.cdt.ui.BestMatchHover;0;org.eclipse.cdt.debug.internal.ui.editors.DebugTextHover;0;org.eclipse.cdt.ui.ProblemHover;0;org.eclipse.cdt.ui.CDocHover;0;org.eclipse.cdt.ui.CMacroExpansionHover;0;org.eclipse.cdt.ui.CSourceHover;131072;org.eclipse.cdt.ui.AnnotationHover;0;
+/configuration/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_assignment=16
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.specsFile.run.arguments=-E -P -v -dD "${plugin_state_location}/${specs_file}"
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_brace_in_array_initializer=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_switchstatements_compare_to_switch=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_colon_in_case=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_switch=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_catch=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.InvalidArguments=Error
+@org.eclipse.ui.ide=3.8.1.v20120828-165804
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.specsFile.parser.enabled=true
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/useHeuristicIncludeResolution=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_colon_in_labeled_statement=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.constant.suffix=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_angle_bracket_in_template_arguments=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_array_initializer=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.specsFile.run.arguments=-c 'gcc -E -P -v -dD "${plugin_state_location}/specs.c"'
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_method_invocation=do not insert
+/instance/org.eclipse.ui.workbench/ColorsAndFontsPreferencePage.expandedCategories=Torg.eclipse.cdt.ui.presentation\tTorg.eclipse.cdt.ui.CEditor.presentation\tTorg.eclipse.egit.ui.GitTheme
+/instance/org.eclipse.help.base/window_infopop=false
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.FieldResolutionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.specsFile.run.command=g++
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedFunctionDeclarationProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},macro\=>true}
+/instance/org.eclipse.cdt.ui/formatter_settings_version=1
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_body_declarations_compare_to_namespace_header=false
+/instance/org.eclipse.ui.workbench/editors=<?xml version\="1.0" encoding\="UTF-8"?>\n<editors>\n<descriptor class\="org.eclipse.cdt.internal.autotools.ui.editors.automake.AutomakeEditor" id\="org.eclipse.cdt.autotools.ui.editors.AutomakeEditor" image\="icons/automake.gif" internal\="true" label\="AutomakeEditor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.cdt.autotools.ui"/>\n<descriptor id\="org.eclipse.linuxtools.perf.editor" internal\="false" label\="Perf Viewer" launcher\="org.eclipse.linuxtools.internal.perf.launch.PerfOpenData" openMode\="4" open_in_place\="false" plugin\="org.eclipse.linuxtools.perf"/>\n<descriptor class\="org.eclipse.cdt.autotools.ui.editors.AutoconfEditor" id\="org.eclipse.cdt.autotools.ui.editor.autoconf" image\="icons/autoconf.gif" internal\="true" label\="Autoconf Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.cdt.autotools.ui"/>\n<descriptor id\="org.eclipse.linuxtools.gprof.editor.single" image\="icons/toggle.gif" internal\="false" label\="Gprof Editor" launcher\="org.eclipse.linuxtools.internal.gprof.action.OpenGmonAction" openMode\="4" open_in_place\="false" plugin\="org.eclipse.linuxtools.gprof"/>\n<descriptor id\="org.eclipse.ui.browser.editorSupport" image\="$nl$/icons/obj16/internal_browser.gif" internal\="false" label\="Web Browser" launcher\="org.eclipse.ui.internal.browser.BrowserLauncher" openMode\="4" open_in_place\="false" plugin\="org.eclipse.ui.browser"/>\n<descriptor class\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.c.CEditor" id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.c.CEditor" image\="icons/views/page_obj.gif" internal\="true" label\="C Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.systemtap.ui.ide"/>\n<descriptor class\="org.eclipse.linuxtools.internal.valgrind.ui.editor.SuppressionsEditor" id\="org.eclipse.linuxtools.valgrind.editor.suppEditor" image\="icons/valgrind-supp-icon.png" internal\="true" label\="Suppressions Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.valgrind.ui.editor"/>\n<descriptor id\="org.eclipse.linuxtools.gcov.editor" image\="icons/toggle.gif" internal\="false" label\="Gcov Editor" launcher\="org.eclipse.linuxtools.internal.gcov.action.OpenGCAction" openMode\="4" open_in_place\="false" plugin\="org.eclipse.linuxtools.gcov.core"/>\n<descriptor class\="org.eclipse.linuxtools.internal.changelog.core.editors.ChangeLogEditor" id\="org.eclipse.linuxtools.changelog.core.editor6" image\="icons/file_obj.gif" internal\="true" label\="ChangeLog Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.changelog.core"/>\n<descriptor class\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.stp.STPEditor" id\="org.eclipse.linuxtools.internal.systemtap.ui.ide.editors.stp.STPEditor" image\="icons/views/page_obj.gif" internal\="true" label\="SystemTap STP Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.systemtap.ui.ide"/>\n<descriptor class\="org.eclipse.linuxtools.rpm.ui.editor.SpecfileEditor" id\="org.eclipse.linuxtools.rpm.ui.editor.SpecfileEditor" image\="icons/rpm.gif" internal\="true" label\="Specfile Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.rpm.ui.editor"/>\n<descriptor class\="org.eclipse.linuxtools.internal.rpm.ui.editor.forms.SpecfileFormEditor" id\="org.eclipse.linuxtools.rpm.ui.editor.forms.SpecfileFormEditor" image\="icons/rpm.gif" internal\="true" label\="Specfile Form Editor" openMode\="1" open_in_place\="false" plugin\="org.eclipse.linuxtools.rpm.ui.editor"/>\n</editors>
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_body_declarations_compare_to_access_specifier=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_colon_in_constructor_initializer_list=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.setter.wordDelimiter=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indentation.size=4
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_access_specifier_extra_spaces=0
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_brace_in_block=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CatchByReference.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},unknown\=>false,exceptions\=>()}
+/instance/org.eclipse.cdt.ui/nameStyle.field.prefix=
+/instance/org.eclipse.cdt.ui/nameStyle.method.suffix=
+/instance/org.eclipse.ui.editors/tabWidth=8
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_base_clause_in_type_declaration=80
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_exception_specification=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.join_wrapped_lines=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CaseBreakProblem=Warning
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.specsFile.parser.enabled=true
+@org.eclipse.mylyn.resources.ui=3.8.2.v20120916-1200
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_type_declaration=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AssignmentToItselfProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.ui.ide/PROBLEMS_FILTERS_MIGRATE=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.SuggestedParenthesisProblem=Warning
+/instance/org.eclipse.cdt.managedbuilder.core/properties/my_kernel.cdt.managedbuild.target.gnu.exe.1212900907/cdt.managedbuild.config.gnu.exe.release.1187245959=\#\n\#Thu Dec 20 04\:01\:06 KST 2012\ncdt.managedbuild.tool.gnu.c.linker.exe.release.1954225296\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.cpp.linker.exe.release.368132671\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.assembler.exe.release.1054553854\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.archiver.base.797356604\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.c.compiler.exe.release.935771488\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1720720941\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\ncdt.managedbuild.toolchain.gnu.exe.release.2146049640\=\\\#\\n\\\#Thu Dec 20 04\\\:01\\\:06 KST 2012\\nrebuildState\\\=true\\n\n
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.specsFile.run.arguments=-c 'g++ -E -P -v -dD "${plugin_state_location}/specs.cpp"'
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_declarator_list=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_template_arguments=do not insert
+/instance/org.eclipse.ui.workbench/org.eclipse.egit.ui.CommitMessageEditorFont=1|Ubuntu Mono|10.0|0|GTK|1|;
+/instance/org.eclipse.debug.core//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.applicationLaunchType=org.eclipse.cdt.dsf.gdb.launch.localCLaunch,debug;org.eclipse.cdt.cdi.launch.localCLaunch,run
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_colon_in_conditional=insert
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.source.wordDelimiter=
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.RedefinitionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+\!/=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_method_invocation=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.NonVirtualDestructorProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.specsFile.run.command=gcc
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.test.wordDelimiter=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_method_declaration=end_of_line
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.FieldResolutionProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_breaks_compare_to_cases=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_enum_declarations=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_type_declaration=end_of_line
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ScanfFormatStringSecurityProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_catch=do not insert
+/instance/org.eclipse.cdt.core/indexer/skipTypeReferences=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_method_declaration=do not insert
+/instance/org.eclipse.ui.workbench/ENABLED_DECORATORS=org.eclipse.cdt.ui.indexedFiles\:false,org.eclipse.cdt.managedbuilder.ui.excludedFile\:true,org.eclipse.cdt.managedbuilder.ui.includeFolder\:true,org.eclipse.egit.ui.internal.decorators.GitLightweightDecorator\:true,org.eclipse.linuxtools.tmf.ui.trace_folder.decorator\:true,org.eclipse.linuxtools.tmf.ui.experiment_folder.decorator\:true,org.eclipse.linuxtools.tmf.ui.linked_trace.decorator\:true,org.eclipse.mylyn.context.ui.decorator.interest\:true,org.eclipse.mylyn.tasks.ui.decorators.task\:true,org.eclipse.mylyn.team.ui.changeset.decorator\:true,org.eclipse.rse.core.virtualobject.decorator\:true,org.eclipse.rse.core.binary.executable.decorator\:true,org.eclipse.rse.core.script.executable.decorator\:true,org.eclipse.rse.core.java.executable.decorator\:true,org.eclipse.rse.core.library.decorator\:true,org.eclipse.rse.core.link.decorator\:true,org.eclipse.rse.subsystems.error.decorator\:true,org.eclipse.team.cvs.ui.decorator\:true,org.eclipse.ui.LinkedResourceDecorator\:true,org.eclipse.ui.VirtualResourceDecorator\:true,org.eclipse.ui.ContentTypeDecorator\:true,org.eclipse.ui.ResourceFilterDecorator\:false,
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_expressions_in_array_initializer=16
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_binary_operator=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_cast=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_while=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_prefix_operator=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_access_specifier_compare_to_type_header=false
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.specsFile.parser.enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.enabled=true
+@org.eclipse.compare=3.5.300.v20120522-1148
+/instance/org.eclipse.cdt.ui/editor_folding_statements=true
+/instance/org.eclipse.cdt.ui/nameStyle.getter.prefix=get
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_empty_lines=false
+/instance/org.eclipse.core.resources/description.autobuilding=false
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AbstractClassCreation.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/indexAllFiles=false
+/instance/org.eclipse.mylyn.resources.ui/org.eclipse.mylyn.ide.resources.ignore.pattern.version=1.0
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/indexUnusedHeadersWithDefaultLang=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_angle_bracket_in_template_arguments=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_parameters_in_method_declaration=16
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AmbiguousProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.MethodResolutionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/skipReferences=false
+/instance/org.eclipse.cdt.core/indexer/useHeuristicIncludeResolution=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.InvalidTemplateArgumentsProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_at_end_of_file_if_missing=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_array_initializer=insert
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/indexOnOpen=false
+/instance/org.eclipse.mylyn.tasks.ui/org.eclipse.mylyn.tasks.ui.editor.currentLineHighlight=true
+/instance/org.eclipse.cdt.core/language.settings.providers.disabled=false
+/instance/org.eclipse.cdt.ui/org.eclipse.cdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_binary_operator=insert
+/instance/org.eclipse.cdt.core/indexer/indexOnOpen=false
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.checkers.errreturnvalue=Error
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.header.wordDelimiter=
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.MemberDeclarationNotFoundProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_prefix_operator=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.continuation_indentation=2
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_semicolon_in_for=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_if=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.specsFile.run.command=gcc
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_expression_list=0
+/instance/org.eclipse.ui.workbench/org.eclipse.cdt.ui.editors.textfont=1|Ubuntu Mono|10.0|0|GTK|1|;
+/instance/org.eclipse.mylyn.monitor.ui/org.eclipse.mylyn.monitor.activity.tracking.enabled.checked=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.TypeResolutionProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AmbiguousProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_bracket=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.test.suffix=_test.cpp
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.header.prefix=
+@org.eclipse.ui.workbench=3.103.1.v20120906-120042
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.BOP.open.enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_method_declaration_parameters=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_new_line_before_identifier_in_function_declaration=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.method.wordDelimiter=
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile.specsFile.parser.enabled=true
+/instance/org.eclipse.cdt.ui/nameStyle.variable.wordDelimiter=
+@org.eclipse.cdt.ui=5.5.0.201209170703
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_parenthesized_expression=do not insert
+/instance/org.eclipse.cdt.ui/org.eclipse.cdt.ui.text.templates.custom=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_for=do not insert
+@org.eclipse.linuxtools.systemtap.ui.ide=1.0.0.201209191645
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_method_declaration=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.specsFile.run.arguments=-c 'gcc -E -P -v -dD "${plugin_state_location}/${specs_file}"'
+/instance/org.eclipse.cdt.ui/sourceHoverBackgroundColor=255,255,255
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_bracket=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_while=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_method_declaration_throws=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_base_types=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.specsFile.run.useDefault=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_array_initializer=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_paren_in_if=do not insert
+@org.eclipse.cdt.debug.core=7.2.0.201209170703
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.MemberDeclarationNotFoundProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.BOP.parser.enabled=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedVariableDeclarationProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},macro\=>true,exceptions\=>("@(\#)","$Id")}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.NamingConventionFunctionChecker=Info
+/instance/org.eclipse.cdt.ui/useAnnotationsPrefPage=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.tabulation.char=tab
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/skipFilesLargerThanMB=8
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_conditional_expression=34
+/instance/org.eclipse.mylyn.context.core/mylyn.attention.migrated=true
+/configuration/org.eclipse.ui.ide/RECENT_WORKSPACES_PROTOCOL=3
+/instance/org.eclipse.team.ui/org.eclipse.team.ui.first_time=false
+/instance/org.eclipse.cdt.debug.core/BreakpointActionManager.actionData=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<breakpointActionData/>\n
+/instance/org.eclipse.cdt.ui/nameStyle.variable.suffix=
+file_export_version=3.0
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.specsFile.run.arguments=-E -P -v -dD "${plugin_state_location}/specs.cpp"
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.RedefinitionProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.compact_else_if=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.TypeResolutionProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_colon_in_base_clause=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_declarator_list=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_overloaded_left_shift_chain=16
+/instance/org.eclipse.cdt.ui/spelling_user_dictionary_encoding=
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ReturnStyleProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_angle_bracket_in_template_parameters=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_exception_specification=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_method_invocation_arguments=do not insert
+@org.eclipse.rse.core=3.3.0.201209191030
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.OverloadProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_angle_bracket_in_template_parameters=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_method_declaration_parameters=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.makefileGenerator.parser.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.showSourceFilesInBinaries=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_method_invocation_arguments=insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CatchByReference=Warning
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.CaseBreakProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},no_break_comment\=>"no break",last_case_param\=>true,empty_case_param\=>false}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_brace_in_block=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_postfix_operator=do not insert
+/instance/org.eclipse.tm.terminal/TerminalPref.migrated=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.specsFile.run.useDefault=true
+@org.eclipse.help.base=3.6.100.v201209141800
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_constructor_initializer_list=0
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ReturnStyleProblem=Warning
+/instance/org.eclipse.debug.core//org.eclipse.debug.core.PREFERRED_DELEGATES/org.eclipse.cdt.launch.postmortemLaunchType=org.eclipse.cdt.dsf.gdb.launch.coreCLaunch,debug
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.UnusedFunctionDeclarationProblem=Warning
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.makefileGenerator.run.arguments=-E -P -v -dD
+/instance/org.eclipse.cdt.ui/nameStyle.getter.prefixForBoolean=is
+/instance/org.eclipse.ui.ide/tipsAndTricks=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.AbstractClassCreation=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_between_empty_parens_in_method_invocation=do not insert
+/instance/org.eclipse.cdt.make.core/instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.problemReportingEnabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.alignment_for_enumerator_list=48
+/instance/org.eclipse.debug.ui/org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<launchPerspectives/>\n
+/instance/org.eclipse.cdt.core.prj-my_kernel/indexer/skipImplicitReferences=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_block_in_case=end_of_line
+/instance/org.eclipse.cdt.core/indexer/skipFilesLargerThanMB=8
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.LabelStatementNotFoundProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.InvalidArguments.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true}}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_switchstatements_compare_to_cases=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_array_initializer=end_of_line
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.SuspiciousSemicolonProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},else\=>false,afterelse\=>false}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_unary_operator=do not insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_closing_angle_bracket_in_template_arguments=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.brace_position_for_namespace_declaration=end_of_line
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core.prj-my_kernel/language.settings.providers.disabled=false
+/instance/org.eclipse.cdt.ui/nameStyle.cpp.source.suffix=.cpp
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_opening_paren_in_parenthesized_expression=do not insert
+/instance/org.eclipse.core.net/org.eclipse.core.net.hasMigrated=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.comment.never_indent_line_comments_on_first_column=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_template_parameters=insert
+/instance/org.eclipse.help.base/search_from_browser=false
+/instance/org.eclipse.team.cvs.ui/pref_first_startup=false
+/instance/org.eclipse.cdt.ui/nameStyle.setter.suffix=
+/instance/org.eclipse.help.base/dialog_infopop=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_postfix_operator=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ClassMembersInitialization=Warning
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile.specsFile.run.useDefault=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.taskTags=TODO,FIXME,XXX
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_colon_in_default=do not insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_comma_in_expression_list=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_assignment_operator=insert
+/instance/org.eclipse.cdt.ui/useQuickDiffPrefPage=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.indent_declaration_compare_to_template_header=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.put_empty_statement_on_new_line=true
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.VariableResolutionProblem=Error
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_assignment_operator=insert
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC.BOP.open.enabled=true
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP.BOP.open.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.keep_imple_if_on_one_line=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_question_in_conditional=insert
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_semicolon=do not insert
+/instance/org.eclipse.cdt.ui/nameStyle.constant.prefix=
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.keep_then_statement_on_same_line=false
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_closing_bracket=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.SuggestedParenthesisProblem.params={launchModes\=>{RUN_ON_FULL_BUILD\=>true,RUN_ON_INC_BUILD\=>true,RUN_ON_FILE_OPEN\=>false,RUN_ON_FILE_SAVE\=>false,RUN_AS_YOU_TYPE\=>true,RUN_ON_DEMAND\=>true},paramNot\=>false}
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_after_opening_paren_in_if=do not insert
+/instance/org.eclipse.cdt.make.core/instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.enabled=true
+/instance/org.eclipse.cdt.core/org.eclipse.cdt.core.formatter.insert_space_before_comma_in_method_declaration_throws=do not insert
+/instance/org.eclipse.cdt.codan.core/org.eclipse.cdt.codan.internal.checkers.ScanfFormatStringSecurityProblem=-Warning
+/instance/org.eclipse.cdt.core/indexer/skipMacroReferences=false
+/instance/org.eclipse.cdt.make.core/SCD.instanceId.preference.org.eclipse.cdt.managedbuilder.core.configurationDataProvider.org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile.specsFile.parser.enabled=true

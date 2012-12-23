@@ -32,8 +32,8 @@ Bundle 'SuperTab'
 Bundle 'git://github.com/slack/vim-bufexplorer.git'
 Bundle 'git://github.com/hallison/vim-markdown.git'
 Bundle 'git://github.com/matthias-guenther/hammer.vim.git'
-Bundle 'http://github.com/sjl/gundo.vim.git'
-Bundle 'http://github.com/petdance/ack.git'
+Bundle 'AutoComplPop'
+Bundle 'git://github.com/glidenote/memolist.vim.git'
 
 filetype plugin indent on     " required!
 "
@@ -207,7 +207,7 @@ endif
 if &term =~ "xterm"
   "256 color --
 let &t_Co=256
-" restore screen after quitting
+"restore screen after quitting
 set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
 if has("terminfo")
   let &t_Sf="\ESC[3%p1%dm"
@@ -422,9 +422,21 @@ nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Gundo
+" Memolist
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-noremap <F5> :GundoToggle<CR>
+let g:memolist_path = "$HOME/wiki/"
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_memo_suffix = "markdown"
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+let g:memolist_memo_date = "epoch"
+let g:memolist_memo_date = "%D %T"
+let g:memolist_prompt_tags = 1
+let g:memolist_prompt_categories = 1
+let g:memolist_qfixgrep = 1
+let g:memolist_vimfiler = 1
+let g:memolist_template_dir_path = "$HOME/wiki/"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

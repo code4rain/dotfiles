@@ -29,10 +29,18 @@ Bundle 'taglist.vim'
 Bundle 'EnhancedJumps'
 Bundle 'snipMate'
 Bundle 'SuperTab'
-Bundle 'git://github.com/slack/vim-bufexplorer.git'
-Bundle 'git://github.com/hallison/vim-markdown.git'
-Bundle 'git://github.com/matthias-guenther/hammer.vim.git'
 Bundle 'AutoComplPop'
+Bundle 'slack/vim-bufexplorer.git'
+Bundle 'hallison/vim-markdown.git'
+Bundle 'matthias-guenther/hammer.vim.git'
+Bundle 'sjl/gundo.vim.git'
+Bundle 'petdance/ack.git'
+" making Tables
+Bundle 'Tabular'
+" summarize
+Bundle 'visSum.vim'
+Bundle 'chrisbra/changesPlugin'
+Bundle 'surround.vim'
 Bundle 'git://github.com/glidenote/memolist.vim.git'
 
 filetype plugin indent on     " required!
@@ -96,6 +104,8 @@ set nuw=5
 " 탭 크기 설정
 set tabstop=8
 set shiftwidth=8
+
+autocmd Filetype python setlocal tabstop=4 shiftwidth=4 sts=4 expandtab
 
 " 탭 -> 공백 변환 기능 (사용 안함)
 "set expandtab
@@ -420,6 +430,22 @@ nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Memolist
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:memolist_path = "$HOME/wiki/"
+map <Leader>mn  :MemoNew<CR>
+map <Leader>ml  :MemoList<CR>
+map <Leader>mg  :MemoGrep<CR>
+let g:memolist_memo_suffix = "markdown"
+let g:memolist_memo_date = "%Y-%m-%d %H:%M"
+let g:memolist_memo_date = "epoch"
+let g:memolist_memo_date = "%D %T"
+let g:memolist_prompt_tags = 1
+let g:memolist_prompt_categories = 1
+let g:memolist_qfixgrep = 1
+let g:memolist_vimfiler = 1
+let g:memolist_template_dir_path = "$HOME/wiki/"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Memolist
@@ -438,8 +464,22 @@ let g:memolist_qfixgrep = 1
 let g:memolist_vimfiler = 1
 let g:memolist_template_dir_path = "$HOME/wiki/"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" changesPlugin
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:changes_hl_lines=1
+let g:changes_autocmd=0
+let g:changes_verbose=0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" easymotion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:EasyMotion_leader_key = '<SPACE>'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Using Vim as wiki
+nnoremap <F8>	vi[gf<ESC>
+inoremap <F8>	[<C-F><C-X>
+
 "Tab 열기/닫기
 map <silent><C-N> :tabnew<CR>
 map <silent><C-H> :tabp<CR>

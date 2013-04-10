@@ -9,13 +9,13 @@ then
 else
 	while [ -O $cur_path ]
 	do
-	#	echo $cur_path
+#		echo $cur_path
 		if [ -f $cur_path"/.p4config" ]
 		then
 			export P4CONFIG=$cur_path"/.p4config"
 			break
 		fi
-		cur_path=`cd .. && pwd`
+		cur_path=`cd $cur_path && cd .. && pwd`
 	done
 fi
 

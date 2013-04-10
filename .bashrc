@@ -127,22 +127,30 @@ export JAVA_HOME=/usr/lib/jvm/java-6-sun-1.6.0.26
 export CLASSPATH=.:$JAVA_HOME/lib
 export ANDROID_JAVA_HOME=$JAVA_HOME
 export PATH=$ANDROID_JAVA_HOME/bin:/usr/local/bin:$PATH
-export PATH=${PATH}:${HOME}/bin:${HOME}/p4utils:${HOME}/p4utils/lib
-export PATH=${PATH}:~/BUILD/J_DEV/android/out/host/linux-x86/bin
+export PATH=${HOME}/bin:${PATH}:${HOME}/p4utils:${HOME}/p4utils/lib
 
 export PATH=${PATH}:~/usr/lib
+export PATH=${PATH}:~/android-sdks/platform-tools
 # export ARCH=arm 
 # export CROSS_COMPILE=$SEC_KERNEL_COMPILER/arm-none-linux-gnueabi-
 # export TOOLCHAIN=/usr/local/arm/4.3.1-eabi-armv6
 # export LD_LIBRARY_PATH=$TOOLCHAIN/mpfr/lib:$TOOLCHAIN/gmp/lib:/usr/local/libiconv/lib:$LD_LIBRARY_PATH
 # export SEC_KERNEL_COMPILER=/opt/toolchains/arm-2009q3/bin
 
-source ~/bin/build
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 # Sets the Mail Environment Variable
 
 # MAIL=/var/spool/mail/alex.jang && export MAIL
 
 # For kernel standalone build
 export ARCH=arm 
+
+# Auto complete.
+source ~/.build_completion
+source ~/.gp4_completion
+source ~/.adb_completion
+
+# For perforce..
+export P4PASSWD=`cat ~/.p4passwd`
+export P4USER="alex.jang"
+# For GIT
+export GIT_PROXY_COMMAND=~/bin/gitproxy.sh

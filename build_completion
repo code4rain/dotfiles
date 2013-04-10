@@ -1,0 +1,17 @@
+_build()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    cur_pwd=`echo $1 | sed 's/build$//'`
+    if [[ -e "./$cur_pwd/build_conf/" ]]; then
+	    opts=`find ./$cur_pwd/build_conf/ -type f -and -name "build_conf.*"|sed 's/.*\.//'`
+    fi
+ 
+    if [[ ${cur} != -* ]] ; then
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+        return 0
+    fi
+}
+complete -F _build build

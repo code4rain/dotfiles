@@ -1,4 +1,4 @@
-﻿set nocompatible               " be iMproved
+set nocompatible               " be iMproved
 
 filetype off                   " required!
 """"""""""""""""""""""""""""""""""""""""""""""""
@@ -29,7 +29,6 @@ Bundle 'taglist.vim'
 Bundle 'EnhancedJumps'
 Bundle 'snipMate'
 Bundle 'SuperTab'
-Bundle 'AutoComplPop'
 Bundle 'slack/vim-bufexplorer.git'
 Bundle 'hallison/vim-markdown.git'
 Bundle 'matthias-guenther/hammer.vim.git'
@@ -42,7 +41,14 @@ Bundle 'visSum.vim'
 Bundle 'chrisbra/changesPlugin'
 Bundle 'surround.vim'
 Bundle 'git://github.com/glidenote/memolist.vim.git'
-
+Bundle 'vim-pandoc'
+Bundle 'ack.vim'
+Bundle 'TableTab.vim'
+Bundle 'table.vim'
+Bundle 'Table-Helper'
+Bundle 'git://github.com/suan/vim-instant-markdown.git'
+Bundle 'http://github.com/davidoc/taskpaper.vim.git'
+Bundle 'autocomp.vim'
 filetype plugin indent on     " required!
 "
 " Brief help
@@ -205,7 +211,7 @@ if has("gui_running")
         set gfn=나눔고딕코딩:h10:cHANGEUL
 "        set gfn=GulimChe:h9:cHANGEUL
     elseif has("unix")
-        set gfn=consolas\ 9
+        set gfn=NanumGothicCoding\ 11
     else
         set gfn=consolas\ 9
     endif
@@ -229,6 +235,7 @@ endif
 endif
 
 set background=dark
+"colorscheme morning
 colorscheme railscasts
 
 "Enable Word wrap
@@ -249,6 +256,9 @@ filetype on
 if has("syntax")
         syntax on
 endif
+
+set omnifunc=syntaxcomplete#Complete
+highlight Pmenu ctermbg=238 gui=bold
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -273,8 +283,8 @@ set hidden
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wmnu
 
-set fdl=1
-set fdc=3
+set fdl=3
+set fdc=5
 
 " /를 입력하여 검색을 시작할 때 자동으로 영문사태로 만들어준다
 set iminsert=0
@@ -391,7 +401,8 @@ let g:CommandTMaxDepth=25
 let g:CommandTMaxCachedDirectories=5 "1 " multiple cache size 
 " For my terminal. <C-H> and <BS> has same keymap in my terminal.
 let g:CommandTCursorLeftMap='<Left>'
-let g:CommandTBackspaceMap='<C-H>'
+" let g:CommandTBackspaceMap='<C-H>'
+let g:CommandTBackspaceMap='<BS>'
 
 set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
 set wildignore+=*.jar,*.so,*.a,*.class,*.apk,*.
@@ -473,6 +484,16 @@ let g:changes_verbose=0
 " easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_leader_key = '<SPACE>'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Completion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

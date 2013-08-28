@@ -1,5 +1,5 @@
 [user]
-	email = code4rain@gmail.com
+	email = alex.jang@samsung.com
 	name = Alex Kyoungdon Jang
 [color]
 	ui = auto
@@ -14,12 +14,27 @@
         d = diff -b
         fix = commit --amend -C HEAD
         glog = log --graph --abbrev-commit --decorate=full --stat
-        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-        l = log --abbrev-commit --decorate=full --stat
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
+        ll = log --abbrev-commit --decorate=full --stat
         st = status
         top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration
 	sh = show
 	b = branch
+	rst = reset --hard HEAD^
+	rt = reset --hard HEAD
+	l ="!tig"
+	s ="!tig status"
 [core]
 	editor = vim
-
+	quotepath = off
+[push]
+	default = matching
+[giggle]
+	main-window-maximized = false
+	main-window-geometry = 1040x832+1600+14
+	history-view-vpane-position = 360
+	main-window-view = HistoryView
+	file-view-vpane-position = 518
+[i18n]
+	logOutputEncoding = utf8
+	commitEncoding = utf8

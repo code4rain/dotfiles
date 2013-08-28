@@ -56,11 +56,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\e[0;33m@\e[0;36m\h\e[0;33m   \w\033[0m \033[0m[\e[0;36m\t\033[0m]\e[0;35m$(__git_ps1 "\n(%s) ")\033[0m\n\$ '
+	if [ "$SHELL_PROMPT" = yes ]; then
+		PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\033[0m\u\e[0;33m@\e[0;36m\h\e[0;33m   \w\033[0m \033[0m[\e[0;36m\t\033[0m]\e[0;35m$(__git_ps1 "\n (%s) ")\033[0m\n\$ '
+	else
+		PS1='${debian_chroot:+($debian_chroot)}\u@\h   \w\$ '
+	fi
+	#PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\e[0;33m@\e[0;36m\h\e[0;33m   \w\033[0m \033[0m[\e[0;36m\t\033[0m]\e[0;35m$(__git_ps1 "\n(%s) ")\033[0m\n\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h   \w\n\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h   \w\$ '
 fi
-unset color_prompt force_color_prompt
+# unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -109,15 +114,15 @@ if [ -f ~/.bash_profile ]; then
 fi
 
 # TO DO TEXT CLI
-export TODOTXT_DEFAULT_ACTION=ls
-export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
-export TODOTXT_DATE_ON_ADD=1
-alias t='todo.sh -d ~/bin/todo/todo.cfg'
-if [ -f ~/bin/todo/todo_completion ]; then
-    . ~/bin/todo/todo_completion
-    complete -F _todo t
-fi
-export PATH=${PATH}:${HOME}/bin/todo # TO DO TEXT CLI
+#export TODOTXT_DEFAULT_ACTION=ls
+#export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
+#export TODOTXT_DATE_ON_ADD=1
+#alias t='todo.sh -d ~/bin/todo/todo.cfg'
+#if [ -f ~/bin/todo/todo_completion ]; then
+#    . ~/bin/todo/todo_completion
+#    complete -F _todo t
+#fi
+#export PATH=${PATH}:${HOME}/bin/todo # TO DO TEXT CLI
 
 # Korean Language Setting
 LANG="ko_KR.UTF-8"
@@ -131,6 +136,7 @@ export PATH=${HOME}/bin:${PATH}:${HOME}/p4utils:${HOME}/p4utils/lib
 
 export PATH=${PATH}:~/usr/lib
 export PATH=${PATH}:~/android-sdks/platform-tools
+export PATH=${HOME}/.gem/ruby/1.8/bin:${PATH}
 # export ARCH=arm 
 # export CROSS_COMPILE=$SEC_KERNEL_COMPILER/arm-none-linux-gnueabi-
 # export TOOLCHAIN=/usr/local/arm/4.3.1-eabi-armv6
@@ -149,8 +155,19 @@ source ~/.build_completion
 source ~/.gp4_completion
 source ~/.adb_completion
 
+# Using cd history
+source ~/bin/cd_func.sh
+
 # For perforce..
 export P4PASSWD=`cat ~/.p4passwd`
-export P4USER="alex.jang"
 # For GIT
 export GIT_PROXY_COMMAND=~/bin/gitproxy.sh
+
+#export P4DIFF=colordiff
+export T32SYS=/opt/t32
+export T32TMP=/tmp
+export T32ID=T32
+PATH=/home/alex/.gem/ruby/1.8/bin:/home/alex/bin:/usr/lib/jvm/java-6-sun-1.6.0.26/bin:/usr/local/bin:/home/alex/bin:~/:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/alex/p4utils:/home/alex/p4utils/lib:/home/alex/usr/lib:/home/alex/android-sdks/platform-tools:/opt/DS-5/bin
+
+export USE_CCACHE=1
+

@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home/alex.jang/.local/share'
+let g:netrw_dirhist_2='/home/alex.jang/.local/share/zeitgeist'
+let g:netrw_dirhist_3='/home/alex.jang/.local/share'
+let g:netrw_dirhist_4='/home/alex.jang/.local'
+let g:netrw_dirhist_5='/home/alex.jang'
+let g:netrw_dirhist_6='/home/alex.jang/_mywork_/octopress/sass/plugins'
+let g:netrw_dirhist_7='/home/alex.jang/_mywork_/octopress/sass/base'

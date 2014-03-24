@@ -1,65 +1,13 @@
-set nocompatible               " be iMproved
-
-filetype off                   " required!
-""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
-""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
-
-" My Bundles here:
+﻿set nocompatible               " be iMproved
 "
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'tpope/vim-rails.git'
-" vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
-" ...
-Bundle 'grep.vim'
-Bundle 'taglist.vim'
-Bundle 'EnhancedJumps'
-Bundle 'snipMate'
-Bundle 'SuperTab'
-Bundle 'slack/vim-bufexplorer.git'
-Bundle 'hallison/vim-markdown.git'
-Bundle 'matthias-guenther/hammer.vim.git'
-Bundle 'sjl/gundo.vim.git'
-Bundle 'petdance/ack.git'
-" making Tables
-Bundle 'Tabular'
-" summarize
-Bundle 'visSum.vim'
-Bundle 'chrisbra/changesPlugin'
-Bundle 'surround.vim'
-Bundle 'git://github.com/glidenote/memolist.vim.git'
-Bundle 'vim-pandoc'
-Bundle 'ack.vim'
-Bundle 'TableTab.vim'
-Bundle 'table.vim'
-Bundle 'Table-Helper'
-Bundle 'git://github.com/suan/vim-instant-markdown.git'
-Bundle 'http://github.com/davidoc/taskpaper.vim.git'
-Bundle 'autocomp.vim'
-filetype plugin indent on     " required!
+" powerline
+"language en_US.UTF-8
+"let g:Powerline_symbols = 'fancy'
+"set rtp+=/usr/local/lib/python2.6/dist-packages/Powerline-beta-py2.6.egg/powerline/bindings/vim/
 "
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
-""""""""""""""""""""""""""""""""""""""""""""""""
+" Use 256 colours (Use this setting only if your terminal supports 256
+" colours)
+set t_Co=256
 
 " 명령어 기록을 남길 갯수 지정
 set history=1000
@@ -112,6 +60,7 @@ set tabstop=8
 set shiftwidth=8
 
 autocmd Filetype python setlocal tabstop=4 shiftwidth=4 sts=4 expandtab
+au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 
 " 탭 -> 공백 변환 기능 (사용 안함)
 "set expandtab
@@ -127,6 +76,7 @@ if has("gui_running") || has("xterm_clipboard")
         set cb=unnamed
 endif
 
+set clipboard=exclude:.*
 " magic 기능 사용 Allows pattern matching with special characters
 set magic
 
@@ -171,6 +121,34 @@ endif
 " set fencs=ucs-bom,utf-8,cp949
 " Origin
 " set paste
+
+"Focus Mode
+function! ToggleFocusMode()
+  if (&foldcolumn != 12)
+    set laststatus=0
+    set numberwidth=10
+    set foldcolumn=12
+    set noruler
+    hi FoldColumn ctermbg=none
+    hi LineNr ctermfg=0 ctermbg=none
+    hi NonText ctermfg=0
+  else
+    set laststatus=2
+    set numberwidth=4
+    set foldcolumn=0
+    set ruler
+    execute 'colorscheme ' . g:colors_name
+  endif
+endfunc
+nnoremap <F1> :call ToggleFocusMode()<cr>
+
+"<Char-78>"
+let mapleader = ";"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Goyo
+let g:goyo_width=120
+nnoremap <F2> :Goyo<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 검색 기능 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,14 +168,30 @@ set showmatch
 
 " Increase Search
 set incsearch
+
+function! GrepQuickFix(pat)
+  let all = getqflist()
+  for d in all
+    if bufname(d['bufnr']) !~ a:pat && d['text'] !~ a:pat
+        call remove(all, index(all,d))
+    endif
+  endfor
+  call setqflist(all)
+endfunction
+command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
+
+function! Find_current_file(word)
+	execute 'vimgrep /\<' . a:word . '\>/ **/%'
+endfunction
+command! -nargs=* CSearch call Find_current_file(<q-args>)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 모양 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 항상 status 라인을 표시하도록 함.
-set ls=2
+set laststatus=2
 
 " Status Line 설정
-set statusline=\ %f\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)\
+set statusline=\ %f\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
 if has("gui_running")
     set lines=150
@@ -211,7 +205,7 @@ if has("gui_running")
         set gfn=나눔고딕코딩:h10:cHANGEUL
 "        set gfn=GulimChe:h9:cHANGEUL
     elseif has("unix")
-        set gfn=NanumGothicCoding\ 11
+        set gfn=consolas\ 9
     else
         set gfn=consolas\ 9
     endif
@@ -235,7 +229,6 @@ endif
 endif
 
 set background=dark
-"colorscheme morning
 colorscheme railscasts
 
 "Enable Word wrap
@@ -257,9 +250,6 @@ if has("syntax")
         syntax on
 endif
 
-set omnifunc=syntaxcomplete#Complete
-highlight Pmenu ctermbg=238 gui=bold
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indent 설정
@@ -277,7 +267,7 @@ au FileType ,jsp setl cin
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 편리한 기능
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지v않아도(hidden) 된다 
+"새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지않아도(hidden) 된다
 set hidden
 
 " Tab 자동 완성시 가능한 목록을 보여줌
@@ -296,8 +286,9 @@ set comments=sl:/*,mb:\ *,elx:*/
 func! FUNC_dos2unix()
     %s///g
     %s/\s\+$//
+    set ff=unix
 endfunc
-nmap  <LocalLeader>unix :call FUNC_dos2unix()<cr>
+nmap  <Leader>u :call FUNC_dos2unix()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 기타 설정
@@ -352,6 +343,7 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
@@ -390,31 +382,30 @@ if has('cscope')
 	cnoreabbrev csh cs help
 	call SetCscope()
 endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SuperTab
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:SuperTabDefaultCompletionType="context"
+let g:SuperTabNoCompleteBefore=[]
+let g:SuperTabNoCompleteAfter=['^',',','\s']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Command-T
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <Leader>t :CommandT<CR>
-nmap <silent> <Leader>b :CommandTBuffer<CR>
-
-let g:CommandTMaxFiles=1000000
-let g:CommandTMaxDepth=25
-let g:CommandTMaxCachedDirectories=5 "1 " multiple cache size 
-" For my terminal. <C-H> and <BS> has same keymap in my terminal.
-let g:CommandTCursorLeftMap='<Left>'
+" nmap <silent> <Leader>t :CommandT<CR>
+" nmap <silent> <Leader>b :CommandTBuffer<CR>
+"
+" let g:CommandTMaxFiles=1000000
+" let g:CommandTMaxDepth=25
+" let g:CommandTMaxCachedDirectories=5 "1 " multiple cache size
+" " For my terminal. <C-H> and <BS> has same keymap in my terminal.
+" let g:CommandTCursorLeftMap='<Left>'
 " let g:CommandTBackspaceMap='<C-H>'
-let g:CommandTBackspaceMap='<BS>'
-
-set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
-set wildignore+=*.jar,*.so,*.a,*.class,*.apk,*.
-set wildignore+=*.js,*.html,*.jpg,*.png,*.gif,*.htm,*.jd,*.txvi,*.zip,*.exe,*.swp
-set wildignore+=cts/**,docs/**,ndk/**,sdk/**,external/**,out/product/**,
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tag List
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:Tlist_Inc_Winwidth=0
-let g:Tlist_Exit_OnlyWindow = 1
-let g:Tlist_GainFocus_On_ToggleOpen = 1
-map <F11> :TlistToggle<CR>
+"
+" set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
+" set wildignore+=*.jar,*.so,*.a,*.class,*.apk,*.
+" set wildignore+=*.js,*.html,*.jpg,*.png,*.gif,*.htm,*.jd,*.txvi,*.zip,*.exe,*.swp
+" set wildignore+=cts/**,docs/**,ndk/**,sdk/**,external/**,out/product/**,
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Grep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -426,11 +417,6 @@ map <F9> :RgrepAdd <cword><CR>
 " Bufexplorer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F12> <leader>be
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EnhancedJumps
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <C-9> :<Plug>EnhancedJumpsFarFallbackChangeNewer
-map <C-0> :<Plug>EnhancedJumpsFarFallbackChangeOlder
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fugitive
@@ -442,69 +428,46 @@ nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Memolist
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:memolist_path = "$HOME/wiki/"
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-let g:memolist_memo_suffix = "markdown"
-let g:memolist_memo_date = "%Y-%m-%d %H:%M"
-let g:memolist_memo_date = "epoch"
-let g:memolist_memo_date = "%D %T"
-let g:memolist_prompt_tags = 1
-let g:memolist_prompt_categories = 1
-let g:memolist_qfixgrep = 1
-let g:memolist_vimfiler = 1
-let g:memolist_template_dir_path = "$HOME/wiki/"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Memolist
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:memolist_path = "$HOME/wiki/"
-map <Leader>mn  :MemoNew<CR>
-map <Leader>ml  :MemoList<CR>
-map <Leader>mg  :MemoGrep<CR>
-let g:memolist_memo_suffix = "markdown"
-let g:memolist_memo_date = "%Y-%m-%d %H:%M"
-let g:memolist_memo_date = "epoch"
-let g:memolist_memo_date = "%D %T"
-let g:memolist_prompt_tags = 1
-let g:memolist_prompt_categories = 1
-let g:memolist_qfixgrep = 1
-let g:memolist_vimfiler = 1
-let g:memolist_template_dir_path = "$HOME/wiki/"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" changesPlugin
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:changes_hl_lines=1
-let g:changes_autocmd=0
-let g:changes_verbose=0
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_leader_key = '<SPACE>'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Completion
+" Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_focusgained = 1
+let g:signify_update_on_bufenter = 1
+let g:signify_line_highlight = 1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:tagbar_usearrows = 1
+"nnoremap <leader>l :TagbarToggle<CR>
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDCommenter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <silent><C-9> <leader>cc
+"map <silent><C-0> <Leader>ci
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Using Vim as wiki
-nnoremap <F8>	vi[gf<ESC>
-inoremap <F8>	[<C-F><C-X>
+"nnoremap <F8>	vi[gf<ESC>
+"inoremap <F8>	[<C-F><C-X>
 
 "Tab 열기/닫기
 map <silent><C-N> :tabnew<CR>
 map <silent><C-H> :tabp<CR>
 map <silent><C-L> :tabn<CR>
+
+"Move Cusor
+noremap <silent><C-A> ^
+noremap <silent><C-E> $
+inoremap <C-A> <Home>
+inoremap <C-E> <End>
+
 
 " Ctrl + j,k 키로 현재 라인을 위아래로 move
 nnoremap <C-j> :m+<CR>==
@@ -518,6 +481,25 @@ cnoremap <C-D> <cword>
 cnoreab W w
 cnoreab rmblank g/^$/d
 cnoreab Wq wq
+cnoreab q q!
 
-imap jk <Esc>   
-cmap jk <Esc>
+" cc키로 currnet word를 변경하기
+nnoremap cc diw"0P
+vnoremap cc "_dP
+
+inoremap jk <Esc>
+"cnoremap jj <Esc>
+inoremap ㅓㅏ <ESC>
+
+noremap <F8> <ESC>:wq<CR>
+if has("multi_byte")
+	set encoding=utf-8
+	setglobal fileencoding=utf-8
+	"setglobal bomb
+	set fileencodings=ucs-bom,utf-8,latin1
+endif
+" 마지막 편집 위치 복원 기능
+au BufReadPost *
+\ if line("'\"")>0 && line("'\"") <= line("$") |
+\ exe "norm g'\"" |
+\ endif

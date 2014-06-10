@@ -1,0 +1,9 @@
+#vim tags
+function _get_tags {
+	[ -f ./tags ] || return
+		local cur
+		read -l cur
+		echo $(echo $(awk -v ORS=" "  "/^${cur}/ { print \$1 }" tags))
+}
+compctl -x 'C[-1,-t]' -K _get_tags -- vim
+#end vim tags

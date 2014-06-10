@@ -1,0 +1,123 @@
+#compdef gp4
+
+typeset -A opt_args
+
+_arguments -C \
+	'1:cmd:->cmds'\
+	'*:: :->args' \
+&& ret=0
+
+case "$state" in
+	(cmds)
+		local commands; commands=(
+		'clone:Creates a new git repository and imports from Perforce into it'
+		'debug:A tool to debug the output of p4 -G.'
+		'commit:Submit changes from git to the perforce depot.'
+		'rebase:Fetches the latest revision from perforce and rebases the current work (branch) against it'
+		'branches:Shows the git branches that hold imports and their corresponding perforce depot paths'
+		'sync:Imports from Perforce into a git repository.'
+		'submit:Submit changes from git to the perforce depot.'
+		)
+		_describe -t commands 'command' commands && ret=0
+	;;
+	(args)
+		case $line[1] in
+			(clone)
+				local opts; opts=(
+					'--branch:Import changes into <ref> instead of refs/remotes/p4/master.'
+					'--detect-branches:Use the branch detection algorithm to find new paths in p4.'
+					'--silent:Do not print any progress information.'
+					'--detect-labels:Query p4 for labels associated with the depot paths, and add them as tags in Git.'
+					'--import-labels:Import labels from p4 into Git.'
+					'--import-local:Import into refs/heads/ , not refs/remotes'
+					'--max-changes=: Limit the number of imported changes to n'
+					'--keep-path:Keep entire BRANCH/DIR/SUBDIR prefix during import'
+					'--use-client-spec:Only sync files that are included in the Perforce Client Spec'
+					'--destination:set destination directory '
+					'--bare:make bare repository '
+					'-\/:Exclude selected depot paths when cloning.'
+					'-v:Provide more progress information.'
+					'--verbose:Provide more progress information.'
+					'-h:help'
+					'--help:help'
+					)
+				_describe -t opts 'option' opts && ret=0
+			;;
+			(sync)
+				local opts; opts=(
+					'--branch:Import changes into <ref> instead of refs/remotes/p4/master.'
+					'--detect-branches:Use the branch detection algorithm to find new paths in p4.'
+					'--silent:Do not print any progress information.'
+					'--detect-labels:Query p4 for labels associated with the depot paths, and add them as tags in Git.'
+					'--import-labels:Import labels from p4 into Git.'
+					'--import-local:Import into refs/heads/ , not refs/remotes'
+					'--max-changes=: Limit the number of imported changes to n'
+					'--keep-path:Keep entire BRANCH/DIR/SUBDIR prefix during import'
+					'--use-client-spec:Only sync files that are included in the Perforce Client Spec'
+					'-v:Provide more progress information.'
+					'--verbose:Provide more progress information.'
+					'-h:help'
+					'--help:help'
+					)
+				_describe -t opts 'option' opts && ret=0
+			;;
+			(commit)
+				local opts; opts=(
+					'--origin=:<commit> Upsteam location'
+					'-M:Detect rename'
+					'--preserve-user:Re-author p4 changes before submitting to p4. This option requires p4 admin privileges.'
+					'--export-labels:Export tags from Git as p4 labels.'
+					'-n:Show just what commits would be submitted to p4; do not change state in Git or p4.'
+					'--dry-run:Show just what commits would be submitted to p4; do not change state in Git or p4.'
+					'--prepare-p4-only:Apply a commit to the p4 workspace, No submit'
+					'--conflict=:ask|skip|quit\: Conflicts can occur when applying a commit to p4.'
+					'--branch=:After submitting, sync this named branch instead of the default p4/master'
+					'--auto-submit:Use git commit message for change description'
+					'--shelve:Make shelve CLs & revert from p4 workspace'
+					'-c :<commit> Apply only commit described'
+					'--commit=:<commit> Apply only commit described'
+					'-v:Provide more progress information.'
+					'--verbose:Provide more progress information.'
+					'-h:help'
+					'--help:help'
+					)
+				_describe -t opts 'option' opts && ret=0
+			;;
+			(submit)
+				local opts; opts=(
+					'--origin=:<commit> Upsteam location'
+					'-M:Detect rename'
+					'--preserve-user:Re-author p4 changes before submitting to p4. This option requires p4 admin privileges.'
+					'--export-labels:Export tags from Git as p4 labels.'
+					'-n:Show just what commits would be submitted to p4; do not change state in Git or p4.'
+					'--dry-run:Show just what commits would be submitted to p4; do not change state in Git or p4.'
+					'--prepare-p4-only:Apply a commit to the p4 workspace, No submit'
+					'--conflict=:ask|skip|quit\: Conflicts can occur when applying a commit to p4.'
+					'--branch=:After submitting, sync this named branch instead of the default p4/master'
+					'--auto-submit:Use git commit message for change description'
+					'--shelve:Make shelve CLs & revert from p4 workspace'
+					'-c :<commit> Apply only commit described'
+					'--commit=:<commit> Apply only commit described'
+					'-v:Provide more progress information.'
+					'--verbose:Provide more progress information.'
+					'-h:help'
+					'--help:help'
+					)
+				_describe -t opts 'option' opts && ret=0
+			;;
+			(rebase)
+				local opts; opts=(
+					'--import-labels:Import p4 labels.'
+					'-v:Provide more progress information.'
+					'--verbose:Provide more progress information.'
+					'-h:help'
+					'--help:help'
+					)
+				_describe -t opts 'option' opts && ret=0
+			;;
+		esac
+	;;
+esac;
+
+return 1;
+

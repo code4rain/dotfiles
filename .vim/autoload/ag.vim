@@ -26,6 +26,14 @@ if !exists("g:ag_mapping_message")
 endif
 
 function! ag#Ag(cmd, args)
+  let l:ag_executable = get(split(g:agprg, " "), 0)
+
+  " Ensure that `ag` is installed
+  if !executable(l:ag_executable)
+    echoe "Ag command '" . l:ag_executable . "' was not found. Is the silver searcher installed and on your $PATH?"
+    return
+  endif
+
   " If no pattern is provided, search for the word under the cursor
   if empty(a:args)
     let l:grepargs = expand("<cword>")
@@ -52,7 +60,7 @@ function! ag#Ag(cmd, args)
   endtry
 
   if a:cmd =~# '^l'
-    let l:match_count = len(getloclist())
+    let l:match_count = len(getloclist(winnr()))
   else
     let l:match_count = len(getqflist())
   endif
@@ -77,7 +85,6 @@ function! ag#Ag(cmd, args)
 
   if l:match_count
     if l:apply_mappings
-      nnoremap <silent> <buffer> go <CR><C-w><C-w>
       nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
       nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
       nnoremap <silent> <buffer> o  <CR>
@@ -86,7 +93,9 @@ function! ag#Ag(cmd, args)
       nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
 
       exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . l:matches_window_prefix .'close<CR>'
+      exe 'nnoremap <silent> <buffer> go <CR>:' . l:matches_window_prefix . 'open<CR>'
       exe 'nnoremap <silent> <buffer> q  :' . l:matches_window_prefix . 'close<CR>'
+
       exe 'nnoremap <silent> <buffer> gv :let b:height=winheight(0)<CR><C-w><CR><C-w>H:' . l:matches_window_prefix . 'open<CR><C-w>J:exe printf(":normal %d\<lt>c-w>_", b:height)<CR>'
       " Interpretation:
       " :let b:height=winheight(0)<CR>                      Get the height of the quickfix/location list window

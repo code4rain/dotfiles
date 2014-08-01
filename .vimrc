@@ -1,6 +1,53 @@
 ﻿set nocompatible               " be iMproved
-"
+
+set rtp+=~/.fzf
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" For Vundle
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+filetype off
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" The following are examples of different formats supported.
+" Keep Plugin commands between vundle#begin/end.
+" plugin on GitHub repo
+Plugin 'tpope/vim-fugitive'
+Plugin 'tomasr/molokai'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mhinz/vim-signify'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'majutsushi/tagbar'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'bbchung/clighter'
+Plugin 'Valloric/YouCompleteMe'
+"""""""""""""""""""""""""
+Plugin 't9md/vim-quickhl'
+" (Optional) For quickhl move
+Plugin 'kana/vim-operator-user'
+"""""""""""""""""""""""""
+
+""" snipmate start
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+" Optional:
+Plugin 'honza/vim-snippets'
+""" snipmate end
+Plugin 'bufexplorer.zip'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 보기 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use 256 colours (Use this setting only if your terminal supports 256
@@ -45,24 +92,21 @@ if has("gui_running")
     endif
 endif
 
-"Putty를 통해 접속한 경우에도 color scheme이 적용되도록
-if &term =~ "xterm"
-  "256 color --
-let &t_Co=256
-"restore screen after quitting
-set t_ti=ESC7ESC[rESC[?47h t_te=ESC[?47lESC8
-if has("terminfo")
-  let &t_Sf="\ESC[3%p1%dm"
-  let &t_Sb="\ESC[4%p1%dm"
-else
-  let &t_Sf="\ESC[3%dm"
-  let &t_Sb="\ESC[4%dm"
-endif
-endif
-
 set background=dark
-colorscheme railscasts
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colorscheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:jellybeans_background_color="000000"
+" colorscheme jellybeans
+"colorscheme gruvbox
+colorscheme molokai
+"if !has("gui_running")
+"   let g:gruvbox_italic = 0
+"endif
+"let g:gruvbox_invert_signs = 1
+"let g:gruvbox_sign_column = 'dark0'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 "Enable Word wrap
 set wrap
 set linebreak
@@ -76,13 +120,14 @@ set listchars=tab:>-,eol:$
 set showmatch
 
 set foldlevel=3
-set foldcolumn=5
+set foldcolumn=2
+set numberwidth=4
 
 " Focus Mode View
 function! ToggleFocusMode()
-  if (&foldcolumn != 12)
-    set numberwidth=10
-    set foldcolumn=12
+  if (&foldcolumn != 8)
+    set numberwidth=6
+    set foldcolumn=8
     set noruler
   else
     set numberwidth=4
@@ -93,7 +138,7 @@ function! ToggleFocusMode()
 endfunc
 function! FocusModeOff()
   set numberwidth=4
-  set foldcolumn=0
+  set foldcolumn=2
   set ruler
 endfunc
 
@@ -101,7 +146,7 @@ nnoremap <F1> :call ToggleFocusMode()<cr>
 
 " For Folding
 set foldtext=MyFoldText()
-function MyFoldText()
+function! MyFoldText()
         let line = getline(v:foldstart)
         let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
         return v:folddashes . sub
@@ -138,15 +183,15 @@ set softtabstop=0
 " 탭 -> 공백 변환 기능 (사용 안함)
 set noexpandtab
 
-" 자동 줄바꿈 안함
-set nowrap
+" 자동 줄바꿈
+set wrap
 
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
-if has("gui_running") || has("xterm_clipboard")
-        set clipboard+=unnamed
-        set clipboard+=unnamedplus
-endif
+"if has("gui_running") || has("xterm_clipboard")
+"        set clipboard+=unnamed
+"        set clipboard+=unnamedplus
+"endif
 if !has("gui_running")
 	set clipboard+=exclude:.*
 endif
@@ -167,13 +212,7 @@ set km=startsel,stopsel
 " 괄호짝 찾기 기능에 사용자 괄호 종류를 더한다.
 set matchpairs+=<:>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Goyo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=120
-nnoremap <F2> :Goyo<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 검색 기능 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -199,8 +238,7 @@ set incsearch
 filetype plugin indent on
 
 " 파일 형식에 따른 Syntax Highlighting 기능을 켠다
-sy enable
-
+syntax enable
 filetype on
 
 if has("syntax")
@@ -242,8 +280,8 @@ set comments=sl:/*,mb:\ *,elx:*/
 
 "unix format으로 변경하고,"trailing space 지우기
 func! FUNC_dos2unix()
-    %s///g
-    %s/\s\+$//
+    %s/\s\+$//g
+    %s///g
     set ff=unix
 endfunc
 nmap  <Leader>u :call FUNC_dos2unix()<cr>
@@ -254,8 +292,10 @@ nmap  <Leader>u :call FUNC_dos2unix()<cr>
 " 매크로 실행중에 화면을 다시 그리지 않음
 set lz
 
-" set mouse=a
-function ShowMouseMode()
+set mouse=a
+set ttymouse=xterm
+
+function! ShowMouseMode()
 if (&mouse == 'a')
     echo "mouse-vim"
 else
@@ -310,58 +350,35 @@ command! -bang Q quitall<bang>
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function SetCscope()
-	let curdir = getcwd()
+ 	let curdir = getcwd()
 
-	while !filereadable("cscope.out") && getcwd() != "/"
-		cd ..
-	endwhile
+ 	while !filereadable("cscope.out") && getcwd() != "/"
+ 		cd ..
+ 	endwhile
 
-	if filereadable("cscope.out")
-		execute "silent cs add " . getcwd() . "/cscope.out"
-		echo "Load CSCOPE DONE"
-	endif
+ 	if filereadable("cscope.out")
+ 		execute "silent cs add " . getcwd() . "/cscope.out"
+ 		"echo \"Load CSCOPE DONE\"
+ 	endif
 
-	execute "cd " . curdir
-endfunction
+ 	execute "cd " . curdir
+ endfunction
 
-"cscope file-searching alternative
-if has('cscope')
-	set cscopetag cscopeverbose
+ "cscope file-searching alternative
+ if has('cscope')
+ 	set cscopetag cscopeverbose
 
-	if has('quickfix')
-		set cscopequickfix=s-,c-,d-,i-,t-,e-
-	endif
-	cnoreabbrev csa cs add
-	cnoreabbrev csf cs find
-	cnoreabbrev csk cs kill
-	cnoreabbrev csr cs reset
-	cnoreabbrev css cs show
-	cnoreabbrev csh cs help
-	call SetCscope()
-endif
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Command-T
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nmap <silent> <Leader>t :CommandT<CR>
-" nmap <silent> <Leader>b :CommandTBuffer<CR>
-"
-" let g:CommandTMaxFiles=1000000
-" let g:CommandTMaxDepth=25
-" let g:CommandTMaxCachedDirectories=5 "1 " multiple cache size
-" " For my terminal. <C-H> and <BS> has same keymap in my terminal.
-" let g:CommandTCursorLeftMap='<Left>'
-" let g:CommandTBackspaceMap='<C-H>'
-"
-" set wildignore+=*.o,*.obj,.git,*.cmd,*.builtin,*.d,*~,*.module,tags,cscope.*,vmlinux,System.map,*.bak
-" set wildignore+=*.jar,*.so,*.a,*.class,*.apk,*.
-" set wildignore+=*.js,*.html,*.jpg,*.png,*.gif,*.htm,*.jd,*.txvi,*.zip,*.exe,*.swp
-" set wildignore+=cts/**,docs/**,ndk/**,sdk/**,external/**,out/product/**,
-"---------------------------------------------------------------------
-" AG
-"---------------------------------------------------------------------
-let g:agprg="ag --hidden --nocolor --column --smart-case"
-let g:aghighlight=1
-let g:agformat="%f:%l:%m"
+ 	if has('quickfix')
+ 		set cscopequickfix=s-,c-,d-,i-,t-,e-
+ 	endif
+ 	cnoreabbrev csa cs add
+ 	cnoreabbrev csf cs find
+ 	cnoreabbrev csk cs kill
+ 	cnoreabbrev csr cs reset
+ 	cnoreabbrev css cs show
+ 	cnoreabbrev csh cs help
+ 	call SetCscope()
+ endif
 "---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------
@@ -405,17 +422,36 @@ endfunction
 command! -nargs=* CSearch call Find_current_file(<q-args>)
 noremap <F3> :call Find_current_file(expand('<cword>'))<CR>
 noremap <F11> :call Open_QuickFixList()<CR>
-"---------------------------------------------------------------------
-" Grep
-"---------------------------------------------------------------------
-let Grep_Skip_Files = '*.bak *~ *.o *.cmd .git *.obj *.builtin *.d *.module tags cscope.* vmlinux *System.map *.patch *.a Image .tmp* *.ko *.swp'
-map <C-/> :Rgrep <cword><CR>
-map <F9> :RgrepAdd <cword><CR>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tagbar_left = 1
+let g:tagbar_show_linenumbers = 0
+let g:tagbar_autopreview = 1
+let g:tagbar_previewwin_pos = "bottomleft"
+let g:tagbar_indent = 1
+
+"autocmd VimEnter * nested :call tagbar#autoopen(1)
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+"autocmd FileType * nested :call tagbar#autoopen(0)
+set <M-L> =l
+nmap <M-L> :TagbarOpenAutoClose<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-quickhl
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+
+nmap <Space>j <Plug>(quickhl-cword-toggle)
+nmap <Space>] <Plug>(quickhl-tag-toggle)
+map H <Plug>(operator-quickhl-manual-this-motion)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bufexplorer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F12> <leader>be
+map <F11> <leader>be
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fugitive
@@ -430,14 +466,18 @@ nnoremap <silent> <F4>l :Git l %<CR>
 " easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:EasyMotion_leader_key = '<Space>'
+nmap s <Plug>(easymotion-s2)
+" Turn on case sensitive feature
+let g:EasyMotion_smartcase = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:signify_vcs_list = [ 'git' ]
+let g:signify_vcs_list = [ 'git', 'perforce' ]
+let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1
-let g:signify_line_highlight = 1
+let g:signify_line_highlight = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDCommenter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -446,47 +486,46 @@ let g:signify_line_highlight = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au VimEnter * RainbowParenthesesToggleAll
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+autocmd VimEnter * RainbowParenthesesActivate 
+autocmd Syntax * RainbowParenthesesLoadRound
+autocmd Syntax * RainbowParenthesesLoadSquare
+autocmd Syntax * RainbowParenthesesLoadBraces
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabluer
+" YCM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists(":Tabularize")
-	nmap <Leader>a= :Tabularize /=<CR>
-	vmap <Leader>a= :Tabularize /=<CR>
-	nmap <Leader>a: :Tabularize /:\zs<CR>
-	vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
-inoremap <silent> <Bar>  <Bar><Esc>:call <SID>align()<CR>a
-
-function! s:align()
-	let p = '^\s*|\s.*\s|\s*$'
-	if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-		let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-		let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-		Tabularize/|/l1
-		normal! 0
-		call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-	endif
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FZF
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" List of buffers
+function! BufList()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
 endfunction
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" gundo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <F5> :GundoToggle<CR>
-let g:gundo_right = 1
+
+function! BufOpen(e)
+  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+nnoremap <silent> <Leader>] :call fzf#run({
+\   'source':      reverse(BufList()),
+\   'sink':        function('BufOpen'),
+\   'options':     '+m',
+\   'tmux_width': '20%'
+\ })<CR>
+let g:fzf_tmux_height = '20%'
+let g:fzf_tmux_width = '20%'
+noremap <F12> <ESC>:FZF<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Using Vim as wiki
-"nnoremap <F8>	vi[gf<ESC>
-"inoremap <F8>	[<C-F><C-X>
 
 "Tab 열기/닫기
 map <silent><C-N> :tabnew<CR>
-map <silent><C-H> :tabp<CR>
-map <silent><C-L> :tabn<CR>
+vnoremap q <ESC>
 
 "Move Cusor like readline
 noremap <silent><C-A> ^
@@ -496,19 +535,35 @@ inoremap <C-E> <End>
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
 " Remove contents like readline
-noremap <silent><C-U> d^
-noremap <silent><C-K> d$
+map <silent><C-K> d$
+map <silent><C-U> d^
+nmap Y "*yw
+noremap <silent><C-P> :set paste<CR>"*p:set nopaste<CR>
 inoremap <silent><C-K> <Esc>d$A
-noremap <silent><C-P> "+p
-inoremap <silent><C-P> <C-R>+
+inoremap <silent><C-P> <Esc>:set paste<CR>"*p:set nopaste<CR>a
+vmap Y "*y
+noremap <silent><C-F> <PageUp>
+"Remap for navigation
+"inoremap <M-H> <Left>
+"inoremap <M-L> <Right>
+"inoremap <M-J> <Down>
+"inoremap <M-K> <Up>
+"Force close
+
+"Below command should be map under 'stty -ixon' at terminal
+noremap <C-Q> <ESC>:q!<CR>
+noremap <C-S> <ESC>:wq<CR>
 
 
-" Ctrl + 방향키로 현재 라인을 위아래로 move
-nmap <S-Up> [e
-nmap <S-Down> ]e
-vmap <S-Up> [egv
-vmap <S-Down> ]egv
-
+" S-j/k 로 현재 라인을 위아래로 move
+nnoremap <S-Up> :m .-2<CR>==g
+nnoremap <S-Down> :m .+1<CR>==g
+" "vmap <S-k> [egv
+" "vmap <S-j> ]egv
+inoremap <S-Up> <Esc>:m .-2<CR>==gi
+inoremap <S-Down> <Esc>:m .+1<CR>==gi
+vnoremap <S-Up> <Esc>:m .-2<CR>==gv
+vnoremap <S-Down> <ESC>:m .+1<CR>==gv
 " Ctrl + [ / Ctrl + ] 키로 indentation 조정
 nnoremap <C-t> <<
 nnoremap <C-y> >>
@@ -522,9 +577,9 @@ cnoreab rmblank g/^$/d
 cnoreab Wq wq
 cnoreab q q!
 
-" cc키로 currnet word를 변경하기
-nnoremap cc diw"*P
-vnoremap cc "_dP
+" tt키로 currnet word를 변경하기
+nnoremap tt diw"*P
+vnoremap tt "_dP
 
 inoremap jk <Esc>
 "cnoremap jj <Esc>
@@ -545,7 +600,7 @@ au BufReadPost *
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Stat functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-call ToggleFocusMode()
+"call ToggleFocusMode()
 " Example of how to use w:created in an autocmd to initialize a window-local option
-autocmd WinLeave * :call FocusModeOff()
-autocmd WinEnter * :call FocusModeOff()
+"autocmd WinLeave * :call FocusModeOff()
+"autocmd WinEnter * :call FocusModeOff()

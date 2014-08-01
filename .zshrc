@@ -97,7 +97,7 @@ esac
 
 autoload -U colors && colors
 CURRENT_BG='NONE'
-SEGMENT_SEPARATOR=''
+SEGMENT_SEPARATOR='⮀'
 
 # Begin a segment
 # Takes two arguments, background and foreground. Both can be omitted,
@@ -170,10 +170,30 @@ build_prompt() {
 	prompt_git
 	prompt_end
 }
-
+simple_prompt_dir() {
+	CURRENT=`dirname ${PWD}`
+	if [[ $CURRENT = / ]]; then
+		echo -n "/"
+	elif [[ $PWD = ${HOME} ]]; then
+		echo -n "~"
+	else
+		CURRENT="$PWD"
+		CURRENT="${CURRENT%/*}"
+		CURRENT="${CURRENT/$HOME/~}"
+		echo -n "%F{yellow}${CURRENT}/%{%f%}"
+		echo -n "%F{cyan}%1~%{%f%}"
+	fi
+}
+simple_prompt() {
+	echo -n "%F{green}%n%{%f%}%{%F{yellow}%}@%{%f%}%{%F{red}%}%m%{%f%}    "
+	simple_prompt_dir
+	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
+	echo "$"
+}
 # Set the prompt
-PROMPT='%{%f%b%k%}$(build_prompt) '
-RPROMPT='%F{000}%n@%m%f'
+#PROMPT='%{%f%b%k%}$(build_prompt) '
+PROMPT='%{%f%b%k%}$(simple_prompt) '
+#RPROMPT='%F{000}%n@%m%f'
 # PS1=$'%{\e[36m%}%v %{\e[0m%}'
 if [[ $UID == 0 ]]; then
     psvar='##'
@@ -245,3 +265,4 @@ if [ -f $HOME/.aliases ]; then
 fi
 # Auto Load
 autoload zmv
+source ~/.fzf.zsh

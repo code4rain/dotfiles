@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+git clone http://git.savannah.gnu.org/r/ranger.git ~/bin/ranger
+git clone https://github.com/jonas/tig.git ~/bin/tig
+git clone https://github.com/ggreer/the_silver_searcher.git ~/bin/ag
+git clone https://github.com/ThomasAdam/tmux.git ~/bin/tmux

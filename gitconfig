@@ -1,0 +1,64 @@
+[user]
+	email = alex.jang@samsung.com
+	name = Alex Kyoungdon Jang
+[color]
+	ui = auto
+	status = auto
+	branch = auto
+[alias]
+        br = branch -av
+        ci = commit -v -s
+        cm = commit -v -s -a -m
+        co = checkout
+        dc = diff -b --cached
+        d = diff -b
+        fix = commit --amend -C HEAD
+        glog = log --graph --abbrev-commit --decorate=full --stat
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
+        ll = log --abbrev-commit --decorate=full --stat
+        st = status
+        top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration
+	sh = !tig show
+	b = branch
+	rst = reset --hard HEAD^
+	rt = reset --hard HEAD
+	l = !tig
+	s ="!tig status"
+	ts ="!tig stash"
+	b ="!tig blame"
+	ss = stash
+	ssh = stash show -p
+	ssl = stash list
+	ssv = stash save
+	cl = clean -df
+	clf = clean -fX
+	pp = pull --rebase
+	ri = tag --force _ribbon HEAD
+	pr = !git tag --force _ribbon HEAD && git pull --rebase
+	pl = !git tag --force _ribbon HEAD && git pull --rebase && tig _ribbon..HEAD
+	sl = !tig _ribbon..HEAD
+	po = push origin master
+	rb = "!f() { git rebase -i HEAD~$1; }; f"
+[core]
+	editor = vim
+	quotepath = off
+[push]
+	default = matching
+[i18n]
+	logOutputEncoding = utf8
+	commitEncoding = utf8
+[http]
+	proxy = http://168.219.61.252:8080
+	sslVerify = false
+[https]
+	proxy = https://168.219.61.252:8080
+	sslVerify = false
+[grep]
+	lineNumber = true
+[color "grep"]
+	linenumber = green
+	filename = blue
+	function = black
+	match = yellow
+[bash]
+	showDirtyState = true

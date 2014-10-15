@@ -1,0 +1,36 @@
+snippet p4 "My Perforce Description" b
+	[Project] ${1:Exynos54xx}
+	[Title] ${2}
+	[BinType] ${3:AP}
+	[Customer] ${4:ALL}
+	
+	[Issue#] ${5:NONE}
+	[Request] ${6:SYSTEM PL}
+	[Occurrence Version] ${7:Previous}
+	
+	[Problem] ${8}
+	[Cause & Measure]
+	${9:Cause:
+	Measure:}
+	[Checking Method] ${10}
+	
+	[Team] System S/W 1Group Kernel
+	[Developer] Alex Kyoungdon Jang
+	[Solution company] Samsung Electronics.
+	[Change Type] ${11:BUG Fix}
+endsnippet
+
+snippet if0 "#if 0 current block" b
+#if 0
+${0:${VISUAL: # assertions...}}
+#endif
+endsnippet
+
+snippet def "#ifdef XXX" b
+#ifdef CONFIG_${1}
+${0:${VISUAL: # assertions...}}
+#endif /* CONFIG_$1 */
+endsnippet
+snippet printk
+printk("${1:%s}\n"${1/([^%]|%%)*(%.)?.*/(?2:, :\);)/}$2${1/([^%]|%%)*(%.)?.*/(?2:\);)/}
+endsnippet

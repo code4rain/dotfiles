@@ -1,0 +1,22 @@
+set refresh-mode = auto          # Enum: manual, auto, after-command, period
+set main-view = id:width=7 date:short author:full,width=14 commit-title:yes,graph=yes,refs=yes,overflow=no
+bind branch 3 !git rebase -i %(branch)
+bind generic I !git add -i %(file)
+bind generic T !git notes edit %(commit)
+bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
+bind generic + !git commit -s --amend -C HEAD
+bind generic C !git commit -s
+bind generic 0 !git format-patch -1 %(commit)
+bind generic <F10> !git format-patch %(commit)
+bind main R !@git revert %(commit)
+bind main i !@git rebase -i %(commit)
+bind main x @!git reset --hard HEAD^
+bind main o refresh
+bind main a !git notes append %(commit)
+bind main e @!git notes remove %(commit)
+bind main H !@git reset --hard %(commit)
+bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
+bind generic U !git checkout -- %(file)
+bind status p !git push
+bind status c !git checkout -p %(file)
+bind generic <F12> !gp4 rebase

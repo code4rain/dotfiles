@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/alex.jang/.gerritcodereview/buck-cache'
-let g:netrw_dirhist_2='/home/alex.jang/.vim/bundle'
-let g:netrw_dirhist_3='/home/alex.jang/.vim/bundle/vim-fugitive'
-let g:netrw_dirhist_4='/home/alex.jang/.vim/bundle'
-let g:netrw_dirhist_5='/home/alex.jang/.vim/bundle/vim-snippets'
-let g:netrw_dirhist_6='/home/alex.jang/.vim/bundle/vim-snippets/snippets'

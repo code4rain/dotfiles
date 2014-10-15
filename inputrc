@@ -1,0 +1,4 @@
+set completion-ignore-case on
+set input-meta on
+set output-meta on
+set convert-meta off

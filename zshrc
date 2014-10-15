@@ -255,6 +255,19 @@ setopt                  \
     pushd_minus         \
 # Keybindings
 bindkey -e
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # Global aliases
 alias -g ...='../..'
 alias -g ....='../../..'

@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/home/alex.jang/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:"
+export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -79,10 +79,6 @@ if [[ -r ${HOME}/.git-prompt.sh ]]; then
 	. ${HOME}/.git-prompt.sh
 fi
 setopt PROMPT_SUBST;
-
-#if [[ -r ${HOME}/.zsh/git-ps1 ]]; then
-#	. ${HOME}/.zsh/git-ps1
-#fi
 
 psvar=()
 # Set the title to "user@host: directory"
@@ -183,7 +179,7 @@ simple_prompt_dir() {
 		CURRENT_PWD="${CURRENT_PWD%/*}"
 		CURRENT_PWD="${CURRENT_PWD/$HOME/~}"
 		echo -n "%F{yellow}${CURRENT_PWD}/%{%f%}"
-		echo -n "%F{cyan}%1~%{%f%}"
+		echo -n "%F{cyan}$(basename $(pwd))%{%f%}"
 	fi
 }
 simple_prompt() {

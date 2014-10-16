@@ -1,13 +1,13 @@
 # Setup fzf function
 # ------------------
 unalias fzf 2> /dev/null
-fzf() { /usr/bin/ruby /home/alex.jang/.fzf/fzf "$@" }
+fzf() { /usr/bin/ruby ${HOME}/.fzf/fzf "$@" }
 #export -f fzf > /dev/null
 #alias fzf='fzf_f'
 
 # Auto-completion
 # ---------------
-[[ $- =~ i ]] && source /home/alex.jang/.fzf/fzf-completion.zsh
+[[ $- =~ i ]] && source ${HOME}/.fzf/fzf-completion.zsh
 
 # Key bindings
 # ------------

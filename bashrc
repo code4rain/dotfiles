@@ -142,7 +142,7 @@ fi
 
 # For kernel standalone build
 # export ARCH=arm
-export SUBARCH=exynos
+# export SUBARCH=exynos
 
 # Using cd history
 source ~/bin/cd_func.sh
@@ -158,4 +158,4 @@ ranger_cd () {
 	command ranger --choosedir=${HOME}/.lastdir &&
 	cd $(cat ${HOME}/.lastdir)
 }
-source ~/.fzf.bash
+# source ~/.fzf.bash

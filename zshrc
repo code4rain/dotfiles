@@ -221,6 +221,12 @@ zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:functions' ignored-patters '_*'
 
+autoload bashcompinit
+bashcompinit
+
+source ~/.gp4_completion
+source ~/.build_completion
+
 setopt                  \
     aliases             \
     NO_all_export       \

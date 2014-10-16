@@ -454,13 +454,13 @@ nmap <M-L> :TagbarOpenAutoClose<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <Space>m <Plug>(quickhl-manual-this)
-xmap <Space>m <Plug>(quickhl-manual-this)
-nmap <Space>M <Plug>(quickhl-manual-reset)
-xmap <Space>M <Plug>(quickhl-manual-reset)
+nmap <leader>h <Plug>(quickhl-manual-this)
+xmap <leader>h <Plug>(quickhl-manual-this)
+nmap <leader>H <Plug>(quickhl-manual-reset)
+xmap <leader>H <Plug>(quickhl-manual-reset)
 
-nmap <Space>j <Plug>(quickhl-cword-toggle)
-nmap <Space>] <Plug>(quickhl-tag-toggle)
+nmap <leader>o <Plug>(quickhl-cword-toggle)
+nmap <leader>] <Plug>(quickhl-tag-toggle)
 map H <Plug>(operator-quickhl-manual-this-motion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bufexplorer
@@ -487,7 +487,7 @@ let g:EasyMotion_smartcase = 1
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:signify_vcs_list = [ 'git', 'perforce' ]
+let g:signify_vcs_list = [ 'git']
 let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1

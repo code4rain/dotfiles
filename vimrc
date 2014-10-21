@@ -99,7 +99,7 @@ if has("gui_running")
     if has("win32")
         set gfn=consolas:h11:cANSI
     elseif has("unix")
-        set gfn=consolas\ 9
+        set gfn=Ubuntu\ Mono\ 11
     else
         set gfn=consolas\ 11
     endif

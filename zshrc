@@ -270,6 +270,9 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+
 # Global aliases
 alias -g ...='../..'
 alias -g ....='../../..'

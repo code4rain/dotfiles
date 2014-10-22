@@ -14,7 +14,7 @@ git clone --recursive https://github.com/sheerun/dotfiles.git ~/.dotfiles
 ~/.dotfiles/bin/dotfiles ~/.dotfiles
 ```
 
-The `dotfiles` command is going to backup your current dotfiles, symlink new ones and generate report.
+The `dotfiles` command is going to backup your current dotfiles to `~/.dotfiles/backup/${date}`, symlink new ones and generate report.
 
 ## License
 

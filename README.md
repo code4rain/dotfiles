@@ -7,13 +7,14 @@ This dotfiles are meant to be used with zsh.
 Please fork this repository and configure it for yourself:
 
 ```
+# if zsh is not installed.
+sudo apt-get install zsh
+
 git clone --recursive https://github.com/sheerun/dotfiles.git ~/.dotfiles
-~/.dotfiles/bin/dotfiles
+~/.dotfiles/bin/dotfiles ~/.dotfiles
 ```
 
 The `dotfiles` command is going to backup your current dotfiles, symlink new ones and generate report.
-
-You can also use `bin/bootstrap` for initial environment setup on OSX.
 
 ## License
 

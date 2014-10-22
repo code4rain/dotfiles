@@ -12,7 +12,7 @@ _gp4()
 	#
 	case "${prev}" in
 		submit)
-			local running="--prepare-p4-only"
+			local running="--prepare-p4-only --auto-submit --shelve"
 			COMPREPLY=( $(compgen -W "${running}" -- ${cur}) )
 			return 0
 			;;

@@ -574,6 +574,8 @@ inoremap <silent><C-P> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
+inoremap <C-Q> <ESC>:q!<CR>
+inoremap <C-S> <ESC>:wq<CR>
 
 map <silent><C-K> d$
 map <silent><C-U> d^

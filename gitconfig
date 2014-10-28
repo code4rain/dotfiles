@@ -12,7 +12,7 @@
         co = checkout
         dc = diff -b --cached
         d = diff -b
-        fix = commit --amend -C HEAD
+        fix = commit -s --amend -C HEAD
         glog = log --graph --abbrev-commit --decorate=full --stat
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
         ll = log --abbrev-commit --decorate=full --stat

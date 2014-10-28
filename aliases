@@ -15,6 +15,7 @@ alias b='nvim'
 
 alias conZ='ssh -X kshare@10.252.250.239'
 alias conX='ssh -X $(whoami)@10.252.251.137'
+alias conW='ssh -X $(whoami)@10.252.251.111'
 
 bcompare_bg () {
 	bcompare "$@" &

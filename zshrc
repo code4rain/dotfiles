@@ -185,6 +185,9 @@ simple_prompt_dir() {
 simple_prompt() {
 	echo -n "%F{green}%n%{%f%}%{%F{yellow}%}@%{%f%}%{%F{red}%}%m%{%f%}    "
 	simple_prompt_dir
+	if [[ -h $(pwd) ]]; then
+		echo -n "\nSYMLINK: %F{magenta}$(readlink $(pwd))%{%f%}"
+	fi
 	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
 	echo "$"
 }
@@ -293,3 +296,4 @@ autoload zmv
 source ~/.fzf.zsh
 # Work for git ^
 setopt NO_NOMATCH
+unsetopt CHASE_LINKS

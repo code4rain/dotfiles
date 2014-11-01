@@ -48,10 +48,10 @@
 	logOutputEncoding = utf8
 	commitEncoding = utf8
 [http]
-	proxy = http://168.219.61.252:8080
+#	proxy = http://168.219.61.252:8080
 	sslVerify = false
 [https]
-	proxy = https://168.219.61.252:8080
+#	proxy = https://168.219.61.252:8080
 	sslVerify = false
 [grep]
 	lineNumber = true

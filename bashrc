@@ -64,7 +64,7 @@ show_sympath () {
 }
 
 if [ "$color_prompt" = yes ]; then
-	PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\e[0;33m@\e[0;36m\h\e[0;33m \w\033[0m\033[0m\e[0;36m$(show_sympath)\033[0m\e[0;35m$(__git_ps1 "\n (%s) ")\033[0m\n\$ '
+  PS1='${debian_chroot:+($debian_chroot)}\[\033[0;32m\]\u\e[0;33m@\e[0;36m\h\e[0;33m \w\033[0m\033[0m\e[0;36m$(show_sympath)\033[0m\e[0;35m$(__git_ps1 "\n (%s) ")\033[0m\n\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h   \w\$ '
 fi

@@ -56,6 +56,8 @@ Plugin 'surround.vim'
 Plugin 'gtags.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
+Plugin 'yssl/VIntSearch'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

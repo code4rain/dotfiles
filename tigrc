@@ -19,4 +19,6 @@ bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
 bind generic U !git checkout -- %(file)
 bind status p !git push
 bind status c !git checkout -p %(file)
+bind generic 1 !@git checkout --ours %(file)
+bind generic 2 !@git checkout --theirs %(file)
 bind generic <F12> !gp4 rebase

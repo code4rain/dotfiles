@@ -577,7 +577,7 @@ inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
-inoremap <C-S> <ESC>:wq<CR>
+inoremap <C-S> <ESC>:w<CR>a
 
 map <silent><C-K> d$
 map <silent><C-U> d^
@@ -588,7 +588,7 @@ nmap Y "*yw
 
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
-noremap <C-S> <ESC>:wq<CR>
+noremap <C-S> <ESC>:w<CR>
 noremap <down> gj
 noremap <silent><C-A> ^
 noremap <silent><C-E> $

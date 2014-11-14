@@ -57,6 +57,7 @@ Plugin 'gtags.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
+Plugin 'delimitMate.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -133,8 +134,16 @@ set listchars=tab:>-,eol:$
 
 " 괄호의 짝을 Highlight
 set showmatch
+set matchtime=3
 
-set foldlevel=3
+set showmode
+set lazyredraw
+set ttyfast
+set scrolloff=4
+set sidescrolloff=2
+set cmdheight=1
+
+set foldlevel=5
 set foldcolumn=2
 set numberwidth=4
 
@@ -186,6 +195,8 @@ set backspace=indent,eol,start
 
 "백업파일을 만들지 않음
 set nobackup
+set nowritebackup
+set noswapfile
 
 " 완성중인 명령을 표시
 set showcmd
@@ -529,6 +540,11 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DelimitMate
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap <C-F> <Plug>delimitMateJumpMany
+imap <C-D> <Plug>delimitMateS-BS
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " List of buffers
@@ -626,6 +642,10 @@ au BufReadPost *
 \ exe "norm g'\"" |
 \ endif
 
+nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
+
+" If you need current path in insert mode :
+inoremap j% <C-R>=expand("%:p:h") . "/" <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Stat functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""

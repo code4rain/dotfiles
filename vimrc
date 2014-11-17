@@ -520,9 +520,9 @@ autocmd Syntax * RainbowParenthesesLoadBraces
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<C-k>"
-let g:UltiSnipsJumpBackwardTrigger="<C-j>"
+let g:UltiSnipsExpandTrigger="<Tab>"
+let g:UltiSnipsJumpForwardTrigger="<Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Repeat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -542,8 +542,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DelimitMate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-imap <C-F> <Plug>delimitMateJumpMany
-imap <C-D> <Plug>delimitMateS-BS
+imap <C-F> <Plug>delimitMateS-Tab
+imap <C-H> <Plug>delimitMateS-BS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

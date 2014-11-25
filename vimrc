@@ -57,7 +57,7 @@ Plugin 'gtags.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
-Plugin 'delimitMate.vim'
+"Plugin 'delimitMate.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -542,8 +542,8 @@ vmap <C-v> <Plug>(expand_region_shrink)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DelimitMate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-imap <C-F> <Plug>delimitMateS-Tab
-imap <C-H> <Plug>delimitMateS-BS
+"imap <C-F> <Plug>delimitMateS-Tab
+"imap <C-H> <Plug>delimitMateS-BS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

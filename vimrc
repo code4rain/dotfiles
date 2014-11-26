@@ -60,6 +60,7 @@ Plugin 'yssl/VIntSearch'
 "
 "Indentation
 Plugin 'IndentConsistencyCop'
+Plugin 'ciaranm/detectindent'
 
 " Colors
 Plugin 'tomasr/molokai'
@@ -206,13 +207,15 @@ set noswapfile
 " 완성중인 명령을 표시
 set showcmd
 
+" Disalbe tabstop, shiftwidth, noexpandtab
+" Instead of these settings, use DetectIndent as autocmd *
 " 탭 크기 설정
-set tabstop=8
-set shiftwidth=8
-set softtabstop=0
+" set tabstop=8
+" set shiftwidth=8
+" set softtabstop=0
 
 " 탭 -> 공백 변환 기능 (사용 안함)
-set noexpandtab
+" set noexpandtab
 
 " 자동 줄바꿈
 set wrap
@@ -518,6 +521,11 @@ let g:signify_line_highlight = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "map <silent><C-9> <leader>cc
 "map <silent><C-0> <Leader>ci
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DetectIndent
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+autocmd BufReadPost * :DetectIndent
+let g:detectindent_preferred_indent = 8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

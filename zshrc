@@ -119,7 +119,7 @@ prompt_end() {
 		echo -n "%{%k%}"
 	fi
 	echo "%{%f%}\n"
-	echo ">> "
+	echo "::"
 	CURRENT_BG=''
 }
 prompt_context() {
@@ -131,14 +131,14 @@ prompt_rcontext() {
 prompt_head_dir() {
 	CURRENT_PWD=`dirname $(pwd)`
 	if [[ $CURRENT_PWD = / ]]; then
-		prompt_segment red black " "
+		prompt_segment cyan black " "
 	elif [[ $(pwd) = ${HOME} ]]; then
-		prompt_segment red black "~"
+		prompt_segment cyan black "~"
 	else
 		CURRENT="$(pwd)"
 		CURRENT="${CURRENT_PWD%/*}"
 		CURRENT="${CURRENT_PWD/$HOME/~}"
-		prompt_segment cyan black " ${CURRENT_PWD}"
+		prompt_segment yellow black " ${CURRENT_PWD}"
 	fi
 }
 prompt_dir() {
@@ -174,13 +174,13 @@ simple_prompt_dir() {
 	elif [[ $CURRENT = / ]]; then
 		echo -n "$(pwd)"
 	elif [[ $(pwd) = ${HOME} ]]; then
-		echo -n "%F{red}~%{%f%}"
+		echo -n "%F{cyan}~%{%f%}"
 	else
 		CURRENT_PWD="$(pwd)"
 		CURRENT_PWD="${CURRENT_PWD%/*}"
 		CURRENT_PWD="${CURRENT_PWD/$HOME/~}"
-		echo -n "%F{yellow}${CURRENT_PWD}/%{%f%}"
-		echo -n "%F{cyan}$(basename $(pwd))%{%f%}"
+		echo -n "%F{cyan}${CURRENT_PWD}/%{%f%}"
+		echo -n "%F{yellow}$(basename $(pwd))%{%f%}"
 	fi
 }
 simple_prompt() {
@@ -190,7 +190,7 @@ simple_prompt() {
 		echo -n "\nSYMLINK: %F{cyan}$(readlink $(pwd))%{%f%}"
 	fi
 	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
-	echo ">>"
+	echo "::"
 }
 # Set the prompt
 #PROMPT='%{%f%b%k%}$(build_prompt) '

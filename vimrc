@@ -57,6 +57,9 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
+"
+"Indentation
+Plugin 'IndentConsistencyCop'
 
 " Colors
 Plugin 'tomasr/molokai'
@@ -96,20 +99,20 @@ set laststatus=2
 set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
 if has("gui_running")
-    set lines=150
-    set co=171
-    winp 580 4
+  set lines=150
+  set co=171
+  winp 580 4
 endif
 
 " 폰트 설정
 if has("gui_running")
-    if has("win32")
-        set gfn=consolas:h11:cANSI
-    elseif has("unix")
-        set gfn=Ubuntu\ Mono\ 11
-    else
-        set gfn=consolas\ 11
-    endif
+  if has("win32")
+    set gfn=consolas:h11:cANSI
+  elseif has("unix")
+    set gfn=Ubuntu\ Mono\ 11
+  else
+    set gfn=consolas\ 11
+  endif
 endif
 
 set background=dark
@@ -173,18 +176,18 @@ nnoremap <F1> :call ToggleFocusMode()<cr>
 " For Folding
 set foldtext=MyFoldText()
 function! MyFoldText()
-        let line = getline(v:foldstart)
-        let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-        return v:folddashes . sub
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return v:folddashes . sub
 endfunction
 
 " c, h 파일인 경우 80 column 이상인 경우 표시
 if exists('+colorcolumn')
-        autocmd BufWinEnter *.c set colorcolumn=80
-        autocmd BufWinEnter *.h set colorcolumn=80
+  autocmd BufWinEnter *.c set colorcolumn=80
+  autocmd BufWinEnter *.h set colorcolumn=80
 else
-        autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-        autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -221,7 +224,7 @@ set wrap
 "        set clipboard+=unnamedplus
 "endif
 if !has("gui_running")
-	set clipboard+=exclude:.*
+  set clipboard+=exclude:.*
 endif
 
 " magic 기능 사용 Allows pattern matching with special characters
@@ -270,7 +273,7 @@ syntax enable
 filetype on
 
 if has("syntax")
-	syntax on
+  syntax on
 endif
 
 " 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
@@ -312,10 +315,9 @@ set comments=sl:/*,mb:\ *,elx:*/
 
 "unix format으로 변경하고,"trailing space 지우기
 func! FUNC_dos2unix()
-    %s/\s\+$//g
-    %s/
-//g
-    set ff=unix
+  %s/\s\+$//g
+  %s///g
+  set ff=unix
 endfunc
 nmap  <Leader>u :call FUNC_dos2unix()<cr>
 
@@ -329,11 +331,11 @@ set mouse=a
 set ttymouse=xterm
 
 function! ShowMouseMode()
-if (&mouse == 'a')
+  if (&mouse == 'a')
     echo "mouse-vim"
-else
+  else
     echo "mouse-xterm"
-endif
+  endif
 endfunction
 
 "source $VIMRUNTIME/vimrc_example.vim
@@ -383,74 +385,74 @@ command! -bang Q quitall<bang>
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function SetCscope()
- 	let curdir = getcwd()
+  let curdir = getcwd()
 
- 	while !filereadable("cscope.out") && getcwd() != "/"
- 		cd ..
- 	endwhile
+  while !filereadable("cscope.out") && getcwd() != "/"
+    cd ..
+  endwhile
 
- 	if filereadable("cscope.out")
- 		execute "silent cs add " . getcwd() . "/cscope.out"
- 		"echo \"Load CSCOPE DONE\"
- 	endif
+  if filereadable("cscope.out")
+    execute "silent cs add " . getcwd() . "/cscope.out"
+    "echo \"Load CSCOPE DONE\"
+  endif
 
- 	execute "cd " . curdir
- endfunction
+  execute "cd " . curdir
+endfunction
 
- "cscope file-searching alternative
- if has('cscope')
- 	set cscopetag cscopeverbose
+"cscope file-searching alternative
+if has('cscope')
+  set cscopetag cscopeverbose
 
- 	if has('quickfix')
- 		set cscopequickfix=s-,c-,d-,i-,t-,e-
- 	endif
- 	cnoreabbrev csa cs add
- 	cnoreabbrev csf cs find
- 	cnoreabbrev csk cs kill
- 	cnoreabbrev csr cs reset
- 	cnoreabbrev css cs show
- 	cnoreabbrev csh cs help
- 	call SetCscope()
- endif
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+  call SetCscope()
+endif
 "---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------
 function! Find_current_file(word)
-	execute "silent vimgrep " . a:word . " %"
-	let l:count = len(getqflist())
-	if l:count
-		execute "copen"
-		nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-		nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-		nnoremap <silent> <buffer> o  <CR>
-		nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-		nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-		nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
+  execute "silent vimgrep " . a:word . " %"
+  let l:count = len(getqflist())
+  if l:count
+    execute "copen"
+    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
+    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
+    nnoremap <silent> <buffer> o  <CR>
+    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
+    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
+    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
 
-		exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-		exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-		exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
+    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
+    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
+    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
 
-		echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-	endif
+    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
+  endif
 endfunction
 function! Open_QuickFixList()
-	let l:count = len(getqflist())
-	if l:count
-		execute "copen"
-		nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-		nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-		nnoremap <silent> <buffer> o  <CR>
-		nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-		nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-		nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
+  let l:count = len(getqflist())
+  if l:count
+    execute "copen"
+    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
+    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
+    nnoremap <silent> <buffer> o  <CR>
+    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
+    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
+    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
 
-		exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-		exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-		exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
+    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
+    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
+    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
 
-		echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-	endif
+    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
+  endif
 endfunction
 command! -nargs=* CSearch call Find_current_file(<q-args>)
 noremap <F9> :call Find_current_file(expand('<cword>'))<CR>
@@ -533,7 +535,7 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 " Repeat
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <silent> <Plug>TransposeCharacters xp
-\:call repeat#set("\<Plug>TransposeCharacters")<CR>
+      \:call repeat#set("\<Plug>TransposeCharacters")<CR>
 nmap cp <Plug>TransposeCharacters
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YCM
@@ -566,11 +568,11 @@ function! BufOpen(e)
 endfunction
 
 nnoremap <silent> <Leader>] :call fzf#run({
-\   'source':      reverse(BufList()),
-\   'sink':        function('BufOpen'),
-\   'options':     '+m',
-\   'tmux_width': '20%'
-\ })<CR>
+      \   'source':      reverse(BufList()),
+      \   'sink':        function('BufOpen'),
+      \   'options':     '+m',
+      \   'tmux_width': '20%'
+      \ })<CR>
 let g:fzf_tmux_height = '20%'
 let g:fzf_tmux_width = '20%'
 noremap <F12> <ESC>:FZF<CR>
@@ -637,16 +639,16 @@ nnoremap <BS> gg
 map q: :q
 
 if has("multi_byte")
-	set encoding=utf-8
-	setglobal fileencoding=utf-8
-	"setglobal bomb
-	set fileencodings=ucs-bom,utf-8,latin1
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
 endif
 " 마지막 편집 위치 복원 기능
 au BufReadPost *
-\ if line("'\"")>0 && line("'\"") <= line("$") |
-\ exe "norm g'\"" |
-\ endif
+      \ if line("'\"")>0 && line("'\"") <= line("$") |
+      \ exe "norm g'\"" |
+      \ endif
 
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 

@@ -18,7 +18,6 @@ Plugin 'gmarik/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-Plugin 'tomasr/molokai'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mhinz/vim-signify'
 Plugin 'kien/rainbow_parentheses.vim'
@@ -58,6 +57,11 @@ Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
+
+" Colors
+Plugin 'tomasr/molokai'
+Plugin 'blerins/flattown'
+Plugin 'itchyny/landscape.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -113,9 +117,7 @@ set background=dark
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:jellybeans_background_color="000000"
-" colorscheme jellybeans
-"colorscheme gruvbox
-colorscheme molokai
+colorscheme landscape
 "if !has("gui_running")
 "   let g:gruvbox_italic = 0
 "endif
@@ -144,8 +146,8 @@ set sidescrolloff=2
 set cmdheight=1
 
 set foldlevel=5
-set foldcolumn=2
-set numberwidth=4
+set foldcolumn=1
+set numberwidth=6
 
 " Focus Mode View
 function! ToggleFocusMode()
@@ -278,7 +280,11 @@ autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
+autocmd BufRead * :%s/\s\+$//e
+autocmd BufRead * %s/\n\{3,}/\r\r/e
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indent 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -594,6 +600,7 @@ inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-S> <ESC>:w<CR>a
+inoremap <silent><C-X> <C-R>"
 
 map <silent><C-K> d$
 map <silent><C-U> d^
@@ -616,7 +623,6 @@ noremap k gk
 
 nnoremap tt diw"*P
 nnoremap <silent> p p`]
-
 
 vmap <F2> "*y
 vmap Y "*y

@@ -34,6 +34,8 @@ Plugin 'kana/vim-operator-user'
 """ Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'mmai/wikilink'
+Plugin 'farseer90718/vim-taskwarrior'
 """""""""""""""""""""""""
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -466,14 +468,14 @@ noremap <F10> :call Open_QuickFixList()<CR>
 let g:tagbar_left = 1
 let g:tagbar_show_linenumbers = 0
 let g:tagbar_autopreview = 1
-let g:tagbar_previewwin_pos = "bottomleft"
+let g:tagbar_previewwin_pos = "aboveleft"
 let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
-set <M-L> =l
-nmap <M-L> :TagbarOpenAutoClose<CR>
+"set <M-L> =l
+nmap <C-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl

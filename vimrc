@@ -290,6 +290,7 @@ autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
+autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufReadPost * if &modifiable | %s/\s\+$//e | endif
 autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
 

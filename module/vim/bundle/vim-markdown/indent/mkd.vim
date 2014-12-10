@@ -31,10 +31,10 @@ function GetMkdIndent()
     let lnum = prevnonblank(v:lnum - 1)
     " At the start of the file use zero indent.
     if lnum == 0 | return 0 | endif
-    let ind = indent(lnum)
+    let ind = indent(v:lnum)
     let line = getline(lnum)    " Last line
     let cline = getline(v:lnum) " Current line
-    if s:is_li_start(cline) 
+    if s:is_li_start(cline)
         " Current line is the first line of a list item, do not change indent
         return indent(v:lnum)
     elseif s:is_li_start(line)

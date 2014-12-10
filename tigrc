@@ -9,7 +9,7 @@ bind generic C !git commit -s
 bind generic 0 !git format-patch -1 %(commit)
 bind generic <F10> !git format-patch %(commit)
 bind main R !@git revert %(commit)
-bind main i !@git rebase -i %(commit)
+bind main <F11> !git rebase -i %(commit)
 bind main x @!git reset --hard HEAD^
 bind main o refresh
 bind main a !git notes append %(commit)

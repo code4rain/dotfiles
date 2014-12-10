@@ -39,6 +39,7 @@
 	sl = !tig _ribbon..HEAD
 	po = push origin master
 	rb = "!f() { git rebase -i HEAD~$1; }; f"
+	gtags = !.git/hooks/gtags
 [core]
 	editor = vim
 	quotepath = off
@@ -62,3 +63,5 @@
 	match = yellow
 [bash]
 	showDirtyState = true
+[init]
+	templatedir = ~/.git_template

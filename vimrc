@@ -635,7 +635,6 @@ inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-S> <ESC>:w<CR>a
-inoremap <silent><C-X> <C-R>"
 
 map <silent><C-K> d$
 map <silent><C-U> d^

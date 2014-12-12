@@ -54,12 +54,14 @@ Plugin 'tommcdo/vim-exchange'
 Plugin 'repeat.vim'
 Plugin 'bufexplorer.zip'
 Plugin 'surround.vim'
-Plugin 'gtags.vim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
+" Gtags
+Plugin 'gtags.vim'
 "
+Plugin 'vimgrep.vim'
 "Indentation
 Plugin 'IndentConsistencyCop'
 Plugin 'ciaranm/detectindent'
@@ -141,6 +143,7 @@ set nolist
 set listchars=tab:>-,eol:$
 
 " 괄호의 짝을 Highlight
+
 set showmatch
 set matchtime=3
 
@@ -420,6 +423,22 @@ if has('cscope')
   cnoreabbrev csh cs help
   call SetCscope()
 endif
+
+"---------------------------------------------------------------------
+" GTAGS
+"---------------------------------------------------------------------
+function! GtagsCommnad()
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
+    if filereadable("GPATH")
+      nnoremap <silent><Leader>\ :GtagsCursor<CR>
+      nnoremap <F7> :Gtags<space>
+      nnoremap <F8> :Gtags -gi<space>
+    endif
+  endif
+endfunction
+autocmd BufReadPost * :call GtagsCommnad()
 "---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------

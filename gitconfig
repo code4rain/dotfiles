@@ -32,6 +32,7 @@
 	ssv = stash save
 	cl = clean -df
 	clf = clean -fX
+	distclean = clean -dfX
 	pp = pull --rebase
 	ri = tag --force _ribbon HEAD
 	pr = !git tag --force _ribbon HEAD && git pull --rebase

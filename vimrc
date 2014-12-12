@@ -32,7 +32,7 @@ Plugin 't9md/vim-quickhl'
 Plugin 'kana/vim-operator-user'
 """""""""""""""""""""""""
 """ Markdown
-Plugin 'godlygeek/tabular'
+"Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'mmai/wikilink'
 Plugin 'farseer90718/vim-taskwarrior'

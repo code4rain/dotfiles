@@ -61,7 +61,6 @@ Plugin 'yssl/VIntSearch'
 " Gtags
 Plugin 'gtags.vim'
 "
-Plugin 'vimgrep.vim'
 "Indentation
 Plugin 'IndentConsistencyCop'
 Plugin 'ciaranm/detectindent'
@@ -75,6 +74,7 @@ Plugin 'itchyny/landscape.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
+let mapleader = "\<Space>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 보기 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -430,8 +430,8 @@ endif
 function! GtagsCommnad()
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
     if filereadable("GPATH")
+      execute "cd " . l:root_dir
       nnoremap <silent><Leader>\ :GtagsCursor<CR>
       nnoremap <F7> :Gtags<space>
       nnoremap <F8> :Gtags -gi<space>
@@ -505,7 +505,7 @@ xmap <leader>h <Plug>(quickhl-manual-this)
 nmap <leader>H <Plug>(quickhl-manual-reset)
 xmap <leader>H <Plug>(quickhl-manual-reset)
 
-nmap <leader>o <Plug>(quickhl-cword-toggle)
+nmap <leader>t <Plug>(quickhl-cword-toggle)
 nmap <leader>] <Plug>(quickhl-tag-toggle)
 map H <Plug>(operator-quickhl-manual-this-motion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -528,15 +528,17 @@ nnoremap <silent> <F4>l :Git l %<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:EasyMotion_leader_key = '<Space>'
-nmap s <Plug>(easymotion-s2)
+let g:EasyMotion_leader_key = '<,>'
+" nmap s <Plug>(easymotion-s1)
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
-
+nmap <Leader>w <Plug>(easymotion-w)
+nmap <Leader><leader> <Plug>(easymotion-bd-w)
+nmap <Leader>b <Plug>(easymotion-b)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:signify_vcs_list = [ 'git']
+let g:signify_vcs_list = [ 'git' ]
 let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1
@@ -614,8 +616,6 @@ nnoremap <silent><leader>o :FZF<CR>
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let mapleader = "\<Space>"
-
 cnoreab W w
 cnoreab Wq wq
 cnoreab q q!
@@ -640,7 +640,6 @@ map <silent><C-K> d$
 map <silent><C-U> d^
 
 nmap <F2> "*yw
-nmap <Leader><Leader> V
 nmap Y "*yw
 
 noremap <C-F> <PageUp>

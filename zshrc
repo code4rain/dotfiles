@@ -299,3 +299,7 @@ source ~/.fzf.zsh
 setopt NO_NOMATCH
 unsetopt CHASE_DOTS
 unsetopt CHASE_LINKS
+
+# For mux
+source ~/.tmuxinator/tmuxinator.zsh
+export P4MERGE=p4merge

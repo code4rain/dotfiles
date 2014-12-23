@@ -1,5 +1,6 @@
 snippet p4 "My Perforce Description" b
-[Project] ${1:Exynos54xx}
+$2
+[Project] ${1:ZERO}
 [Title] ${2}
 [BinType] ${3:AP}
 [Customer] ${4:ALL}
@@ -10,14 +11,14 @@ snippet p4 "My Perforce Description" b
 
 [Problem] ${8}
 [Cause & Measure]
-${9:Cause:
-Measure:}
-[Checking Method] ${10}
+Cause: ${9}
+Measure: ${10}
+[Checking Method] ${11}
 
 [Team] System S/W 1Group Kernel
 [Developer] Alex Kyoungdon Jang
 [Solution company] Samsung Electronics.
-[Change Type] ${11:BUG Fix}
+[Change Type] ${12:BUG Fix}
 endsnippet
 
 snippet if0 "#if 0 current block" b

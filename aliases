@@ -7,12 +7,16 @@ ranger_cd () {
 gg() {
 	git grep "$@"
 }
+subl_bg() {
+	subl "$@" > /dev/null 2>&1 &
+}
 #Command
-alias pv='p4v&'
+alias pv='p4v &'
 alias r='ranger_cd'
 alias ra='ranger'
 alias b='nvim'
 alias f='bcompare_bg'
+alias s='subl_bg'
 alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias pdiff='p4 diff -du | colordiff | less -R'

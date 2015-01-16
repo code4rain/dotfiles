@@ -63,7 +63,8 @@ Plugin 'gtags.vim'
 "
 "Indentation
 Plugin 'IndentConsistencyCop'
-Plugin 'ciaranm/detectindent'
+Plugin 'tpope/vim-sleuth'
+" Plugin 'ciaranm/detectindent'
 
 " Colors
 Plugin 'tomasr/molokai'
@@ -551,8 +552,8 @@ let g:signify_line_highlight = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DetectIndent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufReadPost * :DetectIndent
-let g:detectindent_preferred_indent = 8
+"autocmd BufReadPost * :DetectIndent
+"let g:detectindent_preferred_indent = 8
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

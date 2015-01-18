@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 PATH="/usr/local/bin:$PATH"
-dir="`git rev-parse --git-dir`"
-trap 'rm -f "$dir/GTAGS $dir/GRTAGS $dir/GPATH"' EXIT
-git ls-files | gtags -i -f -
+cd $(git rev-parse --show-toplevel 2>/dev/null)
+rm -f GTAGS GRTAGS GPATH
+git ls-files | gtags -v -i -f -

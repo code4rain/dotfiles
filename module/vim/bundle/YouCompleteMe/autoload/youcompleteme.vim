@@ -21,7 +21,6 @@ set cpo&vim
 
 " This needs to be called outside of a function
 let s:script_folder_path = escape( expand( '<sfile>:p:h' ), '\' )
-let s:searched_and_results_found = 0
 let s:omnifunc_mode = 0
 
 let s:old_cursor_position = []
@@ -46,7 +45,9 @@ function! youcompleteme#Enable()
 
   call s:SetUpBackwardsCompatibility()
 
-  if !s:SetUpPython()
+  " This can be 0 if YCM libs are old or -1 if an exception occured while
+  " executing the function.
+  if s:SetUpPython() != 1
     return
   endif
 
@@ -65,10 +66,9 @@ function! youcompleteme#Enable()
     set ut=2000
   endif
 
+  call youcompleteme#EnableCursorMovedAutocommands()
   augroup youcompleteme
     autocmd!
-    autocmd CursorMovedI * call s:OnCursorMovedInsertMode()
-    autocmd CursorMoved * call s:OnCursorMovedNormalMode()
     " Note that these events will NOT trigger for the file vim is started with;
     " so if you do "vim foo.cc", these events will not trigger when that buffer
     " is read. This is because youcompleteme#Enable() is called on VimEnter and
@@ -77,6 +77,7 @@ function! youcompleteme#Enable()
     " We also need to trigger buf init code on the FileType event because when
     " the user does :enew and then :set ft=something, we need to run buf init
     " code again.
+    autocmd BufReadPre * call s:OnBufferReadPre( expand( '<afile>:p' ) )
     autocmd BufRead,BufEnter,FileType * call s:OnBufferVisit()
     autocmd BufUnload * call s:OnBufferUnload( expand( '<afile>:p' ) )
     autocmd CursorHold,CursorHoldI * call s:OnCursorHold()
@@ -85,14 +86,30 @@ function! youcompleteme#Enable()
     autocmd VimLeave * call s:OnVimLeave()
   augroup END
 
-  " Calling this once solves the problem of BufRead/BufEnter not triggering for
-  " the first loaded file. This should be the last command executed in this
-  " function!
+  " Calling these once solves the problem of BufReadPre/BufRead/BufEnter not
+  " triggering for the first loaded file. This should be the last commands
+  " executed in this function!
+  call s:OnBufferReadPre( expand( '<afile>:p' ) )
   call s:OnBufferVisit()
 endfunction
 
 
-function! s:SetUpPython()
+function! youcompleteme#EnableCursorMovedAutocommands()
+    augroup ycmcompletemecursormove
+        autocmd!
+        autocmd CursorMovedI * call s:OnCursorMovedInsertMode()
+        autocmd CursorMoved * call s:OnCursorMovedNormalMode()
+    augroup END
+endfunction
+
+
+function! youcompleteme#DisableCursorMovedAutocommands()
+    autocmd! ycmcompletemecursormove CursorMoved *
+    autocmd! ycmcompletemecursormove CursorMovedI *
+endfunction
+
+
+function! s:SetUpPython() abort
   py import sys
   py import vim
   exe 'python sys.path.insert( 0, "' . s:script_folder_path . '/../python" )'
@@ -270,6 +287,10 @@ function! s:AllowedToCompleteInCurrentFile()
     return 0
   endif
 
+  if exists( 'b:ycm_largefile' )
+    return 0
+  endif
+
   let whitelist_allows = has_key( g:ycm_filetype_whitelist, '*' ) ||
         \ has_key( g:ycm_filetype_whitelist, &filetype )
   let blacklist_allows = !has_key( g:ycm_filetype_blacklist, &filetype )
@@ -331,6 +352,18 @@ function! s:OnVimLeave()
   py ycm_state.OnVimLeave()
 endfunction
 
+
+function! s:OnBufferReadPre(filename)
+  let threshold = g:ycm_disable_for_files_larger_than_kb * 1024
+
+  if threshold > 0 && getfsize( a:filename ) > threshold
+    echohl WarningMsg |
+          \ echomsg "YouCompleteMe is disabled in this buffer; " .
+          \ "the file exceeded the max size (see YCM options)." |
+          \ echohl None
+    let b:ycm_largefile = 1
+  endif
+endfunction
 
 function! s:OnBufferVisit()
   " We need to do this even when we are not allowed to complete in the current
@@ -518,11 +551,9 @@ function! s:ClosePreviewWindowIfNeeded()
     return
   endif
 
-  if s:searched_and_results_found
-    " This command does the actual closing of the preview window. If no preview
-    " window is shown, nothing happens.
-    pclose
-  endif
+  " This command does the actual closing of the preview window. If no preview
+  " window is shown, nothing happens.
+  pclose
 endfunction
 
 
@@ -633,7 +664,6 @@ EOF
 function! s:GetCompletions()
   py results = GetCompletionsInner()
   let results = pyeval( 'results' )
-  let s:searched_and_results_found = len( results.words ) != 0
   return results
 endfunction
 

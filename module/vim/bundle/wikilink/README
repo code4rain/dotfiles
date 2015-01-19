@@ -1,0 +1,23 @@
+"WikiLink" is a Vim plugin which eases the navigation between files 
+ in a personnal wiki
+ Links syntax currently supported follows Github's Gollum (https://github.com/gollum/gollum)
+  [[My displayed link|My link]]
+
+ This plugin also detects footerbar and sidebar files and splits the window accordingly (again, see Gollum for syntax)
+
+ Installation
+ ------------
+ Copy the wikilink.vim file into the $HOME/.vim/plugin/ directory
+
+ Configuration
+ -------------
+ Window split on footer and sidebar detection can be disabled by writing this
+ line on your .vimrc file :
+ let wikilinkAutosplit="off"
+
+ Usage
+ -----
+ Hit the ENTER key when the cursor is on a wiki link
+ The corresponding file is loaded in the current buffer
+
+ Hit Shift + ENTER to go back

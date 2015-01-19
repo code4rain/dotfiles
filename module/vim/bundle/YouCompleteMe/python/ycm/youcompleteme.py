@@ -46,6 +46,12 @@ try:
 except ImportError:
   USE_ULTISNIPS_DATA = False
 
+def PatchNoProxy():
+  current_value = os.environ.get('no_proxy', '')
+  additions = '127.0.0.1,localhost'
+  os.environ['no_proxy'] = ( additions if not current_value
+                             else current_value + ',' + additions )
+
 # We need this so that Requests doesn't end up using the local HTTP proxy when
 # talking to ycmd. Users should actually be setting this themselves when
 # configuring a proxy server on their machine, but most don't know they need to
@@ -53,7 +59,7 @@ except ImportError:
 # Relevant issues:
 #  https://github.com/Valloric/YouCompleteMe/issues/641
 #  https://github.com/kennethreitz/requests/issues/879
-os.environ['no_proxy'] = '127.0.0.1,localhost'
+PatchNoProxy()
 
 # Force the Python interpreter embedded in Vim (in which we are running) to
 # ignore the SIGINT signal. This helps reduce the fallout of a user pressing
@@ -281,9 +287,9 @@ class YouCompleteMe( object ):
     if self.DiagnosticsForCurrentFileReady():
       diagnostics = self._latest_file_parse_request.Response()
       # We set the diagnostics request to None because we want to prevent
-      # Syntastic from repeatedly refreshing the buffer with the same diags.
-      # Setting this to None makes DiagnosticsForCurrentFileReady return False
-      # until the next request is created.
+      # repeated refreshing of the buffer with the same diags. Setting this to
+      # None makes DiagnosticsForCurrentFileReady return False until the next
+      # request is created.
       self._latest_file_parse_request = None
       if qflist_format:
         return vimsupport.ConvertDiagnosticsToQfList( diagnostics )
@@ -353,7 +359,11 @@ class YouCompleteMe( object ):
   def _AddTagsFilesIfNeeded( self, extra_data ):
     def GetTagFiles():
       tag_files = vim.eval( 'tagfiles()' )
-      current_working_directory = os.getcwd()
+      # getcwd() throws an exception when the CWD has been deleted.
+      try:
+        current_working_directory = os.getcwd()
+      except OSError:
+        return []
       return [ os.path.join( current_working_directory, x ) for x in tag_files ]
 
     if not self._user_options[ 'collect_identifiers_from_tags_files' ]:

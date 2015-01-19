@@ -129,7 +129,7 @@ class BaseRequest( object ):
     return headers
 
   session = FuturesSession( executor = _EXECUTOR )
-  server_location = 'http://localhost:6666'
+  server_location = ''
   hmac_secret = ''
 
 
@@ -161,6 +161,16 @@ def JsonFromFuture( future ):
   if response.text:
     return response.json()
   return None
+
+
+def HandleServerException( exception ):
+  serialized_exception = str( exception )
+
+  # We ignore the exception about the file already being parsed since it comes
+  # up often and isn't something that's actionable by the user.
+  if 'already being parsed' in serialized_exception:
+    return
+  vimsupport.PostVimMessage( serialized_exception )
 
 
 def _ValidateResponseObject( response ):

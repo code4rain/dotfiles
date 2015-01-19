@@ -130,8 +130,9 @@ Ubuntu Linux x64 super-quick installation
 Please refer to the full Installation Guide below; the following commands are
 provided on a best-effort basis and may not work for you.
 
-Make sure you have Vim 7.3.584 with python2 support. At the time of writing, the
-version of Vim shipping with Ubuntu is too old. You may need to [compile Vim
+Make sure you have Vim 7.3.584 with python2 support. Ubuntu 14.04 and later have
+a Vim that's recent enough. You can see the version of Vim installed by running
+`vim --version`. If the version is too old, you may need to [compile Vim
 from source][vim-build] (don't worry, it's easy).
 
 Install YouCompleteMe with [Vundle][].
@@ -174,6 +175,54 @@ YCM has **no official support for Windows**, but that doesn't mean you can't get
 it to work there. See the [Windows Installation Guide][win-wiki] wiki page. Feel
 free to add to it.
 
+FreeBSD/OpenBSD Installation
+----------------------------
+
+Please refer to the full Installation Guide below; the following commands are
+provided on a best-effort basis and may not work for you. OpenBSD / FreeBSD are
+not officially supported platforms by YCM.
+
+Make sure you have Vim 7.3.584 with python2 support.
+
+OpenBSD 5.5 and later have a Vim that's recent enough. You can see the version of
+Vim installed by running `vim --version`.
+
+FreeBSD 10.x comes with clang compiler but not the libraries needed to install.
+
+    pkg install llvm35 boost-all boost-python-libs clang35
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/llvm35/lib/
+
+Install YouCompleteMe with [Vundle][].
+
+**Remember:** YCM is a plugin with a compiled component. If you **update** YCM
+using Vundle and the ycm_support_libs library APIs have changed (happens
+rarely), YCM will notify you to recompile it. You should then rerun the install
+process.
+
+Install dependencies and CMake: `sudo pkg_add llvm boost cmake`
+
+Compiling YCM **with** semantic support for C-family languages:
+
+    cd ~/.vim/bundle/YouCompleteMe
+    ./install.sh --clang-completer --system-libclang --system-boost
+
+Compiling YCM **without** semantic support for C-family languages:
+
+    cd ~/.vim/bundle/YouCompleteMe
+    ./install.sh --system-boost
+
+If you want semantic C# support, you should add `--omnisharp-completer` to the
+install script as well.
+
+That's it. You're done. Refer to the _User Guide_ section on how to use YCM.
+Don't forget that if you want the C-family semantic completion engine to work,
+you will need to provide the compilation flags for your project to YCM. It's all
+in the User Guide.
+
+YCM comes with sane defaults for its options, but you still may want to take a
+look at what's available for configuration. There are a few interesting options
+that are conservatively turned off by default that you may want to turn on.
+
 Full Installation Guide
 -----------------------
 
@@ -215,12 +264,12 @@ process.
     repository (Vundle will do this for you) to fetch YCM's dependencies.
 
 3.  [Complete this step ONLY if you care about semantic completion support for
-    C-family languages. Otherwise it's not neccessary.]
+    C-family languages. Otherwise it's not necessary.]
 
     **Download the latest version of `libclang`**. Clang is an open-source
     compiler that can compile C/C++/Objective-C/Objective-C++. The `libclang`
     library it provides is used to power the YCM semantic completion engine for
-    those languages. YCM is designed to work with libclang version 3.4 or
+    those languages. YCM is designed to work with libclang version 3.5 or
     higher, but can in theory work with any 3.2+ version as well.
 
     You can use the system libclang _only if you are sure it is version 3.3 or
@@ -261,6 +310,14 @@ process.
 
         cmake -G "Unix Makefiles" . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
 
+    For those who want to use the system version of boost, you would pass
+    `-DUSE_SYSTEM_BOOST=ON` to cmake. This may be necessary on some systems
+    where the bundled version of boost doesn't compile out of the box.
+
+    NOTE: We **STRONGLY recommended AGAINST use** of the system boost instead
+    of the bundled version of boost. Random things may break. Save yourself
+    the hassle and use the bundled version of boost.
+
     If you DO care about semantic support for C-family languages, then your
     `cmake` call will be a bit more complicated.  We'll assume you downloaded a
     binary distribution of LLVM+Clang from llvm.org in step 3 and that you
@@ -288,8 +345,8 @@ process.
     other flags.
 
     Running the `make` command will also place the `libclang.[so|dylib]` in the
-    `YouCompleteMe/python` folder for you if you compiled with clang support (it
-    needs to be there for YCM to work).
+    `YouCompleteMe/third_party/ycmd` folder for you if you compiled with clang
+    support (it needs to be there for YCM to work).
 
 That's it. You're done. Refer to the _User Guide_ section on how to use YCM.
 Don't forget that if you want the C-family semantic completion engine to work,
@@ -389,7 +446,8 @@ of projects.
 Yes, [Clang's `CompilationDatabase` system][compdb] is also supported. Again,
 see the above linked example file. You can get CMake to generate this file for
 you by adding `set( CMAKE_EXPORT_COMPILE_COMMANDS 1 )` to your project's
-`CMakeLists.txt` file (if using CMake).
+`CMakeLists.txt` file (if using CMake). If you're not using CMake, you could use
+something like [Bear][] to generate the `compile_commands.json` file.
 
 If Clang encounters errors when compiling the header files that your file
 includes, then it's probably going to take a long time to get completions.  When
@@ -413,8 +471,6 @@ you need to run `git submodule update --init --recursive` when you're checking
 out the YCM repository. That's it.
 
 But again, installing YCM with Vundle takes care of all of this for you.
-
-In the future expect to see features like go-to-definition for Python as well.
 
 ### C# semantic completion
 
@@ -851,9 +907,12 @@ that filetype.
 
 You can get the filetype of the current file in Vim with `:set ft?`.
 
-Default: `{}`
+Default: `[see next line]`
 
-    let g:ycm_filetype_specific_completion_to_disable = {}
+    let g:ycm_filetype_specific_completion_to_disable = {
+          \ 'gitcommit': 1
+          \}
+
 
 ### The `g:ycm_show_diagnostics_ui` option
 
@@ -1326,6 +1385,10 @@ Example:
 * As the first rule takes precedence everything in the home directory excluding
   the `~/dev` directory will be blacklisted.
 
+NOTE: The glob pattern is first expanded with Python's `os.path.expanduser()`
+and then resolved with `os.path.abspath()` before being matched against the
+filename.
+
 Default: `[]`
 
     let g:ycm_extra_conf_globlist = []
@@ -1358,6 +1421,12 @@ trigger. So when the user types `foo.`, the semantic engine will trigger and
 serve `foo`'s list of member functions and variables. Since C++ also has `->`
 listed as a trigger, the same thing would happen when the user typed `foo->`.
 
+It's also possible to use a regular expression as a trigger. You have to prefix
+your trigger with `re!` to signify it's a regex trigger. For instance,
+`re!\w+\.` would only trigger after the `\w+\.` regex matches.
+
+NOTE: The regex syntax is **NOT** Vim's, it's [Python's][python-re].
+
 Default: `[see next line]`
 
     let g:ycm_semantic_triggers =  {
@@ -1367,7 +1436,8 @@ Default: `[see next line]`
       \   'cpp,objcpp' : ['->', '.', '::'],
       \   'perl' : ['->'],
       \   'php' : ['->', '::'],
-      \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
+      \   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+      \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
       \   'ruby' : ['.', '::'],
       \   'lua' : ['.', ':'],
       \   'erlang' : [':'],
@@ -1404,7 +1474,17 @@ be switched (when buffer is modified and `nohidden` option is set),
 then result will be opened in horizontal split.
 
 Default: `'same-buffer'`
+
     let g:ycm_goto_buffer_command = 'same-buffer'
+
+### The `g:ycm_disable_for_files_larger_than_kb` option
+
+Defines the max size (in Kb) for a file to be considered for completion. If this
+option is set to 0 then no check is made on the size of the file you're opening
+
+Default: 1000
+
+    let g:ycm_disable_for_files_larger_than_kb = 1000
 
 FAQ
 ---
@@ -1642,7 +1722,7 @@ YCM needs to perform subsequence-based filtering on _all_ of those identifiers
 I'm sorry, but that level of performance is just plain impossible to achieve
 with VimScript. I've tried, and the language is just too slow. No, you can't get
 acceptable performance even if you limit yourself to just the identifiers in the
-current file and simple prefix-based fitering.
+current file and simple prefix-based filtering.
 
 ### Why does YCM demand such a recent version of Vim?
 
@@ -1672,7 +1752,13 @@ for bug reports and feature requests.
 ### I get an internal compiler error when installing
 
 This can be a problem on virtual servers with limited memory. A possible
-solution is to add more swap memory.
+solution is to add more swap memory. A more practical solution would be to force
+the build script to run only one compile job at a time. You can do this by
+setting the `YCM_CORES` environment variable to `1`. Example:
+
+```
+YCM_CORES=1 ./install.sh --clang-completer
+```
 
 ### I get weird errors when I press `Ctrl-C` in Vim
 
@@ -1807,3 +1893,5 @@ This software is licensed under the [GPL v3 license][gpl].
 [issue-593]: https://github.com/Valloric/YouCompleteMe/issues/593
 [issue-669]: https://github.com/Valloric/YouCompleteMe/issues/669
 [status-mes]: https://groups.google.com/forum/#!topic/vim_dev/WeBBjkXE8H8
+[python-re]: https://docs.python.org/2/library/re.html#regular-expression-syntax
+[bear]: https://github.com/rizsotto/Bear

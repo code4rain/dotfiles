@@ -330,7 +330,7 @@ snippet dt+
 snippet em
 	<em>${0}</em>
 snippet embed
-	<embed src=${1} type="${0} />
+	<embed src="${1}" type="${0}" />
 snippet fieldset
 	<fieldset>
 		${0}
@@ -355,12 +355,12 @@ snippet figure
 	<figure>${0}</figure>
 snippet figure#
 	<figure id="${1}">
-        ${0}
-    </figure>
+		${0}
+	</figure>
 snippet figure.
 	<figure class="${1}">
-        ${0}
-    </figure>
+		${0}
+	</figure>
 snippet footer
 	<footer>
 		${0}
@@ -462,8 +462,8 @@ snippet html5
 	<!DOCTYPE html>
 	<html>
 		<head>
-			<meta charset="utf-8" />
-			<meta name="viewport" content="width=device-width" />
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width">
 			<title>${1:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
 			${2:link}
 		</head>
@@ -475,8 +475,8 @@ snippet html5l
 	<!DOCTYPE html>
 	<html lang="${1:es}">
 		<head>
-			<meta charset="utf-8" />
-			<meta name="viewport" content="width=device-width" />
+			<meta charset="utf-8">
+			<meta name="viewport" content="width=device-width">
 			<title>${2:`substitute(vim_snippets#Filename('', 'Page Title'), '^.', '\u&', '')`}</title>
 			${3:link}
 		</head>
@@ -627,7 +627,7 @@ snippet meta
 snippet meta:s
 	<meta ${0} />
 snippet meta:d
-    <meta name="description" content="${0}" />
+	<meta name="description" content="${0}" />
 snippet meta:compat
 	<meta http-equiv="X-UA-Compatible" content="IE=${1:7,8,edge}" />
 snippet meta:refresh
@@ -674,11 +674,11 @@ snippet ol
 		${0}
 	</ol>
 snippet ol.
-	<ol class="${1}>
+	<ol class="${1}">
 		${0}
 	</ol>
 snippet ol#
-	<ol id="${1}>
+	<ol id="${1}">
 		${0}
 	</ol>
 snippet ol+
@@ -702,6 +702,10 @@ snippet output
 	<output>${0}</output>
 snippet p
 	<p>${0}</p>
+snippet p.
+	<p class="${1}">${0}</p>
+snippet p#
+	<p id="${1}">${0}</p>
 snippet param
 	<param name="${1}" value="${2}" />
 snippet pre
@@ -813,7 +817,7 @@ snippet td+
 	<td>${1}</td>
 	td+${0}
 snippet textarea
-	<textarea name="${1}" id=${2:$1} rows="${3:8}" cols="${4:40}">${5}</textarea>
+	<textarea name="${1}" id="${2:$1}" rows="${3:8}" cols="${4:40}">${5}</textarea>
 snippet tfoot
 	<tfoot>
 		${0}

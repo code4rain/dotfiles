@@ -19,6 +19,7 @@
 
 import vim
 import os
+import tempfile
 import json
 from ycmd.utils import ToUtf8IfNeeded
 from ycmd import user_options_store
@@ -48,6 +49,10 @@ def CurrentColumn():
   # vim.buffers buffer objects OTOH have 0-based lines and columns.
   # Pigs have wings and I'm a loopy purple duck. Everything makes sense now.
   return vim.current.window.cursor[ 1 ]
+
+
+def CurrentLineContents():
+  return vim.current.line
 
 
 def TextAfterCursor():
@@ -104,7 +109,7 @@ def GetUnsavedAndCurrentBufferData():
 
 def GetBufferNumberForFilename( filename, open_file_if_needed = True ):
   return GetIntValue( u"bufnr('{0}', {1})".format(
-      os.path.realpath( filename ),
+      EscapeForVim( os.path.realpath( filename ) ),
       int( open_file_if_needed ) ) )
 
 
@@ -123,20 +128,21 @@ def GetBufferFilepath( buffer_object ):
   if buffer_object.name:
     return buffer_object.name
   # Buffers that have just been created by a command like :enew don't have any
-  # buffer name so we use the buffer number for that.
-  return os.path.join( os.getcwd(), str( buffer_object.number ) )
+  # buffer name so we use the buffer number for that. Also, os.getcwd() throws
+  # an exception when the CWD has been deleted so we handle that.
+  try:
+    folder_path = os.getcwd()
+  except OSError:
+    folder_path = tempfile.gettempdir()
+  return os.path.join( folder_path, str( buffer_object.number ) )
 
 
-# NOTE: This unplaces *all* signs in a buffer, not just the ones we placed. We
-# used to track which signs we ended up placing and would then only unplace
-# ours, but that causes flickering Vim since we have to call
-#    sign unplace <id> buffer=<buffer-num>
-# in a loop. So we're forced to unplace all signs, which might conflict with
-# other Vim plugins.
-def UnplaceAllSignsInBuffer( buffer_number ):
+def UnplaceSignInBuffer( buffer_number, sign_id ):
   if buffer_number < 0:
     return
-  vim.command( 'sign unplace * buffer={0}'.format( buffer_number ) )
+  vim.command(
+    'try | exec "sign unplace {0} buffer={1}" | catch /E158/ | endtry'.format(
+        sign_id, buffer_number ) )
 
 
 def PlaceSign( sign_id, line_num, buffer_num, is_error = True ):
@@ -148,6 +154,26 @@ def PlaceSign( sign_id, line_num, buffer_num, is_error = True ):
   sign_name = 'YcmError' if is_error else 'YcmWarning'
   vim.command( 'sign place {0} line={1} name={2} buffer={3}'.format(
     sign_id, line_num, sign_name, buffer_num ) )
+
+
+def PlaceDummySign( sign_id, buffer_num, line_num ):
+    if buffer_num < 0 or line_num < 0:
+      return
+    vim.command( 'sign define ycm_dummy_sign' )
+    vim.command(
+      'sign place {0} name=ycm_dummy_sign line={1} buffer={2}'.format(
+        sign_id,
+        line_num,
+        buffer_num,
+      )
+    )
+
+
+def UnPlaceDummySign( sign_id, buffer_num ):
+    if buffer_num < 0:
+      return
+    vim.command( 'sign undefine ycm_dummy_sign' )
+    vim.command( 'sign unplace {0} buffer={1}'.format( sign_id, buffer_num ) )
 
 
 def ClearYcmSyntaxMatches():

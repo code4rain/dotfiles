@@ -1,13 +1,18 @@
-function! s:decho(msg) "{{{
+function! s:decho(msg) "{{{1
   if g:quickhl_debug
     echo "[debug] ". a:msg
   endif
-endfunction "}}}
+endfunction
 
-function! s:exe(cmd) "{{{
+function! s:is_cmdwin() "{{{1
+  return bufname('%') ==# '[Command Line]'
+endfunction
+
+function! s:exe(cmd) "{{{1
   call s:decho("[cmd] " . a:cmd)
   exe a:cmd
-endfunction "}}}
+endfunction
+"}}}
 
 
 let s:manual = {
@@ -110,7 +115,7 @@ endfunction "}}}
 function! s:manual.next_index() "{{{
   " let index = self.index_of('')
   " return ( index != -1 ? index : remove(self.history, 0) )
-  return remove(self.history, 0) 
+  return remove(self.history, 0)
 endfunction "}}}
 
 function! s:manual.index_of(pattern) "{{{
@@ -128,7 +133,7 @@ function! s:manual.del(pattern, escaped) "{{{
   let index = self.index_of(pattern)
   call s:decho("[del ]: " . index)
   if index == -1
-    call s:decho("Can't find for '" . a:val . "'" )
+    call s:decho("Can't find for '" . pattern . "'" )
     return
   endif
   call self.del_by_index(index)
@@ -152,7 +157,7 @@ endfunction "}}}
 
 function! quickhl#manual#this(mode) "{{{
   if !s:manual.enabled | call quickhl#manual#enable() | endif
-  let pattern = 
+  let pattern =
         \ a:mode == 'n' ? expand('<cword>') :
         \ a:mode == 'v' ? quickhl#get_selected_text() :
         \ ""
@@ -259,7 +264,7 @@ function! quickhl#manual#disable() "{{{
   augroup QuickhlManual
     autocmd!
   augroup END
-  aucmd! QuickhlManual
+  autocmd! QuickhlManual
   call quickhl#manual#reset()
 endfunction "}}}
 
@@ -280,7 +285,7 @@ function! quickhl#manual#this_motion(motion_wise) " {{{
   let lnum_end = line("']")
   for n in range(lnum_beg, lnum_end)
     let _s = getline(n)
-    let s = { 
+    let s = {
           \  "all":     _s,
           \  "between": _s[col("'[")-1 : col("']")-1],
           \  "pos2end": _s[col("'[")-1 : -1 ],
@@ -289,7 +294,7 @@ function! quickhl#manual#this_motion(motion_wise) " {{{
 
     if a:motion_wise == 'char'
       let str =
-            \ lnum_beg == lnum_end ?            s.between : 
+            \ lnum_beg == lnum_end ?            s.between :
             \ n        == lnum_beg ?            s.pos2end :
             \ n        == lnum_end ?            s.beg2pos :
             \                                   s.all

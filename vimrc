@@ -645,8 +645,8 @@ cnoremap <C-Q> <ESC>:q!<CR>
 
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+inoremap <C-L> <ESC>
 inoremap <silent><C-K> <Esc>d$A
-inoremap <silent><C-P> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
@@ -666,7 +666,6 @@ noremap <down> gj
 noremap <silent><C-A> ^
 noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
-noremap <silent><C-P> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
 noremap j gj
 noremap k gk

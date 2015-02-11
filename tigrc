@@ -5,7 +5,6 @@ bind generic I !git add -i %(file)
 bind generic T !git notes edit %(commit)
 bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
 bind generic + !git commit -s --amend -C HEAD
-bind generic C !git commit -s
 bind generic 0 !git format-patch -1 %(commit)
 bind generic <F10> !git format-patch %(commit)
 bind main R !@git revert %(commit)
@@ -17,8 +16,10 @@ bind main e @!git notes remove %(commit)
 bind main H !@git reset --hard %(commit)
 bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
 bind generic U !git checkout -- %(file)
-bind status p !git push
+bind status - !commit.sh
 bind status c !git checkout -p %(file)
+bind status C !git commit -s
+bind status p !commit_push.sh
 bind generic X !git cl
 bind generic A !git am --resolved
 bind generic S !git am --skip

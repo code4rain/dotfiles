@@ -165,3 +165,5 @@ ranger_cd () {
 	cd $(cat ${HOME}/.lastdir)
 }
 # source ~/.fzf.bash
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

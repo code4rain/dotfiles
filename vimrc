@@ -502,17 +502,17 @@ noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tagbar_left = 1
-let g:tagbar_show_linenumbers = 0
-let g:tagbar_autopreview = 1
-let g:tagbar_previewwin_pos = "aboveleft"
-let g:tagbar_indent = 1
+"let g:tagbar_left = 1
+"let g:tagbar_show_linenumbers = 0
+"let g:tagbar_autopreview = 1
+"let g:tagbar_previewwin_pos = "aboveleft"
+"let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 "set <M-L> =l
-nmap <C-L> :call OpenTagbar()<CR>
+"nmap <C-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl

@@ -33,10 +33,13 @@ Plugin 'kana/vim-operator-user'
 """""""""""""""""""""""""
 """ Markdown
 "Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+"Plugin 'plasticboy/vim-markdown'
 Plugin 'mmai/wikilink'
 Plugin 'farseer90718/vim-taskwarrior'
+Plugin 'vim-pandoc'
+Plugin 'shime/vim-livedown'
 """""""""""""""""""""""""
+Plugin 'Align'
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'
 "Plugin 'tomtom/tlib_vim'
@@ -72,9 +75,14 @@ Plugin 'tomasr/molokai'
 Plugin 'blerins/flattown'
 Plugin 'itchyny/landscape.vim'
 
+Plugin 'YankRing.vim'
+
+Plugin 'elzr/vim-json'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+set shell=/bin/bash
 
 let mapleader = "\<Space>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

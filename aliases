@@ -10,6 +10,13 @@ gg() {
 subl_bg() {
 	subl "$@" > /dev/null 2>&1 &
 }
+bcompare_bg () {
+	bcompare "$@" > /dev/null 2>&1 &
+}
+add_project () {
+	task add project:"$@"
+}
+
 #Command
 alias pv='p4v &'
 alias r='ranger_cd'

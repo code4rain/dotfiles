@@ -1,0 +1,4 @@
+proxy=http://168.219.61.252:8080/
+https-proxy=http://168.219.61.252:8080/
+registry=http://registry.npmjs.org/
+strict-ssl=false

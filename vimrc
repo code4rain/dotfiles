@@ -34,8 +34,8 @@ Plugin 'kana/vim-operator-user'
 """ Markdown
 "Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
-Plugin 'mmai/wikilink'
-Plugin 'farseer90718/vim-taskwarrior'
+"Plugin 'mmai/wikilink'
+"Plugin 'farseer90718/vim-taskwarrior'
 """""""""""""""""""""""""
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'

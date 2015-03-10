@@ -41,11 +41,10 @@
 	po = push origin master
 	rb = "!f() { git rebase -i HEAD~$1; }; f"
 	gtags = !.git/hooks/gtags
+	sub = !git submit
 [core]
 	editor = vim
 	quotepath = off
-[push]
-	default = matching
 [i18n]
 	logOutputEncoding = utf8
 	commitEncoding = utf8
@@ -66,3 +65,5 @@
 	showDirtyState = true
 [init]
 	templatedir = ~/.git_template
+[push]
+	default = simple

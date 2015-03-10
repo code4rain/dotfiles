@@ -326,6 +326,9 @@ set hidden
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wildmenu
 
+" File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
+set wildmode=list:longest,full
+
 " /를 입력하여 검색을 시작할 때 자동으로 영문사태로 만들어준다
 "set iminsert=1
 "set imsearch=0

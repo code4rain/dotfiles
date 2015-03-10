@@ -303,3 +303,5 @@ unsetopt CHASE_LINKS
 # For mux
 source ~/.tmuxinator/tmuxinator.zsh
 export P4MERGE=p4merge
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

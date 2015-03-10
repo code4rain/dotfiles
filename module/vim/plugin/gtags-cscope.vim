@@ -13,12 +13,12 @@
 " it under the terms of the GNU General Public License as published by
 " the Free Software Foundation, either version 3 of the License, or
 " (at your option) any later version.
-" 
+"
 " This program is distributed in the hope that it will be useful,
 " but WITHOUT ANY WARRANTY; without even the implied warranty of
 " MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 " GNU General Public License for more details.
-" 
+"
 " You should have received a copy of the GNU General Public License
 " along with this program.  If not, see <http://www.gnu.org/licenses/>.
 "
@@ -51,7 +51,7 @@
 " Then you can use cs commands except for the 'd'(2) command.
 " Profitable commands are assigned to keys like follows:
 "
-"	explanation		command	
+"	explanation		command
 "	----------------------------------------------------------
 "	Find symbol		:cs find 0 or s
 "	Find definition		:cs find 1 or g
@@ -197,19 +197,19 @@ function! s:GtagsCscope()
             :nmap <C-\>t :cs find g <C-R>=expand("<cword>")<CR>
             :nmap <C-\>r :cs find c <C-R>=expand("<cword>")<CR>
             :nmap <C-\>g :cs find e <C-R>=expand("<cword>")<CR>
-            :nmap <C-\>P :cs find f 
+            :nmap <C-\>P :cs find f
             " Using 'CTRL-spacebar', the result is displayed in new horizontal window.
             :nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR>
             :nmap <C-@>t :scs find g <C-R>=expand("<cword>")<CR>
             :nmap <C-@>r :scs find c <C-R>=expand("<cword>")<CR>
             :nmap <C-@>g :scs find e <C-R>=expand("<cword>")<CR>
-            :nmap <C-@>P :scs find f 
+            :nmap <C-@>P :scs find f
             " Hitting CTRL-space *twice*, the result is displayed in new vertical window.
             :nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR>
             :nmap <C-@><C-@>t :vert scs find g <C-R>=expand("<cword>")<CR>
             :nmap <C-@><C-@>r :vert scs find c <C-R>=expand("<cword>")<CR>
             :nmap <C-@><C-@>g :vert scs find e <C-R>=expand("<cword>")<CR>
-            :nmap <C-@><C-@>P :vert scs find f 
+            :nmap <C-@><C-@>P :vert scs find f
         else
             "
             " The following key mappings are derived from 'cscope_maps.vim'.
@@ -260,9 +260,9 @@ function! s:GtagsCscope()
 	:nmap <C-\><SPACE> :cs find<SPACE>
 	:nmap <C-@><SPACE> :scs find<SPACE>
 	:nmap <C-@><C-@><SPACE> :vert scs find<SPACE>
-	:nmap <F2> :copen<CR>
-	:nmap <F3> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
-	:nmap <F4> :cclose<CR>
+	":nmap <F2> :copen<CR>
+	":nmap <F3> :cs find d <C-R>=expand("<cword>")<CR>:<C-R>=line('.')<CR>:%<CR>
+	":nmap <F4> :cclose<CR>
     endif
 endfunction
 

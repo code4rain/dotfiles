@@ -33,10 +33,11 @@ Plugin 'kana/vim-operator-user'
 """""""""""""""""""""""""
 """ Markdown
 "Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 "Plugin 'mmai/wikilink'
 "Plugin 'farseer90718/vim-taskwarrior'
+Plugin 'vim-pandoc'
 """""""""""""""""""""""""
+Plugin 'Align'
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'
 "Plugin 'tomtom/tlib_vim'
@@ -59,7 +60,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
 " Gtags
-" Plugin 'gtags.vim'
+Plugin 'gtags.vim'
 
 "
 "Indentation
@@ -72,9 +73,14 @@ Plugin 'tomasr/molokai'
 Plugin 'blerins/flattown'
 Plugin 'itchyny/landscape.vim'
 
+Plugin 'YankRing.vim'
+
+Plugin 'elzr/vim-json'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+set shell=/bin/bash
 
 let mapleader = "\<Space>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,6 +324,9 @@ set hidden
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wildmenu
 
+" File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
+set wildmode=list:longest,full
+
 " /를 입력하여 검색을 시작할 때 자동으로 영문사태로 만들어준다
 "set iminsert=1
 "set imsearch=0
@@ -387,11 +396,20 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+
+function! s:P4_edit_current( )
+  execute "!p4 edit " . expand("%")
+endfunc
+function! s:P4_revert_current( )
+  execute "!p4 revert " . expand("%")
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
 command! -bang Q quitall<bang>
+command! PerforceEdit call <SID>P4_edit_current()
+command! PerforceRevert call <SID>P4_revert_current()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -429,18 +447,18 @@ endif
 "---------------------------------------------------------------------
 " GTAGS
 "---------------------------------------------------------------------
-"function! GtagsCommnad()
-"  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-"  if isdirectory(l:root_dir)
-"    if filereadable("GPATH")
-"      execute "cd " . l:root_dir
-"      nnoremap <silent><Leader>\ :GtagsCursor<CR>
-"      nnoremap <F7> :Gtags<space>
-"      nnoremap <F8> :Gtags -gi<space>
-"    endif
-"  endif
-"endfunction
-"autocmd BufReadPost * :call GtagsCommnad()
+function! GtagsCommnad()
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    if filereadable("GPATH")
+      execute "cd " . l:root_dir
+      nnoremap <silent><Leader>\ :GtagsCursor<CR>
+      nnoremap <F7> :Gtags<space>
+      nnoremap <F8> :Gtags -gi<space>
+    endif
+  endif
+endfunction
+autocmd BufReadPost * :call GtagsCommnad()
 "---------------------------------------------------------------------
 " gtags-cscope.vim
 "---------------------------------------------------------------------
@@ -494,17 +512,17 @@ noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tagbar_left = 1
-let g:tagbar_show_linenumbers = 0
-let g:tagbar_autopreview = 1
-let g:tagbar_previewwin_pos = "aboveleft"
-let g:tagbar_indent = 1
+"let g:tagbar_left = 1
+"let g:tagbar_show_linenumbers = 0
+"let g:tagbar_autopreview = 1
+"let g:tagbar_previewwin_pos = "aboveleft"
+"let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 "set <M-L> =l
-nmap <C-L> :call OpenTagbar()<CR>
+"nmap <C-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
@@ -637,8 +655,8 @@ cnoremap <C-Q> <ESC>:q!<CR>
 
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+inoremap <C-L> <ESC>
 inoremap <silent><C-K> <Esc>d$A
-inoremap <silent><C-P> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
@@ -658,7 +676,6 @@ noremap <down> gj
 noremap <silent><C-A> ^
 noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
-noremap <silent><C-P> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
 noremap j gj
 noremap k gk

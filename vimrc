@@ -62,7 +62,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
 " Gtags
-" Plugin 'gtags.vim'
+Plugin 'gtags.vim'
 
 "
 "Indentation
@@ -449,18 +449,18 @@ endif
 "---------------------------------------------------------------------
 " GTAGS
 "---------------------------------------------------------------------
-"function! GtagsCommnad()
-"  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-"  if isdirectory(l:root_dir)
-"    if filereadable("GPATH")
-"      execute "cd " . l:root_dir
-"      nnoremap <silent><Leader>\ :GtagsCursor<CR>
-"      nnoremap <F7> :Gtags<space>
-"      nnoremap <F8> :Gtags -gi<space>
-"    endif
-"  endif
-"endfunction
-"autocmd BufReadPost * :call GtagsCommnad()
+function! GtagsCommnad()
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    if filereadable("GPATH")
+      execute "cd " . l:root_dir
+      nnoremap <silent><Leader>\ :GtagsCursor<CR>
+      nnoremap <F7> :Gtags<space>
+      nnoremap <F8> :Gtags -gi<space>
+    endif
+  endif
+endfunction
+autocmd BufReadPost * :call GtagsCommnad()
 "---------------------------------------------------------------------
 " gtags-cscope.vim
 "---------------------------------------------------------------------

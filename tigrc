@@ -6,7 +6,7 @@ bind generic T !git notes edit %(commit)
 bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
 bind generic + !git commit -s --amend -C HEAD
 bind generic 0 !git format-patch -1 %(commit)
-bind generic <F10> !git format-patch %(commit)
+bind generic <F10> !git format-patch %(commit)~1
 bind main R !@git revert %(commit)
 bind main <F11> !git rebase -i %(commit)
 bind main x @!git reset --hard HEAD^

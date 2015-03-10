@@ -395,11 +395,20 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+
+function! s:P4_edit_current( )
+  execute "!p4 edit " . expand("%")
+endfunc
+function! s:P4_revert_current( )
+  execute "!p4 revert " . expand("%")
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
 command! -bang Q quitall<bang>
+command! PerforceEdit call <SID>P4_edit_current()
+command! PerforceRevert call <SID>P4_revert_current()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

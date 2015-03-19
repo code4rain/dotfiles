@@ -184,7 +184,7 @@ simple_prompt_dir() {
 	fi
 }
 simple_prompt() {
-	echo -n "%F{green}%n%{%f%}%{%F{yellow}%}@%{%f%}%{%F{red}%}%m%{%f%}    "
+	echo -n "%F{green}%n%{%f%}%{%F{yellow}%}@%{%f%}%{%F{cyan}%}%m%{%f%}    "
 	simple_prompt_dir
 	if [[ -h $(pwd) ]]; then
 		echo -n "\nSYMLINK: %F{cyan}$(readlink $(pwd))%{%f%}"

@@ -17,7 +17,9 @@ root: ~/
 
 # Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
 # tmux_command: byobu
-
+pre:
+  - export RBENV_DIR=
+  - export RBENV_VERSION=
 windows:
   - MAIN:
       layout: main-vertical
@@ -28,4 +30,4 @@ windows:
       layout: main-vertical
       panes:
         - cd ~/NILE_DEV && helsync
-        - cd ~/NILE_DEV/kernel.git && gp4 rebase
+        - 

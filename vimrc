@@ -60,7 +60,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
 " Gtags
-Plugin 'gtags.vim'
+"Plugin 'gtags.vim'
 
 "
 "Indentation
@@ -133,7 +133,7 @@ set background=dark
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:jellybeans_background_color="000000"
-colorscheme landscape
+colorscheme flattown
 "if !has("gui_running")
 "   let g:gruvbox_italic = 0
 "endif
@@ -447,25 +447,25 @@ endif
 "---------------------------------------------------------------------
 " GTAGS
 "---------------------------------------------------------------------
-function! GtagsCommnad()
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  if isdirectory(l:root_dir)
-    if filereadable("GPATH")
-      execute "cd " . l:root_dir
-      nnoremap <silent><Leader>\ :GtagsCursor<CR>
-      nnoremap <F7> :Gtags<space>
-      nnoremap <F8> :Gtags -gi<space>
-    endif
-  endif
-endfunction
-autocmd BufReadPost * :call GtagsCommnad()
-"---------------------------------------------------------------------
-" gtags-cscope.vim
-"---------------------------------------------------------------------
-let GtagsCscope_Auto_Load = 1
-let GtagsCscope_Auto_Map = 1
-let GtagsCscope_Keep_Alive = 1
-let GtagsCscope_Quiet = 1
+"function! GtagsCommnad()
+"  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+"  if isdirectory(l:root_dir)
+"    if filereadable("GPATH")
+"      execute "cd " . l:root_dir
+"      nnoremap <silent><Leader>\ :GtagsCursor<CR>
+"      nnoremap <F7> :Gtags<space>
+"      nnoremap <F8> :Gtags -gi<space>
+"    endif
+"  endif
+"endfunction
+"autocmd BufReadPost * :call GtagsCommnad()
+""---------------------------------------------------------------------
+"" gtags-cscope.vim
+""---------------------------------------------------------------------
+"let GtagsCscope_Auto_Load = 1
+"let GtagsCscope_Auto_Map = 1
+"let GtagsCscope_Keep_Alive = 1
+"let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------

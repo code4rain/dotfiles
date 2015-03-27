@@ -303,7 +303,7 @@ autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufReadPost * if &modifiable | %s/\s\+$//e | endif
-autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
+"autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indent 설정

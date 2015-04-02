@@ -26,4 +26,5 @@ bind generic S !git am --skip
 bind generic 1 !@git checkout --ours %(file)
 bind generic 2 !@git checkout --theirs %(file)
 bind generic <F12> !gp4 rebase
+bind generic v !git describe %(commit)
 bind status x !@rm -f %(file)

@@ -14,14 +14,21 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+" Detect Code Format
+Plugin 'guiniol/vim-showspaces'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'kien/rainbow_parentheses.vim'
+"Indentation
+Plugin 'IndentConsistencyCop'
+" Plugin 'tpope/vim-sleuth'
+" Plugin 'ciaranm/detectindent'
+
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mhinz/vim-signify'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'majutsushi/tagbar'
 Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'bbchung/clighter'
@@ -61,12 +68,8 @@ Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
 " Gtags
 Plugin 'gtags.vim'
-
+Plugin 'chrisbra/vim-diff-enhanced'
 "
-"Indentation
-Plugin 'IndentConsistencyCop'
-Plugin 'tpope/vim-sleuth'
-" Plugin 'ciaranm/detectindent'
 
 " Colors
 Plugin 'tomasr/molokai'
@@ -223,9 +226,9 @@ set showcmd
 " Disalbe tabstop, shiftwidth, noexpandtab
 " Instead of these settings, use DetectIndent as autocmd *
 " 탭 크기 설정
-" set tabstop=8
-" set shiftwidth=8
-" set softtabstop=0
+set tabstop=8
+set shiftwidth=8
+set softtabstop=0
 
 " 탭 -> 공백 변환 기능 (사용 안함)
 " set noexpandtab
@@ -526,7 +529,10 @@ noremap <F10> :call Open_QuickFixList()<CR>
 "set <M-L> =l
 "nmap <C-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-showspaces
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let b:showSpacesConceal = 1
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nmap <leader>h <Plug>(quickhl-manual-this)
@@ -658,19 +664,21 @@ cnoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
 inoremap <C-L> <ESC>
+inoremap <C-Q> <ESC>:q!<CR>
+inoremap <C-S> <ESC>:w<CR>a
 inoremap <silent><C-K> <Esc>d$A
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
-inoremap <C-Q> <ESC>:q!<CR>
-inoremap <C-S> <ESC>:w<CR>a
 
 map <silent><C-K> d$
 map <silent><C-U> d^
-
+map q: :q
 nmap <F2> "*yw
 nmap Y "*yw
-
+nnoremap <C-L> V
+nnoremap <silent> p p`]
+nnoremap tt diw"*P
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>
@@ -679,23 +687,15 @@ noremap <silent><C-A> ^
 noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
+noremap gV `[v`]
 noremap j gj
 noremap k gk
-
-nnoremap tt diw"*P
-nnoremap <silent> p p`]
-
 vmap <F2> "*y
 vmap Y "*y
-vnoremap q <ESC>
-vnoremap <silent> y y`]
+vnoremap <C-L> <ESC>
 vnoremap <silent> p p`]
-noremap gV `[v`]
-
-nnoremap <CR> G
-nnoremap <BS> gg
-
-map q: :q
+vnoremap <silent> y y`]
+vnoremap q <ESC>
 
 if has("multi_byte")
   set encoding=utf-8

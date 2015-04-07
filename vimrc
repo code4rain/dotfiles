@@ -14,15 +14,6 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" Detect Code Format
-Plugin 'guiniol/vim-showspaces'
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'kien/rainbow_parentheses.vim'
-"Indentation
-Plugin 'IndentConsistencyCop'
-" Plugin 'tpope/vim-sleuth'
-" Plugin 'ciaranm/detectindent'
-
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -70,7 +61,14 @@ Plugin 'yssl/VIntSearch'
 Plugin 'gtags.vim'
 Plugin 'chrisbra/vim-diff-enhanced'
 "
-
+" Detect Code Format
+Plugin 'guiniol/vim-showspaces'
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'kien/rainbow_parentheses.vim'
+"Indentation
+Plugin 'IndentConsistencyCop'
+" Plugin 'tpope/vim-sleuth'
+" Plugin 'ciaranm/detectindent'
 " Colors
 Plugin 'tomasr/molokai'
 Plugin 'blerins/flattown'

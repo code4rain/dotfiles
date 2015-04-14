@@ -62,7 +62,6 @@ Plugin 'gtags.vim'
 Plugin 'chrisbra/vim-diff-enhanced'
 "
 " Detect Code Format
-Plugin 'guiniol/vim-showspaces'
 Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'kien/rainbow_parentheses.vim'
 "Indentation
@@ -73,6 +72,7 @@ Plugin 'IndentConsistencyCop'
 Plugin 'tomasr/molokai'
 Plugin 'blerins/flattown'
 Plugin 'itchyny/landscape.vim'
+Plugin 'junegunn/seoul256.vim'
 
 Plugin 'YankRing.vim'
 
@@ -134,7 +134,8 @@ set background=dark
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:jellybeans_background_color="000000"
-colorscheme flattown
+let g:seoul256_background = 233
+colorscheme seoul256
 "if !has("gui_running")
 "   let g:gruvbox_italic = 0
 "endif

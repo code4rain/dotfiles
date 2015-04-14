@@ -41,6 +41,7 @@ alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias t='task'
 alias ta='add_project'
 alias vt='vim_gtags'
+alias vimdiff='nvim -d'
 
 alias conW='ssh -X $(whoami)@10.252.251.111'
 alias conX='ssh -X $(whoami)@10.252.251.137'

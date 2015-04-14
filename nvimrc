@@ -1,7 +1,4 @@
-﻿set nocompatible               " be iMproved
-
-set rtp+=~/.fzf
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+﻿""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " For Vundle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype off
@@ -20,8 +17,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'mhinz/vim-signify'
-Plugin 'kien/rainbow_parentheses.vim'
-Plugin 'ntpeters/vim-better-whitespace'
 Plugin 'majutsushi/tagbar'
 Plugin 'Lokaltog/vim-easymotion'
 "Plugin 'bbchung/clighter'
@@ -33,10 +28,11 @@ Plugin 'kana/vim-operator-user'
 """""""""""""""""""""""""
 """ Markdown
 "Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'mmai/wikilink'
-Plugin 'farseer90718/vim-taskwarrior'
+"Plugin 'mmai/wikilink'
+"Plugin 'farseer90718/vim-taskwarrior'
+Plugin 'vim-pandoc'
 """""""""""""""""""""""""
+Plugin 'Align'
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'
 "Plugin 'tomtom/tlib_vim'
@@ -59,19 +55,25 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'yssl/VIntSearch'
 "Plugin 'delimitMate.vim'
 " Gtags
-" Plugin 'gtags.vim'
-
+Plugin 'gtags.vim'
+Plugin 'chrisbra/vim-diff-enhanced'
 "
+" Detect Code Format
+Plugin 'ntpeters/vim-better-whitespace'
+Plugin 'kien/rainbow_parentheses.vim'
 "Indentation
 Plugin 'IndentConsistencyCop'
-Plugin 'tpope/vim-sleuth'
+" Plugin 'tpope/vim-sleuth'
 " Plugin 'ciaranm/detectindent'
-
 " Colors
 Plugin 'tomasr/molokai'
 Plugin 'blerins/flattown'
 Plugin 'itchyny/landscape.vim'
+Plugin 'junegunn/seoul256.vim'
 
+Plugin 'YankRing.vim'
+
+Plugin 'elzr/vim-json'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -82,7 +84,7 @@ let mapleader = "\<Space>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use 256 colours (Use this setting only if your terminal supports 256
 " colours)
-set t_Co=256
+" set t_Co=256
 
 "에러 발생시에 소리대신 화면이 깜빡이도록함 (disable)
 "set visualbell
@@ -127,7 +129,8 @@ set background=dark
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:jellybeans_background_color="000000"
-colorscheme landscape
+let g:seoul256_background = 233
+colorscheme seoul256
 "if !has("gui_running")
 "   let g:gruvbox_italic = 0
 "endif
@@ -217,9 +220,9 @@ set showcmd
 " Disalbe tabstop, shiftwidth, noexpandtab
 " Instead of these settings, use DetectIndent as autocmd *
 " 탭 크기 설정
-" set tabstop=8
-" set shiftwidth=8
-" set softtabstop=0
+set tabstop=8
+set shiftwidth=8
+set softtabstop=0
 
 " 탭 -> 공백 변환 기능 (사용 안함)
 " set noexpandtab
@@ -297,8 +300,8 @@ autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
-autocmd BufReadPost * if &modifiable | %s/\s\+$//e | endif
-autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
+autocmd BufWritePre * if &modifiable | %s/\s\+$//e | endif
+"autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indent 설정
@@ -318,6 +321,9 @@ set hidden
 
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wildmenu
+
+" File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
+set wildmode=list:longest,full
 
 " /를 입력하여 검색을 시작할 때 자동으로 영문사태로 만들어준다
 "set iminsert=1
@@ -388,11 +394,20 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+
+function! s:P4_edit_current( )
+  execute "!p4 edit " . expand("%")
+endfunc
+function! s:P4_revert_current( )
+  execute "!p4 revert " . expand("%")
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
 command! -bang Q quitall<bang>
+command! PerforceEdit call <SID>P4_edit_current()
+command! PerforceRevert call <SID>P4_revert_current()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -495,18 +510,17 @@ noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:tagbar_left = 1
-let g:tagbar_show_linenumbers = 0
-let g:tagbar_autopreview = 1
-let g:tagbar_previewwin_pos = "aboveleft"
-let g:tagbar_indent = 1
+"let g:tagbar_left = 1
+"let g:tagbar_show_linenumbers = 0
+"let g:tagbar_autopreview = 1
+"let g:tagbar_previewwin_pos = "aboveleft"
+"let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 "set <M-L> =l
-nmap <C-L> :call OpenTagbar()<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"nmap <C-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -638,20 +652,22 @@ cnoremap <C-Q> <ESC>:q!<CR>
 
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
+inoremap <C-L> <ESC>
+inoremap <C-Q> <ESC>:q!<CR>
+inoremap <C-S> <ESC>:w<CR>a
 inoremap <silent><C-K> <Esc>d$A
-inoremap <silent><C-P> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
-inoremap <C-Q> <ESC>:q!<CR>
-inoremap <C-S> <ESC>:w<CR>a
 
 map <silent><C-K> d$
 map <silent><C-U> d^
-
+map q: :q
 nmap <F2> "*yw
 nmap Y "*yw
-
+nnoremap <C-L> V
+nnoremap <silent> p p`]
+nnoremap tt diw"*P
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>
@@ -659,25 +675,16 @@ noremap <down> gj
 noremap <silent><C-A> ^
 noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
-noremap <silent><C-P> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
+noremap gV `[v`]
 noremap j gj
 noremap k gk
-
-nnoremap tt diw"*P
-nnoremap <silent> p p`]
-
 vmap <F2> "*y
 vmap Y "*y
-vnoremap q <ESC>
-vnoremap <silent> y y`]
+vnoremap <C-L> <ESC>
 vnoremap <silent> p p`]
-noremap gV `[v`]
-
-nnoremap <CR> G
-nnoremap <BS> gg
-
-map q: :q
+vnoremap <silent> y y`]
+vnoremap q <ESC>
 
 if has("multi_byte")
   set encoding=utf-8

@@ -33,6 +33,7 @@ Plugin 'kana/vim-operator-user'
 Plugin 'vim-pandoc'
 """""""""""""""""""""""""
 Plugin 'Align'
+Plugin 'mkitt/tabline.vim'
 """ snipmate start
 "Plugin 'MarcWeber/vim-addon-mw-utils'
 "Plugin 'tomtom/tlib_vim'

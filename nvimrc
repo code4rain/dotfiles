@@ -1,71 +1,41 @@
 ﻿" Plugins
-"https://github.com/junegunn/vim-plug
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" https://github.com/junegunn/vim-plug
+" Download: curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" Plug on GitHub repo
-Plug 'tpope/vim-fugitive'
-Plug 'scrooloose/nerdcommenter'
-Plug 'mhinz/vim-signify'
-Plug 'majutsushi/tagbar'
-Plug 'Lokaltog/vim-easymotion'
-"Plug 'bbchung/clighter'
-Plug 'Valloric/YouCompleteMe'
-"""""""""""""""""""""""""
-Plug 't9md/vim-quickhl'
-" (Optional) For quickhl move
-Plug 'kana/vim-operator-user'
-"""""""""""""""""""""""""
-""" Markdown
-"Plug 'godlygeek/tabular'
-"Plug 'mmai/wikilink'
-"Plug 'farseer90718/vim-taskwarrior'
-Plug 'vim-pandoc'
-"""""""""""""""""""""""""
 Plug 'Align'
-Plug 'mkitt/tabline.vim'
-""" snipmate start
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'tomtom/tlib_vim'
-"Plug 'garbas/vim-snipmate'
-
-" Optional:
-"Plug 'honza/vim-snippets'
-""" snipmate end
-""" UltiSnips --START--
+Plug 'IndentConsistencyCop'
+Plug 'Lokaltog/vim-easymotion'
 Plug 'UltiSnips'
-" Optional:
-Plug 'honza/vim-snippets'
-""" UltiSnips --END--
-Plug 'tommcdo/vim-exchange'
-Plug 'repeat.vim'
+Plug 'Valloric/YouCompleteMe'
 Plug 'bufexplorer.zip'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'gtags.vim'
+Plug 'honza/vim-snippets'
+Plug 'kana/vim-operator-user'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-signify'
+Plug 'mkitt/tabline.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'repeat.vim'
 Plug 'surround.vim'
-Plug 'terryma/vim-expand-region'
+Plug 't9md/vim-quickhl'
+Plug 'tommcdo/vim-exchange'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-pandoc'
 Plug 'vim-scripts/gitignore'
 Plug 'yssl/VIntSearch'
-"Plug 'delimitMate.vim'
-" Gtags
-Plug 'gtags.vim'
-Plug 'chrisbra/vim-diff-enhanced'
-"
-" Detect Code Format
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'kien/rainbow_parentheses.vim'
-"Indentation
-Plug 'IndentConsistencyCop'
-" Plug 'tpope/vim-sleuth'
-" Plug 'ciaranm/detectindent'
-" Colors
-Plug 'tomasr/molokai'
+Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/limelight.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/vim-after-object'
+Plug 'junegunn/vim-easy-align'
+
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
 Plug 'junegunn/seoul256.vim'
-
-Plug 'YankRing.vim'
-Plug 'elzr/vim-json'
+Plug 'tomasr/molokai'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -118,16 +88,10 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:jellybeans_background_color="000000"
 let g:seoul256_background = 233
 colorscheme seoul256
-"if !has("gui_running")
-"   let g:gruvbox_italic = 0
-"endif
-"let g:gruvbox_invert_signs = 1
-"let g:gruvbox_sign_column = 'dark0'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+
 "Enable Word wrap
 set wrap
 set linebreak
@@ -138,7 +102,6 @@ set nolist
 set listchars=tab:>-,eol:$
 
 " 괄호의 짝을 Highlight
-
 set showmatch
 set matchtime=3
 
@@ -207,8 +170,6 @@ set noswapfile
 " 완성중인 명령을 표시
 set showcmd
 
-" Disalbe tabstop, shiftwidth, noexpandtab
-" Instead of these settings, use DetectIndent as autocmd *
 " 탭 크기 설정
 set tabstop=8
 set shiftwidth=8
@@ -321,20 +282,9 @@ set wildmode=list:longest,full
 
 set comments=sl:/*,mb:\ *,elx:*/
 
-"unix format으로 변경하고,"trailing space 지우기
-func! FUNC_dos2unix()
-  %s/\s\+$//g
-  %s///g
-  set ff=unix
-endfunc
-nmap  <Leader>u :call FUNC_dos2unix()<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 기타 설정
+" Mouse 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 매크로 실행중에 화면을 다시 그리지 않음
-set lz
-
 set mouse=a
 set ttymouse=xterm
 
@@ -345,11 +295,6 @@ function! ShowMouseMode()
     echo "mouse-xterm"
   endif
 endfunction
-
-"source $VIMRUNTIME/vimrc_example.vim
-"source $VIMRUNTIME/mswin.vim
-"behave mswin
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 자주 틀리는 글자 수정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -500,17 +445,16 @@ noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:tagbar_left = 1
-"let g:tagbar_show_linenumbers = 0
-"let g:tagbar_autopreview = 1
-"let g:tagbar_previewwin_pos = "aboveleft"
-"let g:tagbar_indent = 1
+let g:tagbar_left = 1
+let g:tagbar_show_linenumbers = 0
+let g:tagbar_autopreview = 1
+let g:tagbar_previewwin_pos = "aboveleft"
+let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
-"set <M-L> =l
-"nmap <C-L> :call OpenTagbar()<CR>
+nmap <M-L> :call OpenTagbar()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -558,22 +502,27 @@ let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDCommenter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"map <silent><C-9> <leader>cc
-"map <silent><C-0> <Leader>ci
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DetectIndent
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"autocmd BufReadPost * :DetectIndent
-"let g:detectindent_preferred_indent = 8
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"autocmd VimEnter * RainbowParenthesesToggleAll
-autocmd Syntax * RainbowParenthesesLoadRound
-autocmd Syntax * RainbowParenthesesLoadSquare
-autocmd Syntax * RainbowParenthesesLoadBraces
+augroup rainbow
+  autocmd!
+  autocmd VimEnter & RainbowParentheses
+augroup END
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim after object
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup vim_after_object
+  autocmd!
+  autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+augroup END
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim after object
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -581,51 +530,10 @@ let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Repeat
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <Plug>TransposeCharacters xp
-      \:call repeat#set("\<Plug>TransposeCharacters")<CR>
-nmap cp <Plug>TransposeCharacters
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YCM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-expand-region
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" DelimitMate
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"imap <C-F> <Plug>delimitMateS-Tab
-"imap <C-H> <Plug>delimitMateS-BS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FZF
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" List of buffers
-function! BufList()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! BufOpen(e)
-  execute 'buffer '. matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-nnoremap <silent> <Leader>] :call fzf#run({
-      \   'source':      reverse(BufList()),
-      \   'sink':        function('BufOpen'),
-      \   'options':     '+m',
-      \   'tmux_width': '20%'
-      \ })<CR>
-let g:fzf_tmux_height = '20%'
-let g:fzf_tmux_width = '20%'
-noremap <F12> <ESC>:FZF<CR>
-nnoremap <silent><leader>o :FZF<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -689,13 +597,6 @@ au BufReadPost *
       \ endif
 
 nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" If you need current path in insert mode :
-inoremap j% <C-R>=expand("%:p:h") . "/" <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Stat functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-"call ToggleFocusMode()
-" Example of how to use w:created in an autocmd to initialize a window-local option
-"autocmd WinLeave * :call FocusModeOff()
-"autocmd WinEnter * :call FocusModeOff()

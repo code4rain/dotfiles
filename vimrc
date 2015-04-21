@@ -1,85 +1,73 @@
 ﻿set nocompatible               " be iMproved
-
-set rtp+=~/.fzf
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" For Vundle
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype off
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-
+" Plugins
+"https://github.com/junegunn/vim-plug
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mhinz/vim-signify'
-Plugin 'majutsushi/tagbar'
-Plugin 'Lokaltog/vim-easymotion'
-"Plugin 'bbchung/clighter'
-Plugin 'Valloric/YouCompleteMe'
+" Plug on GitHub repo
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdcommenter'
+Plug 'mhinz/vim-signify'
+Plug 'majutsushi/tagbar'
+Plug 'Lokaltog/vim-easymotion'
+"Plug 'bbchung/clighter'
+Plug 'Valloric/YouCompleteMe'
 """""""""""""""""""""""""
-Plugin 't9md/vim-quickhl'
+Plug 't9md/vim-quickhl'
 " (Optional) For quickhl move
-Plugin 'kana/vim-operator-user'
+Plug 'kana/vim-operator-user'
 """""""""""""""""""""""""
 """ Markdown
-"Plugin 'godlygeek/tabular'
-"Plugin 'mmai/wikilink'
-"Plugin 'farseer90718/vim-taskwarrior'
-Plugin 'vim-pandoc'
+"Plug 'godlygeek/tabular'
+"Plug 'mmai/wikilink'
+"Plug 'farseer90718/vim-taskwarrior'
+Plug 'vim-pandoc'
 """""""""""""""""""""""""
-Plugin 'Align'
+Plug 'Align'
+Plug 'mkitt/tabline.vim'
 """ snipmate start
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
+"Plug 'MarcWeber/vim-addon-mw-utils'
+"Plug 'tomtom/tlib_vim'
+"Plug 'garbas/vim-snipmate'
 
 " Optional:
-"Plugin 'honza/vim-snippets'
+"Plug 'honza/vim-snippets'
 """ snipmate end
 """ UltiSnips --START--
-Plugin 'UltiSnips'
+Plug 'UltiSnips'
 " Optional:
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 """ UltiSnips --END--
-Plugin 'tommcdo/vim-exchange'
-Plugin 'repeat.vim'
-Plugin 'bufexplorer.zip'
-Plugin 'surround.vim'
-Plugin 'terryma/vim-expand-region'
-Plugin 'vim-scripts/gitignore'
-Plugin 'yssl/VIntSearch'
-"Plugin 'delimitMate.vim'
+Plug 'tommcdo/vim-exchange'
+Plug 'repeat.vim'
+Plug 'bufexplorer.zip'
+Plug 'surround.vim'
+Plug 'terryma/vim-expand-region'
+Plug 'vim-scripts/gitignore'
+Plug 'yssl/VIntSearch'
+"Plug 'delimitMate.vim'
 " Gtags
-Plugin 'gtags.vim'
-Plugin 'chrisbra/vim-diff-enhanced'
+Plug 'gtags.vim'
+Plug 'chrisbra/vim-diff-enhanced'
 "
 " Detect Code Format
-Plugin 'ntpeters/vim-better-whitespace'
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'kien/rainbow_parentheses.vim'
 "Indentation
-Plugin 'IndentConsistencyCop'
-" Plugin 'tpope/vim-sleuth'
-" Plugin 'ciaranm/detectindent'
+Plug 'IndentConsistencyCop'
+" Plug 'tpope/vim-sleuth'
+" Plug 'ciaranm/detectindent'
 " Colors
-Plugin 'tomasr/molokai'
-Plugin 'blerins/flattown'
-Plugin 'itchyny/landscape.vim'
-Plugin 'junegunn/seoul256.vim'
+Plug 'tomasr/molokai'
+Plug 'blerins/flattown'
+Plug 'itchyny/landscape.vim'
+Plug 'junegunn/seoul256.vim'
 
-Plugin 'YankRing.vim'
-
-Plugin 'elzr/vim-json'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plug 'YankRing.vim'
+Plug 'elzr/vim-json'
+call plug#end()
 
 set shell=/bin/bash
 

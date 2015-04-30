@@ -1,0 +1,17 @@
+#!/usr/bin/expect
+# script file: github_login.exp
+# spawn ssh process
+set cur_dir [exec dirname $argv0]
+spawn bash -c "git push"
+# to accept RSA key automatically, set StrictHostKeyChecking=no
+# spawn ssh -o StrictHostKeyChecking=no john@192.168.0.10
+# wait for password request
+expect -nocase "Username"
+# send password (\r is for return key)
+send -- "[read [open "$cur_dir/.github_id" r]]"
+# wait for shell prompt
+expect -nocase "Password"
+# execute commands (in this example, identify kernel version with 'uname -r' command)
+#send "\r"
+send -- "[read [open "$cur_dir/.github_password" r]]"
+interact

@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-
+cp -R ../module/bin/* ~/bin
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
 git clone http://git.savannah.gnu.org/r/ranger.git ~/bin/ranger
 git clone https://github.com/jonas/tig.git ~/bin/tig

@@ -1,0 +1,101 @@
+#!/usr/bin/env bash
+
+# Change p4 command if you use another p4 script.
+P4C="p4"
+# Default reviewer
+REVIEWER="grant.park,sjin.hahn,seo0.jeong,dh0703.kim,jammer,dw1001.shin,smilesr.ryu"
+D_REVIEWER="sangmoon.kim,dh0703.kim,jammer"
+# Post review command
+POSTREVIEW="postreviewcli.py"
+
+cur_path=`pwd`
+config_file_path=$cur_path/.p4config
+
+if [ -f $config_file_path ]
+then
+	source $config_file_path
+else
+	while [ -O $cur_path ]
+	do
+		if [ -f $cur_path"/.p4config" ]
+		then
+			source $cur_path"/.p4config"
+			break
+		fi
+		cur_path=`cd $cur_path && cd .. && pwd`
+	done
+fi
+
+usage()
+{
+	echo "Usage: $0"
+	echo "-d : Add default reviewer"
+	echo "-r : Add reviewr id"
+	echo "-c : using specific Change List # instead of last pending CL"
+	echo "-p : Auto publish to reviewer"
+	echo "-v : Verbose"
+}
+# echo "$P4C changes -u $P4USER -m $1 -s pending"
+CLS=`$P4C changes -u $P4USER -m 1 -s pending | awk '{ print $2 } '`
+
+# A POSIX variable
+OPTIND=1         # Reset in case getopts has been used previously in the shell.
+
+while getopts ":d:r:c:pv" o; do
+	case "${o}" in
+		d)
+			ADD_DREVIEWER=${OPTARG}
+			;;
+		r)
+			ADD_REVIEWER=${OPTARG}
+			;;
+		c)
+			CLS=${OPTARG}
+			;;
+		p)
+			PUBLISH=1
+			;;
+		v)
+			VERBOSE=1
+			;;
+		*)
+			usage
+			exit 0
+			;;
+	esac
+done
+
+if [ ! -z "$ADD_REVIEWER" ]
+then
+	REVIEWER="$REVIEWER,$ADD_REVIEWER"
+fi
+
+if [ ! -z "$ADD_DREVIEWER" ]
+then
+	D_REVIEWER="$D_REVIEWER,$ADD_DREVIEWER"
+fi
+
+for cl in "$CLS"
+do
+cat << EOF
+	-------------$POSTREVIEW--------------------------
+	USER:		$P4USER
+	CLIENT:		$P4CLIENT
+	REVIEWER:	$REVIEWER
+	DEFAULT REVIEWR:$D_REVIEWER
+	REVIEW CL:	$cl
+	----------------------------------------------------
+EOF
+	$P4C describe -dlu -S $cl | colordiff | less -R
+if [ $PUBLISH ]
+then
+	POSTREVIEW="$POSTREVIEW -p"
+fi
+if [ $VERBOSE ]
+then
+	POSTREVIEW="$POSTREVIEW -d"
+fi
+	echo "$POSTREVIEW --username $P4USER --target-people="$REVIEWER" --target-defaultreviewers="$D_REVIEWER" --p4-client $P4CLIENT --p4-port $P4PORT $cl"
+	$POSTREVIEW --username "$P4USER" --target-people="$REVIEWER" --target-defaultreviewers="$D_REVIEWER" --p4-client "$P4CLIENT" --p4-port "$P4PORT" ${cl% }
+
+done

@@ -38,6 +38,10 @@ Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'majutsushi/tagbar'
+Plug 'aimondi/delimitMate'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -90,8 +94,9 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:seoul256_background = 233
-colorscheme seoul256
+"let g:seoul256_background = 233
+"colorscheme seoul256
+colorscheme PaperColor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap
@@ -405,6 +410,10 @@ let GtagsCscope_Auto_Load = 1
 let GtagsCscope_Keep_Alive = 1
 let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
+" FZF
+"---------------------------------------------------------------------
+noremap <silent> <M-o> :FZF<CR>
+"---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------
 function! Find_current_file(word)
@@ -459,7 +468,7 @@ let g:tagbar_indent = 1
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
-nmap <M-L> :call OpenTagbar()<CR>
+nmap <M-l> :TagbarToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

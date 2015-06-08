@@ -167,3 +167,7 @@ ranger_cd () {
 # source ~/.fzf.bash
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# Enable programmable sdb completion features.
+if [ -f ~/.sdb/.sdb-completion.bash ]; then
+ source ~/.sdb/.sdb-completion.bash
+fi

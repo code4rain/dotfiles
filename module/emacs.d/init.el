@@ -27,8 +27,8 @@ re-downloaded in order to locate PACKAGE."
 (evil-mode t)
 
 ;; Emacs 24.4 or higher
-(with-eval-after-load 'evil
-  (require 'evil-anzu))
+;;(with-eval-after-load 'evil
+;;  (require 'evil-anzu))
 
 ;; ===== Set the highlight current line minor mode =====
 

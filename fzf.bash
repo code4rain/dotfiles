@@ -1,12 +1,14 @@
 # Setup fzf function
 # ------------------
 unalias fzf 2> /dev/null
-fzf() { /usr/bin/ruby ${HOME}/.fzf/fzf "$@" }
-# export -f fzf > /dev/null
+fzf() {
+  /usr/bin/ruby --disable-gems /home/alex/.fzf/fzf "$@"
+}
+export -f fzf > /dev/null
 
 # Auto-completion
 # ---------------
-[[ $- =~ i ]] && source ${HOME}/.fzf/fzf-completion.bash
+[[ $- =~ i ]] && source /home/alex/.fzf/fzf-completion.bash
 
 # Key bindings
 # ------------
@@ -78,5 +80,7 @@ else
   bind '"\ec": "\eddi$(__fcd)\C-x\C-e\C-x\C-r\C-m"'
   bind -m vi-command '"\ec": "i\ec"'
 fi
+
 unset __use_tmux
+
 fi

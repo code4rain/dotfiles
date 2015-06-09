@@ -33,15 +33,16 @@ Plug 'junegunn/vim-after-object'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
-
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'majutsushi/tagbar'
+Plug 'Raimondi/delimitMate'
+"Color
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'majutsushi/tagbar'
-Plug 'Raimondi/delimitMate'
+Plug 'jonathanfilip/vim-lucius'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -96,7 +97,7 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "let g:seoul256_background = 233
 "colorscheme seoul256
-colorscheme PaperColor
+colorscheme lucius
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap
@@ -392,8 +393,7 @@ function! GtagsCommnad()
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if filereadable("GPATH")
-      nnoremap <silent><M-j> :GtagsCursor<CR>
-      nnoremap <M-k> <C-o>
+      nnoremap <silent><F12> :GtagsCursor<CR>
       nnoremap <F7> :Gtags<space>
       nnoremap <M-h> :Gtags -gi<space>
       nnoremap <silent><M-n> :cn<CR>
@@ -515,6 +515,9 @@ let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
+map <silent><M-j> <Plug>(signify-next-hunk)
+map <silent><M-k> <Plug>(signify-prev-hunk)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

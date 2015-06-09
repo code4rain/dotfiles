@@ -41,7 +41,7 @@ Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'majutsushi/tagbar'
-Plug 'aimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 call plug#end()
 
 let mapleader = "\<Space>"

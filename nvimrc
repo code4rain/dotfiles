@@ -50,7 +50,7 @@ let mapleader = "\<Space>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use 256 colours (Use this setting only if your terminal supports 256
 " colours)
-" set t_Co=256
+set t_Co=256
 
 "에러 발생시에 소리대신 화면이 깜빡이도록함 (disable)
 "set visualbell
@@ -293,15 +293,15 @@ set comments=sl:/*,mb:\ *,elx:*/
 " Mouse 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=a
-set ttymouse=xterm
-
-function! ShowMouseMode()
-  if (&mouse == 'a')
-    echo "mouse-vim"
-  else
-    echo "mouse-xterm"
-  endif
-endfunction
+"set ttymouse=xterm
+"
+"function! ShowMouseMode()
+"  if (&mouse == 'a')
+"    echo "mouse-vim"
+"  else
+"    echo "mouse-xterm"
+"  endif
+"endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 자주 틀리는 글자 수정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

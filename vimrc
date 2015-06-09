@@ -37,6 +37,8 @@ Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
+Plug 'NLKNguyen/papercolor-theme'
+
 call plug#end()
 
 set shell=/bin/bash

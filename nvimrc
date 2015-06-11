@@ -36,6 +36,9 @@ Plug 'junegunn/vim-oblique'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'majutsushi/tagbar'
 Plug 'Raimondi/delimitMate'
+Plug 'ervandew/supertab'
+Plug 'kien/ctrlp.vim'
+Plug 'terryma/vim-multiple-cursors'
 "Color
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
@@ -95,9 +98,8 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:seoul256_background = 233
-"colorscheme seoul256
-colorscheme lucius
+let g:seoul256_background = 233
+colorscheme seoul256
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap
@@ -354,7 +356,7 @@ command! PerforceRevert call <SID>P4_revert_current()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function SetCscope()
+function! SetCscope()
   let curdir = getcwd()
 
   while !filereadable("cscope.out") && getcwd() != "/"

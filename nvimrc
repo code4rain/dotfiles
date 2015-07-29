@@ -36,9 +36,11 @@ Plug 'junegunn/vim-oblique'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'majutsushi/tagbar'
 Plug 'Raimondi/delimitMate'
-Plug 'ervandew/supertab'
 Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'Chiel92/vim-autoformat'
+Plug 'gregkh/kernel-coding-style'
+Plug 'wincent/ferret'
 "Color
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
@@ -412,6 +414,9 @@ let GtagsCscope_Auto_Load = 1
 let GtagsCscope_Keep_Alive = 1
 let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
+" Auto
+"---------------------------------------------------------------------
+"---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------
 noremap <silent> <M-o> :FZF<CR>
@@ -572,13 +577,13 @@ inoremap <C-E> <End>
 inoremap <C-L> <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-S> <ESC>:w<CR>a
-inoremap <silent><C-K> <Esc>d$A
+"inoremap <silent><C-K> <Esc>d$A
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
 
-map <silent><C-K> d$
-map <silent><C-U> d^
+"map <silent><C-K> d$
+"map <silent><C-U> d^
 map q: :q
 nmap <F2> "*yw
 nmap Y "*yw

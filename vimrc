@@ -32,13 +32,24 @@ Plug 'junegunn/limelight.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'junegunn/vim-after-object'
 Plug 'junegunn/vim-easy-align'
-
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-oblique'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'majutsushi/tagbar'
+Plug 'Raimondi/delimitMate'
+Plug 'kien/ctrlp.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'Chiel92/vim-autoformat'
+Plug 'gregkh/kernel-coding-style'
+Plug 'wincent/ferret'
+Plug 'jeaye/color_coded'
+"Color
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'
 Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
-
+Plug 'jonathanfilip/vim-lucius'
 call plug#end()
 
 set shell=/bin/bash
@@ -350,7 +361,7 @@ command! PerforceRevert call <SID>P4_revert_current()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function SetCscope()
+function! SetCscope()
   let curdir = getcwd()
 
   while !filereadable("cscope.out") && getcwd() != "/"
@@ -387,24 +398,31 @@ endif
 function! GtagsCommnad()
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
     if filereadable("GPATH")
-      execute "cd " . l:root_dir
-      nnoremap <silent><Leader>j :GtagsCursor<CR>
-      nnoremap <Leader>g :Gtags<space>
-      nnoremap <Leader>i :Gtags -gi<space>
-      nnoremap <Leader>n :cn<CR>
-      nnoremap <Leader>p :cp<CR>
+      nnoremap <silent><F12> :GtagsCursor<CR>
+      nnoremap <F7> :Gtags<space>
+      nnoremap <M-h> :Gtags -gi<space>
+      nnoremap <silent><M-n> :cn<CR>
+      nnoremap <silent><M-m> :cp<CR>
     endif
   endif
 endfunction
 autocmd BufReadPost * :call GtagsCommnad()
-""---------------------------------------------------------------------
-"" gtags-cscope.vim
-""---------------------------------------------------------------------
-"let GtagsCscope_Auto_Load = 1
+"---------------------------------------------------------------------
+" gtags-cscope.vim
+"---------------------------------------------------------------------
+let GtagsCscope_Auto_Load = 1
 "let GtagsCscope_Auto_Map = 1
-"let GtagsCscope_Keep_Alive = 1
-"let GtagsCscope_Quiet = 1
+let GtagsCscope_Keep_Alive = 1
+let GtagsCscope_Quiet = 1
+"---------------------------------------------------------------------
+" Auto
+"---------------------------------------------------------------------
+"---------------------------------------------------------------------
+" FZF
+"---------------------------------------------------------------------
+noremap <silent> <M-o> :FZF<CR>
 "---------------------------------------------------------------------
 " Vimgrep
 "---------------------------------------------------------------------
@@ -451,17 +469,16 @@ noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:tagbar_left = 1
-"let g:tagbar_show_linenumbers = 0
-"let g:tagbar_autopreview = 1
-"let g:tagbar_previewwin_pos = "aboveleft"
-"let g:tagbar_indent = 1
+let g:tagbar_left = 1
+let g:tagbar_show_linenumbers = 0
+let g:tagbar_autopreview = 1
+let g:tagbar_previewwin_pos = "aboveleft"
+let g:tagbar_indent = 1
 
 "autocmd VimEnter * nested :call tagbar#autoopen(1)
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
-"set <M-L> =l
-"nmap <C-L> :call OpenTagbar()<CR>
+nmap <M-l> :TagbarToggle<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-quickhl
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -508,6 +525,9 @@ let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
 let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
+map <silent><M-j> <Plug>(signify-next-hunk)
+map <silent><M-k> <Plug>(signify-prev-hunk)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -560,13 +580,13 @@ inoremap <C-E> <End>
 inoremap <C-L> <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-S> <ESC>:w<CR>a
-inoremap <silent><C-K> <Esc>d$A
+"inoremap <silent><C-K> <Esc>d$A
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
 inoremap ㅓㅏ <ESC>
 
-map <silent><C-K> d$
-map <silent><C-U> d^
+"map <silent><C-K> d$
+"map <silent><C-U> d^
 map q: :q
 nmap <F2> "*yw
 nmap Y "*yw

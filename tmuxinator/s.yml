@@ -22,14 +22,13 @@ pre:
   - export RBENV_VERSION=
 windows:
   - MAIN:
-      layout: 67dd,237x54,0,0{146x54,0,0[146x32,0,0,0,146x21,0,33,2],90x54,147,0[90x27,147,0,3,90x26,147,28,4]}
+      layout: decd,147x41,0,0{108x41,0,0,2,38x41,109,0[38x20,109,0,3,38x20,109,21,4]}
       panes:
         - ranger
         - #empty
         - #empty
-        - #empty
   - Update:
-      layout: main-vertical
+      layout: aec8,147x41,0,0{117x41,0,0,1,29x41,118,0,5}
       panes:
+        - #empty
         - cd ~/NILE_DEV && helsync
-        -

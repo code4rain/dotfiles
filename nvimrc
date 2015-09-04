@@ -8,7 +8,7 @@ Plug 'Align'
 Plug 'IndentConsistencyCop'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'bufexplorer.zip'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'gtags.vim'
@@ -36,10 +36,8 @@ Plug 'junegunn/vim-oblique'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'majutsushi/tagbar'
 Plug 'Raimondi/delimitMate'
-Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
-Plug 'gregkh/kernel-coding-style'
 Plug 'wincent/ferret'
 "Color
 Plug 'blerins/flattown'
@@ -48,6 +46,7 @@ Plug 'junegunn/seoul256.vim'
 Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'jonathanfilip/vim-lucius'
+Plug 'trusktr/seti.vim'
 call plug#end()
 
 let mapleader = "\<Space>"
@@ -100,8 +99,7 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:seoul256_background = 233
-colorscheme seoul256
+colorscheme seti
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap

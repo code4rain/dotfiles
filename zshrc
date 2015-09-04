@@ -189,8 +189,11 @@ simple_prompt() {
 	if [[ -h $(pwd) ]]; then
 		echo -n "\nSYMLINK: %F{cyan}$(readlink $(pwd))%{%f%}"
 	fi
-	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
-	echo "::"
+	echo -n "%{%F{magenta}%}$(__git_ps1 '(%s)')%{%f%}"
+	echo ""
+	echo -n "%{%F{red}%}>%{%f%}"
+	echo -n "%{%F{yellow}%}>%{%f%}"
+	echo -n "%{%F{green}%}>%{%f%}"
 }
 # Set the prompt
 #PROMPT='%{%f%b%k%}$(build_prompt) '

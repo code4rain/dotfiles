@@ -39,6 +39,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
 Plug 'wincent/ferret'
+Plug 'Shougo/unite.vim'
+Plug 'hewes/unite-gtags'
 "Color
 Plug 'blerins/flattown'
 Plug 'itchyny/landscape.vim'

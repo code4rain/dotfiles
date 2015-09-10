@@ -67,7 +67,7 @@ cdpath=(. ~)
 
 fpath=( ${HOME}/.zsh/func ${HOME}/.zsh/completion $fpath )
 
-export EDITOR=vim
+export EDITOR=vi
 
 # Load profile
 if [[ -r ${HOME}/.profile ]]; then

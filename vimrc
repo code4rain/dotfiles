@@ -6,10 +6,10 @@
 call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
 Plug 'Align'
-Plug 'IndentConsistencyCop'
+Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
 Plug 'bufexplorer.zip'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'gtags.vim'
@@ -37,19 +37,19 @@ Plug 'junegunn/vim-oblique'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'majutsushi/tagbar'
 Plug 'Raimondi/delimitMate'
-Plug 'kien/ctrlp.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'Chiel92/vim-autoformat'
-Plug 'gregkh/kernel-coding-style'
 Plug 'wincent/ferret'
-Plug 'jeaye/color_coded'
+Plug 'Shougo/unite.vim'
+Plug 'hewes/unite-gtags'
 "Color
-Plug 'blerins/flattown'
-Plug 'itchyny/landscape.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'tomasr/molokai'
+"Plug 'blerins/flattown'
+"Plug 'itchyny/landscape.vim'
+"Plug 'junegunn/seoul256.vim'
+"Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'jonathanfilip/vim-lucius'
+"Plug 'jonathanfilip/vim-lucius'
+"Plug 'trusktr/seti.vim'
 call plug#end()
 
 set shell=/bin/bash
@@ -104,8 +104,7 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:seoul256_background = 233
-colorscheme seoul256
+colorscheme PaperColor
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap
@@ -291,7 +290,7 @@ set wildmenu
 " File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
 set wildmode=list:longest,full
 
-" /를 입력하여 검색을 시작할 때 자동으로 영문사태로 만들어준다
+" /를 입력하여 검색을 시작할 때 자동으로 영문상태로 만들어준다
 "set iminsert=1
 "set imsearch=0
 
@@ -540,7 +539,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vim_after_object
   autocmd!
-  autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+  autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ','\t')
 augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim after object
@@ -561,6 +560,10 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Unite
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <leader>o :Unite<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

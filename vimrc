@@ -593,7 +593,8 @@ inoremap ㅓㅏ <ESC>
 map q: :q
 nmap <F2> "*yw
 nmap Y "*yw
-nnoremap <C-L> V
+nnoremap <C-L> :Unite<CR>
+nnoremap <C-;> :Unite line<CR>
 nnoremap <silent> p p`]
 nnoremap tt diw"*P
 noremap <C-F> <PageUp>

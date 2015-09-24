@@ -56,6 +56,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
+export PATH="${HOME}/.cask/bin:${PATH}"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 

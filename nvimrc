@@ -8,7 +8,7 @@ Plug 'Align'
 Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --omnisharp-completer'}
 Plug 'bufexplorer.zip'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'gtags.vim'
@@ -530,8 +530,11 @@ map <silent><M-k> <Plug>(signify-prev-hunk)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup rainbow
   autocmd!
-  autocmd VimEnter & RainbowParentheses
+  autocmd VimEnter * RainbowParentheses
 augroup END
+
+let g:rainbow#max_level = 16
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{','}'],['<','>']]
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim after object
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -558,6 +561,16 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_collect_identifiers_from_tags_files = 1
+    let g:ycm_seed_identifiers_with_syntax = 1
+    let g:ycm_add_preview_to_completeopt = 1
+    let g:ycm_autoclose_preview_window_after_completion = 1
+    let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_filepath_completion_use_working_dir = 1
+    let g:ycm_disable_for_files_larger_than_kb = 100000
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

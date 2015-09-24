@@ -4,6 +4,7 @@
 ;; 화면 왼쪽에 라인넘버 표시
 (global-linum-mode t)
 
+(setq linum-format "%4d  ")
 ;; 선택 영역 표시
 (transient-mark-mode t)
 
@@ -12,22 +13,24 @@
 ;; 대응하는 괄호 표시
 (show-paren-mode t)
 
-(load-theme 'deeper-blue)
+;;Color!!
+(require 'color-identifiers-mode)
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(current-language-environment "Korean")
- '(default-input-method "korean-hangul"))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family #("나눔고딕코딩" 0 6 (charset cp949)) :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
- '(cursor ((t (:background "firebrick")))))
+;(custom-set-variables
+; ;; custom-set-variables was added by Custom.
+; ;; If you edit it by hand, you could mess it up, so be careful.
+; ;; Your init file should contain only one such instance.
+; ;; If there is more than one, they won't work right.
+; '(current-language-environment "Korean")
+; '(default-input-method "korean-hangul"))
+;(custom-set-faces
+; ;; custom-set-faces was added by Custom.
+; ;; If you edit it by hand, you could mess it up, so be careful.
+; ;; Your init file should contain only one such instance.
+; ;; If there is more than one, they won't work right.
+; '(default ((t (:family #("나눔고딕코딩" 0 6 (charset cp949)) :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
+; '(cursor ((t (:background "firebrick")))))
 (setq-default line-spacing 3)
 ;;
 (set-language-environment "Korean")
@@ -128,3 +131,21 @@
 ;; Package: yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
+
+;; Smooth Scroll
+(setq scroll-margin 5
+scroll-conservatively 9999
+scroll-step 1)
+
+;; Dont make backup file
+(setq make-backup-files nil)
+
+;; git-gutter+
+(global-git-gutter+-mode)
+
+;; rainbow-delimiters
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+
+(eval-after-load "dash" '(dash-enable-font-lock))

@@ -1,7 +1,8 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
+(setq init-loader-show-log-after-init nil)
+(setq init-loader-byte-compile t)
 (init-loader-load "~/.emacs.d/init-loader/")
-
 
 (package-initialize)
 (custom-set-variables

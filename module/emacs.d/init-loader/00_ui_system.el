@@ -149,3 +149,24 @@ scroll-step 1)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
 
 (eval-after-load "dash" '(dash-enable-font-lock))
+
+;; Enable mouse support
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] (lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] (lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
+(require 'saveplace)
+(if (fboundp #'save-place-mode)
+  (save-place-mode +1)
+  (setq-default save-place t))
+(setq save-place-file "~/.emacs.d/saved-places")
+(setq save-place-forget-unreadable-files t)

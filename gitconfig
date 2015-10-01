@@ -38,6 +38,7 @@
 	pr = !git tag --force _ribbon HEAD && git pull --rebase
 	pl = !git tag --force _ribbon HEAD && git pull --rebase && tig _ribbon..HEAD
 	sl = !tig _ribbon..HEAD
+	tl = !tig $(git show-ref --tags --abbrev=0 | grep -w -B 1 $(git describe) | head -1 | cut -d ' ' -f1)..HEAD
 	po = push origin master
 	rb = "!f() { git rebase -i HEAD~$1; }; f"
 	gtags = !.git/hooks/gtags

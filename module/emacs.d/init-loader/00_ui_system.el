@@ -29,7 +29,7 @@
 ; ;; If you edit it by hand, you could mess it up, so be careful.
 ; ;; Your init file should contain only one such instance.
 ; ;; If there is more than one, they won't work right.
-; '(default ((t (:family #("나눔고딕코딩" 0 6 (charset cp949)) :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
+; '(default ((t (:family #("nanumgothiccoding" 0 6 (charset cp949)) :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
 ; '(cursor ((t (:background "firebrick")))))
 (setq-default line-spacing 3)
 ;;
@@ -170,3 +170,7 @@ scroll-step 1)
   (setq-default save-place t))
 (setq save-place-file "~/.emacs.d/saved-places")
 (setq save-place-forget-unreadable-files t)
+
+;; wheel - font size
+(global-set-key [C-mouse-4] '(lambda () (interactive) (text-scale-increase 1)))
+(global-set-key [C-mouse-5] '(lambda () (interactive) (text-scale-decrease 1)))

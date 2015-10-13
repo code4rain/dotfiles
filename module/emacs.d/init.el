@@ -24,6 +24,7 @@
  '(package-selected-packages
    (quote
     (yasnippet web-mode use-package smex smartparens projectile prodigy popwin pallet nyan-mode multiple-cursors magit init-loader idle-highlight-mode htmlize helm-gtags flycheck-cask expand-region exec-path-from-shell evil drag-stuff company)))
+ '(show-paren-mode t)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -51,6 +52,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family #("nanumgothiccoding" 0 6 (charset cp949)) :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 121 :width normal))))
  '(cursor ((t (:background "firebrick")))))
 

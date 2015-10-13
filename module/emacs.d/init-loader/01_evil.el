@@ -4,6 +4,7 @@
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
+(key-chord-define evil-visual-state-map "jk" 'evil-normal-state)
 (key-chord-mode 1)
 
 (setq evil-auto-indent t)
@@ -44,3 +45,7 @@ by modifying its syntax table."
 (define-key evil-normal-state-map (kbd "C-a") 'beginning-of-line-text)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 (define-key evil-normal-state-map (kbd "C-e") 'end-of-line)
+
+(define-key evil-visual-state-map (kbd "C-a") 'mark-whole-buffer)
+(define-key evil-visual-state-map (kbd "C-v") 'evil-paste-after)
+(define-key evil-visual-state-map (kbd "C-c") 'evil-yank)

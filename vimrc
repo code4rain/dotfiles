@@ -52,7 +52,9 @@ Plug 'NLKNguyen/papercolor-theme'
 "Plug 'trusktr/seti.vim'
 call plug#end()
 
-set shell=/bin/bash
+if !has('nvim')
+  set shell=/bin/bash
+endif
 
 let mapleader = "\<Space>"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -202,8 +204,10 @@ set wrap
 "        set clipboard+=unnamed
 "        set clipboard+=unnamedplus
 "endif
-if !has("gui_running")
-  set clipboard+=exclude:.*
+if !has('nvim')
+  if !has("gui_running")
+    set clipboard+=exclude:.*
+  endif
 endif
 
 " magic 기능 사용 Allows pattern matching with special characters
@@ -300,15 +304,17 @@ set comments=sl:/*,mb:\ *,elx:*/
 " Mouse 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set mouse=a
-set ttymouse=xterm
+  if !has('nvim')
+  set ttymouse=xterm
 
-function! ShowMouseMode()
-  if (&mouse == 'a')
-    echo "mouse-vim"
-  else
-    echo "mouse-xterm"
-  endif
-endfunction
+  function! ShowMouseMode()
+    if (&mouse == 'a')
+      echo "mouse-vim"
+    else
+      echo "mouse-xterm"
+    endif
+  endfunction
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 자주 틀리는 글자 수정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

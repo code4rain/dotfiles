@@ -1,0 +1,1 @@
+/home/alex.jang/.vimrc

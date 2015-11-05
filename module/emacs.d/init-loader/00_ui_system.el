@@ -57,7 +57,7 @@
 ;;(setq recentf-auto-save-timer
 ;;  (run-with-idle-timer 30 t 'recentf-save-list))
 
-(global-set-key [f12] 'recentf-open-files)
+;(global-set-key [f12] 'recentf-open-files)
 
 ;; 탭키를 이용하여 최근 파일명 완성하기
 (defun recentf-open-files-compl ()

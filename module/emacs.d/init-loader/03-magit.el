@@ -73,6 +73,8 @@
   "s" 'git-rebase-squash
   "e" 'git-rebase-edit
   "f" 'git-rebase-fixup
+  "j" 'evil-next-line
+  "k" 'evil-previous-line
   "y" 'git-rebase-insert
   "d" 'git-rebase-kill-line
   "u" 'git-rebase-undo
@@ -82,6 +84,8 @@
   "\M-p" 'git-rebase-move-line-up)
 
 (evil-define-key 'motion magit-commit-mode-map
+  "j" 'evil-next-line
+  "k" 'evil-previous-line
   "\C-c\C-b" 'magit-show-commit-backward
   "\C-c\C-f" 'magit-show-commit-forward)
 
@@ -125,6 +129,8 @@
   "c" 'magit-rename-item
   "d" 'magit-discard-item
   "o" 'magit-create-branch
+  "j" 'evil-next-line
+  "k" 'evil-previous-line
   "v" 'magit-show-branches
   "T" 'magit-change-what-branch-tracks)
 
@@ -167,7 +173,7 @@
   "a" 'magit-apply-item
   "b" 'magit-branch-popup
   "c" 'magit-commit-popup
-  "e" 'magit-diff
+  "e" 'magit-diff-visit-file
   "f" 'magit-fetch-popup
   "g?" 'magit-describe-item
   "g$" 'evil-end-of-visual-line
@@ -200,7 +206,7 @@
   " " 'magit-show-item-or-scroll-up
   "\d" 'magit-show-item-or-scroll-down
   "\t" 'magit-visit-item
-  (kbd "<return>")   'magit-toggle-section
+  (kbd "<return>")   'magit-diff
   (kbd "C-<return>") 'magit-dired-jump
   (kbd "<backtab>")  'magit-expand-collapse-section
   (kbd "C-x 4 a")    'magit-add-change-log-entry-other-window

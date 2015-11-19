@@ -102,9 +102,9 @@
 (setq
  c-default-style "linux" ;; set style to "linux"
  )
-(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
+;(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 ;; activate whitespace-mode to view all whitespace characters
-(global-set-key (kbd "C-c w") 'whitespace-mode)
+(global-set-key (kbd "C-m w") 'whitespace-mode)
 
 ;; show unncessary whitespace that can mess up your diff
 (add-hook 'prog-mode-hook (lambda () (interactive) (setq show-trailing-whitespace 1)))

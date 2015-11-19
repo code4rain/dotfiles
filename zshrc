@@ -314,3 +314,7 @@ export TERM='xterm-256color'
 
 export NVM_DIR="/home/alex.jang/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+if [ -f $HOME/.zshrc.local ]; then
+    source $HOME/.zshrc.local
+fi

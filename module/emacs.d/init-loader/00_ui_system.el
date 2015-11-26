@@ -81,11 +81,12 @@
 (require 'powerline)
 (powerline-center-evil-theme)
 
+(which-function-mode 1)
 (require 'smartparens-config)
 (smartparens-global-mode 1)
 (show-smartparens-global-mode +1)
 (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
- ;; Package: smartparens
+ ;; Package smartparens
 ;; when you press RET, the curly braces automatically
 ;; add another newline
 (sp-with-modes '(c-mode c++-mode)
@@ -95,22 +96,8 @@
 
 (add-hook 'c-mode-common-hook   'hs-minor-mode)
 
-;; Available C style:
-;; “gnu”: The default style for GNU projects
-;; “k&r”: What Kernighan and Ritchie, the authors of C used in their book
-;; “bsd”: What BSD developers use, aka “Allman style” after Eric Allman.
-;; “whitesmith”: Popularized by the examples that came with Whitesmiths C, an early commercial C compiler.
-;; “stroustrup”: What Stroustrup, the author of C++ used in his book
-;; “ellemtel”: Popular C++ coding standards as defined by “Programming in C++, Rules and Recommendations,” Erik Nyquist and Mats Henricson, Ellemtel
-;; “linux”: What the Linux developers use for kernel development
-;; “python”: What Python developers use for extension modules
-;; “java”: The default style for java-mode (see below)
-;; “user”: When you want to define your own style
-(defun my-c-mode-hook ()
-  (setq c-basic-offset 8
-        c-indent-level 8
-        c-default-style "linux"))
-(add-hook 'c-mode-common-hook 'my-c-mode-hook)
+(setq mouse-wheel-scroll-amount '(3 ((shift) . 3) ((control) . nil)))
+(setq mouse-wheel-progressive-speed nil)
 ;(global-set-key (kbd "RET") 'newline-and-indent)  ; automatically indent when press RET
 ;; activate whitespace-mode to view all whitespace characters
 (global-set-key (kbd "C-m w") 'whitespace-mode)
@@ -150,13 +137,6 @@ scroll-step 1)
 ;; Dont make backup file
 (setq make-backup-files nil)
 
-;; git-gutter+
-(global-git-gutter+-mode)
-(setq git-gutter+-unchanged-sign " ")
-(set-face-background 'git-gutter+-unchanged "yellow")
-(setq git-gutter+-unchanged-sign " ")
-(set-face-background 'git-gutter+-unchanged "yellow");; rainbow-delimiters
-
 (require 'rainbow-delimiters)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
@@ -174,6 +154,11 @@ scroll-step 1)
                               (interactive)
                               (scroll-up 1)))
   (defun track-mouse (e))
-  (setq mouse-sel-mode t)
 )
-
+(defun my-c-mode-hook ()
+  (setq indent-tabs-mode t)
+  (setq c-basic-offset 8)
+  (setq c-indent-level 8)
+  (setq c-default-style "linux")
+  (setq tab-width 8))
+(add-hook 'c-mode-hook 'my-c-mode-hook)

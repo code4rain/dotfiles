@@ -58,3 +58,5 @@ by modifying its syntax table."
 (define-key evil-visual-state-map (kbd "C-c") 'evil-yank)
 (define-key evil-visual-state-map (kbd "C-;") 'comment-region)
 (define-key evil-visual-state-map (kbd "C-S-;") 'uncomment-region)
+
+(define-key evil-normal-state-map "<C-down-mouse-1>" 'helm-gtags-find-tag-from-here)

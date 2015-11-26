@@ -14,6 +14,14 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#1d1f21"))
+ '(c-basic-offset 8)
+ '(c-default-style
+   (quote
+    ((c-mode . "linux")
+     (c++-mode . "linux")
+     (java-mode . "java")
+     (awk-mode . "awk")
+     (other . "gnu"))))
  '(current-language-environment "Korean")
  '(custom-enabled-themes (quote (sanityinc-tomorrow-bright)))
  '(custom-safe-themes

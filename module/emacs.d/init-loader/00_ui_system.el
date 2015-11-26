@@ -134,6 +134,15 @@
 scroll-conservatively 9999
 scroll-step 1)
 
+;;(defun my-c-mode-hook ()
+;;  "This is setting for the C/C++ mode"
+;;  (message "my-c-mode-hook executed")
+;;  (setq tab-width 8)
+;;  (setq indent-tabs-mode t)
+;;  (c-set-style "linux")
+;;)
+;;(add-hook 'c-mode-hook 'my-c-mode-hook)
+
 ;; Dont make backup file
 (setq make-backup-files nil)
 
@@ -155,10 +164,3 @@ scroll-step 1)
                               (scroll-up 1)))
   (defun track-mouse (e))
 )
-(defun my-c-mode-hook ()
-  (setq indent-tabs-mode t)
-  (setq c-basic-offset 8)
-  (setq c-indent-level 8)
-  (setq c-default-style "linux")
-  (setq tab-width 8))
-(add-hook 'c-mode-hook 'my-c-mode-hook)

@@ -34,12 +34,18 @@ by modifying its syntax table."
 (define-key evil-normal-state-map (kbd "<f12>") 'helm-gtags-dwim)
 (define-key evil-normal-state-map (kbd "C-]") 'helm-gtags-find-tag-from-here)
 (define-key evil-normal-state-map (kbd "<f7>") 'helm-gtags-select)
+(define-key evil-normal-state-map (kbd "M-9") 'my-speedbar)
+(define-key evil-normal-state-map (kbd "M-0") 'helm-find-files)
+(define-key evil-normal-state-map (kbd "M-l") 'helm-semantic-or-imenu)
 
 (define-key evil-insert-state-map (kbd "M-o") 'helm-gtags-select-path)
 (define-key evil-insert-state-map (kbd "C-/") 'helm-gtags-find-rtag)
 (define-key evil-insert-state-map (kbd "<f12>") 'helm-gtags-dwim)
 (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag-from-here)
 (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
+(define-key evil-insert-state-map (kbd "M-9") 'my-speedbar)
+(define-key evil-normal-state-map (kbd "M-0") 'helm-find-files)
+(define-key evil-normal-state-map (kbd "M-l") 'helm-semantic-or-imenu)
 
  (substitute-key-definition 'kill-buffer
                               'kill-buffer-and-its-windows

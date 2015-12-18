@@ -1,5 +1,6 @@
 ;; In every buffer, the line which contains the cursor will be fully
 ;; highlighted
+
 (global-hl-line-mode 1)
 ;; 화면 왼쪽에 라인넘버 표시
 (global-linum-mode t)

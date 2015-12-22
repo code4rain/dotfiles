@@ -3,6 +3,7 @@
 
 (depends-on "airline-themes")
 (depends-on "bind-key")
+(depends-on "base16-theme")
 (depends-on "cask")
 (depends-on "clean-aindent-mode")
 (depends-on "color-identifiers-mode")
@@ -33,6 +34,7 @@
 (depends-on "magit")
 (depends-on "multiple-cursors")
 (depends-on "nyan-mode")
+(depends-on "paper-theme")
 (depends-on "pallet")
 (depends-on "popwin")
 (depends-on "powerline")

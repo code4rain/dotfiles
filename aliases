@@ -4,6 +4,9 @@ ranger_cd () {
 	command ranger --choosedir=${HOME}/.lastdir &&
 	cd $(cat ${HOME}/.lastdir)
 }
+ee() {
+	emacs "$@" &
+}
 gg() {
 	git grep "$@"
 }
@@ -32,7 +35,7 @@ alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias pdiff='p4 diff -du | colordiff | less -R'
 alias mkdir='mkdir -p'
 alias e='emacs -nw'
-alias es='emacs &'
+alias es='ee'
 alias tmux='TERM=xterm-256color tmux -2'
 alias tn='tmux attach -t normal'
 alias tm='tmux attach -t merge'

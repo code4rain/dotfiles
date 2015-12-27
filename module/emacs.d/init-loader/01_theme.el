@@ -2,7 +2,7 @@
 ;;(require 'airline-themes)
 ;;(load-theme 'airline-papercolor t)
 ;;(require 'color-theme-sanityinc-tomorrow)
-(load-theme 'paper t)
+(load-theme 'seti t)
 ;; (load-theme 'blackboard t)
 ;; (defun my-sanityinc-tomorrow-bright ()
 ;;   (interactive)

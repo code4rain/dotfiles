@@ -28,7 +28,7 @@ The `clone` command will clone useful tools from each repositories.
 
 ### Caution
 The `clone` command do just clone source.
-Should be `make` & `make install` for each project
+Should be run `make` & `make install` for each project
 
 ## License
 

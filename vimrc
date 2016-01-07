@@ -612,14 +612,17 @@ noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
 noremap gV `[v`]
-noremap j gj
-noremap k gk
+noremap j gjzz
+noremap k gkzz
 vmap <F2> "*y
 vmap Y "*y
 vnoremap <C-L> <ESC>
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]
 vnoremap q <ESC>
+
+nnoremap n nzz
+nnoremap N Nzz
 
 if has("multi_byte")
   set encoding=utf-8

@@ -246,6 +246,7 @@
 ;  (define-key magit-mode-map "\s" nil) ;space I use space as my evil-leader key
 ;  (define-key magit-diff-mode-map "\s" nil) ;space
   (define-key magit-diff-mode-map "j" nil)
+  (define-key magit-diff-mode-map "k" nil)
 
   (define-key magit-status-mode-map "j" 'next-line) ;may be should evil-next-line
   (define-key magit-mode-map "j" 'next-line)

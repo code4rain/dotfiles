@@ -1,6 +1,6 @@
-(require 'evil)
 (evil-mode t)
 
+(key-chord-mode 1)
 (setq key-chord-two-keys-delay 0.5)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
@@ -14,6 +14,13 @@
 (setq evil-shift-width 8)
 (setq evil-search-wrap nil)
 
+(setq evil-emacs-state-cursor '("red" box))
+(setq evil-normal-state-cursor '("green" box))
+(setq evil-visual-state-cursor '("orange" box))
+(setq evil-insert-state-cursor '("red" bar))
+(setq evil-replace-state-cursor '("red" bar))
+(setq evil-operator-state-cursor '("red" hollow))
+
 (require 'evil-jumper)
 (evil-jumper-mode t)
 
@@ -26,6 +33,10 @@ by modifying its syntax table."
 (defun c-mode-hook ()
   (evil-add-word-constituents "_"))
 (add-hook 'c-mode-hook #'c-mode-hook)
+
+
+;; evil related ui
+(add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
 
 (require 'evil-visualstar)
 (global-evil-visualstar-mode t)

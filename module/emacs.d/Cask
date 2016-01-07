@@ -17,6 +17,7 @@
 (depends-on "evil-jumper")
 (depends-on "evil-smartparens")
 (depends-on "evil-visualstar")
+(depends-on "evil-org")
 (depends-on "exec-path-from-shell")
 (depends-on "expand-region")
 (depends-on "f")

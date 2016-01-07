@@ -5,6 +5,9 @@
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-visual-state-map "jk" 'evil-normal-state)
+(key-chord-define evil-insert-state-map "ㅓㅏ" 'evil-normal-state)
+(key-chord-define evil-replace-state-map "ㅓㅏ" 'evil-normal-state)
+(key-chord-define evil-visual-state-map  "ㅓㅏ" 'evil-normal-state)
 (key-chord-mode 1)
 
 (setq evil-auto-indent t)

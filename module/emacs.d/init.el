@@ -14,7 +14,6 @@
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#1d1f21"))
- '(c-basic-offset 8)
  '(c-default-style
    (quote
     ((c-mode . "linux")
@@ -29,6 +28,7 @@
    (quote
     (yasnippet web-mode use-package smex smartparens projectile prodigy popwin pallet nyan-mode multiple-cursors magit init-loader idle-highlight-mode htmlize helm-gtags flycheck-cask expand-region exec-path-from-shell evil drag-stuff company)))
  '(show-paren-mode t)
+ '(tab-width 8)
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote
@@ -56,4 +56,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(highlight ((t (:background "DeepSkyBlue4")))))
+ '(highlight ((t (:background "DeepSkyBlue4"))))
+ '(semantic-decoration-on-unknown-includes ((t (:foreground "red")))))

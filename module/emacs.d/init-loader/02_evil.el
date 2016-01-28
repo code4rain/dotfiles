@@ -37,6 +37,8 @@ by modifying its syntax table."
 
 ;; evil related ui
 (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
+;; Search * with full word
+(setq-default evil-symbol-word-search t)
 
 (require 'evil-visualstar)
 (global-evil-visualstar-mode t)

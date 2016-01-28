@@ -640,3 +640,4 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 " Stat functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+au BufRead,BufNewFile *.cmm setfiletype trace

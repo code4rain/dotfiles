@@ -318,3 +318,5 @@ export NVM_DIR="/home/alex.jang/.nvm"
 if [ -f $HOME/.zshrc.local ]; then
     source $HOME/.zshrc.local
 fi
+
+export ALTERNATE_EDITOR=""

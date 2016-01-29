@@ -36,6 +36,7 @@ alias pdiff='p4 diff -du | colordiff | less -R'
 alias mkdir='mkdir -p'
 alias e='emacsclient -t'
 alias es='ee'
+alias ek="emacsclient -e '(kill-emacs)'"
 alias tmux='TERM=xterm-256color tmux -2'
 alias tn='tmux attach -t normal'
 alias tm='tmux attach -t merge'

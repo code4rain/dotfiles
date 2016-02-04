@@ -4,6 +4,9 @@
 (setq init-loader-byte-compile t)
 (init-loader-load "~/.emacs.d/init-loader/")
 
+(prefer-coding-system 'utf-8)
+
+(set-face-bold-p 'bold nil)
 (package-initialize)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -21,9 +24,15 @@
      (java-mode . "java")
      (awk-mode . "awk")
      (other . "gnu"))))
+ '(cua-mode t nil (cua-base))
  '(current-language-environment "Korean")
+ '(custom-safe-themes
+   (quote
+    ("94ba29363bfb7e06105f68d72b268f85981f7fba2ddef89331660033101eb5e5" default)))
  '(default-input-method "korean-hangul")
  '(fci-rule-color "#373b41")
+ '(global-semantic-decoration-mode t)
+ '(global-semanticdb-minor-mode t)
  '(package-selected-packages
    (quote
     (yasnippet web-mode use-package smex smartparens projectile prodigy popwin pallet nyan-mode multiple-cursors magit init-loader idle-highlight-mode htmlize helm-gtags flycheck-cask expand-region exec-path-from-shell evil drag-stuff company)))

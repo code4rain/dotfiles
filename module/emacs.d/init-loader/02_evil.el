@@ -40,6 +40,53 @@ by modifying its syntax table."
 ;; Search * with full word
 (setq-default evil-symbol-word-search t)
 
+(defun close-all-other-buffers-and-frames ()
+  "Close all buffers and quit"
+  :repeat nil
+  (interactive )
+  (mapc 'kill-buffer (buffer-list))
+  (condition-case nil
+      (delete-window)
+    (error
+     (if (and (boundp 'server-buffer-clientks)
+	      (fboundp 'server-edit)
+	      (fboundp 'server-buffer-done)
+	      server-buffer-clients)
+	 (if force
+	     (server-buffer-done (current-buffer))
+	   (server-edit))
+       (condition-case nil
+	   (delete-frame)
+	 (error
+	  (if force
+	      (kill-emacs)
+	    (save-buffers-kill-emacs))))))))
+
+(defun close-all (orig-fun &rest args)
+  "Close all buffers and quit"
+  :repeat nil
+  (interactive)
+  (mapc 'kill-buffer (buffer-list))
+  (condition-case nil
+      (delete-window)
+    (error
+     (if (and (boundp 'server-buffer-clientks)
+	      (fboundp 'server-edit)
+	      (fboundp 'server-buffer-done)
+	      server-buffer-clients)
+	 (if force
+	     (server-buffer-done (current-buffer))
+	   (server-edit))
+       (condition-case nil
+	   (delete-frame)
+	 (error
+	  (if force
+	      (kill-emacs)
+	    (save-buffers-kill-emacs))))))))
+(evil-ex-define-cmd "Q" 'close-all-other-buffers-and-frames)
+(evil-ex-define-cmd "W" "write")
+(advice-add #'evil-quit :around #'close-all)
+
 (require 'evil-visualstar)
 (global-evil-visualstar-mode t)
 ;; Define keyss
@@ -48,6 +95,7 @@ by modifying its syntax table."
 (define-key evil-normal-state-map "-" 'helm-gtags-find-tag-from-here)
 (define-key evil-normal-state-map (kbd "M-o") 'helm-gtags-select-path)
 (define-key evil-normal-state-map (kbd "M-/") 'helm-gtags-find-rtag)
+(define-key evil-normal-state-map (kbd "M-S-/") 'helm-projectile-grep)
 (define-key evil-normal-state-map (kbd "<f12>") 'helm-gtags-dwim)
 (define-key evil-normal-state-map (kbd "C-]") 'helm-gtags-find-tag)
 (define-key evil-normal-state-map (kbd "<f7>") 'helm-gtags-select)
@@ -56,6 +104,7 @@ by modifying its syntax table."
 
 (define-key evil-insert-state-map (kbd "M-o") 'helm-gtags-select-path)
 (define-key evil-insert-state-map (kbd "M-/") 'helm-gtags-find-rtag)
+(define-key evil-insert-state-map (kbd "M-S-/") 'helm-projectile-grep)
 (define-key evil-insert-state-map (kbd "<f12>") 'helm-gtags-dwim)
 (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
 (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
@@ -81,21 +130,6 @@ by modifying its syntax table."
 (define-key evil-visual-state-map (kbd "C-S-;") 'uncomment-region)
 
 (define-key evil-normal-state-map "<C-down-mouse-1>" 'helm-gtags-find-tag)
-
-(defun close-all-other-buffers-and-frames ()
-  "Destro"
-  (interactive)
-  (set-buffer "*scratch*")
-  (delete-other-frames)
-  (let ((l (buffer-list))b)
-    (while l
-      (setq b (car l)
-	    l (cdr l))
-      (and (buffer-file-name b)
-	   (kill-buffer b)))))
-(evil-ex-define-cmd "b[uffer]" 'helm-buffers-list)
-(evil-ex-define-cmd "e[dit]" 'find-file)
-(evil-ex-define-cmd "q[uit]" 'close-all-other-buffers-and-frames)
 
 
 

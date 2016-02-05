@@ -7,6 +7,8 @@
 (prefer-coding-system 'utf-8)
 
 (set-face-bold-p 'bold nil)
+;; 붙여넣기시에 indent하지 않도록
+(electric-indent-mode 0)
 (package-initialize)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -42,6 +42,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'wincent/ferret'
 Plug 'Shougo/unite.vim'
 Plug 'hewes/unite-gtags'
+Plug 'vim-latex/vim-latex'
 "Color
 "Plug 'blerins/flattown'
 "Plug 'itchyny/landscape.vim'

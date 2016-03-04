@@ -44,3 +44,21 @@ scroll-step 1)
 (global-font-lock-mode t)             ;;syntax highlighting on...
 (setq font-lock-maximum-decoration t) ;;...as much as possible
 (setq frame-title-format '(buffer-file-name "%f" ("%b"))) ;;titlebar=buffer unless filename
+
+;; Diminish to clean clutter from the modeline
+(require 'diminish)
+(diminish 'visual-line-mode)
+(after 'autopair (diminish 'autopair-mode))
+(after 'undo-tree (diminish 'undo-tree-mode))
+(after 'auto-complete (diminish 'auto-complete-mode))
+(after 'projectile (diminish 'projectile-mode))
+(after 'yasnippet (diminish 'yas-minor-mode))
+(after 'guide-key (diminish 'guide-key-mode))
+(after 'eldoc (diminish 'eldoc-mode))
+(after 'smartparens (diminish 'smartparens-mode))
+(after 'company (diminish 'company-mode))
+(after 'elisp-slime-nav (diminish 'elisp-slime-nav-mode))
+(after 'git-gutter+ (diminish 'git-gutter+-mode))
+(after 'magit (diminish 'magit-auto-revert-mode))
+(after 'hs-minor-mode (diminish 'hs-minor-mode))
+(after 'color-identifiers-mode (diminish 'color-identifiers-mode))

@@ -24,9 +24,6 @@
 (require 'evil-jumper)
 (evil-jumper-mode t)
 
-;; keep the highlight on
-(require 'evil-search-highlight-persist)
-(global-evil-search-highlight-persist t)
 
 (defun evil-add-word-constituents (char-string)
   "Add characters in CHAR-STRING as word constituents in the current buffer,
@@ -37,7 +34,6 @@ by modifying its syntax table."
 (defun c-mode-hook ()
   (evil-add-word-constituents "_"))
 (add-hook 'c-mode-hook #'c-mode-hook)
-
 
 ;; evil related ui
 (add-hook 'smartparens-enabled-hook #'evil-smartparens-mode)
@@ -89,13 +85,22 @@ by modifying its syntax table."
 	    (save-buffers-kill-emacs))))))))
 (evil-ex-define-cmd "Q" 'close-all-other-buffers-and-frames)
 (evil-ex-define-cmd "W" "write")
+(evil-ex-define-cmd "Wq" 'evil-save-and-quit)
 (advice-add #'evil-quit :around #'close-all)
 
 (require 'evil-visualstar)
 (global-evil-visualstar-mode t)
 ;; Define keyss
+(define-key evil-normal-state-map (kbd ";") 'evil-ex)
+(define-key evil-visual-state-map (kbd ";") 'evil-ex)
+(define-key evil-motion-state-map (kbd ";") 'evil-ex)
 
-(define-key evil-normal-state-map " " 'helm-mini)
+(define-key evil-normal-state-map "  " 'helm-mini)
+(define-key evil-normal-state-map "  " 'helm-my-buffers)
+(define-key evil-normal-state-map " b" 'helm-bookmarks)
+(define-key evil-normal-state-map " r" 'helm-recentf)
+(define-key evil-normal-state-map " k" 'helm-show-kill-ring)
+(define-key evil-normal-state-map " o" 'helm-occur)
 (define-key evil-normal-state-map "-" 'helm-gtags-find-tag-from-here)
 (define-key evil-normal-state-map (kbd "M-o") 'helm-gtags-select-path)
 (define-key evil-normal-state-map (kbd "M-/") 'helm-gtags-find-rtag)
@@ -133,10 +138,7 @@ by modifying its syntax table."
 (define-key evil-visual-state-map (kbd "C-;") 'comment-region)
 (define-key evil-visual-state-map (kbd "C-S-;") 'uncomment-region)
 
-(define-key evil-normal-state-map "<C-down-mouse-1>" 'helm-gtags-find-tag)
-
-
-;; j/k will move over the wrapped lines 
+;; j/k will move over the wrapped lines
 (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
 (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
 
@@ -158,3 +160,8 @@ then it takes a second \\[keyboard-quit] to abort the minibuffer."
 (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
 (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
 (global-set-key [escape] 'evil-exit-emacs-state)
+
+;; keep the highlight on
+(setq evil-search-module 'evil-search)
+
+(define-key evil-normal-state-map "<C-down-mouse-1>" 'helm-gtags-find-tag)

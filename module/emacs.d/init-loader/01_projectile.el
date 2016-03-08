@@ -1,5 +1,0 @@
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-(setq projectile-indexing-method 'git)
-(setq projectile-enable-caching t)

@@ -19,6 +19,7 @@
     flyspell
     gnuplot
     htmlize
+    mu4e
     ;; org and org-agenda are installed by `org-plus-contrib'
     (org :location built-in)
     (org-agenda :location built-in)
@@ -29,6 +30,7 @@
     org-pomodoro
     org-present
     org-repo-todo
+    (ox-gfm :location local)
     persp-mode
     toc-org
     ))
@@ -73,6 +75,11 @@
     :init (spacemacs/set-leader-keys-for-major-mode 'org-mode
             "tp" 'org-plot/gnuplot)))
 
+(defun org/pre-init-mu4e ()
+  ;; Load org-mu4e when mu4e is actually loaded
+  (spacemacs|use-package-add-hook mu4e
+    :post-config (require 'org-mu4e nil 'noerror)))
+
 ;; dummy init function to force installation of `org-plus-contrib'
 (defun org/init-org-plus-contrib ())
 
@@ -98,17 +105,35 @@
             (concat spacemacs-cache-directory ".org-id-locations")
             org-log-done t
             org-startup-with-inline-images t
-            org-src-fontify-natively t)
+            org-src-fontify-natively t
+            ;; this is consistent with the value of
+            ;; `helm-org-headings-max-depth'.
+            org-imenu-depth 8)
 
       (with-eval-after-load 'org-indent
         (spacemacs|hide-lighter org-indent-mode))
-      (setq org-startup-indented t)
       (let ((dir (configuration-layer/get-layer-property 'org :dir)))
         (setq org-export-async-init-file (concat dir "org-async-init.el")))
       (defmacro spacemacs|org-emphasize (fname char)
         "Make function for setting the emphasis in org mode"
         `(defun ,fname () (interactive)
                 (org-emphasize ,char)))
+
+      ;; Follow the confirm and abort conventions
+      (with-eval-after-load 'org-capture
+        (spacemacs/set-leader-keys-for-minor-mode 'org-capture-mode
+          dotspacemacs-major-mode-leader-key 'org-capture-finalize
+          "c" 'org-capture-finalize
+          "k" 'org-capture-kill
+          "a" 'org-capture-kill
+          "r" 'org-capture-refile))
+
+      (with-eval-after-load 'org-src
+        (spacemacs/set-leader-keys-for-minor-mode 'org-src-mode
+          "'" 'org-edit-src-exit
+          "c" 'org-edit-src-exit
+          "a" 'org-edit-src-abort
+          "k" 'org-edit-src-abort))
 
       ;; Insert key for org-mode and markdown a la C-h k
       ;; from SE endless http://emacs.stackexchange.com/questions/2206/i-want-to-have-the-kbd-tags-for-my-blog-written-in-org-mode/2208#2208
@@ -239,7 +264,11 @@ Will work on both org-mode and any mode that accepts plain html."
         ;; other
         "aoO" 'org-clock-out
         "aoc" 'org-capture
-        "aol" 'org-store-link))
+        "aol" 'org-store-link)
+
+      (define-key global-map "\C-cl" 'org-store-link)
+      (define-key global-map "\C-ca" 'org-agenda)
+      (define-key global-map "\C-cc" 'org-capture))
     :config
     (progn
       (setq org-default-notes-file "notes.org")
@@ -248,11 +277,6 @@ Will work on both org-mode and any mode that accepts plain html."
                     (1 font-lock-comment-face prepend)
                     (2 font-lock-function-name-face)
                     (3 font-lock-comment-face prepend))))
-
-      (require 'org-indent)
-      (define-key global-map "\C-cl" 'org-store-link)
-      (define-key global-map "\C-ca" 'org-agenda)
-      (define-key global-map "\C-cc" 'org-capture)
 
       ;; Open links and files with RET in normal state
       (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)
@@ -289,7 +313,97 @@ Will work on both org-mode and any mode that accepts plain html."
   (use-package org-agenda
     :defer t
     :init
-    (setq org-agenda-restore-windows-after-quit t)
+    (progn
+      (setq org-agenda-restore-windows-after-quit t)
+      (spacemacs/set-leader-keys-for-major-mode 'org-agenda-mode
+        ":" 'org-agenda-set-tags
+        "a" 'org-agenda
+        "d" 'org-agenda-deadline
+        "f" 'org-agenda-set-effort
+        "I" 'org-agenda-clock-in
+        "O" 'org-agenda-clock-out
+        "P" 'org-agenda-set-property
+        "q" 'org-agenda-refile
+        "Q" 'org-agenda-clock-cancel
+        "s" 'org-agenda-schedule)
+      (spacemacs|define-transient-state org-agenda
+      :title "Org-agenda transient state"
+      :on-enter (setq which-key-inhibit t)
+      :on-exit (setq which-key-inhibit nil)
+      :foreign-keys run
+      :doc
+      "
+Headline^^            Visit entry^^               Filter^^                    Date^^               Toggle mode^^        View^^             Clock^^        Other^^
+--------^^---------   -----------^^------------   ------^^-----------------   ----^^-------------  -----------^^------  ----^^---------    -----^^------  -----^^-----------
+[_ht_] set status     [_SPC_] in other window     [_ft_] by tag               [_ds_] schedule      [_tf_] follow        [_vd_] day         [_ci_] in      [_gr_] reload
+[_hk_] kill           [_TAB_] & go to location    [_fr_] refine by tag        [_dd_] set deadline  [_tl_] log           [_vw_] week        [_co_] out     [_._]  go to today
+[_hr_] refile         [_RET_] & del other windows [_fc_] by category          [_dt_] timestamp     [_ta_] archive       [_vt_] fortnight   [_ck_] cancel  [_gd_] go to date
+[_hA_] archive        [_o_]   link                [_fh_] by top headline      [_+_]  do later      [_tr_] clock report  [_vm_] month       [_cj_] jump    ^^
+[_hT_] set tags       ^^                          [_fx_] by regexp            [_-_]  do earlier    [_td_] diaries       [_vy_] year        ^^             ^^
+[_hp_] set priority   ^^                          [_fd_] delete all filters   ^^                   ^^                   [_vn_] next span   ^^             ^^
+^^                    ^^                          ^^                          ^^                   ^^                   [_vp_] prev span   ^^             ^^
+^^                    ^^                          ^^                          ^^                   ^^                   [_vr_] reset       ^^             ^^
+[_q_] quit
+"
+      :bindings
+      ;; Entry
+      ("ht" org-agenda-todo)
+      ("hk" org-agenda-kill)
+      ("hr" org-agenda-refile)
+      ("hA" org-agenda-archive-default)
+      ("hT" org-agenda-set-tags)
+      ("hp" org-agenda-priority)
+
+      ;; Visit entry
+      ("SPC" org-agenda-show-and-scroll-up)
+      ("<tab>" org-agenda-goto :exit t)
+      ("TAB" org-agenda-goto :exit t)
+      ("RET" org-agenda-switch-to :exit t)
+      ("o"   link-hint-open-link :exit t)
+
+      ;; Date
+      ("ds" org-agenda-schedule)
+      ("dd" org-agenda-deadline)
+      ("dt" org-agenda-date-prompt)
+      ("+" org-agenda-do-date-later)
+      ("-" org-agenda-do-date-earlier)
+
+      ;; View
+      ("vd" org-agenda-day-view)
+      ("vw" org-agenda-week-view)
+      ("vt" org-agenda-fortnight-view)
+      ("vm" org-agenda-month-view)
+      ("vy" org-agenda-year-view)
+      ("vn" org-agenda-later)
+      ("vp" org-agenda-earlier)
+      ("vr" org-agenda-reset-view)
+
+      ;; Toggle mode
+      ("tf" org-agenda-follow-mode)
+      ("tl" org-agenda-log-mode)
+      ("ta" org-agenda-archives-mode)
+      ("tr" org-agenda-clockreport-mode)
+      ("td" org-agenda-toggle-diary)
+
+      ;; Filter
+      ("ft" org-agenda-filter-by-tag)
+      ("fr" org-agenda-filter-by-tag-refine)
+      ("fc" org-agenda-filter-by-category)
+      ("fh" org-agenda-filter-by-top-headline)
+      ("fx" org-agenda-filter-by-regexp)
+      ("fd" org-agenda-filter-remove-all)
+
+      ;; Clock
+      ("ci" org-agenda-clock-in :exit t)
+      ("co" org-agenda-clock-out)
+      ("ck" org-agenda-clock-cancel)
+      ("cj" org-agenda-clock-goto :exit t)
+
+      ;; Other
+      ("q" nil :exit t)
+      ("gr" org-agenda-redo)
+      ("." org-agenda-goto-today)
+      ("gd" org-agenda-goto-date)))
     :config
     (evilified-state-evilify-map org-agenda-mode-map
       :mode org-agenda-mode
@@ -301,7 +415,10 @@ Will work on both org-mode and any mode that accepts plain html."
       (kbd "M-h") 'org-agenda-earlier
       (kbd "M-l") 'org-agenda-later
       (kbd "gd") 'org-agenda-toggle-time-grid
-      (kbd "gr") 'org-agenda-redo)))
+      (kbd "gr") 'org-agenda-redo
+      (kbd "M-RET") 'org-agenda-show-and-scroll-up
+      (kbd "M-SPC") 'spacemacs/org-agenda-transient-state/body
+      (kbd "s-M-SPC") 'spacemacs/org-agenda-transient-state/body)))
 
 (defun org/init-org-bullets ()
   (use-package org-bullets
@@ -365,6 +482,50 @@ Will work on both org-mode and any mode that accepts plain html."
         "CT"  'ort/capture-checkitem)
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "gt" 'ort/goto-todos))))
+
+(defun org/init-ox-gfm ()
+  ;; installing this package from melpa is buggy,
+  ;; so we install it as an extension for now.
+  (use-package ox-gfm
+    :if org-enable-github-support
+    :defer t
+    :init
+    (progn
+      ;; seems to be required otherwise the extension is not
+      ;; loaded properly by org
+      (with-eval-after-load 'org (require 'ox-gfm))
+      (autoload 'org-gfm-export-as-markdown "ox-gfm" "\
+ Export current buffer to a Github Flavored Markdown buffer.
+
+If narrowing is active in the current buffer, only export its
+narrowed part.
+
+If a region is active, export that region.
+
+A non-nil optional argument ASYNC means the process should happen
+asynchronously.  The resulting buffer should be accessible
+through the `org-export-stack' interface.
+
+When optional argument SUBTREEP is non-nil, export the sub-tree
+at point, extracting information from the headline properties
+first.
+
+When optional argument VISIBLE-ONLY is non-nil, don't export
+contents of hidden elements.
+
+Export is done in a buffer named \"*Org GFM Export*\", which will
+be displayed when `org-export-show-temporary-export-buffer' is
+non-nil.
+
+\(fn &optional ASYNC SUBTREEP VISIBLE-ONLY)" t nil)
+
+      (autoload 'org-gfm-convert-region-to-md "ox-gfm" "\
+Assume the current region has org-mode syntax, and convert it
+to Github Flavored Markdown.  This can be used in any buffer.
+For example, you can write an itemized list in org-mode syntax in
+a Markdown buffer and use this command to convert it.
+
+\(fn)" t nil))))
 
 (defun org/post-init-persp-mode ()
   (spacemacs|define-custom-layout "@Org"

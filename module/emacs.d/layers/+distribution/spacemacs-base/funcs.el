@@ -64,11 +64,16 @@
 
 (defun spacemacs/jump-in-buffer ()
   (interactive)
-  (cond
-   ((eq major-mode 'org-mode)
-    (call-interactively 'helm-org-in-buffer-headings))
-   (t
-    (call-interactively 'helm-semantic-or-imenu))))
+  (call-interactively
+   (cond
+    ((and (configuration-layer/layer-usedp 'spacemacs-helm)
+          (eq major-mode 'org-mode))
+     'helm-org-in-buffer-headings)
+    ((configuration-layer/layer-usedp 'spacemacs-helm)
+     'helm-semantic-or-imenu)
+    ((configuration-layer/layer-usedp 'spacemacs-ivy)
+     'counsel-imenu)
+    (t 'imenu))))
 
 (defun spacemacs/split-and-new-line ()
   "Split a quoted string or s-expression and insert a new line with
@@ -124,7 +129,8 @@ the current state and point position."
     makefile-bsdmake-mode
     makefile-gmake-mode
     makefile-imake-mode
-    python-mode)
+    python-mode
+    yaml-mode)
   "Modes for which auto-indenting is suppressed.")
 
 (defcustom spacemacs-yank-indent-threshold 1000
@@ -160,7 +166,7 @@ the current state and point position."
   "Replace the preceding sexp with its value."
   (interactive)
   (backward-kill-sexp)
-  (condition-case nil
+  (condition-case-unless-debug nil
       (prin1 (eval (read (current-kill 0)))
              (current-buffer))
     (error (message "Invalid expression")
@@ -321,6 +327,15 @@ argument takes the kindows rotate backwards."
               (buffer-string)))
            (t (concat "/sudo:root@localhost:" fname))))))
 
+;; check when opening large files - literal file open
+(defun spacemacs/check-large-file ()
+  (when (> (nth 7 (file-attributes (buffer-file-name)))
+           (* 1024 1024 dotspacemacs-large-file-size))
+    (when (y-or-n-p "This is a large file, open literally to avoid performance issues?")
+      (setq buffer-read-only t)
+      (buffer-disable-undo)
+      (fundamental-mode))))
+
 ;; found at http://emacswiki.org/emacs/KillingBuffers
 (defun spacemacs/kill-other-buffers ()
   "Kill all other buffers."
@@ -342,7 +357,7 @@ argument takes the kindows rotate backwards."
 
 ;; http://camdez.com/blog/2013/11/14/emacs-show-buffer-file-name/
 (defun spacemacs/show-and-copy-buffer-filename ()
-  "Show the full path to the current file in the minibuffer."
+  "Show and copy the full path to the current file in the minibuffer."
   (interactive)
   (let ((file-name (buffer-file-name)))
     (if file-name
@@ -374,6 +389,7 @@ argument takes the kindows rotate backwards."
   (interactive)
   (let ((newbuf (generate-new-buffer-name "untitled")))
     (switch-to-buffer newbuf)))
+(evil-ex-define-cmd "enew" 'spacemacs/new-empty-buffer)
 
 ;; from https://gist.github.com/timcharper/493269
 (defun spacemacs/split-window-vertically-and-switch ()
@@ -493,7 +509,7 @@ dotspacemacs-persistent-server to be t"
 (defun spacemacs/frame-killer ()
   "Kill server buffer and hide the main Emacs window"
   (interactive)
-  (condition-case nil
+  (condition-case-unless-debug nil
       (delete-frame nil 1)
       (error
        (make-frame-invisible nil 1))))
@@ -674,6 +690,7 @@ the right."
 (spacemacs|create-align-repeat-x "bar" "|")
 (spacemacs|create-align-repeat-x "left-paren" "(")
 (spacemacs|create-align-repeat-x "right-paren" ")" t)
+(spacemacs|create-align-repeat-x "backslash" "\\\\")
 
 ;; END align functions
 

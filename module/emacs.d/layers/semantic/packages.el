@@ -11,36 +11,10 @@
 
 (setq semantic-packages
       '(
-        ;; package semantic go here
         semantic
-        ;; srefactor
+        (srefactor :toggle (version<= "24.4" emacs-version))
         stickyfunc-enhance
         ))
-
-(unless (version< emacs-version "24.4")
-  (add-to-list 'semantic-packages 'srefactor))
-
-(defvar semantic-excluded-packages '()
-  "List of packages to exclude.")
-
-;; For each package, define a function semantic/init-<package-semantic>
-;;
-;; (defun semantic/init-my-package ()
-;;   "Initialize my package"
-;;   )
-;;
-;; Often the body of an initialize function uses `use-package'
-;; For more info on `use-package', see readme:
-;; https://github.com/jwiegley/use-package
-(defun semantic/enable-semantic-mode (mode)
-  (let ((hook (intern (concat (symbol-name mode) "-hook"))))
-    (add-hook hook (lambda ()
-                     (require 'semantic)
-                     (add-to-list 'semantic-default-submodes
-                                  'global-semantic-stickyfunc-mode)
-                     (add-to-list 'semantic-default-submodes
-                                  'global-semantic-idle-summary-mode)
-                     (semantic-mode 1)))))
 
 (defun semantic/init-semantic ()
   (use-package semantic
@@ -52,8 +26,13 @@
       (setq semanticdb-default-save-directory (concat spacemacs-cache-directory
                                                       "semanticdb/"))
       (unless (file-exists-p semanticdb-default-save-directory)
-        (make-directory semanticdb-default-save-directory))
-      )))
+        (make-directory semanticdb-default-save-directory)))
+    :config
+    (progn
+      (add-to-list 'semantic-default-submodes
+                   'global-semantic-stickyfunc-mode)
+      (add-to-list 'semantic-default-submodes
+                   'global-semantic-idle-summary-mode))))
 
 (defun semantic/init-srefactor ()
   (use-package srefactor

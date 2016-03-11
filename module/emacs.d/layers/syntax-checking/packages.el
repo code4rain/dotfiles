@@ -18,19 +18,22 @@
 
 (defun syntax-checking/init-flycheck ()
   (use-package flycheck
-    :defer t
     :init
     (progn
-      (setq flycheck-standard-error-navigation nil)
+      (setq flycheck-standard-error-navigation nil
+            flycheck-global-modes nil)
+
       (spacemacs|add-toggle syntax-checking
         :status flycheck-mode
         :on (flycheck-mode)
         :off (flycheck-mode -1)
         :documentation "Enable error and syntax checking."
-        :evil-leader "ts"))
-    :config
-    (progn
+        :evil-leader "ts")
+
       (spacemacs|diminish flycheck-mode " ⓢ" " s")
+
+      (when syntax-checking-enable-by-default
+        (global-flycheck-mode 1))
 
       ;; Custom fringe indicator
       (when (fboundp 'define-fringe-bitmap)
@@ -77,6 +80,13 @@ If the error list is visible, hide it.  Otherwise, show it."
             (quit-window nil window)
           (flycheck-list-errors)))
 
+      (defun spacemacs/goto-flycheck-error-list ()
+        "Open and go to the error list buffer."
+        (interactive)
+        (unless (get-buffer-window (get-buffer flycheck-error-list-buffer))
+          (flycheck-list-errors))
+        (switch-to-buffer-other-window flycheck-error-list-buffer))
+
       (evilified-state-evilify-map flycheck-error-list-mode-map
         :mode flycheck-error-list-mode
         :bindings
@@ -89,6 +99,7 @@ If the error list is visible, hide it.  Otherwise, show it."
         "ec" 'flycheck-clear
         "eh" 'flycheck-describe-checker
         "el" 'spacemacs/toggle-flycheck-error-list
+        "eL" 'spacemacs/goto-flycheck-error-list
         "es" 'flycheck-select-checker
         "eS" 'flycheck-set-checker-executable
         "ev" 'flycheck-verify-setup))))

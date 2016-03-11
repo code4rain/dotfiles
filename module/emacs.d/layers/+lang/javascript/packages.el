@@ -23,6 +23,8 @@
     json-snatcher
     tern
     web-beautify
+    skewer-mode
+    livid-mode
     ))
 
 (defun javascript/init-coffee-mode ()
@@ -55,8 +57,8 @@
       (push 'company-tern company-backends-js2-mode))))
 
 (defun javascript/post-init-flycheck ()
-  (dolist (hook '(coffee-mode-hook js2-mode-hook json-mode-hook))
-    (spacemacs/add-flycheck-hook hook)))
+  (dolist (mode '(coffee-mode js2-mode json-mode))
+    (spacemacs/add-flycheck-hook mode)))
 
 (defun javascript/init-js-doc ()
   (use-package js-doc
@@ -190,6 +192,8 @@
     :init (add-hook 'js2-mode-hook 'tern-mode)
     :config
     (progn
+      (when javascript-disable-tern-port-files
+        (add-to-list 'tern-command "--no-port-file" 'append))
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "rrV" 'tern-rename-variable)
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "hd" 'tern-get-docs)
       (spacemacs/set-leader-keys-for-major-mode 'js2-mode "gg" 'tern-find-definition)
@@ -206,3 +210,67 @@
       (spacemacs/set-leader-keys-for-major-mode 'json-mode "=" 'web-beautify-js)
       (spacemacs/set-leader-keys-for-major-mode 'web-mode  "=" 'web-beautify-html)
       (spacemacs/set-leader-keys-for-major-mode 'css-mode  "=" 'web-beautify-css))))
+
+(defun javascript/init-skewer-mode ()
+  (use-package skewer-mode
+    :defer t
+    :init
+    (progn
+      (spacemacs/register-repl 'skewer-mode 'spacemacs/skewer-start-repl "skewer")
+      (add-hook 'js2-mode-hook 'skewer-mode))
+    :config
+    (progn
+      (defun spacemacs/skewer-start-repl ()
+        "Attach a browser to Emacs and start a skewer REPL."
+        (interactive)
+        (run-skewer)
+        (skewer-repl))
+
+      (defun spacemacs/skewer-load-buffer-and-focus ()
+        "Execute whole buffer in browser and switch to REPL in insert state."
+        (interactive)
+        (skewer-load-buffer)
+        (skewer-repl)
+        (spacemacs/normal-to-insert-state))
+
+      (defun spacemacs/skewer-eval-defun-and-focus ()
+       "Execute function at point in browser and switch to REPL in insert state."
+       (interactive)
+       (skewer-eval-defun)
+       (skewer-repl)
+       (spacemacs/normal-to-insert-state))
+
+      (defun spacemacs/skewer-eval-region (beg end)
+        "Execute the region as JavaScript code in the attached browser."
+        (interactive "r")
+        (skewer-eval (buffer-substring beg end) #'skewer-post-minibuffer))
+
+      (defun spacemacs/skewer-eval-region-and-focus (beg end)
+        "Execute the region in browser and swith to REPL in insert state."
+        (interactive "r")
+        (spacemacs/skewer-eval-region beg end)
+        (skewer-repl)
+        (spacemacs/normal-to-insert-state))
+
+      (spacemacs/set-leader-keys-for-major-mode 'js2-mode
+        "'" 'spacemacs/skewer-start-repl
+        "ee" 'skewer-eval-last-expression
+        "eE" 'skewer-eval-print-last-expression
+        "sb" 'skewer-load-buffer
+        "sB" 'spacemacs/skewer-load-buffer-and-focus
+        "si" 'spacemacs/skewer-start-repl
+        "sf" 'skewer-eval-defun
+        "sF" 'spacemacs/skewer-eval-defun-and-focus
+        "sr" 'spacemacs/skewer-eval-region
+        "sR" 'spacemacs/skewer-eval-region-and-focus
+        "ss" 'skewer-repl))))
+
+(defun javascript/init-livid-mode ()
+  (use-package livid-mode
+    :defer t
+    :init (spacemacs|add-toggle javascript-repl-live-evaluation
+            :status livid-mode
+            :on (livid-mode)
+            :off (livid-mode -1)
+            :documentation "Live evaluation of JS buffer change."
+            :evil-leader-for-mode (js2-mode . "sa"))))

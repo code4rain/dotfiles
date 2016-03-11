@@ -1,4 +1,4 @@
-;;; keybindings.el --- bepo Layer extensions File for Spacemacs
+;;; keybindings.el --- bepo Layer key bindings File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -23,7 +23,7 @@
       "wC" 'evil-window-move-far-left
       "wL" 'ace-delete-window
       "wQ" 'ace-delete-window)
-    (setq aw-keys '(?t ?e ?s ?i ?r ?u ?n ?a ?c ?,))))
+    (setq aw-keys '(?t ?e ?s ?i ?r ?u ?n ?a))))
 
 (bepo|config avy
   :description
@@ -188,7 +188,7 @@
   :description
   "Remap `flycheck-error-list' bindings."
   :loader
-  (spacemacs|use-package-add-hook flycheck :post-config BODY)
+  (spacemacs|use-package-add-hook flycheck :post-init BODY)
   :config
   (bepo/evil-correct-keys 'evilified flycheck-error-list-mode-map
     "j"
@@ -239,6 +239,20 @@
     ;; HACK: Forced to correct wrong behaviour
     (bepo/set-in-state helm-generic-files-map "C-s" 'helm-previous-line)
     (bepo/set-in-state helm-generic-files-map "C-k" 'helm-ff-run-grep)))
+
+(bepo|config ivy
+  :description
+  "Remap `ivy' bindings."
+  :loader
+  (spacemacs|use-package-add-hook ivy :post-config BODY)
+  :config
+  (progn
+    (bepo/correct-keys ivy-minibuffer-map
+      "C-h"
+      "C-j"
+      "C-k"
+      "C-l"
+      )))
 
 (bepo|config magit
   :description
@@ -297,6 +311,20 @@
     (bepo/set-in-state (evil-get-auxiliary-keymap neotree-mode-map 'evilified)
       "h" 'neotree-hidden-file-toggle
       "k" 'neotree-rename-node)))
+
+(bepo|config org-agenda
+  :description
+  "Remap `org-agenda' bindings."
+  :loader
+  (spacemacs|use-package-add-hook org-agenda :post-config BODY)
+  :config
+  (bepo/evil-correct-keys 'evilified org-agenda-mode-map
+    "j"
+    "k"
+    "M-h"
+    "M-j"
+    "M-k"
+    "M-l"))
 
 (bepo|config org
   :description

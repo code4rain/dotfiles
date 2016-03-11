@@ -34,10 +34,11 @@
       (evil-define-key 'motion magit-mode-map
         (kbd dotspacemacs-leader-key) spacemacs-default-map))))
 
-(defun git/init-helm-gitignore ()
-  (use-package helm-gitignore
-    :defer t
-    :init (spacemacs/set-leader-keys "gI" 'helm-gitignore)))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun git/init-helm-gitignore ()
+    (use-package helm-gitignore
+      :defer t
+      :init (spacemacs/set-leader-keys "gI" 'helm-gitignore))))
 
 (defun git/init-git-commit ()
   (use-package git-commit
@@ -56,22 +57,24 @@
 (defun git/init-git-timemachine ()
   (use-package git-timemachine
     :defer t
-    :commands spacemacs/time-machine-micro-state
+    :commands spacemacs/time-machine-transient-state/body
     :init
     (spacemacs/set-leader-keys
-      "gt" 'spacemacs/time-machine-micro-state)
+      "gt" 'spacemacs/time-machine-transient-state/body)
 
     :config
     (progn
 
-      (spacemacs|define-micro-state time-machine
-        :doc "[p] [N] previous [n] next [c] current [Y] copy hash [q] quit"
+      (spacemacs|define-transient-state time-machine
+        :title "Git Timemachine Transient State"
+        :doc "
+[_p_/_N_] previous [_n_] next [_c_] current [_Y_] copy hash [_q_] quit"
         :on-enter (let (golden-ratio-mode)
                     (unless (bound-and-true-p git-timemachine-mode)
                       (call-interactively 'git-timemachine)))
         :on-exit (when (bound-and-true-p git-timemachine-mode)
                    (git-timemachine-quit))
-        :persistent t
+        :foreign-keys run
         :bindings
         ("c" git-timemachine-show-current-revision)
         ("p" git-timemachine-show-previous-revision)
@@ -95,17 +98,22 @@
 (defun git/init-magit ()
   (use-package magit
     :commands (magit-blame-mode
+               magit-cherry-pick-popup
                magit-commit-popup
                magit-diff-popup
                magit-fetch-popup
                magit-log-popup
                magit-pull-popup
                magit-push-popup
+               magit-rebase-popup
                magit-status)
     :init
     (progn
-      (setq magit-completing-read-function 'magit-builtin-completing-read
-            magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
+      (setq magit-completing-read-function
+            (if (configuration-layer/layer-usedp 'spacemacs-ivy)
+                'ivy-completing-read
+              'magit-builtin-completing-read))
+      (setq magit-revision-show-gravatars '("^Author:     " . "^Commit:     "))
       (add-hook 'git-commit-mode-hook 'fci-mode)
       ;; On Windows, we must use Git GUI to enter username and password
       ;; See: https://github.com/magit/magit/wiki/FAQ#windows-cannot-push-via-https
@@ -119,6 +127,7 @@
 
       (spacemacs/declare-prefix "gd" "diff")
       (spacemacs/set-leader-keys
+        "gA" 'magit-cherry-pick-popup
         "gb" 'spacemacs/git-blame-micro-state
         "gc" 'magit-commit-popup
         "gC" 'magit-checkout
@@ -131,18 +140,20 @@
         "gi" 'magit-init
         "gl" 'magit-log-popup
         "gL" 'magit-log-buffer-file
+        "gr" 'magit-rebase-popup
         "gP" 'magit-push-popup
         "gs" 'magit-status
         "gS" 'magit-stage-file
         "gU" 'magit-unstage-file)
 
       (spacemacs|define-micro-state git-blame
-        :doc (concat "Press [b] again to blame further in the history, "
-                     "[q] to go up or quit.")
+        :title "Git Blame Transient State"
+        :doc "
+Press [_b_] again to blame further in the history, [_q_] to go up or quit."
         :on-enter (let (golden-ratio-mode)
                     (unless (bound-and-true-p magit-blame-mode)
                       (call-interactively 'magit-blame)))
-        :persistent t
+        :foreign-keys run
         :bindings
         ("b" magit-blame)
         ;; here we use the :exit keyword because we should exit the

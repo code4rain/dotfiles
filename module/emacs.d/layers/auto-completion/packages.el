@@ -145,32 +145,34 @@
       (with-eval-after-load 'company
         (setq company-frontends (delq 'company-echo-metadata-frontend company-frontends))))))
 
-(defun auto-completion/init-helm-c-yasnippet ()
-  (use-package helm-c-yasnippet
-    :defer t
-    :init
-    (progn
-      (defun spacemacs/helm-yas ()
-        "Properly lazy load helm-c-yasnipper."
-        (interactive)
-        (spacemacs/load-yasnippet)
-        (require 'helm-c-yasnippet)
-        (call-interactively 'helm-yas-complete))
-      (spacemacs/set-leader-keys "is" 'spacemacs/helm-yas)
-      (setq helm-c-yas-space-match-any-greedy t))))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun auto-completion/init-helm-c-yasnippet ()
+    (use-package helm-c-yasnippet
+      :defer t
+      :init
+      (progn
+        (defun spacemacs/helm-yas ()
+          "Properly lazy load helm-c-yasnipper."
+          (interactive)
+          (spacemacs/load-yasnippet)
+          (require 'helm-c-yasnippet)
+          (call-interactively 'helm-yas-complete))
+        (spacemacs/set-leader-keys "is" 'spacemacs/helm-yas)
+        (setq helm-c-yas-space-match-any-greedy t)))))
 
-(defun auto-completion/init-helm-company ()
-  (use-package helm-company
-    :if (configuration-layer/package-usedp 'company)
-    :defer t
-    :init
-    (with-eval-after-load 'company
-      (define-key company-active-map (kbd "C-/") 'helm-company))))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun auto-completion/init-helm-company ()
+    (use-package helm-company
+      :if (configuration-layer/package-usedp 'company)
+      :defer t
+      :init
+      (with-eval-after-load 'company
+        (define-key company-active-map (kbd "C-/") 'helm-company)))))
 
 (defun auto-completion/init-hippie-exp ()
   ;; replace dabbrev-expand
   (global-set-key (kbd "M-/") 'hippie-expand)
-  (define-key evil-insert-state-map (kbd "C-p") 'hippie-expand)
+  (define-key evil-insert-state-map [remap evil-complete-previous] 'hippie-expand)
   (setq hippie-expand-try-functions-list
         '(
           ;; Try to expand word "dynamically", searching the current buffer.

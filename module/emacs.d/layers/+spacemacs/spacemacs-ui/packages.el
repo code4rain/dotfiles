@@ -132,7 +132,7 @@
       "/"  'spacemacs/doc-view-search-new-query
       "?"  'spacemacs/doc-view-search-new-query-backward
       "gg" 'doc-view-first-page
-      "G"  'doc-view-last-page
+      "G"  'spacemacs/doc-view-goto-page
       "gt" 'doc-view-goto-page
       "h"  'doc-view-previous-page
       "j"  'doc-view-next-line-or-next-page
@@ -155,6 +155,14 @@
         "Initiate a new query."
         (interactive)
         (doc-view-search 'newquery t))
+
+      (defun spacemacs/doc-view-goto-page (&optional count)
+        (interactive (list
+                      (when current-prefix-arg
+                        (prefix-numeric-value current-prefix-arg))))
+        (if (null count)
+            (doc-view-last-page)
+          (doc-view-goto-page count)))
 
       ;; fixed a weird issue where toggling display does not
       ;; swtich to text mode
@@ -265,12 +273,13 @@ on whether the spacemacs-ivy layer is used or not, with
         "9" 'select-window-9)
       (window-numbering-mode 1))
 
-    (defun spacemacs//window-numbering-assign (windows)
-      "Custom number assignment for special buffers."
-      (mapc (lambda (w)
-              (when (and (boundp 'neo-global--window)
-                         (eq w neo-global--window))
-                (window-numbering-assign w 0)))
-            windows))
-    (add-hook 'window-numbering-before-hook 'spacemacs//window-numbering-assign)
-    (add-hook 'neo-after-create-hook '(lambda (w) (window-numbering-update)))))
+    ;; make sure neotree is always 0
+    (defun spacemacs//window-numbering-assign ()
+      "Custom number assignment for neotree."
+      (when (and (boundp 'neo-buffer-name)
+                 (string= (buffer-name) neo-buffer-name))
+        0))
+    ;; using lambda to work-around a bug in window-numbering, see
+    ;; https://github.com/nschum/window-numbering.el/issues/10
+    (setq window-numbering-assign-func
+          (lambda () (spacemacs//window-numbering-assign)))))

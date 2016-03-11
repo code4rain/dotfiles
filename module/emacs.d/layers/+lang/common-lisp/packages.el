@@ -10,13 +10,20 @@
 ;;; License: GPLv3
 
 (setq common-lisp-packages
-      '(slime))
+      '(auto-highlight-symbol
+        common-lisp-snippets
+        slime))
+
+(defun common-lisp/post-init-auto-highlight-symbol ()
+  (with-eval-after-load 'auto-highlight-symbol
+    (add-to-list 'ahs-plugin-bod-modes 'lisp-mode)))
 
 (defun common-lisp/init-slime ()
   (use-package slime
     :commands slime-mode
     :init
     (progn
+      (spacemacs/register-repl 'slime 'slime)
       (setq slime-contribs '(slime-fancy
                              slime-indentation
                              slime-sbcl-exts
@@ -37,8 +44,11 @@
       (slime-setup)
       (dolist (m `(,slime-mode-map ,slime-repl-mode-map))
         (define-key m [(tab)] 'slime-fuzzy-complete-symbol))
+
       ;; TODO: Add bindings for the SLIME debugger?
       (spacemacs/set-leader-keys-for-major-mode 'lisp-mode
+        "'" 'slime
+
         "cc" 'slime-compile-file
         "cC" 'slime-compile-and-load-file
         "cl" 'slime-load-file
@@ -80,3 +90,6 @@
         "sq" 'slime-quit-lisp
 
         "tf" 'slime-toggle-fancy-trace))))
+
+(when (configuration-layer/layer-usedp 'auto-completion)
+  (defun common-lisp/init-common-lisp-snippets ()))

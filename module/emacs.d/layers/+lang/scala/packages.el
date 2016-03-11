@@ -22,6 +22,7 @@
     :commands (ensime-mode)
     :init
     (progn
+      (spacemacs/register-repl 'ensime 'ensime-inf-switch "ensime")
       (when scala-enable-eldoc
         (add-hook 'ensime-mode-hook 'scala/enable-eldoc))
       (add-hook 'scala-mode-hook 'scala/configure-flyspell)
@@ -73,14 +74,14 @@
         (interactive)
         (ensime-inf-eval-buffer)
         (ensime-inf-switch)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun ensime-inf-eval-region-switch (start end)
         "Send region content to shell and switch to it in insert mode."
         (interactive "r")
         (ensime-inf-switch)
         (ensime-inf-eval-region start end)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (dolist (prefix '(("mb" . "scala/build")
                         ("mc" . "scala/check")
@@ -96,7 +97,8 @@
         (spacemacs/declare-prefix-for-mode 'scala-mode (car prefix) (cdr prefix)))
 
       (spacemacs/set-leader-keys-for-major-mode 'scala-mode
-        "/"     'ensime-search
+        "/"      'ensime-search
+        "'"      'ensime-inf-switch
 
         "bc"     'ensime-sbt-do-compile
         "bC"     'ensime-sbt-do-clean
@@ -206,6 +208,45 @@
 
       (evil-define-key 'insert scala-mode-map
         (kbd "RET") 'scala/newline-and-indent-with-asterisk)
+
+      ;; Automatically replace arrows with unicode ones when enabled
+      (defconst scala-unicode-arrows-alist
+        '(("=>" . "⇒")
+          ("->" . "→")
+          ("<-" . "←")))
+
+      (defun scala/replace-arrow-at-point ()
+        "Replace the arrow before the point (if any) with unicode ones.
+An undo boundary is inserted before doing the replacement so that
+it can be undone."
+        (let* ((end (point))
+               (start (max (- end 2) (point-min)))
+               (x (buffer-substring start end))
+               (arrow (assoc x scala-unicode-arrows-alist)))
+          (when arrow
+            (undo-boundary)
+            (backward-delete-char 2)
+            (insert (cdr arrow)))))
+
+      (defun scala/gt ()
+        "Insert a `>' to the buffer. If it's part of a right arrow (`->' or `=>'),
+replace it with the corresponding unicode arrow."
+        (interactive)
+        (insert ">")
+        (scala/replace-arrow-at-point))
+
+      (defun scala/hyphen ()
+        "Insert a `-' to the buffer. If it's part of a left arrow (`<-'),
+replace it with the unicode arrow."
+        (interactive)
+        (insert "-")
+        (scala/replace-arrow-at-point))
+
+      (when scala-use-unicode-arrows
+        (define-key scala-mode-map
+          (kbd ">") 'scala/gt)
+        (define-key scala-mode-map
+          (kbd "-") 'scala/hyphen))
 
       (evil-define-key 'normal scala-mode-map "J" 'spacemacs/scala-join-line)
 

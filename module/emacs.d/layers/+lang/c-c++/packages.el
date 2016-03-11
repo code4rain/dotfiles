@@ -23,13 +23,11 @@
     helm-cscope
     helm-gtags
     semantic
+    srefactor
     stickyfunc-enhance
     ycmd
     xcscope
     ))
-
-(unless (version< emacs-version "24.4")
-  (add-to-list 'c-c++-packages 'srefactor))
 
 (defun c-c++/init-cc-mode ()
   (use-package cc-mode
@@ -89,8 +87,8 @@
       :init (push 'company-c-headers company-backends-c-mode-common))))
 
 (defun c-c++/post-init-flycheck ()
-  (dolist (hook '(c-mode-hook c++-mode-hook))
-    (spacemacs/add-flycheck-hook hook))
+  (dolist (mode '(c-mode c++-mode))
+    (spacemacs/add-flycheck-hook mode))
   (when c-c++-enable-clang-support
     (spacemacs/add-to-hooks 'c-c++/load-clang-args '(c-mode-hook c++-mode-hook))))
 
@@ -104,13 +102,13 @@
      ;; Non-nil means display source file containing the main routine at startup
      gdb-show-main t)))
 
-(defun c-c++/post-init-helm-gtags ()
-  (spacemacs/helm-gtags-define-keys-for-mode 'c-mode)
-  (spacemacs/helm-gtags-define-keys-for-mode 'c++-mode))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun c-c++/post-init-helm-gtags ()
+    (spacemacs/helm-gtags-define-keys-for-mode 'c-mode)
+    (spacemacs/helm-gtags-define-keys-for-mode 'c++-mode)))
 
 (defun c-c++/post-init-semantic ()
-  (semantic/enable-semantic-mode 'c-mode)
-  (semantic/enable-semantic-mode 'c++-mode))
+  (spacemacs/add-to-hooks 'semantic-mode '(c-mode-hook c++-mode-hook)))
 
 (defun c-c++/post-init-srefactor ()
   (spacemacs/set-leader-keys-for-major-mode 'c-mode "r" 'srefactor-refactor-at-point)
@@ -135,8 +133,9 @@
     (dolist (mode '(c-mode c++-mode))
       (spacemacs/set-leader-keys-for-major-mode mode "gi" 'cscope-index-files))))
 
-(defun c-c++/pre-init-helm-cscope ()
-  (spacemacs|use-package-add-hook xcscope
-    :post-init
-    (dolist (mode '(c-mode c++-mode))
-      (spacemacs/setup-helm-cscope mode))))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun c-c++/pre-init-helm-cscope ()
+    (spacemacs|use-package-add-hook xcscope
+      :post-init
+      (dolist (mode '(c-mode c++-mode))
+        (spacemacs/setup-helm-cscope mode)))))

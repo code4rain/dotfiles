@@ -1,4 +1,4 @@
-;;; funcs.el --- Ansible Layer extensions File for Spacemacs
+;;; funcs.el --- Ansible Layer functions File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -13,11 +13,7 @@
        (string-match ansible/ansible-filename-re buffer-file-name)))
 
 (defun ansible/ansible-maybe-enable ()
-  (when (ansible/ansible-should-enable?)
-    (ansible 1)))
+  (when (ansible/ansible-should-enable?) (ansible 1)))
 
 (defun ansible/ansible-doc-maybe-enable ()
-  (when (ansible/ansible-should-enable?)
-    (ansible-doc-mode 1)
-    (spacemacs/set-leader-keys-for-major-mode 'yaml-mode
-      "a?" 'ansible-doc)))
+  (when (ansible/ansible-should-enable?) (ansible-doc-mode 1)))

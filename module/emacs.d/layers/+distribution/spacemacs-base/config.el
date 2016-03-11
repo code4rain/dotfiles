@@ -27,10 +27,10 @@
                                        ("fe"  "emacs(spacemacs)")
                                        ("fv"  "variables")
                                        ("g"   "git/versions-control")
-                                       ("h"   "helm/help/highlight")
+                                       ("h"   "help")
                                        ("hd"  "help-describe")
                                        ("i"   "insertion")
-                                       ("j"   "join/split")
+                                       ("j"   "jump/join/split")
                                        ("k"   "lisp")
                                        ("kd"  "delete")
                                        ("kD"  "delete-backward")
@@ -39,7 +39,7 @@
                                        ("p"   "projects")
                                        ("p$"  "projects/shell")
                                        ("q"   "quit")
-                                       ("r"   "registers/rings")
+                                       ("r"   "registers/rings/resume")
                                        ("Re"  "elisp")
                                        ("Rp"  "pcre")
                                        ("s"   "search/symbol")
@@ -86,7 +86,7 @@
 ;; Regexp for useful and useless buffers for smarter buffer switching
 (defvar spacemacs-useless-buffers-regexp '("*\.\+")
   "Regexp used to determine if a buffer is not useful.")
-(defvar spacemacs-useful-buffers-regexp '("\\*\\(scratch\\|terminal\.\+\\|ansi-term\\|eshell\\)\\*")
+(defvar spacemacs-useful-buffers-regexp '("\\*scratch\\*")
   "Regexp used to define buffers that are useful despite matching
 `spacemacs-useless-buffers-regexp'.")
 
@@ -160,6 +160,9 @@ It runs `tabulated-list-revert-hook', then calls `tabulated-list-print'."
 ;; `comint-delchar-or-maybe-eof' function, so we disable it
 (with-eval-after-load 'comint
   (define-key comint-mode-map (kbd "C-d") nil))
+
+;; Prompt to open file literally if large file.
+(add-hook 'find-file-hook 'spacemacs/check-large-file)
 
 ;; whitespace-cleanup configuration
 (pcase dotspacemacs-whitespace-cleanup

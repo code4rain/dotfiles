@@ -16,8 +16,6 @@
     (dired :location built-in)
     ))
 
-(setq vinegar-excluded-packages '())
-
 (defun vinegar/init-dired+ ()
   (use-package dired+
     :defer t
@@ -56,7 +54,9 @@
       (kbd "RET") (if vinegar-reuse-dired-buffer
                       'dired-find-alternate-file
                     'dired-find-file)
-      "f"         'helm-find-files
+      "f"         (if (configuration-layer/layer-usedp 'spacemacs-ivy)
+                      'counsel-find-file
+                    'helm-find-files)
       "J"         'dired-goto-file
       (kbd "C-f") 'find-name-dired
       "H"         'diredp-dired-recent-dirs

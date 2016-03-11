@@ -3,18 +3,22 @@
         company
         company-go
         flycheck
-        go-mode
         go-eldoc
+        go-mode
+        (go-oracle :location local)
+        (go-rename :location local)
         ))
 
 (defun go/post-init-flycheck ()
-  (spacemacs/add-flycheck-hook 'go-mode-hook))
+  (spacemacs/add-flycheck-hook 'go-mode))
 
 (defun go/init-go-mode()
   (when (memq window-system '(mac ns x))
     (dolist (var '("GOPATH" "GO15VENDOREXPERIMENT"))
       (unless (getenv var)
         (exec-path-from-shell-copy-env var))))
+
+  (add-hook 'go-mode-hook (lambda () (setq-local tab-width 8)))
 
   (use-package go-mode
     :defer t
@@ -42,7 +46,7 @@
                                    "-check.f"
                                  "-run")))
               (save-excursion
-                  (re-search-backward "^func[ ]+([[:alnum:]]*?[ ]?[*]?\\([[:alnum:]]+\\))[ ]+\\(Test[[:alnum:]]+\\)(.*)")
+                  (re-search-backward "^func[ ]+\\(([[:alnum:]]*?[ ]?[*]?[[:alnum:]]+)[ ]+\\)?\\(Test[[:alnum:]]+\\)(.*)")
                   (spacemacs/go-run-tests (concat test-method "='" (match-string-no-properties 2) "'"))))
           (message "Must be in a _test.go file to run go-run-test-current-function")))
 
@@ -51,8 +55,8 @@
         (if (string-match "_test\.go" buffer-file-name)
             (if go-use-gocheck-for-testing
                 (save-excursion
-                    (re-search-backward "^func[ ]+([[:alnum:]]*?[ ]?[*]?\\([[:alnum:]]+\\))[ ]+\\(Test[[:alnum:]]+\\)(.*)")
-                    (spacemacs/go-run-tests (concat "-check.f='" (match-string-no-properties 1) "'")))
+                    (re-search-backward "^func[ ]+\\(([[:alnum:]]*?[ ]?[*]?\\([[:alnum:]]+\\))[ ]+\\)?Test[[:alnum:]]+(.*)")
+                    (spacemacs/go-run-tests (concat "-check.f='" (match-string-no-properties 2) "'")))
               (message "Gocheck is needed to test the current suite"))
           (message "Must be in a _test.go file to run go-test-current-suite")))
 
@@ -96,4 +100,33 @@
       :if (configuration-layer/package-usedp 'company)
       :defer t
       :init
-      (push 'company-go company-backends-go-mode))))
+      (progn
+        (setq company-go-show-annotation t)
+        (push 'company-go company-backends-go-mode)))))
+
+(defun go/init-go-oracle()
+  (let ((go-path (getenv "GOPATH")))
+    (if (not go-path)
+        (spacemacs-buffer/warning
+         "GOPATH variable not found, go-oracle configuration skipped.")
+      (when (load-gopath-file
+             go-path "/src/golang.org/x/tools/cmd/oracle/oracle.el")
+        (spacemacs/declare-prefix-for-mode 'go-mode "mr" "rename")
+        (spacemacs/set-leader-keys-for-major-mode 'go-mode
+          "ro" 'go-oracle-set-scope
+          "r<" 'go-oracle-callers
+          "r>" 'go-oracle-callees
+          "rc" 'go-oracle-peers
+          "rd" 'go-oracle-definition
+          "rf" 'go-oracle-freevars
+          "rg" 'go-oracle-callgraph
+          "ri" 'go-oracle-implements
+          "rp" 'go-oracle-pointsto
+          "rr" 'go-oracle-referrers
+          "rs" 'go-oracle-callstack
+          "rt" 'go-oracle-describe)))))
+
+(defun go/init-go-rename()
+  (use-package go-rename
+    :init
+    (spacemacs/set-leader-keys-for-major-mode 'go-mode "rn" 'go-rename)))

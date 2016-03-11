@@ -9,15 +9,8 @@
 ;;
 ;;; License: GPLv3
 
-(setq cscope-packages '(evil-jumper
-                        helm-cscope
+(setq cscope-packages '(helm-cscope
                         xcscope))
-
-(setq cscope-excluded-packages '())
-
-(defun cscope/post-init-evil-jump ()
-  (defadvice helm-cscope-find-this-symbol (before cscope/goto activate)
-    (evil-jumper--push)))
 
 (defun cscope/init-xcscope ()
   (use-package xcscope
@@ -44,18 +37,22 @@
            (format "pycscope -R -f '%s'"
                    (expand-file-name "cscope.out" directory))))))))
 
-(defun cscope/init-helm-cscope ()
-  (use-package helm-cscope
-    :defer t
-    :init
-    (defun spacemacs/setup-helm-cscope (mode)
-      "Setup `helm-cscope' for MODE"
-      (spacemacs/set-leader-keys-for-major-mode mode
-        "gc" 'helm-cscope-find-called-function
-        "gC" 'helm-cscope-find-calling-this-funtcion
-        "gd" 'helm-cscope-find-global-definition
-        "ge" 'helm-cscope-find-egrep-pattern
-        "gf" 'helm-cscope-find-this-file
-        "gF" 'helm-cscope-find-files-including-file
-        "gr" 'helm-cscope-find-this-symbol
-        "gx" 'helm-cscope-find-this-text-string))))
+(when (configuration-layer/layer-usedp 'spacemacs-helm)
+  (defun cscope/init-helm-cscope ()
+    (use-package helm-cscope
+      :defer t
+      :init
+      (defun spacemacs/setup-helm-cscope (mode)
+        "Setup `helm-cscope' for MODE"
+        (spacemacs/set-leader-keys-for-major-mode mode
+          "gc" 'helm-cscope-find-called-function
+          "gC" 'helm-cscope-find-calling-this-funtcion
+          "gd" 'helm-cscope-find-global-definition
+          "ge" 'helm-cscope-find-egrep-pattern
+          "gf" 'helm-cscope-find-this-file
+          "gF" 'helm-cscope-find-files-including-file
+          "gr" 'helm-cscope-find-this-symbol
+          "gx" 'helm-cscope-find-this-text-string))
+      :config
+      (defadvice helm-cscope-find-this-symbol (before cscope/goto activate)
+        (evil--jumps-push)))))

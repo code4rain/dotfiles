@@ -26,6 +26,7 @@
 (require 'core-toggle)
 (require 'core-funcs)
 (require 'core-micro-state)
+(require 'core-transient-state)
 (require 'core-use-package-ext)
 
 (defgroup spacemacs nil
@@ -44,6 +45,11 @@
 (defvar spacemacs-loading-dots-chunk-size
   (/ spacemacs-loading-dots-count spacemacs-loading-dots-chunk-count))
 (defvar spacemacs-loading-dots-chunk-threshold 0)
+
+(defvar spacemacs-post-user-config-hook nil
+  "Hook run after dotspacemacs/user-config")
+(defvar spacemacs-post-user-config-hook-run nil
+  "Whether `spacemacs-post-user-config-hook' has been run")
 
 (defvar spacemacs--default-mode-line mode-line-format
   "Backup of default mode line format.")
@@ -64,7 +70,7 @@
   (setq-default evil-want-C-u-scroll t
                 ;; `evil-want-C-i-jump' is set to nil to avoid `TAB' being
                 ;; overlapped in terminal mode. The GUI specific `<C-i>' is used
-                ;; instead (defined in the init of `evil-jumper' package).
+                ;; instead.
                 evil-want-C-i-jump nil)
   (dotspacemacs/load-file)
   (require 'core-configuration-layer)
@@ -100,6 +106,11 @@
   (setq initial-buffer-choice nil)
   (setq inhibit-startup-screen t)
   ;; bootstrap packages
+  (spacemacs/load-or-install-protected-package 'dash t)
+  (spacemacs/load-or-install-protected-package 's t)
+  (spacemacs/load-or-install-protected-package 'f t)
+  (setq evil-want-Y-yank-to-eol dotspacemacs-remap-Y-to-y$
+        evil-ex-substitute-global dotspacemacs-ex-substitute-global)
   (spacemacs/load-or-install-protected-package 'evil t)
   (spacemacs/load-or-install-protected-package 'bind-map t)
   ;; bind-key is required by use-package
@@ -115,6 +126,8 @@
         quelpa-persistent-cache-file (expand-file-name "cache" quelpa-dir)
         quelpa-update-melpa-p nil)
   (spacemacs/load-or-install-protected-package 'quelpa t)
+  ;; required for some micro-states
+  (spacemacs/load-or-install-protected-package 'hydra t)
   ;; inject use-package hooks for easy customization of stock package
   ;; configuration
   (setq use-package-inject-hooks t)
@@ -162,6 +175,13 @@
   "Change the default welcome message of minibuffer to another one."
   (message "Spacemacs is ready."))
 
+(defun spacemacs/defer-until-after-user-config (func)
+  "Call FUNC if dotspacemacs/user-config has been called. Otherwise,
+defer call using `spacemacs-post-user-config-hook'."
+  (if spacemacs-post-user-config-hook-run
+      (funcall func)
+    (add-hook 'spacemacs-post-user-config-hook func)))
+
 (defun spacemacs/setup-startup-hook ()
   "Add post init processing."
   (add-hook
@@ -169,15 +189,10 @@
    (lambda ()
      ;; Ultimate configuration decisions are given to the user who can defined
      ;; them in his/her ~/.spacemacs file
-     ;; TODO remove support for dotspacemacs/config in 0.106
-     (if (fboundp 'dotspacemacs/user-config)
-         (dotspacemacs|call-func dotspacemacs/user-config
-                                 "Calling dotfile user config...")
-       (spacemacs-buffer/warning (concat "`dotspacemacs/config' is deprecated, "
-                                         "please rename your function to "
-                                         "`dotspacemacs/user-config'"))
-       (dotspacemacs|call-func dotspacemacs/config
-                               "Calling dotfile user config..."))
+     (dotspacemacs|call-func dotspacemacs/user-config
+                             "Calling dotfile user config...")
+     (run-hooks 'spacemacs-post-user-config-hook)
+     (setq spacemacs-post-user-config-hook-run t)
      (when (fboundp dotspacemacs-scratch-mode)
        (with-current-buffer "*scratch*"
          (funcall dotspacemacs-scratch-mode)))

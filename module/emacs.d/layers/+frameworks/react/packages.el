@@ -48,13 +48,17 @@
       (add-hook 'react-mode-hook #'react/disable-jshint))))
 
 (defun react/post-init-flycheck ()
-  (spacemacs/add-flycheck-hook 'react-mode-hook))
+  (spacemacs/add-flycheck-hook 'react-mode))
 
 (defun react/post-init-js-doc ()
   (add-hook 'react-mode-hook 'spacemacs/js-doc-require)
   (spacemacs/js-doc-set-key-bindings 'react-mode))
 
+(defun react//setup-imenu ()
+  (setq imenu-create-index-function #'js2-mode-create-imenu-index))
+
 (defun react/post-init-js2-mode ()
+  (add-hook 'react-mode-hook 'react//setup-imenu)
   (add-hook 'react-mode-hook 'js2-imenu-extras-mode)
   (add-hook 'react-mode-hook 'js2-minor-mode))
 

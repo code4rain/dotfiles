@@ -11,6 +11,8 @@
 
 (defvar configuration-layer--protected-packages)
 (defvar dotspacemacs-filepath)
+(defvar spacemacs-repl-list '()
+  "List of all registered REPLs.")
 
 (defun spacemacs/load-or-install-protected-package (pkg &optional log file-to-load)
   "Load PKG package, and protect it against being deleted as an orphan.
@@ -25,31 +27,29 @@ directory is returned.
 If LOG is non-nil a message is displayed in spacemacs-buffer-mode buffer.
 FILE-TO-LOAD is an explicit file to load after the installation."
   (let ((warning-minimum-level :error))
-    (condition-case nil
-        (require pkg)
-      (error
-       ;; not installed, we try to initialize package.el only if required to
-       ;; precious seconds during boot time
-       (require 'cl)
-       (let ((pkg-elpa-dir (spacemacs//get-package-directory pkg)))
-         (if pkg-elpa-dir
-             (add-to-list 'load-path pkg-elpa-dir)
-           ;; install the package
-           (when log
-             (spacemacs-buffer/append
-              (format "(Bootstrap) Installing %s...\n" pkg))
-             (spacemacs//redisplay))
-           (configuration-layer/retrieve-package-archives 'quiet)
-           (package-install pkg)
-           (setq pkg-elpa-dir (spacemacs//get-package-directory pkg)))
-         (require pkg nil 'noerror)
-         (when file-to-load
-           (load-file (concat pkg-elpa-dir file-to-load)))
-         pkg-elpa-dir)))))
+    (unless (require pkg nil 'noerror)
+      ;; not installed, we try to initialize package.el only if required to
+      ;; precious seconds during boot time
+      (require 'cl)
+      (let ((pkg-elpa-dir (spacemacs//get-package-directory pkg)))
+        (if pkg-elpa-dir
+            (add-to-list 'load-path pkg-elpa-dir)
+          ;; install the package
+          (when log
+            (spacemacs-buffer/append
+             (format "(Bootstrap) Installing %s...\n" pkg))
+            (spacemacs//redisplay))
+          (configuration-layer/retrieve-package-archives 'quiet)
+          (package-install pkg)
+          (setq pkg-elpa-dir (spacemacs//get-package-directory pkg)))
+        (require pkg nil 'noerror)
+        (when file-to-load
+          (load-file (concat pkg-elpa-dir file-to-load)))
+        pkg-elpa-dir))))
 
 (defun spacemacs//get-package-directory (pkg)
   "Return the directory of PKG. Return nil if not found."
-  (let ((elpa-dir (concat user-emacs-directory "elpa/")))
+  (let ((elpa-dir (file-name-as-directory package-user-dir)))
     (when (file-exists-p elpa-dir)
       (let ((dir (cl-reduce (lambda (x y) (if x x y))
                          (mapcar (lambda (x)
@@ -147,19 +147,23 @@ Supported properties:
         (evil-leader-for-mode (spacemacs/mplist-get props :evil-leader-for-mode))
         (global-key (spacemacs/mplist-get props :global-key))
         (def-key (spacemacs/mplist-get props :define-key)))
-    `((unless (null ',evil-leader)
-        (dolist (key ',evil-leader)
-          (spacemacs/set-leader-keys key ',func)))
-      (unless (null ',evil-leader-for-mode)
-        (dolist (val ',evil-leader-for-mode)
+    (append
+     (when evil-leader
+       `((dolist (key ',evil-leader)
+            (spacemacs/set-leader-keys key ',func))))
+
+     (when evil-leader-for-mode
+       `((dolist (val ',evil-leader-for-mode)
           (spacemacs/set-leader-keys-for-major-mode
-            (car val) (cdr val) ',func)))
-      (unless (null ',global-key)
-        (dolist (key ',global-key)
-          (global-set-key (kbd key) ',func)))
-      (unless (null ',def-key)
-        (dolist (val ',def-key)
-          (define-key (eval (car val)) (kbd (cdr val)) ',func))))))
+            (car val) (cdr val) ',func))))
+
+     (when global-key
+       `((dolist (key ',global-key)
+          (global-set-key (kbd key) ',func))))
+
+     (when def-key
+       `((dolist (val ',def-key)
+          (define-key (eval (car val)) (kbd (cdr val)) ',func)))))))
 
 (defun spacemacs/view-org-file (file &optional anchor-text expand-scope)
   "Open the change log for the current version."
@@ -262,5 +266,13 @@ Emacs versions."
   (interactive)
   (byte-recompile-directory package-user-dir nil t))
 
-(provide 'core-funcs)
+(defun spacemacs/register-repl (feature repl-func &optional tag)
+  "Register REPL-FUNC to the global list of REPLs SPACEMACS-REPL-LIST.
+FEATURE will be loaded before running the REPL, in case it is not already
+loaded. If TAG is non-nil, it will be used as the string to show in the helm
+buffer."
+  (push `(,(or tag (symbol-name repl-func))
+          . (,feature . ,repl-func))
+        spacemacs-repl-list))
 
+(provide 'core-funcs)

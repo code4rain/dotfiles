@@ -50,13 +50,17 @@
       ;; Key bindings for plain TeX
       (dolist (mode '(tex-mode latex-mode))
         (spacemacs/set-leader-keys-for-major-mode mode
-          "\\"  'TeX-insert-macro           ;; C-c C-m
-          "-"   'TeX-recenter-output-buffer ;; C-c C-l
+          "\\"  'TeX-insert-macro                            ;; C-c C-m
+          "-"   'TeX-recenter-output-buffer                  ;; C-c C-l
+          "%"   'TeX-comment-or-uncomment-paragraph          ;; C-c %
+          ";"   'TeX-comment-or-uncomment-region             ;; C-c ; or C-c :
+          ;; TeX-command-run-all runs compile and open the viewer
+          "a"   'TeX-command-run-all                         ;; C-c C-a
           "b"   'latex/build
-          "k"   'TeX-kill-job               ;; C-c C-k
-          "l"   'TeX-recenter-output-buffer ;; C-c C-l
-          "m"   'TeX-insert-macro           ;; C-c C-m
-          "v"   'TeX-view                   ;; C-c C-v
+          "k"   'TeX-kill-job                                ;; C-c C-k
+          "l"   'TeX-recenter-output-buffer                  ;; C-c C-l
+          "m"   'TeX-insert-macro                            ;; C-c C-m
+          "v"   'TeX-view                                    ;; C-c C-v
           ;; TeX-doc is a very slow function
           "hd"  'TeX-doc
           "xb"  'latex/font-bold
@@ -92,6 +96,10 @@
         "e"   'LaTeX-environment       ;; C-c C-e
         "i"   'LaTeX-insert-item       ;; C-c C-j
         "s"   'LaTeX-section           ;; C-c C-s
+        "fe"  'LaTeX-fill-environment  ;; C-c C-q C-e
+        "fp"  'LaTeX-fill-paragraph    ;; C-c C-q C-p
+        "fr"  'LaTeX-fill-region       ;; C-c C-q C-r
+        "fs"  'LaTeX-fill-section      ;; C-c C-q C-s
         "pb"  'preview-buffer
         "pc"  'preview-clearout
         "pd"  'preview-document
@@ -159,7 +167,7 @@
   (add-hook 'LaTeX-mode-hook 'evil-matchit-mode))
 
 (defun latex/post-init-flycheck ()
-  (spacemacs/add-flycheck-hook 'LaTeX-mode-hook))
+  (spacemacs/add-flycheck-hook 'LaTeX-mode))
 
 (defun latex/post-init-flyspell ()
   (spell-checking/add-flyspell-hook 'LaTeX-mode-hook))

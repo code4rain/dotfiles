@@ -16,6 +16,7 @@
         company
         evil-matchit
         flycheck
+        popwin
         rbenv
         robe
         rspec-mode
@@ -24,6 +25,7 @@
         ruby-tools
         rvm
         smartparens
+        rake
         ))
 (if ruby-enable-enh-ruby-mode
     (add-to-list 'ruby-packages 'enh-ruby-mode)
@@ -40,7 +42,8 @@
         "bi" 'bundle-install
         "bs" 'bundle-console
         "bu" 'bundle-update
-        "bx" 'bundle-exec))))
+        "bx" 'bundle-exec
+        "bo" 'bundle-open))))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
   (defun ruby/post-init-company ()
@@ -54,22 +57,11 @@
 (defun ruby/init-chruby ()
   (use-package chruby
     :if (equal ruby-version-manager 'chruby)
+    :commands chruby-use-corresponding
     :defer t
     :init
     (progn
-      (defun spacemacs//enable-chruby ()
-        "Enable chruby, use .ruby-version if exists."
-        (let ((version-file-path (chruby--locate-file ".ruby-version")))
-          (chruby)
-          ;; try to use the ruby defined in .ruby-version
-          (if version-file-path
-              (progn
-                (chruby-use (chruby--read-version-from-file
-                             version-file-path))
-                (message (concat "[chruby] Using ruby version "
-                                 "from .ruby-version file.")))
-            (message "[chruby] Using the currently activated ruby."))))
-      (spacemacs/add-to-hooks 'spacemacs//enable-chruby
+      (spacemacs/add-to-hooks 'chruby-use-corresponding
                               '(ruby-mode-hook enh-ruby-mode-hook)))))
 
 (defun ruby/init-enh-ruby-mode ()
@@ -87,8 +79,14 @@
     (add-hook hook `turn-on-evil-matchit-mode)))
 
 (defun ruby/post-init-flycheck ()
-  (spacemacs/add-flycheck-hook 'ruby-mode-hook)
-  (spacemacs/add-flycheck-hook 'enh-ruby-mode-hook))
+  (spacemacs/add-flycheck-hook 'ruby-mode)
+  (spacemacs/add-flycheck-hook 'enh-ruby-mode))
+
+(defun ruby/post-init-popwin ()
+  (push '("*rspec-compilation*" :dedicated t :position bottom :stick t :noselect t :height 0.4)
+        popwin:special-display-config)
+  (push '("*rake-compilation*" :dedicated t :position bottom :stick t :noselect t :height 0.4)
+        popwin:special-display-config))
 
 (defun ruby/init-rbenv ()
   (use-package rbenv
@@ -117,6 +115,7 @@
     :defer t
     :init
     (progn
+      (spacemacs/register-repl 'robe 'robe-start "robe")
       (dolist (hook '(ruby-mode-hook enh-ruby-mode-hook))
         (add-hook hook 'robe-mode))
       (when (configuration-layer/layer-usedp 'auto-completion)
@@ -131,6 +130,7 @@
         (spacemacs/declare-prefix-for-mode mode "mh" "ruby/docs")
         (spacemacs/declare-prefix-for-mode mode "ms" "ruby/repl")
         (spacemacs/set-leader-keys-for-major-mode mode
+          "'" 'robe-start
           ;; robe mode specific
           "gg" 'robe-jump
           "hd" 'robe-doc
@@ -153,15 +153,17 @@
       (spacemacs|hide-lighter rspec-mode)
       (dolist (mode '(ruby-mode enh-ruby-mode))
         (spacemacs/set-leader-keys-for-major-mode mode
-          "ta" 'rspec-verify-all
-          "tb" 'rspec-verify
-          "tc" 'rspec-verify-continue
-          "te" 'rspec-toggle-example-pendingness
-          "tf" 'rspec-verify-method
-          "tl" 'rspec-run-last-failed
-          "tm" 'rspec-verify-matching
-          "tr" 'rspec-rerun
-          "tt" 'rspec-verify-single)))))
+          "ta"    'rspec-verify-all
+          "tb"    'rspec-verify
+          "tc"    'rspec-verify-continue
+          "te"    'rspec-toggle-example-pendingness
+          "tf"    'rspec-verify-method
+          "tl"    'rspec-run-last-failed
+          "tm"    'rspec-verify-matching
+          "tr"    'rspec-rerun
+          "tt"    'rspec-verify-single
+          "t~"    'rspec-toggle-spec-and-target-find-example
+          "t TAB" 'rspec-toggle-spec-and-target)))))
 
 (defun ruby/init-rubocop ()
   (use-package rubocop
@@ -183,6 +185,7 @@
 (defun ruby/init-ruby-mode ()
   (use-package ruby-mode
     :defer t
+    :mode "Puppetfile"
     :config
     (progn
       (spacemacs/set-leader-keys-for-major-mode 'ruby-mode
@@ -246,3 +249,15 @@
        :post-handlers '(sp-ruby-post-handler
                         (spacemacs/smartparens-pair-newline-and-indent "RET"))
        :suffix ""))))
+
+(defun ruby/init-rake ()
+  (use-package rake
+    :defer t
+    :init (setq rake-cache-file (concat spacemacs-cache-directory "rake.cache"))
+    :config
+    (dolist (mode '(ruby-mode enh-ruby-mode))
+      (spacemacs/set-leader-keys-for-major-mode mode
+        "kk"    'rake
+        "kr"    'rake-rerun
+        "kR"    'rake-regenerate-cache
+        "kf"    'rake-find-task))))

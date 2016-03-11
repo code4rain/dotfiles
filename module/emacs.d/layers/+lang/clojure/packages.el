@@ -4,11 +4,11 @@
     cider-eval-sexp-fu
     clj-refactor
     clojure-mode
+    (clojure-snippets :toggle (configuration-layer/layer-usedp 'auto-completion))
     company
     popwin
-    rainbow-delimiters
     subword
-   ))
+    ))
 
 
 (defun clojure/init-cider ()
@@ -16,6 +16,7 @@
     :defer t
     :init
     (progn
+      (spacemacs/register-repl 'cider 'cider-jack-in "cider")
       (setq cider-stacktrace-default-filters '(tooling dup)
             cider-repl-pop-to-buffer-on-connect nil
             cider-prompt-save-file-on-load nil
@@ -56,7 +57,7 @@ the focus."
 `insert state'."
         (interactive)
         (cider-insert-last-sexp-in-repl t)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/cider-send-region-to-repl (start end)
         "Send region to REPL and evaluate it without changing
@@ -71,7 +72,7 @@ the focus."
         (interactive "r")
         (cider-insert-in-repl
          (buffer-substring-no-properties start end) t)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/cider-send-function-to-repl ()
         "Send current function to REPL and evaluate it without changing
@@ -84,7 +85,7 @@ the focus."
 `insert state'."
         (interactive)
         (cider-insert-defun-in-repl t)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/cider-send-ns-form-to-repl ()
         "Send buffer's ns form to REPL and evaluate it without changing
@@ -97,7 +98,7 @@ the focus."
 `insert state'."
         (interactive)
         (cider-insert-ns-form-in-repl t)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/cider-send-buffer-in-repl-and-focus ()
         "Send the current buffer in the REPL and switch to the REPL in
@@ -105,7 +106,7 @@ the focus."
         (interactive)
         (cider-load-buffer)
         (cider-switch-to-repl-buffer)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/cider-test-run-focused-test ()
         (interactive)
@@ -199,6 +200,7 @@ If called with a prefix argument, uses the other-window instead."
 
       (dolist (m '(clojure-mode clojurec-mode clojurescript-mode clojurex-mode))
         (spacemacs/set-leader-keys-for-major-mode m
+          "ha" 'cider-apropos
           "hh" 'cider-doc
           "hg" 'cider-grimoire
           "hj" 'cider-javadoc
@@ -216,6 +218,7 @@ If called with a prefix argument, uses the other-window instead."
           "gg" 'cider-find-var
           "gr" 'cider-jump-to-resource
 
+          "'"  'cider-jack-in
           "sb" 'cider-load-buffer
           "sB" 'spacemacs/cider-send-buffer-in-repl-and-focus
           "sc" 'cider-connect
@@ -227,6 +230,7 @@ If called with a prefix argument, uses the other-window instead."
           "sI" 'cider-jack-in-clojurescript
           "sn" 'spacemacs/cider-send-ns-form-to-repl
           "sN" 'spacemacs/cider-send-ns-form-to-repl-focus
+          "so" 'cider-repl-switch-to-other
           "sq" 'cider-quit
           "sr" 'spacemacs/cider-send-region-to-repl
           "sR" 'spacemacs/cider-send-region-to-repl-focus
@@ -261,6 +265,7 @@ If called with a prefix argument, uses the other-window instead."
 
         "sc" 'cider-repl-clear-buffer
         "sn" 'cider-repl-set-ns
+        "so" 'cider-repl-switch-to-other
         "sq" 'cider-quit
         "ss" 'cider-switch-to-last-clojure-buffer
         "sx" 'cider-refresh
@@ -278,9 +283,8 @@ If called with a prefix argument, uses the other-window instead."
       (when clojure-enable-fancify-symbols
         (clojure/fancify-symbols 'cider-repl-mode)))
 
-    (when (configuration-layer/package-usedp 'evil-jumper)
-      (defadvice cider-jump-to-var (before add-evil-jump activate)
-        (evil-set-jump)))))
+    (defadvice cider-jump-to-var (before add-evil-jump activate)
+      (evil-set-jump))))
 
 (defun clojure/init-cider-eval-sexp-fu ()
   (with-eval-after-load 'eval-sexp-fu
@@ -350,28 +354,7 @@ If called with a prefix argument, uses the other-window instead."
 
       (when clojure-enable-fancify-symbols
         (dolist (m '(clojure-mode clojurescript-mode clojurec-mode clojurex-mode))
-          (clojure/fancify-symbols m)))
-
-      (define-clojure-indent
-        ;; Compojure
-        (ANY 2)
-        (DELETE 2)
-        (GET 2)
-        (HEAD 2)
-        (POST 2)
-        (PUT 2)
-        (context 2)
-        (defroutes 'defun)
-        ;; Cucumber
-        (After 1)
-        (Before 1)
-        (Given 2)
-        (Then 2)
-        (When 2)
-        ;; Schema
-        (s/defrecord 2)
-        ;; test.check
-        (for-all 'defun)))))
+          (clojure/fancify-symbols m))))))
 
 (defun clojure/pre-init-popwin ()
   (spacemacs|use-package-add-hook popwin
@@ -380,10 +363,6 @@ If called with a prefix argument, uses the other-window instead."
           popwin:special-display-config)
     (push '("*cider-doc*" :dedicated t :position bottom :stick t :noselect nil :height 0.4)
           popwin:special-display-config)))
-
-(defun clojure/post-init-rainbow-delimiters ()
-  (if (configuration-layer/package-usedp 'cider)
-      (add-hook 'cider-mode-hook 'rainbow-delimiters-mode)))
 
 (defun clojure/post-init-subword ()
   (unless (version< emacs-version "24.4")
@@ -396,3 +375,7 @@ If called with a prefix argument, uses the other-window instead."
 
     (push 'company-capf company-backends-cider-repl-mode)
     (spacemacs|add-company-hook cider-repl-mode)))
+
+(defun clojure/init-clojure-snippets ()
+  (use-package clojure-snippets
+    :defer t))

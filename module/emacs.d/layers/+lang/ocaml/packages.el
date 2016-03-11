@@ -27,7 +27,7 @@
 
 (when (configuration-layer/layer-usedp 'syntax-checking)
   (defun ocaml/post-init-flycheck ()
-    (spacemacs/add-flycheck-hook 'merlin-mode-hook))
+    (spacemacs/add-flycheck-hook 'merlin-mode))
   (defun ocaml/init-flycheck-ocaml ()
     (use-package flycheck-ocaml
       :if (configuration-layer/package-usedp 'flycheck)
@@ -100,7 +100,10 @@
 (defun ocaml/init-utop ()
   (use-package utop
     :defer t
-    :init (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+    :init
+    (progn
+      (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+      (spacemacs/register-repl 'utop 'utop "ocaml"))
     :config
     (progn
       ;; Setup environment variables using opam
@@ -120,7 +123,7 @@
         (interactive)
         (utop-eval-phrase)
         (utop)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/utop-eval-buffer-and-go ()
         "Send buffer to REPL and evaluate it and switch to the REPL in
@@ -128,7 +131,7 @@
         (interactive)
         (utop-eval-buffer)
         (utop)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/utop-eval-region-and-go (start end)
         "Send region to REPL and evaluate it and switch to the REPL in
@@ -136,9 +139,10 @@
         (interactive "r")
         (utop-eval-region start end)
         (utop)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (spacemacs/set-leader-keys-for-major-mode 'tuareg-mode
+        "'"  'utop
         "sb" 'utop-eval-buffer
         "sB" 'spacemacs/utop-eval-buffer-and-go
         "si" 'utop

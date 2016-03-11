@@ -15,6 +15,7 @@
 (defun idris/init-idris-mode ()
   (use-package idris-mode
     :defer t
+    :init (spacemacs/register-repl 'idris-mode 'idris-ensure-process-and-repl-buffer "idris")
     :config
     (progn
       (defun spacemacs/idris-load-file-and-focus (&optional set-line)
@@ -23,21 +24,21 @@
         (interactive "p")
         (idris-load-file set-line)
         (idris-pop-to-repl)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/idris-load-forward-line-and-focus ()
         "Pass the next line to REPL and switch to it in `insert state'."
         (interactive)
         (idris-load-forward-line)
         (idris-pop-to-repl)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/idris-load-backward-line-and-focus ()
         "Pass the previous line to REPL and switch to it in `insert state'."
         (interactive)
         (idris-load-backward-line)
         (idris-pop-to-repl)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (spacemacs/set-leader-keys-for-major-mode 'idris-mode
         ;; Shorthands: rebind the standard evil-mode combinations to the local
@@ -77,6 +78,7 @@
         "mc" 'idris-show-core-term
 
         ;; REPL
+        "'"  'idris-ensure-process-and-repl-buffer
         "sb" 'idris-load-file
         "sB" 'spacemacs/idris-load-file-and-focus
         "si" 'idris-ensure-process-and-repl-buffer

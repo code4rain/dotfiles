@@ -162,9 +162,10 @@ If the perspective doesn't have a workspace, create one."
   "Update and save current frame's eyebrowse workspace to its perspective.
 Parameter _NEW-PERSP-NAME is ignored, and exists only for compatibility with
 `persp-before-switch-functions'."
-  (eyebrowse--update-window-config-element
-   (eyebrowse--current-window-config (eyebrowse--get 'current-slot)
-                                     (eyebrowse--get 'current-tag)))
+  (let* ((current-slot (eyebrowse--get 'current-slot))
+         (current-tag (nth 2 (assoc current-slot (eyebrowse--get 'window-configs)))))
+    (eyebrowse--update-window-config-element
+     (eyebrowse--current-window-config current-slot current-tag)))
   (spacemacs/save-eyebrowse-for-perspective))
 
 (defun spacemacs/save-eyebrowse-for-perspective (&optional frame)
@@ -178,9 +179,9 @@ FRAME defaults to the current frame."
     (set-persp-parameter
      'eyebrowse-last-slot (eyebrowse--get 'last-slot frame) persp)))
 
-(defun spacemacs/layout-workspaces-micro-state ()
-  "Launches the workspaces micro state, if defined."
+(defun spacemacs/layout-workspaces-transient-state ()
+  "Launches the workspaces transient state, if defined."
   (interactive)
-  (if (fboundp 'spacemacs/workspaces-micro-state)
-      (call-interactively 'spacemacs/workspaces-micro-state)
+  (if (fboundp 'spacemacs/workspaces-transient-state/body)
+      (call-interactively 'spacemacs/workspaces-transient-state/body)
     (message "You need the eyebrowse layer to use this feature.")))

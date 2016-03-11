@@ -65,6 +65,9 @@ environment, otherwise it is strongly recommended to let it set to t.")
   "List of additional paths where to look for configuration layers.
 Paths must have a trailing slash (ie. `~/.mycontribs/')")
 
+(defvar dotspacemacs-enable-lazy-installation nil
+  "If non-nil layers with lazy install support are lazy installed.")
+
 (defvar dotspacemacs-additional-packages '()
   "List of additional packages that will be installed wihout being
 wrapped in a layer. If you need some configuration for these
@@ -120,6 +123,11 @@ pressing `<leader> m`. Set it to `nil` to disable it.")
 (defvar dotspacemacs-major-mode-emacs-leader-key "C-M-m"
   "Major mode leader key accessible in `emacs state' and `insert state'")
 
+(defvar dotspacemacs-command-key "SPC"
+  "The key used for Emacs commands (M-x) (after pressing on the leader key).")
+(defvaralias 'dotspacemacs-emacs-command-key 'dotspacemacs-command-key
+  "New official name for `dotspacemacs-command-key'")
+
 (defvar dotspacemacs-distinguish-gui-tab nil
   "If non nil, distinguish C-i and tab in the GUI version of
 emacs.")
@@ -136,13 +144,11 @@ emacs.")
   "Default font. `powerline-scale' allows to quickly tweak the mode-line
 size to make separators look not too crappy.")
 
-(defvar dotspacemacs-command-key ":"
-  "The key used for Evil commands (ex-commands) and Emacs commands (M-x).
-By default the command key is `:' so ex-commands are executed like in Vim
-with `:' and Emacs commands are executed with `<leader> :'.")
+(defvar dotspacemacs-remap-Y-to-y$ nil
+  "If non nil `Y' is remapped to `y$' in Evil states.")
 
-(defvaralias 'dotspacemacs-remap-Y-to-y$ 'evil-want-Y-yank-to-eol
-  "If non nil `Y' is remapped to `y$'.")
+(defvar dotspacemacs-ex-substitute-global nil
+  "If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.")
 
 (defvar dotspacemacs-default-layout-name "Default"
   " Name of the default layout.")
@@ -157,10 +163,6 @@ start.")
 (defvar dotspacemacs-max-rollback-slots 5
   "Maximum number of rollback slots to keep in the cache.")
 
-(defvar dotspacemacs-use-ido nil
-  "If non nil then `ido' replaces `helm' for some commands. For now only
-`find-files' (SPC f f) is replaced.")
-
 (defvar dotspacemacs-helm-resize nil
   "If non nil, `helm' will try to minimize the space it uses.")
 
@@ -170,14 +172,19 @@ start.")
 (defvar dotspacemacs-helm-position 'bottom
   "Position in which to show the `helm' mini-buffer.")
 
+(defvar dotspacemacs-large-file-size 1
+  "Size (in MB) above which spacemacs will prompt to open the large file
+literally to avoid performance issues. Opening a file literally means that
+no major mode or minor modes are active.")
+
 (defvar dotspacemacs-auto-save-file-location 'cache
   "Location where to auto-save files. Possible values are `original' to
 auto-save the file in-place, `cache' to auto-save the file to another
 file stored in the cache directory and `nil' to disable auto-saving.
 Default value is `cache'.")
 
-(defvar dotspacemacs-enable-paste-micro-state t
-  "If non nil the paste micro-state is enabled. While enabled pressing `p`
+(defvar dotspacemacs-enable-paste-transient-state t
+  "If non nil the paste transient-state is enabled. While enabled pressing `p`
 several times cycle between the kill ring content.'")
 
 (defvar dotspacemacs-which-key-delay 0.4
@@ -217,13 +224,20 @@ can be toggled through `toggle-transparency'.")
 transparency level of a frame when it's inactive or deselected. Transparency
 can be toggled through `toggle-transparency'.")
 
+(defvar dotspacemacs-show-transient-state-title t
+  "If non nil show the titles of transient states.")
+
+(defvar dotspacemacs-show-transient-state-color-guide t
+  "If non nil show the color guide hint for transient state keys.")
+
 (defvar dotspacemacs-mode-line-unicode-symbols t
   "If non nil unicode symbols are displayed in the mode-line (eg. for lighters)")
 
 (defvar dotspacemacs-smooth-scrolling t
-  "If non nil smooth scrolling (native-scrolling) is enabled. Smooth scrolling
-overrides the default behavior of Emacs which recenters the point when
-it reaches the top or bottom of the screen.")
+  "If non nil smooth scrolling (native-scrolling) is enabled.
+Smooth scrolling overrides the default behavior of Emacs which
+recenters point when it reaches the top or bottom of the
+screen.")
 
 (defvar dotspacemacs-line-numbers nil
   "If non nil line numbers are turned on in all `prog-mode' and `text-mode'
@@ -234,6 +248,11 @@ derivatives. If set to `relative', also turns on relative line numbers.")
 
 (defvar dotspacemacs-smartparens-strict-mode nil
   "If non-nil smartparens-strict-mode will be enabled in programming modes.")
+
+(defvar dotspacemacs-smart-closing-parenthesis nil
+  "If non-nil pressing the closing parenthesis `)' key in insert mode passes
+  over any automatically added closing parenthesis, bracket, quote, etc…
+  This can be temporary disabled by pressing `C-q' before `)'. (default nil)")
 
 (defvar dotspacemacs-highlight-delimiters 'all
   "Select a scope to highlight delimiters. Possible values are `any',
@@ -262,14 +281,14 @@ NOT USED FOR NOW :-)")
 
 (defvar dotspacemacs-startup-lists '(recents projects)
   "List of items to show in the startup buffer. If nil it is disabled.
-Possible values are: `recents' `bookmarks' `projects'.")
+Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.")
 
 (defvar dotspacemacs-startup-recent-list-size 5
   "Number of recent files to show in the startup buffer. Ignored if
 `dotspacemacs-startup-lists' doesn't include `recents'.")
 
 (defvar dotspacemacs-excluded-packages '()
-  "A list of packages and/or extensions that will not be install and loaded.")
+  "A list of packages that will not be install and loaded.")
 
 ;; only for backward compatibility
 (defalias 'dotspacemacs-mode 'emacs-lisp-mode)
@@ -309,17 +328,10 @@ Called with `C-u C-u' skips `dotspacemacs/user-config' _and_ preleminary tests."
                                         "Calling dotfile init...")
                 (configuration-layer/sync)
                 (if (member arg '((4) (16)))
-                    (message (concat "Done (`dotspacemacs/user-config' function has "
-                                     "been skipped)."))
-                  ;; TODO remove support for dotspacemacs/config in 0.106
-                  (if (fboundp 'dotspacemacs/user-config)
-                      (dotspacemacs|call-func dotspacemacs/user-config
-                                              "Calling dotfile user config...")
-                    (spacemacs-buffer/warning (concat "`dotspacemacs/config' is deprecated, "
-                                                      "please rename your function to "
-                                                      "`dotspacemacs/user-config'"))
-                    (dotspacemacs|call-func dotspacemacs/config
-                                            "Calling dotfile user config..."))
+                    (message (concat "Done (`dotspacemacs/user-config' "
+                                     "function has been skipped)."))
+                  (dotspacemacs|call-func dotspacemacs/user-config
+                                          "Calling dotfile user config...")
                   (message "Done."))
                 (when (configuration-layer/package-usedp 'spaceline)
                   (spacemacs//restore-powerline (current-buffer))))
@@ -386,7 +398,7 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
               ,(format
                 "dotspacemacs-editing-style '%S"
                 (dotspacemacs//ido-completing-read
-                 "What is your preferred style? "
+                 "What is your preferred editing style? "
                  '(("Among the stars aboard the Evil flagship (vim)"
                     vim)
                    ("On the planet Emacs in the Holy control tower (emacs)"
@@ -396,13 +408,24 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
                 "dotspacemacs-distribution '%S"
                 (dotspacemacs//ido-completing-read
                  "What distribution of spacemacs would you like to start with? "
-                 '(("The standard distribution, recommended. (spacemacs)"
+                 `(("The standard distribution, recommended (spacemacs)"
                     spacemacs)
-                   ("A minimalist distribution that you can build on. (spacemacs-base)"
-                    spacemacs-base)))))))))
+                   (,(concat "A minimalist distribution that you can build on "
+                             "(spacemacs-base)")
+                    spacemacs-base)))))
+             ("spacemacs-helm"
+              ,(dotspacemacs//ido-completing-read
+                "What type of completion framework do you want? "
+                '(("A heavy one but full-featured (helm)"
+                   "spacemacs-helm")
+                  ("A lighter one but still very powerful (ivy)"
+                   "spacemacs-ivy")
+                  ;; For now, None works only if the user selected
+                  ;; the spacemacs-base distribution
+                  ("None (not recommended)" ""))))))))
     (with-current-buffer (find-file-noselect
-                       (concat dotspacemacs-template-directory
-                               ".spacemacs.template"))
+                          (concat dotspacemacs-template-directory
+                                  ".spacemacs.template"))
       (dolist (p preferences)
         (goto-char (point-min))
         (re-search-forward (car p))
@@ -526,7 +549,7 @@ error recovery."
     (lambda (x) (member x '(all any current nil)))
     'dotspacemacs-highlight-delimiters "is one of \'all, \'any, \'current or nil")
    (spacemacs//test-list
-    (lambda (x) (member x '(recents bookmarks projects)))
+    (lambda (x) (member x '(recents bookmarks projects todos agenda)))
     'dotspacemacs-startup-lists (concat "includes only \'recents, "
                                         "\'bookmarks or \'projects"))
    (spacemacs//test-var 'stringp 'dotspacemacs-leader-key "is a string")
@@ -537,7 +560,7 @@ error recovery."
    (spacemacs//test-var
     (lambda (x) (or (null x) (stringp x)))
     'dotspacemacs-major-mode-emacs-leader-key "is a string or nil")
-   (spacemacs//test-var 'stringp 'dotspacemacs-command-key "is a string")
+   (spacemacs//test-var 'stringp 'dotspacemacs-emacs-command-key "is a string")
    (insert (format
             (concat "** RESULTS: "
                     "[[file:%s::dotspacemacs/init][dotspacemacs/init]] "

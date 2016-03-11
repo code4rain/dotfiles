@@ -1,4 +1,4 @@
-;;; config.el --- bepo Layer extensions File for Spacemacs
+;;; config.el --- bepo Layer configuration File for Spacemacs
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -64,5 +64,7 @@ they will not be loaded in any case.")
   "The list of all evil states.")
 
 (defvar bepo--all-evil-states-but-insert
-  (remove evil-insert-state-map bepo--all-evil-states)
+  (list evil-normal-state-map
+        evil-visual-state-map
+        evil-motion-state-map)
   "The list of all evil states except insert.")

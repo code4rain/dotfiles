@@ -15,7 +15,9 @@
   (use-package fsharp-mode
     :defer t
     :init
-    (setq fsharp-doc-idle-delay .2)
+    (progn
+      (setq fsharp-doc-idle-delay .2)
+      (spacemacs/register-repl 'fsharp-mode 'fsharp-show-subshell "F#"))
     :config
     (progn
 
@@ -25,7 +27,7 @@
         (interactive)
         (fsharp-load-buffer-file)
         (switch-to-buffer-other-window inferior-fsharp-buffer-name)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/fsharp-eval-phrase-focus ()
         "Send the current phrase to REPL and switch to the REPL in
@@ -33,7 +35,7 @@
         (interactive)
         (fsharp-eval-phrase)
         (switch-to-buffer-other-window inferior-fsharp-buffer-name)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (defun spacemacs/fsharp-eval-region-focus (start end)
         "Send the current phrase to REPL and switch to the REPL in
@@ -41,7 +43,7 @@
         (interactive "r")
         (fsharp-eval-region start end)
         (switch-to-buffer-other-window inferior-fsharp-buffer-name)
-        (evil-insert-state))
+        (spacemacs/normal-to-insert-state))
 
       (spacemacs/set-leader-keys-for-major-mode 'fsharp-mode
         ;; Compile
@@ -53,6 +55,7 @@
 
         "ht" 'fsharp-ac/show-tooltip-at-point
 
+        "'"  'fsharp-show-subshell
         "sb" 'fsharp-load-buffer-file
         "sB" 'spacemacs/fsharp-load-buffer-file-focus
         "si" 'fsharp-show-subshell

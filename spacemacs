@@ -122,7 +122,7 @@ values."
                                :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.6)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -188,7 +188,7 @@ values."
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
-   dotspacemacs-which-key-position 'right-then-bottom
+   dotspacemacs-which-key-position 'bottom
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
@@ -271,9 +271,16 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
+  ;; quit insert mode by pressing jk
   (setq-default evil-escape-key-sequence "jk")
+  ;; Kill current buffer
+  (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
+  (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
+  (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
+  ;; move j/k wrapped line
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

@@ -295,7 +295,7 @@ you should place you code here."
   (setq-default c-default-style "linux")
 
   ;; centered-cursor-mode set
-  (setq-default centered-cursor-mode t)
+  (centered-cursor-mode t)
 
   ;; overide C-] key from evil-jump-to-tag to helm-gtags-dwim
   (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-dwim)

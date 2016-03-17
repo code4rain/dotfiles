@@ -294,14 +294,16 @@ you should place you code here."
   (setq-default c-basic-offset 8)
   (setq-default c-default-style "linux")
 
-  ;; centered-cursor-mode set
-  (centered-cursor-mode t)
-
-  ;; overide C-] key from evil-jump-to-tag to helm-gtags-dwim
-  (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-dwim)
-
-  (define-key evil-motion-state-map (kbd "<F7>") 'helm-gtags-find-tag)
-  (define-key evil-motion-state-map (kbd "M-o") 'helm-gtags-find-files)
+  ;; add helm gtags related keymap
+  (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
+  (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
+  (define-key evil-motion-state-map (kbd "M-o") 'helm-gtags-select-path)
+  (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
+  (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
+  (define-key evil-visual-state-map (kbd "M-o") 'helm-gtags-select-path)
+  (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
+  (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
+  (define-key evil-insert-state-map (kbd "M-o") 'helm-gtags-select-path)
 
   ;; change font size by mouse wheeling
   (defun font-big ()
@@ -317,6 +319,9 @@ you should place you code here."
                              (- (face-attribute 'default :height) 10))))
   (global-set-key (kbd "<C-mouse-5>") 'font-small)
   (global-set-key (kbd "<C-mouse-4>") 'font-big)
+
+  ;; centered-cursor-mode set
+  (centered-cursor-mode t)
   )
 
 ;; do not write anything past this comment. this is where emacs will

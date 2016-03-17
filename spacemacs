@@ -288,9 +288,38 @@ you should place you code here."
   ;; prevent startup hang
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
+  ;; tab width set
+  (setq-default tab-width 8)
+  (setq-default c-basic-offset 8)
+  (setq-default c-default-style "linux")
+
+  ;; centered-cursor-mode set
+  (setq-default centered-cursor-mode t)
+
+  ;; overide C-] key from evil-jump-to-tag to helm-gtags-dwim
+  (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-dwim)
+
+  (define-key evil-motion-state-map (kbd "<F7>") 'helm-gtags-find-tag)
+  (define-key evil-motion-state-map (kbd "M-o") 'helm-gtags-find-files)
+
+  ;; change font size by mouse wheeling
+  (defun font-big ()
+    (interactive)
+    (set-face-attribute 'default nil :height
+                        (min 720
+                             (+ (face-attribute 'default :height) 10))))
+
+  (defun font-small ()
+    (interactive)
+    (set-face-attribute 'default nil :height
+                        (max 80
+                             (- (face-attribute 'default :height) 10))))
+  (global-set-key (kbd "<C-mouse-5>") 'font-small)
+  (global-set-key (kbd "<C-mouse-4>") 'font-big)
   )
 
-;; Do not write anything past this comment. This is where Emacs will
+;; do not write anything past this comment. this is where emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

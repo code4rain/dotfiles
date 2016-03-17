@@ -277,9 +277,17 @@ you should place you code here."
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
-  ;; move j/k wrapped line
-  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+
+  ;; Make evil-mode up/down operate in screen lines instead of logical lines
+  (define-key evil-motion-state-map "j" 'evil-next-visual-line)
+  (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
+  ;; Also in visual mode
+  (define-key evil-visual-state-map "j" 'evil-next-visual-line)
+  (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+
+  ;; prevent startup hang
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

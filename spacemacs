@@ -106,10 +106,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-light
+   dotspacemacs-themes '(solarized-dark
+                         spacemacs-light
                          spacemacs-dark
                          solarized-light
-                         solarized-dark
                          leuven
                          monokai
                          zenburn)
@@ -297,13 +297,13 @@ you should place you code here."
   ;; add helm gtags related keymap
   (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-motion-state-map (kbd "M-o") 'helm-gtags-select-path)
+  (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-visual-state-map (kbd "M-o") 'helm-gtags-select-path)
+  (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-insert-state-map (kbd "M-o") 'helm-gtags-select-path)
+  (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
 
   ;; change font size by mouse wheeling
   (defun font-big ()

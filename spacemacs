@@ -129,10 +129,10 @@ values."
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key ","
+   dotspacemacs-major-mode-leader-key "C-k"
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m)
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   dotspacemacs-major-mode-emacs-leader-key "C-k"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
    ;; (default "SPC")
    dotspacemacs-emacs-command-key "SPC"
@@ -225,7 +225,7 @@ values."
    ;; (default nil)
    dotspacemacs-line-numbers nil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
-   ;; (default nil)
+   ;; (defau lt nil)
    dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
@@ -271,6 +271,8 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
   (set-language-environment "Korean")
+  (prefer-coding-system 'utf-8) ; utf-8 환경 설정
+
   ;; quit insert mode by pressing jk
   (setq-default evil-escape-key-sequence "jk")
   ;; Kill current buffer
@@ -292,6 +294,7 @@ you should place you code here."
   ;; tab width set
   (setq-default tab-width 8)
   (setq-default c-basic-offset 8)
+  (setq-default indent-tabs-mode t)
   (setq-default c-default-style "linux")
 
   ;; add helm gtags related keymap
@@ -304,6 +307,25 @@ you should place you code here."
   (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
+
+  ;; 한글
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+
+  (if (daemonp)
+      (progn
+        (add-hook 'after-make-frame-functions
+                  (lambda (frame)
+                    (with-selected-frame frame
+                      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+                                        '("NanumGothicCoding" . "iso10646-1"))
+                      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+                                        '("NanumGothicCoding" . "iso10646-1"))
+                      )))
+        )
+    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+		      '("NanumGothicCoding" . "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+		      '("NanumGothicCoding" . "iso10646-1")))
 
   ;; change font size by mouse wheeling
   (defun font-big ()
@@ -319,7 +341,6 @@ you should place you code here."
                              (- (face-attribute 'default :height) 10))))
   (global-set-key (kbd "<C-mouse-5>") 'font-small)
   (global-set-key (kbd "<C-mouse-4>") 'font-big)
-
   ;; centered-cursor-mode set
   (centered-cursor-mode t)
   )

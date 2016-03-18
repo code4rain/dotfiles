@@ -308,7 +308,7 @@ you should place you code here."
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
 
-  ;; 한글
+  ;; 한글 폰트 설정
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
   (if (daemonp)
@@ -316,17 +316,14 @@ you should place you code here."
         (add-hook 'after-make-frame-functions
                   (lambda (frame)
                     (with-selected-frame frame
-                      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                                        '("NanumGothicCoding" . "iso10646-1"))
-                      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-                                        '("NanumGothicCoding" . "iso10646-1"))
+                      (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
                       )))
         )
-    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-		      '("NanumGothicCoding" . "iso10646-1"))
-    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-		      '("NanumGothicCoding" . "iso10646-1")))
-
+    )
+  ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤
+  (setq face-font-rescale-alist
+	'((".*hiragino.*" . 1.2)
+	  ("NanumGothicCoding" . 1.2307692307692308)))
   ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)

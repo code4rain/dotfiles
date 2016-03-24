@@ -1,0 +1,1 @@
+(define-package "helm-make" "20160323.1023" "Select a Makefile target with helm" '((helm "1.5.3") (projectile "0.11.0")) :stars '("") :url "https://github.com/abo-abo/helm-make" :keywords '("makefile"))

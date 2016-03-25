@@ -120,7 +120,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.6)
@@ -312,6 +312,7 @@ you should place you code here."
 
   (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
   (evil-ex-define-cmd "W[rite]" 'evil-write)
+  (evil-ex-define-cmd "Wq" 'evil-save-and-quit)
 
   (defun forward-evil-word (&optional count)
     ""
@@ -339,9 +340,6 @@ you should place you code here."
   ;; (setq face-font-rescale-alist
   ;; 	'((".*hiragino.*" . 1.2)
   ;; 	  ("NanumGothicCoding" . 1.2307692307692308)))
-  (setq face-font-rescale-alist
-	'((".*hiragino.*" . 1.2)
-	  ("NanumGothicCoding" . 0.9307692307692308)))
   ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)
@@ -357,7 +355,7 @@ you should place you code here."
   (global-set-key (kbd "<C-mouse-5>") 'font-small)
   (global-set-key (kbd "<C-mouse-4>") 'font-big)
   ;; centered-cursor-mode set
-  (setq centered-cursor-mode t)
+  (global-centered-cursor-mode +1)
   )
 
 ;; do not write anything past this comment. this is where emacs will

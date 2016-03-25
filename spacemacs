@@ -310,6 +310,19 @@ you should place you code here."
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
 
+  (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
+  (evil-ex-define-cmd "W[rite]" 'evil-write)
+
+  (defun forward-evil-word (&optional count)
+    ""
+    (let ((init-point (point)))
+      (forward-symbol (or count 1))
+
+      (if (= (point) init-point)
+	  count 0)))
+
+  (setq-default evil-symbol-word-search t)
+
   ;; 한글 폰트 설정
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
@@ -323,9 +336,12 @@ you should place you code here."
         )
     )
   ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤
+  ;; (setq face-font-rescale-alist
+  ;; 	'((".*hiragino.*" . 1.2)
+  ;; 	  ("NanumGothicCoding" . 1.2307692307692308)))
   (setq face-font-rescale-alist
 	'((".*hiragino.*" . 1.2)
-	  ("NanumGothicCoding" . 1.2307692307692308)))
+	  ("NanumGothicCoding" . 0.9307692307692308)))
   ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)
@@ -341,7 +357,7 @@ you should place you code here."
   (global-set-key (kbd "<C-mouse-5>") 'font-small)
   (global-set-key (kbd "<C-mouse-4>") 'font-big)
   ;; centered-cursor-mode set
-  (centered-cursor-mode t)
+  (setq centered-cursor-mode t)
   )
 
 ;; do not write anything past this comment. this is where emacs will

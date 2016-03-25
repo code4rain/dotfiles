@@ -4,9 +4,11 @@ This dotfiles are meant to be used with zsh.
 
 Please fork this repository and configure it for yourself:
 
+
 ```
 # if zsh is not installed.
 sudo apt-get install zsh
+chsh /usr/bin/zsh
 
 git clone --recursive https://github.com/sheerun/dotfiles.git ~/.dotfiles
 ~/.dotfiles/bin/dotfiles ~/.dotfiles

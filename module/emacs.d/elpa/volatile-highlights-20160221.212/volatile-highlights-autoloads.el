@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "volatile-highlights" "volatile-highlights.el"
-;;;;;;  (22238 29074 0 0))
-;;; Generated autoloads from volatile-highlights.el
+;;;### (autoloads nil "volatile-highlights" "../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights.el"
+;;;;;;  "343d39b4c5d678d580d93a4ad89df493")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights.el
 
 (defvar volatile-highlights-mode nil "\
 Non-nil if Volatile-Highlights mode is enabled.
@@ -20,6 +20,12 @@ or call the function `volatile-highlights-mode'.")
 Minor mode for visual feedback on some operations.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights.el")
+;;;;;;  (22264 48183 220919 647000))
 
 ;;;***
 

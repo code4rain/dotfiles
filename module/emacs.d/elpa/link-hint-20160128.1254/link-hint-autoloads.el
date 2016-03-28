@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "link-hint" "link-hint.el" (22242 40494 385657
-;;;;;;  797000))
-;;; Generated autoloads from link-hint.el
+;;;### (autoloads nil "link-hint" "../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint.el"
+;;;;;;  "40d3a48941d0c54dc5cca79f46a011d8")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint.el
 
 (autoload 'link-hint-open-link-at-point "link-hint" "\
 Open a link of any supported type at the point.
@@ -58,6 +58,12 @@ Copy all visible links of a supported type.
 See `link-hint-copy-link' for more information.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint.el")
+;;;;;;  (22264 48021 96102 92000))
 
 ;;;***
 

@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-mc" "evil-mc.el" (22259 16714 628830
-;;;;;;  629000))
-;;; Generated autoloads from evil-mc.el
+;;;### (autoloads nil "evil-mc" "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc.el"
+;;;;;;  "c8ba899d0d2aae49c26530756cb8a9ee")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc.el
 
 (autoload 'evil-mc-mode "evil-mc" "\
 Toggle evil multiple cursors in a single buffer.
@@ -50,11 +50,21 @@ Turn off evil-mc mode in the current buffer.
 
 ;;;***
 
-;;;### (autoloads nil nil ("evil-mc-command-execute.el" "evil-mc-command-record.el"
-;;;;;;  "evil-mc-common.el" "evil-mc-cursor-make.el" "evil-mc-cursor-state.el"
-;;;;;;  "evil-mc-known-commands.el" "evil-mc-pkg.el" "evil-mc-region.el"
-;;;;;;  "evil-mc-scratch.el" "evil-mc-setup.el" "evil-mc-undo.el"
-;;;;;;  "evil-mc-vars.el") (22259 16714 741261 204000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-command-execute.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-command-record.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-common.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-cursor-make.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-cursor-state.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-known-commands.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-region.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-scratch.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-setup.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-undo.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc-vars.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160321.855/evil-mc.el")
+;;;;;;  (22264 47937 724580 6000))
 
 ;;;***
 

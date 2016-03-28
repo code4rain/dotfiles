@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "ggtags" "ggtags.el" (22242 16893 592898 203000))
-;;; Generated autoloads from ggtags.el
+;;;### (autoloads nil "ggtags" "../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags.el"
+;;;;;;  "4d927b6a0d9b87a5abec947d16fab304")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags.el
 
 (autoload 'ggtags-find-project "ggtags" "\
 
@@ -40,6 +41,12 @@ A function suitable for `imenu-create-index-function'.
 A function suitable for `hippie-expand-try-functions-list'.
 
 \(fn OLD)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags.el")
+;;;;;;  (22264 47967 925359 225000))
 
 ;;;***
 

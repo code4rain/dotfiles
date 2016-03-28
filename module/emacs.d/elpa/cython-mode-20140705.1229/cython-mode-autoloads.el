@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "cython-mode" "cython-mode.el" (22242 40456
-;;;;;;  583670 816000))
-;;; Generated autoloads from cython-mode.el
+;;;### (autoloads nil "cython-mode" "../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el"
+;;;;;;  "53cbf3f6866428f897f9b74174b57d45")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el
 
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
 
@@ -27,6 +27,12 @@ Major mode for Cython development, derived from Python mode.
 \\{cython-mode-map}
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el")
+;;;;;;  (22264 47899 225845 205000))
 
 ;;;***
 

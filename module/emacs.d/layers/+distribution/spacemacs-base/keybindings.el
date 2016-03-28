@@ -135,7 +135,6 @@
 (spacemacs/set-leader-keys
   "j0" 'spacemacs/push-mark-and-goto-beginning-of-line
   "j$" 'spacemacs/push-mark-and-goto-end-of-line
-  "jb" 'bookmark-jump
   "jd" 'dired-jump
   "jD" 'dired-jump-other-window
   "jf" 'find-function-at-point
@@ -148,7 +147,9 @@
   "ck" 'kill-compilation
   "cr" 'recompile
   "cq" 'spacemacs/close-compilation-window)
-
+(with-eval-after-load 'compile
+  (define-key compilation-mode-map "r" 'recompile)
+  (define-key compilation-mode-map "g" nil))
 ;; narrow & widen -------------------------------------------------------------
 (spacemacs/set-leader-keys
   "nr" 'narrow-to-region
@@ -358,13 +359,6 @@
   (evil-define-key 'insert comint-mode-map [up] 'comint-previous-input)
   (evil-define-key 'insert comint-mode-map [down] 'comint-next-input))
 
-;; ivy/helm keys --------------------------------------------------------------
-
-(defvar spacemacs--hjkl-completion-navigation-functions nil
-  "Hook to adjust hjkl keys for completion (helm/ivy) navigation.
-Each function in the hook is run with a single argument, which
-when true should disable the hjkl keys.")
-
 ;; ---------------------------------------------------------------------------
 ;; Transient-states
 ;; ---------------------------------------------------------------------------
@@ -407,17 +401,15 @@ when true should disable the hjkl keys.")
 
 (spacemacs|define-transient-state window-manipulation
   :title "Window Manipulation Transient State"
-  :doc
-  "
-Select^^^^               Move^^^^              Split^^                Resize^^                     Other^^
-------^^^^------------- -----^^^^------------ ------^^-------------- -------^^------------------- ------^^-------------------
-[_j_/_k_] down/up        [_J_/_K_] down/up     [_s_] vertical         [_[_] shrink horizontally    [_q_] quit
-[_h_/_l_] left/right     [_H_/_L_] left/right  [_S_] vert & follow    [_]_] enlarge horizontally   [_u_] restore prev layout
-[_0_-_9_] window N       [_R_]^^   rotate      [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
-[_w_]^^   other window   ^^^^                  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
-[_o_]^^   other frame    ^^^^                  ^^                     ^^                           [_D_] close other
-^^^^                     ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode
-"
+  :doc "
+ Select^^^^              Move^^^^              Split^^                Resize^^                     Other^^
+ ──────^^^^───────────── ────^^^^───────────── ─────^^─────────────── ──────^^──────────────────── ─────^^──────────────────────────────
+ [_j_/_k_] down/up       [_J_/_K_] down/up     [_s_] vertical         [_[_] shrink horizontally    [_q_] quit
+ [_h_/_l_] left/right    [_H_/_L_] left/right  [_S_] vert & follow    [_]_] enlarge horizontally   [_u_] restore prev layout
+ [_0_-_9_] window N      [_R_]^^   rotate      [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
+ [_w_]^^   other window  ^^^^                  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
+ [_o_]^^   other frame   ^^^^                  ^^                     ^^                           [_D_] close other
+ ^^^^                    ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode"
   :bindings
   ("q" nil :exit t)
   ("0" select-window-0)

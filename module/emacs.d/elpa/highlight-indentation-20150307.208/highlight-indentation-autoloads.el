@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "highlight-indentation" "highlight-indentation.el"
-;;;;;;  (22238 29005 0 0))
-;;; Generated autoloads from highlight-indentation.el
+;;;### (autoloads nil "highlight-indentation" "../../../../../.emacs.d/elpa/highlight-indentation-20150307.208/highlight-indentation.el"
+;;;;;;  "455ed8d2a875598f67c7a01faa558fd5")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/highlight-indentation-20150307.208/highlight-indentation.el
 
 (autoload 'highlight-indentation-mode "highlight-indentation" "\
 Highlight indentation minor mode highlights indentation based on spaces
@@ -24,6 +24,12 @@ Hilight Indentation minor mode displays a vertical bar
 corresponding to the indentation of the current line
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/highlight-indentation-20150307.208/highlight-indentation-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/highlight-indentation-20150307.208/highlight-indentation.el")
+;;;;;;  (22264 48005 121270 379000))
 
 ;;;***
 

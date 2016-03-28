@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "git-gutter+" "git-gutter+.el" (22238 32371
-;;;;;;  0 0))
-;;; Generated autoloads from git-gutter+.el
+;;;### (autoloads nil "git-gutter+" "../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+.el"
+;;;;;;  "79e8eb5ae0e154e56f78601da1038500")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+.el
 
 (autoload 'git-gutter+-mode "git-gutter+" "\
 Git-Gutter mode
@@ -34,6 +34,12 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 Commit staged changes. If nothing is staged, ask to stage the current buffer.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+.el")
+;;;;;;  (22264 47970 708342 556000))
 
 ;;;***
 

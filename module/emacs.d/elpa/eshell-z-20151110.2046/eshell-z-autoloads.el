@@ -3,14 +3,20 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "eshell-z" "eshell-z.el" (22242 40465 404133
-;;;;;;  811000))
-;;; Generated autoloads from eshell-z.el
+;;;### (autoloads nil "eshell-z" "../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el"
+;;;;;;  "cedb2eaafa377a2e3a07d5735feb8faa")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el
 
 (autoload 'eshell-z "eshell-z" "\
 Switch to eshell and change directory to DIR.
 
 \(fn DIR)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el")
+;;;;;;  (22264 47910 441333 103000))
 
 ;;;***
 

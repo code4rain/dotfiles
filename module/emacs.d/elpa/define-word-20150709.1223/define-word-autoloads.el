@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "define-word" "define-word.el" (22238 28956
-;;;;;;  0 0))
-;;; Generated autoloads from define-word.el
+;;;### (autoloads nil "define-word" "../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word.el"
+;;;;;;  "3b690b347e37223d2c3ced6e6dbc8a80")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word.el
 
 (autoload 'define-word "define-word" "\
 Define WORD using the Wordnik website.
@@ -17,6 +17,12 @@ Use `define-word' to define word at point.
 When the region is active, define the marked phrase.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word.el")
+;;;;;;  (22264 47903 520983 791000))
 
 ;;;***
 

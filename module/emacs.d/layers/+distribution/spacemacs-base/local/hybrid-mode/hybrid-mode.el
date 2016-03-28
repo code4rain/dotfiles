@@ -31,74 +31,131 @@
 
 (require 'evil)
 
-(defvar hybrid-mode-default-state-backup evil-default-state
-  "Backup of `evil-default-state'.")
+(defvar hybrid-mode-enable-hjkl-bindings)
 
 (defcustom hybrid-mode-default-state 'normal
-  "Value of `evil-default-state' for hybrid-mode. Set to hybrid
-to start in hybrid state (emacs bindings) by default."
+  "Value of `evil-default-state' for hybrid-mode."
   :group 'spacemacs
   :type 'symbol)
 
-(defvar hybrid-mode-insert-cursor evil-hybrid-state-cursor)
-(defvar hybrid-mode-insert-cursor-backup evil-insert-state-cursor)
-(defvar hybrid-mode-insert-state-entry-hook)
-(defvar hybrid-mode-insert-state-exit-hook)
+(defcustom hybrid-mode-enable-hjkl-bindings nil
+  "If non nil then packages configuration should enable hjkl navigation."
+  :group 'spacemacs
+  :type 'boolean)
 
-(defun hybrid-mode-insert-state-entry-hook ()
-  "Run hooks in `hybrid-mode-insert-state-entry-hook'."
-  (run-hooks 'hybrid-mode-insert-state-entry-hook))
+(defcustom hybrid-mode-enable-evilified-state nil
+  "If non nil then evilified states is enabled in buffer supporting it."
+  :group 'spacemacs
+  :type 'boolean)
 
-(defun hybrid-mode-insert-state-exit-hook ()
-  "Run hooks in `hybrid-mode-insert-state-exit-hook'."
-  (run-hooks 'hybrid-mode-insert-state-exit-hook))
+(defvar hybrid-mode-default-state-backup evil-default-state
+  "Backup of `evil-default-state'.")
+
+(defadvice evil-insert-state (around hybrid-insert-to-hybrid-state disable)
+  "Forces Hybrid state."
+  (evil-hybrid-state))
+
+(defadvice evil-evilified-state (around hybrid-evilified-to-hybrid-state disable)
+  "Forces Hybrid state."
+  (if (equal -1 (ad-get-arg 0))
+      ad-do-it
+    (if hybrid-mode-enable-evilified-state
+        ad-do-it
+      ;; seems better to set the emacs state instead of hybrid for evilified
+      ;; buffers
+      (evil-emacs-state))))
 
 ;;;###autoload
 (define-minor-mode hybrid-mode
-  "Global minor mode to allow emacs bindings in `evil-insert-state'."
+  "Global minor mode to replace insert state by hybrid state."
   :global t
   :lighter " hybrid"
   :group 'spacemacs
   (if hybrid-mode
-      (progn
-        (setq hybrid-mode-default-state-backup evil-default-state
-              evil-default-state hybrid-mode-default-state
-              evil-insert-state-cursor hybrid-mode-insert-cursor)
-        (put 'spacemacs-insert-face 'face-alias 'spacemacs-hybrid-face)
-        ;; using this function to set the variable triggers the defcustom :set
-        ;; property which actually does the work of removing the bindings.
-        (customize-set-variable 'evil-disable-insert-state-bindings t)
-        (add-hook 'evil-insert-state-entry-hook 'hybrid-mode-insert-state-entry-hook)
-        (add-hook 'evil-insert-state-exit-hook 'hybrid-mode-insert-state-exit-hook))
-    (setq evil-default-state hybrid-mode-default-state-backup
-          evil-insert-state-cursor hybrid-mode-insert-cursor-backup)
-    (put 'spacemacs-insert-face 'face-alias nil)
-    (customize-set-variable 'evil-disable-insert-state-bindings nil)
-    (remove-hook 'evil-insert-state-entry-hook 'hybrid-mode-insert-state-entry-hook)
-    (remove-hook 'evil-insert-state-exit-hook 'hybrid-mode-insert-state-exit-hook)))
+      (enable-hybrid-editing-style)
+    (disable-hybrid-editing-style)))
 
-;;; Temporary to support old method of defining bindings. Should be removed
-;;; eventually.
-(when (fboundp 'advice-add)
-  (defun hybrid-mode-evil-define-key (old-func &rest args)
-    (if (equal (car args) ''hybrid)
-        (let ((map (nth 1 args))
-              (key (nth 2 args))
-              (def (nth 3 args))
-              (bindings (nthcdr 4 args)))
-          (message "warning: evil-define-key no longer supports \
-hybrid as a state please convert to (define-key map key def)")
-          (while key
-            (when (keymapp (symbol-value map))
-              (define-key (symbol-value map) key def)
-              (setq key (pop bindings)
-                    def (pop bindings)))))
-      (apply old-func args)))
-  (advice-add 'evil-define-key :around #'hybrid-mode-evil-define-key))
+(defun enable-hybrid-editing-style ()
+  "Enable the hybrid editing style."
+  (setq hybrid-mode-default-state-backup evil-default-state
+        evil-default-state hybrid-mode-default-state)
+  ;; replace evil states by `hybrid state'
+  (ad-enable-advice 'evil-insert-state
+                    'around 'hybrid-insert-to-hybrid-state)
+  (ad-enable-advice 'evil-evilified-state
+                    'around 'hybrid-evilified-to-hybrid-state)
+  (ad-activate 'evil-insert-state)
+  (ad-activate 'evil-evilified-state)
+  ;; key bindings hooks for dynamic switching of editing styles
+  (run-hook-with-args 'spacemacs-editing-style-hook 'hybrid)
+  ;; initiate `hybrid state'
+  (hybrid-mode//update-states-for-current-buffers 'hybrid))
 
-(defvar evil-hybrid-state-map
-  (let ((map (make-sparse-keymap)))
-    (set-keymap-parent evil-insert-state-map map)
-    map))
+(defun disable-hybrid-editing-style ()
+  "Disable the hybrid editing style (reverting to 'vim style)."
+  (setq evil-default-state hybrid-mode-default-state-backup)
+  ;; restore evil states
+  (ad-disable-advice 'evil-insert-state
+                     'around 'hybrid-insert-to-hybrid-state)
+  (ad-disable-advice 'evil-evilified-state
+                     'around 'hybrid-evilified-to-hybrid-state)
+  (ad-activate 'evil-insert-state)
+  (ad-activate 'evil-evilified-state)
+  ;; restore key bindings
+  (run-hook-with-args 'spacemacs-editing-style-hook 'vim)
+  ;; restore the states
+  (hybrid-mode//update-states-for-current-buffers 'vim))
+
+;; This code is from evil insert state definition, any change upstream
+;; should be reflected here
+;; see https://bitbucket.org/lyro/evil/src/a25b848c90c7942fe89d9ec283c6bb44fb7b3cf4/evil-states.el?fileviewer=file-view-default#evil-states.el-74
+(evil-define-state hybrid
+  "Hybrid state for hybrid mode."
+  :tag " <H> "
+  :cursor (bar . 2)
+  :message "-- HYBRID --"
+  :entry-hook (evil-start-track-last-insertion)
+  :exit-hook (evil-cleanup-insert-state evil-stop-track-last-insertion)
+  :input-method t
+  (cond
+   ((evil-hybrid-state-p)
+    (add-hook 'pre-command-hook #'evil-insert-repeat-hook)
+    (unless (eq evil-want-fine-undo t)
+      (evil-start-undo-step t)))
+   (t
+    (remove-hook 'pre-command-hook #'evil-insert-repeat-hook)
+    (setq evil-insert-repeat-info evil-repeat-info)
+    (evil-set-marker ?^ nil t)
+    (unless (eq evil-want-fine-undo t)
+      (evil-end-undo-step t (eq evil-want-fine-undo 'fine)))
+    (when evil-move-cursor-back
+      (when (or (evil-normal-state-p evil-next-state)
+                (evil-motion-state-p evil-next-state))
+        (evil-move-cursor-back))))))
+
+(define-key evil-hybrid-state-map [escape] 'evil-normal-state)
+
+;; Override stock evil function `evil-insert-state-p'
+(defun evil-insert-state-p (&optional state)
+  "Whether the current state is insert."
+  (and evil-local-mode
+       (memq (or state evil-state) '(insert hybrid))))
+
+(defun hybrid-mode//update-states-for-current-buffers (style)
+  "Update the active state in all current buffers given current STYLE."
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (cond
+       ((eq 'hybrid style)
+        (if (memq major-mode evil-evilified-state-modes)
+            (evil-evilified-state)
+          (funcall (intern (format "evil-%S-state"
+                                   hybrid-mode-default-state)))))
+       ((and (eq 'vim style)
+             (memq evil-state '(hybrid emacs)))
+        (cond
+         ((memq major-mode evil-evilified-state-modes) (evil-evilified-state))
+         ((memq major-mode evil-motion-state-modes) (evil-motion-state))
+         (t (evil-normal-state))))))))
 
 (provide 'hybrid-mode)

@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "gnuplot" "gnuplot.el" (22238 32379 0 0))
-;;; Generated autoloads from gnuplot.el
+;;;### (autoloads nil "gnuplot" "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el"
+;;;;;;  "06947309254d5a5b58e3720b781ac080")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el
 
 (autoload 'gnuplot-mode "gnuplot" "\
 Major mode for editing and executing GNUPLOT scripts.
@@ -82,8 +83,12 @@ Run an inferior Gnuplot process.
 
 ;;;***
 
-;;;### (autoloads nil nil ("gnuplot-context.el" "gnuplot-gui.el"
-;;;;;;  "gnuplot-pkg.el") (22238 32379 617000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-context.el"
+;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-gui.el"
+;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el")
+;;;;;;  (22264 47978 831972 114000))
 
 ;;;***
 

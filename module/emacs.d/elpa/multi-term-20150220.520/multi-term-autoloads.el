@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "multi-term" "multi-term.el" (22238 32396 0
-;;;;;;  0))
-;;; Generated autoloads from multi-term.el
+;;;### (autoloads nil "multi-term" "../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el"
+;;;;;;  "44519f03cb96136a4b7da064ddeb792f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el
 
 (autoload 'multi-term "multi-term" "\
 Create new term buffer.
@@ -40,6 +40,12 @@ Toggle dedicated `multi-term' window.
 Select the `multi-term' dedicated window.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el")
+;;;;;;  (22264 48042 100513 363000))
 
 ;;;***
 

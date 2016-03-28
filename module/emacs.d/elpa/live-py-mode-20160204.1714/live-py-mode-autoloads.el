@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "live-py-mode" "live-py-mode.el" (22242 40496
-;;;;;;  69746 412000))
-;;; Generated autoloads from live-py-mode.el
+;;;### (autoloads nil "live-py-mode" "../../../../../.emacs.d/elpa/live-py-mode-20160204.1714/live-py-mode.el"
+;;;;;;  "2a410aecf8ca3557315bded518ff8642")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/live-py-mode-20160204.1714/live-py-mode.el
 
 (autoload 'live-py-mode "live-py-mode" "\
 Minor mode to do on-the-fly Python tracing.
@@ -16,8 +16,10 @@ With arg, turn mode on if and only if arg is positive.
 
 ;;;***
 
-;;;### (autoloads nil nil ("live-py-mode-pkg.el") (22242 40496 169076
-;;;;;;  158000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/live-py-mode-20160204.1714/live-py-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160204.1714/live-py-mode-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160204.1714/live-py-mode.el")
+;;;;;;  (22264 48023 195150 548000))
 
 ;;;***
 

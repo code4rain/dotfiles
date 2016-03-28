@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "alert" "alert.el" (22238 32434 0 0))
-;;; Generated autoloads from alert.el
+;;;### (autoloads nil "alert" "../../../../../.emacs.d/elpa/alert-20151123.759/alert.el"
+;;;;;;  "9543f7340ce0eac63d820d8410f6149c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/alert-20151123.759/alert.el
 
 (autoload 'alert-add-rule "alert" "\
 Programmatically add an alert configuration rule.
@@ -81,6 +82,12 @@ Here are some more typical examples of usage:
          :category \\='some-category-or-other)
 
 \(fn MESSAGE &key (severity (quote normal)) TITLE ICON CATEGORY BUFFER MODE DATA STYLE PERSISTENT NEVER-PERSIST)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/alert-20151123.759/alert-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/alert-20151123.759/alert.el")
+;;;;;;  (22264 48086 746208 707000))
 
 ;;;***
 

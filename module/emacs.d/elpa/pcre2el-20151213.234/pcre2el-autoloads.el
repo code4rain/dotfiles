@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "pcre2el" "pcre2el.el" (22238 29029 0 0))
-;;; Generated autoloads from pcre2el.el
+;;;### (autoloads nil "pcre2el" "../../../../../.emacs.d/elpa/pcre2el-20151213.234/pcre2el.el"
+;;;;;;  "047acfb9c9e4ad14ddc8ca1b739c0bc0")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/pcre2el-20151213.234/pcre2el.el
 
 (defvar pcre-mode nil "\
 Non-nil if PCRE mode is enabled.
@@ -203,6 +204,12 @@ Rxt mode is enabled in all buffers where
 See `rxt-mode' for more information on Rxt mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pcre2el-20151213.234/pcre2el-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/pcre2el-20151213.234/pcre2el.el")
+;;;;;;  (22264 48119 23408 442000))
 
 ;;;***
 

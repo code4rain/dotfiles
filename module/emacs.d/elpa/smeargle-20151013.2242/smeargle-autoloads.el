@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "smeargle" "smeargle.el" (22238 32463 0 0))
-;;; Generated autoloads from smeargle.el
+;;;### (autoloads nil "smeargle" "../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el"
+;;;;;;  "99a06e54b24aa17eca7b4074ecdb5824")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el
 
 (autoload 'smeargle-clear "smeargle" "\
 Clear smeargle overlays in current buffer.
@@ -20,6 +21,12 @@ Highlight regions by last updated time.
 Highlight regions by age of commits.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el")
+;;;;;;  (22264 48151 855082 799000))
 
 ;;;***
 

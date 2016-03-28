@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "orgit" "orgit.el" (22238 32462 0 0))
-;;; Generated autoloads from orgit.el
+;;;### (autoloads nil "orgit" "../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit.el"
+;;;;;;  "5229d1ae1d7e558e7bbe93cff65ccbe5")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit.el
 
 (eval-after-load "org" '(progn (org-add-link-type "orgit" 'orgit-status-open 'orgit-status-export) (add-hook 'org-store-link-functions 'orgit-status-store)))
 
@@ -56,6 +57,12 @@
 
 
 \(fn PATH DESC FORMAT)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit.el")
+;;;;;;  (22264 48111 329312 558000))
 
 ;;;***
 

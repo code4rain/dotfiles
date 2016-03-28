@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "helm-flx" "helm-flx.el" (22238 28994 0 0))
-;;; Generated autoloads from helm-flx.el
+;;;### (autoloads nil "helm-flx" "../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx.el"
+;;;;;;  "f1349da28269c892f5f29d878b61701a")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx.el
 
 (defvar helm-flx-mode nil "\
 Non-nil if Helm-Flx mode is enabled.
@@ -19,6 +20,12 @@ or call the function `helm-flx-mode'.")
 helm-flx minor mode
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx.el")
+;;;;;;  (22264 47990 208633 24000))
 
 ;;;***
 

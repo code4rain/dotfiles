@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "paradox" "paradox.el" (22259 16552 404339
-;;;;;;  945000))
-;;; Generated autoloads from paradox.el
+;;;### (autoloads nil "paradox" "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox.el"
+;;;;;;  "8919a396393be1e0103bf805e44a0961")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox.el
 
 (autoload 'paradox-list-packages "paradox" "\
 Improved version of `package-list-packages'.  The heart of Paradox.
@@ -61,9 +61,15 @@ empty.  Passing a non-nil REFRESH argument forces this update.
 
 ;;;***
 
-;;;### (autoloads nil nil ("paradox-commit-list.el" "paradox-core.el"
-;;;;;;  "paradox-execute.el" "paradox-github.el" "paradox-menu.el"
-;;;;;;  "paradox-pkg.el") (22259 16552 560962 451000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-commit-list.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-core.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-execute.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-github.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-menu.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox.el")
+;;;;;;  (22264 48115 750447 52000))
 
 ;;;***
 

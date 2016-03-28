@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "disaster" "disaster.el" (22242 23996 604019
-;;;;;;  460000))
-;;; Generated autoloads from disaster.el
+;;;### (autoloads nil "disaster" "../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el"
+;;;;;;  "e3f19d30fc6708e345c5a5c0cc922318")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el
 
 (autoload 'disaster "disaster" "\
 Shows assembly code for current line of C/C++ file.
@@ -24,6 +24,12 @@ If FILE and LINE are not specified, the current editing location
 is used.
 
 \(fn &optional FILE LINE)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el")
+;;;;;;  (22264 47905 661645 902000))
 
 ;;;***
 

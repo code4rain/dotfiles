@@ -3,14 +3,20 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "helm-themes" "helm-themes.el" (22238 29002
-;;;;;;  0 0))
-;;; Generated autoloads from helm-themes.el
+;;;### (autoloads nil "helm-themes" "../../../../../.emacs.d/elpa/helm-themes-20151008.2321/helm-themes.el"
+;;;;;;  "0da746e5ec59caaa326276de7c33aa30")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/helm-themes-20151008.2321/helm-themes.el
 
 (autoload 'helm-themes "helm-themes" "\
 Theme selection with helm interface
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-themes-20151008.2321/helm-themes-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/helm-themes-20151008.2321/helm-themes.el")
+;;;;;;  (22264 48001 311266 86000))
 
 ;;;***
 

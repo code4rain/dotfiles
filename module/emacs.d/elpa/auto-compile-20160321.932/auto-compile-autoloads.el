@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "auto-compile" "auto-compile.el" (22259 16744
-;;;;;;  854412 649000))
-;;; Generated autoloads from auto-compile.el
+;;;### (autoloads nil "auto-compile" "../../../../../.emacs.d/elpa/auto-compile-20160321.932/auto-compile.el"
+;;;;;;  "59fefcaf9cfc1bdc3ec96dd59c5ae483")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/auto-compile-20160321.932/auto-compile.el
 
 (autoload 'auto-compile-mode "auto-compile" "\
 Compile Emacs Lisp source files after the visiting buffers are saved.
@@ -112,6 +112,12 @@ byte code file would be loaded instead.
 Also see the related `auto-compile-on-save-mode'.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-compile-20160321.932/auto-compile-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/auto-compile-20160321.932/auto-compile.el")
+;;;;;;  (22264 47831 702629 521000))
 
 ;;;***
 

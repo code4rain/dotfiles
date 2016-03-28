@@ -1,4 +1,5 @@
 ;;; orgit.el --- support for Org links to Magit buffers
+;; Package-Version: 20160119.1424
 
 ;; Copyright (C) 2014-2016  The Magit Project Developers
 
@@ -40,7 +41,6 @@
 ;; When an Org file containing such links is exported, then the url of
 ;; the remote configured with `orgit-remote' is used to generate a web
 ;; url according to `orgit-export-alist'.  That webpage should present
-;; Package-Version: 20160119.1424
 ;; approximately the same information as the Magit buffer would.
 
 ;; Both the remote to be considered the public remote, as well as the

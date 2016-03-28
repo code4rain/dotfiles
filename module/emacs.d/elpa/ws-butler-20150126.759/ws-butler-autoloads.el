@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "ws-butler" "ws-butler.el" (22238 29075 0 0))
-;;; Generated autoloads from ws-butler.el
+;;;### (autoloads nil "ws-butler" "../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler.el"
+;;;;;;  "4ab3b9c3cee127662d3fbff163e0eea6")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler.el
 
 (autoload 'ws-butler-mode "ws-butler" "\
 White space cleanup, without obtrusive white space removal.
@@ -34,6 +35,12 @@ Ws-Butler mode is enabled in all buffers where
 See `ws-butler-mode' for more information on Ws-Butler mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler.el")
+;;;;;;  (22264 48184 925010 698000))
 
 ;;;***
 

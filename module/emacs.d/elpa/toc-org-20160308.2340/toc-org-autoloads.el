@@ -3,13 +3,20 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "toc-org" "toc-org.el" (22250 8204 397565 720000))
-;;; Generated autoloads from toc-org.el
+;;;### (autoloads nil "toc-org" "../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org.el"
+;;;;;;  "426f43d9c27f171fd624d5b6d79c1e62")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org.el
 
 (autoload 'toc-org-enable "toc-org" "\
 Enable toc-org in this buffer.
 
 \(fn)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org.el")
+;;;;;;  (22264 48172 662154 182000))
 
 ;;;***
 

@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "iedit" "iedit.el" (22238 28966 0 0))
-;;; Generated autoloads from iedit.el
+;;;### (autoloads nil "iedit" "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit.el"
+;;;;;;  "c74386f97876d5b24fbc7d26d02670a8")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit.el
 
 (autoload 'iedit-mode "iedit" "\
 Toggle Iedit mode.
@@ -68,9 +69,9 @@ Toggle Iedit mode on current function.
 
 ;;;***
 
-;;;### (autoloads nil "iedit-rect" "iedit-rect.el" (22238 28966 0
-;;;;;;  0))
-;;; Generated autoloads from iedit-rect.el
+;;;### (autoloads nil "iedit-rect" "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-rect.el"
+;;;;;;  "f68ee65bf917b867e4e27dd9d334eaf0")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-rect.el
 
 (autoload 'iedit-rectangle-mode "iedit-rect" "\
 Toggle Iedit-rect mode.
@@ -86,8 +87,12 @@ Commands:
 
 ;;;***
 
-;;;### (autoloads nil nil ("iedit-lib.el" "iedit-pkg.el") (22238
-;;;;;;  28966 412000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-lib.el"
+;;;;;;  "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit-rect.el"
+;;;;;;  "../../../../../.emacs.d/elpa/iedit-20150915.2022/iedit.el")
+;;;;;;  (22264 47919 633172 967000))
 
 ;;;***
 

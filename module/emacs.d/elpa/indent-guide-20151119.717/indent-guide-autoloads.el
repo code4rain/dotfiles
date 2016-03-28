@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "indent-guide" "indent-guide.el" (22238 29010
-;;;;;;  0 0))
-;;; Generated autoloads from indent-guide.el
+;;;### (autoloads nil "indent-guide" "../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide.el"
+;;;;;;  "6fb0d1ec479a23b4e4eb5ff5fec926a4")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide.el
 
 (autoload 'indent-guide-mode "indent-guide" "\
 show vertical lines to guide indentation
@@ -32,6 +32,12 @@ Indent-Guide mode is enabled in all buffers where
 See `indent-guide-mode' for more information on Indent-Guide mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide.el")
+;;;;;;  (22264 48012 844850 893000))
 
 ;;;***
 

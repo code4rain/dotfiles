@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "restart-emacs" "restart-emacs.el" (22238 29066
-;;;;;;  0 0))
-;;; Generated autoloads from restart-emacs.el
+;;;### (autoloads nil "restart-emacs" "../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs.el"
+;;;;;;  "23afe3347d402a8fcfaa8174b225472a")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs.el
 
 (autoload 'restart-emacs "restart-emacs" "\
 Restart Emacs.
@@ -23,6 +23,12 @@ When called non-interactively ARGS should be a list of arguments
 with which Emacs should be restarted.
 
 \(fn &optional ARGS)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs.el")
+;;;;;;  (22264 48148 611951 251000))
 
 ;;;***
 

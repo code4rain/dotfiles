@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-escape" "evil-escape.el" (22250 8308
-;;;;;;  403065 872000))
-;;; Generated autoloads from evil-escape.el
+;;;### (autoloads nil "evil-escape" "../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape.el"
+;;;;;;  "3d7f4228f9877ebba503667d0bb9ceca")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape.el
 
 (defvar evil-escape-mode nil "\
 Non-nil if Evil-Escape mode is enabled.
@@ -21,6 +21,12 @@ Buffer-local minor mode to escape insert state and everything else
 with a key sequence.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape.el")
+;;;;;;  (22264 47917 335226 101000))
 
 ;;;***
 

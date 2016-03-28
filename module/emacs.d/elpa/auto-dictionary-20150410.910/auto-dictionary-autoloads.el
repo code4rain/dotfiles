@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "auto-dictionary" "auto-dictionary.el" (22238
-;;;;;;  32334 0 0))
-;;; Generated autoloads from auto-dictionary.el
+;;;### (autoloads nil "auto-dictionary" "../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary.el"
+;;;;;;  "09bb7ecf500ba34c08d0f4c5201a89a2")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary.el
 
 (autoload 'auto-dictionary-mode "auto-dictionary" "\
 A minor mode that automatically sets `ispell-dictionary`.
@@ -24,6 +24,12 @@ when an input event occurs.
 Set buffer language to LANG and stop detecting it automatically.
 
 \(fn &optional LANG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary.el")
+;;;;;;  (22264 47832 804494 251000))
 
 ;;;***
 

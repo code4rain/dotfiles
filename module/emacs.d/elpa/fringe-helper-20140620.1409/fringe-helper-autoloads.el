@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("fringe-helper.el") (22238 32372 834000
-;;;;;;  0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/fringe-helper-20140620.1409/fringe-helper-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/fringe-helper-20140620.1409/fringe-helper.el")
+;;;;;;  (22264 47971 519176 207000))
 
 ;;;***
 

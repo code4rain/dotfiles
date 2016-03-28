@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "hy-mode" "hy-mode.el" (22242 40487 21270 579000))
-;;; Generated autoloads from hy-mode.el
+;;;### (autoloads nil "hy-mode" "../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode.el"
+;;;;;;  "310f7e0d836143b2b3e67a2deccad980")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode.el
 
 (add-to-list 'auto-mode-alist '("\\.hy\\'" . hy-mode))
 
@@ -14,6 +15,12 @@
 Major mode for editing Hy files.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode.el")
+;;;;;;  (22264 48010 956254 490000))
 
 ;;;***
 

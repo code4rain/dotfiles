@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "typo" "typo.el" (22242 40564 985370 528000))
-;;; Generated autoloads from typo.el
+;;;### (autoloads nil "typo" "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el"
+;;;;;;  "f46087dcb4e6ae2838a89cf187852963")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/typo-20160121.330/typo.el
 
 (autoload 'typo-mode "typo" "\
 Minor mode for typographic editing.
@@ -35,6 +36,12 @@ default C-x 8 prefix map.
 \\{typo-global-mode-map}
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/typo-20160121.330/typo-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el")
+;;;;;;  (22264 48178 526328 855000))
 
 ;;;***
 

@@ -3,7 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("popup.el") (22238 28921 646000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/popup-20151222.1339/popup-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/popup-20151222.1339/popup.el")
+;;;;;;  (22264 47773 814898 893000))
 
 ;;;***
 

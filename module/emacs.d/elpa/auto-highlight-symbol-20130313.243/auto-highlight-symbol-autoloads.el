@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "auto-highlight-symbol" "auto-highlight-symbol.el"
-;;;;;;  (22238 28953 0 0))
-;;; Generated autoloads from auto-highlight-symbol.el
+;;;### (autoloads nil "auto-highlight-symbol" "../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol.el"
+;;;;;;  "5aa0cef9507a26c9563b9b3d5760bf95")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol.el
 
 (defvar global-auto-highlight-symbol-mode nil "\
 Non-nil if Global-Auto-Highlight-Symbol mode is enabled.
@@ -32,6 +32,12 @@ See `auto-highlight-symbol-mode' for more information on Auto-Highlight-Symbol m
 Toggle Auto Highlight Symbol Mode
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol.el")
+;;;;;;  (22264 47833 815038 993000))
 
 ;;;***
 

@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "google-translate-default-ui" "google-translate-default-ui.el"
-;;;;;;  (22238 28990 0 0))
-;;; Generated autoloads from google-translate-default-ui.el
+;;;### (autoloads nil "google-translate-default-ui" "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-default-ui.el"
+;;;;;;  "6207811d2f01780f8812f6ed4f5f1ac2")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-default-ui.el
 
 (autoload 'google-translate-query-translate "google-translate-default-ui" "\
 Interactively translate text with Google Translate.
@@ -63,9 +63,9 @@ reverse direction.
 
 ;;;***
 
-;;;### (autoloads nil "google-translate-smooth-ui" "google-translate-smooth-ui.el"
-;;;;;;  (22238 28990 0 0))
-;;; Generated autoloads from google-translate-smooth-ui.el
+;;;### (autoloads nil "google-translate-smooth-ui" "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-smooth-ui.el"
+;;;;;;  "44a288bfcbffe8b916214e8eb57bf7c1")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-smooth-ui.el
 
 (autoload 'google-translate-smooth-translate "google-translate-smooth-ui" "\
 Translate a text using translation directions.
@@ -91,9 +91,15 @@ one respectively.
 
 ;;;***
 
-;;;### (autoloads nil nil ("google-translate-core-ui.el" "google-translate-core.el"
-;;;;;;  "google-translate-pkg.el" "google-translate-tk.el" "google-translate.el")
-;;;;;;  (22238 28990 906000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-core-ui.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-core.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-default-ui.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-smooth-ui.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-tk.el"
+;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate.el")
+;;;;;;  (22264 47981 56809 6000))
 
 ;;;***
 

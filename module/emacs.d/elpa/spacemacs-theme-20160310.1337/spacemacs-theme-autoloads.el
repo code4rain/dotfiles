@@ -3,16 +3,20 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "spacemacs-common" "spacemacs-common.el" (22250
-;;;;;;  8206 797692 811000))
-;;; Generated autoloads from spacemacs-common.el
+;;;### (autoloads nil "spacemacs-common" "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-common.el"
+;;;;;;  "f7dcac7f9e8afc4beee17794a0a8e45f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-common.el
 
 (when load-file-name (add-to-list 'custom-theme-load-path (file-name-as-directory (file-name-directory load-file-name))))
 
 ;;;***
 
-;;;### (autoloads nil nil ("spacemacs-dark-theme.el" "spacemacs-light-theme.el"
-;;;;;;  "spacemacs-theme-pkg.el") (22250 8206 840276 527000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-common.el"
+;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-dark-theme.el"
+;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-light-theme.el"
+;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-theme-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-theme-pkg.el")
+;;;;;;  (22264 48163 156590 880000))
 
 ;;;***
 

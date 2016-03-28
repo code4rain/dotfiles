@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "aggressive-indent" "aggressive-indent.el"
-;;;;;;  (22238 28948 0 0))
-;;; Generated autoloads from aggressive-indent.el
+;;;### (autoloads nil "aggressive-indent" "../../../../../.emacs.d/elpa/aggressive-indent-20160226.1046/aggressive-indent.el"
+;;;;;;  "cfdf29dfe1ecfdb68ba23414b19aaccd")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/aggressive-indent-20160226.1046/aggressive-indent.el
 
 (autoload 'aggressive-indent-indent-defun "aggressive-indent" "\
 Indent current defun.
@@ -52,6 +52,12 @@ See `aggressive-indent-mode' for more information on Aggressive-Indent mode.
 \(fn &optional ARG)" t nil)
 
 (defalias 'aggressive-indent-global-mode #'global-aggressive-indent-mode)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/aggressive-indent-20160226.1046/aggressive-indent-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/aggressive-indent-20160226.1046/aggressive-indent.el")
+;;;;;;  (22264 47792 335247 764000))
 
 ;;;***
 

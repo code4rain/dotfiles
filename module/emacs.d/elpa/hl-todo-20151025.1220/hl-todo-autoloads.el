@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "hl-todo" "hl-todo.el" (22238 29008 0 0))
-;;; Generated autoloads from hl-todo.el
+;;;### (autoloads nil "hl-todo" "../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo.el"
+;;;;;;  "47f74e335513bd9c719feb2cabc436c0")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo.el
 
 (autoload 'hl-todo-mode "hl-todo" "\
 Highlight TODO tags in comments and strings.
@@ -31,6 +32,12 @@ Hl-Todo mode is enabled in all buffers where
 See `hl-todo-mode' for more information on Hl-Todo mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo.el")
+;;;;;;  (22264 48008 114326 879000))
 
 ;;;***
 

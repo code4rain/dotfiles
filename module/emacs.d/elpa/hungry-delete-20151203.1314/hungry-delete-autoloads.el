@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "hungry-delete" "hungry-delete.el" (22238 29008
-;;;;;;  0 0))
-;;; Generated autoloads from hungry-delete.el
+;;;### (autoloads nil "hungry-delete" "../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete.el"
+;;;;;;  "a9828695e64c84f61c64eab0a73aa5b5")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete.el
 
 (autoload 'hungry-delete-forward "hungry-delete" "\
 Delete the following character, or all of the following
@@ -75,6 +75,12 @@ Hungry-Delete mode is enabled in all buffers where
 See `hungry-delete-mode' for more information on Hungry-Delete mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete.el")
+;;;;;;  (22264 48010 12234 296000))
 
 ;;;***
 

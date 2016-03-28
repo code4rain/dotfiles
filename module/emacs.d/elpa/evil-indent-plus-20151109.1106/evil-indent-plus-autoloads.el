@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-indent-plus" "evil-indent-plus.el" (22238
-;;;;;;  28968 0 0))
-;;; Generated autoloads from evil-indent-plus.el
+;;;### (autoloads nil "evil-indent-plus" "../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus.el"
+;;;;;;  "38de2b4c5a30a3c08d757a61f349ad34")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus.el
  (autoload 'evil-indent-plus-i-indent "evil-indent-plus" nil t)
  (autoload 'evil-indent-plus-a-indent "evil-indent-plus" nil t)
  (autoload 'evil-indent-plus-i-indent-up "evil-indent-plus" nil t)
@@ -17,6 +17,12 @@
 Set the default evil-indent-plus keybindings.
 
 \(fn)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus.el")
+;;;;;;  (22264 47921 220747 495000))
 
 ;;;***
 

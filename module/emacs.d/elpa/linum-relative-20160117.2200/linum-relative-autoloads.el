@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "linum-relative" "linum-relative.el" (22238
-;;;;;;  29014 0 0))
-;;; Generated autoloads from linum-relative.el
+;;;### (autoloads nil "linum-relative" "../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative.el"
+;;;;;;  "d0deb539a3e71c80bc43cd8978334b76")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative.el
 
 (autoload 'linum-relative-toggle "linum-relative" "\
 Toggle between linum-relative and linum.
@@ -42,6 +42,12 @@ See `linum-relative-mode' for more information on Linum-Relative mode.
 Turn on `linum-relative-mode' in helm.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative.el")
+;;;;;;  (22264 48021 907355 275000))
 
 ;;;***
 

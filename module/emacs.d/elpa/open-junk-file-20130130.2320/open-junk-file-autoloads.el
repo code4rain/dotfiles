@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("open-junk-file.el") (22238 29019 661000
-;;;;;;  0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/open-junk-file-20130130.2320/open-junk-file-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/open-junk-file-20130130.2320/open-junk-file.el")
+;;;;;;  (22264 48052 9644 300000))
 
 ;;;***
 

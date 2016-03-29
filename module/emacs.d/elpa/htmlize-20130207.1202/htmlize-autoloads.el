@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "htmlize" "htmlize.el" (22238 32386 0 0))
-;;; Generated autoloads from htmlize.el
+;;;### (autoloads nil "htmlize" "../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el"
+;;;;;;  "980fc941e008dbcb503f77373b776c48")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el
 
 (autoload 'htmlize-buffer "htmlize" "\
 Convert BUFFER to HTML, preserving colors and decorations.
@@ -65,6 +66,12 @@ corresponding source file.
 HTMLize dired-marked files.
 
 \(fn ARG &optional TARGET-DIRECTORY)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el")
+;;;;;;  (22264 48009 242812 57000))
 
 ;;;***
 

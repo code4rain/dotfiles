@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "org-pomodoro" "org-pomodoro.el" (22238 32435
-;;;;;;  0 0))
-;;; Generated autoloads from org-pomodoro.el
+;;;### (autoloads nil "org-pomodoro" "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el"
+;;;;;;  "a58c28db24179ee81aadd01f6c3bf86f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el
 
 (autoload 'org-pomodoro "org-pomodoro" "\
 Start a new pomodoro or stop the current one.
@@ -18,8 +18,11 @@ kill the current timer, this may be a break or a running pomodoro.
 
 ;;;***
 
-;;;### (autoloads nil nil ("org-pomodoro-pidgin.el" "org-pomodoro-pkg.el")
-;;;;;;  (22238 32435 750000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pidgin.el"
+;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el")
+;;;;;;  (22264 48088 808418 295000))
 
 ;;;***
 

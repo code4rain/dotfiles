@@ -3,7 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("dash.el") (22238 28950 366000 0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/dash-20160306.1222/dash-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/dash-20160306.1222/dash.el")
+;;;;;;  (22264 47756 612842 914000))
 
 ;;;***
 

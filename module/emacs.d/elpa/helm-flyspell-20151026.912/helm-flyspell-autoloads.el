@@ -3,15 +3,21 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "helm-flyspell" "helm-flyspell.el" (22238 32383
-;;;;;;  0 0))
-;;; Generated autoloads from helm-flyspell.el
+;;;### (autoloads nil "helm-flyspell" "../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el"
+;;;;;;  "076fe523f45d283836b67a9b27b90402")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el
 
 (autoload 'helm-flyspell-correct "helm-flyspell" "\
 Use helm for flyspell correction.
 Adapted from `flyspell-correct-word-before-point'.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el")
+;;;;;;  (22264 47991 27506 199000))
 
 ;;;***
 

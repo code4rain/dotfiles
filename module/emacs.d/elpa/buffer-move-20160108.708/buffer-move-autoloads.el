@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "buffer-move" "buffer-move.el" (22238 28955
-;;;;;;  0 0))
-;;; Generated autoloads from buffer-move.el
+;;;### (autoloads nil "buffer-move" "../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move.el"
+;;;;;;  "41649377b1d17ec2a5fa97027a0e3c39")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move.el
 
 (autoload 'buf-move-up "buffer-move" "\
 Swap the current buffer and the buffer above the split.
@@ -42,6 +42,12 @@ Use the arrow keys to move in the desired direction.  Pressing
 any other key exits this function.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move.el")
+;;;;;;  (22264 47879 6389 887000))
 
 ;;;***
 

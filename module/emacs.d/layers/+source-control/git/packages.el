@@ -28,11 +28,10 @@
         ))
 
 (defun git/init-evil-magit ()
-  (unless (eq dotspacemacs-editing-style 'emacs)
-    (with-eval-after-load 'magit
-      (require 'evil-magit)
-      (evil-define-key 'motion magit-mode-map
-        (kbd dotspacemacs-leader-key) spacemacs-default-map))))
+  (with-eval-after-load 'magit
+    (require 'evil-magit)
+    (evil-define-key 'motion magit-mode-map
+      (kbd dotspacemacs-leader-key) spacemacs-default-map)))
 
 (when (configuration-layer/layer-usedp 'spacemacs-helm)
   (defun git/init-helm-gitignore ()
@@ -68,7 +67,7 @@
       (spacemacs|define-transient-state time-machine
         :title "Git Timemachine Transient State"
         :doc "
-[_p_/_N_] previous [_n_] next [_c_] current [_Y_] copy hash [_q_] quit"
+[_p_/_N_] previous [_n_] next [_c_] current [_g_] goto nth rev [_Y_] copy hash [_q_] quit"
         :on-enter (let (golden-ratio-mode)
                     (unless (bound-and-true-p git-timemachine-mode)
                       (call-interactively 'git-timemachine)))
@@ -77,6 +76,7 @@
         :foreign-keys run
         :bindings
         ("c" git-timemachine-show-current-revision)
+        ("g" git-timemachine-show-nth-revision)
         ("p" git-timemachine-show-previous-revision)
         ("n" git-timemachine-show-next-revision)
         ("N" git-timemachine-show-previous-revision)

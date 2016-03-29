@@ -24,7 +24,9 @@
                (cfgl-package "pkg2" :name 'pkg2 :owner 'layer1)
                (cfgl-package "pkg3" :name 'pkg3 :owner 'layer1)
                (cfgl-package "pkg4" :name 'pkg4 :owner 'layer2))))
-    (should (equal '(pkg2 pkg3) (cfgl-layer-owned-packages layer1)))))
+    (should (equal (list (cfgl-package "pkg2" :name 'pkg2 :owner 'layer1)
+                         (cfgl-package "pkg3" :name 'pkg3 :owner 'layer1))
+                   (cfgl-layer-owned-packages layer1)))))
 
 (ert-deftest test-cfgl-layer-owned-packages--nil-layer-returns-nil ()
   (should (null (cfgl-layer-owned-packages nil))))
@@ -32,6 +34,8 @@
 ;; ---------------------------------------------------------------------------
 ;; class cfgl-package
 ;; ---------------------------------------------------------------------------
+
+;; method: cfgl-package-enabledp
 
 (ert-deftest test-cfgl-package-enabledp--default-toggle-eval-non-nil ()
   (let ((pkg (cfgl-package "testpkg" :name 'testpkg)))
@@ -537,6 +541,95 @@
      (should (equal (list (cfgl-package "pkg1" :name 'pkg1 :owner 'layer18 :excluded t))
                     (configuration-layer/get-packages layers))))))
 
+(ert-deftest test-get-packages--owner-layer-can-define-toggle ()
+  (let* ((layer19 (cfgl-layer "layer19" :name 'layer19 :dir "/path"))
+         (layers (list layer19))
+         (layer19-packages '((pkg1 :toggle (foo-toggle))))
+         (mocker-mock-default-record-cls 'mocker-stub-record))
+    (defun layer19/init-pkg1 nil)
+    (mocker-let
+     ((file-exists-p (f) ((:output t :occur 1)))
+      (configuration-layer/layer-usedp (l) ((:output t :occur 1))))
+     (should (equal (list (cfgl-package "pkg1"
+                                        :name 'pkg1
+                                        :owner 'layer19
+                                        :toggle '(foo-toggle)))
+                    (configuration-layer/get-packages layers))))))
+
+(ert-deftest test-get-packages--not-owner-layer-cannot-define-toggle ()
+  (let* ((layer20 (cfgl-layer "layer20" :name 'layer20 :dir "/path"))
+         (layer21 (cfgl-layer "layer21" :name 'layer21 :dir "/path"))
+         (layers (list layer20 layer21))
+         (layer20-packages '((pkg1)))
+         (layer21-packages '((pkg1 :toggle (foo-toggle))))
+         (mocker-mock-default-record-cls 'mocker-stub-record))
+    (defun layer20/init-pkg1 nil)
+    (defun layer21/post-init-pkg1 nil)
+    (mocker-let
+     ((file-exists-p (f) ((:output t :occur 2)))
+      (spacemacs-buffer/warning (msg &rest args) ((:output nil :occur 1)))
+      (configuration-layer/layer-usedp (l) ((:output t :occur 2))))
+     (should (equal (list (cfgl-package "pkg1"
+                                        :name 'pkg1
+                                        :owner 'layer20
+                                        :post-layers '(layer21)
+                                        :toggle t))
+                    (configuration-layer/get-packages layers))))))
+
+(ert-deftest test-get-packages--new-owner-layer-can-override-toggle ()
+  (let* ((layer22 (cfgl-layer "layer22" :name 'layer22 :dir "/path"))
+         (layer23 (cfgl-layer "layer23" :name 'layer23 :dir "/path"))
+         (layers (list layer22 layer23))
+         (layer22-packages '((pkg1 :toggle (foo-toggle))))
+         (layer23-packages '((pkg1 :toggle (bar-toggle))))
+         (mocker-mock-default-record-cls 'mocker-stub-record))
+    (defun layer22/init-pkg1 nil)
+    (defun layer23/init-pkg1 nil)
+    (mocker-let
+     ((file-exists-p (f) ((:output t :occur 2)))
+      (spacemacs-buffer/warning (msg &rest args) ((:output nil :occur 1)))
+      (configuration-layer/layer-usedp (l) ((:output t :occur 2))))
+     (should (equal (list (cfgl-package "pkg1"
+                                        :name 'pkg1
+                                        :owner 'layer23
+                                        :toggle '(bar-toggle)))
+                    (configuration-layer/get-packages layers))))))
+
+(ert-deftest test-get-packages--dotfile-additional-pkg-can-override-toggle ()
+  (let* ((layer22 (cfgl-layer "layer22" :name 'layer22 :dir "/path"))
+         (layer23 (cfgl-layer "layer23" :name 'layer23 :dir "/path"))
+         (layers (list layer22 layer23))
+         (layer22-packages '((pkg1 :toggle (foo-toggle))))
+         (layer23-packages '((pkg1 :toggle (bar-toggle))))
+         (mocker-mock-default-record-cls 'mocker-stub-record))
+    (defun layer22/init-pkg1 nil)
+    (defun layer23/init-pkg1 nil)
+    (mocker-let
+     ((file-exists-p (f) ((:output t :occur 2)))
+      (spacemacs-buffer/warning (msg &rest args) ((:output nil :occur 1)))
+      (configuration-layer/layer-usedp (l) ((:output t :occur 2))))
+     (should (equal (list (cfgl-package "pkg1"
+                                        :name 'pkg1
+                                        :owner 'layer23
+                                        :toggle '(bar-toggle)))
+                    (configuration-layer/get-packages layers))))))
+
+(ert-deftest test-get-packages--dotfile-additional-pkg-can-override-toggle ()
+  (let* ((layer24 (cfgl-layer "layer24" :name 'layer24 :dir "/path"))
+         (layers (list layer24))
+         (layer24-packages '((pkg1 :toggle (foo-toggle))))
+         (dotspacemacs-additional-packages '((pkg1 :toggle (bar-toggle))))
+         (mocker-mock-default-record-cls 'mocker-stub-record))
+    (defun layer24/init-pkg1 nil)
+    (mocker-let
+     ((file-exists-p (f) ((:output t :occur 1)))
+      (configuration-layer/layer-usedp (l) ((:output t :occur 1))))
+     (should (equal (list (cfgl-package "pkg1"
+                                        :name 'pkg1
+                                        :owner 'layer24
+                                        :toggle '(bar-toggle)))
+                    (configuration-layer/get-packages layers t))))))
+
 ;; ---------------------------------------------------------------------------
 ;; configuration-layer//configure-package
 ;; ---------------------------------------------------------------------------
@@ -697,6 +790,15 @@
 (ert-deftest
     test-configure-packages-2--package-owned-by-dotfile-is-not-configured()
   (let ((pkg (cfgl-package "pkg" :name 'pkg :owner 'dotfile))
+        (mocker-mock-default-record-cls 'mocker-stub-record))
+    (mocker-let
+     ((configuration-layer//configure-package (p) nil)
+      (spacemacs-buffer/loading-animation nil ((:output nil)))
+      (spacemacs-buffer/message (m) ((:output nil))))
+     (configuration-layer//configure-packages-2 `(,pkg)))))
+
+(ert-deftest test-configure-packages-2--lazy-install-package-is-not-configured()
+  (let ((pkg (cfgl-package "pkg" :name 'pkg :owner 'layer :lazy-install t))
         (mocker-mock-default-record-cls 'mocker-stub-record))
     (mocker-let
      ((configuration-layer//configure-package (p) nil)
@@ -1132,6 +1234,6 @@
   (cl-letf (((symbol-function 'insert) 'identity))
     (should
      (equal
-      (concat "(configuration-layer/lazy-install 'mode "
-              ":extensions '(\"\\\\(\\\\.ext\\\\'\\\\)\"))\n")
-      (configuration-layer//insert-lazy-install-form 'mode "\\(\\.ext\\'\\)")))))
+      (concat "(configuration-layer/lazy-install 'layer "
+              ":extensions '(\"\\\\(\\\\.ext\\\\'\\\\)\" mode))\n")
+      (configuration-layer//insert-lazy-install-form 'layer 'mode "\\(\\.ext\\'\\)")))))

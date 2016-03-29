@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-matchit" "evil-matchit.el" (22238 28974
-;;;;;;  0 0))
-;;; Generated autoloads from evil-matchit.el
+;;;### (autoloads nil "evil-matchit" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit.el"
+;;;;;;  "edcc696cc214fde4672ef722fa015aed")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit.el
 
 (autoload 'evilmi-select-items "evil-matchit" "\
 Select items/tags and the region between them
@@ -70,9 +70,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-c" "evil-matchit-c.el" (22238
-;;;;;;  28974 0 0))
-;;; Generated autoloads from evil-matchit-c.el
+;;;### (autoloads nil "evil-matchit-c" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-c.el"
+;;;;;;  "376e6c82b75b0df0a8fce3320e41633c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-c.el
 
 (autoload 'evilmi-c-get-tag "evil-matchit-c" "\
 
@@ -86,9 +86,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-cmake" "evil-matchit-cmake.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-cmake.el
+;;;### (autoloads nil "evil-matchit-cmake" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-cmake.el"
+;;;;;;  "b9464ceb5260769933a4e92c5508edba")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-cmake.el
 
 (autoload 'evilmi-cmake-get-tag "evil-matchit-cmake" "\
 
@@ -102,9 +102,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-fortran" "evil-matchit-fortran.el"
-;;;;;;  (22238 28973 0 0))
-;;; Generated autoloads from evil-matchit-fortran.el
+;;;### (autoloads nil "evil-matchit-fortran" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-fortran.el"
+;;;;;;  "98d786cdca407a5c687d92fb1e5a98e9")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-fortran.el
 
 (autoload 'evilmi-fortran-get-tag "evil-matchit-fortran" "\
 
@@ -118,9 +118,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-html" "evil-matchit-html.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-html.el
+;;;### (autoloads nil "evil-matchit-html" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-html.el"
+;;;;;;  "e5458740ac1d9fe3307437e89dba7726")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-html.el
 
 (autoload 'evilmi-html-get-tag "evil-matchit-html" "\
 
@@ -134,9 +134,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-javascript" "evil-matchit-javascript.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-javascript.el
+;;;### (autoloads nil "evil-matchit-javascript" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-javascript.el"
+;;;;;;  "ac41fb38066d1f17bbc7288950adb60f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-javascript.el
 
 (autoload 'evilmi-javascript-get-tag "evil-matchit-javascript" "\
 
@@ -150,9 +150,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-latex" "evil-matchit-latex.el"
-;;;;;;  (22238 28973 0 0))
-;;; Generated autoloads from evil-matchit-latex.el
+;;;### (autoloads nil "evil-matchit-latex" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-latex.el"
+;;;;;;  "e5d0d74225e9b1f19c39580c118e5053")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-latex.el
 
 (autoload 'evilmi-latex-get-tag "evil-matchit-latex" "\
 
@@ -166,9 +166,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-org" "evil-matchit-org.el" (22238
-;;;;;;  28974 0 0))
-;;; Generated autoloads from evil-matchit-org.el
+;;;### (autoloads nil "evil-matchit-org" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-org.el"
+;;;;;;  "a3fbe6488ac1eb96474c6ec2c5ac3b24")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-org.el
 
 (autoload 'evilmi-org-get-tag "evil-matchit-org" "\
 
@@ -182,9 +182,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-python" "evil-matchit-python.el"
-;;;;;;  (22238 28973 0 0))
-;;; Generated autoloads from evil-matchit-python.el
+;;;### (autoloads nil "evil-matchit-python" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-python.el"
+;;;;;;  "9627b5afd292ab41018f8a4053351911")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-python.el
 
 (autoload 'evilmi-python-get-tag "evil-matchit-python" "\
 
@@ -198,9 +198,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-ruby" "evil-matchit-ruby.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-ruby.el
+;;;### (autoloads nil "evil-matchit-ruby" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-ruby.el"
+;;;;;;  "4a70f111100d624261bc7e0d87a975fc")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-ruby.el
 
 (autoload 'evilmi-ruby-get-tag "evil-matchit-ruby" "\
 
@@ -214,9 +214,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-script" "evil-matchit-script.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-script.el
+;;;### (autoloads nil "evil-matchit-script" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-script.el"
+;;;;;;  "2206f0cf829fab0973fcb75d476a8611")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-script.el
 
 (autoload 'evilmi-script-get-tag "evil-matchit-script" "\
 
@@ -230,9 +230,9 @@ See `evil-matchit-mode' for more information on Evil-Matchit mode.
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-sdk" "evil-matchit-sdk.el" (22238
-;;;;;;  28974 0 0))
-;;; Generated autoloads from evil-matchit-sdk.el
+;;;### (autoloads nil "evil-matchit-sdk" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sdk.el"
+;;;;;;  "70796f288eaf93440f284bfb99e06a82")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sdk.el
 
 (autoload 'evilmi-sdk-member "evil-matchit-sdk" "\
 check if KEYWORD exist in LIST
@@ -258,9 +258,9 @@ return '(start-point tag-info)
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-sh" "evil-matchit-sh.el" (22238
-;;;;;;  28973 0 0))
-;;; Generated autoloads from evil-matchit-sh.el
+;;;### (autoloads nil "evil-matchit-sh" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sh.el"
+;;;;;;  "137bf40ae96d253b5e7e8f9076849202")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sh.el
 
 (autoload 'evilmi-sh-get-tag "evil-matchit-sh" "\
 
@@ -274,9 +274,9 @@ return '(start-point tag-info)
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-simple" "evil-matchit-simple.el"
-;;;;;;  (22238 28973 0 0))
-;;; Generated autoloads from evil-matchit-simple.el
+;;;### (autoloads nil "evil-matchit-simple" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-simple.el"
+;;;;;;  "dc893baaf16fc4399a1ce8843a6b2c7a")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-simple.el
 
 (autoload 'evilmi-simple-get-tag "evil-matchit-simple" "\
 
@@ -290,9 +290,9 @@ return '(start-point tag-info)
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-sql" "evil-matchit-sql.el" (22238
-;;;;;;  28974 0 0))
-;;; Generated autoloads from evil-matchit-sql.el
+;;;### (autoloads nil "evil-matchit-sql" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sql.el"
+;;;;;;  "0b8e6023525303567e1913906982be20")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sql.el
 
 (autoload 'evilmi-sql-get-tag "evil-matchit-sql" "\
 
@@ -306,9 +306,9 @@ return '(start-point tag-info)
 
 ;;;***
 
-;;;### (autoloads nil "evil-matchit-template" "evil-matchit-template.el"
-;;;;;;  (22238 28974 0 0))
-;;; Generated autoloads from evil-matchit-template.el
+;;;### (autoloads nil "evil-matchit-template" "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-template.el"
+;;;;;;  "9fd537d98417f0dc0d93762a5078bc91")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-template.el
 
 (autoload 'evilmi-template-get-tag "evil-matchit-template" "\
 
@@ -322,8 +322,25 @@ return '(start-point tag-info)
 
 ;;;***
 
-;;;### (autoloads nil nil ("evil-matchit-pkg.el") (22238 28974 71000
-;;;;;;  0))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-c.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-cmake.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-fortran.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-html.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-javascript.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-latex.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-org.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-python.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-ruby.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-script.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sdk.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sh.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-simple.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sql.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-template.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit.el")
+;;;;;;  (22264 47935 260806 163000))
 
 ;;;***
 

@@ -113,11 +113,12 @@ around point as the initial input. If DIR is non nil start in
 that directory."
     (interactive)
     (require 'counsel)
-    (letf* ((initial-input (when use-initial-input
-                             (if (region-active-p)
-                                 (buffer-substring-no-properties
-                                  (region-beginning) (region-end))
-                               (thing-at-point 'symbol t))))
+    (letf* ((initial-input (if use-initial-input
+                               (if (region-active-p)
+                                   (buffer-substring-no-properties
+                                    (region-beginning) (region-end))
+                                 (thing-at-point 'symbol t))
+                             ""))
             (tool (catch 'tool
                     (dolist (tool tools)
                       (when (and (assoc-string tool spacemacs--counsel-commands)
@@ -375,28 +376,28 @@ Helm hack."
                               (require (car repl))
                               (call-interactively (cdr repl))))))
 
-      (defun spacemacs//ivy-hjkl-navigation (&optional arg)
-        "Set navigation on \"hjkl\" for ivy. ARG non nil means
-vim like movements."
-        (if arg
-            (progn
-              ;; better navigation on homerow
-              (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-next-line)
-              (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-previous-line)
-              (define-key ivy-minibuffer-map (kbd "C-h") (kbd "DEL"))
-              ;; Move C-h to C-S-h
-              (define-key ivy-minibuffer-map (kbd "C-S-h") help-map)
-              (define-key ivy-minibuffer-map (kbd "C-l") 'ivy-alt-done)
-              (define-key ivy-minibuffer-map (kbd "<escape>")
-                'minibuffer-keyboard-quit))
+      (defun spacemacs//ivy-hjkl-navigation (style)
+        "Set navigation on 'hjkl' for the given editing STYLE."
+        (cond
+         ((or (eq 'vim style)
+              (and (eq 'hybrid style)
+                   hybrid-mode-enable-hjkl-bindings))
+          (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-next-line)
+          (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-previous-line)
+          (define-key ivy-minibuffer-map (kbd "C-h") (kbd "DEL"))
+          ;; Move C-h to C-S-h
+          (define-key ivy-minibuffer-map (kbd "C-S-h") help-map)
+          (define-key ivy-minibuffer-map (kbd "C-l") 'ivy-alt-done)
+          (define-key ivy-minibuffer-map (kbd "<escape>")
+            'minibuffer-keyboard-quit))
+         (t
           (define-key ivy-minibuffer-map (kbd "C-j") 'ivy-alt-done)
           (define-key ivy-minibuffer-map (kbd "C-k") 'ivy-kill-line)
           (define-key ivy-minibuffer-map (kbd "C-h") nil)
-          (define-key ivy-minibuffer-map (kbd "C-l") nil)))
-      (add-hook 'spacemacs--hjkl-completion-navigation-functions
-                'spacemacs//ivy-hjkl-navigation)
-      (run-hook-with-args 'spacemacs--hjkl-completion-navigation-functions
-                          (member dotspacemacs-editing-style '(vim hybrid)))
+          (define-key ivy-minibuffer-map (kbd "C-l") nil))))
+      (add-hook 'spacemacs-editing-style-hook 'spacemacs//ivy-hjkl-navigation)
+      ;; ensure that the correct bindings are set at startup
+      (spacemacs//ivy-hjkl-navigation dotspacemacs-editing-style)
 
       (defun spacemacs/counsel-up-directory-no-error ()
         "`counsel-up-directory' ignoring errors."

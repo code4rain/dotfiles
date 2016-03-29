@@ -41,7 +41,7 @@ Add backends provided by company-auctex to company-backends.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-auctex-20151102.643/company-auctex-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-auctex-20151102.643/company-auctex.el")
-;;;;;;  (22241 44515 561000 0))
+;;;;;;  (22264 47893 515787 77000))
 
 ;;;***
 

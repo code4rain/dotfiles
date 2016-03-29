@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "spinner" "spinner.el" (22238 29024 0 0))
-;;; Generated autoloads from spinner.el
+;;;### (autoloads nil "spinner" "../../../../../.emacs.d/elpa/spinner-1.7/spinner.el"
+;;;;;;  "1efaa03d313cfce51c7883bbce893fc5")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/spinner-1.7/spinner.el
 
 (autoload 'spinner-create "spinner" "\
 Create a spinner of the given TYPE.
@@ -56,6 +57,12 @@ displaying the spinner. It is safe to cancel the spinner before
 this time, in which case it won't display at all.
 
 \(fn &optional TYPE-OR-OBJECT FPS DELAY)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/spinner-1.7/spinner-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/spinner-1.7/spinner.el") (22264
+;;;;;;  48113 927631 64000))
 
 ;;;***
 

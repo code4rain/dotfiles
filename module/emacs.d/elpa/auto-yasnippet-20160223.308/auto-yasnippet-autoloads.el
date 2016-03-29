@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "auto-yasnippet" "auto-yasnippet.el" (22238
-;;;;;;  32344 0 0))
-;;; Generated autoloads from auto-yasnippet.el
+;;;### (autoloads nil "auto-yasnippet" "../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el"
+;;;;;;  "5daf8841004e86ef1cf96e1d5f0f3bc1")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el
 
 (autoload 'aya-create-one-line "auto-yasnippet" "\
 A simplistic `aya-create' to create only one mirror.
@@ -42,6 +42,12 @@ Insert current snippet at point.
 To save a snippet permanently, create an empty file and call this.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el")
+;;;;;;  (22264 47875 320947 602000))
 
 ;;;***
 

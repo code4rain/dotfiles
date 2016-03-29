@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "vi-tilde-fringe" "vi-tilde-fringe.el" (22238
-;;;;;;  29072 0 0))
-;;; Generated autoloads from vi-tilde-fringe.el
+;;;### (autoloads nil "vi-tilde-fringe" "../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe.el"
+;;;;;;  "cf31dfff04b7ef0d3f1a60507249fa46")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe.el
 
 (autoload 'vi-tilde-fringe-mode "vi-tilde-fringe" "\
 Buffer-local minor mode to display tildes in the fringe when the line is
@@ -33,6 +33,12 @@ Vi-Tilde-Fringe mode is enabled in all buffers where
 See `vi-tilde-fringe-mode' for more information on Vi-Tilde-Fringe mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe.el")
+;;;;;;  (22264 48182 110514 187000))
 
 ;;;***
 

@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "highlight-parentheses" "highlight-parentheses.el"
-;;;;;;  (22238 29007 0 0))
-;;; Generated autoloads from highlight-parentheses.el
+;;;### (autoloads nil "highlight-parentheses" "../../../../../.emacs.d/elpa/highlight-parentheses-20151107.2316/highlight-parentheses.el"
+;;;;;;  "e37d4d800eb2241ca615915975640843")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/highlight-parentheses-20151107.2316/highlight-parentheses.el
 
 (autoload 'highlight-parentheses-mode "highlight-parentheses" "\
 Minor mode to highlight the surrounding parentheses.
@@ -32,6 +32,12 @@ Highlight-Parentheses mode is enabled in all buffers where
 See `highlight-parentheses-mode' for more information on Highlight-Parentheses mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/highlight-parentheses-20151107.2316/highlight-parentheses-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/highlight-parentheses-20151107.2316/highlight-parentheses.el")
+;;;;;;  (22264 48007 262029 384000))
 
 ;;;***
 

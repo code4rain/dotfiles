@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "elisp-slime-nav" "elisp-slime-nav.el" (22238
-;;;;;;  32353 0 0))
-;;; Generated autoloads from elisp-slime-nav.el
+;;;### (autoloads nil "elisp-slime-nav" "../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav.el"
+;;;;;;  "b948c89c1c944d6ce79ca348d6bc93fd")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav.el
 
 (autoload 'elisp-slime-nav-mode "elisp-slime-nav" "\
 Enable Slime-style navigation of elisp symbols using M-. and M-,
@@ -38,6 +38,12 @@ for the symbol to jump to.
 Argument SYM-NAME is the thing to find.
 
 \(fn SYM-NAME)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav.el")
+;;;;;;  (22264 47908 92660 242000))
 
 ;;;***
 

@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "gh-md" "gh-md.el" (22238 32369 0 0))
-;;; Generated autoloads from gh-md.el
+;;;### (autoloads nil "gh-md" "../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el"
+;;;;;;  "576d598df4c69800b2ee39a77ee6643c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el
 
 (defalias 'gh-md-render-region #'gh-md-convert-region)
 
@@ -29,6 +30,12 @@ Export to a file the markdown content from region BEGIN to END.
 Export to a file the markdown content from BUFFER.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el")
+;;;;;;  (22264 47968 736071 385000))
 
 ;;;***
 

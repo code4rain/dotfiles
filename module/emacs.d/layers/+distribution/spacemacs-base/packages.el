@@ -21,10 +21,9 @@
         evil
         evil-ediff
         evil-escape
-        ;; evil-leader
+        (evil-evilified-state :location local :step pre :protected t)
         evil-surround
         evil-visualstar
-        (evil-evilified-state :location local :step pre :protected t)
         exec-path-from-shell
         fill-column-indicator
         help-fns+
@@ -226,14 +225,7 @@
       (defun evil-insert-state-cursor-hide ()
         (setq evil-insert-state-cursor '((hbar . 0))))
 
-      (defun spacemacs/normal-to-insert-state ()
-        "Switches to evil-insert-state if the current state is
-evil-normal state."
-        (when (evil-normal-state-p)
-          (evil-insert-state)))
-
-      (unless (eq dotspacemacs-editing-style 'emacs)
-        (evil-mode 1)))
+      (evil-mode 1))
     :config
     (progn
       ;; bind function keys
@@ -399,7 +391,7 @@ below. Anything else exits."
 
       ;; define text-object for entire buffer
       (evil-define-text-object evil-inner-buffer (count &optional beg end type)
-        (evil-select-paren "\\`" "\\'" beg end type count nil))
+        (list (point-min) (point-max)))
       (define-key evil-inner-text-objects-map "g" 'evil-inner-buffer)
 
       ;; support smart 1parens-strict-mode
@@ -421,11 +413,13 @@ below. Anything else exits."
 
 (defun spacemacs-base/init-evil-escape ()
   (use-package evil-escape
-    :init
-    (unless (eq dotspacemacs-editing-style 'emacs)
-      (evil-escape-mode))
-    :config
-    (spacemacs|hide-lighter evil-escape-mode)))
+    :init (evil-escape-mode)
+    :config (spacemacs|hide-lighter evil-escape-mode)))
+
+(defun spacemacs-base/init-evil-evilified-state ()
+  (use-package evil-evilified-state)
+  (define-key evil-evilified-state-map (kbd dotspacemacs-leader-key)
+    spacemacs-default-map))
 
 (defun spacemacs-base/init-evil-surround ()
   (use-package evil-surround
@@ -447,11 +441,6 @@ below. Anything else exits."
         'evil-visualstar/begin-search-forward)
       (define-key evil-visual-state-map (kbd "#")
         'evil-visualstar/begin-search-backward))))
-
-(defun spacemacs-base/init-evil-evilified-state ()
-  (use-package evil-evilified-state)
-  (define-key evil-evilified-state-map (kbd dotspacemacs-leader-key)
-    spacemacs-default-map))
 
 (defun spacemacs-base/init-exec-path-from-shell ()
   (use-package exec-path-from-shell
@@ -506,14 +495,15 @@ below. Anything else exits."
         (holy-mode))
       (spacemacs|add-toggle holy-mode
         :status holy-mode
-        :on (holy-mode)
+        :on (progn (when (bound-and-true-p hybrid-mode)
+                     (hybrid-mode -1))
+                   (holy-mode))
         :off (holy-mode -1)
         :documentation "Globally toggle holy mode."
         :evil-leader "tEe")
       (spacemacs|diminish holy-mode " Ⓔe" " Ee"))))
 
-(defun spacemacs-base/init-hybrid-mode ())
-(defun spacemacs-base/post-init-evil ()
+(defun spacemacs-base/init-hybrid-mode ()
   (use-package hybrid-mode
     :config
     (progn
@@ -875,24 +865,15 @@ below. Anything else exits."
       "Restart emacs without the spacemacs configuration, enable
 debug-init and load the given list of packages."
       (interactive
-       (let* ((guess (function-called-at-point)))
-         (require 'finder-inf nil t)
-         ;; Load the package list if necessary (but don't activate them).
+       (progn
          (unless package--initialized
            (package-initialize t))
          (let ((packages (append (mapcar 'car package-alist)
                                  (mapcar 'car package-archive-contents)
                                  (mapcar 'car package--builtins))))
-           (unless (memq guess packages)
-             (setq guess nil))
            (setq packages (mapcar 'symbol-name packages))
-           (let ((val
-                  (completing-read-multiple
-                   (if guess
-                       (format "Describe package (default %s): "
-                               guess)
-                     "Describe package: ")
-                   packages nil t nil nil guess)))
+           (let ((val (completing-read-multiple "Packages to load (comma separated): "
+                                                packages nil t)))
              `(,val)))))
       (let ((load-packages-string (mapconcat (lambda (pkg) (format "(use-package %s)" pkg))
                                              packages " ")))

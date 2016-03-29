@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "helm-gtags" "helm-gtags.el" (22250 8291 206156
-;;;;;;  512000))
-;;; Generated autoloads from helm-gtags.el
+;;;### (autoloads nil "helm-gtags" "../../../../../.emacs.d/elpa/helm-gtags-20160313.405/helm-gtags.el"
+;;;;;;  "688cac829ec573bf07ccb3a489f55cc3")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/helm-gtags-20160313.405/helm-gtags.el
 
 (autoload 'helm-gtags-clear-all-cache "helm-gtags" "\
 
@@ -137,6 +137,12 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 \\{helm-gtags-mode-map}
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-gtags-20160313.405/helm-gtags-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/helm-gtags-20160313.405/helm-gtags.el")
+;;;;;;  (22264 47994 435344 65000))
 
 ;;;***
 

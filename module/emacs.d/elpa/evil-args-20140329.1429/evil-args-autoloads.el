@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-args" "evil-args.el" (22238 28963 0 0))
-;;; Generated autoloads from evil-args.el
+;;;### (autoloads nil "evil-args" "../../../../../.emacs.d/elpa/evil-args-20140329.1429/evil-args.el"
+;;;;;;  "964286f95c2e864337299bf78777e477")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-args-20140329.1429/evil-args.el
 
 (autoload 'evil-backward-arg "evil-args" "\
 Move the cursor backward COUNT arguments.
@@ -22,6 +23,12 @@ Move the cursor forward COUNT arguments.
 Move the cursor out of the nearest enclosing matching pairs.
 
 \(fn COUNT)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-args-20140329.1429/evil-args-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-args-20140329.1429/evil-args.el")
+;;;;;;  (22264 47915 814071 719000))
 
 ;;;***
 

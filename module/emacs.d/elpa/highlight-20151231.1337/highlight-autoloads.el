@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "highlight" "highlight.el" (22238 28959 0 0))
-;;; Generated autoloads from highlight.el
+;;;### (autoloads nil "highlight" "../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight.el"
+;;;;;;  "09c9f00b7466963200fe8a8d6266644a")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight.el
 
 (defvar hlt-auto-face-foreground nil "\
 *Foreground color for pseudo faces created from a chosen background.
@@ -555,6 +556,12 @@ arg during Isearch exits Isearch.
 Non-interactively, FACE = nil means unhighlight all faces.
 
 \(fn &optional FACE MSGP MOUSEP BUFFERS STRING)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight.el")
+;;;;;;  (22264 47912 554649 539000))
 
 ;;;***
 

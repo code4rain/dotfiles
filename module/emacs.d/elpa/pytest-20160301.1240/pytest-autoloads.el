@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "pytest" "pytest.el" (22242 40530 835574 652000))
-;;; Generated autoloads from pytest.el
+;;;### (autoloads nil "pytest" "../../../../../.emacs.d/elpa/pytest-20160301.1240/pytest.el"
+;;;;;;  "86de1c8cf41d65a2cd5b24c103323ef0")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/pytest-20160301.1240/pytest.el
 
 (autoload 'pytest-all "pytest" "\
 Run all tests.
@@ -55,6 +56,12 @@ Optional argument FLAGS py.test command line flags.
 Run pytest on testable thing at point, enter debugger on error.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pytest-20160301.1240/pytest-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/pytest-20160301.1240/pytest.el")
+;;;;;;  (22264 48143 424422 352000))
 
 ;;;***
 

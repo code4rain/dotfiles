@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "use-package" "use-package.el" (22238 28877
-;;;;;;  0 0))
-;;; Generated autoloads from use-package.el
+;;;### (autoloads nil "use-package" "../../../../../.emacs.d/elpa/use-package-20160226.1618/use-package.el"
+;;;;;;  "537897c037581f393fd253233479619d")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/use-package-20160226.1618/use-package.el
 
 (autoload 'use-package "use-package" "\
 Declare an Emacs package by specifying a group of configuration options.
@@ -61,6 +61,12 @@ this file.  Usage:
 \(fn NAME &rest ARGS)" nil t)
 
 (put 'use-package 'lisp-indent-function '1)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/use-package-20160226.1618/use-package-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/use-package-20160226.1618/use-package.el")
+;;;;;;  (22264 47768 880780 45000))
 
 ;;;***
 

@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "popwin" "popwin.el" (22238 29065 0 0))
-;;; Generated autoloads from popwin.el
+;;;### (autoloads nil "popwin" "../../../../../.emacs.d/elpa/popwin-20150315.600/popwin.el"
+;;;;;;  "721fa0d68c9305afff89261e16189782")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/popwin-20150315.600/popwin.el
 
 (autoload 'popwin:popup-buffer "popwin" "\
 Show BUFFER in a popup window and return the popup window. If
@@ -65,6 +66,12 @@ Edit file FILENAME with popup window by
 Display *Messages* buffer in a popup window.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/popwin-20150315.600/popwin-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/popwin-20150315.600/popwin.el")
+;;;;;;  (22264 48140 131261 669000))
 
 ;;;***
 

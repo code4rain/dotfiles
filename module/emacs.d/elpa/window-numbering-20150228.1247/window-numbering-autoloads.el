@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "window-numbering" "window-numbering.el" (22238
-;;;;;;  29074 0 0))
-;;; Generated autoloads from window-numbering.el
+;;;### (autoloads nil "window-numbering" "../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering.el"
+;;;;;;  "868fe4d0bdd96dda38d5ca0d7f3e3764")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering.el
 
 (defvar window-numbering-mode nil "\
 Non-nil if Window-Numbering mode is enabled.
@@ -20,6 +20,12 @@ or call the function `window-numbering-mode'.")
 A minor mode that assigns a number to each window.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering.el")
+;;;;;;  (22264 48184 22978 829000))
 
 ;;;***
 

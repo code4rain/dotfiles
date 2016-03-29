@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "company-quickhelp" "company-quickhelp.el"
-;;;;;;  (22238 32349 0 0))
-;;; Generated autoloads from company-quickhelp.el
+;;;### (autoloads nil "company-quickhelp" "../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp.el"
+;;;;;;  "cd93f0e39e92d43587912f9652972524")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp.el
 
 (defvar company-quickhelp-mode nil "\
 Non-nil if Company-Quickhelp mode is enabled.
@@ -20,6 +20,12 @@ or call the function `company-quickhelp-mode'.")
 Provides documentation popups for `company-mode' using `pos-tip'.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp.el")
+;;;;;;  (22264 47895 805778 736000))
 
 ;;;***
 

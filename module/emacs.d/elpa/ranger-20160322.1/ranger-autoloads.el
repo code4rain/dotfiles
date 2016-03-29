@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "ranger" "ranger.el" (22259 16547 200067 564000))
-;;; Generated autoloads from ranger.el
+;;;### (autoloads nil "ranger" "../../../../../.emacs.d/elpa/ranger-20160322.1/ranger.el"
+;;;;;;  "6fc64a0b7c238bf51711754c55eba239")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/ranger-20160322.1/ranger.el
 
 (defvar ranger-key [16] "\
 `dired-mode' key used to toggle `ranger-mode'")
@@ -41,6 +42,12 @@ Major mode emulating the ranger file manager in `dired'.
 \\{ranger-mode-map}
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ranger-20160322.1/ranger-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/ranger-20160322.1/ranger.el")
+;;;;;;  (22264 48147 651206 644000))
 
 ;;;***
 

@@ -9,7 +9,7 @@ Plug 'Align'
 Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
 Plug 'bufexplorer.zip'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'gtags.vim'
@@ -24,7 +24,7 @@ Plug 'surround.vim'
 Plug 't9md/vim-quickhl'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-pandoc'
+"Plug 'vim-pandoc'
 Plug 'vim-scripts/gitignore'
 Plug 'yssl/VIntSearch'
 Plug 'junegunn/vim-peekaboo'
@@ -44,10 +44,10 @@ Plug 'Shougo/unite.vim'
 Plug 'hewes/unite-gtags'
 Plug 'vim-latex/vim-latex'
 "Color
-"Plug 'blerins/flattown'
-"Plug 'itchyny/landscape.vim'
-"Plug 'junegunn/seoul256.vim'
-"Plug 'tomasr/molokai'
+Plug 'blerins/flattown'
+Plug 'itchyny/landscape.vim'
+Plug 'junegunn/seoul256.vim'
+Plug 'tomasr/molokai'
 Plug 'NLKNguyen/papercolor-theme'
 "Plug 'jonathanfilip/vim-lucius'
 "Plug 'trusktr/seti.vim'
@@ -546,7 +546,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vim_after_object
   autocmd!
-  autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ','\t')
+  autocmd VimEnter call after_object#enable('=', ':', '-', '#', ' ','\t')
 augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim after object

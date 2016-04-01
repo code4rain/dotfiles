@@ -1,1 +1,1 @@
-../../vimrc
+/home/alex.jang/.vimrc

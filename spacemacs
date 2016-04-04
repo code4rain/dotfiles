@@ -46,6 +46,7 @@ values."
      markdown
      org
      latex
+     html
      gtags
      python
      (ranger :variables
@@ -53,7 +54,7 @@ values."
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     spell-checking
+     ;; spell-checking
      syntax-checking
      (typography :variables typography-enable-typographic-editing t)
      version-control
@@ -363,6 +364,8 @@ you should place you code here."
                              (- (face-attribute 'default :height) 10))))
   (global-set-key (kbd "<C-mouse-5>") 'font-small)
   (global-set-key (kbd "<C-mouse-4>") 'font-big)
+  (global-set-key (kbd "<C-wheel-down>") 'font-small)
+  (global-set-key (kbd "<C-wheel-up>") 'font-big)
 
   ;; centered-cursor-mode set
   (global-centered-cursor-mode +1)
@@ -376,6 +379,9 @@ you should place you code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(evil-disable-insert-state-bindings t)
+ '(package-selected-packages
+   (quote
+    (web-mode tagedit slim-mode scss-mode sass-mode less-css-mode jade-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data xterm-color pytest org-plus-contrib live-py-mode helm-projectile helm-make projectile helm-gtags helm-ag evil-surround evil-mc evil-lisp-state ace-jump-helm-line auto-complete packed auctex flycheck yasnippet helm helm-core avy markdown-mode magit magit-popup git-commit spinner hydra use-package which-key evil zenburn-theme ws-butler with-editor window-numbering volatile-highlights vi-tilde-fringe uuidgen undo-tree typo toc-org sublime-themes spacemacs-theme spaceline smooth-scrolling smeargle smartparens shell-pop restart-emacs ranger rainbow-delimiters quelpa pyvenv pyenv-mode popwin pkg-info pip-requirements persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-bullets open-junk-file neotree multi-term move-text monokai-theme mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint leuven-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-mode-manager helm-gitignore helm-flyspell helm-flx helm-descbinds helm-company helm-c-yasnippet goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav disaster diminish diff-hl define-word cython-mode company-statistics company-quickhelp company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste bind-map bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent adaptive-wrap ace-window ace-link ac-ispell)))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

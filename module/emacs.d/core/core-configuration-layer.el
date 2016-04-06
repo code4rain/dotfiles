@@ -113,7 +113,7 @@ LAYER has to be installed for this method to work properly."
              :initform elpa
              :type (satisfies (lambda (x)
                                 (or (stringp x)
-                                    (member x '(built-in local site elpa))
+                                    (memq x '(built-in local site elpa))
                                     (and (listp x) (eq 'recipe (car x))))))
              :documentation "Location of the package.")
    (toggle :initarg :toggle
@@ -123,7 +123,7 @@ LAYER has to be installed for this method to work properly."
            "Package is enabled/installed if toggle evaluates to non-nil.")
    (step :initarg :step
          :initform nil
-         :type (satisfies (lambda (x) (member x '(nil pre))))
+         :type (satisfies (lambda (x) (member x '(nil bootstrap pre))))
          :documentation "Initialization step.")
    (lazy-install :initarg :lazy-install
                  :initform nil
@@ -204,6 +204,16 @@ cache folder.")
     (unless (or (package-installed-p 'python) (version< emacs-version "24.3"))
       (add-to-list 'package-archives
                    '("marmalade" . "https://marmalade-repo.org/packages/")))))
+
+(defun configuration-layer//install-quelpa ()
+  "Install `quelpa'."
+  (setq quelpa-verbose init-file-debug
+        quelpa-dir (concat spacemacs-cache-directory "quelpa/")
+        quelpa-build-dir (expand-file-name "build" quelpa-dir)
+        quelpa-persistent-cache-file (expand-file-name "cache" quelpa-dir)
+        quelpa-update-melpa-p nil)
+  (configuration-layer/load-or-install-protected-package 'package-build)
+  (configuration-layer/load-or-install-protected-package 'quelpa))
 
 (defun configuration-layer//resolve-package-archives (archives)
   "Resolve HTTP handlers for each archive in ARCHIVES and return a list
@@ -300,6 +310,8 @@ If NO-INSTALL is non nil then install steps are skipped."
       (lambda (x)
         (not (oref x :lazy-install)))))
     (configuration-layer//configure-packages configuration-layer--packages)
+    (configuration-layer//load-layers-files
+     configuration-layer--layers '("keybindings.el"))
     (when dotspacemacs-delete-orphan-packages
       (configuration-layer/delete-orphan-packages
        configuration-layer--packages))))
@@ -399,7 +411,8 @@ If TOGGLEP is non nil then `:toggle' parameter is ignored."
     (when toggle (oset obj :toggle toggle))
     ;; cannot override protected packages
     (unless copyp
-      (oset obj :protected protected)
+      ;; a bootstrap package is protected
+      (oset obj :protected (or protected (eq 'bootstrap step)))
       (when protected
         (push name-sym configuration-layer--protected-packages)))
     obj))
@@ -698,7 +711,10 @@ If TOGGLEP is non nil then `:toggle' parameter is ignored."
 
 (defun configuration-layer//auto-mode (layer-name mode)
   "Auto mode support of lazily installed layers."
-  (configuration-layer//lazy-install-packages layer-name mode)
+  (let ((layer (object-assoc layer-name :name configuration-layer--layers)))
+    (when (or (null layer)
+              (oref layer :lazy-install))
+      (configuration-layer//lazy-install-packages layer-name mode)))
   (when (fboundp mode) (funcall mode)))
 
 (defun configuration-layer/filter-objects (objects ffunc)
@@ -852,8 +868,10 @@ path."
         (spacemacs-buffer/warning "Unknown layer %s declared in dotfile."
                                   layer-name))))
   (setq configuration-layer--layers (reverse configuration-layer--layers))
-  ;; distribution layer is always first
+  ;; distribution and bootstrap layers are always first
   (push (configuration-layer/make-layer dotspacemacs-distribution)
+        configuration-layer--layers)
+  (push (configuration-layer/make-layer 'spacemacs-bootstrap)
         configuration-layer--layers))
 
 (defun configuration-layer/declare-layers (layer-names)
@@ -911,7 +929,8 @@ path."
 (defun configuration-layer/package-usedp (name)
   "Return non-nil if NAME is the name of a used package."
   (let ((obj (object-assoc name :name configuration-layer--packages)))
-    (when (and obj (not (oref obj :excluded))) (oref obj :owner))))
+    (when (and obj (not (oref obj :excluded)))
+      (not (null (oref obj :owner))))))
 
 (defun  configuration-layer/package-lazy-installp (name)
   "Return non-nil if NAME is the name of a package to be lazily installed."
@@ -930,19 +949,17 @@ path."
   "Configure LAYER."
   (configuration-layer//set-layer-variables layer)
   (configuration-layer//load-layer-files layer '("funcs.el"
-                                                 "config.el"
-                                                 "keybindings.el")))
+                                                 "config.el")))
 
 (defun configuration-layer//declare-packages (layers)
   "Declare all packages contained in LAYERS."
-  (let ((layers2 layers)
-        (warning-minimum-level :error))
-    (configuration-layer//load-layers-files layers2 '("packages.el"
-                                                      "packages-config.el"
-                                                      "packages-funcs.el"))
+  (let ((warning-minimum-level :error))
+    (configuration-layer//load-layers-files layers '("packages.el"
+                                                     "packages-config.el"
+                                                     "packages-funcs.el"))
     ;; gather all the packages of current layer
     (configuration-layer//sort-packages (configuration-layer/get-packages
-                                         layers2 t))))
+                                         layers t))))
 
 (defun configuration-layer//load-layers-files (layers files)
   "Load the files of list FILES for all passed LAYERS."
@@ -955,9 +972,24 @@ path."
     (let ((file (concat (oref layer :dir) file)))
       (if (file-exists-p file) (load file)))))
 
-(defun configuration-layer/configured-packages-count ()
-  "Return the number of configured packages."
-  (length configuration-layer--packages))
+(defun configuration-layer/configured-packages-stats (packages)
+  "Return a statistics alist regarding the number of configured PACKAGES."
+  `((total ,(length packages))
+    (elpa ,(length (configuration-layer/filter-objects
+                    packages (lambda (x)
+                               (eq 'elpa (oref x :location))))))
+    (recipe ,(length (configuration-layer/filter-objects
+                      packages
+                      (lambda (x)
+                        (let ((location (oref x :location)))
+                          (and (listp location)
+                               (eq 'recipe (car location))))))))
+    (local ,(length (configuration-layer/filter-objects
+                     packages (lambda (x)
+                                (memq (oref x :location) '(local site))))))
+    (built-in ,(length (configuration-layer/filter-objects
+                        packages (lambda (x)
+                                   (eq 'built-in (oref x :location))))))))
 
 (defun configuration-layer//install-package (pkg)
   "Unconditionally install the package PKG."
@@ -968,6 +1000,7 @@ path."
              (if layer "package" "dependency")
              pkg-name (if layer (format "@%S" layer) "")
              installed-count noinst-count) t)
+    (spacemacs//redisplay)
     (unless (package-installed-p pkg-name)
       (condition-case-unless-debug err
           (cond
@@ -983,12 +1016,13 @@ path."
          (configuration-layer//increment-error-count)
          (spacemacs-buffer/append
           (format (concat "\nAn error occurred while installing %s "
-                          "(error: %s)\n") pkg-name err)))))))
+                          "(error: %s)\n") pkg-name err))
+         (spacemacs//redisplay))))))
 
 (defun configuration-layer//lazy-install-p (layer-name)
   "Return non nil if the layer with LAYER-NAME should be lazy installed."
-  (or (memq dotspacemacs-enable-lazy-installation '(all t))
-      (and (eq 'unused dotspacemacs-enable-lazy-installation)
+  (or (eq 'all dotspacemacs-enable-lazy-installation)
+      (and (memq dotspacemacs-enable-lazy-installation '(unused t))
            (not (configuration-layer/layer-usedp layer-name)))))
 
 (defun configuration-layer//lazy-install-packages (layer-name mode)
@@ -1023,11 +1057,14 @@ path."
         (oset layer :lazy-install nil)
         (configuration-layer//install-packages sorted-inst)
         (configuration-layer//configure-packages sorted-config)
+        (configuration-layer//load-layer-files layer '("keybindings.el"))
         (switch-to-buffer last-buffer)))))
 
 (defun configuration-layer//install-packages (packages)
   "Install PACKAGES which are not lazy installed."
   (interactive)
+  ;; ensure we have quelpa available first
+  (configuration-layer//install-quelpa)
   (let* ((noinst-pkg-names
           (configuration-layer//get-uninstalled-packages
            (mapcar 'car (object-assoc-list :name packages))))
@@ -1040,11 +1077,11 @@ path."
                noinst-count))
       (configuration-layer/retrieve-package-archives)
       (setq installed-count 0)
+      (spacemacs//redisplay)
       (dolist (pkg-name noinst-pkg-names)
         (setq installed-count (1+ installed-count))
         (configuration-layer//install-package
-         (object-assoc pkg-name :name configuration-layer--packages))
-        (spacemacs//redisplay))
+         (object-assoc pkg-name :name configuration-layer--packages)))
       (spacemacs-buffer/append "\n"))))
 
 (defun configuration-layer//install-from-elpa (pkg-name)
@@ -1141,11 +1178,17 @@ path."
 (defun configuration-layer//configure-packages (packages)
   "Configure all passed PACKAGES honoring the steps order."
   (setq spacemacs-loading-dots-chunk-threshold
-        (/ (configuration-layer/configured-packages-count)
+        (/ (length configuration-layer--packages)
            spacemacs-loading-dots-chunk-count))
+  (spacemacs-buffer/message "+ Configuring bootstrap packages...")
+  (configuration-layer//configure-packages-2
+   (configuration-layer/filter-objects
+    packages (lambda (x) (eq 'bootstrap (oref x :step)))))
+  (spacemacs-buffer/message "+ Configuring pre packages...")
   (configuration-layer//configure-packages-2
    (configuration-layer/filter-objects
     packages (lambda (x) (eq 'pre (oref x :step)))))
+  (spacemacs-buffer/message "+ Configuring packages...")
   (configuration-layer//configure-packages-2
    (configuration-layer/filter-objects
     packages (lambda (x) (null (oref x :step))))))
@@ -1651,6 +1694,55 @@ to select one."
       (dolist (x mode-exts)
         (configuration-layer//insert-lazy-install-form
          layer-name (car x) (cdr x))))))
+
+(defun configuration-layer/display-summary (start-time)
+  "Display a summary of loading time."
+  (let ((elapsed (float-time (time-subtract (current-time) emacs-start-time)))
+        (stats (configuration-layer/configured-packages-stats
+                configuration-layer--packages)))
+    (spacemacs-buffer/append
+     (format "\n%s packages loaded in %.3fs (e:%s r:%s l:%s b:%s)\n"
+             (cadr (assq 'total stats))
+             elapsed
+             (cadr (assq 'elpa stats))
+             (cadr (assq 'recipe stats))
+             (cadr (assq 'local stats))
+             (cadr (assq 'built-in stats))))))
+
+(defun configuration-layer/load-or-install-protected-package
+    (pkg &optional log file-to-load)
+  "Load PKG package, and protect it against being deleted as an orphan.
+See `configuration-layer/load-or-install-package' for more information."
+  (push pkg configuration-layer--protected-packages)
+  (configuration-layer/load-or-install-package pkg log file-to-load))
+
+(defun configuration-layer/load-or-install-package
+    (pkg &optional log file-to-load)
+  "Load PKG package. PKG will be installed if it is not already installed.
+Whenever the initial require fails the absolute path to the package
+directory is returned.
+If LOG is non-nil a message is displayed in spacemacs-buffer-mode buffer.
+FILE-TO-LOAD is an explicit file to load after the installation."
+  (let ((warning-minimum-level :error))
+    (unless (require pkg nil 'noerror)
+      ;; not installed, we try to initialize package.el only if required to
+      ;; precious seconds during boot time
+      (require 'cl)
+      (let ((pkg-elpa-dir (spacemacs//get-package-directory pkg)))
+        (if pkg-elpa-dir
+            (add-to-list 'load-path pkg-elpa-dir)
+          ;; install the package
+          (when log
+            (spacemacs-buffer/append
+             (format "(Bootstrap) Installing %s...\n" pkg))
+            (spacemacs//redisplay))
+          (configuration-layer/retrieve-package-archives 'quiet)
+          (package-install pkg)
+          (setq pkg-elpa-dir (spacemacs//get-package-directory pkg)))
+        (require pkg nil 'noerror)
+        (when file-to-load
+          (load-file (concat pkg-elpa-dir file-to-load)))
+        pkg-elpa-dir))))
 
 (defun configuration-layer//increment-error-count ()
   "Increment the error counter."

@@ -47,7 +47,7 @@ any other key exits this function.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/buffer-move-20160108.708/buffer-move.el")
-;;;;;;  (22264 47879 6389 887000))
+;;;;;;  (22276 52527 679034 0))
 
 ;;;***
 

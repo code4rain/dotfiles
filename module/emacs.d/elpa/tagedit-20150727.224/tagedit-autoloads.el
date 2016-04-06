@@ -1,7 +1,7 @@
 ;;; tagedit-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "tagedit" "../../../../../.emacs.d/elpa/tagedit-20150727.224/tagedit.el"
 ;;;;;;  "b67a1777d1419c2f05c648f6f17e43b2")
@@ -116,7 +116,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/tagedit-20150727.224/tagedit-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/tagedit-20150727.224/tagedit.el")
-;;;;;;  (22274 36947 0 0))
+;;;;;;  (22276 52983 318095 100000))
 
 ;;;***
 

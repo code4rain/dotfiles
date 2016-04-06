@@ -1,7 +1,7 @@
 ;;; ace-jump-helm-line-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "ace-jump-helm-line" "../../../../../.emacs.d/elpa/ace-jump-helm-line-20160329.1218/ace-jump-helm-line.el"
 ;;;;;;  "5346ed695ee4314c9df38eb0f0853b33")
@@ -47,7 +47,7 @@ Automatically show line labels in `helm'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ace-jump-helm-line-20160329.1218/ace-jump-helm-line-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ace-jump-helm-line-20160329.1218/ace-jump-helm-line.el")
-;;;;;;  (22274 36184 0 0))
+;;;;;;  (22276 52397 522589 500000))
 
 ;;;***
 

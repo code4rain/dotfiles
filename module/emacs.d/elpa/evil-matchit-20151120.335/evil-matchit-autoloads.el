@@ -340,7 +340,7 @@ return '(start-point tag-info)
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-sql.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit-template.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-matchit-20151120.335/evil-matchit.el")
-;;;;;;  (22264 47935 260806 163000))
+;;;;;;  (22276 52655 630352 400000))
 
 ;;;***
 

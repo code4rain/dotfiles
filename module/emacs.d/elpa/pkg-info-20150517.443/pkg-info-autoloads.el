@@ -116,7 +116,7 @@ version.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pkg-info-20150517.443/pkg-info-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pkg-info-20150517.443/pkg-info.el")
-;;;;;;  (22264 47959 41390 21000))
+;;;;;;  (22276 52687 543177 700000))
 
 ;;;***
 

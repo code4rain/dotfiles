@@ -47,7 +47,7 @@ Turns off visual star selection.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-visualstar-20160222.1648/evil-visualstar-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-visualstar-20160222.1648/evil-visualstar.el")
-;;;;;;  (22264 47943 335946 478000))
+;;;;;;  (22276 52669 280133 100000))
 
 ;;;***
 

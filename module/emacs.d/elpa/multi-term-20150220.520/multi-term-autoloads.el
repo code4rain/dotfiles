@@ -45,7 +45,7 @@ Select the `multi-term' dedicated window.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el")
-;;;;;;  (22264 48042 100513 363000))
+;;;;;;  (22276 52808 339086 900000))
 
 ;;;***
 

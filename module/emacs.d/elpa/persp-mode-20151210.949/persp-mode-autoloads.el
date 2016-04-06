@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "persp-mode" "persp-mode.el" (22264 48135 592341
-;;;;;;  961000))
-;;; Generated autoloads from persp-mode.el
+;;;### (autoloads nil "persp-mode" "../../../../../.emacs.d/elpa/persp-mode-20151210.949/persp-mode.el"
+;;;;;;  "926a1a02df4d6c94a3f4f298bc768e1c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/persp-mode-20151210.949/persp-mode.el
 
 (defvar persp-mode nil "\
 Non-nil if Persp mode is enabled.
@@ -22,6 +22,12 @@ When active, keeps track of multiple 'perspectives',
 named collections of buffers and window configurations.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/persp-mode-20151210.949/persp-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/persp-mode-20151210.949/persp-mode.el")
+;;;;;;  (22276 52948 48077 800000))
 
 ;;;***
 

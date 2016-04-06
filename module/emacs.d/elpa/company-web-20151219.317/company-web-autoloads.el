@@ -1,7 +1,7 @@
 ;;; company-web-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "company-web-html" "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web-html.el"
 ;;;;;;  "974b4b2963b8ae982903f84f0c9f0c9e")
@@ -42,7 +42,7 @@
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web-slim.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web.el")
-;;;;;;  (22274 36887 0 0))
+;;;;;;  (22276 52576 885848 500000))
 
 ;;;***
 

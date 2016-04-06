@@ -1,7 +1,7 @@
 ;;; emmet-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "emmet-mode" "../../../../../.emacs.d/elpa/emmet-mode-20151213.738/emmet-mode.el"
 ;;;;;;  "c3b2923b3d01c9093389ae34bc968a0e")
@@ -72,7 +72,7 @@ Wrap region with markup.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/emmet-mode-20151213.738/emmet-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/emmet-mode-20151213.738/emmet-mode.el")
-;;;;;;  (22274 36896 0 0))
+;;;;;;  (22276 52589 131548 900000))
 
 ;;;***
 

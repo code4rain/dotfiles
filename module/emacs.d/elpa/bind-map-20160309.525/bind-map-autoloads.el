@@ -126,7 +126,7 @@ series of KEY DEF pairs. Each KEY should be a string suitable for
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/bind-map-20160309.525/bind-map-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/bind-map-20160309.525/bind-map.el")
-;;;;;;  (22264 47765 93651 45000))
+;;;;;;  (22276 52524 851872 300000))
 
 ;;;***
 

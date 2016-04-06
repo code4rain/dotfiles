@@ -8,7 +8,7 @@
 ;;;;;;  "../../../../../.emacs.d/elpa/spaceline-20160229.1115/spaceline-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/spaceline-20160229.1115/spaceline-segments.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/spaceline-20160229.1115/spaceline.el")
-;;;;;;  (22264 48161 447073 567000))
+;;;;;;  (22276 52980 441930 600000))
 
 ;;;***
 

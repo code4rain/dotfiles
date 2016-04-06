@@ -40,7 +40,7 @@ See `ws-butler-mode' for more information on Ws-Butler mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ws-butler-20150126.759/ws-butler.el")
-;;;;;;  (22264 48184 925010 698000))
+;;;;;;  (22276 53004 652315 300000))
 
 ;;;***
 

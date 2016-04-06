@@ -123,7 +123,7 @@ Do dired actions asynchronously.
 ;;;;;;  "../../../../../.emacs.d/elpa/async-20160223.146/async.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/async-20160223.146/dired-async.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/async-20160223.146/smtpmail-async.el")
-;;;;;;  (22264 47778 244958 598000))
+;;;;;;  (22276 52376 155367 400000))
 
 ;;;***
 

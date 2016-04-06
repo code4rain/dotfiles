@@ -35,7 +35,7 @@ Export to a file the markdown content from BUFFER.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el")
-;;;;;;  (22264 47968 736071 385000))
+;;;;;;  (22276 52701 58950 800000))
 
 ;;;***
 

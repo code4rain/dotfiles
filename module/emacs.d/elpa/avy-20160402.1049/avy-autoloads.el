@@ -1,7 +1,7 @@
 ;;; avy-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "avy" "../../../../../.emacs.d/elpa/avy-20160402.1049/avy.el"
 ;;;;;;  "96d36cc4a91507cd53198ce3f33f373d")
@@ -122,7 +122,7 @@ The window scope is determined by `avy-all-windows' (ARG negates it).
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/avy-20160402.1049/avy-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/avy-20160402.1049/avy.el")
-;;;;;;  (22274 35366 0 0))
+;;;;;;  (22276 52382 713742 500000))
 
 ;;;***
 

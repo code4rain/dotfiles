@@ -138,7 +138,7 @@ Toggle displaying `diff-hl-mode' highlights on the margin.
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl-margin.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl.el")
-;;;;;;  (22264 47904 791664 622000))
+;;;;;;  (22276 52582 63144 600000))
 
 ;;;***
 

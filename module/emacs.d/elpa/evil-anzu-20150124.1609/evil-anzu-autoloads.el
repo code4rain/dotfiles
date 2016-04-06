@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-anzu-20150124.1609/evil-anzu-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-anzu-20150124.1609/evil-anzu.el")
-;;;;;;  (22264 47915 94741 702000))
+;;;;;;  (22276 52613 848962 700000))
 
 ;;;***
 

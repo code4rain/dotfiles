@@ -26,7 +26,7 @@ Create a snippet from region.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-c-yasnippet-20151231.10/helm-c-yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-c-yasnippet-20151231.10/helm-c-yasnippet.el")
-;;;;;;  (22264 47987 609722 405000))
+;;;;;;  (22276 52730 873656 100000))
 
 ;;;***
 

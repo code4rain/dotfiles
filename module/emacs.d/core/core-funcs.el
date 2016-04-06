@@ -14,38 +14,16 @@
 (defvar spacemacs-repl-list '()
   "List of all registered REPLs.")
 
-(defun spacemacs/load-or-install-protected-package (pkg &optional log file-to-load)
-  "Load PKG package, and protect it against being deleted as an orphan.
-See `spacemacs/load-or-install-package' for more information."
-  (push pkg configuration-layer--protected-packages)
-  (spacemacs/load-or-install-package pkg log file-to-load))
+(defun spacemacs/system-is-mac ()
+  (eq system-type 'darwin))
+(defun spacemacs/system-is-linux ()
+  (eq system-type 'gnu/linux))
+(defun spacemacs/system-is-mswindows ()
+  (eq system-type 'windows-nt))
 
-(defun spacemacs/load-or-install-package (pkg &optional log file-to-load)
-  "Load PKG package. PKG will be installed if it is not already installed.
-Whenever the initial require fails the absolute path to the package
-directory is returned.
-If LOG is non-nil a message is displayed in spacemacs-buffer-mode buffer.
-FILE-TO-LOAD is an explicit file to load after the installation."
-  (let ((warning-minimum-level :error))
-    (unless (require pkg nil 'noerror)
-      ;; not installed, we try to initialize package.el only if required to
-      ;; precious seconds during boot time
-      (require 'cl)
-      (let ((pkg-elpa-dir (spacemacs//get-package-directory pkg)))
-        (if pkg-elpa-dir
-            (add-to-list 'load-path pkg-elpa-dir)
-          ;; install the package
-          (when log
-            (spacemacs-buffer/append
-             (format "(Bootstrap) Installing %s...\n" pkg))
-            (spacemacs//redisplay))
-          (configuration-layer/retrieve-package-archives 'quiet)
-          (package-install pkg)
-          (setq pkg-elpa-dir (spacemacs//get-package-directory pkg)))
-        (require pkg nil 'noerror)
-        (when file-to-load
-          (load-file (concat pkg-elpa-dir file-to-load)))
-        pkg-elpa-dir))))
+(defun spacemacs/window-system-is-mac ()
+  ;; ns is returned instead of mac on Emacs 25+
+  (memq (window-system) '(mac ns)))
 
 (defun spacemacs//get-package-directory (pkg)
   "Return the directory of PKG. Return nil if not found."
@@ -151,16 +129,13 @@ Supported properties:
      (when evil-leader
        `((dolist (key ',evil-leader)
             (spacemacs/set-leader-keys key ',func))))
-
      (when evil-leader-for-mode
        `((dolist (val ',evil-leader-for-mode)
           (spacemacs/set-leader-keys-for-major-mode
             (car val) (cdr val) ',func))))
-
      (when global-key
        `((dolist (key ',global-key)
           (global-set-key (kbd key) ',func))))
-
      (when def-key
        `((dolist (val ',def-key)
           (define-key (eval (car val)) (kbd (cdr val)) ',func)))))))
@@ -168,27 +143,38 @@ Supported properties:
 (defun spacemacs/view-org-file (file &optional anchor-text expand-scope)
   "Open the change log for the current version."
   (interactive)
+  (require 'space-doc)
   (find-file file)
   (org-indent-mode)
   (view-mode)
+  (space-doc-mode)
   (goto-char (point-min))
-
   (when anchor-text
-    (re-search-forward anchor-text))
+    ;; If `anchor-text' is GitHub style link.
+    (if (string-prefix-p "#" anchor-text)
+        ;; If the toc-org package is loaded.
+        (if (configuration-layer/package-usedp 'toc-org)
+            ;; For each heading. Search the heading that corresponds
+            ;; to `anchor-text'.
+            (while (and (re-search-forward "^[\\*]+\s\\(.*\\).*$" nil t)
+                        (not (string= (toc-org-hrefify-gh (match-string 1))
+                                      anchor-text))))
+          ;; This is not a problem because without the space-doc package
+          ;; those links will be opened in the browser.
+          (message (format (concat "Can't follow the GitHub style anchor: '%s' "
+                                   "without the org layer.") anchor-text)))
+      (re-search-forward anchor-text)))
   (beginning-of-line)
-
   (cond
    ((eq expand-scope 'subtree)
     (outline-show-subtree))
    ((eq expand-scope 'all)
     (outline-show-all))
    (t nil))
-
   ;; Make ~SPC ,~ work, reference:
   ;; http://stackoverflow.com/questions/24169333/how-can-i-emphasize-or-verbatim-quote-a-comma-in-org-mode
   (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\n")
   (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
-
   (setq-local org-emphasis-alist '(("*" bold)
                                    ("/" italic)
                                    ("_" underline)
@@ -196,7 +182,6 @@ Supported properties:
                                    ("~" org-kbd)
                                    ("+"
                                     (:strike-through t))))
-
   (setq-local org-hide-emphasis-markers t))
 
 (defun spacemacs//test-var (pred var test-desc)

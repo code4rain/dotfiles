@@ -16,7 +16,7 @@ Enable bracketed paste mode support on the terminal.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/bracketed-paste-20140222.1801/bracketed-paste-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/bracketed-paste-20140222.1801/bracketed-paste.el")
-;;;;;;  (22264 47877 610576 832000))
+;;;;;;  (22276 52526 259952 900000))
 
 ;;;***
 

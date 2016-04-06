@@ -17,7 +17,7 @@ PORT defaults to `gntp-server-port'
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gntp-20141024.1950/gntp-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gntp-20141024.1950/gntp.el")
-;;;;;;  (22264 48084 424946 58000))
+;;;;;;  (22276 52864 202282 0))
 
 ;;;***
 

@@ -18,10 +18,14 @@
       (unless (getenv var)
         (exec-path-from-shell-copy-env var))))
 
-  (add-hook 'go-mode-hook (lambda () (setq-local tab-width 8)))
-
   (use-package go-mode
     :defer t
+    :init
+    (progn
+      (defun spacemacs//go-set-tab-width ()
+        "Set the tab width."
+        (setq-local tab-width go-tab-width))
+      (add-hook 'go-mode-hook 'spacemacs//go-set-tab-width))
     :config
     (progn
       (add-hook 'before-save-hook 'gofmt-before-save)

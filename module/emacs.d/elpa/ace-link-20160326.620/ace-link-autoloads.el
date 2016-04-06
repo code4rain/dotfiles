@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "ace-link" "ace-link.el" (22264 47788 172342
-;;;;;;  2000))
-;;; Generated autoloads from ace-link.el
+;;;### (autoloads nil "ace-link" "../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link.el"
+;;;;;;  "d64f869be54bb6831fcfc30f460953aa")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link.el
 
 (autoload 'ace-link "ace-link" "\
 Call the ace link function for the current `major-mode'
@@ -61,6 +61,12 @@ Open a visible link in a goto-address buffer.
 Bind KEY to appropriate functions in appropriate keymaps.
 
 \(fn &optional KEY)" nil nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link.el")
+;;;;;;  (22276 52399 125681 200000))
 
 ;;;***
 

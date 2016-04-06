@@ -98,7 +98,7 @@ List of modes which derive from `text-mode' for which text mode expansions are n
 ;;;;;;  "../../../../../.emacs.d/elpa/expand-region-20150902.558/text-mode-expansions.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/expand-region-20150902.558/the-org-mode-expansions.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/expand-region-20150902.558/web-mode-expansions.el")
-;;;;;;  (22264 47947 219172 434000))
+;;;;;;  (22276 52673 939399 600000))
 
 ;;;***
 

@@ -43,7 +43,7 @@ Argument SYM-NAME is the thing to find.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/elisp-slime-nav-20160128.1109/elisp-slime-nav.el")
-;;;;;;  (22264 47908 92660 242000))
+;;;;;;  (22276 52587 147435 400000))
 
 ;;;***
 

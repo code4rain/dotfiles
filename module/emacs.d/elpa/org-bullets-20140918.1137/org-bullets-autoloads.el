@@ -16,7 +16,7 @@ UTF8 Bullets for org-mode
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets.el")
-;;;;;;  (22264 48052 853313 783000))
+;;;;;;  (22276 52813 464380 0))
 
 ;;;***
 

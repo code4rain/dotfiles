@@ -26,7 +26,7 @@ Highlight regions by age of commits.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el")
-;;;;;;  (22264 48151 855082 799000))
+;;;;;;  (22276 52974 75566 400000))
 
 ;;;***
 

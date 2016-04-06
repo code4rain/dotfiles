@@ -37,7 +37,7 @@ Minor mode for pyenv interaction.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pyenv-mode-20160221.1123/pyenv-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pyenv-mode-20160221.1123/pyenv-mode.el")
-;;;;;;  (22264 48142 621396 769000))
+;;;;;;  (22276 52955 638511 900000))
 
 ;;;***
 

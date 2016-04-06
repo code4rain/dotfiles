@@ -2577,7 +2577,7 @@ This function returns BUFFER.
 
 \(fn BACKEND BUFFER &optional ASYNC SUBTREEP VISIBLE-ONLY BODY-ONLY EXT-PLIST POST-PROCESS)" nil nil)
 
-(function-put 'org-export-to-buffer 'lisp-indent-function '2)
+(put 'org-export-to-buffer 'lisp-indent-function '2)
 
 (autoload 'org-export-to-file "ox" "\
 Call `org-export-as' with output to a specified file.
@@ -2613,7 +2613,7 @@ or FILE.
 
 \(fn BACKEND FILE &optional ASYNC SUBTREEP VISIBLE-ONLY BODY-ONLY EXT-PLIST POST-PROCESS)" nil nil)
 
-(function-put 'org-export-to-file 'lisp-indent-function '2)
+(put 'org-export-to-file 'lisp-indent-function '2)
 
 (autoload 'org-export-dispatch "ox" "\
 Export dispatcher for Org mode.

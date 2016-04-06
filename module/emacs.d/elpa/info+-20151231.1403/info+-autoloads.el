@@ -187,7 +187,7 @@ If key's command cannot be found by looking in indexes, then
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/info+-20151231.1403/info+-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/info+-20151231.1403/info+.el")
-;;;;;;  (22264 48014 422359 629000))
+;;;;;;  (22276 52778 336370 800000))
 
 ;;;***
 

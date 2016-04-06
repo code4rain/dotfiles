@@ -561,7 +561,7 @@ Non-interactively, FACE = nil means unhighlight all faces.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/highlight-20151231.1337/highlight.el")
-;;;;;;  (22264 47912 554649 539000))
+;;;;;;  (22276 52597 88004 0))
 
 ;;;***
 

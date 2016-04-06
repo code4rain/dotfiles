@@ -30,7 +30,7 @@ This function uses `evil-numbers/inc-at-pt'
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-numbers-20140606.551/evil-numbers-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-numbers-20140606.551/evil-numbers.el")
-;;;;;;  (22264 47940 109269 388000))
+;;;;;;  (22276 52663 140782 0))
 
 ;;;***
 

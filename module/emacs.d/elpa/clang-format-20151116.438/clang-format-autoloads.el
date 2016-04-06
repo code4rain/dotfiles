@@ -25,7 +25,7 @@ Use clang-format to format the current buffer according to STYLE.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/clang-format-20151116.438/clang-format-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/clang-format-20151116.438/clang-format.el")
-;;;;;;  (22264 47881 329807 24000))
+;;;;;;  (22276 52529 417133 400000))
 
 ;;;***
 

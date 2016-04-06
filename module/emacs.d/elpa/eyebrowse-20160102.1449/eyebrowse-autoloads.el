@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "eyebrowse" "eyebrowse.el" (22264 47949 540341
-;;;;;;  983000))
-;;; Generated autoloads from eyebrowse.el
+;;;### (autoloads nil "eyebrowse" "../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse.el"
+;;;;;;  "6616b7e5327979b7a464221b17fa17e7")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse.el
 
 (autoload 'eyebrowse-setup-evil-keys "eyebrowse" "\
 Set up key bindings specific to Evil.
@@ -38,6 +38,12 @@ switching window configurations.  It tries mimicking the tab
 behaviour of `ranger`, a file manager.
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse.el")
+;;;;;;  (22276 52678 447657 500000))
 
 ;;;***
 

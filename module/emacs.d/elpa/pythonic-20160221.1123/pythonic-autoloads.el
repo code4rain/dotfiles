@@ -21,7 +21,7 @@ Deactivate python virtual environment.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pythonic-20160221.1123/pythonic-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pythonic-20160221.1123/pythonic.el")
-;;;;;;  (22264 47797 409359 922000))
+;;;;;;  (22276 52410 356323 500000))
 
 ;;;***
 

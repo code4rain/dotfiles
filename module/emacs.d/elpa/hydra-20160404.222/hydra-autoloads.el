@@ -1,7 +1,7 @@
 ;;; hydra-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "hydra" "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra.el"
 ;;;;;;  "fa31a6d1f4ad93dfdb2f21a9b156ea81")
@@ -59,7 +59,7 @@ result of `defhydra'.
 
 \(fn NAME BODY &optional DOCSTRING &rest HEADS)" nil t)
 
-(function-put 'defhydra 'lisp-indent-function 'defun)
+(put 'defhydra 'lisp-indent-function 'defun)
 
 ;;;***
 
@@ -69,7 +69,7 @@ result of `defhydra'.
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/lv.el")
-;;;;;;  (22274 35290 0 0))
+;;;;;;  (22276 52772 508037 400000))
 
 ;;;***
 

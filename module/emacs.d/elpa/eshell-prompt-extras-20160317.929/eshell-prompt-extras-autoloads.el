@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eshell-prompt-extras-20160317.929/eshell-prompt-extras-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/eshell-prompt-extras-20160317.929/eshell-prompt-extras.el")
-;;;;;;  (22264 47909 547503 412000))
+;;;;;;  (22276 52593 124777 300000))
 
 ;;;***
 

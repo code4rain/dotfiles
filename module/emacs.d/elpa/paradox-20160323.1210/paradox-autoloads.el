@@ -69,7 +69,7 @@ empty.  Passing a non-nil REFRESH argument forces this update.
 ;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-menu.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/paradox-20160323.1210/paradox.el")
-;;;;;;  (22264 48115 750447 52000))
+;;;;;;  (22276 52918 59362 500000))
 
 ;;;***
 

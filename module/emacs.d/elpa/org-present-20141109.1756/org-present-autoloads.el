@@ -16,7 +16,7 @@ init.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-present-20141109.1756/org-present-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-present-20141109.1756/org-present.el")
-;;;;;;  (22264 48108 955095 392000))
+;;;;;;  (22276 52907 309747 700000))
 
 ;;;***
 

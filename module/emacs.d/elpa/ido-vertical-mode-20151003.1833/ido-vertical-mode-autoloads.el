@@ -25,7 +25,7 @@ Makes ido-mode display vertically.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ido-vertical-mode-20151003.1833/ido-vertical-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ido-vertical-mode-20151003.1833/ido-vertical-mode.el")
-;;;;;;  (22264 48012 108662 821000))
+;;;;;;  (22276 52774 359143 300000))
 
 ;;;***
 

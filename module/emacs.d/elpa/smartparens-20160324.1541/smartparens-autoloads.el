@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "smartparens" "smartparens.el" (22264 47922
-;;;;;;  880341 986000))
-;;; Generated autoloads from smartparens.el
+;;;### (autoloads nil "smartparens" "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens.el"
+;;;;;;  "e4693212400558eb99bd50f3938fda04")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens.el
 
 (autoload 'sp-cheat-sheet "smartparens" "\
 Generate a cheat sheet of all the smartparens interactive functions.
@@ -178,11 +178,20 @@ Turn off `show-smartparens-mode'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("smartparens-config.el" "smartparens-haskell.el"
-;;;;;;  "smartparens-html.el" "smartparens-latex.el" "smartparens-lua.el"
-;;;;;;  "smartparens-pkg.el" "smartparens-python.el" "smartparens-racket.el"
-;;;;;;  "smartparens-ruby.el" "smartparens-rust.el" "smartparens-scala.el")
-;;;;;;  (22264 47923 177538 513000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-config.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-haskell.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-html.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-latex.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-lua.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-python.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-racket.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-ruby.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-rust.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens-scala.el"
+;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160324.1541/smartparens.el")
+;;;;;;  (22276 52631 40946 0))
 
 ;;;***
 

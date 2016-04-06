@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter-fringe+-20140729.403/git-gutter-fringe+-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-gutter-fringe+-20140729.403/git-gutter-fringe+.el")
-;;;;;;  (22264 47973 7288 410000))
+;;;;;;  (22276 52710 11462 800000))
 
 ;;;***
 

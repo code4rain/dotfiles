@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/parent-mode-20150824.1600/parent-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/parent-mode-20150824.1600/parent-mode.el")
-;;;;;;  (22264 48005 823782 802000))
+;;;;;;  (22276 52761 131386 700000))
 
 ;;;***
 

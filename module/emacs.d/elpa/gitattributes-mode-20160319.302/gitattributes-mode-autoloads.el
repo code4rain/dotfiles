@@ -19,7 +19,7 @@ A major mode for editing .gitattributes files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode.el")
-;;;;;;  (22264 47975 614587 553000))
+;;;;;;  (22276 52714 447716 600000))
 
 ;;;***
 

@@ -38,7 +38,7 @@ See `vi-tilde-fringe-mode' for more information on Vi-Tilde-Fringe mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/vi-tilde-fringe-20141027.1942/vi-tilde-fringe.el")
-;;;;;;  (22264 48182 110514 187000))
+;;;;;;  (22276 52992 91596 900000))
 
 ;;;***
 

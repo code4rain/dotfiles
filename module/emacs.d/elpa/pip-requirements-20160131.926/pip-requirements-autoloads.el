@@ -28,7 +28,7 @@ Major mode for editing pip requirements files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pip-requirements-20160131.926/pip-requirements-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pip-requirements-20160131.926/pip-requirements.el")
-;;;;;;  (22264 48138 26089 760000))
+;;;;;;  (22276 52951 96252 100000))
 
 ;;;***
 

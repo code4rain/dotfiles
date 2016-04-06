@@ -32,7 +32,7 @@ If ARG-DIRECTORY is supplied, capture into `ort/prefix-arg-directory'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-repo-todo-20160307.1029/org-repo-todo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-repo-todo-20160307.1029/org-repo-todo.el")
-;;;;;;  (22264 48109 749557 265000))
+;;;;;;  (22276 52909 759887 800000))
 
 ;;;***
 

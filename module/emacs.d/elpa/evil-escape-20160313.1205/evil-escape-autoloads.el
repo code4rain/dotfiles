@@ -26,7 +26,7 @@ with a key sequence.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-escape-20160313.1205/evil-escape.el")
-;;;;;;  (22264 47917 335226 101000))
+;;;;;;  (22276 52618 663238 0))
 
 ;;;***
 

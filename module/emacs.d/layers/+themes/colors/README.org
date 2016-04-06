@@ -1,17 +1,16 @@
 #+TITLE: Colors layer
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../css/readtheorg.css" />
 
 [[file:img/rainbow_dash.png]]
 
-* Table of Contents                                         :TOC_4_org:noexport:
- - [[Description][Description]]
- - [[Install][Install]]
-   - [[Enable rainbow-identifiers][Enable rainbow-identifiers]]
-   - [[Enable Nyan cat][Enable Nyan cat]]
- - [[Key bindings][Key bindings]]
-   - [[Rainbow Identifiers][Rainbow Identifiers]]
-   - [[Rainbow Mode][Rainbow Mode]]
-   - [[Nyan Mode][Nyan Mode]]
+* Table of Contents                                         :TOC_4_gh:noexport:
+ - [[#description][Description]]
+ - [[#install][Install]]
+   - [[#enable-rainbow-identifiers][Enable rainbow-identifiers]]
+   - [[#enable-nyan-cat][Enable Nyan cat]]
+ - [[#key-bindings][Key bindings]]
+   - [[#rainbow-identifiers][Rainbow Identifiers]]
+   - [[#rainbow-mode][Rainbow Mode]]
+   - [[#nyan-mode][Nyan Mode]]
 
 * Description
 This layer colors your life with:
@@ -76,7 +75,7 @@ The prefix associated with colors is ~C~.
 
 =rainbow-identifiers= mode can be toggled on and off with:
 
-    ~<SPC> t C i~
+    ~SPC t C i~
 
 Note that the toggle is local to the current buffer.
 
@@ -85,8 +84,8 @@ with the transient-state:
 
 | Key Binding     | Description                              |
 |-----------------+------------------------------------------|
-| ~<SPC> C i s~   | initiate change =saturation= mini-mode   |
-| ~<SPC> C i l~   | initiate change =lightness= mini-mode    |
+| ~SPC C i s~     | initiate change =saturation= mini-mode   |
+| ~SPC C i l~     | initiate change =lightness= mini-mode    |
 | ~+~             | increase the =saturation= or =lightness= |
 | ~-~             | decrease the =saturation= or =lightness= |
 | ~=~             | reset the =saturation= or =lightness=    |
@@ -98,11 +97,11 @@ with the transient-state:
 
 =rainbow-mode= mode can be toggled on and off with:
 
-    ~<SPC> t C c~
+    ~SPC t C c~
 
 ** Nyan Mode
 =nyan-mode= mode can be toggled on and off with:
 
-    ~<SPC> t m n~
+    ~SPC t m n~
 
 Note that the toggle is local to the current buffer.

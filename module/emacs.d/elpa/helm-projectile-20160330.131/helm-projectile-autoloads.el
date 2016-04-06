@@ -1,7 +1,7 @@
 ;;; helm-projectile-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm-projectile" "../../../../../.emacs.d/elpa/helm-projectile-20160330.131/helm-projectile.el"
 ;;;;;;  "a534c5932de0163dd8b771d147822991")
@@ -65,7 +65,7 @@ If invoked outside of a project, displays a list of known projects to jump.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-projectile-20160330.131/helm-projectile-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-projectile-20160330.131/helm-projectile.el")
-;;;;;;  (22274 36231 0 0))
+;;;;;;  (22276 52750 289766 600000))
 
 ;;;***
 

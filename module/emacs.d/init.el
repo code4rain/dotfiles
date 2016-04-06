@@ -13,7 +13,7 @@
 ;; (package-initialize)
 
 (setq gc-cons-threshold 100000000)
-(defconst spacemacs-version         "0.105.14" "Spacemacs version.")
+(defconst spacemacs-version         "0.105.16" "Spacemacs version.")
 (defconst spacemacs-emacs-min-version   "24.3" "Minimal version of Emacs.")
 
 (if (not (version<= spacemacs-emacs-min-version emacs-version))
@@ -25,6 +25,7 @@
   (spacemacs/init)
   (spacemacs/maybe-install-dotfile)
   (configuration-layer/sync)
+  (spacemacs-buffer/display-info-box)
   (spacemacs/setup-startup-hook)
   (require 'server)
   (unless (server-running-p) (server-start)))

@@ -21,7 +21,7 @@ Declare auto-complete source based on `ac-ispell-requires'
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ac-ispell-20151031.1926/ac-ispell-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ac-ispell-20151031.1926/ac-ispell.el")
-;;;;;;  (22264 47777 207534 111000))
+;;;;;;  (22276 52374 386266 200000))
 
 ;;;***
 

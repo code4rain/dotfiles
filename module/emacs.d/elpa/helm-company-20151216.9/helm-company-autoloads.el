@@ -17,7 +17,7 @@ It is useful to narrow candidates.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-company-20151216.9/helm-company-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-company-20151216.9/helm-company.el")
-;;;;;;  (22264 47988 445241 783000))
+;;;;;;  (22276 52732 362741 300000))
 
 ;;;***
 

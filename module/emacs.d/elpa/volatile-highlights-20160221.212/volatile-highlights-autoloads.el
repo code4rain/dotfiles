@@ -25,7 +25,7 @@ Minor mode for visual feedback on some operations.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/volatile-highlights-20160221.212/volatile-highlights.el")
-;;;;;;  (22264 48183 220919 647000))
+;;;;;;  (22276 52994 225719 0))
 
 ;;;***
 

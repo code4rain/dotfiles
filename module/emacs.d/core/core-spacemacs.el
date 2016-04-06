@@ -107,32 +107,6 @@
      (spacemacs-buffer/goto-buffer)))
   (setq initial-buffer-choice nil)
   (setq inhibit-startup-screen t)
-  ;; bootstrap packages
-  (spacemacs/load-or-install-protected-package 'dash t)
-  (spacemacs/load-or-install-protected-package 's t)
-  (spacemacs/load-or-install-protected-package 'f t)
-  (setq evil-want-Y-yank-to-eol dotspacemacs-remap-Y-to-y$
-        evil-ex-substitute-global dotspacemacs-ex-substitute-global)
-  (spacemacs/load-or-install-protected-package 'evil t)
-  (spacemacs/load-or-install-protected-package 'bind-map t)
-  ;; bind-key is required by use-package
-  (spacemacs/load-or-install-protected-package 'bind-key t)
-  (spacemacs/load-or-install-protected-package 'which-key t)
-  (spacemacs/load-or-install-protected-package 'use-package t)
-  (setq use-package-verbose init-file-debug)
-  ;; package-build is required by quelpa
-  (spacemacs/load-or-install-protected-package 'package-build t)
-  (setq quelpa-verbose init-file-debug
-        quelpa-dir (concat spacemacs-cache-directory "quelpa/")
-        quelpa-build-dir (expand-file-name "build" quelpa-dir)
-        quelpa-persistent-cache-file (expand-file-name "cache" quelpa-dir)
-        quelpa-update-melpa-p nil)
-  (spacemacs/load-or-install-protected-package 'quelpa t)
-  ;; required for some micro-states
-  (spacemacs/load-or-install-protected-package 'hydra t)
-  ;; inject use-package hooks for easy customization of stock package
-  ;; configuration
-  (setq use-package-inject-hooks t)
   (require 'core-keybindings)
   ;; for convenience and user support
   (unless (fboundp 'tool-bar-mode)
@@ -148,7 +122,7 @@
 (defun spacemacs//removes-gui-elements ()
   "Remove the menu bar, tool bar and scroll bars."
   ;; removes the GUI elements
-  (unless (eq window-system 'mac)
+  (unless (spacemacs/window-system-is-mac)
     (when (and (fboundp 'menu-bar-mode) (not (eq menu-bar-mode -1)))
       (menu-bar-mode -1)))
   (when (and (fboundp 'scroll-bar-mode) (not (eq scroll-bar-mode -1)))
@@ -165,7 +139,7 @@
     (spacemacs-buffer/set-mode-line "Dotfile wizard installer")
     (spacemacs//redisplay)
     (when (dotspacemacs/install 'with-wizard)
-      (dotspacemacs/sync-configuration-layers '(16)))))
+      (configuration-layer/sync))))
 
 (defun spacemacs/display-and-copy-version ()
   "Echo the current spacemacs version and copy it."
@@ -198,14 +172,7 @@ defer call using `spacemacs-post-user-config-hook'."
      (when (fboundp dotspacemacs-scratch-mode)
        (with-current-buffer "*scratch*"
          (funcall dotspacemacs-scratch-mode)))
-     ;; from jwiegley
-     ;; https://github.com/jwiegley/dot-emacs/blob/master/init.el
-     (let ((elapsed (float-time
-                     (time-subtract (current-time) emacs-start-time))))
-       (spacemacs-buffer/append
-        (format "\n[%s packages loaded in %.3fs]\n"
-                (configuration-layer/configured-packages-count)
-                elapsed)))
+     (configuration-layer/display-summary emacs-start-time)
      (spacemacs/check-for-new-version spacemacs-version-check-interval))))
 
 (defun spacemacs//describe-system-info-string ()
@@ -307,5 +274,9 @@ with the message pre-filled with template and information."
     ;; HACK: Needed because the first `#' is not encoded
     (setq url (replace-regexp-in-string "#" "%23" url))
     (browse-url url)))
+
+(when (and (display-graphic-p)
+           (string-equal "04/01/16" (format-time-string "%D")))
+  (require 'zemacs))
 
 (provide 'core-spacemacs)

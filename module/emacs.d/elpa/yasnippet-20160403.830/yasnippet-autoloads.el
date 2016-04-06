@@ -1,7 +1,7 @@
 ;;; yasnippet-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "yasnippet" "../../../../../.emacs.d/elpa/yasnippet-20160403.830/yasnippet.el"
 ;;;;;;  "88f6a7024a66e67edaacedb466d0bf01")
@@ -49,7 +49,7 @@ See `yas-minor-mode' for more information on Yas minor mode.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/yasnippet-20160403.830/yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160403.830/yasnippet-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160403.830/yasnippet.el")
-;;;;;;  (22274 36089 0 0))
+;;;;;;  (22276 52518 973536 100000))
 
 ;;;***
 

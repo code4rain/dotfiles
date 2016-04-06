@@ -1,7 +1,7 @@
 ;;; helm-gtags-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm-gtags" "../../../../../.emacs.d/elpa/helm-gtags-20160330.106/helm-gtags.el"
 ;;;;;;  "f0b3fa5ba6c305fc3e34625ed6b5e407")
@@ -142,7 +142,7 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-gtags-20160330.106/helm-gtags-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-gtags-20160330.106/helm-gtags.el")
-;;;;;;  (22274 36215 0 0))
+;;;;;;  (22276 52742 263307 500000))
 
 ;;;***
 

@@ -66,7 +66,7 @@ Restart Python inferior processes.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pyvenv-20160108.28/pyvenv-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pyvenv-20160108.28/pyvenv.el")
-;;;;;;  (22264 48144 526791 390000))
+;;;;;;  (22276 52959 807750 400000))
 
 ;;;***
 

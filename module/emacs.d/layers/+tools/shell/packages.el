@@ -20,6 +20,7 @@
         helm
         magit
         multi-term
+        org
         projectile
         (shell :location built-in)
         shell-pop
@@ -249,6 +250,10 @@ is achieved by adding the relevant text properties."
           (projectile-with-default-dir (projectile-project-root) (multi-term)))
         (spacemacs/set-leader-keys "p$t" 'projectile-multi-term-in-root)))))
 
+(defun shell/pre-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages '(shell . t))))
+
 (defun shell/post-init-projectile ()
   (spacemacs/set-leader-keys "p'" 'spacemacs/projectile-shell-pop))
 
@@ -311,7 +316,8 @@ is achieved by adding the relevant text properties."
                                   (when (string-match "\\(finished\\|exited\\)"
                                                       change)
                                     (kill-buffer (process-buffer proc))
-                                    (delete-window))))))
+                                    (when (> (count-windows) 1)
+                                      (delete-window)))))))
       (add-hook 'term-mode-hook 'ansi-term-handle-close)
       (add-hook 'term-mode-hook (lambda () (linum-mode -1)))
 

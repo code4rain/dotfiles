@@ -1,7 +1,7 @@
 ;;; evil-mc-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "evil-mc" "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc.el"
 ;;;;;;  "c8ba899d0d2aae49c26530756cb8a9ee")
@@ -13,7 +13,7 @@ Toggle evil multiple cursors in a single buffer.
 \(fn &optional ARG)" t nil)
 
 (defvar global-evil-mc-mode nil "\
-Non-nil if Global Evil-Mc mode is enabled.
+Non-nil if Global-Evil-Mc mode is enabled.
 See the command `global-evil-mc-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -23,7 +23,7 @@ or call the function `global-evil-mc-mode'.")
 
 (autoload 'global-evil-mc-mode "evil-mc" "\
 Toggle Evil-Mc mode in all buffers.
-With prefix ARG, enable Global Evil-Mc mode if ARG is positive;
+With prefix ARG, enable Global-Evil-Mc mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -64,7 +64,7 @@ Turn off evil-mc mode in the current buffer.
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-undo.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-vars.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc.el")
-;;;;;;  (22274 36193 0 0))
+;;;;;;  (22276 52658 903539 600000))
 
 ;;;***
 

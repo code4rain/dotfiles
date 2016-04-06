@@ -1,7 +1,7 @@
 ;;; use-package-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "use-package" "../../../../../.emacs.d/elpa/use-package-20160403.1129/use-package.el"
 ;;;;;;  "8df03eb73a79f6597a5a5416879cf659")
@@ -60,13 +60,13 @@ this file.  Usage:
 
 \(fn NAME &rest ARGS)" nil t)
 
-(function-put 'use-package 'lisp-indent-function '1)
+(put 'use-package 'lisp-indent-function '1)
 
 ;;;***
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/use-package-20160403.1129/use-package-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/use-package-20160403.1129/use-package.el")
-;;;;;;  (22274 35286 0 0))
+;;;;;;  (22276 52988 776407 300000))
 
 ;;;***
 

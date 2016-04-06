@@ -38,7 +38,7 @@ TTY frames.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/flycheck-pos-tip-20160323.129/flycheck-pos-tip-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/flycheck-pos-tip-20160323.129/flycheck-pos-tip.el")
-;;;;;;  (22264 47965 911874 479000))
+;;;;;;  (22276 52697 249732 900000))
 
 ;;;***
 

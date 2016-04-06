@@ -19,7 +19,7 @@ Start a evil-tutor session.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-tutor-20150102.2250/evil-tutor-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-tutor-20150102.2250/evil-tutor-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-tutor-20150102.2250/evil-tutor.el")
-;;;;;;  (22264 47942 700989 698000))
+;;;;;;  (22276 52668 36062 0))
 
 ;;;***
 

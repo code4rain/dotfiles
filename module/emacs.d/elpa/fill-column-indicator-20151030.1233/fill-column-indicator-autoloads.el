@@ -32,7 +32,7 @@ Turn on fci-mode unconditionally.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/fill-column-indicator-20151030.1233/fill-column-indicator-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/fill-column-indicator-20151030.1233/fill-column-indicator.el")
-;;;;;;  (22264 47952 458138 49000))
+;;;;;;  (22276 52681 699843 500000))
 
 ;;;***
 

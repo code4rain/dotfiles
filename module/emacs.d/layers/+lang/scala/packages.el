@@ -27,7 +27,8 @@
         (add-hook 'ensime-mode-hook 'scala/enable-eldoc))
       (add-hook 'scala-mode-hook 'scala/configure-flyspell)
       (add-hook 'scala-mode-hook 'scala/configure-ensime)
-      (add-hook 'scala-mode-hook 'scala/maybe-start-ensime))
+      (when scala-auto-start-ensime
+        (add-hook 'scala-mode-hook 'scala/maybe-start-ensime)))
     :config
     (progn
       (setq user-emacs-ensime-directory ".cache/ensime")
@@ -106,7 +107,7 @@
         "bp"     'ensime-sbt-do-package
         "br"     'ensime-sbt-do-run
 
-        "ct"     'ensime-typecheck-current-file
+        "ct"     'ensime-typecheck-current-buffer
         "cT"     'ensime-typecheck-all
 
         "dA"     'ensime-db-attach
@@ -140,11 +141,13 @@
         "ii"     'ensime-inspect-type-at-point
         "iI"     'ensime-inspect-type-at-point-other-frame
         "ip"     'ensime-inspect-project-package
+        "iy"     'scala/yank-type-at-point
 
         "nF"     'ensime-reload-open-files
         "ns"     'ensime
         "nS"     'ensime-gen-and-restart
 
+        "ra"     'ensime-refactor-add-type-annotation
         "rd"     'ensime-refactor-diff-inline-local
         "rD"     'ensime-undo-peek
         "rf"     'ensime-format-source
@@ -186,10 +189,9 @@
 
 (defun scala/init-sbt-mode ()
   (use-package sbt-mode
-    :config
-    (progn
-      (spacemacs/set-leader-keys-for-major-mode 'scala-mode
-        "bb" 'sbt-command))))
+    :defer t
+    :init (spacemacs/set-leader-keys-for-major-mode 'scala-mode
+            "bb" 'sbt-command)))
 
 (defun scala/init-scala-mode2 ()
   (use-package scala-mode2

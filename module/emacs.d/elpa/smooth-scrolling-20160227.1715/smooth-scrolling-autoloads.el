@@ -77,7 +77,7 @@ Note that the advice will not have an effect unless
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/smooth-scrolling-20160227.1715/smooth-scrolling-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smooth-scrolling-20160227.1715/smooth-scrolling.el")
-;;;;;;  (22264 48152 649156 801000))
+;;;;;;  (22276 52975 447644 900000))
 
 ;;;***
 

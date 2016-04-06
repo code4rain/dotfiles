@@ -23,7 +23,7 @@ Insert UUIDv4 at point. If TIME-BASED is non-nil, insert UUIDv1 instead.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/uuidgen-20140918.1601/uuidgen-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/uuidgen-20140918.1601/uuidgen.el")
-;;;;;;  (22264 48181 123799 54000))
+;;;;;;  (22276 52990 308494 900000))
 
 ;;;***
 

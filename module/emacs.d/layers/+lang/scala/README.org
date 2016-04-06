@@ -1,31 +1,31 @@
 #+TITLE: Scala layer
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../../css/readtheorg.css" />
 
 [[file:img/scala.png]] with [[file:img/ensime.png]]
 
-* Table of Contents                                         :TOC_4_org:noexport:
- - [[Description][Description]]
- - [[Layer Installation][Layer Installation]]
- - [[Ensime][Ensime]]
-   - [[Installation][Installation]]
-   - [[Usage][Usage]]
- - [[Scalastyle][Scalastyle]]
- - [[Automatically show the type of the symbol under the cursor][Automatically show the type of the symbol under the cursor]]
- - [[Automatically insert asterisk in multiline comments][Automatically insert asterisk in multiline comments]]
- - [[Automatically replace arrows with unicode ones][Automatically replace arrows with unicode ones]]
- - [[Key bindings][Key bindings]]
-   - [[Ensime key bindings][Ensime key bindings]]
-     - [[Search][Search]]
-     - [[sbt][sbt]]
-     - [[Typecheck][Typecheck]]
-     - [[Debug][Debug]]
-     - [[Errors][Errors]]
-     - [[Goto][Goto]]
-     - [[Documentation, Inspect][Documentation, Inspect]]
-     - [[Server][Server]]
-     - [[Refactoring][Refactoring]]
-     - [[Tests][Tests]]
-     - [[REPL][REPL]]
+* Table of Contents                                         :TOC_4_gh:noexport:
+ - [[#description][Description]]
+ - [[#layer-installation][Layer Installation]]
+ - [[#ensime][Ensime]]
+   - [[#installation][Installation]]
+   - [[#usage][Usage]]
+ - [[#scalastyle][Scalastyle]]
+ - [[#automatically-show-the-type-of-the-symbol-under-the-cursor][Automatically show the type of the symbol under the cursor]]
+ - [[#automatically-insert-asterisk-in-multiline-comments][Automatically insert asterisk in multiline comments]]
+ - [[#automatically-replace-arrows-with-unicode-ones][Automatically replace arrows with unicode ones]]
+ - [[#disable-auto-start][Disable auto-start]]
+ - [[#key-bindings][Key bindings]]
+   - [[#ensime-key-bindings][Ensime key bindings]]
+     - [[#search][Search]]
+     - [[#sbt][sbt]]
+     - [[#typecheck][Typecheck]]
+     - [[#debug][Debug]]
+     - [[#errors][Errors]]
+     - [[#goto][Goto]]
+     - [[#documentation-inspect][Documentation, Inspect]]
+     - [[#server][Server]]
+     - [[#refactoring][Refactoring]]
+     - [[#tests][Tests]]
+     - [[#repl][REPL]]
 
 * Description
 
@@ -86,11 +86,12 @@ To use scalastyle,
 See the [[http://flycheck.readthedocs.org/en/latest/guide/languages.html#el.flycheck-checker.scala-scalastyle][flycheck documentation]] for up-to-date configuration instructions.
 * Automatically show the type of the symbol under the cursor
 
-To enable the feature =ensime-print-type-at-point= when cursor moves, set the variable =scala-enable-eldoc-mode= to =t=.
+To enable the feature =ensime-print-type-at-point= when cursor moves, set the
+variable =scala-enable-eldoc= to =t=.
 
 #+BEGIN_SRC emacs-lisp
   (setq-default dotspacemacs-configuration-layers '(
-    (scala :variables scala-enable-eldoc-mode t)))
+    (scala :variables scala-enable-eldoc t)))
 #+END_SRC
 
 Enabling this option can cause slow editor performance.
@@ -116,6 +117,15 @@ the ascii arrows back.
 #+BEGIN_SRC emacs-lisp
   (setq-default dotspacemacs-configuration-layers '(
     (scala :variables scala-use-unicode-arrows t)))
+
+* Disable auto-start
+
+If you prefer not to have Ensime start when you load a scala file, you can
+disable it with
+
+#+BEGIN_SRC emacs-lisp
+(setq-default dotspacemacs-configuration-layers '(
+    (scala :variables scala-auto-start-ensime nil)))
 #+END_SRC
 
 * Key bindings
@@ -193,6 +203,7 @@ the ascii arrows back.
 | ~SPC m i i~ | inspect type at point                  |
 | ~SPC m i I~ | inspect type in other frame            |
 | ~SPC m i p~ | inspect project package                |
+| ~SPC m i y~ | yank type at point                     |
 
 *** Server
 
@@ -206,6 +217,7 @@ the ascii arrows back.
 
 | Key Binding | Description                                                          |
 |-------------+----------------------------------------------------------------------|
+| ~SPC m r a~ | add type annotation                                                  |
 | ~SPC m r f~ | format source                                                        |
 | ~SPC m r d~ | get rid of an intermediate variable (=ensime-refactor-inline-local=) |
 | ~SPC m r D~ | get rid of an intermediate variable (=ensime-undo-peek=)             |

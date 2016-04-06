@@ -1,21 +1,20 @@
 #+TITLE: Shell layer
-#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../../css/readtheorg.css" />
 
 [[file:img/shell.png]]
 
-* Table of Contents                                         :TOC_4_org:noexport:
- - [[Description][Description]]
- - [[Install][Install]]
-   - [[Layer][Layer]]
-   - [[Default shell][Default shell]]
-   - [[Default shell position and height][Default shell position and height]]
-   - [[Set shell for term and ansi-term][Set shell for term and ansi-term]]
-   - [[Enable em-smart in Eshell][Enable em-smart in Eshell]]
-   - [[Protect your Eshell prompt][Protect your Eshell prompt]]
- - [[Eshell][Eshell]]
- - [[Key bindings][Key bindings]]
-   - [[Multi-term][Multi-term]]
-   - [[Eshell][Eshell]]
+* Table of Contents                                         :TOC_4_gh:noexport:
+ - [[#description][Description]]
+ - [[#install][Install]]
+   - [[#layer][Layer]]
+   - [[#default-shell][Default shell]]
+   - [[#default-shell-position-and-height][Default shell position and height]]
+   - [[#set-shell-for-term-and-ansi-term][Set shell for term and ansi-term]]
+   - [[#enable-em-smart-in-eshell][Enable em-smart in Eshell]]
+   - [[#protect-your-eshell-prompt][Protect your Eshell prompt]]
+ - [[#eshell][Eshell]]
+ - [[#key-bindings][Key bindings]]
+   - [[#multi-term][Multi-term]]
+   - [[#eshell][Eshell]]
 
 * Description
 This layer configures the various shells available in Emacs.
@@ -52,10 +51,9 @@ The default shell is quickly accessible via a the default shortcut key ~SPC '​
 
 ** Default shell position and height
 It is possible to choose where the shell should pop up by setting the variable
-=shell-default-position= to either =top=, =bottom= or =full=. It is not possible
-to show it on the side for now. Default value is =bottom=. It is also possible
-to set the default height in percents with the variable =shell-default-height=.
-Default value is =30=.
+=shell-default-position= to either =top=, =bottom=, =left=, =right=, or =full=.
+Default value is =bottom=. It is also possible to set the default height in
+percents with the variable =shell-default-height=. Default value is =30=.
 
 #+BEGIN_SRC emacs-lisp
   (setq-default dotspacemacs-configuration-layers

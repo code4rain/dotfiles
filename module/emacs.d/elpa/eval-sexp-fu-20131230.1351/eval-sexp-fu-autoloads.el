@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eval-sexp-fu-20131230.1351/eval-sexp-fu-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/eval-sexp-fu-20131230.1351/eval-sexp-fu.el")
-;;;;;;  (22264 47913 407017 877000))
+;;;;;;  (22276 52598 567088 600000))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; helm-ag-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm-ag" "../../../../../.emacs.d/elpa/helm-ag-20160330.0/helm-ag.el"
 ;;;;;;  "b7bad1b38b8cd62944d369e024058132")
@@ -69,7 +69,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-ag-20160330.0/helm-ag-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-ag-20160330.0/helm-ag.el")
-;;;;;;  (22274 36210 0 0))
+;;;;;;  (22276 52729 151557 600000))
 
 ;;;***
 

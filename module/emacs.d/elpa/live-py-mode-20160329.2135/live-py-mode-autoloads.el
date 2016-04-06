@@ -1,7 +1,7 @@
 ;;; live-py-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "live-py-mode" "../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode.el"
 ;;;;;;  "2a410aecf8ca3557315bded518ff8642")
@@ -19,7 +19,7 @@ With arg, turn mode on if and only if arg is positive.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode.el")
-;;;;;;  (22274 36235 0 0))
+;;;;;;  (22276 52789 911032 800000))
 
 ;;;***
 

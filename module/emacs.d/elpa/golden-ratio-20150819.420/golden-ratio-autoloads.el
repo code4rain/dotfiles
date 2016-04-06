@@ -30,7 +30,7 @@ Enable automatic window resizing with golden ratio.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/golden-ratio-20150819.420/golden-ratio-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/golden-ratio-20150819.420/golden-ratio.el")
-;;;;;;  (22264 47979 709924 180000))
+;;;;;;  (22276 52722 587182 100000))
 
 ;;;***
 

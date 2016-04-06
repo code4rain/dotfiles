@@ -25,7 +25,7 @@ A minor mode that assigns a number to each window.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/window-numbering-20150228.1247/window-numbering.el")
-;;;;;;  (22264 48184 22978 829000))
+;;;;;;  (22276 53003 110227 100000))
 
 ;;;***
 

@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "column-enforce-mode" "column-enforce-mode.el"
-;;;;;;  (22264 47888 588341 990000))
-;;; Generated autoloads from column-enforce-mode.el
+;;;### (autoloads nil "column-enforce-mode" "../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode.el"
+;;;;;;  "04708cb44b78f1d4cf80156c6de7d997")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode.el
 
 (autoload 'column-enforce-n "column-enforce-mode" "\
 Turn on `column-enforce-mode' with warnings at column N.
@@ -30,6 +30,12 @@ Variable `column-enforce-column' decides which column to start warning at.
 Variable `column-enforce-face' decides how to display the warnings
 
 \(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode.el")
+;;;;;;  (22276 52533 851387 100000))
 
 ;;;***
 

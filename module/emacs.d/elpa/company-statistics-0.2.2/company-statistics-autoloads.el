@@ -35,7 +35,7 @@ configuration.  You can customize this behavior with
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics-tests.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics.el")
-;;;;;;  (22264 47897 312334 63000))
+;;;;;;  (22276 52550 390333 0))
 
 ;;;***
 

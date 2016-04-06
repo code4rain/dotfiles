@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/magit-gitflow-20160318.700/magit-gitflow-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/magit-gitflow-20160318.700/magit-gitflow.el")
-;;;;;;  (22264 48026 713461 251000))
+;;;;;;  (22276 52795 203335 500000))
 
 ;;;***
 

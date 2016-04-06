@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/fringe-helper-20140620.1409/fringe-helper-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/fringe-helper-20140620.1409/fringe-helper.el")
-;;;;;;  (22264 47971 519176 207000))
+;;;;;;  (22276 52707 160299 800000))
 
 ;;;***
 

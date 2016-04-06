@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/open-junk-file-20130130.2320/open-junk-file-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/open-junk-file-20130130.2320/open-junk-file.el")
-;;;;;;  (22264 48052 9644 300000))
+;;;;;;  (22276 52812 9296 800000))
 
 ;;;***
 

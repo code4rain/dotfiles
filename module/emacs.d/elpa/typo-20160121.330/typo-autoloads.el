@@ -41,7 +41,7 @@ default C-x 8 prefix map.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/typo-20160121.330/typo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el")
-;;;;;;  (22264 48178 526328 855000))
+;;;;;;  (22276 52986 950302 800000))
 
 ;;;***
 

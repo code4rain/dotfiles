@@ -1,7 +1,7 @@
 ;;; helm-core-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm" "../../../../../.emacs.d/elpa/helm-core-20160403.2307/helm.el"
 ;;;;;;  "7811f3980775451030d6642c568969b8")
@@ -36,7 +36,7 @@ See `helm-define-multi-key'.
 
 \(fn NAME DOCSTRING FUNS &optional DELAY)" nil t)
 
-(function-put 'helm-multi-key-defun 'lisp-indent-function '2)
+(put 'helm-multi-key-defun 'lisp-indent-function '2)
 
 (autoload 'helm-define-key-with-subkeys "helm" "\
 Defines in MAP a KEY and SUBKEY to COMMAND.
@@ -71,7 +71,7 @@ NOTE: SUBKEY and OTHER-SUBKEYS bindings support char syntax only
 
 \(fn MAP KEY SUBKEY COMMAND &optional OTHER-SUBKEYS MENU EXIT-FN)" nil nil)
 
-(function-put 'helm-define-key-with-subkeys 'lisp-indent-function '1)
+(put 'helm-define-key-with-subkeys 'lisp-indent-function '1)
 
 (autoload 'helm-debug-open-last-log "helm" "\
 Open helm log file of last helm session.
@@ -196,7 +196,7 @@ Enable/disable helm debugging from outside of helm session.
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-core-20160403.2307/helm-multi-match.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-core-20160403.2307/helm-source.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-core-20160403.2307/helm.el")
-;;;;;;  (22274 35378 0 0))
+;;;;;;  (22276 52379 679568 900000))
 
 ;;;***
 

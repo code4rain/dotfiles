@@ -22,7 +22,7 @@ kill the current timer, this may be a break or a running pomodoro.
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pidgin.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el")
-;;;;;;  (22264 48088 808418 295000))
+;;;;;;  (22276 52871 287687 300000))
 
 ;;;***
 

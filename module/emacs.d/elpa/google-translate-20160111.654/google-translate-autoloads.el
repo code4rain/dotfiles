@@ -99,7 +99,7 @@ one respectively.
 ;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-smooth-ui.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate-tk.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/google-translate-20160111.654/google-translate.el")
-;;;;;;  (22264 47981 56809 6000))
+;;;;;;  (22276 52724 684302 100000))
 
 ;;;***
 

@@ -22,7 +22,7 @@ Set the default evil-indent-plus keybindings.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-indent-plus-20151109.1106/evil-indent-plus.el")
-;;;;;;  (22264 47921 220747 495000))
+;;;;;;  (22276 52625 830648 0))
 
 ;;;***
 

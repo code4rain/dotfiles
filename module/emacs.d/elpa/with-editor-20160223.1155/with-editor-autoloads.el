@@ -6,7 +6,7 @@
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/with-editor-20160223.1155/with-editor-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/with-editor-20160223.1155/with-editor-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/with-editor-20160223.1155/with-editor.el")
-;;;;;;  (22264 47925 969811 202000))
+;;;;;;  (22276 52635 834220 100000))
 
 ;;;***
 

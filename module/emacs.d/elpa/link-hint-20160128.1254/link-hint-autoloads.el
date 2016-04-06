@@ -63,7 +63,7 @@ See `link-hint-copy-link' for more information.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/link-hint-20160128.1254/link-hint.el")
-;;;;;;  (22264 48021 96102 92000))
+;;;;;;  (22276 52786 402832 200000))
 
 ;;;***
 

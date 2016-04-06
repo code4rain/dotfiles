@@ -16,7 +16,7 @@
 ;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-light-theme.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-theme-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/spacemacs-theme-20160310.1337/spacemacs-theme-pkg.el")
-;;;;;;  (22264 48163 156590 880000))
+;;;;;;  (22276 52360 156452 300000))
 
 ;;;***
 

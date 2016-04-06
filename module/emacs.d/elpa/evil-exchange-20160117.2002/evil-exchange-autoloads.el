@@ -29,7 +29,7 @@ Setting evil-exchange key bindings in a vim-compatible way
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-exchange-20160117.2002/evil-exchange-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-exchange-20160117.2002/evil-exchange.el")
-;;;;;;  (22264 47918 29080 76000))
+;;;;;;  (22276 52620 42316 900000))
 
 ;;;***
 

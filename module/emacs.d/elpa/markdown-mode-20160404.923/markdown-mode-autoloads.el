@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "markdown-mode" "markdown-mode.el" (22274 64469
-;;;;;;  297005 776000))
-;;; Generated autoloads from markdown-mode.el
+;;;### (autoloads nil "markdown-mode" "../../../../../.emacs.d/elpa/markdown-mode-20160404.923/markdown-mode.el"
+;;;;;;  "0d546027a043fe4906fea118cca49088")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/markdown-mode-20160404.923/markdown-mode.el
 
 (autoload 'markdown-mode "markdown-mode" "\
 Major mode for editing Markdown files.
@@ -20,6 +20,12 @@ Major mode for editing Markdown files.
 Major mode for editing GitHub Flavored Markdown files.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/markdown-mode-20160404.923/markdown-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/markdown-mode-20160404.923/markdown-mode.el")
+;;;;;;  (22276 52798 236509 0))
 
 ;;;***
 

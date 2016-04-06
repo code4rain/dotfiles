@@ -23,7 +23,7 @@ Toggle echo area display of Python objects at point.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/anaconda-mode-20160221.1123/anaconda-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/anaconda-mode-20160221.1123/anaconda-mode.el")
-;;;;;;  (22264 47798 503499 834000))
+;;;;;;  (22276 52412 122424 600000))
 
 ;;;***
 

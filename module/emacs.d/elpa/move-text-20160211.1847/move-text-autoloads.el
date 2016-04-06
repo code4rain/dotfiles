@@ -28,7 +28,7 @@ Bind `move-text-up' and `move-text-down' to M-up and M-down.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/move-text-20160211.1847/move-text-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/move-text-20160211.1847/move-text.el")
-;;;;;;  (22264 48041 139887 535000))
+;;;;;;  (22276 52806 679992 0))
 
 ;;;***
 

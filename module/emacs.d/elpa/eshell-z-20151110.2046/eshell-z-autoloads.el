@@ -16,7 +16,7 @@ Switch to eshell and change directory to DIR.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el")
-;;;;;;  (22264 47910 441333 103000))
+;;;;;;  (22276 52595 31886 400000))
 
 ;;;***
 

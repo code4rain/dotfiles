@@ -1,7 +1,7 @@
 ;;; helm-make-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm-make" "../../../../../.emacs.d/elpa/helm-make-20160331.754/helm-make.el"
 ;;;;;;  "666c1d02b1e728afac7c8a12306be117")
@@ -33,7 +33,7 @@ setting the buffer local variable `helm-make-build-dir'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-make-20160331.754/helm-make-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-make-20160331.754/helm-make.el")
-;;;;;;  (22274 36228 0 0))
+;;;;;;  (22276 52746 838569 200000))
 
 ;;;***
 

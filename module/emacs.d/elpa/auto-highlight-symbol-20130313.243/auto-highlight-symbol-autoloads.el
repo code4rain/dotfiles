@@ -37,7 +37,7 @@ Toggle Auto Highlight Symbol Mode
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-highlight-symbol-20130313.243/auto-highlight-symbol.el")
-;;;;;;  (22264 47833 815038 993000))
+;;;;;;  (22276 52460 850211 600000))
 
 ;;;***
 

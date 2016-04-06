@@ -37,7 +37,7 @@ See `hl-todo-mode' for more information on Hl-Todo mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hl-todo-20151025.1220/hl-todo.el")
-;;;;;;  (22264 48008 114326 879000))
+;;;;;;  (22276 52765 524638 0))
 
 ;;;***
 

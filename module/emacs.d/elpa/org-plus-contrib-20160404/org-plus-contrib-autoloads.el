@@ -1,7 +1,7 @@
 ;;; org-plus-contrib-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "org" "../../../../../.emacs.d/elpa/org-plus-contrib-20160404/org.el"
 ;;;;;;  "c4b592dac84a8ff56e265a592b6541b7")
@@ -1336,7 +1336,7 @@ the reports is done using the TaskJuggler GUI.
 ;;;;;;  "../../../../../.emacs.d/elpa/org-plus-contrib-20160404/ox-taskjuggler.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-plus-contrib-20160404/ox-texinfo.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-plus-contrib-20160404/ox.el")
-;;;;;;  (22274 36246 0 0))
+;;;;;;  (22276 52837 50729 100000))
 
 ;;;***
 

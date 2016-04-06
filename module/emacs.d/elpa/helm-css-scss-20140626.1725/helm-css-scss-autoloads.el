@@ -1,7 +1,7 @@
 ;;; helm-css-scss-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "helm-css-scss" "../../../../../.emacs.d/elpa/helm-css-scss-20140626.1725/helm-css-scss.el"
 ;;;;;;  "6121fec25745ae0027dc4370b72d517b")
@@ -31,7 +31,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-css-scss-20140626.1725/helm-css-scss-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-css-scss-20140626.1725/helm-css-scss.el")
-;;;;;;  (22274 36910 0 0))
+;;;;;;  (22276 52734 70839 0))
 
 ;;;***
 

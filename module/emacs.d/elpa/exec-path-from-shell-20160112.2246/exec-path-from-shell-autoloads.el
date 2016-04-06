@@ -38,7 +38,7 @@ values used in the user's shell.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/exec-path-from-shell-20160112.2246/exec-path-from-shell-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/exec-path-from-shell-20160112.2246/exec-path-from-shell.el")
-;;;;;;  (22264 47944 46534 273000))
+;;;;;;  (22276 52670 794219 700000))
 
 ;;;***
 

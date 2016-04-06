@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "quelpa" "quelpa.el" (22264 47770 840342 5000))
-;;; Generated autoloads from quelpa.el
+;;;### (autoloads nil "quelpa" "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa.el"
+;;;;;;  "c550f701aaa023572023165367006945")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa.el
 
 (autoload 'quelpa-expand-recipe "quelpa" "\
 Expand a given recipe name into full recipe.
@@ -41,8 +42,11 @@ the global var `quelpa-upgrade-p' is set to nil.
 
 ;;;***
 
-;;;### (autoloads nil nil ("bootstrap.el" "quelpa-pkg.el") (22264
-;;;;;;  47770 913926 897000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/quelpa-20160325.629/bootstrap.el"
+;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa.el")
+;;;;;;  (22276 52365 354749 600000))
 
 ;;;***
 

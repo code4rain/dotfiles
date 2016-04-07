@@ -372,6 +372,12 @@ you should place you code here."
 
   ;; Server Start
   (server-start)
+
+  ;; add git path for magit
+  (if (eq system-type 'windows-nt)
+      (progn
+	(setq exec-path (add-to-list 'exec-path "C:/Program Files)/Git/bin"))
+	(setenv "PATH" (concat "C:\\Program Files\\Git\\bin;" (getenv "PATH")))))
   )
 
 ;; do not write anything past this comment. this is where emacs will

@@ -347,9 +347,9 @@ you should place you code here."
         )
     )
   ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤
-  ;; (setq face-font-rescale-alist
-  ;; 	'((".*hiragino.*" . 1.2)
-  ;; 	  ("NanumGothicCoding" . 1.2307692307692308)))
+  (setq face-font-rescale-alist
+  	'((".*hiragino.*" . 1.2)
+  	  ("NanumGothicCoding" . 1.2307692307692308)))
   ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)

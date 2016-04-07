@@ -369,6 +369,9 @@ you should place you code here."
 
   ;; centered-cursor-mode set
   (global-centered-cursor-mode +1)
+
+  ;; Server Start
+  (server-start)
   )
 
 ;; do not write anything past this comment. this is where emacs will

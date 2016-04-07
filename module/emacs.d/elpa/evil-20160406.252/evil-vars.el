@@ -1172,11 +1172,17 @@ SYMBOL is made permanent buffer local."
      (make-variable-buffer-local ',symbol)
      (put ',symbol 'permanent-local t)))
 
-(evil-define-local-var evil-ud-scroll-count 0
+(evil-define-local-var evil-scroll-count 0
   "Holds last used prefix for `evil-scroll-up'
 and `evil-scroll-down'.
 Determines how many lines should be scrolled.
 Default value is 0 - scroll half the screen.")
+
+(evil-define-local-var evil-scroll-line-count 1
+  "Holds last used prefix for `evil-scroll-line-up'
+and `evil-scroll-line-down'.
+Determines how many lines should be scrolled.
+Default value is 1 line.")
 
 (evil-define-local-var evil-state nil
   "The current Evil state.

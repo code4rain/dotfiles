@@ -4,7 +4,7 @@
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
 ;; URL: https://github.com/syohex/emacs-git-gutter
-;; Package-Version: 20160210.28
+;; Package-Version: 20160406.1609
 ;; Version: 0.87
 ;; Package-Requires: ((cl-lib "0.5") (emacs "24"))
 
@@ -111,6 +111,10 @@ gutter information of other windows."
 (defcustom git-gutter:verbosity 0
   "Log/message level. 4 means all, 0 nothing."
   :type 'integer)
+
+(defcustom git-gutter:visual-line nil
+  "Show sign at gutter by visual line."
+  :type 'boolean)
 
 (defface git-gutter:separator
   '((t (:foreground "cyan" :weight bold :inherit default)))
@@ -415,16 +419,24 @@ gutter information of other windows."
     (+ (apply #'max (mapcar 'git-gutter:sign-width signs))
        (git-gutter:sign-width git-gutter:separator-sign))))
 
+(defun git-gutter:next-visual-line (arg)
+  (let ((line-move-visual t))
+    (with-no-warnings
+      (next-line arg))))
+
 (defun git-gutter:view-for-unchanged ()
   (save-excursion
     (let ((sign (if git-gutter:unchanged-sign
                     (propertize git-gutter:unchanged-sign
                                 'face 'git-gutter:unchanged)
-                  " ")))
+                  " "))
+          (move-fn (if git-gutter:visual-line
+                       #'git-gutter:next-visual-line
+                     #'forward-line)))
       (goto-char (point-min))
       (while (not (eobp))
         (git-gutter:view-at-pos sign (point))
-        (forward-line 1)))))
+        (funcall move-fn 1)))))
 
 (defsubst git-gutter:check-file-and-directory ()
   (and (git-gutter:base-file)
@@ -565,26 +577,32 @@ gutter information of other windows."
     (git-gutter:view-for-unchanged))
   (save-excursion
     (goto-char (point-min))
-    (cl-loop with curline = 1
-             for info in diffinfos
-             for start-line = (plist-get info :start-line)
-             for end-line = (plist-get info :end-line)
-             for type = (plist-get info :type)
-             for sign = (git-gutter:propertized-sign type)
-             do
-             (progn
-               (forward-line (- start-line curline))
-               (cl-case type
-                 ((modified added)
-                  (setq curline start-line)
-                  (while (and (<= curline end-line) (not (eobp)))
+    (let ((curline 1))
+      (cl-loop with move-fn = (if git-gutter:visual-line
+                                  (lambda ()
+                                    (git-gutter:next-visual-line 1)
+                                    (setq curline (line-number-at-pos)))
+                                (lambda ()
+                                  (forward-line 1)
+                                  (cl-incf curline)))
+               for info in diffinfos
+               for start-line = (plist-get info :start-line)
+               for end-line = (plist-get info :end-line)
+               for type = (plist-get info :type)
+               for sign = (git-gutter:propertized-sign type)
+               do
+               (progn
+                 (forward-line (- start-line curline))
+                 (cl-case type
+                   ((modified added)
+                    (setq curline start-line)
+                    (while (and (<= curline end-line) (not (eobp)))
+                      (git-gutter:view-at-pos sign (point))
+                      (funcall move-fn)))
+                   (deleted
                     (git-gutter:view-at-pos sign (point))
-                    (cl-incf curline)
-                    (forward-line 1)))
-                 (deleted
-                  (git-gutter:view-at-pos sign (point))
-                  (forward-line 1)
-                  (setq curline (1+ end-line))))))))
+                    (forward-line 1)
+                    (setq curline (1+ end-line)))))))))
 
 (defun git-gutter:view-diff-infos (diffinfos)
   (when (or diffinfos git-gutter:always-show-separator)
@@ -853,6 +871,10 @@ gutter information of other windows."
 
 (defadvice vc-revert (after git-gutter:vc-revert activate)
   (when git-gutter-mode
+    (run-with-idle-timer 0.1 nil 'git-gutter)))
+
+(defadvice toggle-truncate-lines (after git-gutter:toggle-truncate-lines activate)
+  (when (and git-gutter-mode git-gutter:visual-line)
     (run-with-idle-timer 0.1 nil 'git-gutter)))
 
 ;; `quit-window' and `switch-to-buffer' are called from other

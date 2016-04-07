@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "git-commit" "../../../../../.emacs.d/elpa/git-commit-20160329.858/git-commit.el"
-;;;;;;  "ce959b6d08cb7b8ac265821ac2788651")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/git-commit-20160329.858/git-commit.el
+;;;### (autoloads nil "git-commit" "git-commit.el" (22278 6004 520501
+;;;;;;  217000))
+;;; Generated autoloads from git-commit.el
 
 (defvar global-git-commit-mode t "\
 Non-nil if Global-Git-Commit mode is enabled.
@@ -24,12 +24,6 @@ when Git uses the Emacsclient as $GIT_EDITOR to have the user
 provide such a commit message.
 
 \(fn &optional ARG)" t nil)
-
-;;;***
-
-;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-commit-20160329.858/git-commit-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/elpa/git-commit-20160329.858/git-commit.el")
-;;;;;;  (22276 52637 568319 300000))
 
 ;;;***
 

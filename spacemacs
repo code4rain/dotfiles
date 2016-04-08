@@ -120,7 +120,9 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-light
+   dotspacemacs-themes '(tango
+			 afternoon
+			 spacemacs-light
 			 junio
 			 spacemacs-dark
                          solarized-light
@@ -378,6 +380,9 @@ you should place you code here."
       (progn
 	(setq exec-path (add-to-list 'exec-path "C:/Program Files)/Git/bin"))
 	(setenv "PATH" (concat "C:\\Program Files\\Git\\bin;" (getenv "PATH")))))
+  ;; For ranger
+  (setq ranger-override-dired t)
+  (setq ranger-cleanup-eagerly t)
   )
 
 ;; do not write anything past this comment. this is where emacs will

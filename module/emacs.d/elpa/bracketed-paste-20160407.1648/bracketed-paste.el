@@ -4,7 +4,7 @@
 
 ;; Author: Takeshi Banse <takebi@laafc.net>
 ;; Version: 0.1.0
-;; Package-Version: 20140222.1801
+;; Package-Version: 20160407.1648
 ;; Package-Requires: ((emacs "24.3"))
 ;; Keywords: terminals
 
@@ -129,7 +129,8 @@
   '(suspend-hook suspend-tty-functions kill-emacs-hook delete-frame-functions))
 
 (defun bracketed-paste--safe-tty-state-call (terminalish send-tty)
-  (cond ((null terminalish) (funcall send-tty))
+  (cond ((window-system) nil) ; don't call send-tty if not a TTY
+        ((null terminalish) (funcall send-tty))
         ((and (eq (terminal-live-p terminalish) t) ; borrowed from xt-mouse.el
               (not (string= (terminal-name terminalish) "initial_terminal")))
          (funcall send-tty terminalish))))
@@ -198,6 +199,4 @@
                   (setq setupp t))))))
 
 (provide 'bracketed-paste)
-;;; bracketed-paste ends here
-
 ;;; bracketed-paste.el ends here

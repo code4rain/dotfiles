@@ -3,9 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "hydra" "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra.el"
-;;;;;;  "fa31a6d1f4ad93dfdb2f21a9b156ea81")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/hydra-20160404.222/hydra.el
+;;;### (autoloads nil "hydra" "hydra.el" (22279 21511 680868 948000))
+;;; Generated autoloads from hydra.el
 
 (autoload 'defhydra "hydra" "\
 Create a Hydra - a family of functions with prefix NAME.
@@ -63,13 +62,8 @@ result of `defhydra'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hydra-20160404.222/hydra-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra-examples.el"
-;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra-ox.el"
-;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra-pkg.el"
-;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/hydra.el"
-;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160404.222/lv.el")
-;;;;;;  (22276 52772 508037 400000))
+;;;### (autoloads nil nil ("hydra-examples.el" "hydra-ox.el" "hydra-pkg.el"
+;;;;;;  "lv.el") (22279 21511 761757 876000))
 
 ;;;***
 

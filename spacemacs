@@ -241,7 +241,7 @@ values."
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
-   ;; over any automatically added closing parenthesis, bracket, quote, etc¡¦
+   ;; over any automatically added closing parenthesis, bracket, quote, etcâ€¦
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
    dotspacemacs-smart-closing-parenthesis nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
@@ -285,7 +285,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
   (set-language-environment "Korean")
-  (prefer-coding-system 'utf-8) ; utf-8 È¯°æ ¼³Á¤
+  (prefer-coding-system 'utf-8) ; utf-8 í™˜ê²½ ì„¤ì •
 
   ;; quit insert mode by pressing jk
   (setq-default evil-escape-key-sequence "jk")
@@ -344,10 +344,10 @@ you should place you code here."
 
   (setq-default evil-symbol-word-search t)
 
-  ;; ±âº» ÆùÆ® ¼³Á¤À» ³ª´®°íµñÄÚµùÆùÆ®·Î º¯°æÇÔ
-  ;; ;; ÇÑ±Û ÆùÆ® ¼³Á¤
+  ;; ê¸°ë³¸ í°íŠ¸ ì„¤ì •ì„ ë‚˜ëˆ”ê³ ë”•ì½”ë”©í°íŠ¸ë¡œ ë³€ê²½í•¨
+  ;; ;; í•œê¸€ í°íŠ¸ ì„¤ì •
   ;; (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-  ;; ;; ³ª´®°íµñ°ú ¿µ¹®ÆùÆ® »çÀÌ¿¡ ºñÀ²À» ¸ÂÃãA
+  ;; ;; ë‚˜ëˆ”ê³ ë”•ê³¼ ì˜ë¬¸í°íŠ¸ ì‚¬ì´ì— ë¹„ìœ¨ì„ ë§ì¶¤A
   ;; (setq face-font-rescale-alist
   ;; 	'(("NanumGothicCoding" . 1.2307692307692308)))
   ;; (if (daemonp)
@@ -379,6 +379,15 @@ you should place you code here."
   ;; centered-cursor-mode set
   (global-centered-cursor-mode +1)
 
+  (define-typo-cycle typo-cycle-left-angle-brackets
+    "Cycle through the less-than sign and guillemet quotation marks.
+     If used with a numeric prefix argument N, N less-than signs will be inserted."
+    ("<" "<<" "Â«" "â€¹"))
+
+  (define-typo-cycle typo-cycle-right-angle-brackets
+    "Cycle through the greater-than sign and guillemet quotation marks.
+     If used with a numeric prefix argument N, N greater-than signs will be inserted."
+    (">" ">>" "Â»" "â€º" ))
   ;; Server Start
   (server-start)
 
@@ -386,3 +395,17 @@ you should place you code here."
 
 ;; do not write anything past this comment. this is where emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (which-key web-mode spaceline org-plus-contrib helm-ag packed anaconda-mode smartparens flycheck git-gutter yasnippet helm popup helm-core markdown-mode magit magit-popup git-commit with-editor hydra spacemacs-theme xterm-color ws-butler window-numbering volatile-highlights vi-tilde-fringe uuidgen use-package typo toc-org tagedit smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode powerline popwin pip-requirements persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diff-hl define-word cython-mode company-web company-statistics company-quickhelp company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk async aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

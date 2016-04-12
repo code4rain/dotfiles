@@ -37,24 +37,23 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     spacemacs-helm
      auto-completion
      better-defaults
      c-c++
      emacs-lisp
      git
+     gtags
+     html
+     latex
      markdown
      org
-     latex
-     html
-     gtags
-     python
      (ranger :variables
-                       ranger-show-preview t)
+	     ranger-show-preview t)
+     python
+     spacemacs-helm
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; spell-checking
      syntax-checking
      (typography :variables typography-enable-typographic-editing t)
      version-control
@@ -91,7 +90,7 @@ values."
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. (default t)
-   dotspacemacs-check-for-update t
+   dotspacemacs-check-for-update nil
    ;; One of `vim', `emacs' or `hybrid'.
    ;; `hybrid' is like `vim' except that `insert state' is replaced by the
    ;; `hybrid state' with `emacs' key bindings. The value can also be a list
@@ -120,21 +119,21 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(tango
-			 afternoon
-			 spacemacs-light
-			 junio
-			 spacemacs-dark
+   dotspacemacs-themes '(spacemacs-dark
+                         tango
+                         afternoon
+                         junio
+                         spacemacs-light
                          solarized-light
-                         leuven
+                         solarized-dark
                          monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
-                               :size 15
+   dotspacemacs-default-font '("NanumGothicCoding"
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.6)
@@ -175,7 +174,7 @@ values."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 1
+   dotspacemacs-large-file-size 10
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -193,10 +192,10 @@ values."
    dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
-   dotspacemacs-enable-paste-transient-state nil
+   dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.4
+   dotspacemacs-which-key-delay 0.6
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -205,7 +204,7 @@ values."
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar t
+   dotspacemacs-loading-progress-bar nil
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
    dotspacemacs-fullscreen-at-startup nil
@@ -237,10 +236,10 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode nil
+   dotspacemacs-smartparens-strict-mode t
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -275,6 +274,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq evil-want-C-i-jump t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -293,13 +293,21 @@ you should place you code here."
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
-
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
   ;; Also in visual mode
   (define-key evil-visual-state-map "j" 'evil-next-visual-line)
   (define-key evil-visual-state-map "k" 'evil-previous-visual-line)
+  (define-key evil-visual-state-map "q" 'evil-normal-state)
+
+  ;; move quick
+  (define-key evil-normal-state-map "\C-e" 'evil-end-of-line)
+  (define-key evil-insert-state-map "\C-e" 'end-of-line)
+  (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
+  (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
+  ;; exit with <C-g>
+  (global-set-key (kbd "C-g") 'evil-escape)
 
   ;; prevent startup hang
   (setq tramp-ssh-controlmaster-options
@@ -336,22 +344,21 @@ you should place you code here."
 
   (setq-default evil-symbol-word-search t)
 
-  ;; 한글 폰트 설정
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-
-  (if (daemonp)
-      (progn
-        (add-hook 'after-make-frame-functions
-                  (lambda (frame)
-                    (with-selected-frame frame
-                      (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-                      )))
-        )
-    )
-  ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤
+  ;; 기본 폰트 설정을 나눔고딕코딩폰트로 변경함
+  ;; ;; 한글 폰트 설정
+  ;; (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  ;; ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤A
   ;; (setq face-font-rescale-alist
-  ;; 	'((".*hiragino.*" . 1.2)
-  ;; 	  ("NanumGothicCoding" . 1.2307692307692308)))
+  ;; 	'(("NanumGothicCoding" . 1.2307692307692308)))
+  ;; (if (daemonp)
+  ;;     (progn
+  ;;       (add-hook 'after-make-frame-functions
+  ;;                 (lambda (frame)
+  ;;                   (with-selected-frame frame
+  ;;                     (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  ;;                     )))
+  ;;       )
+  ;;   )
   ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)
@@ -375,14 +382,6 @@ you should place you code here."
   ;; Server Start
   (server-start)
 
-  ;; add git path for magit
-  (if (eq system-type 'windows-nt)
-      (progn
-	(setq exec-path (add-to-list 'exec-path "C:/Program Files)/Git/bin"))
-	(setenv "PATH" (concat "C:\\Program Files\\Git\\bin;" (getenv "PATH")))))
-  ;; For ranger
-  (setq ranger-override-dired t)
-  (setq ranger-cleanup-eagerly t)
   )
 
 ;; do not write anything past this comment. this is where emacs will

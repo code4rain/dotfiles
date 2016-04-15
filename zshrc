@@ -322,4 +322,9 @@ if [ -f $HOME/.zshrc.local ]; then
 fi
 
 export ALTERNATE_EDITOR=""
-export PATH=/home/alex.jang/bin/cve:/home/alex.jang/bin/gp4:/home/alex.jang/bin/gref:/home/alex.jang/bin/report:/home/alex.jang/bin/faster_than_grep:/home/alex.jang/bin/helper:/home/alex.jang/bin/review:/home/alex.jang/bin/private:/home/alex.jang/bin:/home/alex.jang/.rvm/gems/ruby-2.2.0/bin:/home/alex.jang/.rvm/gems/ruby-2.2.0@global/bin:/home/alex.jang/.rvm/rubies/ruby-2.2.0/bin:/home/alex.jang/bin:/home/alex.jang/.cask/bin:/home/alex.jang/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin::/home/alex.jang/.rvm/bin:/home/alex.jang/.fzf/bin
+
+# added by Anaconda3 4.0.0 installer
+export PATH="/home/alex.jang/bin/.anaconda3/bin:$PATH"
+# added by Anaconda2 4.0.0 installer
+export PATH="/home/alex.jang/bin/.anaconda2/bin:$PATH"
+

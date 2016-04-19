@@ -28,7 +28,8 @@
         ;; https://github.com/7696122/evil-terminal-cursor-changer/issues/8
         (evil-terminal-cursor-changer :excluded t)
         evil-tutor
-        (evil-unimpaired :location local)))
+        (evil-unimpaired :location local)
+        evil-visual-mark-mode))
 
 (defun spacemacs-evil/init-evil-anzu ()
   (use-package evil-anzu
@@ -179,9 +180,15 @@
   (use-package evil-search-highlight-persist
     :init
     (progn
+      (defun spacemacs/evil-search-clear-highlight ()
+        "Clear evil-search or evil-ex-search persistent highlights."
+        (interactive)
+        (case evil-search-module
+          ('isearch (evil-search-highlight-persist-remove-all))
+          ('evil-search (evil-ex-nohighlight))))
       (global-evil-search-highlight-persist)
       ;; (set-face-attribute )
-      (spacemacs/set-leader-keys "sc" 'evil-search-highlight-persist-remove-all)
+      (spacemacs/set-leader-keys "sc" 'spacemacs/evil-search-clear-highlight)
       (define-key evil-search-highlight-persist-map (kbd "C-x SPC") 'rectangle-mark-mode)
       (evil-ex-define-cmd "nohlsearch"
                           'evil-search-highlight-persist-remove-all)
@@ -291,3 +298,13 @@
   (define-key evil-normal-state-map (kbd "[ p") 'evil-unimpaired/paste-above)
   (define-key evil-normal-state-map (kbd "] p") 'evil-unimpaired/paste-below))
 
+(defun spacemacs-evil/init-evil-visual-mark-mode ()
+  (use-package evil-visual-mark-mode
+    :defer t
+    :init
+    (spacemacs|add-toggle evil-visual-mark-mode
+      :status evil-visual-mark-mode
+      :on (evil-visual-mark-mode)
+      :off (evil-visual-mark-mode -1)
+      :documentation "Enable evil visual marks mode."
+      :evil-leader "t`")))

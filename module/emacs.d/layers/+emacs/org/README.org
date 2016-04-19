@@ -5,6 +5,7 @@
 * Table of Contents                                         :TOC_4_gh:noexport:
  - [[#description][Description]]
    - [[#features][Features:]]
+   - [[#bibtex][BibTeX]]
    - [[#important-note][Important Note]]
  - [[#install][Install]]
    - [[#layer][Layer]]
@@ -15,7 +16,7 @@
    - [[#org][Org]]
    - [[#org-with-evil-org-mode][Org with evil-org-mode]]
      - [[#tables][Tables]]
-     - [[#tree-][Tree ]]
+     - [[#tree][Tree]]
      - [[#element-insertion][Element insertion]]
      - [[#links][Links]]
      - [[#emphasis][Emphasis]]
@@ -31,7 +32,7 @@
    - [[#org-mime][Org-MIME]]
 
 * Description
-This layer enables  [[http://orgmode.org/][org mode]] for Spacemacs.
+This layer enables [[http://orgmode.org/][org mode]] for Spacemacs.
 
 ** Features:
 - Vim inspired key bindings are provided by [[https://github.com/edwtjo/evil-org-mode][evil-org-mode]]
@@ -39,6 +40,10 @@ This layer enables  [[http://orgmode.org/][org mode]] for Spacemacs.
 - A [[http://pomodorotechnique.com/][pomodoro method]] integration via [[https://github.com/lolownia/org-pomodoro][org-pomodoro]]
 - TODO capture via [[https://github.com/waymondo/org-repo-todo][org-repo-todo]]
 - presentation mode via [[https://github.com/rlister/org-present][org-present]]
+
+** BibTeX
+For more extensive support of references through BibTeX files, have a look at
+the [[../+lang/bibtex][BibTeX layer]].
 
 ** Important Note
 Since version 0.104, spacemacs uses the =org= version from the org ELPA
@@ -184,7 +189,7 @@ You can tweak the bullets displayed in the org buffer in the function
 | ~SPC m t t o~ | Toggle the display of Row/Column numbers in tables                         |
 | ~SPC m t w~   | Wrap several fields in a column like a paragraph                           |
 
-*** Tree 
+*** Tree
 
 | Key Binding | Description           |
 |-------------+-----------------------|

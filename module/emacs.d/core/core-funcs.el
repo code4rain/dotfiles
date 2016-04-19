@@ -25,6 +25,16 @@
   ;; ns is returned instead of mac on Emacs 25+
   (memq (window-system) '(mac ns)))
 
+(defun spacemacs/run-prog-mode-hooks ()
+  "Runs `prog-mode-hook'. Useful for modes that don't derive from
+`prog-mode' but should."
+  (run-hooks 'prog-mode-hook))
+
+(defun spacemacs/run-text-mode-hooks ()
+  "Runs `text-mode-hook'. Useful for modes that don't derive from
+`text-mode' but should."
+  (run-hooks 'text-mode-hook))
+
 (defun spacemacs//get-package-directory (pkg)
   "Return the directory of PKG. Return nil if not found."
   (let ((elpa-dir (file-name-as-directory package-user-dir)))
@@ -140,14 +150,30 @@ Supported properties:
        `((dolist (val ',def-key)
           (define-key (eval (car val)) (kbd (cdr val)) ',func)))))))
 
-(defun spacemacs/view-org-file (file &optional anchor-text expand-scope)
-  "Open the change log for the current version."
+(defun spacemacs/prettify-org-buffer ()
+  "Apply visual enchantments to the current buffer.
+The buffer's major mode should be `org-mode'."
   (interactive)
-  (require 'space-doc)
+  (if (not (derived-mode-p 'org-mode))
+      (user-error "org-mode should be enabled in the current buffer.")
+
+    (require 'space-doc)
+    (org-indent-mode)
+    (view-mode)
+    (space-doc-mode)))
+
+(defun spacemacs/view-org-file (file &optional anchor-text expand-scope)
+  "Open org file and apply visual enchantments.
+FILE is the org file to be opened.
+If ANCHOR-TEXT  is `nil' then run `re-search-forward' with ^ (beginning-of-line).
+If ANCHOR-TEXT is a GitHub style anchor then find a corresponding header.
+If ANCHOR-TEXT isn't a GitHub style anchor then run `re-search-forward' with
+ANCHOR-TEXT.
+If EXPAND-SCOPE is `subtree' then run `outline-show-subtree' at the matched line.
+If EXPAND-SCOPE is `all' then run `outline-show-all' at the matched line."
+  (interactive)
   (find-file file)
-  (org-indent-mode)
-  (view-mode)
-  (space-doc-mode)
+  (spacemacs/prettify-org-buffer)
   (goto-char (point-min))
   (when anchor-text
     ;; If `anchor-text' is GitHub style link.

@@ -21,15 +21,16 @@
     helm-cscope
     helm-pydoc
     hy-mode
-    (nose :location local)
     live-py-mode
+    (nose :location local)
+    org
     pip-requirements
     pyenv-mode
     (pylookup :location local)
     pytest
     (python :location built-in)
     pyvenv
-    (py-yapf :location local)
+    py-yapf
     semantic
     smartparens
     stickyfunc-enhance
@@ -74,7 +75,6 @@
       :defer t
       :init
       (push 'company-anaconda company-backends-python-mode))))
-
 
 (defun python/init-cython-mode ()
   (use-package cython-mode
@@ -152,6 +152,10 @@
       (add-to-list 'nose-project-root-files "setup.cfg")
       (setq nose-use-verbose nil))))
 
+(defun python/pre-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages '(python . t))))
+
 (defun python/init-pip-requirements ()
   (use-package pip-requirements
     :defer t
@@ -175,7 +179,6 @@
       (spacemacs/set-leader-keys-for-major-mode 'python-mode
         "vu" 'pyenv-mode-unset
         "vs" 'pyenv-mode-set))))
-
 
 (defun python/init-pyvenv ()
   (use-package pyvenv
@@ -262,7 +265,6 @@
                                  'python-setup-shell))
     :config
     (progn
-      (add-hook 'inferior-python-mode-hook 'smartparens-mode)
       ;; add support for `ahs-range-beginning-of-defun' for python-mode
       (with-eval-after-load 'auto-highlight-symbol
         (add-to-list 'ahs-plugin-bod-modes 'python-mode))
@@ -365,20 +367,7 @@
 
       ;; add this optional key binding for Emacs user, since it is unbound
       (define-key inferior-python-mode-map
-        (kbd "C-c M-l") 'spacemacs/comint-clear-buffer)
-
-      ;; fix for issue #2569 (https://github.com/syl20bnr/spacemacs/issues/2569)
-      ;; use `semantic-create-imenu-index' only when `semantic-mode' is enabled,
-      ;; otherwise use `python-imenu-create-index'
-      (defun spacemacs/python-imenu-create-index-python-or-semantic ()
-        (if (bound-and-true-p semantic-mode)
-            (semantic-create-imenu-index)
-          (python-imenu-create-index)))
-
-      (defadvice wisent-python-default-setup
-          (after spacemacs/python-set-imenu-create-index-function activate)
-        (setq imenu-create-index-function
-              #'spacemacs/python-imenu-create-index-python-or-semantic)))))
+        (kbd "C-c M-l") 'spacemacs/comint-clear-buffer))))
 
 (defun python/init-py-yapf ()
   (use-package py-yapf
@@ -389,7 +378,11 @@
               (add-hook 'python-mode-hook 'py-yapf-enable-on-save))))
 
 (defun python/post-init-semantic ()
+  (add-hook 'python-mode-hook
+            'spacemacs//disable-semantic-idle-summary-mode t)
   (add-hook 'python-mode-hook 'semantic-mode)
+  (add-hook 'python-mode-hook 'spacemacs//python-imenu-create-index-use-semantic)
+
   (defadvice semantic-python-get-system-include-path
       (around semantic-python-skip-error-advice activate)
     "Don't cause error when Semantic cannot retrieve include
@@ -401,6 +394,7 @@ fix this issue."
       (error nil))))
 
 (defun python/post-init-smartparens ()
+  (add-hook 'inferior-python-mode-hook 'smartparens-mode)
   (defadvice python-indent-dedent-line-backspace
       (around python/sp-backward-delete-char activate)
     (let ((pythonp (or (not smartparens-strict-mode)

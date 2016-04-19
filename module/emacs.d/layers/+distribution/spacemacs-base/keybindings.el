@@ -141,7 +141,6 @@
   "ep" 'spacemacs/previous-error)
 ;; file -----------------------------------------------------------------------
 (spacemacs/set-leader-keys
-  "fb" 'bookmark-jump
   "fc" 'spacemacs/copy-file
   "fD" 'spacemacs/delete-current-buffer-file
   "fei" 'spacemacs/find-user-init-file
@@ -345,7 +344,6 @@
   "w3"  'spacemacs/layout-triple-columns
   "wb"  'spacemacs/switch-to-minibuffer-window
   "wd"  'delete-window
-  "wD"  'ace-delete-window
   "wt"  'spacemacs/toggle-current-window-dedication
   "wf"  'follow-mode
   "wH"  'evil-window-move-far-left
@@ -367,7 +365,8 @@
   "wm"  'spacemacs/toggle-maximize-buffer
   "wM"  'spacemacs-centered-buffer-mode
   "wo"  'other-frame
-  "wR"  'spacemacs/rotate-windows
+  "wr"  'spacemacs/rotate-windows
+  "wR"  'spacemacs/rotate-windows-backward
   "ws"  'split-window-below
   "wS"  'split-window-below-and-focus
   "w-"  'split-window-below
@@ -594,8 +593,10 @@ otherwise it is scaled down."
 
 (spacemacs|define-transient-state scale-transparency
   :title "Frame Transparency Transient State"
+  :doc "\n[_+_/_=_] increase transparency [_-_] decrease [_T_] toggle [_q_] quit"
   :bindings
   ("+" spacemacs/increase-transparency "increase")
+  ("=" spacemacs/increase-transparency "increase")
   ("-" spacemacs/decrease-transparency "decrease")
   ("T" spacemacs/toggle-transparency "toggle")
   ("q" nil "quit" :exit t))

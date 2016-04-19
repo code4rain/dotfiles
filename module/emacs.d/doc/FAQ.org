@@ -21,7 +21,7 @@
    - [[#typing-quickly-fd-takes-me-out-of-insert-state-what-is-going-on][Typing quickly =fd= takes me out of =insert state=. What is going on?]]
    - [[#why-do-i-get-files-starting-with-][Why do I get files starting with .#?]]
    - [[#why-do-i-get-4m-characters-inside-ansi-term][Why do I get '4m' characters inside ansi-term?]]
- - [[#how-do-i][How do I...]]
+ - [[#how-do-i][How do I:]]
    - [[#install-a-package-not-provided-by-a-layer][Install a package not provided by a layer?]]
    - [[#disable-a-package-completely][Disable a package completely?]]
    - [[#disable-a-package-only-for-a-specific-major-mode][Disable a package only for a specific major-mode?]]
@@ -44,7 +44,7 @@
    - [[#why-do-the-fonts-look-crappy-on-windows][Why do the fonts look crappy on Windows?]]
    - [[#why-is-there-no-spacemacs-logo-in-the-startup-buffer][Why is there no Spacemacs logo in the startup buffer?]]
    - [[#why-are-all-packages-unavailable][Why are all packages unavailable?]]
-   - [[#the-powerline-isnt-shown-correctly-when-spacemacs-is-used-within-putty][The powerline isn't shown correctly when Spacemacs is used within =PuTTY=.]]
+   - [[#the-powerline-isnt-shown-correctly-when-spacemacs-is-used-within-putty][The powerline isn't shown correctly when Spacemacs is used within =PuTTY=]]
  - [[#os-x][OS X]]
    - [[#why-are-the-powerline-colors-not-correct-on-os-x][Why are the powerline colors not correct on OS X?]]
 
@@ -207,7 +207,7 @@ the =~/.terminfo= yourself.
 tic -o ~/.terminfo $TERMINFO/e/eterm-color.ti
 #+END_SRC
 
-* How do I...
+* How do I:
 ** Install a package not provided by a layer?
 Spacemacs provides a variable in the =dotspacemacs/layers= function in
 =.spacemacs= called =dotspacemacs-additional-packages=. Just add a package name
@@ -347,7 +347,7 @@ This is the value that will be used by Emacs. So it must contain =~/.local/bin=.
 After that you can run Spacemacs and check that it properly gets the value of
 =$PATH= by running =M-: (getenv "PATH")=.
 
-Note that having =~/.local.bin= in your =$PATH= also means that it's possible to
+Note that having =~/.local/bin= in your =$PATH= also means that it's possible to
 run terminal and call tools from =~/.local/bin= without specifying their full
 path. Under certain conditions you might want to avoid modifying your =$PATH=.
 In that case you have the option of updating the value of =exec-path= in the
@@ -504,7 +504,7 @@ Check if your Emacs has HTTPS capabilities by doing =M-:= and then:
 If this returns =nil=, you need to install the GnuTLS DLL file in the same
 directory as Emacs. See [[https://www.gnu.org/software/emacs/manual/html_mono/emacs-gnutls.html#Help-For-Users][here]] for instructions.
 
-** The powerline isn't shown correctly when Spacemacs is used within =PuTTY=.
+** The powerline isn't shown correctly when Spacemacs is used within =PuTTY=
 You can follow [[http://mschulte.nl/posts/using-powerline-in-PuTTY.html][this explanation]] explaining how to correct this.
 
 * OS X

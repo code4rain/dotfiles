@@ -60,9 +60,11 @@
   (use-package bookmark
     :defer t
     :init
-    (setq bookmark-default-file (concat spacemacs-cache-directory "bookmarks")
-          ;; autosave each change
-          bookmark-save-flag 1)))
+    (progn
+      (setq bookmark-default-file (concat spacemacs-cache-directory "bookmarks")
+            ;; autosave each change
+            bookmark-save-flag 1)
+      (spacemacs/set-leader-keys "fb" 'bookmark-jump))))
 
 (defun spacemacs-base/init-diminish ()
   (use-package diminish
@@ -93,23 +95,11 @@
     "jD" 'dired-jump-other-window))
 
 (defun spacemacs-base/init-dired-x ()
-  (autoload 'dired-jump "dired-x"
-    "Jump to Dired buffer corresponding to current buffer." t)
+  (use-package dired-x
+    :commands (dired-jump
+               dired-jump-other-window
+               dired-omit-mode)))
 
-  (autoload 'dired-jump-other-window "dired-x"
-    "Like \\[dired-jump] (dired-jump) but in other window." t))
-
-(defun spacemacs-base/init-eldoc ()
-  (use-package eldoc
-    :defer t
-    :config
-    (progn
-      ;; enable eldoc in `eval-expression'
-      (add-hook 'eval-expression-minibuffer-setup-hook #'eldoc-mode)
-      ;; enable eldoc in IELM
-      (add-hook 'ielm-mode-hook #'eldoc-mode)
-      ;; don't display eldoc on modeline
-      (spacemacs|hide-lighter eldoc-mode))))
 
 (defun spacemacs-base/init-electric-indent-mode ()
   (electric-indent-mode))
@@ -473,7 +463,7 @@
       (setq popwin:special-display-config nil)
 
       ;; buffers that we manage
-      (push '("*Help*"                 :dedicated t :position bottom :stick t :noselect nil :height 0.4) popwin:special-display-config)
+      (push '("*Help*"                 :dedicated t :position bottom :stick t :noselect t   :height 0.4) popwin:special-display-config)
       (push '("*compilation*"          :dedicated t :position bottom :stick t :noselect t   :height 0.4) popwin:special-display-config)
       (push '("*Shell Command Output*" :dedicated t :position bottom :stick t :noselect nil            ) popwin:special-display-config)
       (push '("*Async Shell Command*"  :dedicated t :position bottom :stick t :noselect nil            ) popwin:special-display-config)
@@ -502,7 +492,7 @@
                projectile-find-dir
                projectile-find-file
                projectile-find-tag
-               projectile-find-test-file
+               projectile-test-project
                projectile-grep
                projectile-invalidate-cache
                projectile-kill-buffers
@@ -551,7 +541,7 @@
         "pk" 'projectile-kill-buffers
         "po" 'projectile-multi-occur
         "pR" 'projectile-replace
-        "pT" 'projectile-find-test-file
+        "pT" 'projectile-test-project
         "py" 'projectile-find-tag))
     :config
     (progn

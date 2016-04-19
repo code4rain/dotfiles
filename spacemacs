@@ -55,6 +55,7 @@ values."
             shell-default-height 30
             shell-default-position 'bottom)
      syntax-checking
+     spell-checking
      (typography :variables typography-enable-typographic-editing t)
      version-control
      )
@@ -63,7 +64,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-				      olivetti)
+				      olivetti
+				      focus)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -240,7 +242,7 @@ values."
    dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -341,6 +343,9 @@ you should place you code here."
 
   (setq-default evil-symbol-word-search t)
 
+  ;; centered-cursor-mode set
+  (global-centered-cursor-mode +1)
+
   (defun font-big ()
     (interactive)
     (set-face-attribute 'default nil :height
@@ -352,13 +357,18 @@ you should place you code here."
     (set-face-attribute 'default nil :height
                         (max 80
                              (- (face-attribute 'default :height) 10))))
-  (global-set-key (kbd "<C-mouse-5>") 'font-small)
-  (global-set-key (kbd "<C-mouse-4>") 'font-big)
-  (global-set-key (kbd "<C-wheel-down>") 'font-small)
-  (global-set-key (kbd "<C-wheel-up>") 'font-big)
-
-  ;; centered-cursor-mode set
-  (global-centered-cursor-mode +1)
+  (if (eq system-type 'linux)
+    (global-unset-key (kbd "<C-mouse-5>"))
+    (global-unset-key (kbd "<C-mouse-4>"))
+    (global-set-key (kbd "<C-mouse-5>") 'font-small)
+    (global-set-key (kbd "<C-mouse-4>") 'font-big)
+  )
+  (if (eq system-type 'windows-nt)
+    (global-unset-key (kbd "<C-wheel-down>"))
+    (global-unset-key (kbd "<C-wheel-up>"))
+    (global-set-key (kbd "<C-wheel-down>") 'font-small)
+    (global-set-key (kbd "<C-wheel-up>") 'font-big)
+  )
 
   (define-typo-cycle typo-cycle-left-angle-brackets
     "Cycle through the less-than sign and guillemet quotation marks.
@@ -372,6 +382,34 @@ you should place you code here."
   ;; Server Start
   (server-start)
 
+  ;; enable org-indent-mode with org-mode
+  (add-hook 'org-mode-hook 'my-org-mode-hook)
+  (defun my-org-mode-hook ()
+    (org-indent-mode 1))
+
+  ;; olivetti
+  (defun alex/toggle-write-mode ()
+    "Toggle a distraction-free environment for writing."
+    (interactive)
+    (cond ((bound-and-true-p olivetti-mode)
+	   (olivetti-mode -1)
+	   (olivetti-toggle-hide-mode-line)
+	   (toggle-frame-fullscreen)
+	   (focus-mode -1)
+	   (spacemacs/toggle-menu-bar-on)
+	   (spacemacs/toggle-line-numbers-on))
+	  (t
+	   (olivetti-mode 1)
+	   (olivetti-toggle-hide-mode-line)
+	   (toggle-frame-fullscreen)
+	   (focus-mode 1)
+	   (spacemacs/toggle-menu-bar-off)
+	   (spacemacs/toggle-line-numbers-off))))
+  ;; windows spell checker
+  (if (eq system-type 'windows-nt)
+    (setq ispell-program-name "C:\\Program Files (x86)\\Aspell\\bin\\aspell.exe")
+    (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
+  )
   )
 
 ;; do not write anything past this comment. this is where emacs will

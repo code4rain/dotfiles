@@ -79,23 +79,10 @@
     :defer t
     :init
     (progn
-
-      (defun spacemacs/git-link-copy-url-only ()
-        "Only copy the generated link to the kill ring."
-        (interactive)
-        (let (git-link-open-in-browser)
-          (call-interactively 'git-link)))
-
-      (defun spacemacs/git-link-commit-copy-url-only ()
-        "Only copy the generated link to the kill ring."
-        (interactive)
-        (let (git-link-open-in-browser)
-          (call-interactively 'git-link-commit)))
-
       (spacemacs/set-leader-keys
-        "ghl" 'git-link
+        "ghl" 'spacemacs/git-link
         "ghL" 'spacemacs/git-link-copy-url-only
-        "ghc" 'git-link-commit
+        "ghc" 'spacemacs/git-link-commit
         "ghC" 'spacemacs/git-link-commit-copy-url-only)
       ;; default is to open the generated link
       (setq git-link-open-in-browser t))))

@@ -37,15 +37,16 @@
       (spacemacs/declare-prefix-for-mode 'rust-mode "mc" "cargo")
       (spacemacs/set-leader-keys-for-major-mode 'rust-mode
         "="  'rust-format-buffer
+        "cC" 'spacemacs/rust-cargo-clean
         "cc" 'spacemacs/rust-cargo-build
-        "ct" 'spacemacs/rust-cargo-test
         "cd" 'spacemacs/rust-cargo-doc
+        "cf" 'spacemacs/rust-cargo-fmt))))
+        "ct" 'spacemacs/rust-cargo-test
         "cx" 'spacemacs/rust-cargo-run
-        "cC" 'spacemacs/rust-cargo-clean))))
 
 (defun rust/init-toml-mode ()
   (use-package toml-mode
-    :defer t))
+    :mode "/\\(Cargo.lock\\|\\.cargo/config\\)\\'"))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
   (defun rust/post-init-company ()
@@ -65,6 +66,7 @@
     (exec-path-from-shell-copy-env "RUST_SRC_PATH"))
 
   (use-package racer
+    :diminish racer-mode
     :defer t
     :init
     (progn

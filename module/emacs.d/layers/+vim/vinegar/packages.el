@@ -10,11 +10,11 @@
 ;;; License: GPLv3
 
 (setq vinegar-packages
-  '(
-    diff-hl
-    ;; dired+
-    (dired :location built-in)
-    ))
+      '(
+        diff-hl
+        ;; dired+
+        (dired :location built-in)
+        ))
 
 (defun vinegar/init-dired+ ()
   (use-package dired+
@@ -37,7 +37,7 @@
       (add-hook 'dired-mode-hook 'diff-hl-dired-mode)
       )))
 
-(defun vinegar/init-dired ()
+(defun vinegar/post-init-dired ()
   (use-package dired
     :defer t
     :config

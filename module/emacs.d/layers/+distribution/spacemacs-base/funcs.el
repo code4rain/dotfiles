@@ -115,6 +115,7 @@ the current state and point position."
 ;; TODO: dispatch these in the layers
 (defvar spacemacs-indent-sensitive-modes
   '(coffee-mode
+    elm-mode
     haml-mode
     haskell-mode
     slim-mode
@@ -352,11 +353,10 @@ argument takes the kindows rotate backwards."
 (defun spacemacs/show-and-copy-buffer-filename ()
   "Show and copy the full path to the current file in the minibuffer."
   (interactive)
-  (let ((file-name (buffer-file-name)))
+  ;; list-buffers-directory is the variable set in dired buffers
+  (let ((file-name (or (buffer-file-name) list-buffers-directory)))
     (if file-name
-        (progn
-          (message file-name)
-          (kill-new file-name))
+        (message (kill-new file-name))
       (error "Buffer not visiting a file"))))
 
 ;; adapted from bozhidar
@@ -602,7 +602,8 @@ current window."
   "Dispatch to flycheck or standard emacs error."
   (interactive "P")
   (if (and (boundp 'flycheck-mode)
-           (symbol-value flycheck-mode))
+           (symbol-value flycheck-mode)
+           (not (get-buffer-window "*compilation*")))
       (call-interactively 'flycheck-next-error)
     (call-interactively 'next-error)))
 
@@ -610,7 +611,8 @@ current window."
   "Dispatch to flycheck or standard emacs error."
   (interactive "P")
   (if (and (boundp 'flycheck-mode)
-           (symbol-value flycheck-mode))
+           (symbol-value flycheck-mode)
+           (not (get-buffer-window "*compilation*")))
       (call-interactively 'flycheck-previous-error)
     (call-interactively 'previous-error)))
 
@@ -894,25 +896,3 @@ is nonempty."
   (interactive)
   (delete-windows-on "*compilation*"))
 
-(defun spacemacs//set-evil-shift-width ()
-  "Set the value of `evil-shift-width' based on the indentation settings of the
-current major mode."
-  (let ((shift-width
-         (catch 'break
-           (dolist (test spacemacs--indent-variable-alist)
-             (let ((mode (car test))
-                   (val (cdr test)))
-               (when (or (and (symbolp mode) (derived-mode-p mode))
-                         (and (listp mode) (apply 'derived-mode-p mode))
-                         (eq 't mode))
-                 (when (not (listp val))
-                   (setq val (list val)))
-                 (dolist (v val)
-                   (cond
-                    ((integerp v) (throw 'break v))
-                    ((and (symbolp v) (boundp v))
-                     (throw 'break (symbol-value v))))))))
-           (throw 'break (default-value 'evil-shift-width)))))
-    (when (and (integerp shift-width)
-               (< 0 shift-width))
-      (setq-local evil-shift-width shift-width))))

@@ -10,8 +10,11 @@
 ;;
 ;;; License: GPLv3
 
-(setq ranger-packages '(dired
-                        ranger))
+(setq ranger-packages
+      '(
+        (dired :location built-in)
+        ranger
+        ))
 
 (defun ranger//set-leader-keys ()
   (spacemacs/set-leader-keys
@@ -21,6 +24,7 @@
 (defun ranger/init-ranger ()
   (use-package ranger
     :defer t
+    :commands (ranger deer ranger-override-dired-fn)
     :init
     (progn
       (ranger//set-leader-keys)
@@ -33,4 +37,8 @@
 
 (defun ranger/post-init-dired ()
   ;; Be sure to override dired bindings
-  (ranger//set-leader-keys))
+  (ranger//set-leader-keys)
+  ;; need to apply this to compensate for defer
+  (spacemacs|use-package-add-hook ranger
+    :post-init (when ranger-override-dired
+                 (add-hook 'dired-mode-hook #'ranger-override-dired-fn))))

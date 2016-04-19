@@ -16,7 +16,6 @@
     emoji-cheat-sheet-plus
     (evil-org :location local)
     evil-surround
-    flyspell
     gnuplot
     htmlize
     mu4e
@@ -24,8 +23,6 @@
     (ob :location built-in)
     (org :location built-in)
     (org-agenda :location built-in)
-    (org-plus-contrib :step pre)
-    org-bullets
     ;; org-mime is installed by `org-plus-contrib'
     (org-mime :location built-in)
     org-pomodoro
@@ -34,7 +31,6 @@
     (ox-gfm :location local)
     persp-mode
     (space-doc :location local)
-    toc-org
     ))
 
 (when (configuration-layer/layer-usedp 'auto-completion)
@@ -49,15 +45,14 @@
 
 (defun org/init-evil-org ()
   (use-package evil-org
-    :commands evil-org-mode
-    :init
-    (add-hook 'org-mode-hook 'evil-org-mode)
+    :commands (evil-org-mode evil-org-recompute-clocks)
+    :init (add-hook 'org-mode-hook 'evil-org-mode)
     :config
     (progn
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "C" 'evil-org-recompute-clocks)
       (evil-define-key 'normal evil-org-mode-map
         "O" 'evil-open-above)
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "C" 'evil-org-recompute-clocks)
       (spacemacs|diminish evil-org-mode " ⓔ" " e"))))
 
 (defun org/post-init-evil-surround ()
@@ -67,9 +62,6 @@
   (defun spacemacs//surround-drawer ()
     (let ((dname (read-from-minibuffer "" "")))
       (cons (format ":%s:\n" (or dname "")) "\n:END:"))))
-
-(defun org/post-init-flyspell ()
-  (spell-checking/add-flyspell-hook 'org-mode-hook))
 
 (defun org/init-gnuplot ()
   (use-package gnuplot
@@ -81,9 +73,6 @@
   ;; Load org-mu4e when mu4e is actually loaded
   (spacemacs|use-package-add-hook mu4e
     :post-config (require 'org-mu4e nil 'noerror)))
-
-;; dummy init function to force installation of `org-plus-contrib'
-(defun org/init-org-plus-contrib ())
 
 (defun org/init-ob ()
   (use-package ob
@@ -98,20 +87,9 @@
 
 (defun org/init-org ()
   (use-package org
-    :mode ("\\.org$" . org-mode)
-    :commands (org-clock-out org-occur-in-agenda-files org-agenda-files)
     :defer t
     :init
     (progn
-      ;; FIXME: This check has been disabled pending a resolution of
-      ;; https://github.com/syl20bnr/spacemacs/issues/3933
-      ;; (when (featurep 'org)
-      ;;   (configuration-layer//set-error)
-      ;;   (spacemacs-buffer/append
-      ;;    (concat
-      ;;     "Org features were loaded before the `org' layer initialized.\n"
-      ;;     "Try removing org code from user initialization and private layers.") t))
-
       (setq org-clock-persist-file (concat spacemacs-cache-directory
                                            "org-clock-save.el")
             org-id-locations-file (concat spacemacs-cache-directory
@@ -149,6 +127,13 @@
           "c" 'org-edit-src-exit
           "a" 'org-edit-src-abort
           "k" 'org-edit-src-abort))
+
+      (let ((dir (configuration-layer/get-layer-property 'org :dir)))
+        (setq org-export-async-init-file (concat dir "org-async-init.el")))
+      (defmacro spacemacs|org-emphasize (fname char)
+        "Make function for setting the emphasis in org mode"
+        `(defun ,fname () (interactive)
+                (org-emphasize ,char)))
 
       ;; Insert key for org-mode and markdown a la C-h k
       ;; from SE endless http://emacs.stackexchange.com/questions/2206/i-want-to-have-the-kbd-tags-for-my-blog-written-in-org-mode/2208#2208
@@ -287,14 +272,6 @@ Will work on both org-mode and any mode that accepts plain html."
     :config
     (progn
       (setq org-default-notes-file "notes.org")
-      (font-lock-add-keywords
-       'org-mode '(("\\(@@html:<kbd>@@\\) \\(.*\\) \\(@@html:</kbd>@@\\)"
-                    (1 font-lock-comment-face prepend)
-                    (2 font-lock-function-name-face)
-                    (3 font-lock-comment-face prepend))))
-
-      ;; Open links and files with RET in normal state
-      (evil-define-key 'normal org-mode-map (kbd "RET") 'org-open-at-point)
 
       ;; We add this key mapping because an Emacs user can change
       ;; `dotspacemacs-major-mode-emacs-leader-key' to `C-c' and the key binding
@@ -444,11 +421,6 @@ Headline^^            Visit entry^^               Filter^^                    Da
       (kbd "M-SPC") 'spacemacs/org-agenda-transient-state/body
       (kbd "s-M-SPC") 'spacemacs/org-agenda-transient-state/body)))
 
-(defun org/init-org-bullets ()
-  (use-package org-bullets
-    :defer t
-    :init (add-hook 'org-mode-hook 'org-bullets-mode)))
-
 (defun org/init-org-mime ()
   (use-package org-mime
     :defer t
@@ -557,16 +529,10 @@ a Markdown buffer and use this command to convert it.
     :body
     (find-file (first (org-agenda-files)))))
 
-(defun org/init-toc-org ()
-  (use-package toc-org
-    :defer t
-    :init
-    (progn
-      (setq toc-org-max-depth 10)
-      (add-hook 'org-mode-hook 'toc-org-enable))))
-
 (defun org/init-htmlize ()
  (use-package htmlize
-    :defer t))
+   :defer t))
 
-(defun org/init-space-doc ())
+(defun org/init-space-doc ()
+  (use-package space-doc
+    :config (spacemacs|diminish space-doc-mode " ❤" " d")))

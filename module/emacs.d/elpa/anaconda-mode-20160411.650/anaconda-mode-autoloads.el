@@ -1,7 +1,7 @@
 ;;; anaconda-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "anaconda-mode" "../../../../../.emacs.d/elpa/anaconda-mode-20160411.650/anaconda-mode.el"
 ;;;;;;  "9c806ad5565dc47a232e13d0bd163d93")
@@ -23,7 +23,7 @@ Toggle echo area display of Python objects at point.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/anaconda-mode-20160411.650/anaconda-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/anaconda-mode-20160411.650/anaconda-mode.el")
-;;;;;;  (22285 25390 0 0))
+;;;;;;  (22293 58752 914728 300000))
 
 ;;;***
 

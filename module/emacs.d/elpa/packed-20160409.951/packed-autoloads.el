@@ -1,11 +1,11 @@
 ;;; packed-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/packed-20160409.951/packed-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/packed-20160409.951/packed.el")
-;;;;;;  (22285 25392 0 0))
+;;;;;;  (22293 58745 83260 0))
 
 ;;;***
 

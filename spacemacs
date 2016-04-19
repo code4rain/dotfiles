@@ -309,10 +309,6 @@ you should place you code here."
   ;; exit with <C-g>
   (global-set-key (kbd "C-g") 'evil-escape)
 
-  ;; prevent startup hang
-  (setq tramp-ssh-controlmaster-options
-        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-
   ;; tab width set
   (setq-default tab-width 8)
   (setq-default c-basic-offset 8)
@@ -344,22 +340,6 @@ you should place you code here."
 
   (setq-default evil-symbol-word-search t)
 
-  ;; 기본 폰트 설정을 나눔고딕코딩폰트로 변경함
-  ;; ;; 한글 폰트 설정
-  ;; (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-  ;; ;; 나눔고딕과 영문폰트 사이에 비율을 맞춤A
-  ;; (setq face-font-rescale-alist
-  ;; 	'(("NanumGothicCoding" . 1.2307692307692308)))
-  ;; (if (daemonp)
-  ;;     (progn
-  ;;       (add-hook 'after-make-frame-functions
-  ;;                 (lambda (frame)
-  ;;                   (with-selected-frame frame
-  ;;                     (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
-  ;;                     )))
-  ;;       )
-  ;;   )
-  ;; change font size by mouse wheeling
   (defun font-big ()
     (interactive)
     (set-face-attribute 'default nil :height
@@ -395,17 +375,3 @@ you should place you code here."
 
 ;; do not write anything past this comment. this is where emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (which-key web-mode spaceline org-plus-contrib helm-ag packed anaconda-mode smartparens flycheck git-gutter yasnippet helm popup helm-core markdown-mode magit magit-popup git-commit with-editor hydra spacemacs-theme xterm-color ws-butler window-numbering volatile-highlights vi-tilde-fringe uuidgen use-package typo toc-org tagedit smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode powerline popwin pip-requirements persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-present org-pomodoro org-bullets open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diff-hl define-word cython-mode company-web company-statistics company-quickhelp company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk async aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

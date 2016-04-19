@@ -1,7 +1,7 @@
 ;;; smartparens-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "smartparens" "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens.el"
 ;;;;;;  "8e18a382cf37dc9b0acce1293398bd20")
@@ -191,7 +191,7 @@ Turn off `show-smartparens-mode'.
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens-rust.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens-scala.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens.el")
-;;;;;;  (22285 25387 0 0))
+;;;;;;  (22293 58742 499229 0))
 
 ;;;***
 

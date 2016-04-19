@@ -364,114 +364,11 @@ endfunc
 command! -bang Q quitall<bang>
 command! PerforceEdit call <SID>P4_edit_current()
 command! PerforceRevert call <SID>P4_revert_current()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cscope
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! SetCscope()
-  let curdir = getcwd()
 
-  while !filereadable("cscope.out") && getcwd() != "/"
-    cd ..
-  endwhile
-
-  if filereadable("cscope.out")
-    execute "silent cs add " . getcwd() . "/cscope.out"
-    "echo \"Load CSCOPE DONE\"
-  endif
-
-  execute "cd " . curdir
-endfunction
-
-"cscope file-searching alternative
-if has('cscope')
-  set cscopetag cscopeverbose
-
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-  call SetCscope()
-endif
-
-"---------------------------------------------------------------------
-" GTAGS
-"---------------------------------------------------------------------
-function! GtagsCommnad()
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-    if filereadable("GPATH")
-      nnoremap <silent><F12> :GtagsCursor<CR>
-      nnoremap <F7> :Gtags<space>
-      nnoremap <M-h> :Gtags -gi<space>
-      nnoremap <silent><M-n> :cn<CR>
-      nnoremap <silent><M-m> :cp<CR>
-    endif
-  endif
-endfunction
-autocmd BufReadPost * :call GtagsCommnad()
-"---------------------------------------------------------------------
-" gtags-cscope.vim
-"---------------------------------------------------------------------
-let GtagsCscope_Auto_Load = 1
-"let GtagsCscope_Auto_Map = 1
-let GtagsCscope_Keep_Alive = 1
-let GtagsCscope_Quiet = 1
-"---------------------------------------------------------------------
-" Auto
-"---------------------------------------------------------------------
 "---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------
 noremap <silent> <M-o> :FZF<CR>
-"---------------------------------------------------------------------
-" Vimgrep
-"---------------------------------------------------------------------
-function! Find_current_file(word)
-  execute "silent vimgrep " . a:word . " %"
-  let l:count = len(getqflist())
-  if l:count
-    execute "copen"
-    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-    nnoremap <silent> <buffer> o  <CR>
-    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
-
-    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
-
-    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-  endif
-endfunction
-function! Open_QuickFixList()
-  let l:count = len(getqflist())
-  if l:count
-    execute "copen"
-    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-    nnoremap <silent> <buffer> o  <CR>
-    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
-
-    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
-
-    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-  endif
-endfunction
-command! -nargs=* CSearch call Find_current_file(<q-args>)
-noremap <F9> :call Find_current_file(expand('<cword>'))<CR>
-noremap <F10> :call Open_QuickFixList()<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

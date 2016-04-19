@@ -1,4 +1,4 @@
-(define-package "evil-mc" "20160331.844" "Multiple cursors for evil-mode"
+(define-package "evil-mc" "20160418.2149" "Multiple cursors for evil-mode"
   '((emacs "24.3")
     (evil "1.2.11")
     (cl-lib "0.5"))

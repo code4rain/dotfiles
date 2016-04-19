@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "evil-mc" "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc.el"
+;;;### (autoloads nil "evil-mc" "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc.el"
 ;;;;;;  "c8ba899d0d2aae49c26530756cb8a9ee")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc.el
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc.el
 
 (autoload 'evil-mc-mode "evil-mc" "\
 Toggle evil multiple cursors in a single buffer.
@@ -50,21 +50,21 @@ Turn off evil-mc mode in the current buffer.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-command-execute.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-command-record.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-common.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-cursor-make.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-cursor-state.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-known-commands.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-pkg.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-region.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-scratch.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-setup.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-undo.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc-vars.el"
-;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160331.844/evil-mc.el")
-;;;;;;  (22276 52658 903539 600000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-command-execute.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-command-record.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-common.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-cursor-make.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-cursor-state.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-known-commands.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-region.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-scratch.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-setup.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-undo.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-vars.el"
+;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc.el")
+;;;;;;  (22294 18374 928422 0))
 
 ;;;***
 

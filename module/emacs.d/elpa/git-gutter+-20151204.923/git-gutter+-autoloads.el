@@ -39,7 +39,7 @@ Commit staged changes. If nothing is staged, ask to stage the current buffer.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-gutter+-20151204.923/git-gutter+.el")
-;;;;;;  (22276 52705 229189 300000))
+;;;;;;  (22294 10019 522520 100000))
 
 ;;;***
 

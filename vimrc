@@ -607,11 +607,13 @@ nnoremap tt diw"*P
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>
-noremap <down> gj
 noremap <silent><C-A> ^
 noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
+noremap <down> gj
 noremap <up> gk
+noremap <left> h
+noremap <right> l
 noremap gV `[v`]
 noremap j gjzz
 noremap k gkzz

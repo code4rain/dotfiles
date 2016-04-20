@@ -344,7 +344,7 @@ you should place you code here."
   (setq-default evil-symbol-word-search t)
 
   ;; centered-cursor-mode set
-  (global-centered-cursor-mode +1)
+  ;; (global-centered-cursor-mode +1)
 
   (defun font-big ()
     (interactive)

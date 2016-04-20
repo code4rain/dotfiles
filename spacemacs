@@ -136,7 +136,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("NanumGothicCoding"
-                               :size 13
+                               :size 18
                                :weight normal
                                :width normal
                                :powerline-scale 1.6)
@@ -346,29 +346,30 @@ you should place you code here."
   ;; centered-cursor-mode set
   ;; (global-centered-cursor-mode +1)
 
-  (defun font-big ()
-    (interactive)
-    (set-face-attribute 'default nil :height
-                        (min 720
-                             (+ (face-attribute 'default :height) 10))))
-
-  (defun font-small ()
-    (interactive)
-    (set-face-attribute 'default nil :height
-                        (max 80
-                             (- (face-attribute 'default :height) 10))))
-  (if (eq system-type 'linux)
-    (global-unset-key (kbd "<C-mouse-5>"))
-    (global-unset-key (kbd "<C-mouse-4>"))
-    (global-set-key (kbd "<C-mouse-5>") 'font-small)
-    (global-set-key (kbd "<C-mouse-4>") 'font-big)
-  )
+  ;; (defun font-big ()
+  ;;   (interactive)
+  ;;   (set-face-attribute 'default nil :height
+  ;;                       (min 720
+  ;;                            (+ (face-attribute 'default :height) 10))))
+  ;; (defun font-small ()
+  ;;   (interactive)
+  ;;   (set-face-attribute 'default nil :height
+  ;;                       (max 80
+  ;;                            (- (face-attribute 'default :height) 10))))
   (if (eq system-type 'windows-nt)
-    (global-unset-key (kbd "<C-wheel-down>"))
-    (global-unset-key (kbd "<C-wheel-up>"))
-    (global-set-key (kbd "<C-wheel-down>") 'font-small)
-    (global-set-key (kbd "<C-wheel-up>") 'font-big)
-  )
+      (progn
+	(global-unset-key (kbd "<C-wheel-down>"))
+	(global-unset-key (kbd "<C-wheel-up>"))
+	(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+	)
+    (progn
+      (global-unset-key (kbd "<C-mouse-5>"))
+      (global-unset-key (kbd "<C-mouse-4>"))
+      (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+      (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+      )
+    )
 
   (define-typo-cycle typo-cycle-left-angle-brackets
     "Cycle through the less-than sign and guillemet quotation marks.
@@ -382,10 +383,17 @@ you should place you code here."
   ;; Server Start
   (server-start)
 
+  ;; ------------ ORG MODE +
   ;; enable org-indent-mode with org-mode
   (add-hook 'org-mode-hook 'my-org-mode-hook)
   (defun my-org-mode-hook ()
-    (org-indent-mode 1))
+    (org-indent-mode 1)
+    (visual-line-mode))
+  (font-lock-add-keywords 'org-mode
+			  '(("^ +\\([-*]\\) "
+			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+  (setq org-bullets-bullet-list '("■" "◆" "▼" "●" "◉" "◎" "○" "◦" "￮" "⊙" "⊚" "⊛" "✡" "✽" "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
+  ;; ------------ ORG MODE -
 
   ;; olivetti
   (defun alex/toggle-write-mode ()
@@ -396,20 +404,19 @@ you should place you code here."
 	   (olivetti-toggle-hide-mode-line)
 	   (toggle-frame-fullscreen)
 	   (focus-mode -1)
-	   (spacemacs/toggle-menu-bar-on)
 	   (spacemacs/toggle-line-numbers-on))
 	  (t
 	   (olivetti-mode 1)
 	   (olivetti-toggle-hide-mode-line)
 	   (toggle-frame-fullscreen)
 	   (focus-mode 1)
-	   (spacemacs/toggle-menu-bar-off)
 	   (spacemacs/toggle-line-numbers-off))))
   ;; windows spell checker
   (if (eq system-type 'windows-nt)
     (setq ispell-program-name "C:\\Program Files (x86)\\Aspell\\bin\\aspell.exe")
     (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
   )
+  (setq-default line-spacing 10)
   )
 
 ;; do not write anything past this comment. this is where emacs will

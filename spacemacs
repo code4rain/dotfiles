@@ -356,18 +356,34 @@ you should place you code here."
   ;;   (set-face-attribute 'default nil :height
   ;;                       (max 80
   ;;                            (- (face-attribute 'default :height) 10))))
+  (setq-default line-spacing 10)
+  (defun alex/line-spacing-increase()
+    (interactive)
+    (setq line-spacing (+ line-spacing 1)))
+  (defun alex/line-spacing-decrease()
+    (interactive)
+    (setq line-spacing (- line-spacing 1)))
+
   (if (eq system-type 'windows-nt)
       (progn
 	(global-unset-key (kbd "<C-wheel-down>"))
 	(global-unset-key (kbd "<C-wheel-up>"))
 	(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+	(global-unset-key (kbd "<C-S-wheel-down>"))
+	(global-unset-key (kbd "<C-S-wheel-up>"))
+	(global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
+	(global-set-key (kbd "<C-S-wheel-up>") 'alex/line-spacing-increase)
 	)
     (progn
       (global-unset-key (kbd "<C-mouse-5>"))
       (global-unset-key (kbd "<C-mouse-4>"))
       (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
       (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+      (global-unset-key (kbd "<C-S-mouse-5>"))
+      (global-unset-key (kbd "<C-S-mouse-4>"))
+      (global-set-key (kbd "<C-S-mouse-5>") 'alex/line-spacing-decrease)
+      (global-set-key (kbd "<C-S-mouse-4>") 'alex/line-spacing-increase)
       )
     )
 
@@ -418,7 +434,6 @@ you should place you code here."
     (setq ispell-program-name "C:\\Program Files (x86)\\Aspell\\bin\\aspell.exe")
     (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
   )
-  (setq-default line-spacing 10)
   )
 
 ;; do not write anything past this comment. this is where emacs will

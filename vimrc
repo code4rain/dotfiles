@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
 " Language Support
 Plug 'tpope/vim-fugitive'
+
 " Expand Editor
 Plug 'Lokaltog/vim-easymotion'
 Plug 'repeat.vim'
@@ -17,10 +18,12 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
+
 " UI (Colorscheme and so on)
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
+
 " Framework
 Plug 'UltiSnips'
 Plug 'honza/vim-snippets'
@@ -29,10 +32,12 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Mizuchi/vim-ranger'
+
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'junegunn/vim-peekaboo' "Show registers for paste text
+
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
 Plug 't9md/vim-quickhl'
@@ -129,11 +134,13 @@ function! ToggleFocusMode()
     set foldcolumn=8
     set noruler
     set nonumber
+    Limelight
   else
     set numberwidth=4
     set foldcolumn=1
     set ruler
     set number
+    Limelight!
   endif
 endfunc
 function! FocusModeOff()
@@ -391,6 +398,7 @@ xmap <leader>H <Plug>(quickhl-manual-reset)
 nmap <leader>t <Plug>(quickhl-cword-toggle)
 nmap <leader>] <Plug>(quickhl-tag-toggle)
 map H <Plug>(operator-quickhl-manual-this-motion)
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fugitive
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -400,6 +408,7 @@ nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -410,6 +419,7 @@ let g:EasyMotion_smartcase = 1
 nmap <Leader>w <Plug>(easymotion-w)
 nmap <Leader><leader> <Plug>(easymotion-bd-w)
 nmap <Leader>b <Plug>(easymotion-b)
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -420,7 +430,7 @@ let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
 map <silent><M-j> <Plug>(signify-next-hunk)
 map <silent><M-k> <Plug>(signify-prev-hunk)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rainbow parentheses
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -428,6 +438,7 @@ augroup rainbow
   autocmd!
   autocmd VimEnter & RainbowParentheses
 augroup END
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EasyAlign
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -436,17 +447,20 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YCM
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " expand-region
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -465,6 +479,7 @@ let g:expand_region_text_objects = {
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 vnoremap q <ESC>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

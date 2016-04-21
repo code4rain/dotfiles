@@ -28,7 +28,7 @@ with which Emacs should be restarted.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/restart-emacs-20151203.835/restart-emacs.el")
-;;;;;;  (22276 52965 873097 300000))
+;;;;;;  (22296 32238 634477 81000))
 
 ;;;***
 

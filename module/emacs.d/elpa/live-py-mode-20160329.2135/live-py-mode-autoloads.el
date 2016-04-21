@@ -19,7 +19,7 @@ With arg, turn mode on if and only if arg is positive.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/live-py-mode-20160329.2135/live-py-mode.el")
-;;;;;;  (22276 52789 911032 800000))
+;;;;;;  (22296 32160 53011 451000))
 
 ;;;***
 

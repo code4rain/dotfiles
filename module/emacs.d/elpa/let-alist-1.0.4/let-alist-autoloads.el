@@ -44,7 +44,7 @@ displayed in the example above.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/let-alist-1.0.4/let-alist-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/let-alist-1.0.4/let-alist.el")
-;;;;;;  (22276 52690 139326 200000))
+;;;;;;  (22296 32082 965977 855000))
 
 ;;;***
 

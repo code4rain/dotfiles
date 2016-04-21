@@ -72,7 +72,7 @@ Wrap region with markup.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/emmet-mode-20151213.738/emmet-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/emmet-mode-20151213.738/emmet-mode.el")
-;;;;;;  (22276 52589 131548 900000))
+;;;;;;  (22296 32014 39683 446000))
 
 ;;;***
 

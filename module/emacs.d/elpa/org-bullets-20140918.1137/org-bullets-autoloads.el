@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "org-bullets" "../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets.el"
-;;;;;;  "2fcd838b4c3c0ca6c94803cea948876b")
+;;;;;;  "96685ebb3dba58f2377180100d447b0b")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets.el
 
 (autoload 'org-bullets-mode "org-bullets" "\
@@ -16,7 +16,7 @@ UTF8 Bullets for org-mode
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-bullets-20140918.1137/org-bullets.el")
-;;;;;;  (22276 52813 464380 0))
+;;;;;;  (22296 32179 432868 160000))
 
 ;;;***
 

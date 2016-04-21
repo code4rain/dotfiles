@@ -88,7 +88,7 @@ Set the hotkeys of evil-nerd-comment.
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-nerd-commenter-20160209.49/evil-nerd-commenter-operator.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-nerd-commenter-20160209.49/evil-nerd-commenter-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-nerd-commenter-20160209.49/evil-nerd-commenter.el")
-;;;;;;  (22276 52661 709700 100000))
+;;;;;;  (22296 32061 54860 12000))
 
 ;;;***
 

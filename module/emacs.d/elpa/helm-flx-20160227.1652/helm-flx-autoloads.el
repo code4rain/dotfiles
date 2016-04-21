@@ -25,7 +25,7 @@ helm-flx minor mode
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-flx-20160227.1652/helm-flx.el")
-;;;;;;  (22276 52737 89011 600000))
+;;;;;;  (22296 32120 462838 500000))
 
 ;;;***
 

@@ -40,7 +40,7 @@ If NUM is non-nil, insert NUM list items.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/lorem-ipsum-20140911.1408/lorem-ipsum-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/lorem-ipsum-20140911.1408/lorem-ipsum.el")
-;;;;;;  (22276 52791 454121 100000))
+;;;;;;  (22296 32161 213310 895000))
 
 ;;;***
 

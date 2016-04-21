@@ -16,7 +16,7 @@ Helm to generate .gitignore using gitignore.io.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-gitignore-20150517.2056/helm-gitignore-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-gitignore-20150517.2056/helm-gitignore.el")
-;;;;;;  (22276 52740 358198 600000))
+;;;;;;  (22296 32124 128817 16000))
 
 ;;;***
 

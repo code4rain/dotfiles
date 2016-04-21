@@ -18,7 +18,7 @@ Major mode for editing jade node.js templates
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/jade-mode-20150801.944/jade-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/jade-mode-20150801.944/jade-mode.el")
-;;;;;;  (22276 52780 652503 300000))
+;;;;;;  (22296 32153 222892 784000))
 
 ;;;***
 

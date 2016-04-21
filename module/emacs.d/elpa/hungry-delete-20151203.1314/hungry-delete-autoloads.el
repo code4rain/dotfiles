@@ -80,7 +80,7 @@ See `hungry-delete-mode' for more information on Hungry-Delete mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hungry-delete-20151203.1314/hungry-delete.el")
-;;;;;;  (22276 52769 187847 500000))
+;;;;;;  (22296 32145 136470 544000))
 
 ;;;***
 

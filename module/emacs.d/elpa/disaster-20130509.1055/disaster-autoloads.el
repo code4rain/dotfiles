@@ -29,7 +29,7 @@ is used.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el")
-;;;;;;  (22276 52585 646349 600000))
+;;;;;;  (22296 32011 823604 505000))
 
 ;;;***
 

@@ -42,7 +42,7 @@
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web-slim.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-web-20151219.317/company-web.el")
-;;;;;;  (22276 52576 885848 500000))
+;;;;;;  (22296 32005 704783 677000))
 
 ;;;***
 

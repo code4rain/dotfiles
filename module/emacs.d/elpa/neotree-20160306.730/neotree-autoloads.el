@@ -52,7 +52,7 @@ Show the NeoTree window.")
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/neotree-20160306.730/neotree-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/neotree-20160306.730/neotree-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/neotree-20160306.730/neotree.el")
-;;;;;;  (22276 52810 430206 500000))
+;;;;;;  (22296 32175 556004 512000))
 
 ;;;***
 

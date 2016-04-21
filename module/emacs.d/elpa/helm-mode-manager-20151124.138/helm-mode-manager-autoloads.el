@@ -26,7 +26,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-mode-manager-20151124.138/helm-mode-manager-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-mode-manager-20151124.138/helm-mode-manager.el")
-;;;;;;  (22276 52748 455661 700000))
+;;;;;;  (22296 32129 467723 397000))
 
 ;;;***
 

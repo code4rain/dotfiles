@@ -41,7 +41,7 @@ than the current.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/clean-aindent-mode-20150816.2029/clean-aindent-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/clean-aindent-mode-20150816.2029/clean-aindent-mode.el")
-;;;;;;  (22276 52530 759210 200000))
+;;;;;;  (22296 31983 83091 460000))
 
 ;;;***
 

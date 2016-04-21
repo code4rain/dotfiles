@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "multi-term" "../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el"
-;;;;;;  "44519f03cb96136a4b7da064ddeb792f")
+;;;;;;  "867fe595a45c3df4dae961bc341724e8")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el
 
 (autoload 'multi-term "multi-term" "\
@@ -45,7 +45,7 @@ Select the `multi-term' dedicated window.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/multi-term-20150220.520/multi-term.el")
-;;;;;;  (22276 52808 339086 900000))
+;;;;;;  (22296 32173 954717 438000))
 
 ;;;***
 

@@ -88,7 +88,7 @@ Run an inferior Gnuplot process.
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-gui.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el")
-;;;;;;  (22276 52720 461060 500000))
+;;;;;;  (22296 32107 603237 548000))
 
 ;;;***
 

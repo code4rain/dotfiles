@@ -18,7 +18,7 @@ A major mode for editing .gitconfig files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitconfig-mode-20160319.302/gitconfig-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitconfig-mode-20160319.302/gitconfig-mode.el")
-;;;;;;  (22276 52715 931801 500000))
+;;;;;;  (22296 32103 935315 221000))
 
 ;;;***
 

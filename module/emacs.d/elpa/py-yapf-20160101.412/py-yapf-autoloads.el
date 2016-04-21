@@ -21,7 +21,7 @@ Pre-save hooked to be used before running py-yapf.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/py-yapf-20160101.412/py-yapf-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/py-yapf-20160101.412/py-yapf.el")
-;;;;;;  (22294 15641 901101 800000))
+;;;;;;  (22296 32231 330830 327000))
 
 ;;;***
 

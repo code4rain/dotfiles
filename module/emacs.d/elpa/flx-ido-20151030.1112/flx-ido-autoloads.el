@@ -22,7 +22,7 @@ Toggle flx ido mode
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/flx-ido-20151030.1112/flx-ido-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/flx-ido-20151030.1112/flx-ido.el")
-;;;;;;  (22276 52684 571007 700000))
+;;;;;;  (22296 32079 853705 434000))
 
 ;;;***
 

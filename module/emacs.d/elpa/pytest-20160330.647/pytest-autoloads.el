@@ -61,7 +61,7 @@ Run pytest on testable thing at point, enter debugger on error.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pytest-20160330.647/pytest-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pytest-20160330.647/pytest.el")
-;;;;;;  (22276 52957 662627 700000))
+;;;;;;  (22296 32233 628257 456000))
 
 ;;;***
 

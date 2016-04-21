@@ -20,7 +20,7 @@ Major mode for editing Slim files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/slim-mode-20140611.950/slim-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/slim-mode-20140611.950/slim-mode.el")
-;;;;;;  (22276 52972 430472 300000))
+;;;;;;  (22296 32243 530069 137000))
 
 ;;;***
 

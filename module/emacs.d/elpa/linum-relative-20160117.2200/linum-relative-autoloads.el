@@ -47,7 +47,7 @@ Turn on `linum-relative-mode' in helm.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/linum-relative-20160117.2200/linum-relative.el")
-;;;;;;  (22276 52787 835914 100000))
+;;;;;;  (22296 32158 332253 530000))
 
 ;;;***
 

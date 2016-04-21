@@ -49,7 +49,7 @@ Add the submode classes CLASSES to `mmm-classes-alist'.
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-univ.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-utils.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-vars.el")
-;;;;;;  (22276 52803 528811 700000))
+;;;;;;  (22296 32171 219752 372000))
 
 ;;;***
 

@@ -22,7 +22,7 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/highlight-numbers-20150531.607/highlight-numbers-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/highlight-numbers-20150531.607/highlight-numbers.el")
-;;;;;;  (22276 52762 491464 500000))
+;;;;;;  (22296 32140 33621 585000))
 
 ;;;***
 

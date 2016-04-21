@@ -1,7 +1,7 @@
 ;;; auctex-latexmk-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "auctex-latexmk" "../../../../../.emacs.d/elpa/auctex-latexmk-20160307.352/auctex-latexmk.el"
 ;;;;;;  "dab807f875a150f519ae90081c87a2e4")
@@ -16,7 +16,7 @@ Add LatexMk command to TeX-command-list.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auctex-latexmk-20160307.352/auctex-latexmk-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-latexmk-20160307.352/auctex-latexmk.el")
-;;;;;;  (22285 16393 0 0))
+;;;;;;  (22296 31949 2824 25000))
 
 ;;;***
 

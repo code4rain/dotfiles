@@ -309,7 +309,7 @@ shadow backends that come after it.  Recommended usages:
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160413.1347/company-xcode.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160413.1347/company-yasnippet.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160413.1347/company.el")
-;;;;;;  (22293 58534 375183 800000))
+;;;;;;  (22296 31987 67541 416000))
 
 ;;;***
 

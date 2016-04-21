@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "evil-surround" "../../../../../.emacs.d/elpa/evil-surround-20160331.821/evil-surround.el"
-;;;;;;  "fb10f1b24578dfc5ef36a755aa8bc60e")
+;;;;;;  "03c960f963fbb55b3764113246d81bcb")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/evil-surround-20160331.821/evil-surround.el
 
 (autoload 'evil-surround-delete "evil-surround" "\
@@ -63,7 +63,7 @@ See `evil-surround-mode' for more information on Evil-Surround mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-surround-20160331.821/evil-surround-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-surround-20160331.821/evil-surround.el")
-;;;;;;  (22276 52665 942942 300000))
+;;;;;;  (22296 32065 73699 973000))
 
 ;;;***
 

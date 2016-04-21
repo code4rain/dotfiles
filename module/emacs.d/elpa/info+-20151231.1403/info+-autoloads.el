@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "info+" "../../../../../.emacs.d/elpa/info+-20151231.1403/info+.el"
-;;;;;;  "404a15abb44a0fda868e3a0b42ef4b46")
+;;;;;;  "88bbd585d4ae1eb39e36909d28989e47")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/info+-20151231.1403/info+.el
 
 (let ((loads (get 'Info-Plus 'custom-loads))) (if (member '"info+" loads) nil (put 'Info-Plus 'custom-loads (cons '"info+" loads))))
@@ -187,7 +187,7 @@ If key's command cannot be found by looking in indexes, then
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/info+-20151231.1403/info+-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/info+-20151231.1403/info+.el")
-;;;;;;  (22276 52778 336370 800000))
+;;;;;;  (22296 32151 839123 839000))
 
 ;;;***
 

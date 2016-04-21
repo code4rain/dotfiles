@@ -43,7 +43,7 @@ behaviour of `ranger`, a file manager.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/eyebrowse-20160102.1449/eyebrowse.el")
-;;;;;;  (22276 52678 447657 500000))
+;;;;;;  (22296 32074 837316 866000))
 
 ;;;***
 

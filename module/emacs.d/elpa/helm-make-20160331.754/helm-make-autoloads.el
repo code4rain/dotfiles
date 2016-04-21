@@ -33,7 +33,7 @@ setting the buffer local variable `helm-make-build-dir'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-make-20160331.754/helm-make-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-make-20160331.754/helm-make.el")
-;;;;;;  (22276 52746 838569 200000))
+;;;;;;  (22296 32128 220171 129000))
 
 ;;;***
 

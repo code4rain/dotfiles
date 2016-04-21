@@ -21,7 +21,7 @@ A read-only mode optimized for `focus-mode'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/focus-20160131.1418/focus-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/focus-20160131.1418/focus.el")
-;;;;;;  (22294 10316 524507 700000))
+;;;;;;  (22296 32089 569554 88000))
 
 ;;;***
 

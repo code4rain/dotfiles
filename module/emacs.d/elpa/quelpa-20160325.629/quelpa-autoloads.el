@@ -46,7 +46,7 @@ the global var `quelpa-upgrade-p' is set to nil.
 ;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/quelpa-20160325.629/quelpa.el")
-;;;;;;  (22276 52365 354749 600000))
+;;;;;;  (22296 31903 874468 874000))
 
 ;;;***
 

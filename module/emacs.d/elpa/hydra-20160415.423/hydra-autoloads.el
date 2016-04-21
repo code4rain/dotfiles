@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "hydra" "../../../../../.emacs.d/elpa/hydra-20160415.423/hydra.el"
-;;;;;;  "bc7c04c3b2452cb3142ab09f012d2d8c")
+;;;;;;  "1b2b52070acbe4f45b25d0e7cc521e92")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/hydra-20160415.423/hydra.el
 
 (autoload 'defhydra "hydra" "\
@@ -69,7 +69,7 @@ result of `defhydra'.
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160415.423/hydra-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160415.423/hydra.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hydra-20160415.423/lv.el")
-;;;;;;  (22293 58501 95280 300000))
+;;;;;;  (22296 32148 207553 570000))
 
 ;;;***
 

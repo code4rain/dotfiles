@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "gitattributes-mode" "../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode.el"
-;;;;;;  "1e1a5e9beab730c4a413ccb03cd1789e")
+;;;;;;  "9d5bcdd2249c7e5eabf1a89b9e4e25a2")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode.el
 
 (autoload 'gitattributes-mode "gitattributes-mode" "\
@@ -19,7 +19,7 @@ A major mode for editing .gitattributes files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitattributes-mode-20160319.302/gitattributes-mode.el")
-;;;;;;  (22276 52714 447716 600000))
+;;;;;;  (22296 32102 774142 265000))
 
 ;;;***
 

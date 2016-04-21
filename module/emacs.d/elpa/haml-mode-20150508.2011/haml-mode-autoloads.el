@@ -20,7 +20,7 @@ Major mode for editing Haml files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/haml-mode-20150508.2011/haml-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/haml-mode-20150508.2011/haml-mode.el")
-;;;;;;  (22276 52726 749420 200000))
+;;;;;;  (22296 32112 433308 942000))
 
 ;;;***
 

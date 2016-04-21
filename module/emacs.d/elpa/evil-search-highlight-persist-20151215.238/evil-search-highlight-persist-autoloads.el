@@ -47,7 +47,7 @@ See `evil-search-highlight-persist' for more information on Evil-Search-Highligh
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-search-highlight-persist-20151215.238/evil-search-highlight-persist-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-search-highlight-persist-20151215.238/evil-search-highlight-persist.el")
-;;;;;;  (22276 52664 574864 0))
+;;;;;;  (22296 32063 929987 209000))
 
 ;;;***
 

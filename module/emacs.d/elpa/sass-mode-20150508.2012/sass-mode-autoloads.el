@@ -20,7 +20,7 @@ Major mode for editing Sass files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/sass-mode-20150508.2012/sass-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/sass-mode-20150508.2012/sass-mode.el")
-;;;;;;  (22276 52967 390184 100000))
+;;;;;;  (22296 32239 832405 250000))
 
 ;;;***
 

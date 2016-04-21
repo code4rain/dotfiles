@@ -13,7 +13,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/leuven-theme-20160319.819/leuven-theme-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/leuven-theme-20160319.819/leuven-theme.el")
-;;;;;;  (22276 52784 868744 400000))
+;;;;;;  (22296 32155 857869 115000))
 
 ;;;***
 

@@ -25,7 +25,7 @@ Makes evil marks visible and easy to remember.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-visual-mark-mode-20150202.1000/evil-visual-mark-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-visual-mark-mode-20150202.1000/evil-visual-mark-mode.el")
-;;;;;;  (22294 15640 530023 400000))
+;;;;;;  (22296 32068 130226 125000))
 
 ;;;***
 

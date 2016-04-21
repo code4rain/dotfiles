@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "smartparens" "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens.el"
-;;;;;;  "8e18a382cf37dc9b0acce1293398bd20")
+;;;;;;  "b5964ed5403176ecb44cc117eac68bb2")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens.el
 
 (autoload 'sp-cheat-sheet "smartparens" "\
@@ -191,7 +191,7 @@ Turn off `show-smartparens-mode'.
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens-rust.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens-scala.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smartparens-20160411.719/smartparens.el")
-;;;;;;  (22293 58742 499229 0))
+;;;;;;  (22296 32041 353981 126000))
 
 ;;;***
 

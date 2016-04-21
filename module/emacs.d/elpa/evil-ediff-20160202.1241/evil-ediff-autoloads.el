@@ -16,7 +16,7 @@ Initialize evil-ediff.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-ediff-20160202.1241/evil-ediff-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-ediff-20160202.1241/evil-ediff.el")
-;;;;;;  (22276 52616 730127 400000))
+;;;;;;  (22296 32033 633255 554000))
 
 ;;;***
 

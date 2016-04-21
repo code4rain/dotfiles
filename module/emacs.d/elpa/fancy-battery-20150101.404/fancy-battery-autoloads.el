@@ -39,7 +39,7 @@ The text in the mode line is controlled by
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/fancy-battery-20150101.404/fancy-battery-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/fancy-battery-20150101.404/fancy-battery.el")
-;;;;;;  (22276 52679 997746 200000))
+;;;;;;  (22296 32076 23118 937000))
 
 ;;;***
 

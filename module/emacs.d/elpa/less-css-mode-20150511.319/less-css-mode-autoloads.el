@@ -25,7 +25,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/less-css-mode-20150511.319/less-css-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/less-css-mode-20150511.319/less-css-mode.el")
-;;;;;;  (22276 52783 86642 500000))
+;;;;;;  (22296 32154 370614 224000))
 
 ;;;***
 

@@ -142,7 +142,7 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-gtags-20160417.555/helm-gtags-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-gtags-20160417.555/helm-gtags.el")
-;;;;;;  (22293 58763 167946 500000))
+;;;;;;  (22296 32125 730172 834000))
 
 ;;;***
 

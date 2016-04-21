@@ -78,7 +78,7 @@ Setup a nano-like mode-line.
 ;;;;;;  "../../../../../.emacs.d/elpa/powerline-20160224.2052/powerline-separators.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/powerline-20160224.2052/powerline-themes.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/powerline-20160224.2052/powerline.el")
-;;;;;;  (22276 52977 381755 500000))
+;;;;;;  (22296 32247 479953 43000))
 
 ;;;***
 

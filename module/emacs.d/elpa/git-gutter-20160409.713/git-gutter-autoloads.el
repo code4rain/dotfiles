@@ -52,7 +52,7 @@ Toggle to show diff information.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter-20160409.713/git-gutter-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-gutter-20160409.713/git-gutter.el")
-;;;;;;  (22294 10022 355682 200000))
+;;;;;;  (22296 32094 33194 283000))
 
 ;;;***
 

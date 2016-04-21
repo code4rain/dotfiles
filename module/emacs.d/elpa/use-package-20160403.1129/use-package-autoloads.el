@@ -66,7 +66,7 @@ this file.  Usage:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/use-package-20160403.1129/use-package-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/use-package-20160403.1129/use-package.el")
-;;;;;;  (22276 52988 776407 300000))
+;;;;;;  (22296 32253 722066 196000))
 
 ;;;***
 

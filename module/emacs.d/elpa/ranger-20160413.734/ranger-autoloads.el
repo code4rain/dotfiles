@@ -47,7 +47,7 @@ Major mode emulating the ranger file manager in `dired'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ranger-20160413.734/ranger-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ranger-20160413.734/ranger.el")
-;;;;;;  (22293 58810 615634 600000))
+;;;;;;  (22296 32237 344906 611000))
 
 ;;;***
 

@@ -16,7 +16,7 @@ Wrap the buffer text with adaptive filling.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/adaptive-wrap-0.5/adaptive-wrap-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/adaptive-wrap-0.5/adaptive-wrap.el")
-;;;;;;  (22276 52402 753888 700000))
+;;;;;;  (22296 31924 764903 906000))
 
 ;;;***
 

@@ -32,7 +32,7 @@ Major mode for Cython development, derived from Python mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el")
-;;;;;;  (22276 52578 468939 0))
+;;;;;;  (22296 32006 866591 874000))
 
 ;;;***
 

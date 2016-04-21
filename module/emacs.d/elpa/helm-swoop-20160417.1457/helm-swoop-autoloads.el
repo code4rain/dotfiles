@@ -70,7 +70,7 @@ Start helm-swoop without pre input query.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-swoop-20160417.1457/helm-swoop-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-swoop-20160417.1457/helm-swoop.el")
-;;;;;;  (22293 58765 510351 600000))
+;;;;;;  (22296 32134 45496 120000))
 
 ;;;***
 

@@ -18,7 +18,7 @@ A major mode for editing .gitignore files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitignore-mode-20160319.302/gitignore-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitignore-mode-20160319.302/gitignore-mode.el")
-;;;;;;  (22276 52717 535893 200000))
+;;;;;;  (22296 32105 53799 56000))
 
 ;;;***
 

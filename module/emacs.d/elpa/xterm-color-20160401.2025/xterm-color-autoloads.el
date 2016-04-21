@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/xterm-color-20160401.2025/xterm-color-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/xterm-color-20160401.2025/xterm-color.el")
-;;;;;;  (22276 53006 585425 900000))
+;;;;;;  (22296 32264 135693 612000))
 
 ;;;***
 

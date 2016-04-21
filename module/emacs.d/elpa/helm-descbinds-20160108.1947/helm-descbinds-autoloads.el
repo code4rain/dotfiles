@@ -58,7 +58,7 @@ useful, yet they are listed for completeness.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-descbinds-20160108.1947/helm-descbinds-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-descbinds-20160108.1947/helm-descbinds.el")
-;;;;;;  (22276 52735 463918 600000))
+;;;;;;  (22296 32119 329015 967000))
 
 ;;;***
 

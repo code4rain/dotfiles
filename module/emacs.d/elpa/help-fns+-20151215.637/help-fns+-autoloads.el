@@ -67,7 +67,7 @@ Non-nil optional arg NO-ERROR-P prints an error message but does not
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/help-fns+-20151215.637/help-fns+-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/help-fns+-20151215.637/help-fns+.el")
-;;;;;;  (22276 52757 958205 200000))
+;;;;;;  (22296 32136 436056 396000))
 
 ;;;***
 

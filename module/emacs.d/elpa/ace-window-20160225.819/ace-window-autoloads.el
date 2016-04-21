@@ -61,7 +61,7 @@ Minor mode for showing the ace window key in the mode line.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ace-window-20160225.819/ace-window-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ace-window-20160225.819/ace-window.el")
-;;;;;;  (22276 52400 675769 800000))
+;;;;;;  (22296 31923 943530 199000))
 
 ;;;***
 

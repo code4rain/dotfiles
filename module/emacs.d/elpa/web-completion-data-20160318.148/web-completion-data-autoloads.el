@@ -6,7 +6,7 @@
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data.el")
-;;;;;;  (22276 52575 110747 0))
+;;;;;;  (22296 32004 481923 624000))
 
 ;;;***
 

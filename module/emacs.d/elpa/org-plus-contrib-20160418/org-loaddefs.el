@@ -726,9 +726,13 @@ Set `org-capture-templates' to be similar to `org-remember-templates'.
 
 ;;;***
 
-;;;### (autoloads nil "org-clock" "../../../../../.emacs.d/elpa/org-plus-contrib-20160418/org-clock.el"
-;;;;;;  "ebac090c26a7ed7ef6ecd13d264204ab")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-plus-contrib-20160418/org-clock.el
+;;;### (autoloads (org-clock-update-time-maybe org-dblock-write:clocktable
+;;;;;;  org-clocktable-shift org-clock-report org-clock-get-clocktable
+;;;;;;  org-clock-remove-overlays org-clock-display org-clock-sum
+;;;;;;  org-clock-goto org-clock-cancel org-clock-out org-clock-in-last
+;;;;;;  org-clock-in org-resolve-clocks) "org-clock" "org-clock.el"
+;;;;;;  "133b6d837d46606bf3b4f1753035bca8")
+;;; Generated autoloads from org-clock.el
 
 (autoload 'org-resolve-clocks "org-clock" "\
 Resolve all currently open org-mode clocks.
@@ -2470,7 +2474,7 @@ Call the customize function with org as argument.
 ;;;***
 
 ;;;### (autoloads nil "ox" "../../../../../.emacs.d/elpa/org-plus-contrib-20160418/ox.el"
-;;;;;;  "7b98e4512d9c9bb0221a93b7151ab715")
+;;;;;;  "b179c517456780a4806f9b43dc76c0dd")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-plus-contrib-20160418/ox.el
 
 (autoload 'org-export-as "ox" "\
@@ -2638,9 +2642,10 @@ When ARG is \\[universal-argument] \\[universal-argument], display the asynchron
 
 ;;;***
 
-;;;### (autoloads nil "ox-ascii" "../../../../../.emacs.d/elpa/org-plus-contrib-20160418/ox-ascii.el"
-;;;;;;  "4b04cfaebfd629b12ba0d65452f9de43")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-plus-contrib-20160418/ox-ascii.el
+;;;### (autoloads (org-ascii-publish-to-utf8 org-ascii-publish-to-latin1
+;;;;;;  org-ascii-publish-to-ascii org-ascii-export-to-ascii org-ascii-export-as-ascii)
+;;;;;;  "ox-ascii" "ox-ascii.el" "21f6b831d93842294a7e7f6995a200d2")
+;;; Generated autoloads from ox-ascii.el
 
 (autoload 'org-ascii-export-as-ascii "ox-ascii" "\
 Export current buffer to a text buffer.

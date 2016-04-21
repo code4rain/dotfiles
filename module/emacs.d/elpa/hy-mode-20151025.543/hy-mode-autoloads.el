@@ -20,7 +20,7 @@ Major mode for editing Hy files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/hy-mode-20151025.543/hy-mode.el")
-;;;;;;  (22276 52770 550925 500000))
+;;;;;;  (22296 32146 318038 388000))
 
 ;;;***
 

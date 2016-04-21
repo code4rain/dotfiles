@@ -71,7 +71,7 @@ HTMLize dired-marked files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el")
-;;;;;;  (22276 52767 654759 800000))
+;;;;;;  (22296 32143 941617 530000))
 
 ;;;***
 

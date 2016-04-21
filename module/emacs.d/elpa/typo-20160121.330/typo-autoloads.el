@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "typo" "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el"
-;;;;;;  "f46087dcb4e6ae2838a89cf187852963")
+;;;;;;  "0c49b8dc2cd2f28462107299e205b169")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/typo-20160121.330/typo.el
 
 (autoload 'typo-mode "typo" "\
@@ -41,7 +41,7 @@ default C-x 8 prefix map.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/typo-20160121.330/typo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el")
-;;;;;;  (22276 52986 950302 800000))
+;;;;;;  (22296 32252 564759 816000))
 
 ;;;***
 

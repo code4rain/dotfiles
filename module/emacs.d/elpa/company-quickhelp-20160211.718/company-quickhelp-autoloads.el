@@ -25,7 +25,7 @@ Provides documentation popups for `company-mode' using `pos-tip'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-quickhelp-20160211.718/company-quickhelp.el")
-;;;;;;  (22276 52547 655176 600000))
+;;;;;;  (22296 31993 825620 178000))
 
 ;;;***
 

@@ -16,7 +16,7 @@ Enable toc-org in this buffer.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/toc-org-20160308.2340/toc-org.el")
-;;;;;;  (22276 52985 364212 100000))
+;;;;;;  (22296 32251 434429 681000))
 
 ;;;***
 

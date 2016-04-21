@@ -66,7 +66,7 @@ Bind KEY to appropriate functions in appropriate keymaps.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ace-link-20160326.620/ace-link.el")
-;;;;;;  (22276 52399 125681 200000))
+;;;;;;  (22296 31922 757896 683000))
 
 ;;;***
 

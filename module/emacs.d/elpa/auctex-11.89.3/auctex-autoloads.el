@@ -292,7 +292,7 @@ Install toolbar buttons for LaTeX mode.
 ;;;***
 
 ;;;### (autoloads nil "tex-font" "../../../../../.emacs.d/elpa/auctex-11.89.3/tex-font.el"
-;;;;;;  "cb0a9b121101c5b30ce0e3d8e446e9a3")
+;;;;;;  "07c520c682f0590571fa966c42f8a8c2")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/auctex-11.89.3/tex-font.el
 
 (autoload 'tex-font-setup "tex-font" "\
@@ -322,7 +322,7 @@ value of `Texinfo-mode-hook'.
 ;;;***
 
 ;;;### (autoloads nil "tex-jp" "../../../../../.emacs.d/elpa/auctex-11.89.3/tex-jp.el"
-;;;;;;  "406e3c12a008d0f998613e1e1e14b30f")
+;;;;;;  "9e0e52469eb692332f6ff454c6727798")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/auctex-11.89.3/tex-jp.el
 
 (autoload 'japanese-plain-tex-mode "tex-jp" "\
@@ -397,7 +397,7 @@ Limit searched to BOUND.
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/tex-wizard.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/tex.el" "../../../../../.emacs.d/elpa/auctex-11.89.3/texmathp.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/toolbar-x.el")
-;;;;;;  (22276 52436 598824 500000))
+;;;;;;  (22296 31941 446312 739000))
 
 ;;;***
 

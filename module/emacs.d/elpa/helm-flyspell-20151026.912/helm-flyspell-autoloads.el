@@ -17,7 +17,7 @@ Adapted from `flyspell-correct-word-before-point'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el")
-;;;;;;  (22294 12811 875233 600000))
+;;;;;;  (22296 32121 625052 545000))
 
 ;;;***
 

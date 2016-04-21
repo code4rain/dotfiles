@@ -71,7 +71,7 @@ Display *Messages* buffer in a popup window.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/popwin-20150315.600/popwin-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/popwin-20150315.600/popwin.el")
-;;;;;;  (22276 52953 330379 900000))
+;;;;;;  (22296 32230 136748 292000))
 
 ;;;***
 

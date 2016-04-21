@@ -16,7 +16,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-messenger-20160121.1842/git-messenger-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-messenger-20160121.1842/git-messenger.el")
-;;;;;;  (22276 52711 628555 300000))
+;;;;;;  (22296 32100 327867 205000))
 
 ;;;***
 

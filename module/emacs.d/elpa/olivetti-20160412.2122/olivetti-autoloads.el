@@ -27,7 +27,7 @@ hidden.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/olivetti-20160412.2122/olivetti-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/olivetti-20160412.2122/olivetti.el")
-;;;;;;  (22294 11686 208849 100000))
+;;;;;;  (22296 32177 158754 537000))
 
 ;;;***
 

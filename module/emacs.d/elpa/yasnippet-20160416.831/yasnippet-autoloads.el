@@ -54,7 +54,7 @@ A mode for editing yasnippets
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/yasnippet-20160416.831/yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160416.831/yasnippet-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160416.831/yasnippet.el")
-;;;;;;  (22293 58603 990483 0))
+;;;;;;  (22296 31974 466108 590000))
 
 ;;;***
 

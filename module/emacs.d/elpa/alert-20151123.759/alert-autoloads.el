@@ -87,7 +87,7 @@ Here are some more typical examples of usage:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/alert-20151123.759/alert-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/alert-20151123.759/alert.el")
-;;;;;;  (22276 52868 761542 800000))
+;;;;;;  (22296 32199 48755 178000))
 
 ;;;***
 

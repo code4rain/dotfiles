@@ -5,7 +5,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/evil-lisp-state-20160403.1948/evil-lisp-state-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-lisp-state-20160403.1948/evil-lisp-state.el")
-;;;;;;  (22276 52633 434082 900000))
+;;;;;;  (22296 32043 35565 865000))
 
 ;;;***
 

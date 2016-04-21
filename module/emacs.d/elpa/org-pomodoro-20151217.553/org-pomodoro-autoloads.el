@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "org-pomodoro" "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el"
-;;;;;;  "a58c28db24179ee81aadd01f6c3bf86f")
+;;;;;;  "a7bfaf8c23e49dbbd68f6d22bb751d58")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el
 
 (autoload 'org-pomodoro "org-pomodoro" "\
@@ -22,7 +22,7 @@ kill the current timer, this may be a break or a running pomodoro.
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pidgin.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el")
-;;;;;;  (22276 52871 287687 300000))
+;;;;;;  (22296 32201 628715 846000))
 
 ;;;***
 

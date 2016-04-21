@@ -116,7 +116,7 @@ Goto start of content within current tag.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/tagedit-20160418.31/tagedit-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/tagedit-20160418.31/tagedit.el")
-;;;;;;  (22293 58814 129641 0))
+;;;;;;  (22296 32250 168750 94000))
 
 ;;;***
 

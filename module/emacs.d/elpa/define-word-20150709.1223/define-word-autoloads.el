@@ -22,7 +22,7 @@ When the region is active, define the marked phrase.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/define-word-20150709.1223/define-word.el")
-;;;;;;  (22276 52580 29028 300000))
+;;;;;;  (22296 32008 121875 50000))
 
 ;;;***
 

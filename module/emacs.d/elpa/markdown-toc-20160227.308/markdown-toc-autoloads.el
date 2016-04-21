@@ -24,7 +24,7 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc.el")
-;;;;;;  (22276 52800 278625 800000))
+;;;;;;  (22296 32168 350373 272000))
 
 ;;;***
 

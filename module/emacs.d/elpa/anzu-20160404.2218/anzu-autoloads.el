@@ -72,7 +72,7 @@ See `anzu-mode' for more information on Anzu mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/anzu-20160404.2218/anzu-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/anzu-20160404.2218/anzu.el")
-;;;;;;  (22276 52612 617892 200000))
+;;;;;;  (22296 32030 236009 662000))
 
 ;;;***
 

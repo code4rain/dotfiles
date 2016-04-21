@@ -23,7 +23,7 @@ The input format is the same as that of `kbd'.")
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop.el")
-;;;;;;  (22276 52970 677372 100000))
+;;;;;;  (22296 32242 234128 454000))
 
 ;;;***
 

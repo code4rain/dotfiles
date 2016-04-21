@@ -4,7 +4,7 @@
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
 ;;;### (autoloads nil "spinner" "../../../../../.emacs.d/elpa/spinner-1.7.1/spinner.el"
-;;;;;;  "8cf0928a1471008de997a2b25db8024f")
+;;;;;;  "61b6da719eb1002e24c53da56051aadd")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/spinner-1.7.1/spinner.el
 
 (autoload 'spinner-create "spinner" "\
@@ -62,7 +62,7 @@ this time, in which case it won't display at all.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/spinner-1.7.1/spinner-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/spinner-1.7.1/spinner.el")
-;;;;;;  (22276 52915 392209 900000))
+;;;;;;  (22296 32222 190342 207000))
 
 ;;;***
 

@@ -35,7 +35,7 @@ Variable `column-enforce-face' decides how to display the warnings
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/column-enforce-mode-20140902.949/column-enforce-mode.el")
-;;;;;;  (22276 52533 851387 100000))
+;;;;;;  (22296 31985 451175 48000))
 
 ;;;***
 

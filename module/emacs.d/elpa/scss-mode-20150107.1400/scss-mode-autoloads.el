@@ -20,7 +20,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/scss-mode-20150107.1400/scss-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/scss-mode-20150107.1400/scss-mode.el")
-;;;;;;  (22276 52968 941272 800000))
+;;;;;;  (22296 32241 34633 431000))
 
 ;;;***
 

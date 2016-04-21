@@ -69,7 +69,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-ag-20160411.417/helm-ag-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-ag-20160411.417/helm-ag.el")
-;;;;;;  (22293 58761 15142 700000))
+;;;;;;  (22296 32113 847180 835000))
 
 ;;;***
 

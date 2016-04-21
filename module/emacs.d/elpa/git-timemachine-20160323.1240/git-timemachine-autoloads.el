@@ -26,7 +26,7 @@ Enable git timemachine for current buffer, switching to GIT-BRANCH.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-timemachine-20160323.1240/git-timemachine-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-timemachine-20160323.1240/git-timemachine.el")
-;;;;;;  (22276 52712 949630 900000))
+;;;;;;  (22296 32101 628009 195000))
 
 ;;;***
 

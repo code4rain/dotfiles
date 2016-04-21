@@ -64,7 +64,7 @@ Turn off evil-mc mode in the current buffer.
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-undo.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc-vars.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/evil-mc-20160418.2149/evil-mc.el")
-;;;;;;  (22294 18374 928422 0))
+;;;;;;  (22296 32059 201565 720000))
 
 ;;;***
 

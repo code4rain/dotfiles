@@ -32,7 +32,7 @@ named collections of buffers and window configurations.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode.el")
-;;;;;;  (22294 18377 430565 100000))
+;;;;;;  (22296 32227 642186 746000))
 
 ;;;***
 

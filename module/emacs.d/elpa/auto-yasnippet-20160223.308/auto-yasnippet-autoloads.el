@@ -47,7 +47,7 @@ To save a snippet permanently, create an empty file and call this.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el")
-;;;;;;  (22276 52521 27653 600000))
+;;;;;;  (22296 31975 873307 342000))
 
 ;;;***
 

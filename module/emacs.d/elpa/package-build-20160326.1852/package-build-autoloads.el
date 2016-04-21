@@ -50,7 +50,7 @@ Build all packages in the `package-build-recipe-alist'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/package-build-20160326.1852/package-build-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/package-build-20160326.1852/package-build.el")
-;;;;;;  (22276 52363 199626 300000))
+;;;;;;  (22296 31902 631007 369000))
 
 ;;;***
 

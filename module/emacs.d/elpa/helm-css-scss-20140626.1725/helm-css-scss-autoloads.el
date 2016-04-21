@@ -31,7 +31,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-css-scss-20140626.1725/helm-css-scss-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-css-scss-20140626.1725/helm-css-scss.el")
-;;;;;;  (22276 52734 70839 0))
+;;;;;;  (22296 32118 23094 359000))
 
 ;;;***
 

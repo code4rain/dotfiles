@@ -37,7 +37,7 @@ See `indent-guide-mode' for more information on Indent-Guide mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/indent-guide-20151119.717/indent-guide.el")
-;;;;;;  (22276 52775 966235 200000))
+;;;;;;  (22296 32150 667124 59000))
 
 ;;;***
 

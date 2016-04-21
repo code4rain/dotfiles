@@ -68,8 +68,8 @@ cdpath=(. ~)
 
 fpath=( ${HOME}/.zsh/func ${HOME}/.zsh/completion $fpath )
 
-# export EDITOR=vi
-export EDITOR='emacsclient -t'
+export EDITOR=vi
+# export EDITOR='emacsclient -t'
 export VISUAL=vi
 
 # Load profile

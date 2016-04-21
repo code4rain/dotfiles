@@ -322,3 +322,6 @@ if [ -f $HOME/.zshrc.local ]; then
 fi
 
 export ALTERNATE_EDITOR=""
+
+export PATH=~/bin/.anaconda3/bin:$PATH
+export PATH=~/bin/.anaconda2/bin:$PATH

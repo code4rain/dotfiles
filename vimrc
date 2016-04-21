@@ -5,52 +5,40 @@
 
 call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
-Plug 'Align'
-Plug 'vim-scripts/IndentConsistencyCop'
+" Language Support
+Plug 'tpope/vim-fugitive'
+" Expand Editor
 Plug 'Lokaltog/vim-easymotion'
-Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
-Plug 'bufexplorer.zip'
-Plug 'chrisbra/vim-diff-enhanced'
-Plug 'gtags.vim'
-Plug 'honza/vim-snippets'
-Plug 'kana/vim-operator-user'
-Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-signify'
-Plug 'mkitt/tabline.vim'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'repeat.vim'
 Plug 'surround.vim'
-Plug 't9md/vim-quickhl'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-fugitive'
-"Plug 'vim-pandoc'
-Plug 'vim-scripts/gitignore'
-Plug 'yssl/VIntSearch'
-Plug 'junegunn/vim-peekaboo'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'junegunn/vim-after-object'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-oblique'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'majutsushi/tagbar'
-Plug 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
 Plug 'terryma/vim-multiple-cursors'
-Plug 'Chiel92/vim-autoformat'
-Plug 'wincent/ferret'
-Plug 'Shougo/unite.vim'
-Plug 'hewes/unite-gtags'
-Plug 'vim-latex/vim-latex'
-"Color
-Plug 'blerins/flattown'
-Plug 'itchyny/landscape.vim'
-Plug 'junegunn/seoul256.vim'
-Plug 'tomasr/molokai'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
+Plug 'kana/vim-textobj-entire'
+Plug 'terryma/vim-expand-region'
+" UI (Colorscheme and so on)
 Plug 'NLKNguyen/papercolor-theme'
-"Plug 'jonathanfilip/vim-lucius'
-"Plug 'trusktr/seti.vim'
+Plug 'mhinz/vim-signify'
+Plug 'junegunn/rainbow_parentheses.vim'
+" Framework
+Plug 'UltiSnips'
+Plug 'honza/vim-snippets'
+Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+Plug 'Mizuchi/vim-ranger'
+" Background executed
+Plug 'vim-scripts/IndentConsistencyCop'
+Plug 'chrisbra/vim-diff-enhanced'
+Plug 'junegunn/vim-peekaboo' "Show registers for paste text
+" Executed Plugin
+Plug 'ntpeters/vim-better-whitespace'
+Plug 't9md/vim-quickhl'
+Plug 'junegunn/limelight.vim' "Focus for writer
+Plug 'junegunn/vim-easy-align'
+
 call plug#end()
 
 if !has('nvim')
@@ -137,14 +125,15 @@ set numberwidth=6
 " Focus Mode View
 function! ToggleFocusMode()
   if (&foldcolumn != 8)
-    set numberwidth=6
+    set numberwidth=10
     set foldcolumn=8
     set noruler
+    set nonumber
   else
     set numberwidth=4
-    set foldcolumn=0
+    set foldcolumn=1
     set ruler
-    "execute 'colorscheme ' . g:colors_name
+    set number
   endif
 endfunc
 function! FocusModeOff()
@@ -196,15 +185,12 @@ set softtabstop=0
 " 탭 -> 공백 변환 기능 (사용 안함)
 " set noexpandtab
 
-" 자동 줄바꿈
-set wrap
-
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
-"if has("gui_running") || has("xterm_clipboard")
-"        set clipboard+=unnamed
-"        set clipboard+=unnamedplus
-"endif
+if has("gui_running") || has("xterm_clipboard")
+        set clipboard+=unnamed
+        set clipboard+=unnamedplus
+endif
 if !has('nvim')
   if !has("gui_running")
     set clipboard+=exclude:.*
@@ -364,114 +350,23 @@ endfunc
 command! -bang Q quitall<bang>
 command! PerforceEdit call <SID>P4_edit_current()
 command! PerforceRevert call <SID>P4_revert_current()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cscope
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! SetCscope()
-  let curdir = getcwd()
-
-  while !filereadable("cscope.out") && getcwd() != "/"
-    cd ..
-  endwhile
-
-  if filereadable("cscope.out")
-    execute "silent cs add " . getcwd() . "/cscope.out"
-    "echo \"Load CSCOPE DONE\"
-  endif
-
-  execute "cd " . curdir
-endfunction
-
-"cscope file-searching alternative
-if has('cscope')
-  set cscopetag cscopeverbose
-
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-  call SetCscope()
-endif
-
-"---------------------------------------------------------------------
-" GTAGS
-"---------------------------------------------------------------------
-function! GtagsCommnad()
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-    if filereadable("GPATH")
-      nnoremap <silent><F12> :GtagsCursor<CR>
-      nnoremap <F7> :Gtags<space>
-      nnoremap <M-h> :Gtags -gi<space>
-      nnoremap <silent><M-n> :cn<CR>
-      nnoremap <silent><M-m> :cp<CR>
-    endif
-  endif
-endfunction
-autocmd BufReadPost * :call GtagsCommnad()
-"---------------------------------------------------------------------
-" gtags-cscope.vim
-"---------------------------------------------------------------------
-let GtagsCscope_Auto_Load = 1
-"let GtagsCscope_Auto_Map = 1
-let GtagsCscope_Keep_Alive = 1
-let GtagsCscope_Quiet = 1
-"---------------------------------------------------------------------
-" Auto
-"---------------------------------------------------------------------
 "---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------
 noremap <silent> <M-o> :FZF<CR>
-"---------------------------------------------------------------------
-" Vimgrep
-"---------------------------------------------------------------------
-function! Find_current_file(word)
-  execute "silent vimgrep " . a:word . " %"
-  let l:count = len(getqflist())
-  if l:count
-    execute "copen"
-    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-    nnoremap <silent> <buffer> o  <CR>
-    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
 
-    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
-    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-  endif
-endfunction
-function! Open_QuickFixList()
-  let l:count = len(getqflist())
-  if l:count
-    execute "copen"
-    nnoremap <silent> <buffer> h  <C-W><CR><C-w>K
-    nnoremap <silent> <buffer> H  <C-W><CR><C-w>K<C-w>b
-    nnoremap <silent> <buffer> o  <CR>
-    nnoremap <silent> <buffer> t  <C-w><CR><C-w>T
-    nnoremap <silent> <buffer> T  <C-w><CR><C-w>TgT<C-W><C-W>
-    nnoremap <silent> <buffer> v  <C-w><CR><C-w>H<C-W>b<C-W>J<C-W>t
-
-    exe 'nnoremap <silent> <buffer> e <CR><C-w><C-w>:' . 'c' .'close<CR>'
-    exe 'nnoremap <silent> <buffer> go <CR>:' . 'c' . 'open<CR>'
-    exe 'nnoremap <silent> <buffer> q  :' . 'c' . 'close<CR>'
-
-    echom "keys: q=quit <cr>/e/t/h/v=enter/edit/tab/split/vsplit go/T/H=preview versions of same"
-  endif
-endfunction
-command! -nargs=* CSearch call Find_current_file(<q-args>)
-noremap <F9> :call Find_current_file(expand('<cword>'))<CR>
-noremap <F10> :call Open_QuickFixList()<CR>
+" Advanced customization using autoload functions
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -496,14 +391,6 @@ xmap <leader>H <Plug>(quickhl-manual-reset)
 nmap <leader>t <Plug>(quickhl-cword-toggle)
 nmap <leader>] <Plug>(quickhl-tag-toggle)
 map H <Plug>(operator-quickhl-manual-this-motion)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Bufexplorer
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F11> <leader>be
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-markdown
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vim_markdown_initial_foldlevel=6
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Fugitive
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -542,14 +429,7 @@ augroup rainbow
   autocmd VimEnter & RainbowParentheses
 augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim after object
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-augroup vim_after_object
-  autocmd!
-  autocmd VimEnter call after_object#enable('=', ':', '-', '#', ' ','\t')
-augroup END
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim after object
+" EasyAlign
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -568,9 +448,23 @@ let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Unite
+" expand-region
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>o :Unite<CR>
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :1,
+      \ 'ip'  :1,
+      \ 'ie'  :1,
+      \ }
+vmap v <Plug>(expand_region_expand)
+vmap V <Plug>(expand_region_shrink)
+vnoremap q <ESC>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -620,7 +514,6 @@ vmap Y "*y
 vnoremap <C-L> <ESC>
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]
-vnoremap q <ESC>
 
 nnoremap n nzz
 nnoremap N Nzz
@@ -631,6 +524,7 @@ if has("multi_byte")
   "setglobal bomb
   set fileencodings=ucs-bom,utf-8,latin1
 endif
+
 " 마지막 편집 위치 복원 기능
 au BufReadPost *
       \ if line("'\"")>0 && line("'\"") <= line("$") |

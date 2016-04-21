@@ -37,6 +37,7 @@ Plug 'Mizuchi/vim-ranger'
 Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'junegunn/vim-peekaboo' "Show registers for paste text
+Plug 'gtags.vim'
 
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
@@ -357,6 +358,64 @@ endfunc
 command! -bang Q quitall<bang>
 command! PerforceEdit call <SID>P4_edit_current()
 command! PerforceRevert call <SID>P4_revert_current()
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Cscope
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SetCscope()
+  let curdir = getcwd()
+
+  while !filereadable("cscope.out") && getcwd() != "/"
+    cd ..
+  endwhile
+
+  if filereadable("cscope.out")
+    execute "silent cs add " . getcwd() . "/cscope.out"
+    "echo \"Load CSCOPE DONE\"
+  endif
+
+  execute "cd " . curdir
+endfunction
+
+"cscope file-searching alternative
+if has('cscope')
+  set cscopetag cscopeverbose
+
+  if has('quickfix')
+    set cscopequickfix=s-,c-,d-,i-,t-,e-
+  endif
+  cnoreabbrev csa cs add
+  cnoreabbrev csf cs find
+  cnoreabbrev csk cs kill
+  cnoreabbrev csr cs reset
+  cnoreabbrev css cs show
+  cnoreabbrev csh cs help
+  call SetCscope()
+endif
+
+"---------------------------------------------------------------------
+" GTAGS
+"---------------------------------------------------------------------
+function! GtagsCommnad()
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
+    if filereadable("GPATH")
+      nnoremap <C-\>^] :GtagsCursor<CR>
+      nnoremap <F7> :Gtags<space>
+      nnoremap <M-h> :Gtags -gi<space>
+      nnoremap <silent><M-n> :cn<CR>
+      nnoremap <silent><M-m> :cp<CR>
+    endif
+  endif
+endfunction
+autocmd BufReadPost * :call GtagsCommnad()
+"---------------------------------------------------------------------
+" gtags-cscope.vim
+"---------------------------------------------------------------------
+let GtagsCscope_Auto_Load = 1
+"let GtagsCscope_Auto_Map = 1
+let GtagsCscope_Keep_Alive = 1
+let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------

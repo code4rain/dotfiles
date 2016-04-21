@@ -1,5 +1,5 @@
 set refresh-mode = auto          # Enum: manual, auto, after-command, period
-set main-view = id:width=7 date:short author:full,width=14 commit-title:yes,graph=yes,refs=yes,overflow=no
+set main-view = id:width=7 date:default author:full,width=14 commit-title:yes,graph=yes,refs=yes,overflow=no
 bind branch 3 !git rebase -i %(branch)
 bind generic I !git add -i %(file)
 bind generic T !git notes edit %(commit)

@@ -136,10 +136,10 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("NanumGothicCoding"
-                               :size 18
+                               :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.6)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -356,13 +356,15 @@ you should place you code here."
   ;;   (set-face-attribute 'default nil :height
   ;;                       (max 80
   ;;                            (- (face-attribute 'default :height) 10))))
-  (setq-default line-spacing 10)
+  (setq-default line-spacing 3)
   (defun alex/line-spacing-increase()
     (interactive)
-    (setq line-spacing (+ line-spacing 1)))
+    (setq line-spacing (max 30
+			    (+ line-spacing 1))))
   (defun alex/line-spacing-decrease()
     (interactive)
-    (setq line-spacing (- line-spacing 1)))
+    (setq line-spacing (min 0
+			    (- line-spacing 1))))
 
   (if (eq system-type 'windows-nt)
       (progn

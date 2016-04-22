@@ -533,12 +533,12 @@ vnoremap <silent> y y`]
 nnoremap n nzz
 nnoremap N Nzz
 
-if has("multi_byte")
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-endif
+"if has("multi_byte")
+"  set encoding=utf-8
+"  setglobal fileencoding=utf-8
+"  "setglobal bomb
+"  set fileencodings=ucs-bom,utf-8,latin1
+"endif
 
 " 마지막 편집 위치 복원 기능
 au BufReadPost *

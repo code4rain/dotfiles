@@ -13,7 +13,7 @@
 
 ;; Package-Requires: ((emacs "24.4") (dash "20151021.113") (with-editor "20160408.201"))
 ;; Keywords: git tools vc
-;; Package-Version: 20160414.251
+;; Package-Version: 20160425.430
 ;; Homepage: https://github.com/magit/magit
 
 ;; This file is not part of GNU Emacs.

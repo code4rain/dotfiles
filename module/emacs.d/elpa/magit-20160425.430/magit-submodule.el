@@ -57,8 +57,7 @@ PATH also becomes the name."
                                         #'magit-git-repo-p nil nil nil
                                         (magit-section-when [file untracked]
                                           (file-relative-name
-                                           (directory-file-name
-                                            (magit-section-value it))
+                                           (magit-section-value it)
                                            default-directory)))))
        (unless path
          (user-error "No path selected"))
@@ -70,10 +69,11 @@ PATH also becomes the name."
              (directory-file-name path)
              (magit-read-string-ns
               "Name submodule" nil nil
-              (--keep (-let [(var val) (split-string it "=")]
-                        (and (equal val path)
-                             (cadr (split-string var "\\."))))
-                      (magit-git-lines "config" "--list" "-f" ".gitmodules")))))))
+              (or (--keep (-let [(var val) (split-string it "=")]
+                            (and (equal val path)
+                                 (cadr (split-string var "\\."))))
+                          (magit-git-lines "config" "--list" "-f" ".gitmodules"))
+                  (directory-file-name path)))))))
   (magit-run-git "submodule" "add" (and name (list "--name" name)) url path))
 
 ;;;###autoload
@@ -130,7 +130,7 @@ With a prefix argument fetch all remotes."
 For each section insert the path and the output of `git describe --tags'."
   (-when-let (modules (magit-get-submodules))
     (magit-insert-section (modules nil t)
-      (magit-insert-heading "Submodules:")
+      (magit-insert-heading "Modules:")
       (magit-with-toplevel
         (dolist (module modules)
           (let ((default-directory

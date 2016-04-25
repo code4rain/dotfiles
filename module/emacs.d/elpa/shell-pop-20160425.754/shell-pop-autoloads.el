@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "shell-pop" "../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop.el"
-;;;;;;  "6258c55f319822b45b8a5fa0c6c12b10")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop.el
+;;;### (autoloads nil "shell-pop" "shell-pop.el" (22302 42439 24564
+;;;;;;  824000))
+;;; Generated autoloads from shell-pop.el
 
 (defvar shell-pop-universal-key nil "\
 Key binding used to pop in and out of the shell.
@@ -18,12 +18,6 @@ The input format is the same as that of `kbd'.")
 
 
 \(fn ARG)" t nil)
-
-;;;***
-
-;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/elpa/shell-pop-20160208.148/shell-pop.el")
-;;;;;;  (22296 32242 234128 454000))
 
 ;;;***
 

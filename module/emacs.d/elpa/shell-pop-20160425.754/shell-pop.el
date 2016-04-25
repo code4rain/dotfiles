@@ -5,7 +5,7 @@
 ;; Author:        Kazuo YAGI <kazuo.yagi@gmail.com>
 ;; Maintainer:    Kazuo YAGI <kazuo.yagi@gmail.com>
 ;; URL:           http://github.com/kyagi/shell-pop-el
-;; Package-Version: 20160208.148
+;; Package-Version: 20160425.754
 ;; Version:       0.63
 ;; Created:       2009-05-31 23:57:08
 ;; Keywords:      shell, terminal, tools
@@ -143,6 +143,13 @@ The value is a list with these items:
 buffer from which the `shell-pop' command was invoked."
   :type 'boolean
   :group 'shell-pop)
+
+(defcustom shell-pop-restore-window-configuration t
+  "If non-nil, restore the original window configuration when
+shell-pop is closed.
+
+shell-pop's window is deleted in any case. This variable has no
+effect when `shell-pop-window-position' value is \"full\".")
 
 (defun shell-pop--set-universal-key (symbol value)
   (set-default symbol value)
@@ -323,7 +330,8 @@ The input format is the same as that of `kbd'."
     (when (and (not (one-window-p)) (not (= shell-pop-window-height 100)))
       (delete-window)
       (select-window shell-pop-last-window))
-    (switch-to-buffer shell-pop-last-buffer)))
+    (when shell-pop-restore-window-configuration
+      (switch-to-buffer shell-pop-last-buffer))))
 
 (defun shell-pop-split-window ()
   (unless (shell-pop--full-p)

@@ -349,11 +349,11 @@ you should place you code here."
   (setq-default line-spacing 3)
   (defun alex/line-spacing-increase()
     (interactive)
-    (setq line-spacing (max 30
+    (setq line-spacing (min 40
 			    (+ line-spacing 1))))
   (defun alex/line-spacing-decrease()
     (interactive)
-    (setq line-spacing (min 0
+    (setq line-spacing (max 0
 			    (- line-spacing 1))))
 
   (if (eq system-type 'windows-nt)

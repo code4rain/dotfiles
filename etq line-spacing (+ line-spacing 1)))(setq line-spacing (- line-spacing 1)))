@@ -1,0 +1,50 @@
+[1mdiff --git a/spacemacs b/spacemacs[m
+[1mindex 7f1e8d8..669655f 100644[m
+[1m--- a/spacemacs[m
+[1m+++ b/spacemacs[m
+[36m@@ -135,7 +135,7 @@[m [mvalues."[m
+    dotspacemacs-colorize-cursor-according-to-state t[m
+    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line[m
+    ;; size to make separators look not too crappy.[m
+[31m-   dotspacemacs-default-font '("NanumGothicCoding"[m
+[32m+[m[32m   dotspacemacs-default-font '("Source Code Pro"[m
+                                :size 18[m
+                                :weight normal[m
+                                :width normal[m
+[36m@@ -346,23 +346,15 @@[m [myou should place you code here."[m
+   ;; centered-cursor-mode set[m
+   ;; (global-centered-cursor-mode +1)[m
+ [m
+[31m-  ;; (defun font-big ()[m
+[31m-  ;;   (interactive)[m
+[31m-  ;;   (set-face-attribute 'default nil :height[m
+[31m-  ;;                       (min 720[m
+[31m-  ;;                            (+ (face-attribute 'default :height) 10))))[m
+[31m-  ;; (defun font-small ()[m
+[31m-  ;;   (interactive)[m
+[31m-  ;;   (set-face-attribute 'default nil :height[m
+[31m-  ;;                       (max 80[m
+[31m-  ;;                            (- (face-attribute 'default :height) 10))))[m
+[31m-  (setq-default line-spacing 10)[m
+[32m+[m[32m  (setq-default line-spacing 3)[m
+   (defun alex/line-spacing-increase()[m
+     (interactive)[m
+[31m-    (setq line-spacing (+ line-spacing 1)))[m
+[32m+[m[32m    (setq line-spacing (max 30[m
+[32m+[m			[32m    (+ (line-spacing) 1))))[m
+   (defun alex/line-spacing-decrease()[m
+     (interactive)[m
+[31m-    (setq line-spacing (- line-spacing 1)))[m
+[32m+[m[32m    (setq line-spacing (min 0[m
+[32m+[m			[32m    (- (line-spacing) 1))))[m
+ [m
+   (if (eq system-type 'windows-nt)[m
+       (progn[m
+[36m@@ -406,6 +398,7 @@[m [myou should place you code here."[m
+   (add-hook 'org-mode-hook 'my-org-mode-hook)[m
+   (defun my-org-mode-hook ()[m
+     (org-indent-mode 1)[m
+[32m+[m[32m    (focus-mode 1)[m
+     (visual-line-mode))[m
+   (font-lock-add-keywords 'org-mode[m
+ 			  '(("^ +\\([-*]\\) "[m

@@ -78,16 +78,6 @@
             company-dabbrev-ignore-case nil
             company-dabbrev-downcase nil)
 
-      (defvar-local company-fci-mode-on-p nil)
-
-      (defun company-turn-off-fci (&rest ignore)
-        (when (boundp 'fci-mode)
-          (setq company-fci-mode-on-p fci-mode)
-          (when fci-mode (fci-mode -1))))
-
-      (defun company-maybe-turn-on-fci (&rest ignore)
-        (when company-fci-mode-on-p (fci-mode 1)))
-
       (add-hook 'company-completion-started-hook 'company-turn-off-fci)
       (add-hook 'company-completion-finished-hook 'company-maybe-turn-on-fci)
       (add-hook 'company-completion-cancelled-hook 'company-maybe-turn-on-fci))
@@ -103,25 +93,21 @@
       (spacemacs//auto-completion-set-RET-key-behavior 'company)
       (spacemacs//auto-completion-set-TAB-key-behavior 'company)
       (spacemacs//auto-completion-setup-key-sequence 'company)
+
       (let ((map company-active-map))
-        (define-key map (kbd "C-/") 'company-search-candidates)
+        (define-key map (kbd "C-/")   'company-search-candidates)
         (define-key map (kbd "C-M-/") 'company-filter-candidates)
-        (define-key map (kbd "C-d") 'company-show-doc-buffer)
-        (define-key map (kbd "C-j") 'company-select-next)
-        (define-key map (kbd "C-k") 'company-select-previous)
-        (define-key map (kbd "C-l") 'company-complete-selection))
+        (define-key map (kbd "C-d")   'company-show-doc-buffer))
+      (add-hook 'spacemacs-editing-style-hook 'spacemacs//company-active-navigation)
+      ;; ensure that the correct bindings are set at startup
+      (spacemacs//company-active-navigation dotspacemacs-editing-style)
+
       ;; Nicer looking faces
       (custom-set-faces
        '(company-tooltip-common
          ((t (:inherit company-tooltip :weight bold :underline nil))))
        '(company-tooltip-common-selection
          ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
-      ;; Transformers
-      (defun spacemacs//company-transformer-cancel (candidates)
-        "Cancel completion if prefix is in the list
-`company-mode-completion-cancel-keywords'"
-        (unless (member company-prefix company-mode-completion-cancel-keywords)
-          candidates))
       (setq company-transformers '(spacemacs//company-transformer-cancel
                                    company-sort-by-occurrence)))))
 
@@ -151,12 +137,6 @@
       :defer t
       :init
       (progn
-        (defun spacemacs/helm-yas ()
-          "Properly lazy load helm-c-yasnipper."
-          (interactive)
-          (spacemacs/load-yasnippet)
-          (require 'helm-c-yasnippet)
-          (call-interactively 'helm-yas-complete))
         (spacemacs/set-leader-keys "is" 'spacemacs/helm-yas)
         (setq helm-c-yas-space-match-any-greedy t)))))
 
@@ -247,9 +227,6 @@
               (setq yas-snippet-dirs (append yas-snippet-dirs private-yas-dir))
             (push private-yas-dir yas-snippet-dirs))))
 
-      (defun spacemacs/load-yasnippet ()
-        (unless yas-global-mode (yas-global-mode 1))
-        (yas-minor-mode 1))
       (spacemacs/add-to-hooks 'spacemacs/load-yasnippet '(prog-mode-hook
                                                           markdown-mode-hook
                                                           org-mode-hook))
@@ -260,9 +237,6 @@
         :documentation "Enable snippets."
         :evil-leader "ty")
 
-      (defun spacemacs/force-yasnippet-off ()
-        (yas-minor-mode -1)
-        (setq yas-dont-activate t))
       (spacemacs/add-to-hooks
        'spacemacs/force-yasnippet-off '(term-mode-hook
                                         shell-mode-hook
@@ -277,11 +251,6 @@
       (setq aya-persist-snippets-dir
             (or auto-completion-private-snippets-directory
                 (concat configuration-layer-private-directory "snippets/")))
-      (defun spacemacs/auto-yasnippet-expand ()
-        "Call `yas-expand' and switch to `insert state'"
-        (interactive)
-        (call-interactively 'aya-expand)
-        (unless holy-mode (evil-insert-state)))
       (spacemacs/declare-prefix "iS" "auto-yasnippet")
       (spacemacs/set-leader-keys
         "iSc" 'aya-create

@@ -23,6 +23,7 @@
     (ob :location built-in)
     (org :location built-in)
     (org-agenda :location built-in)
+    org-download
     ;; org-mime is installed by `org-plus-contrib'
     (org-mime :location built-in)
     org-pomodoro
@@ -169,6 +170,7 @@ Will work on both org-mode and any mode that accepts plain html."
         ;; headings
         "hi" 'org-insert-heading-after-current
         "hI" 'org-insert-heading
+        "hs" 'org-insert-subheading
 
         ;; More cycling options (timestamps, headlines, items, properties)
         "L" 'org-shiftright
@@ -421,6 +423,18 @@ Headline^^            Visit entry^^               Filter^^                    Da
       (kbd "M-SPC") 'spacemacs/org-agenda-transient-state/body
       (kbd "s-M-SPC") 'spacemacs/org-agenda-transient-state/body)))
 
+(defun org/init-org-download ()
+  (use-package org-download
+    :commands (org-download-enable
+               org-download-yank
+               org-download-screenshot)
+    :init
+    (progn
+      (add-hook 'org-mode-hook 'org-download-enable)
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "iy" 'org-download-yank
+        "is" 'org-download-screenshot))))
+
 (defun org/init-org-mime ()
   (use-package org-mime
     :defer t
@@ -470,14 +484,21 @@ Headline^^            Visit entry^^               Filter^^                    Da
 
 (defun org/init-org-repo-todo ()
   (use-package org-repo-todo
-    :defer t
+    :commands (ort/todo-root ort/find-root ort/todo-file)
     :init
     (progn
       (spacemacs/set-leader-keys
-        "Ct"  'ort/capture-todo
-        "CT"  'ort/capture-checkitem)
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "gt" 'ort/goto-todos))))
+        "Ct" 'ort/capture-todo
+        "CT" 'ort/capture-checkitem
+        "aop" 'ort/list-project-todos)
+      (when (configuration-layer/package-usedp 'projectile)
+        (spacemacs/set-leader-keys
+          "aoT" 'ort/list-all-todos
+          "aoP" 'ort/list-all-project-todos)))
+    :config
+    ;; Better default capture template
+    (setcdr (cdddr (assoc "ort/todo" org-capture-templates))
+            '("* TODO %?\n%U\n\n%i" :empty-lines 1))))
 
 (defun org/init-ox-gfm ()
   ;; installing this package from melpa is buggy,
@@ -535,4 +556,5 @@ a Markdown buffer and use this command to convert it.
 
 (defun org/init-space-doc ()
   (use-package space-doc
+    :commands space-doc-mode
     :config (spacemacs|diminish space-doc-mode " ❤" " d")))

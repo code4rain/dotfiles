@@ -239,6 +239,7 @@
               fill-column python-fill-column
               ;; auto-indent on colon doesn't work well with if statement
               electric-indent-chars (delq ?: electric-indent-chars))
+        (setq-local comment-inline-offset 2)
         (annotate-pdb)
         ;; make C-j work the same way as RET
         (local-set-key (kbd "C-j") 'newline-and-indent))
@@ -378,8 +379,9 @@
               (add-hook 'python-mode-hook 'py-yapf-enable-on-save))))
 
 (defun python/post-init-semantic ()
-  (add-hook 'python-mode-hook
-            'spacemacs//disable-semantic-idle-summary-mode t)
+  (when (configuration-layer/package-usedp 'anaconda-mode)
+      (add-hook 'python-mode-hook
+                'spacemacs//disable-semantic-idle-summary-mode t))
   (add-hook 'python-mode-hook 'semantic-mode)
   (add-hook 'python-mode-hook 'spacemacs//python-imenu-create-index-use-semantic)
 

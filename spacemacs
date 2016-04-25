@@ -135,11 +135,11 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
-   dotspacemacs-default-font '("NanumGothicCoding"
-                               :size 13
+   dotspacemacs-default-font '("Source Code Pro"
+                               :size 14
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.3)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -346,16 +346,6 @@ you should place you code here."
   ;; centered-cursor-mode set
   ;; (global-centered-cursor-mode +1)
 
-  ;; (defun font-big ()
-  ;;   (interactive)
-  ;;   (set-face-attribute 'default nil :height
-  ;;                       (min 720
-  ;;                            (+ (face-attribute 'default :height) 10))))
-  ;; (defun font-small ()
-  ;;   (interactive)
-  ;;   (set-face-attribute 'default nil :height
-  ;;                       (max 80
-  ;;                            (- (face-attribute 'default :height) 10))))
   (setq-default line-spacing 3)
   (defun alex/line-spacing-increase()
     (interactive)
@@ -408,6 +398,7 @@ you should place you code here."
   (add-hook 'org-mode-hook 'my-org-mode-hook)
   (defun my-org-mode-hook ()
     (org-indent-mode 1)
+    (focus-mode 1)
     (visual-line-mode))
   (font-lock-add-keywords 'org-mode
 			  '(("^ +\\([-*]\\) "

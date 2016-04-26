@@ -405,6 +405,13 @@ you should place you code here."
 			  '(("^ +\\([-*]\\) "
 			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (setq org-bullets-bullet-list '("■" "◆" "▼" "●" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "✡" "✽" "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
+  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (global-set-key (kbd "C-0") 'org-capture)
+  (setq org-capture-templates
+	'(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+	   "* TODO %?\n  %i\n  %a")
+	  ("j" "Journal" entry (file+datetree "~/org/journal.org")
+	   "* %?\nEntered on %U\n  %i\n  %a")))
   ;; ------------ ORG MODE -
 
   ;; olivetti

@@ -405,7 +405,7 @@ you should place you code here."
 			  '(("^ +\\([-*]\\) "
 			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (setq org-bullets-bullet-list '("■" "◆" "▼" "●" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "✡" "✽" "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
+  (setq org-default-notes-file "~/org/notes.org")
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")

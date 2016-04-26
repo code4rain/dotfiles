@@ -141,7 +141,7 @@ values."
                                :width normal
                                :powerline-scale 1.3)
    ;; The leader key
-   dotspacemacs-leader-key "SPC"
+   dotspacemacs-leader-key "C-l"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
    dotspacemacs-emacs-leader-key "M-m"
@@ -153,7 +153,7 @@ values."
    dotspacemacs-major-mode-emacs-leader-key "C-k"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
    ;; (default "SPC")
-   dotspacemacs-emacs-command-key "SPC"
+   dotspacemacs-emacs-command-key "C-l"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
    ;; Setting it to a non-nil value, allows for separate commands under <C-i>
@@ -278,6 +278,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq evil-want-C-i-jump t)
+  (setq helm-gtags-maximum-candidates 500)
   )
 
 (defun dotspacemacs/user-config ()

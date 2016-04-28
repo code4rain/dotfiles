@@ -1,7 +1,7 @@
 ;;; gitconfig-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "gitconfig-mode" "../../../../../.emacs.d/elpa/gitconfig-mode-20160319.302/gitconfig-mode.el"
 ;;;;;;  "7ab7df1233beffe982c9f6f66fd2ff98")
@@ -18,7 +18,7 @@ A major mode for editing .gitconfig files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitconfig-mode-20160319.302/gitconfig-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitconfig-mode-20160319.302/gitconfig-mode.el")
-;;;;;;  (22296 32103 935315 221000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

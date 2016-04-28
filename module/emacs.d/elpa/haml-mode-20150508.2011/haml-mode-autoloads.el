@@ -1,7 +1,7 @@
 ;;; haml-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "haml-mode" "../../../../../.emacs.d/elpa/haml-mode-20150508.2011/haml-mode.el"
 ;;;;;;  "e92025e1212d5e1b69e72c2b6ddcf187")
@@ -20,7 +20,7 @@ Major mode for editing Haml files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/haml-mode-20150508.2011/haml-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/haml-mode-20150508.2011/haml-mode.el")
-;;;;;;  (22296 32112 433308 942000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; clang-format-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "clang-format" "../../../../../.emacs.d/elpa/clang-format-20151116.438/clang-format.el"
 ;;;;;;  "532ddceb65909489a80afa4c78337a0d")
@@ -25,7 +25,7 @@ Use clang-format to format the current buffer according to STYLE.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/clang-format-20151116.438/clang-format-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/clang-format-20151116.438/clang-format.el")
-;;;;;;  (22296 31981 837335 188000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

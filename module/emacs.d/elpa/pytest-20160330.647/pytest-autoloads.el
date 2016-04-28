@@ -1,7 +1,7 @@
 ;;; pytest-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "pytest" "../../../../../.emacs.d/elpa/pytest-20160330.647/pytest.el"
 ;;;;;;  "e4ba5cffaa45692dbcfff1221b7900f3")
@@ -61,7 +61,7 @@ Run pytest on testable thing at point, enter debugger on error.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pytest-20160330.647/pytest-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pytest-20160330.647/pytest.el")
-;;;;;;  (22296 32233 628257 456000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

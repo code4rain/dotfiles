@@ -1,7 +1,7 @@
 ;;; tagedit-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "tagedit" "../../../../../.emacs.d/elpa/tagedit-20160418.31/tagedit.el"
 ;;;;;;  "a94ccb32e46d57f8156fec685eef1b2e")
@@ -116,7 +116,7 @@ Goto start of content within current tag.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/tagedit-20160418.31/tagedit-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/tagedit-20160418.31/tagedit.el")
-;;;;;;  (22296 32250 168750 94000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

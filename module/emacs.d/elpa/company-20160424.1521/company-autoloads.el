@@ -1,7 +1,7 @@
 ;;; company-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "company" "../../../../../.emacs.d/elpa/company-20160424.1521/company.el"
 ;;;;;;  "335147e06612e7d1c86a853b2f4402b1")
@@ -38,7 +38,7 @@ keymap during active completions (`company-active-map'):
 \(fn &optional ARG)" t nil)
 
 (defvar global-company-mode nil "\
-Non-nil if Global-Company mode is enabled.
+Non-nil if Global Company mode is enabled.
 See the command `global-company-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -48,7 +48,7 @@ or call the function `global-company-mode'.")
 
 (autoload 'global-company-mode "company" "\
 Toggle Company mode in all buffers.
-With prefix ARG, enable Global-Company mode if ARG is positive;
+With prefix ARG, enable Global Company mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -309,7 +309,7 @@ shadow backends that come after it.  Recommended usages:
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160424.1521/company-xcode.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160424.1521/company-yasnippet.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-20160424.1521/company.el")
-;;;;;;  (22302 114 860899 700000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

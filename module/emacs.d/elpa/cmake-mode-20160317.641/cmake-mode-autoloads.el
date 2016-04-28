@@ -1,7 +1,7 @@
 ;;; cmake-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "cmake-mode" "../../../../../.emacs.d/elpa/cmake-mode-20160317.641/cmake-mode.el"
 ;;;;;;  "a3dec9fb8adc4c7df9e7c1e0a5dc1c06")
@@ -56,7 +56,7 @@ Queries for any of the four available help topics and prints out the approriate 
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/cmake-mode-20160317.641/cmake-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/cmake-mode-20160317.641/cmake-mode.el")
-;;;;;;  (22296 31984 334510 763000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

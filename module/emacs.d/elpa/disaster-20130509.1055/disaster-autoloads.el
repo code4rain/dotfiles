@@ -1,7 +1,7 @@
 ;;; disaster-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "disaster" "../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el"
 ;;;;;;  "e3f19d30fc6708e345c5a5c0cc922318")
@@ -29,7 +29,7 @@ is used.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/disaster-20130509.1055/disaster.el")
-;;;;;;  (22296 32011 823604 505000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

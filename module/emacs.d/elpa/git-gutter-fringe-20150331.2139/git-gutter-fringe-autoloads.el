@@ -1,11 +1,11 @@
 ;;; git-gutter-fringe-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter-fringe-20150331.2139/git-gutter-fringe-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-gutter-fringe-20150331.2139/git-gutter-fringe.el")
-;;;;;;  (22296 32098 19948 355000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

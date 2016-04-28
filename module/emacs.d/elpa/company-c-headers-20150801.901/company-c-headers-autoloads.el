@@ -1,7 +1,7 @@
 ;;; company-c-headers-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "company-c-headers" "../../../../../.emacs.d/elpa/company-c-headers-20150801.901/company-c-headers.el"
 ;;;;;;  "e5615ffd126570f03580962c16c2087f")
@@ -16,7 +16,7 @@ Company backend for C/C++ header files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-c-headers-20150801.901/company-c-headers-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-c-headers-20150801.901/company-c-headers.el")
-;;;;;;  (22296 31991 456240 841000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

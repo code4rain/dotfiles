@@ -1,7 +1,7 @@
 ;;; markdown-toc-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "markdown-toc" "../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc.el"
 ;;;;;;  "047d1c58a0494d82a9585e3a65b03dd4")
@@ -24,7 +24,7 @@ If called interactively with prefix arg REPLACE-TOC-P, replaces previous TOC.
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/markdown-toc-20160227.308/markdown-toc.el")
-;;;;;;  (22296 32168 350373 272000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

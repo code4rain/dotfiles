@@ -1,7 +1,7 @@
 ;;; company-auctex-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "company-auctex" "../../../../../.emacs.d/elpa/company-auctex-20151102.643/company-auctex.el"
 ;;;;;;  "b55d762aac8a0bc089f47fd508b39fc1")
@@ -41,7 +41,7 @@ Add backends provided by company-auctex to company-backends.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-auctex-20151102.643/company-auctex-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-auctex-20151102.643/company-auctex.el")
-;;;;;;  (22296 31990 28282 368000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

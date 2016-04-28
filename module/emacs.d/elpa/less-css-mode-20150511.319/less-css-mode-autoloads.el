@@ -1,7 +1,7 @@
 ;;; less-css-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "less-css-mode" "../../../../../.emacs.d/elpa/less-css-mode-20150511.319/less-css-mode.el"
 ;;;;;;  "817001b967d6752bdd2f5c116dafb072")
@@ -25,7 +25,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/less-css-mode-20150511.319/less-css-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/less-css-mode-20150511.319/less-css-mode.el")
-;;;;;;  (22296 32154 370614 224000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

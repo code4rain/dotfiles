@@ -1,7 +1,7 @@
 ;;; scss-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "scss-mode" "../../../../../.emacs.d/elpa/scss-mode-20150107.1400/scss-mode.el"
 ;;;;;;  "153f7320dbb7fe420f0c1bcd56de3575")
@@ -20,7 +20,7 @@ Special commands:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/scss-mode-20150107.1400/scss-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/scss-mode-20150107.1400/scss-mode.el")
-;;;;;;  (22296 32241 34633 431000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

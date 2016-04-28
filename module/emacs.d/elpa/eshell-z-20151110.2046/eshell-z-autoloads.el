@@ -1,7 +1,7 @@
 ;;; eshell-z-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "eshell-z" "../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el"
 ;;;;;;  "cedb2eaafa377a2e3a07d5735feb8faa")
@@ -16,7 +16,7 @@ Switch to eshell and change directory to DIR.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/eshell-z-20151110.2046/eshell-z.el")
-;;;;;;  (22296 32017 721704 949000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

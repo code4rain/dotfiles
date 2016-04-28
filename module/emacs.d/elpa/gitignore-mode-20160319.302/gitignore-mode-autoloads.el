@@ -1,7 +1,7 @@
 ;;; gitignore-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "gitignore-mode" "../../../../../.emacs.d/elpa/gitignore-mode-20160319.302/gitignore-mode.el"
 ;;;;;;  "c86b9f5c5a39d4c6e9aef7689fedf19d")
@@ -18,7 +18,7 @@ A major mode for editing .gitignore files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gitignore-mode-20160319.302/gitignore-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gitignore-mode-20160319.302/gitignore-mode.el")
-;;;;;;  (22296 32105 53799 56000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

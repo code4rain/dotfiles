@@ -1,7 +1,7 @@
 ;;; auto-dictionary-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "auto-dictionary" "../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary.el"
 ;;;;;;  "991cbcd84bfe3d89d6c9a86b28ca63d3")
@@ -29,7 +29,7 @@ Set buffer language to LANG and stop detecting it automatically.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-dictionary-20150410.910/auto-dictionary.el")
-;;;;;;  (22296 31952 438555 554000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

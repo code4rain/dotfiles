@@ -1,7 +1,7 @@
 ;;; gh-md-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "gh-md" "../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el"
 ;;;;;;  "576d598df4c69800b2ee39a77ee6643c")
@@ -35,7 +35,7 @@ Export to a file the markdown content from BUFFER.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gh-md-20151207.940/gh-md.el")
-;;;;;;  (22296 32092 651285 592000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

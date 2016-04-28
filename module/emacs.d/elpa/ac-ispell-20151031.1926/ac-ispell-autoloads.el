@@ -1,7 +1,7 @@
 ;;; ac-ispell-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "ac-ispell" "../../../../../.emacs.d/elpa/ac-ispell-20151031.1926/ac-ispell.el"
 ;;;;;;  "7219375cc306e9cfbe378af6bb32e3fe")
@@ -21,7 +21,7 @@ Declare auto-complete source based on `ac-ispell-requires'
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ac-ispell-20151031.1926/ac-ispell-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ac-ispell-20151031.1926/ac-ispell.el")
-;;;;;;  (22296 31908 47994 746000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; mmm-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "mmm-erb" "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-erb.el"
 ;;;;;;  "ab3e26c455fa8163de8f7b1840cbb8e0")
@@ -49,7 +49,7 @@ Add the submode classes CLASSES to `mmm-classes-alist'.
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-univ.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-utils.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/mmm-mode-20150828.1716/mmm-vars.el")
-;;;;;;  (22296 32171 219752 372000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

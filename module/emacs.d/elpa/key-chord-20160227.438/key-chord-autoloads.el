@@ -1,7 +1,7 @@
 ;;; key-chord-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "key-chord" "../../../../../.emacs.d/elpa/key-chord-20160227.438/key-chord.el"
 ;;;;;;  "dd2152e163bf532cce3dedf7ca13f24f")
@@ -61,7 +61,7 @@ If COMMAND is nil, the key-chord is removed.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/key-chord-20160227.438/key-chord-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/key-chord-20160227.438/key-chord.el")
-;;;;;;  (22303 23049 910487 700000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

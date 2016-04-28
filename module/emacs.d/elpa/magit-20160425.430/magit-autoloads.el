@@ -1,11 +1,11 @@
 ;;; magit-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "git-rebase" "git-rebase.el" (22302 42432 232211
-;;;;;;  787000))
-;;; Generated autoloads from git-rebase.el
+;;;### (autoloads nil "git-rebase" "../../../../../.emacs.d/elpa/magit-20160425.430/git-rebase.el"
+;;;;;;  "bb256e2240e1dc0c1e9c5c2a6629d145")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/git-rebase.el
 
 (autoload 'git-rebase-mode "git-rebase" "\
 Major mode for editing of a Git rebase file.
@@ -23,8 +23,9 @@ running 'man git-rebase' at the command line) for details.
 
 ;;;***
 
-;;;### (autoloads nil "magit" "magit.el" (22302 42432 492225 302000))
-;;; Generated autoloads from magit.el
+;;;### (autoloads nil "magit" "../../../../../.emacs.d/elpa/magit-20160425.430/magit.el"
+;;;;;;  "d8ed65cbf0ca7cafbc5e6e3dba989db3")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit.el
 
 (autoload 'magit-status "magit" "\
 Show the status of the current Git repository in a buffer.
@@ -401,7 +402,7 @@ defaulting to the tag at point.
  (autoload 'magit-file-popup "magit" nil t)
 
 (defvar global-magit-file-mode nil "\
-Non-nil if Global-Magit-File mode is enabled.
+Non-nil if Global Magit-File mode is enabled.
 See the command `global-magit-file-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -411,7 +412,7 @@ or call the function `global-magit-file-mode'.")
 
 (autoload 'global-magit-file-mode "magit" "\
 Toggle Magit-File mode in all buffers.
-With prefix ARG, enable Global-Magit-File mode if ARG is positive;
+With prefix ARG, enable Global Magit-File mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -458,9 +459,9 @@ Git, and Emacs in the echo area.
 
 ;;;***
 
-;;;### (autoloads nil "magit-apply" "magit-apply.el" (22302 42432
-;;;;;;  296215 116000))
-;;; Generated autoloads from magit-apply.el
+;;;### (autoloads nil "magit-apply" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-apply.el"
+;;;;;;  "4480a43b77c24d6ce4360cda83e90748")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-apply.el
 
 (autoload 'magit-stage-file "magit-apply" "\
 Stage all changes to FILE.
@@ -495,9 +496,9 @@ Remove all changes from the staging area.
 
 ;;;***
 
-;;;### (autoloads nil "magit-autorevert" "magit-autorevert.el" (22302
-;;;;;;  42432 64203 56000))
-;;; Generated autoloads from magit-autorevert.el
+;;;### (autoloads nil "magit-autorevert" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-autorevert.el"
+;;;;;;  "6de456ebc0af8d39a910d27ffe6175c1")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-autorevert.el
 
 (defvar magit-revert-buffers t)
 
@@ -524,9 +525,9 @@ See `auto-revert-mode' for more information on Auto-Revert mode.
 
 ;;;***
 
-;;;### (autoloads nil "magit-bisect" "magit-bisect.el" (22302 42432
-;;;;;;  272213 868000))
-;;; Generated autoloads from magit-bisect.el
+;;;### (autoloads nil "magit-bisect" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-bisect.el"
+;;;;;;  "f369a4e5dbd107fb921f4b04f81f23ac")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-bisect.el
  (autoload 'magit-bisect-popup "magit-bisect" nil t)
 
 (autoload 'magit-bisect-start "magit-bisect" "\
@@ -576,9 +577,9 @@ bisect run'.
 
 ;;;***
 
-;;;### (autoloads nil "magit-blame" "magit-blame.el" (22302 42432
-;;;;;;  456223 430000))
-;;; Generated autoloads from magit-blame.el
+;;;### (autoloads nil "magit-blame" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-blame.el"
+;;;;;;  "067fda46b501c15833858f6c49e4501c")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-blame.el
  (autoload 'magit-blame-popup "magit-blame" nil t)
 
 (autoload 'magit-blame "magit-blame" "\
@@ -601,9 +602,9 @@ only arguments available from `magit-blame-popup' should be used.
 
 ;;;***
 
-;;;### (autoloads nil "magit-commit" "magit-commit.el" (22302 42432
-;;;;;;  84204 95000))
-;;; Generated autoloads from magit-commit.el
+;;;### (autoloads nil "magit-commit" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-commit.el"
+;;;;;;  "4bb8e47c4bf41a71d9024277d49d3d91")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-commit.el
 
 (autoload 'magit-commit "magit-commit" "\
 Create a new commit on HEAD.
@@ -684,9 +685,9 @@ Create a squash commit targeting COMMIT and instantly rebase.
 
 ;;;***
 
-;;;### (autoloads nil "magit-diff" "magit-diff.el" (22302 42432 436222
-;;;;;;  392000))
-;;; Generated autoloads from magit-diff.el
+;;;### (autoloads nil "magit-diff" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-diff.el"
+;;;;;;  "cf35af7e86660eccdada4b29cc19f089")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-diff.el
 
 (autoload 'magit-diff-dwim "magit-diff" "\
 Show changes for the thing at point.
@@ -750,9 +751,9 @@ for a revision.
 
 ;;;***
 
-;;;### (autoloads nil "magit-ediff" "magit-ediff.el" (22302 42432
-;;;;;;  392220 104000))
-;;; Generated autoloads from magit-ediff.el
+;;;### (autoloads nil "magit-ediff" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-ediff.el"
+;;;;;;  "f28dd58c3f3e4033768334eaf1d433f0")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-ediff.el
  (autoload 'magit-ediff-popup "magit-ediff" nil t)
 
 (autoload 'magit-ediff-resolve "magit-ediff" "\
@@ -839,9 +840,9 @@ stash that were staged.
 
 ;;;***
 
-;;;### (autoloads nil "magit-extras" "magit-extras.el" (22302 42432
-;;;;;;  104205 135000))
-;;; Generated autoloads from magit-extras.el
+;;;### (autoloads nil "magit-extras" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-extras.el"
+;;;;;;  "49e17699d25f832e2332c89f1b318c17")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-extras.el
 
 (autoload 'magit-run-git-gui "magit-extras" "\
 Run `git gui' for the current git repository.
@@ -910,9 +911,9 @@ on a position in a file-visiting buffer.
 
 ;;;***
 
-;;;### (autoloads nil "magit-log" "magit-log.el" (22302 42432 416221
-;;;;;;  353000))
-;;; Generated autoloads from magit-log.el
+;;;### (autoloads nil "magit-log" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-log.el"
+;;;;;;  "60f82e06a035fbba95015e30792f6e71")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-log.el
 
 (autoload 'magit-log-current "magit-log" "\
 Show log for the current branch.
@@ -979,9 +980,9 @@ Show commits in a branch that are not merged in the upstream branch.
 
 ;;;***
 
-;;;### (autoloads nil "magit-remote" "magit-remote.el" (22302 42432
-;;;;;;  576229 669000))
-;;; Generated autoloads from magit-remote.el
+;;;### (autoloads nil "magit-remote" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-remote.el"
+;;;;;;  "074f6b5e9cec5cc19502051f7ec22ec6")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-remote.el
 
 (autoload 'magit-clone "magit-remote" "\
 Clone the REPOSITORY to DIRECTORY.
@@ -1212,9 +1213,9 @@ is asked to pull.  START has to be reachable from that commit.
 
 ;;;***
 
-;;;### (autoloads nil "magit-sequence" "magit-sequence.el" (22302
-;;;;;;  42432 512226 342000))
-;;; Generated autoloads from magit-sequence.el
+;;;### (autoloads nil "magit-sequence" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-sequence.el"
+;;;;;;  "9015f344f110d6b30d49ca13f391ba18")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-sequence.el
 
 (autoload 'magit-sequencer-continue "magit-sequence" "\
 Resume the current cherry-pick or revert sequence.
@@ -1361,9 +1362,9 @@ Abort the current rebase operation, restoring the original branch.
 
 ;;;***
 
-;;;### (autoloads nil "magit-stash" "magit-stash.el" (22302 42432
-;;;;;;  352218 26000))
-;;; Generated autoloads from magit-stash.el
+;;;### (autoloads nil "magit-stash" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-stash.el"
+;;;;;;  "79ad5d050f2a7a8e7c4130997d28f8ae")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-stash.el
  (autoload 'magit-stash-popup "magit-stash" nil t)
 
 (autoload 'magit-stash "magit-stash" "\
@@ -1461,9 +1462,9 @@ Show all diffs of a stash in a buffer.
 
 ;;;***
 
-;;;### (autoloads nil "magit-submodule" "magit-submodule.el" (22302
-;;;;;;  42432 636232 787000))
-;;; Generated autoloads from magit-submodule.el
+;;;### (autoloads nil "magit-submodule" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-submodule.el"
+;;;;;;  "135c824d72dda835aa7e3fd4c9a4f17d")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-submodule.el
  (autoload 'magit-submodule-popup "magit-submodule" nil t)
 
 (autoload 'magit-submodule-add "magit-submodule" "\
@@ -1542,9 +1543,9 @@ These sections can be expanded to show the respective commits.
 
 ;;;***
 
-;;;### (autoloads nil "magit-wip" "magit-wip.el" (22302 42432 156207
-;;;;;;  838000))
-;;; Generated autoloads from magit-wip.el
+;;;### (autoloads nil "magit-wip" "../../../../../.emacs.d/elpa/magit-20160425.430/magit-wip.el"
+;;;;;;  "f4367e3e8f70403bf5e76634490eac1f")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/magit-20160425.430/magit-wip.el
 
 (defvar magit-wip-after-save-mode nil "\
 Non-nil if Magit-Wip-After-Save mode is enabled.
@@ -1608,9 +1609,31 @@ command which is about to be called are committed.
 
 ;;;***
 
-;;;### (autoloads nil nil ("magit-core.el" "magit-git.el" "magit-mode.el"
-;;;;;;  "magit-pkg.el" "magit-process.el" "magit-section.el" "magit-utils.el")
-;;;;;;  (22302 42432 679349 732000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/magit-20160425.430/git-rebase.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-apply.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-autorevert.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-bisect.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-blame.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-commit.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-core.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-diff.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-ediff.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-extras.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-git.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-log.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-mode.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-process.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-remote.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-section.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-sequence.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-stash.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-submodule.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-utils.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit-wip.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-20160425.430/magit.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

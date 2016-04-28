@@ -1,7 +1,7 @@
 ;;; cython-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "cython-mode" "../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el"
 ;;;;;;  "53cbf3f6866428f897f9b74174b57d45")
@@ -32,7 +32,7 @@ Major mode for Cython development, derived from Python mode.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/cython-mode-20140705.1229/cython-mode.el")
-;;;;;;  (22296 32006 866591 874000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

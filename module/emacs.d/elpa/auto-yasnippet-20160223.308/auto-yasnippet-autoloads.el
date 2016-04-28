@@ -1,7 +1,7 @@
 ;;; auto-yasnippet-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "auto-yasnippet" "../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el"
 ;;;;;;  "5daf8841004e86ef1cf96e1d5f0f3bc1")
@@ -47,7 +47,7 @@ To save a snippet permanently, create an empty file and call this.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-yasnippet-20160223.308/auto-yasnippet.el")
-;;;;;;  (22296 31975 873307 342000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

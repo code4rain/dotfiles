@@ -1,7 +1,7 @@
 ;;; ranger-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "ranger" "../../../../../.emacs.d/elpa/ranger-20160413.734/ranger.el"
 ;;;;;;  "91ea7fe0bb27077cc497376e86c377b9")
@@ -47,7 +47,7 @@ Major mode emulating the ranger file manager in `dired'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ranger-20160413.734/ranger-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ranger-20160413.734/ranger.el")
-;;;;;;  (22296 32237 344906 611000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

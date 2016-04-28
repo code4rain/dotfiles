@@ -1,7 +1,7 @@
 ;;; company-statistics-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "company-statistics" "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics.el"
 ;;;;;;  "d3b3cbf0c3bbd101de753baa4233d717")
@@ -35,7 +35,7 @@ configuration.  You can customize this behavior with
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics-tests.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-statistics-0.2.2/company-statistics.el")
-;;;;;;  (22296 31994 732474 985000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

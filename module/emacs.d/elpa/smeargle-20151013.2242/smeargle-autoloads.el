@@ -1,7 +1,7 @@
 ;;; smeargle-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "smeargle" "../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el"
 ;;;;;;  "99a06e54b24aa17eca7b4074ecdb5824")
@@ -26,7 +26,7 @@ Highlight regions by age of commits.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/smeargle-20151013.2242/smeargle.el")
-;;;;;;  (22296 32244 761741 630000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

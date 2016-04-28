@@ -1,7 +1,7 @@
 ;;; typo-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "typo" "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el"
 ;;;;;;  "0c49b8dc2cd2f28462107299e205b169")
@@ -41,7 +41,7 @@ default C-x 8 prefix map.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/typo-20160121.330/typo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/typo-20160121.330/typo.el")
-;;;;;;  (22296 32252 564759 816000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

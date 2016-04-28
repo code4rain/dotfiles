@@ -1,7 +1,7 @@
 ;;; yasnippet-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "yasnippet" "../../../../../.emacs.d/elpa/yasnippet-20160423.1336/yasnippet.el"
 ;;;;;;  "235143a727335115237688283ed1339e")
@@ -54,7 +54,7 @@ A mode for editing yasnippets
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/yasnippet-20160423.1336/yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160423.1336/yasnippet-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/yasnippet-20160423.1336/yasnippet.el")
-;;;;;;  (22302 188 35085 100000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

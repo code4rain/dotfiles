@@ -1,11 +1,11 @@
 ;;; pos-tip-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pos-tip-20150318.813/pos-tip-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pos-tip-20150318.813/pos-tip.el")
-;;;;;;  (22296 31992 578051 345000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

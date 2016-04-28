@@ -1,10 +1,10 @@
 ;;; biblio-core-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "biblio-core" "../../../../../.emacs.d/elpa/biblio-core-20160407.226/biblio-core.el"
-;;;;;;  "8816e340c3e39961f3b4a14aa78361db")
+;;;;;;  "3f9f530b7c357222e4e4121b0e2e715c")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/biblio-core-20160407.226/biblio-core.el
 
 (autoload 'biblio-lookup "biblio-core" "\
@@ -20,7 +20,7 @@ inserted.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/biblio-core-20160407.226/biblio-core-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-core-20160407.226/biblio-core.el")
-;;;;;;  (22303 23041 720473 300000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

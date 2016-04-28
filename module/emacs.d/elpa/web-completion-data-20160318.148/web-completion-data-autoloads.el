@@ -1,12 +1,12 @@
 ;;; web-completion-data-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/web-completion-data-20160318.148/web-completion-data.el")
-;;;;;;  (22296 32004 481923 624000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

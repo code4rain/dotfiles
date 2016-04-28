@@ -1,7 +1,7 @@
 ;;; orgit-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "orgit" "../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit.el"
 ;;;;;;  "5229d1ae1d7e558e7bbe93cff65ccbe5")
@@ -62,7 +62,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/orgit-20160119.1424/orgit.el")
-;;;;;;  (22296 32220 133835 297000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

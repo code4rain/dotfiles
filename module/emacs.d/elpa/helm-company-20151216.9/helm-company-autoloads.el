@@ -1,7 +1,7 @@
 ;;; helm-company-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "helm-company" "../../../../../.emacs.d/elpa/helm-company-20151216.9/helm-company.el"
 ;;;;;;  "95ff6d6ff82f45ce1547a3381c1d499d")
@@ -17,7 +17,7 @@ It is useful to narrow candidates.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-company-20151216.9/helm-company-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-company-20151216.9/helm-company.el")
-;;;;;;  (22296 32116 458276 471000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

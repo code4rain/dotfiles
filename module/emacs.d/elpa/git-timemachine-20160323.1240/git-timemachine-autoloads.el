@@ -1,7 +1,7 @@
 ;;; git-timemachine-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "git-timemachine" "../../../../../.emacs.d/elpa/git-timemachine-20160323.1240/git-timemachine.el"
 ;;;;;;  "d44078a19116aac4371071a5064796fc")
@@ -26,7 +26,7 @@ Enable git timemachine for current buffer, switching to GIT-BRANCH.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-timemachine-20160323.1240/git-timemachine-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-timemachine-20160323.1240/git-timemachine.el")
-;;;;;;  (22296 32101 628009 195000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

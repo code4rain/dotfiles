@@ -1,7 +1,7 @@
 ;;; slim-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "slim-mode" "../../../../../.emacs.d/elpa/slim-mode-20140611.950/slim-mode.el"
 ;;;;;;  "ecfe00a2a7bdcdd0747b1312facfc028")
@@ -20,7 +20,7 @@ Major mode for editing Slim files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/slim-mode-20140611.950/slim-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/slim-mode-20140611.950/slim-mode.el")
-;;;;;;  (22296 32243 530069 137000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

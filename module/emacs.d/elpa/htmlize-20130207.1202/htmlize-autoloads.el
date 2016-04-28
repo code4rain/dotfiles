@@ -1,7 +1,7 @@
 ;;; htmlize-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "htmlize" "../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el"
 ;;;;;;  "980fc941e008dbcb503f77373b776c48")
@@ -71,7 +71,7 @@ HTMLize dired-marked files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/htmlize-20130207.1202/htmlize.el")
-;;;;;;  (22296 32143 941617 530000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

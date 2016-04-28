@@ -1,7 +1,7 @@
 ;;; py-yapf-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "py-yapf" "../../../../../.emacs.d/elpa/py-yapf-20160101.412/py-yapf.el"
 ;;;;;;  "5e173b7858dc33991051bba0cbee44bb")
@@ -21,7 +21,7 @@ Pre-save hooked to be used before running py-yapf.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/py-yapf-20160101.412/py-yapf-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/py-yapf-20160101.412/py-yapf.el")
-;;;;;;  (22296 32231 330830 327000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; flycheck-pos-tip-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "flycheck-pos-tip" "../../../../../.emacs.d/elpa/flycheck-pos-tip-20160323.129/flycheck-pos-tip.el"
 ;;;;;;  "49630f8484f469df52705c19f60d56f1")
@@ -38,7 +38,7 @@ TTY frames.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/flycheck-pos-tip-20160323.129/flycheck-pos-tip-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/flycheck-pos-tip-20160323.129/flycheck-pos-tip.el")
-;;;;;;  (22296 32088 434568 766000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

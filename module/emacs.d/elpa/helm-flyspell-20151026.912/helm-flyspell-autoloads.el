@@ -1,7 +1,7 @@
 ;;; helm-flyspell-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "helm-flyspell" "../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el"
 ;;;;;;  "076fe523f45d283836b67a9b27b90402")
@@ -17,7 +17,7 @@ Adapted from `flyspell-correct-word-before-point'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-flyspell-20151026.912/helm-flyspell.el")
-;;;;;;  (22296 32121 625052 545000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

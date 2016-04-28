@@ -1,7 +1,7 @@
 ;;; org-repo-todo-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "org-repo-todo" "../../../../../.emacs.d/elpa/org-repo-todo-20160307.1029/org-repo-todo.el"
 ;;;;;;  "5c48fef7bd345208a22d13fa9ba4ee8c")
@@ -32,7 +32,7 @@ If ARG-DIRECTORY is supplied, capture into `ort/prefix-arg-directory'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/org-repo-todo-20160307.1029/org-repo-todo-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-repo-todo-20160307.1029/org-repo-todo.el")
-;;;;;;  (22296 32218 924988 791000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

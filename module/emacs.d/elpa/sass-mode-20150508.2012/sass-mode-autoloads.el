@@ -1,7 +1,7 @@
 ;;; sass-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "sass-mode" "../../../../../.emacs.d/elpa/sass-mode-20150508.2012/sass-mode.el"
 ;;;;;;  "fbdbc0f25b954bb848a634ca5eb41cbf")
@@ -20,7 +20,7 @@ Major mode for editing Sass files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/sass-mode-20150508.2012/sass-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/sass-mode-20150508.2012/sass-mode.el")
-;;;;;;  (22296 32239 832405 250000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

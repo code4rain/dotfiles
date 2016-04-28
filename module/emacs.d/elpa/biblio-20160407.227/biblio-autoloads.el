@@ -1,7 +1,7 @@
 ;;; biblio-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "biblio-arxiv" "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-arxiv.el"
 ;;;;;;  "7dbd4e0fbeeebc5e723e220b8d3b8da7")
@@ -71,7 +71,7 @@ Add Dissemin to list of `biblio-selection-mode' actions.
 ;;;***
 
 ;;;### (autoloads nil "biblio-doi" "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-doi.el"
-;;;;;;  "4e294aa692d32e806ae258598f0e4432")
+;;;;;;  "599a39e20eacc1dc0171f25bc262fa91")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-doi.el
 
 (autoload 'doi-insert-bibtex "biblio-doi" "\
@@ -82,7 +82,7 @@ Insert BibTeX entry matching DOI.
 ;;;***
 
 ;;;### (autoloads nil "biblio-hal" "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el"
-;;;;;;  "61b7755deaad56498c3205d34d9a3002")
+;;;;;;  "77e17a9e036fb5af180c2ae2f346dbfe")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el
 
 (add-hook 'biblio-init-hook #'biblio-hal-backend)
@@ -105,7 +105,7 @@ Start a HAL search for QUERY, prompting if needed.
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio.el")
-;;;;;;  (22303 23045 932480 700000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

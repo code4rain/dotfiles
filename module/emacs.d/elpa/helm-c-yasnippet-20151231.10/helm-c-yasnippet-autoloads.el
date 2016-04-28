@@ -1,7 +1,7 @@
 ;;; helm-c-yasnippet-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "helm-c-yasnippet" "../../../../../.emacs.d/elpa/helm-c-yasnippet-20151231.10/helm-c-yasnippet.el"
 ;;;;;;  "d2492485a99a4a85a8e4f9a37992fef9")
@@ -26,7 +26,7 @@ Create a snippet from region.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/helm-c-yasnippet-20151231.10/helm-c-yasnippet-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-c-yasnippet-20151231.10/helm-c-yasnippet.el")
-;;;;;;  (22296 32115 364484 384000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; gnuplot-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "gnuplot" "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el"
 ;;;;;;  "06947309254d5a5b58e3720b781ac080")
@@ -88,7 +88,7 @@ Run an inferior Gnuplot process.
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-gui.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gnuplot-20141231.1337/gnuplot.el")
-;;;;;;  (22296 32107 603237 548000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

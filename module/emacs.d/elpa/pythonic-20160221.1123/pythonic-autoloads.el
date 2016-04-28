@@ -1,7 +1,7 @@
 ;;; pythonic-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "pythonic" "../../../../../.emacs.d/elpa/pythonic-20160221.1123/pythonic.el"
 ;;;;;;  "a6ca7b5fb755550f1d029801cc3d28d5")
@@ -21,7 +21,7 @@ Deactivate python virtual environment.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pythonic-20160221.1123/pythonic-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pythonic-20160221.1123/pythonic.el")
-;;;;;;  (22296 31931 31315 339000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

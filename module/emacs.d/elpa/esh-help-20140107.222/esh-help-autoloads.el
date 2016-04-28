@@ -1,7 +1,7 @@
 ;;; esh-help-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "esh-help" "../../../../../.emacs.d/elpa/esh-help-20140107.222/esh-help.el"
 ;;;;;;  "429182b2b13f18b682d0bc0e47a98b23")
@@ -22,7 +22,7 @@ It comes from Zsh.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/esh-help-20140107.222/esh-help-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/esh-help-20140107.222/esh-help.el")
-;;;;;;  (22296 32015 424859 547000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

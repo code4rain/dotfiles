@@ -1,11 +1,11 @@
 ;;; xterm-color-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/xterm-color-20160401.2025/xterm-color-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/xterm-color-20160401.2025/xterm-color.el")
-;;;;;;  (22296 32264 135693 612000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

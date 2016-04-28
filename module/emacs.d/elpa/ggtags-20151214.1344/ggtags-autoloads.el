@@ -1,7 +1,7 @@
 ;;; ggtags-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "ggtags" "../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags.el"
 ;;;;;;  "4d927b6a0d9b87a5abec947d16fab304")
@@ -46,7 +46,7 @@ A function suitable for `hippie-expand-try-functions-list'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/ggtags-20151214.1344/ggtags.el")
-;;;;;;  (22296 32091 335803 535000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

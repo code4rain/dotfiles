@@ -1,7 +1,7 @@
 ;;; jade-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "jade-mode" "../../../../../.emacs.d/elpa/jade-mode-20150801.944/jade-mode.el"
 ;;;;;;  "5f9aad70ebb5922f1e73c5d865e4dd49")
@@ -18,7 +18,7 @@ Major mode for editing jade node.js templates
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/jade-mode-20150801.944/jade-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/jade-mode-20150801.944/jade-mode.el")
-;;;;;;  (22296 32153 222892 784000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

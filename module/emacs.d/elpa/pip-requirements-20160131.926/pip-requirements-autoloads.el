@@ -1,7 +1,7 @@
 ;;; pip-requirements-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "pip-requirements" "../../../../../.emacs.d/elpa/pip-requirements-20160131.926/pip-requirements.el"
 ;;;;;;  "6f53fb3952f9e512e7272d5ad98b044c")
@@ -28,7 +28,7 @@ Major mode for editing pip requirements files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pip-requirements-20160131.926/pip-requirements-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pip-requirements-20160131.926/pip-requirements.el")
-;;;;;;  (22296 32228 919155 586000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

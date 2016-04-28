@@ -1,7 +1,7 @@
 ;;; git-messenger-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "git-messenger" "../../../../../.emacs.d/elpa/git-messenger-20160121.1842/git-messenger.el"
 ;;;;;;  "71054d3e9840d8a4f182033f1a18950f")
@@ -16,7 +16,7 @@
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-messenger-20160121.1842/git-messenger-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-messenger-20160121.1842/git-messenger.el")
-;;;;;;  (22296 32100 327867 205000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

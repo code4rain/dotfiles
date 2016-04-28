@@ -1,7 +1,7 @@
 ;;; alert-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "alert" "../../../../../.emacs.d/elpa/alert-20151123.759/alert.el"
 ;;;;;;  "9543f7340ce0eac63d820d8410f6149c")
@@ -87,7 +87,7 @@ Here are some more typical examples of usage:
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/alert-20151123.759/alert-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/alert-20151123.759/alert.el")
-;;;;;;  (22296 32199 48755 178000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

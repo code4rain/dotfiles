@@ -1,7 +1,7 @@
 ;;; diff-hl-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "diff-hl" "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl.el"
 ;;;;;;  "a7e80dcaaaa8534b603f921cd1efd2f7")
@@ -18,7 +18,7 @@ Turn on `diff-hl-mode' or `diff-hl-dir-mode' in a buffer if appropriate.
 \(fn)" nil nil)
 
 (defvar global-diff-hl-mode nil "\
-Non-nil if Global-Diff-Hl mode is enabled.
+Non-nil if Global Diff-Hl mode is enabled.
 See the command `global-diff-hl-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -28,7 +28,7 @@ or call the function `global-diff-hl-mode'.")
 
 (autoload 'global-diff-hl-mode "diff-hl" "\
 Toggle Diff-Hl mode in all buffers.
-With prefix ARG, enable Global-Diff-Hl mode if ARG is positive;
+With prefix ARG, enable Global Diff-Hl mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -53,7 +53,7 @@ Currently only supports Git, Mercurial and Bazaar.
 \(fn &optional ARG)" t nil)
 
 (defvar global-diff-hl-amend-mode nil "\
-Non-nil if Global-Diff-Hl-Amend mode is enabled.
+Non-nil if Global Diff-Hl-Amend mode is enabled.
 See the command `global-diff-hl-amend-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -63,7 +63,7 @@ or call the function `global-diff-hl-amend-mode'.")
 
 (autoload 'global-diff-hl-amend-mode "diff-hl-amend" "\
 Toggle Diff-Hl-Amend mode in all buffers.
-With prefix ARG, enable Global-Diff-Hl-Amend mode if ARG is positive;
+With prefix ARG, enable Global Diff-Hl-Amend mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -138,7 +138,7 @@ Toggle displaying `diff-hl-mode' highlights on the margin.
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl-margin.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/diff-hl-20160203.1501/diff-hl.el")
-;;;;;;  (22296 32009 322206 11000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

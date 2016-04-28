@@ -1,7 +1,7 @@
 ;;; auctex-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "bib-cite" "../../../../../.emacs.d/elpa/auctex-11.89.3/bib-cite.el"
 ;;;;;;  "d9c69a86e9e1c209498467ba6e90080c")
@@ -397,7 +397,7 @@ Limit searched to BOUND.
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/tex-wizard.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/tex.el" "../../../../../.emacs.d/elpa/auctex-11.89.3/texmathp.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auctex-11.89.3/toolbar-x.el")
-;;;;;;  (22296 31941 446312 739000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

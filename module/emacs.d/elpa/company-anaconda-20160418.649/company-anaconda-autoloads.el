@@ -1,7 +1,7 @@
 ;;; company-anaconda-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "company-anaconda" "../../../../../.emacs.d/elpa/company-anaconda-20160418.649/company-anaconda.el"
 ;;;;;;  "92e584f343e94b0261a39307d5a93ef7")
@@ -17,7 +17,7 @@ See `company-backends' for more info about COMMAND and ARG.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/company-anaconda-20160418.649/company-anaconda-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/company-anaconda-20160418.649/company-anaconda.el")
-;;;;;;  (22296 31988 876709 142000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; olivetti-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "olivetti" "../../../../../.emacs.d/elpa/olivetti-20160412.2122/olivetti.el"
 ;;;;;;  "9c914765c392f641831dc7dca755a498")
@@ -27,7 +27,7 @@ hidden.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/olivetti-20160412.2122/olivetti-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/olivetti-20160412.2122/olivetti.el")
-;;;;;;  (22296 32177 158754 537000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

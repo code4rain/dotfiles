@@ -1,7 +1,7 @@
 ;;; auto-complete-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "auto-complete" "../../../../../.emacs.d/elpa/auto-complete-20160416.604/auto-complete.el"
 ;;;;;;  "9d3b442f15f028b4064359de814a5f45")
@@ -18,7 +18,7 @@ AutoComplete mode
 \(fn &optional ARG)" t nil)
 
 (defvar global-auto-complete-mode nil "\
-Non-nil if Global-Auto-Complete mode is enabled.
+Non-nil if Global Auto-Complete mode is enabled.
 See the command `global-auto-complete-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -28,7 +28,7 @@ or call the function `global-auto-complete-mode'.")
 
 (autoload 'global-auto-complete-mode "auto-complete" "\
 Toggle Auto-Complete mode in all buffers.
-With prefix ARG, enable Global-Auto-Complete mode if ARG is positive;
+With prefix ARG, enable Global Auto-Complete mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -55,7 +55,7 @@ See `auto-complete-mode' for more information on Auto-Complete mode.
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-complete-20160416.604/auto-complete-config.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-complete-20160416.604/auto-complete-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/auto-complete-20160416.604/auto-complete.el")
-;;;;;;  (22296 31906 865597 612000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

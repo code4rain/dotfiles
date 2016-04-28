@@ -1,7 +1,7 @@
 ;;; org-pomodoro-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "org-pomodoro" "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el"
 ;;;;;;  "a7bfaf8c23e49dbbd68f6d22bb751d58")
@@ -22,7 +22,7 @@ kill the current timer, this may be a break or a running pomodoro.
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pidgin.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/org-pomodoro-20151217.553/org-pomodoro.el")
-;;;;;;  (22296 32201 628715 846000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

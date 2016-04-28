@@ -1,7 +1,7 @@
 ;;; git-gutter-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "git-gutter" "../../../../../.emacs.d/elpa/git-gutter-20160409.713/git-gutter.el"
 ;;;;;;  "f413486fe4ea6be5ca48a8278152950a")
@@ -18,7 +18,7 @@ Git-Gutter mode
 \(fn &optional ARG)" t nil)
 
 (defvar global-git-gutter-mode nil "\
-Non-nil if Global-Git-Gutter mode is enabled.
+Non-nil if Global Git-Gutter mode is enabled.
 See the command `global-git-gutter-mode' for a description of this minor mode.
 Setting this variable directly does not take effect;
 either customize it (see the info node `Easy Customization')
@@ -28,7 +28,7 @@ or call the function `global-git-gutter-mode'.")
 
 (autoload 'global-git-gutter-mode "git-gutter" "\
 Toggle Git-Gutter mode in all buffers.
-With prefix ARG, enable Global-Git-Gutter mode if ARG is positive;
+With prefix ARG, enable Global Git-Gutter mode if ARG is positive;
 otherwise, disable it.  If called from Lisp, enable the mode if
 ARG is omitted or nil.
 
@@ -52,7 +52,7 @@ Toggle to show diff information.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/git-gutter-20160409.713/git-gutter-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/git-gutter-20160409.713/git-gutter.el")
-;;;;;;  (22296 32094 33194 283000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

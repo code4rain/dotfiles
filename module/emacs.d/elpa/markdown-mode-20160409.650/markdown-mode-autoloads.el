@@ -1,7 +1,7 @@
 ;;; markdown-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "markdown-mode" "../../../../../.emacs.d/elpa/markdown-mode-20160409.650/markdown-mode.el"
 ;;;;;;  "4407d7c5bb59a506fc84183d804fc522")
@@ -25,7 +25,7 @@ Major mode for editing GitHub Flavored Markdown files.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/markdown-mode-20160409.650/markdown-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/markdown-mode-20160409.650/markdown-mode.el")
-;;;;;;  (22296 32166 769387 970000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,7 +1,7 @@
 ;;; helm-bibtex-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "helm-bibtex" "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex.el"
 ;;;;;;  "e66de05a6764a026fe17dfff3f96f011")
@@ -21,7 +21,7 @@ reread.
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex.el")
-;;;;;;  (22303 23048 428485 100000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

@@ -1,10 +1,12 @@
 ;;; magit-popup-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("magit-popup-pkg.el" "magit-popup.el")
-;;;;;;  (22302 42426 911747 732000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/magit-popup-20160425.430/magit-popup-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-popup-20160425.430/magit-popup-pkg.el"
+;;;;;;  "../../../../../.emacs.d/elpa/magit-popup-20160425.430/magit-popup.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

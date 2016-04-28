@@ -1,7 +1,7 @@
 ;;; pyenv-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "pyenv-mode" "../../../../../.emacs.d/elpa/pyenv-mode-20160221.1123/pyenv-mode.el"
 ;;;;;;  "2b007ce57206aa663207c777e417abc8")
@@ -37,7 +37,7 @@ Minor mode for pyenv interaction.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/pyenv-mode-20160221.1123/pyenv-mode-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/pyenv-mode-20160221.1123/pyenv-mode.el")
-;;;;;;  (22296 32232 468760 48000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

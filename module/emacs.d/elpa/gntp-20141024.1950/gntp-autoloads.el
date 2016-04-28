@@ -1,7 +1,7 @@
 ;;; gntp-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "gntp" "../../../../../.emacs.d/elpa/gntp-20141024.1950/gntp.el"
 ;;;;;;  "4353f09e37565203f3b17cb93791183e")
@@ -17,7 +17,7 @@ PORT defaults to `gntp-server-port'
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/gntp-20141024.1950/gntp-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/gntp-20141024.1950/gntp.el")
-;;;;;;  (22296 32196 437794 779000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

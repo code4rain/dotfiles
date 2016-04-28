@@ -1,7 +1,7 @@
 ;;; focus-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
 ;;;### (autoloads nil "focus" "../../../../../.emacs.d/elpa/focus-20160131.1418/focus.el"
 ;;;;;;  "73297760ba1cd698b4e66549e5412ea5")
@@ -21,7 +21,7 @@ A read-only mode optimized for `focus-mode'.
 
 ;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/focus-20160131.1418/focus-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/focus-20160131.1418/focus.el")
-;;;;;;  (22296 32089 569554 88000))
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

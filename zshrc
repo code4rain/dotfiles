@@ -56,7 +56,6 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
-export PATH="${HOME}/.cask/bin:${PATH}"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -193,9 +192,7 @@ simple_prompt() {
 		echo -n "\nSYMLINK: %F{cyan}$(readlink $(pwd))%{%f%}"
 	fi
 	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
-	echo -n "%{%F{red}%}>%{%f%}"
-	echo -n "%{%F{yellow}%}>%{%f%}"
-	echo -n "%{%F{green}%}>%{%f%}"
+	echo -n "::"
 }
 # Set the prompt
 #PROMPT='%{%f%b%k%}$(build_prompt) '

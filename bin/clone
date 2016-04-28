@@ -1,7 +1,43 @@
 #! /usr/bin/env bash
+source color.sh
+OH_MY_ZSH_DIR="~/.oh-my-zsh"
+OH_MY_ZSH_GITHUB="https://github.com/robbyrussell/oh-my-zsh.git"
+TIG_DIR="~/bin/tig"
+TIG_GITHUB="https://github.com/jonas/tig.git"
+RANGER_DIR="~/bin/ranger"
+RANGER_GITHUB="https://github.com/hut/ranger.git"
+AG_DIR="~/bin/ag"
+AG_GITHUB="https://github.com/ggreer/the_silver_searcher.git"
+TMUX_DIR="~/bin/tmux"
+TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
+
+clone_or_update() {
+  if [ -d "$2" ]
+  then
+    echo "$2 is exist"
+    echo "Run git pull for $2"
+    pushd .
+    cd $2
+    git pull --rebase
+    popd
+  else
+    git clone $1 $2
+  fi
+  if [ ! -z $3 ]
+  then
+    echo "Let's build!"
+    pushd .
+    cd $2
+    ./configure $4
+    make -j32
+    sudo make install
+    popd
+  fi
+}
 cp -R ../module/bin/* ~/bin
-git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-git clone http://git.savannah.gnu.org/r/ranger.git ~/bin/ranger
-git clone https://github.com/jonas/tig.git ~/bin/tig
-git clone https://github.com/ggreer/the_silver_searcher.git ~/bin/ag
-git clone https://github.com/ThomasAdam/tmux.git ~/bin/tmux
+clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
+clone_or_update $TIG_GITHUB $TIG_DIR Y
+clone_or_update $RANGER_GITHUB $RANGER_DIR Y
+clone_or_update $AG_GITHUB $AG_DIR Y
+clone_or_update $TMUX_GITHUB $TMUX_DIR Y
+

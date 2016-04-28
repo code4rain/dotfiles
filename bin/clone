@@ -1,21 +1,29 @@
 #! /usr/bin/env bash
 source color.sh
-OH_MY_ZSH_DIR="~/.oh-my-zsh"
+OH_MY_ZSH_DIR="$HOME/.oh-my-zsh"
 OH_MY_ZSH_GITHUB="https://github.com/robbyrussell/oh-my-zsh.git"
-TIG_DIR="~/bin/tig"
+
+TIG_DIR="$HOME/bin/tig"
 TIG_GITHUB="https://github.com/jonas/tig.git"
-RANGER_DIR="~/bin/ranger"
+TIG_BUILD="sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
+
+RANGER_DIR="$HOME/bin/ranger"
 RANGER_GITHUB="https://github.com/hut/ranger.git"
-AG_DIR="~/bin/ag"
+RANGER_BUILD="sudo make install"
+
+AG_DIR="$HOME/bin/ag"
 AG_GITHUB="https://github.com/ggreer/the_silver_searcher.git"
-TMUX_DIR="~/bin/tmux"
+AG_BUILD="sudo apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && ./build.sh && sudo make install"
+
+TMUX_DIR="$HOME/bin/tmux"
 TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
+TMUX_BUILD="sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
 
 clone_or_update() {
   if [ -d "$2" ]
   then
     echo "$2 is exist"
-    echo "Run git pull for $2"
+    echo ">> Run git pull for $2 <<"
     pushd .
     cd $2
     git pull --rebase
@@ -23,21 +31,21 @@ clone_or_update() {
   else
     git clone $1 $2
   fi
-  if [ ! -z $3 ]
+  if [ ! -z "${3}" ]
   then
-    echo "Let's build!"
+    echo ">> Let's build! <<"
     pushd .
-    cd $2
-    ./configure $4
-    make -j32
-    sudo make install
+    echo ">>> Move ${2} <<<"
+    cd ${2}
+    echo ">> Do: ${3} <<"
+    eval ${3}
     popd
   fi
 }
-cp -R ../module/bin/* ~/bin
+cp -R ../module/bin/* $HOME/bin
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
-clone_or_update $TIG_GITHUB $TIG_DIR Y
-clone_or_update $RANGER_GITHUB $RANGER_DIR Y
-clone_or_update $AG_GITHUB $AG_DIR Y
-clone_or_update $TMUX_GITHUB $TMUX_DIR Y
+clone_or_update $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"
+clone_or_update $RANGER_GITHUB $RANGER_DIR "${RANGER_BUILD}"
+clone_or_update $AG_GITHUB $AG_DIR "${AG_BUILD}"
+clone_or_update $TMUX_GITHUB $TMUX_DIR "${TMUX_BUILD}"
 

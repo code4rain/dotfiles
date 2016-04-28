@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "persp-mode" "../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode.el"
-;;;;;;  "7ecdf8553e20c7efd66352a717955c02")
-;;; Generated autoloads from ../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode.el
+;;;### (autoloads nil "persp-mode" "../../../../../.emacs.d/elpa/persp-mode-20160425.2309/persp-mode.el"
+;;;;;;  "804bacde7136f049971be627502bdeba")
+;;; Generated autoloads from ../../../../../.emacs.d/elpa/persp-mode-20160425.2309/persp-mode.el
 
 (autoload 'def-auto-persp "persp-mode" "\
 
@@ -30,9 +30,9 @@ named collections of buffers and window configurations.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode-autoloads.el"
-;;;;;;  "../../../../../.emacs.d/elpa/persp-mode-20160228.2149/persp-mode.el")
-;;;;;;  (22296 32227 642186 746000))
+;;;### (autoloads nil nil ("../../../../../.emacs.d/elpa/persp-mode-20160425.2309/persp-mode-autoloads.el"
+;;;;;;  "../../../../../.emacs.d/elpa/persp-mode-20160425.2309/persp-mode.el")
+;;;;;;  (22303 23061 782108 600000))
 
 ;;;***
 

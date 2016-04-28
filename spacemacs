@@ -39,6 +39,7 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
+     bibtex
      c-c++
      emacs-lisp
      git
@@ -398,6 +399,7 @@ you should place you code here."
   ;; enable org-indent-mode with org-mode
   (add-hook 'org-mode-hook 'my-org-mode-hook)
   (defun my-org-mode-hook ()
+    (require 'org-ref)
     (org-indent-mode 1)
     (focus-mode 1)
     (visual-line-mode))
@@ -412,6 +414,15 @@ you should place you code here."
 	   "* TODO %?\n  %i\n  %a")
 	  ("j" "Journal" entry (file+datetree "~/org/journal.org")
 	   "* %?\nEntered on %U\n  %i\n  %a")))
+  (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
+
+  ;; see org-ref for use of these variables
+  (setq org-ref-bibliography-notes "~/Dropbox/bibliography/notes.org"
+	org-ref-default-bibliography '("~/Dropbox/bibliography/references.bib")
+	org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
+  (setq helm-bibtex-bibliography "~/Dropbox/bibliography/references.bib")
+  (setq helm-bibtex-library-path "~/Dropbox/bibliography/bibtex-pdfs")
+
   ;; ------------ ORG MODE -
 
   ;; olivetti

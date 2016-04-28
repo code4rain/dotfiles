@@ -1,5 +1,4 @@
 #! /usr/bin/env bash
-source color.sh
 OH_MY_ZSH_DIR="$HOME/.oh-my-zsh"
 OH_MY_ZSH_GITHUB="https://github.com/robbyrussell/oh-my-zsh.git"
 
@@ -23,29 +22,48 @@ clone_or_update() {
   if [ -d "$2" ]
   then
     echo "$2 is exist"
+    msg_cyan
     echo ">> Run git pull for $2 <<"
-    pushd .
+    msg_nc
     cd $2
     git pull --rebase
-    popd
   else
     git clone $1 $2
   fi
   if [ ! -z "${3}" ]
   then
+    msg_green
     echo ">> Let's build! <<"
-    pushd .
+    msg_cyan
     echo ">>> Move ${2} <<<"
     cd ${2}
-    echo ">> Do: ${3} <<"
+    msg_blue
+    echo ">> ${3} <<"
+    msg_nc
     eval ${3}
-    popd
+    result=$?
+    if [ "0" != "$result" ]
+    then
+      msg_red
+      echo "Failed!! Result=$result"
+      msg_nc
+      exit 1
+    else
+      msg_green
+      echo "Sucess!! $2 "
+      msg_nc
+    fi
   fi
 }
 cp -R ../module/bin/* $HOME/bin
+source $HOME/bin/color.sh
+pushd .
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
 clone_or_update $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"
 clone_or_update $RANGER_GITHUB $RANGER_DIR "${RANGER_BUILD}"
 clone_or_update $AG_GITHUB $AG_DIR "${AG_BUILD}"
 clone_or_update $TMUX_GITHUB $TMUX_DIR "${TMUX_BUILD}"
-
+popd
+msg_green
+echo "All Success!!"
+msg_nc

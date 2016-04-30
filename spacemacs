@@ -178,7 +178,7 @@ values."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 30
+   dotspacemacs-large-file-size 10
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -193,13 +193,13 @@ values."
    dotspacemacs-helm-no-header nil
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'top
+   dotspacemacs-helm-position 'right
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
    dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.2
+   dotspacemacs-which-key-delay 0.6
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -240,7 +240,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -268,7 +268,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup changed
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -289,18 +289,15 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
-  ;; + Korean Language support +
   (set-language-environment "Korean")
   (prefer-coding-system 'utf-8) ; utf-8 환경 설정
-  ;; - Korean Language support -
 
-  ;; + Evil Key binding +
   ;; quit insert mode by pressing jk
   (setq-default evil-escape-key-sequence "jk")
-
   ;; Kill current buffer
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
-
+  (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
+  (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
   (define-key evil-motion-state-map "j" 'evil-next-visual-line)
   (define-key evil-motion-state-map "k" 'evil-previous-visual-line)
@@ -314,18 +311,22 @@ you should place you code here."
   (define-key evil-insert-state-map "\C-e" 'end-of-line)
   (define-key evil-visual-state-map "\C-e" 'evil-end-of-line)
   (define-key evil-motion-state-map "\C-e" 'evil-end-of-line)
-
   ;; exit with <C-g>
   (global-set-key (kbd "C-g") 'evil-escape)
 
+  ;; tab width set
+  (setq-default tab-width 8)
+  (setq-default c-basic-offset 8)
+  (setq-default indent-tabs-mode t)
+  (setq-default c-default-style "linux")
+
   ;; add helm gtags related keymap
+  (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
-
   (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
-
   (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
@@ -392,11 +393,10 @@ you should place you code here."
      If used with a numeric prefix argument N, N greater-than signs will be inserted."
     (">" ">>" "»" "›" ))
 
-  ;; + quick start +
+  ;; Server Start
   (server-start)
-  ;; - quick start -
 
-  ;; + ORG MODE +
+  ;; ------------ ORG MODE +
   ;; enable org-indent-mode with org-mode
   (add-hook 'org-mode-hook 'my-org-mode-hook)
   (defun my-org-mode-hook ()
@@ -424,9 +424,9 @@ you should place you code here."
   (setq helm-bibtex-bibliography "~/Dropbox/bibliography/references.bib")
   (setq helm-bibtex-library-path "~/Dropbox/bibliography/bibtex-pdfs")
 
-  ;; - ORG MODE -
+  ;; ------------ ORG MODE -
 
-  ;; + olivetti +
+  ;; olivetti
   (defun alex/toggle-write-mode ()
     "Toggle a distraction-free environment for writing."
     (interactive)
@@ -442,22 +442,29 @@ you should place you code here."
 	   (toggle-frame-fullscreen)
 	   (focus-mode 1)
 	   (spacemacs/toggle-line-numbers-off))))
-  ;; - olivetti -
-
-  ;; + Windows spell checker +
+  ;; windows spell checker
   (if (eq system-type 'windows-nt)
     (setq ispell-program-name "C:\\Program Files (x86)\\Aspell\\bin\\aspell.exe")
     (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))
   )
-  ;; - Windows spell checker -
-
-  ;; + Coding Style +
-  (setq-default tab-width 8)
-  (setq-default c-basic-offset 8)
-  (setq-default indent-tabs-mode t)
-  (setq-default c-default-style "linux")
-  ;; - Coding Style -
   )
 
 ;; do not write anything past this comment. this is where emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (helm helm-core async xterm-color web-mode typo tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger pyvenv pytest pyenv-mode py-yapf pip-requirements orgit org-repo-todo org-ref key-chord helm-bibtex biblio parsebib biblio-core org-present org-pomodoro alert log4e gntp org-download olivetti multi-term mmm-mode markdown-toc markdown-mode magit-gitflow live-py-mode less-css-mode jade-mode hy-mode htmlize helm-pydoc helm-gtags helm-gitignore helm-flyspell helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags focus flycheck-pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-c-headers company-auctex company-anaconda company cmake-mode clang-format auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic f ac-ispell auto-complete afternoon-theme ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smooth-scrolling restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox page-break-lines org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word column-enforce-mode clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+ '(tab-width 8))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

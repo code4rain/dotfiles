@@ -27,7 +27,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 " Framework
 Plug 'UltiSnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', {'do': './install.sh'}
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'

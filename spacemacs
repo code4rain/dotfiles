@@ -348,6 +348,7 @@ you should place you code here."
 
   ;; centered-cursor-mode set
   ;; (global-centered-cursor-mode +1)
+  (set-face-background 'hl-line "#402060")
 
   (setq-default line-spacing 3)
   (defun alex/line-spacing-increase()
@@ -392,9 +393,6 @@ you should place you code here."
     "Cycle through the greater-than sign and guillemet quotation marks.
      If used with a numeric prefix argument N, N greater-than signs will be inserted."
     (">" ">>" "»" "›" ))
-
-  ;; Server Start
-  (server-start)
 
   ;; ------------ ORG MODE +
   ;; enable org-indent-mode with org-mode
@@ -456,7 +454,10 @@ you should place you code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(anzu-cons-mode-line-p nil)
+ '(anzu-mode-line-update-function (quote spacemacs/anzu-update-mode-line))
  '(evil-want-Y-yank-to-eol nil)
+ '(global-hl-line-mode t)
  '(package-selected-packages
    (quote
     (helm helm-core async xterm-color web-mode typo tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger pyvenv pytest pyenv-mode py-yapf pip-requirements orgit org-repo-todo org-ref key-chord helm-bibtex biblio parsebib biblio-core org-present org-pomodoro alert log4e gntp org-download olivetti multi-term mmm-mode markdown-toc markdown-mode magit-gitflow live-py-mode less-css-mode jade-mode hy-mode htmlize helm-pydoc helm-gtags helm-gitignore helm-flyspell helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags focus flycheck-pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-c-headers company-auctex company-anaconda company cmake-mode clang-format auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic f ac-ispell auto-complete afternoon-theme ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smooth-scrolling restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox page-break-lines org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word column-enforce-mode clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
@@ -467,4 +468,7 @@ you should place you code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
+ '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
+ '(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro")))))

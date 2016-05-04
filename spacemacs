@@ -101,7 +101,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'hybrid
+   dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -324,13 +324,16 @@ you should place you code here."
   (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
+  (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
   (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
+
   (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
+  (define-key evil-insert-state-map (kbd "C-l") 'helm-mini)
 
   (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
   (evil-ex-define-cmd "W[rite]" 'evil-write)

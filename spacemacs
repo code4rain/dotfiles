@@ -102,7 +102,7 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
    ;; Specify the startup banner. Default value is `official', it displays
@@ -255,7 +255,7 @@ values."
    dotspacemacs-highlight-delimiters 'all
    ;; If non nil advises quit functions to keep server open when quitting.
    ;; (default nil)
-   dotspacemacs-persistent-server nil
+   dotspacemacs-persistent-server t
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.
    ;; (default '("ag" "pt" "ack" "grep"))
@@ -326,6 +326,8 @@ you should place you code here."
   (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
+  (define-key evil-motion-state-map (kbd "C-b") 'bookmark-set)
+  (define-key evil-motion-state-map (kbd "C-S-b") 'bookmark-delete)
   (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
@@ -335,6 +337,12 @@ you should place you code here."
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
   (define-key evil-insert-state-map (kbd "C-l") 'helm-mini)
+
+  (define-key evil-hybrid-state-map (kbd "C-]") 'helm-gtags-find-tag)
+  (define-key evil-hybrid-state-map (kbd "<f7>") 'helm-gtags-select)
+  (define-key evil-hybrid-state-map (kbd "M-o") 'helm-projectile-find-file)
+  (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
+  (define-key evil-hybrid-state-map (kbd "C-l") 'helm-mini)
 
   (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
   (evil-ex-define-cmd "W[rite]" 'evil-write)
@@ -452,6 +460,11 @@ you should place you code here."
 
   ;; tumblr
   (setq tumblesocks-blog "code2write.tumblr.com")
+  ;; helm
+  (setq helm-mini-default-sources '(helm-source-buffers-list
+				    helm-source-recentf
+				    helm-source-bookmarks
+				    helm-source-buffer-not-found))
   )
 
 ;; do not write anything past this comment. this is where emacs will

@@ -146,7 +146,7 @@ values."
    dotspacemacs-leader-key "C-j"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-emacs-leader-key "C-j"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
    dotspacemacs-major-mode-leader-key "C-k"
@@ -491,4 +491,5 @@ you should place you code here."
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
  '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
+ '(evil-search-highlight-persist-mark ((t (:foreground "orange2" :distant-foreground "black"))))
  '(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro")))))

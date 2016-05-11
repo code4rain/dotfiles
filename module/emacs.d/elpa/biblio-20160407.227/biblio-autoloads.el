@@ -71,7 +71,7 @@ Add Dissemin to list of `biblio-selection-mode' actions.
 ;;;***
 
 ;;;### (autoloads nil "biblio-doi" "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-doi.el"
-;;;;;;  "599a39e20eacc1dc0171f25bc262fa91")
+;;;;;;  "4e294aa692d32e806ae258598f0e4432")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-doi.el
 
 (autoload 'doi-insert-bibtex "biblio-doi" "\
@@ -82,7 +82,7 @@ Insert BibTeX entry matching DOI.
 ;;;***
 
 ;;;### (autoloads nil "biblio-hal" "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el"
-;;;;;;  "77e17a9e036fb5af180c2ae2f346dbfe")
+;;;;;;  "61b7755deaad56498c3205d34d9a3002")
 ;;; Generated autoloads from ../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el
 
 (add-hook 'biblio-init-hook #'biblio-hal-backend)
@@ -105,7 +105,7 @@ Start a HAL search for QUERY, prompting if needed.
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-hal.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/biblio-20160407.227/biblio.el")
-;;;;;;  (0 0 0 0))
+;;;;;;  (22323 20438 0 0))
 
 ;;;***
 

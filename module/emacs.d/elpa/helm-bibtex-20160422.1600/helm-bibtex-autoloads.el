@@ -21,7 +21,7 @@ reread.
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex-autoloads.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex-pkg.el"
 ;;;;;;  "../../../../../.emacs.d/elpa/helm-bibtex-20160422.1600/helm-bibtex.el")
-;;;;;;  (0 0 0 0))
+;;;;;;  (22323 20445 0 0))
 
 ;;;***
 

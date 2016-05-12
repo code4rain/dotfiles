@@ -422,9 +422,15 @@ you should place you code here."
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/Dropbox/org/gtd.org" "Tasks")
+<<<<<<< 20c96483d66dbbe92159fa0ed11cca39c7fa5710
 	   "* TODO %?\n  %i  %a")
 	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
 	   "* %?\nEntered on %U\n  %i  %a")))
+=======
+	   "* TODO %?\n  %i\n  %a")
+	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
+	   "* %?\nEntered on %U\n  %i\n  %a")))
+>>>>>>> * spacemacs: update it!
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
 
   ;; see org-ref for use of these variables
@@ -465,12 +471,8 @@ you should place you code here."
 				    helm-source-recentf
 				    helm-source-bookmarks
 				    helm-source-buffer-not-found))
-<<<<<<< ab970f707692825e96dec905107e5299aa1336e7
-  ;; Hangul
-=======
 
   ;; Hangul(한글)
->>>>>>> * spacemacs: update it
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
   (if (daemonp)
@@ -487,13 +489,8 @@ you should place you code here."
     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
 		      '("NanumGothicCoding" . "iso10646-1"))
     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-<<<<<<< ab970f707692825e96dec905107e5299aa1336e7
-		      '("NanumGothicCoding" . "iso10646-1")))
-
-=======
 		      '("NanumGothicCoding" . "iso10646-1"))
     )
->>>>>>> * spacemacs: update it
   )
 
 ;; do not write anything past this comment. this is where emacs will

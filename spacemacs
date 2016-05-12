@@ -418,12 +418,12 @@ you should place you code here."
 			  '(("^ +\\([-*]\\) "
 			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
   (setq org-bullets-bullet-list '("■" "◆" "▼" "●" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "✡" "✽" "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
-  (setq org-default-notes-file "~/org/notes.org")
+  (setq org-default-notes-file "~/Dropbox/org/notes.org")
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
-	'(("t" "Todo" entry (file+headline "~/org/gtd.org" "Tasks")
+	'(("t" "Todo" entry (file+headline "~/Dropbox/org/gtd.org" "Tasks")
 	   "* TODO %?\n  %i\n  %a")
-	  ("j" "Journal" entry (file+datetree "~/org/journal.org")
+	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
 	   "* %?\nEntered on %U\n  %i\n  %a")))
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
 
@@ -465,6 +465,25 @@ you should place you code here."
 				    helm-source-recentf
 				    helm-source-bookmarks
 				    helm-source-buffer-not-found))
+  ;; Hangul
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+
+  (if (daemonp)
+      (progn
+	(add-hook 'after-make-frame-functions
+		  (lambda (frame)
+		    (with-selected-frame frame
+		      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+					'("NanumGothicCoding" . "iso10646-1"))
+		      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+					'("NanumGothicCoding" . "iso10646-1"))
+		      )))
+	)
+    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+		      '("NanumGothicCoding" . "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+		      '("NanumGothicCoding" . "iso10646-1")))
+
   )
 
 ;; do not write anything past this comment. this is where emacs will

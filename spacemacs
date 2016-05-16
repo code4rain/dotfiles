@@ -112,12 +112,12 @@ values."
    ;; List of items to show in the startup buffer. If nil it is disabled.
    ;; Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.
    ;; (default '(recents projects))
-   dotspacemacs-startup-lists '(recents bookmarks todos)
+   dotspacemacs-startup-lists '(recents bookmarks projects todos agenda)
    ;; Number of recent files to show in the startup buffer. Ignored if
    ;; `dotspacemacs-startup-lists' doesn't include `recents'. (default 5)
    dotspacemacs-startup-recent-list-size 5
    ;; Default major mode of the scratch buffer (default `text-mode')
-   dotspacemacs-scratch-mode 'elpa-mode
+   dotspacemacs-scratch-mode 'org-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
@@ -465,7 +465,12 @@ you should place you code here."
 				    helm-source-recentf
 				    helm-source-bookmarks
 				    helm-source-buffer-not-found))
+<<<<<<< ab970f707692825e96dec905107e5299aa1336e7
   ;; Hangul
+=======
+
+  ;; Hangul(한글)
+>>>>>>> * spacemacs: update it
   (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
   (if (daemonp)
@@ -482,8 +487,13 @@ you should place you code here."
     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
 		      '("NanumGothicCoding" . "iso10646-1"))
     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+<<<<<<< ab970f707692825e96dec905107e5299aa1336e7
 		      '("NanumGothicCoding" . "iso10646-1")))
 
+=======
+		      '("NanumGothicCoding" . "iso10646-1"))
+    )
+>>>>>>> * spacemacs: update it
   )
 
 ;; do not write anything past this comment. this is where emacs will
@@ -493,10 +503,6 @@ you should place you code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(helm-selection
-   ((t
-     (:background "MediumPurple4" :distant-foreground "black"))))
- '(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
  '(package-selected-packages
    (quote
     (helm-bibtex xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks toc-org tagedit spacemacs-theme spaceline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-ref org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags focus flyspell-correct flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diff-hl define-word cython-mode company-web company-statistics company-quickhelp company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))

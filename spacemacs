@@ -410,9 +410,9 @@ you should place you code here."
   ;; enable org-indent-mode with org-mode
   (add-hook 'org-mode-hook 'my-org-mode-hook)
   (defun my-org-mode-hook ()
-    (require 'org-ref)
+    ;;(require 'org-ref) ;; If you want this, use M-x.
     (org-indent-mode 1)
-    (focus-mode 1)
+    ;;(focus-mode 1)
     (visual-line-mode))
   (font-lock-add-keywords 'org-mode
 			  '(("^ +\\([-*]\\) "
@@ -422,9 +422,9 @@ you should place you code here."
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/Dropbox/org/gtd.org" "Tasks")
-	   "* TODO %?\n  %i\n  %a")
+	   "* TODO %?\n  %i  %a")
 	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a")))
+	   "* %?\nEntered on %U\n  %i  %a")))
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
 
   ;; see org-ref for use of these variables
@@ -496,8 +496,10 @@ you should place you code here."
  '(helm-selection
    ((t
      (:background "MediumPurple4" :distant-foreground "black"))))
- '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
- )
+ '(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
+ '(package-selected-packages
+   (quote
+    (helm-bibtex xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks toc-org tagedit spacemacs-theme spaceline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox page-break-lines orgit org-repo-todo org-ref org-present org-pomodoro org-plus-contrib org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags focus flyspell-correct flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diff-hl define-word cython-mode company-web company-statistics company-quickhelp company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile auctex-latexmk aggressive-indent afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

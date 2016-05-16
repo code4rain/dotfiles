@@ -115,9 +115,6 @@ It runs `tabulated-list-revert-hook', then calls `tabulated-list-print'."
 
 ;; important for golden-ratio to better work
 (setq window-combination-resize t)
-;; fringes
-(setq-default fringe-indicator-alist
-              '((truncation . nil) (continuation . nil)))
 ;; Show column number in mode line
 (setq column-number-mode t)
 ;; Activate linum-mode in all prog-mode and text-mode buffers if the setting is
@@ -191,7 +188,7 @@ It runs `tabulated-list-revert-hook', then calls `tabulated-list-print'."
       eval-expression-print-level nil)
 
 ;; cache files
-(setq tramp-persistency-file-name (concat spacemacs-cache-directory "tramp/"))
+(setq tramp-persistency-file-name (concat spacemacs-cache-directory "tramp"))
 
 ;; seems pointless to warn. There's always undo.
 (put 'narrow-to-region 'disabled nil)

@@ -37,6 +37,9 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (ranger :variables ranger-show-preview t)
+     (shell :variables shell-default-height 30 shell-default-position 'bottom)
+     (typography :variables typography-enable-typographic-editing t)
      auto-completion
      better-defaults
      bibtex
@@ -44,20 +47,14 @@ values."
      emacs-lisp
      git
      gtags
+     helm
      html
      latex
      markdown
      org
-     (ranger :variables
-	     ranger-show-preview t)
      python
-     spacemacs-helm
-     (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom)
-     syntax-checking
      spell-checking
-     (typography :variables typography-enable-typographic-editing t)
+     syntax-checking
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -138,10 +135,10 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.3)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "C-j"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -165,6 +162,9 @@ values."
    dotspacemacs-distinguish-gui-tab nil
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
    dotspacemacs-remap-Y-to-y$ nil
+   ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
+   ;; there. (default t)
+   dotspacemacs-retain-visual-state-on-shift t
    ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
    ;; (default nil)
    dotspacemacs-ex-substitute-global nil
@@ -200,7 +200,7 @@ values."
    dotspacemacs-enable-paste-transient-state t
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
-   dotspacemacs-which-key-delay 0.6
+   dotspacemacs-which-key-delay 0.4
    ;; Which-key frame position. Possible values are `right', `bottom' and
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
@@ -209,7 +209,7 @@ values."
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar nil
+   dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
    dotspacemacs-fullscreen-at-startup nil
@@ -493,14 +493,11 @@ you should place you code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(anzu-cons-mode-line-p nil)
- '(anzu-mode-line-update-function (quote spacemacs/anzu-update-mode-line))
- '(evil-want-Y-yank-to-eol nil)
- '(global-hl-line-mode t)
- '(package-selected-packages
-   (quote
-    (bind-map projectile hydra tumblesocks oauth powerline smartparens evil avy dash s helm helm-core async xterm-color web-mode typo tagedit smeargle slim-mode shell-pop scss-mode sass-mode ranger pyvenv pytest pyenv-mode py-yapf pip-requirements orgit org-repo-todo org-ref key-chord helm-bibtex biblio parsebib biblio-core org-present org-pomodoro alert log4e gntp org-download olivetti multi-term mmm-mode markdown-toc markdown-mode magit-gitflow live-py-mode less-css-mode jade-mode hy-mode htmlize helm-pydoc helm-gtags helm-gitignore helm-flyspell helm-css-scss helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags focus flycheck-pos-tip flycheck evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-statistics company-quickhelp pos-tip company-c-headers company-auctex company-anaconda company cmake-mode clang-format auto-yasnippet yasnippet auto-dictionary auctex-latexmk auctex anaconda-mode pythonic f ac-ispell auto-complete afternoon-theme ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spacemacs-theme spaceline smooth-scrolling restart-emacs request rainbow-delimiters quelpa popwin persp-mode pcre2el paradox page-break-lines org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint leuven-theme info+ indent-guide ido-vertical-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word column-enforce-mode clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
- '(tab-width 8))
+ '(helm-selection
+   ((t
+     (:background "MediumPurple4" :distant-foreground "black"))))
+ '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

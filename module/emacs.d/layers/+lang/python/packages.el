@@ -99,13 +99,13 @@
 (defun python/post-init-flycheck ()
   (spacemacs/add-flycheck-hook 'python-mode))
 
-(when (configuration-layer/layer-usedp 'spacemacs-helm)
+(when (configuration-layer/layer-usedp 'helm)
   (defun python/pre-init-helm-cscope ()
     (spacemacs|use-package-add-hook xcscope
       :post-init
       (spacemacs/setup-helm-cscope 'python-mode))))
 
-(when (configuration-layer/layer-usedp 'spacemacs-helm)
+(when (configuration-layer/layer-usedp 'helm)
   (defun python/init-helm-pydoc ()
     (use-package helm-pydoc
       :defer t
@@ -261,9 +261,9 @@
         (setq indent-tabs-mode t))
 
       (add-hook 'inferior-python-mode-hook #'inferior-python-setup-hook)
-      (spacemacs/add-all-to-hook 'python-mode-hook
-                                 'python-default
-                                 'python-setup-shell))
+      (add-hook 'python-mode-hook #'python-default)
+      ;; call `python-setup-shell' once, don't put it in a hook (see issue #5988)
+      (python-setup-shell))
     :config
     (progn
       ;; add support for `ahs-range-beginning-of-defun' for python-mode

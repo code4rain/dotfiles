@@ -27,6 +27,7 @@
         smooth-scrolling
         (term :location built-in)
         xterm-color
+        vi-tilde-fringe
         ))
 
 (defun shell/init-comint ()
@@ -186,7 +187,7 @@ is achieved by adding the relevant text properties."
     (with-eval-after-load 'eshell
       (require 'eshell-z))))
 
-(when (configuration-layer/layer-usedp 'spacemacs-helm)
+(when (configuration-layer/layer-usedp 'helm)
   (defun shell/pre-init-helm ()
     (spacemacs|use-package-add-hook helm
       :post-init
@@ -289,7 +290,7 @@ is achieved by adding the relevant text properties."
       (setq shell-pop-window-position shell-default-position
             shell-pop-window-size     shell-default-height
             shell-pop-term-shell      shell-default-term-shell
-            shell-pop-full-span t)
+            shell-pop-full-span       shell-default-full-span)
       (make-shell-pop-command eshell)
       (make-shell-pop-command shell)
       (make-shell-pop-command term shell-pop-term-shell)
@@ -347,3 +348,10 @@ is achieved by adding the relevant text properties."
             (remove 'ansi-color-process-output comint-output-filter-functions))
       (setq font-lock-unfontify-region-function 'xterm-color-unfontify-region)
       (add-hook 'eshell-mode-hook 'spacemacs/init-eshell-xterm-color))))
+
+(defun shell/post-init-vi-tilde-fringe ()
+  (spacemacs/add-to-hooks 'spacemacs/disable-vi-tilde-fringe
+                          '(comint-mode-hook
+                            eshell-mode-hook
+                            shell-mode-hook
+                            term-mode-hook)))

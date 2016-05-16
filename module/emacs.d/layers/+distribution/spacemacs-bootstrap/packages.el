@@ -11,12 +11,14 @@
 
 (setq spacemacs-bootstrap-packages
       '(
+        (async :step bootstrap)
         (bind-map :step bootstrap)
         (bind-key :step bootstrap)
-        (dash :step bootstrap)
+        (diminish :step bootstrap)
         (evil :step bootstrap)
         (f :step bootstrap)
         (hydra :step bootstrap)
+        (page-break-lines :step bootstrap)
         (s :step bootstrap)
         (use-package :step bootstrap)
         (which-key :step bootstrap)
@@ -24,7 +26,11 @@
 
 ;; Note: `use-package' cannot be used for bootstrap packages configuration
 
+(defun spacemacs-bootstrap/init-async ())
+
 (defun spacemacs-bootstrap/init-bind-key ())
+
+(defun spacemacs-bootstrap/init-diminish ())
 
 (defun spacemacs-bootstrap/init-bind-map ()
   (require 'bind-map)
@@ -108,8 +114,9 @@
   (add-hook 'after-change-major-mode-hook 'spacemacs//set-evil-shift-width 'append)
 
   ;; Keep the region active when shifting
-  (evil-map visual "<" "<gv")
-  (evil-map visual ">" ">gv")
+  (when dotspacemacs-retain-visual-state-on-shift
+    (evil-map visual "<" "<gv")
+    (evil-map visual ">" ">gv"))
 
   ;; move selection up and down
   (define-key evil-visual-state-map "J" (concat ":m '>+1" (kbd "RET") "gv=gv"))
@@ -218,6 +225,11 @@
   (require 'hydra)
   (setq hydra-key-doc-function 'spacemacs//hydra-key-doc-function
         hydra-head-format "[%s] "))
+
+(defun spacemacs-bootstrap/init-page-break-lines ()
+  (require 'page-break-lines)
+  (global-page-break-lines-mode t)
+  (spacemacs|hide-lighter page-break-lines-mode))
 
 (defun spacemacs-bootstrap/init-use-package ()
   (require 'use-package)

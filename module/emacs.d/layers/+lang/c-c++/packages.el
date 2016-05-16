@@ -33,7 +33,7 @@
   (use-package cc-mode
     :defer t
     :init
-    (add-to-list 'auto-mode-alist `("\\.h$" . ,c-c++-default-mode-for-headers))
+    (add-to-list 'auto-mode-alist `("\\.h\\'" . ,c-c++-default-mode-for-headers))
     :config
     (progn
       (require 'compile)
@@ -102,7 +102,7 @@
      ;; Non-nil means display source file containing the main routine at startup
      gdb-show-main t)))
 
-(when (configuration-layer/layer-usedp 'spacemacs-helm)
+(when (configuration-layer/layer-usedp 'helm)
   (defun c-c++/post-init-helm-gtags ()
     (spacemacs/helm-gtags-define-keys-for-mode 'c-mode)
     (spacemacs/helm-gtags-define-keys-for-mode 'c++-mode)))
@@ -133,7 +133,7 @@
     (dolist (mode '(c-mode c++-mode))
       (spacemacs/set-leader-keys-for-major-mode mode "gi" 'cscope-index-files))))
 
-(when (configuration-layer/layer-usedp 'spacemacs-helm)
+(when (configuration-layer/layer-usedp 'helm)
   (defun c-c++/pre-init-helm-cscope ()
     (spacemacs|use-package-add-hook xcscope
       :post-init

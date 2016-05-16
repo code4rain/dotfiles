@@ -58,16 +58,19 @@
                   #b00000000)))
 
       (flycheck-define-error-level 'error
+        :severity 2
         :overlay-category 'flycheck-error-overlay
         :fringe-bitmap 'my-flycheck-fringe-indicator
         :fringe-face 'flycheck-fringe-error)
 
       (flycheck-define-error-level 'warning
+        :severity 1
         :overlay-category 'flycheck-warning-overlay
         :fringe-bitmap 'my-flycheck-fringe-indicator
         :fringe-face 'flycheck-fringe-warning)
 
       (flycheck-define-error-level 'info
+        :severity 0
         :overlay-category 'flycheck-info-overlay
         :fringe-bitmap 'my-flycheck-fringe-indicator
         :fringe-face 'flycheck-fringe-info)
@@ -85,8 +88,8 @@ If the error list is visible, hide it.  Otherwise, show it."
         "Open and go to the error list buffer."
         (interactive)
         (unless (get-buffer-window (get-buffer flycheck-error-list-buffer))
-          (flycheck-list-errors))
-        (switch-to-buffer-other-window flycheck-error-list-buffer))
+          (flycheck-list-errors)
+          (switch-to-buffer-other-window flycheck-error-list-buffer)))
 
       (evilified-state-evilify-map flycheck-error-list-mode-map
         :mode flycheck-error-list-mode

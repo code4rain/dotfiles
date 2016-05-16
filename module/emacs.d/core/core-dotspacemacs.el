@@ -159,6 +159,10 @@ size to make separators look not too crappy.")
 (defvar dotspacemacs-remap-Y-to-y$ nil
   "If non nil `Y' is remapped to `y$' in Evil states.")
 
+(defvar dotspacemacs-retain-visual-state-on-shift t
+  "If non-nil, the shift mappings `<' and `>' retain visual state
+if used there.")
+
 (defvar dotspacemacs-ex-substitute-global nil
   "If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.")
 
@@ -388,6 +392,7 @@ Called with `C-u C-u' skips `dotspacemacs/user-config' _and_ preleminary tests."
                                      "function has been skipped)."))
                   (dotspacemacs|call-func dotspacemacs/user-config
                                           "Calling dotfile user config...")
+                  (run-hooks 'spacemacs-post-user-config-hook)
                   (message "Done.")))
             (switch-to-buffer-other-window dotspacemacs-test-results-buffer)
             (spacemacs-buffer/warning "Some tests failed, check `%s' buffer"
@@ -467,13 +472,13 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
                    (,(concat "A minimalist distribution that you can build on "
                              "(spacemacs-base)")
                     spacemacs-base)))))
-             ("spacemacs-helm"
+             ("helm"
               ,(dotspacemacs//ido-completing-read
                 "What type of completion framework do you want? "
                 '(("A heavy one but full-featured (helm)"
-                   "spacemacs-helm")
+                   "helm")
                   ("A lighter one but still very powerful (ivy)"
-                   "spacemacs-ivy")
+                   "ivy")
                   ;; For now, None works only if the user selected
                   ;; the spacemacs-base distribution
                   ("None (not recommended)" ""))))))))
@@ -492,7 +497,8 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
         (when install
           (write-file dotspacemacs-filepath)
           (message "%s has been installed." dotspacemacs-filepath)
-          t)))))
+          t))))
+  (load-file dotspacemacs-filepath))
 
 (defun dotspacemacs//install-and-replace (&optional values)
   "Install the dotfile and replace its content according to VALUES.

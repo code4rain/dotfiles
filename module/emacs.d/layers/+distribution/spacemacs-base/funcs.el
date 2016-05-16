@@ -59,12 +59,12 @@
   (interactive)
   (call-interactively
    (cond
-    ((and (configuration-layer/layer-usedp 'spacemacs-helm)
+    ((and (configuration-layer/layer-usedp 'helm)
           (eq major-mode 'org-mode))
      'helm-org-in-buffer-headings)
-    ((configuration-layer/layer-usedp 'spacemacs-helm)
+    ((configuration-layer/layer-usedp 'helm)
      'helm-semantic-or-imenu)
-    ((configuration-layer/layer-usedp 'spacemacs-ivy)
+    ((configuration-layer/layer-usedp 'ivy)
      'counsel-imenu)
     (t 'imenu))))
 
@@ -131,6 +131,16 @@ the current state and point position."
   "Threshold (# chars) over which indentation does not automatically occur."
   :type 'number
   :group 'spacemacs)
+
+(defcustom spacemacs-large-file-modes-list
+  '(archive-mode tar-mode jka-compr git-commit-mode image-mode
+                 doc-view-mode doc-view-mode-maybe ebrowse-tree-mode
+                 pdf-view-mode)
+  "Major modes which `spacemacs/check-large-file' will not be
+automatically applied to."
+  :group 'spacemacs
+  :type '(list symbol))
+
 
 (defun spacemacs/indent-region-or-buffer ()
   "Indent a region if selected, otherwise the whole buffer."
@@ -324,8 +334,10 @@ argument takes the kindows rotate backwards."
 ;; check when opening large files - literal file open
 (defun spacemacs/check-large-file ()
   (let ((size (nth 7 (file-attributes (buffer-file-name)))))
-    (when (and size (> size (* 1024 1024 dotspacemacs-large-file-size))
-               (y-or-n-p "This is a large file, open literally to avoid performance issues?"))
+    (when (and
+           (not (memq major-mode spacemacs-large-file-modes-list))
+           size (> size (* 1024 1024 dotspacemacs-large-file-size))
+           (y-or-n-p "This is a large file, open literally to avoid performance issues?"))
       (setq buffer-read-only t)
       (buffer-disable-undo)
       (fundamental-mode))))
@@ -894,5 +906,6 @@ is nonempty."
 (defun spacemacs/close-compilation-window ()
   "Close the window containing the '*compilation*' buffer."
   (interactive)
-  (delete-windows-on "*compilation*"))
+  (when compilation-last-buffer
+    (delete-windows-on compilation-last-buffer)))
 

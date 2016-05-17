@@ -422,15 +422,10 @@ you should place you code here."
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/Dropbox/org/gtd.org" "Tasks")
-<<<<<<< 20c96483d66dbbe92159fa0ed11cca39c7fa5710
 	   "* TODO %?\n  %i  %a")
 	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
 	   "* %?\nEntered on %U\n  %i  %a")))
-=======
-	   "* TODO %?\n  %i\n  %a")
-	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a")))
->>>>>>> * spacemacs: update it!
+
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
 
   ;; see org-ref for use of these variables

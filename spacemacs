@@ -494,6 +494,66 @@ you should place you code here."
     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
 		      '("NanumGothicCoding" . "iso10646-1"))
     )
+  ;; C mode hack
+  (defun my-c-mode-font-lock-if0 (limit)
+    (save-restriction
+      (widen)
+      (save-excursion
+	(goto-char (point-min))
+	(let ((depth 0) str start start-depth)
+	  (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
+	    (setq str (match-string 1))
+	    (if (string= str "if")
+		(progn
+		  (setq depth (1+ depth))
+		  (when (and (null start) (looking-at "\\s-+0"))
+		    (setq start (match-end 0)
+			  start-depth depth)))
+	      (when (and start (= depth start-depth))
+		(c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
+		(setq start nil))
+	      (when (string= str "endif")
+		(setq depth (1- depth)))))
+	  (when (and start (> depth 0))
+	    (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
+    nil)
+
+  (defun my-c-mode-common-hook ()
+    (font-lock-add-keywords
+     nil
+     '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
+
+  (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+  ;;
+  (add-hook 'c-mode-common-hook
+	    (lambda ()
+	      (font-lock-add-keywords nil
+				      '(("\\<\\(FIXME\\|TODO\\|HACK\\|fixme\\|todo\\|hack\\)" 1 
+					 font-lock-warning-face t)))))
+  (font-lock-add-keywords
+   'c-mode
+   '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+  (global-set-key [C-down-mouse-1] nil)
+  (global-set-key [C-mouse-1] 'helm-gtags-dwim)
+
+  (defun helm-select-candidate-by-mouse (prefix event)
+    "Select helm candidate by using mouse(click).  With PREFIX, also execute its first action."
+    (interactive "P\ne")
+    (if (helm-alive-p)
+	(progn
+	  (with-helm-buffer
+	    (let* ((posn (elt event 1))
+		   (cursor (line-number-at-pos (point)))
+		   (pointer (line-number-at-pos (posn-point posn))))
+	      (helm--next-or-previous-line (if (> pointer cursor)
+					       'next
+					     'previous)
+					   (abs (- pointer cursor)))))
+	  (when prefix (helm-maybe-exit-minibuffer)))
+      (mouse-drag-region event)))
+
+  (bind-key* "<down-mouse-1>" #'helm-select-candidate-by-mouse())
+  (bind-key* "<mouse-1>" #'ignore)
   )
 
 ;; do not write anything past this comment. this is where emacs will

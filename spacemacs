@@ -325,28 +325,33 @@ you should place you code here."
   (setq-default indent-tabs-mode t)
   (setq-default c-default-style "linux")
 
-  ;; add helm gtags related keymap
+  ;; Evil keymap
   (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
   (define-key evil-motion-state-map (kbd "C-b") 'bookmark-set)
   (define-key evil-motion-state-map (kbd "C-S-b") 'bookmark-delete)
+  (define-key evil-motion-state-map (kbd "M-l") 'helm-gtags-parse-file)
+
   (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
+  (define-key evil-visual-state-map (kbd "M-l") 'helm-gtags-parse-file)
 
   (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
   (define-key evil-insert-state-map (kbd "C-l") 'helm-mini)
+  (define-key evil-insert-state-map (kbd "M-l") 'helm-gtags-parse-file)
 
   (define-key evil-hybrid-state-map (kbd "C-]") 'helm-gtags-find-tag)
   (define-key evil-hybrid-state-map (kbd "<f7>") 'helm-gtags-select)
   (define-key evil-hybrid-state-map (kbd "M-o") 'helm-projectile-find-file)
   (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
   (define-key evil-hybrid-state-map (kbd "C-l") 'helm-mini)
+  (define-key evil-hybrid-state-map (kbd "M-l") 'helm-gtags-parse-file)
 
   (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
   (evil-ex-define-cmd "W[rite]" 'evil-write)

@@ -512,5 +512,5 @@ you should place you code here."
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
  '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
- '(evil-search-highlight-persist-mark ((t (:foreground "orange2" :distant-foreground "black"))))
- '(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro")))))
+ '(evil-search-highlight-persist-highlight ((t (:foreground "orange3" :distant-foreground "black"))))
+ )

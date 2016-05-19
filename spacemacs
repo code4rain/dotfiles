@@ -142,7 +142,7 @@ values."
 >>>>>>> emacs: update packages
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.3)
    ;; The leader key
    dotspacemacs-leader-key "C-j"
    ;; The leader key accessible in `emacs state' and `insert state'

@@ -16,7 +16,7 @@ Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
-Plug 'kana/vim-textobj-entire'
+"Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
 
 " UI (Colorscheme and so on)

@@ -135,11 +135,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-<<<<<<< a9f2dceed655bb180c5d23fbeab1f079be5d6c04
                                :size 20
-=======
-                               :size 13
->>>>>>> emacs: update packages
                                :weight normal
                                :width normal
                                :powerline-scale 1.3)
@@ -371,7 +367,7 @@ you should place you code here."
   ;; (global-centered-cursor-mode +1)
   (set-face-background 'hl-line "#402060")
 
-  (setq-default line-spacing 3)
+  (setq-default line-spacing 8)
   (defun alex/line-spacing-increase()
     (interactive)
     (setq line-spacing (min 40
@@ -431,9 +427,9 @@ you should place you code here."
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
 	'(("t" "Todo" entry (file+headline "~/Dropbox/org/gtd.org" "Tasks")
-	   "* TODO %?\n  %i\n  %a")
+	   "* TODO %?\n  %i  %a")
 	  ("j" "Journal" entry (file+datetree "~/Dropbox/org/journal.org")
-	   "* %?\nEntered on %U\n  %i\n  %a")))
+	   "* %?\nEntered on %U\n  %i  %a")))
   (setq reftex-default-bibliography '("~/Dropbox/bibliography/references.bib"))
 
   ;; see org-ref for use of these variables
@@ -528,7 +524,7 @@ you should place you code here."
   (add-hook 'c-mode-common-hook
 	    (lambda ()
 	      (font-lock-add-keywords nil
-				      '(("\\<\\(FIXME\\|TODO\\|HACK\\|fixme\\|todo\\|hack\\)" 1 
+				      '(("\\<\\(FIXME\\|TODO\\|HACK\\|fixme\\|todo\\|hack\\)" 1
 					 font-lock-warning-face t)))))
   (font-lock-add-keywords
    'c-mode
@@ -570,4 +566,7 @@ you should place you code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
+ '(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
+ '(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro")))))

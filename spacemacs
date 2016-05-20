@@ -135,7 +135,7 @@ values."
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 14
+                               :size 20
                                :weight normal
                                :width normal
                                :powerline-scale 1.3)
@@ -507,5 +507,5 @@ you should place you code here."
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
  '(helm-source-header ((t (:foreground "goldenrod" :underline t :slant italic))))
- '(evil-search-highlight-persist-highlight ((t (:foreground "orange3" :distant-foreground "black"))))
+ '(evil-search-highlight-persist-highlight-face ((t (:foreground "orange3" :distant-foreground "black"))))
  )

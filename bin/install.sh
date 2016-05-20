@@ -59,7 +59,7 @@ clone_or_update() {
 }
 # Check essential
 sudo apt-get install build-essential automake libncurses5-dev
-cp -R $DOT_DIR/module/bin/* $HOME/bin
+cp -r $DOT_DIR/module/bin/* $HOME/bin
 source $HOME/bin/color.sh
 pushd .
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR

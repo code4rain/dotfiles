@@ -171,3 +171,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 if [ -f ~/.sdb/.sdb-completion.bash ]; then
  source ~/.sdb/.sdb-completion.bash
 fi
+export PATH=/home/alex.jang/@Work/ahbuild:$PATH
+export BOOT_COMPILE_64=/opt/toolchains/arm-eabi-4.9/bin/aarch64-linux-android-
+export BOOT_COMPILE_32=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-

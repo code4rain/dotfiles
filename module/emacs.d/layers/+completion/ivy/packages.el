@@ -10,18 +10,34 @@
 ;;; License: GPLv3
 
 (setq ivy-packages
-      '(auto-highlight-symbol
+      '(
+        auto-highlight-symbol
         counsel
+        (counsel-projectile :toggle (configuration-layer/package-usedp 'projectile))
         evil
         flx
+        helm-make
         ivy
+        ivy-hydra
         (ivy-spacemacs-help :location local)
-        ;; Why do we need this ?
-        pcre2el
+        persp-mode
         projectile
         smex
         swiper
-        wgrep))
+        wgrep
+        ))
+
+(defun ivy/pre-init-auto-highlight-symbol ()
+  (spacemacs|use-package-add-hook auto-highlight-symbol
+    :post-init
+    ;; add some functions to ahs transient states
+    (setq spacemacs--symbol-highlight-transient-state-doc
+          (concat spacemacs--symbol-highlight-transient-state-doc
+                  "  [_b_] search buffers [_/_] search proj [_f_] search files")
+          spacemacs-symbol-highlight-transient-state-add-bindings
+          '(("/" spacemacs/search-project-auto-region-or-symbol :exit t)
+            ("b" spacemacs/swiper-all-region-or-symbol :exit t)
+            ("f" spacemacs/search-auto-region-or-symbol :exit t)))))
 
 (defun ivy/init-counsel ()
   (use-package counsel
@@ -71,6 +87,12 @@
         "skF" 'spacemacs/search-ack-region-or-symbol
         "skp" 'spacemacs/search-project-ack
         "skP" 'spacemacs/search-project-ack-region-or-symbol)
+
+      ;; set additional ivy actions
+      (ivy-set-actions
+       'counsel-find-file
+       spacemacs--ivy-file-actions)
+
       ;; remaps built-in commands that have a counsel replacement
       (counsel-mode 1)
       (spacemacs|hide-lighter counsel-mode)
@@ -79,15 +101,37 @@
       ;; Set syntax highlighting for counsel search results
       (ivy-set-display-transformer 'spacemacs/counsel-search 'counsel-git-grep-transformer))))
 
-(defun ivy/post-init-auto-highlight-symbol ()
-  (setq spacemacs-symbol-highlight-transient-state-remove-bindings
-        '("/" "b" "f"))
-  (setq spacemacs-symbol-highlight-transient-state-add-bindings
-        '(("/" spacemacs/search-project-auto-region-or-symbol :exit t)
-          ("b" spacemacs/swiper-all-region-or-symbol :exit t)
-          ("f" spacemacs/search-auto-region-or-symbol :exit t))))
+(defun ivy/init-counsel-projectile ()
+  (use-package counsel-projectile
+    :defer t
+    :init
+    ;; overwrite projectile settings
+    (spacemacs|use-package-add-hook projectile
+      :post-init
+      (progn
+        (setq projectile-switch-project-action 'counsel-projectile-find-file)
+        (spacemacs/set-leader-keys
+          "pb" 'counsel-projectile-switch-to-buffer
+          "pd" 'counsel-projectile-find-dir
+          "pp" 'counsel-projectile
+          "pf" 'counsel-projectile-find-file
+          "pr" 'projectile-recentf)))))
+
+(defun ivy/post-init-evil ()
+  (spacemacs/set-leader-keys
+    "re" 'spacemacs/ivy-evil-registers))
 
 (defun ivy/init-flx ())
+
+(defun ivy/init-helm-make ()
+  (use-package helm-make
+    :defer t
+    :init
+    (progn
+      (setq helm-make-completion-method 'ivy)
+      (spacemacs/set-leader-keys
+        "cc" 'helm-make-projectile
+        "cm" 'helm-make))))
 
 (defun ivy/init-ivy ()
   (use-package ivy
@@ -104,6 +148,12 @@
         "fr" 'ivy-recentf
         "rl" 'ivy-resume
         "bb" 'ivy-switch-buffer)
+
+      ;; custom actions for recentf
+      (ivy-set-actions
+       'ivy-recentf
+       spacemacs--ivy-file-actions)
+
       (ivy-mode 1)
       (global-set-key (kbd "C-c C-r") 'ivy-resume)
       (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -113,24 +163,24 @@
                      'spacemacs//counsel-occur)
       (spacemacs/set-leader-keys-for-major-mode 'ivy-occur-grep-mode
         "w" 'ivy-wgrep-change-to-wgrep-mode)
-      ;; Perspectives support
-      (ivy-set-actions
-       'spacemacs/ivy-perspectives
-       '(("c" persp-kill-without-buffers "Close perspective(s)")
-         ("k" persp-kill  "Kill perspective(s)")))
-      (setq spacemacs-layouts-transient-state-remove-bindings
-            '("b" "l" "C" "X"))
-      (setq spacemacs-layouts-transient-state-add-bindings
-            '(("b" spacemacs/ivy-persp-buffer)
-              ("l" spacemacs/ivy-perspectives)
-              ("C" spacemacs/ivy-persp-close-other :exit t)
-              ("X" spacemacs/ivy-persp-kill-other :exit t)))
       ;; Why do we do this ?
       (ido-mode -1))))
 
-;; Why do we need this ?
-(defun ivy/init-pcre2el ()
-  (use-package pcre2el :defer t))
+(defun ivy/init-ivy-hydra ()
+  (use-package ivy-hydra))
+
+(defun ivy/post-init-persp-mode ()
+  (ivy-set-actions
+   'spacemacs/ivy-spacemacs-layouts
+   '(("c" persp-kill-without-buffers "Close layout(s)")
+     ("k" persp-kill  "Kill layout(s)")))
+  (setq spacemacs-layouts-transient-state-remove-bindings
+        '("b" "l" "C" "X"))
+  (setq spacemacs-layouts-transient-state-add-bindings
+        '(("b" spacemacs/ivy-spacemacs-layout-buffer)
+          ("l" spacemacs/ivy-spacemacs-layouts)
+          ("C" spacemacs/ivy-spacemacs-layout-close-other :exit t)
+          ("X" spacemacs/ivy-spacemacs-layout-kill-other :exit t))))
 
 (defun ivy/post-init-projectile ()
   (setq projectile-completion-system 'ivy)

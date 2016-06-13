@@ -19,13 +19,13 @@
     (company-ghci :toggle (and (configuration-layer/package-usedp 'company)
                                (not haskell-enable-ghc-mod-support)))
     flycheck
-    flycheck-haskell
+    (flycheck-haskell :toggle (configuration-layer/package-usedp 'flycheck))
     ghc
     haskell-mode
     haskell-snippets
-    helm-hoogle
+    (helm-hoogle :toggle (configuration-layer/package-usedp 'helm))
     hindent
-    shm
+    hlint-refactor
     ))
 
 (defun haskell/init-cmm-mode ()
@@ -56,23 +56,20 @@
     (push '(company-cabal)
           company-backends-haskell-cabal-mode)))
 
-(when (configuration-layer/layer-usedp 'helm)
-  (defun haskell/init-helm-hoogle ()
-    (use-package helm-hoogle
-      :defer t
-      :init
-      (dolist (mode haskell-modes)
-        (spacemacs/set-leader-keys-for-major-mode mode "hf" 'helm-hoogle)))))
+(defun haskell/init-helm-hoogle ()
+  (use-package helm-hoogle
+    :defer t
+    :init
+    (dolist (mode haskell-modes)
+      (spacemacs/set-leader-keys-for-major-mode mode "hf" 'helm-hoogle))))
 
 (defun haskell/post-init-flycheck ()
   (spacemacs/add-flycheck-hook 'haskell-mode))
 
-(when (configuration-layer/layer-usedp 'syntax-checking)
-  (defun haskell/init-flycheck-haskell ()
-    (use-package flycheck-haskell
-      :if (configuration-layer/package-usedp 'flycheck)
-      :commands flycheck-haskell-configure
-      :init (add-hook 'flycheck-mode-hook 'flycheck-haskell-configure))))
+(defun haskell/init-flycheck-haskell ()
+  (use-package flycheck-haskell
+    :commands flycheck-haskell-configure
+    :init (add-hook 'flycheck-mode-hook 'flycheck-haskell-configure)))
 
 (defun haskell/init-ghc ()
   (use-package ghc
@@ -91,8 +88,10 @@
           "me" 'ghc-expand-th
           "mn" 'ghc-goto-next-hole
           "mp" 'ghc-goto-prev-hole
-          "m>"  'ghc-make-indent-deeper
-          "m<"  'ghc-make-indent-shallower))
+          "m>" 'ghc-make-indent-deeper
+          "m<" 'ghc-make-indent-shallower
+          "hi" 'ghc-show-info
+          "ht" 'ghc-show-type))
       (when (configuration-layer/package-usedp 'flycheck)
         ;; remove overlays from ghc-check.el if flycheck is enabled
         (set-face-attribute 'ghc-face-error nil :underline nil)
@@ -113,8 +112,6 @@
      ;; Use notify.el (if you have it installed) at the end of running
      ;; Cabal commands or generally things worth notifying.
      haskell-notify-p t
-     ;; To enable tags generation on save.
-     haskell-tags-on-save t
      ;; Remove annoying error popups
      haskell-interactive-popup-errors nil
      ;; Better import handling
@@ -129,10 +126,7 @@
       (defun spacemacs/init-haskell-mode ()
         ;; use only internal indentation system from haskell
         (if (fboundp 'electric-indent-local-mode)
-            (electric-indent-local-mode -1))
-        (when haskell-enable-shm-support
-          ;; in structured-haskell-mode line highlighting creates noise
-          (setq-local global-hl-line-mode nil)))
+            (electric-indent-local-mode -1)))
 
       (defun spacemacs/haskell-interactive-bring ()
         "Bring up the interactive mode for this session without
@@ -188,14 +182,30 @@
           "hT"  'spacemacs/haskell-process-do-type-on-prev-line
           "hy"  'hayoo
 
-          "dd"  'haskell-debug
+          "da"  'haskell-debug/abandon
           "db"  'haskell-debug/break-on-function
-          "dn"  'haskell-debug/next
-          "dN"  'haskell-debug/previous
           "dB"  'haskell-debug/delete
           "dc"  'haskell-debug/continue
-          "da"  'haskell-debug/abandon
-          "dr"  'haskell-debug/refresh))
+          "dd"  'haskell-debug
+          "dn"  'haskell-debug/next
+          "dN"  'haskell-debug/previous
+          "dp"  'haskell-debug/previous
+          "dr"  'haskell-debug/refresh
+          "ds"  'haskell-debug/step
+          "dt"  'haskell-debug/trace))
+
+      (evilified-state-evilify haskell-debug-mode haskell-debug-mode-map
+        "RET" 'haskell-debug/select
+        "a" 'haskell-debug/abandon
+        "b" 'haskell-debug/break-on-function
+        "c" 'haskell-debug/continue
+        "d" 'haskell-debug/delete
+        "n" 'haskell-debug/next
+        "N" 'haskell-debug/previous
+        "p" 'haskell-debug/previous
+        "r" 'haskell-debug/refresh
+        "s" 'haskell-debug/step
+        "t" 'haskell-debug/trace)
 
       ;; configure C-c C-l so it doesn't throw any errors
       (bind-key "C-c C-l" 'haskell-process-load-file haskell-mode-map)
@@ -232,7 +242,15 @@
       (evil-define-key 'normal haskell-interactive-mode-map
         (kbd "RET") 'haskell-interactive-mode-return)
 
-      ;;GHCi-ng
+      ;; interactive haskell mode
+      (unless (or haskell-enable-ghc-mod-support
+                  haskell-enable-ghci-ng-support)
+        (dolist (mode haskell-modes)
+          (spacemacs/set-leader-keys-for-major-mode mode
+            "hi" 'haskell-process-do-info
+            "ht" 'haskell-process-do-type)))
+
+      ;; GHCi-ng
       (when haskell-enable-ghci-ng-support
         ;; haskell-process-type is set to auto, so setup ghci-ng for either case
         ;; if haskell-process-type == cabal-repl
@@ -302,38 +320,12 @@
       (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
         "F" 'hindent-reformat-decl))))
 
-(defun haskell/init-shm ()
-  (use-package shm
+(defun haskell/init-hlint-refactor ()
+  (use-package hlint-refactor
     :defer t
-    :if haskell-enable-shm-support
     :init
-    (add-hook 'haskell-mode-hook 'structured-haskell-mode)
-    :config
     (progn
-      (when (require 'shm-case-split nil 'noerror)
-        ;;TODO: Find some better bindings for case-splits
-        (define-key shm-map (kbd "C-c S") 'shm/case-split)
-        (define-key shm-map (kbd "C-c C-s") 'shm/do-case-split))
-
-      (evil-define-key 'normal shm-map
-        (kbd "RET") nil
-        (kbd "C-k") nil
-        (kbd "C-j") nil
-        (kbd "D") 'shm/kill-line
-        (kbd "R") 'shm/raise
-        (kbd "P") 'shm/yank
-        (kbd "RET") 'shm/newline-indent
-        (kbd "RET") 'shm/newline-indent
-        (kbd "M-RET") 'evil-ret)
-
-      (evil-define-key 'operator shm-map
-        (kbd ")") 'shm/forward-node
-        (kbd "(") 'shm/backward-node)
-
-      (evil-define-key 'motion shm-map
-        (kbd ")") 'shm/forward-node
-        (kbd "(") 'shm/backward-node)
-
-      (define-key shm-map (kbd "C-j") nil)
-      (define-key shm-map (kbd "C-k") nil))))
-
+      (spacemacs/declare-prefix-for-mode 'haskell-mode "mr" "haskell/refactor")
+      (spacemacs/set-leader-keys-for-major-mode 'haskell-mode
+        "rb" 'hlint-refactor-refactor-buffer
+        "rr" 'hlint-refactor-refactor-at-point))))

@@ -12,6 +12,7 @@
 (defconst emacs-start-time (current-time))
 
 (require 'subr-x nil 'noerror)
+(require 'page-break-lines)
 (require 'core-debug)
 (require 'core-command-line)
 (require 'core-dotspacemacs)
@@ -38,6 +39,7 @@
 (defvar spacemacs-loading-char ?█)
 (defvar spacemacs-loading-string "")
 (defvar spacemacs-loading-counter 0)
+(defvar spacemacs-loading-value 0)
 ;; (defvar spacemacs-loading-text "Loading")
 ;; (defvar spacemacs-loading-done-text "Ready!")
 (defvar spacemacs-loading-dots-chunk-count 3)
@@ -103,11 +105,12 @@ the final step of executing code in `emacs-startup-hook'.")
    ;; increase the counter bellow so next people will give it more confidence.
    ;; Counter = 1
    (message "Setting the font...")
-   (if (find-font (font-spec :name (car dotspacemacs-default-font)))
-       (spacemacs/set-default-font dotspacemacs-default-font)
+   (unless (spacemacs/set-default-font dotspacemacs-default-font)
      (spacemacs-buffer/warning
-      "Cannot find font \"%s\"! Font settings may not be correct."
-      (car dotspacemacs-default-font))))
+      "Cannot find any of the specified fonts (%s)! Font settings may not be correct."
+      (if (listp (car dotspacemacs-default-font))
+          (mapconcat 'car dotspacemacs-default-font ", ")
+        (car dotspacemacs-default-font)))))
   ;; spacemacs init
   (setq inhibit-startup-screen t)
   (spacemacs-buffer/goto-buffer)
@@ -191,7 +194,7 @@ defer call using `spacemacs-post-user-config-hook'."
 (defun spacemacs//describe-system-info-string ()
   "Gathers info about your Spacemacs setup and returns it as a string."
   (format
-   (concat "#### System Info\n"
+   (concat "#### System Info :computer:\n"
            "- OS: %s\n"
            "- Emacs: %s\n"
            "- Spacemacs: %s\n"
@@ -240,7 +243,7 @@ defer call using `spacemacs-post-user-config-hook'."
               (set-fill-column 60)
               (insert (mapconcat 'identity keys " "))
               (fill-region (point-min) (point-max))
-              (format "#### Emacs last keys\n```text\n%s\n```\n" (buffer-string))))))
+              (format "#### Emacs last keys :musical_keyboard: \n```text\n%s\n```\n" (buffer-string))))))
 
 (defun spacemacs/describe-last-keys ()
   "Gathers info about your Emacs last keys and copies to clipboard."

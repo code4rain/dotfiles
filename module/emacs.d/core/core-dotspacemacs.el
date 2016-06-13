@@ -50,7 +50,7 @@ exists. Otherwise, fallback to ~/.spacemacs")
 
 (defvar dotspacemacs-distribution 'spacemacs
   "Base distribution to use. This is a layer contained in the directory
-`+distribution'. For now available distributions are `spacemacs-base'
+`+distributions'. For now available distributions are `spacemacs-base'
 or `spacemacs'.")
 
 (defvar dotspacemacs-elpa-https t
@@ -64,6 +64,15 @@ environment, otherwise it is strongly recommended to let it set to t.")
 (defvar dotspacemacs-configuration-layer-path '()
   "List of additional paths where to look for configuration layers.
 Paths must have a trailing slash (ie. `~/.mycontribs/')")
+
+(defvar dotspacemacs-download-packages 'used
+  "Defines the behaviour of Spacemacs when downloading packages.
+Possible values are `used', `used-but-keep-unused' and `all'. `used' will
+download only explicitly used packages and remove any unused packages as well as
+their dependencies. `used-but-keep-unused' will download only the used packages
+but won't delete them if they become unused. `all' will download all the
+packages regardless if they are used or not and packages won't be deleted by
+Spacemacs.")
 
 (defvar dotspacemacs-enable-lazy-installation 'unused
   " Lazy installation of layers (i.e. layers are installed only when a file
@@ -107,14 +116,10 @@ If the value is nil then no banner is displayed.")
 when the current branch is not `develop'")
 
 (defvar dotspacemacs-configuration-layers '(emacs-lisp)
-  "List of configuration layers to load. If it is the symbol `all' instead
-of a list then all discovered layers will be installed.")
+  "List of configuration layers to load.")
 
 (defvar dotspacemacs-themes '(spacemacs-dark
-                              spacemacs-light
-                              solarized-dark
-                              solarized-light
-                              leuven)
+                              spacemacs-light)
   "List of themes, the first of the list is loaded when spacemacs starts.
 Press `SPC T n' to cycle to the next theme in the list (works great
 with 2 themes variants, one dark and one light")
@@ -153,8 +158,9 @@ emacs.")
                                     :weight normal
                                     :width normal
                                     :powerline-scale 1.1)
-  "Default font. `powerline-scale' allows to quickly tweak the mode-line
-size to make separators look not too crappy.")
+  "Default font, or prioritized list of fonts. `powerline-scale'
+allows to quickly tweak the mode-line size to make separators
+look not too crappy.")
 
 (defvar dotspacemacs-remap-Y-to-y$ nil
   "If non nil `Y' is remapped to `y$' in Evil states.")
@@ -163,8 +169,14 @@ size to make separators look not too crappy.")
   "If non-nil, the shift mappings `<' and `>' retain visual state
 if used there.")
 
+(defvar dotspacemacs-visual-line-move-text nil
+  "If non-nil, J and K move lines up and down when in visual mode.")
+
 (defvar dotspacemacs-ex-substitute-global nil
   "If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.")
+
+(defvar dotspacemacs-folding-method 'evil
+  "Code folding method. Possible values are `evil' and `origami'.")
 
 (defvar dotspacemacs-default-layout-name "Default"
   " Name of the default layout.")
@@ -280,11 +292,6 @@ derivatives. If set to `relative', also turns on relative line numbers.")
 to aggressively delete empty lines and long sequences of whitespace, `trailing'
 to delete only the whitespace at end of lines, `changed' to delete only
 whitespace for changed lines or `nil' to disable cleanup.")
-
-(defvar dotspacemacs-delete-orphan-packages t
-  "If non-nil spacemacs will delete any orphan packages, i.e. packages that are
-declared in a layer which is not a member of
-`dotspacemacs-configuration-layers'")
 
 (defvar dotspacemacs-search-tools '("ag" "pt" "ack" "grep")
   "List of search tool executable names. Spacemacs uses the first installed
@@ -524,7 +531,7 @@ error recovery."
   (defadvice dotspacemacs/layers
       (after error-recover-preserve-packages activate)
     (progn
-      (setq-default dotspacemacs-delete-orphan-packages nil)
+      (setq-default dotspacemacs-download-packages 'used-but-keep-unused)
       (ad-disable-advice 'dotspacemacs/layers 'after
                          'error-recover-preserve-packages)
       (ad-activate 'dotspacemacs/layers)))
@@ -558,7 +565,7 @@ error recovery."
   ;; protect global values of these variables
   (let (dotspacemacs-configuration-layer-path dotspacemacs-configuration-layers
         dotspacemacs-additional-packages dotspacemacs-excluded-packages
-        dotspacemacs-delete-orphan-packages
+        dotspacemacs-download-packages
         (passed-tests 0) (total-tests 0))
     (load dotspacemacs-filepath)
     (dotspacemacs/layers)

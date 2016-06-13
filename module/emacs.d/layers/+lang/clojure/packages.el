@@ -8,6 +8,7 @@
     company
     eldoc
     popwin
+    smartparens
     subword
     ))
 
@@ -22,9 +23,7 @@
             cider-prompt-save-file-on-load nil
             cider-repl-use-clojure-font-lock t)
       (push "\\*cider-repl\.\+\\*" spacemacs-useful-buffers-regexp)
-      (add-hook 'clojure-mode-hook 'cider-mode)
-      (if dotspacemacs-smartparens-strict-mode
-          (add-hook 'cider-repl-mode-hook #'smartparens-strict-mode)))
+      (add-hook 'clojure-mode-hook 'cider-mode))
     :config
     (progn
       ;; add support for golden-ratio
@@ -231,17 +230,21 @@
     (push '("*cider-doc*" :dedicated t :position bottom :stick t :noselect nil :height 0.4)
           popwin:special-display-config)))
 
+(defun clojure/post-init-smartparens ()
+  (add-hook 'cider-repl-mode-hook
+            (if dotspacemacs-smartparens-strict-mode
+                #'smartparens-strict-mode
+              #'smartparens-mode)))
+
 (defun clojure/post-init-subword ()
   (unless (version< emacs-version "24.4")
     (add-hook 'cider-mode-hook 'subword-mode)))
 
-(when (configuration-layer/layer-usedp 'auto-completion)
-  (defun clojure/post-init-company ()
-    (push 'company-capf company-backends-cider-mode)
-    (spacemacs|add-company-hook cider-mode)
-
-    (push 'company-capf company-backends-cider-repl-mode)
-    (spacemacs|add-company-hook cider-repl-mode)))
+(defun clojure/post-init-company ()
+  (push 'company-capf company-backends-cider-mode)
+  (spacemacs|add-company-hook cider-mode)
+  (push 'company-capf company-backends-cider-repl-mode)
+  (spacemacs|add-company-hook cider-repl-mode))
 
 (defun clojure/init-clojure-snippets ()
   (use-package clojure-snippets

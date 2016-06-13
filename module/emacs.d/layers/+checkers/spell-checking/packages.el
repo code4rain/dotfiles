@@ -14,7 +14,11 @@
     auto-dictionary
     flyspell
     flyspell-correct
-    ))
+    (flyspell-correct-ivy :toggle (configuration-layer/layer-usedp 'ivy))
+    (flyspell-correct-helm :toggle (configuration-layer/layer-usedp 'helm))
+    (flyspell-correct-popup :toggle (and (not (configuration-layer/layer-usedp 'ivy))
+                                         (not (configuration-layer/layer-usedp 'helm))))
+    (flyspell-popup :toggle enable-flyspell-auto-completion)))
 
 (defun spell-checking/init-auto-dictionary ()
   (use-package auto-dictionary
@@ -65,11 +69,24 @@
 
 (defun spell-checking/init-flyspell-correct ()
   (use-package flyspell-correct
-    :commands (flyspell-correct-word-generic)
+    :commands (flyspell-correct-word-generic
+               flyspell-correct-previous-word-generic)
     :init
-    (when (configuration-layer/layer-usedp 'ivy)
-      (setq flyspell-correct-interface 'flyspell-correct-ivy))
-    (when (configuration-layer/layer-usedp 'helm)
-      (setq flyspell-correct-interface 'flyspell-correct-helm))
-    (when (bound-and-true-p flyspell-correct-interface)
-      (spacemacs/set-leader-keys "Sc" 'flyspell-correct-word-generic))))
+    (spacemacs/set-leader-keys "Sc" 'flyspell-correct-previous-word-generic)))
+
+(defun spell-checking/init-flyspell-correct-ivy ()
+  (use-package flyspell-correct-ivy))
+
+(defun spell-checking/init-flyspell-correct-helm ()
+  (use-package flyspell-correct-helm))
+
+(defun spell-checking/init-flyspell-correct-popup ()
+  (use-package flyspell-correct-popup))
+
+(defun spell-checking/init-flyspell-popup ()
+  (use-package flyspell-popup
+    :defer t
+    :init
+    (progn
+      (setq flyspell-popup-correct-delay 0.8)
+      (add-hook 'flyspell-mode-hook 'flyspell-popup-auto-correct-mode))))

@@ -33,6 +33,7 @@
         (evil-unimpaired :location local)
         evil-visual-mark-mode
         (hs-minor-mode :location built-in)
+        linum-relative
         vi-tilde-fringe
         ))
 
@@ -101,7 +102,14 @@
 
 (defun spacemacs-evil/init-evil-mc ()
   (use-package evil-mc
-    :defer t))
+    :defer t
+    :init
+    ;; remove emc prefix when there is not multiple cursors
+    (setq evil-mc-mode-line
+          `(:eval (when (> (evil-mc-get-cursor-count) 1)
+                    (format ,(propertize " %s:%d" 'face 'cursor)
+                            evil-mc-mode-line-prefix
+                            (evil-mc-get-cursor-count)))))))
 
 ;; other commenting functions in funcs.el with keybinds in keybindings.el
 (defun spacemacs-evil/init-evil-nerd-commenter ()
@@ -321,19 +329,24 @@
     :defer t
     :init
     (spacemacs|add-toggle evil-visual-mark-mode
-      :status evil-visual-mark-mode
-      :on (evil-visual-mark-mode)
-      :off (evil-visual-mark-mode -1)
+      :mode evil-visual-mark-mode
       :documentation "Enable evil visual marks mode."
       :evil-leader "t`")))
 
 (defun spacemacs-evil/init-hs-minor-mode ()
-  ;; required for evil folding
-  (defun spacemacs//enable-hs-minor-mode ()
-    "Enable hs-minor-mode for code folding."
-    (ignore-errors
-      (hs-minor-mode)
-      (spacemacs|hide-lighter hs-minor-mode))))
+  (add-hook 'prog-mode-hook 'spacemacs//enable-hs-minor-mode))
+
+(defun spacemacs-evil/init-linum-relative ()
+  (use-package linum-relative
+    :commands (linum-relative-toggle linum-relative-on)
+    :init
+    (progn
+      (when (eq dotspacemacs-line-numbers 'relative)
+        (linum-relative-on))
+      (spacemacs/set-leader-keys "tr" 'linum-relative-toggle))
+    :config
+    (progn
+      (setq linum-relative-current-symbol ""))))
 
 (defun spacemacs-evil/init-vi-tilde-fringe ()
   (spacemacs|do-after-display-system-init
@@ -342,15 +355,14 @@
      (progn
        (global-vi-tilde-fringe-mode)
        (spacemacs|add-toggle vi-tilde-fringe
-         :status vi-tilde-fringe-mode
-         :on (global-vi-tilde-fringe-mode)
-         :off (global-vi-tilde-fringe-mode -1)
+         :mode global-vi-tilde-fringe-mode
          :documentation
          "Globally display a ~ on empty lines in the fringe."
          :evil-leader "T~")
-       ;; don't enable it on spacemacs home buffer
-       (with-current-buffer spacemacs-buffer-name
-         (spacemacs/disable-vi-tilde-fringe))
+       ;; don't enable it on some special buffers
+       (dolist (x (list spacemacs-buffer-name
+                        which-key--buffer))
+         (with-current-buffer x (spacemacs/disable-vi-tilde-fringe)))
        ;; after a major mode is loaded, check if the buffer is read only
        ;; if so, disable vi-tilde-fringe-mode
        (add-hook 'after-change-major-mode-hook

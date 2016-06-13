@@ -11,15 +11,24 @@
 
 (setq markdown-packages
   '(
+    company
+    company-emoji
     emoji-cheat-sheet-plus
     gh-md
     markdown-mode
     markdown-toc
     mmm-mode
-    company
-    company-emoji
     smartparens
+    (vmd-mode :toggle (and (eq 'vmd markdown-live-preview-engine)
+                           (executable-find "vmd")))
     ))
+
+(defun markdown/post-init-company ()
+  (spacemacs|add-company-hook markdown-mode)
+  (push 'company-capf company-backends-markdown-mode))
+
+(defun markdown/post-init-company-emoji ()
+  (push 'company-emoji company-backends-markdown-mode))
 
 (defun markdown/post-init-emoji-cheat-sheet-plus ()
   (add-hook 'markdown-mode-hook 'emoji-cheat-sheet-plus-display-mode))
@@ -78,7 +87,6 @@ Will work on both org-mode and any mode that accepts plain html."
         "cn"  'markdown-cleanup-list-numbers
         "co"  'markdown-open
         "cp"  'markdown-preview
-        "cP"  'markdown-live-preview-mode
         "cv"  'markdown-export-and-preview
         "cw"  'markdown-kill-ring-save
         ;; headings
@@ -120,7 +128,9 @@ Will work on both org-mode and any mode that accepts plain html."
         "f"   'markdown-follow-thing-at-point
         "P"   'markdown-previous-link
         "<RET>" 'markdown-jump)
-
+      (when (eq 'eww markdown-live-preview-engine)
+        (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
+          "cP"  'markdown-live-preview-mode))
       ;; Header navigation in normal state movements
       (evil-define-key 'normal markdown-mode-map
         "gj" 'outline-forward-same-level
@@ -128,7 +138,6 @@ Will work on both org-mode and any mode that accepts plain html."
         "gh" 'outline-up-heading
         ;; next visible heading is not exactly what we want but close enough
         "gl" 'outline-next-visible-heading)
-
       ;; Promotion, Demotion
       (define-key markdown-mode-map (kbd "M-h") 'markdown-promote)
       (define-key markdown-mode-map (kbd "M-j") 'markdown-move-down)
@@ -210,9 +219,8 @@ Will work on both org-mode and any mode that accepts plain html."
       (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-ess)
       (mmm-add-mode-ext-class 'markdown-mode nil 'markdown-rust))))
 
-(when (configuration-layer/layer-usedp 'auto-completion)
-  (defun markdown/post-init-company ()
-    (spacemacs|add-company-hook markdown-mode)
-    (push 'company-capf company-backends-markdown-mode))
-  (defun markdown/post-init-company-emoji ()
-    (push 'company-emoji company-backends-markdown-mode)))
+(defun markdown/init-vmd-mode ()
+  (use-package vmd-mode
+    :defer t
+    :init (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
+            "cP" 'vmd-mode)))

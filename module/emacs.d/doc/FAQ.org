@@ -58,9 +58,20 @@ may also just type ~SPC f e v~.
 As it is written, that is _space_ then _macs_.
 
 ** Why are packages installed with =package-install= automatically deleted by Spacemacs when it boots?
-To declare new packages you have to create a new configuration layer or add the
-package name to the variable =dotspacemacs-additonal-packages= of your dotfile,
-see the [[file:QUICK_START.org][quick start guide]] for more info.
+By default Spacemacs will keep only the packages that you use (i.e. the packages
+belonging to a layer explicitly listed in the variable
+=dotspacemacs-configuration-layers=).
+
+To install packages that does not belong to any Spacemacs layers, you can:
+
+- use the variable =dotspacemacs-additonal-packages=.
+- or create a configuration layer configuring the package and add this layer to
+  =dotspacemacs-configuration-layers=
+- or set the variable =dotspacemacs-download-packages= to =used-but-keep-unused=
+  which will prevent Spacemacs from removing the packages you installed
+  manually.
+
+To create a new configuration layer see the [[file:QUICK_START.org][quick start guide]] for more info.
 
 ** How to fix package download errors when installing Spacemacs ?
 Since 0.105.0 HTTPS protocol is used by default to download packages. If your
@@ -112,7 +123,7 @@ experience.
 
 Set the distribution with =dotspacemacs-distribution= variable. The default is
 =spacemacs=. For more information as to what is included, check out the
-=packages.el= file in the respective folders in the =+distribution= folder of
+=packages.el= file in the respective folders in the =+distributions= folder of
 the =layers/= directory.
 
 ** Should I place my settings in =user-init= or =user-config=?
@@ -460,7 +471,7 @@ enable copying/pasting with the mouse. You need to add this line to your
 
 ** Use =helm-ag= to search only in files of a certain type?
 It is possible to restrict the scope of =helm-ag= to search only expressions in
-some specified file types. There is two way of doing this, both by appending
+some specified file types. There are two ways of doing this, both by appending
 some expressions to the search input:
 
 - By using a regexp with =-G=, for instance =-G\.el$= will look for all files

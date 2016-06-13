@@ -46,11 +46,13 @@ keeping their content visible.
 
 (defconst spacemacs--space-doc-modificators
   '(spacemacs//space-doc-set-space-doc-cache
+    spacemacs//space-doc-hide-line-numbers
     spacemacs//space-doc-modf-emphasis-overlays
     spacemacs//space-doc-modf-meta-tags-overlays
     spacemacs//space-doc-modf-link-protocol
     spacemacs//space-doc-modf-org-block-line-face-remap
     spacemacs//space-doc-modf-org-kbd-face-remap
+    spacemacs//space-doc-modf-resize-inline-images
     spacemacs//space-doc-modf-advice-org-do-emphasis-faces
     (lambda (flag) (spacemacs//space-doc-run-modfs-deferred
                '()
@@ -98,6 +100,13 @@ It is set by `spacemacs//space-doc-set-space-doc-cache'.")
                :btn-marker-face btn-marker-face
                :kbd-marker      kbd-marker)))))
 
+(defun spacemacs//space-doc-hide-line-numbers (&optional enable)
+  "If ENABLE is non-nil then toggle off the line numbers."
+  (if enable
+      (spacemacs/toggle-line-numbers-off)
+    (when dotspacemacs-line-numbers
+      (spacemacs/toggle-line-numbers-on))))
+
 (defun spacemacs//space-doc-org-do-emphasis-faces-advice (found)
   "If FOUND has non-nil value - modify emphasized regions
 appearances in the current buffer. The function uses
@@ -105,7 +114,12 @@ appearances in the current buffer. The function uses
 
   ;; `org-do-emphasis-faces' returns non-nil value when it
   ;; found a region to emphasize.
-  (when (and found space-doc-mode)
+  (when (and found
+             space-doc-mode
+             (not (string-empty-p
+                   (replace-regexp-in-string "\\*+"
+                                             ""
+                                             (match-string 4)))))
     (spacemacs//space-doc-emphasis-region
      (match-beginning 2)
      (match-end 2)))
@@ -127,10 +141,10 @@ current buffer so piggybacking it should be pretty performant solution."
 The character should be one of the markers
 from `org-emphasis-alist'."
 
-  (let* ((beginnig-marker-overlay nil)
+  (let* ((beginning-marker-overlay nil)
          (ending-marker-overlay nil))
 
-    (setq beginnig-marker-overlay
+    (setq beginning-marker-overlay
           (make-overlay begin (1+ begin))
           ending-marker-overlay
           (make-overlay (1- end) end))
@@ -140,7 +154,7 @@ from `org-emphasis-alist'."
                  (spacemacs//space-doc-cache-kbd-marker
                   spacemacs--space-doc-cache))
         (progn
-          (overlay-put beginnig-marker-overlay
+          (overlay-put beginning-marker-overlay
                        'face
                        (spacemacs//space-doc-cache-btn-marker-face
                         spacemacs--space-doc-cache))
@@ -155,7 +169,7 @@ from `org-emphasis-alist'."
             (beginning-of-line)
             (looking-at-p org-table-any-line-regexp))
           (progn
-            (overlay-put beginnig-marker-overlay
+            (overlay-put beginning-marker-overlay
                          'face
                          (spacemacs//space-doc-cache-marker-face
                           spacemacs--space-doc-cache))
@@ -164,12 +178,12 @@ from `org-emphasis-alist'."
                          (spacemacs//space-doc-cache-marker-face
                           spacemacs--space-doc-cache)))
 
-        (overlay-put beginnig-marker-overlay
+        (overlay-put beginning-marker-overlay
                      'invisible t)
         (overlay-put ending-marker-overlay
                      'invisible t)))
 
-    (overlay-put beginnig-marker-overlay
+    (overlay-put beginning-marker-overlay
                  'space-doc-emphasis-overlay t)
     (overlay-put ending-marker-overlay
                  'space-doc-emphasis-overlay t)))
@@ -204,6 +218,16 @@ default."
                                     `(:box nil)))
     (face-remap-remove-relative
      spacemacs--space-doc-org-kbd-face-remap-cookie)))
+
+(defun spacemacs//space-doc-modf-resize-inline-images (&optional enable)
+  "If ENABLE is non nil then resize inline images."
+  ;; resizing is always performed even when the image is smaller
+  ;; so we don't resize in README.org buffers for now
+  (let ((org-image-actual-width
+         (and enable
+              (not (string-match-p ".*README.org\\'" (buffer-file-name)))
+              600)))
+    (org-display-inline-images)))
 
 (defun spacemacs//space-doc-modf-meta-tags-overlays (&optional enable)
   "If ENABLE has non-nil value - modify `org-mode' meta tags
@@ -287,10 +311,14 @@ If ENABLE has nil value - revert to the default."
                 'spacemacs--space-doc-org-block-end-line-face-remap-cookie)
                (face-remap-add-relative 'org-block-end-line
                                         hide-bn-text-face))))
-    (face-remap-remove-relative
-     spacemacs--space-doc-org-block-begin-line-face-remap-cookie)
-    (face-remap-remove-relative
-     spacemacs--space-doc-org-block-end-line-face-remap-cookie)))
+    (when (bound-and-true-p
+           spacemacs--space-doc-org-block-begin-line-face-remap-cookie)
+      (face-remap-remove-relative
+       spacemacs--space-doc-org-block-begin-line-face-remap-cookie))
+    (when (bound-and-true-p
+           spacemacs--space-doc-org-block-end-line-face-remap-cookie)
+      (face-remap-remove-relative
+       spacemacs--space-doc-org-block-end-line-face-remap-cookie))))
 
 (defun spacemacs//space-doc-modf-link-protocol (&optional enable)
   "If ENABLE has non-nil value - use `spacemacs//space-doc-open' to

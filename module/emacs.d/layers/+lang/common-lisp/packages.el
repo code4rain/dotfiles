@@ -11,12 +11,19 @@
 
 (setq common-lisp-packages
       '(auto-highlight-symbol
-        common-lisp-snippets
+        (common-lisp-snippets :toggle (configuration-layer/package-usedp 'yasnippet))
+        helm
         slime))
 
 (defun common-lisp/post-init-auto-highlight-symbol ()
   (with-eval-after-load 'auto-highlight-symbol
     (add-to-list 'ahs-plugin-bod-modes 'lisp-mode)))
+
+(defun common-lisp/init-common-lisp-snippets ())
+
+(defun common-lisp/post-init-helm ()
+  (spacemacs/set-leader-keys-for-major-mode 'lisp-mode
+    "sI" 'spacemacs/helm-slime))
 
 (defun common-lisp/init-slime ()
   (use-package slime
@@ -42,9 +49,6 @@
     :config
     (progn
       (slime-setup)
-      (dolist (m `(,slime-mode-map ,slime-repl-mode-map))
-        (define-key m [(tab)] 'slime-fuzzy-complete-symbol))
-
       ;; TODO: Add bindings for the SLIME debugger?
       (spacemacs/set-leader-keys-for-major-mode 'lisp-mode
         "'" 'slime
@@ -89,7 +93,14 @@
         "si" 'slime
         "sq" 'slime-quit-lisp
 
-        "tf" 'slime-toggle-fancy-trace))))
-
-(when (configuration-layer/layer-usedp 'auto-completion)
-  (defun common-lisp/init-common-lisp-snippets ()))
+        "tf" 'slime-toggle-fancy-trace)
+      ;; prefix names for which-key
+      (mapc (lambda (x)
+              (spacemacs/declare-prefix-for-mode 'lisp-mode (car x) (cdr x)))
+            '(("mh" . "help")
+              ("me" . "eval")
+              ("ms" . "repl")
+              ("mc" . "compile")
+              ("mg" . "nav")
+              ("mm" . "macro")
+              ("mt" . "toggle"))))))

@@ -232,6 +232,19 @@ To prevent this error we just wrap `describe-mode' to defeat the
       (interactive)
       (call-interactively 'describe-mode))))
 
+(defun spacemacs//counsel-with-git-grep (func x)
+  (when (string-match "\\`\\(.*?\\):\\([0-9]+\\):\\(.*\\)\\'" x)
+    (with-ivy-window
+      (let ((file-name (match-string-no-properties 1 x))
+            (line-number (match-string-no-properties 2 x)))
+        (funcall func
+                 (expand-file-name file-name counsel--git-grep-dir))
+        (goto-char (point-min))
+        (forward-line (1- (string-to-number line-number)))
+        (re-search-forward (ivy--regex ivy-text t) (line-end-position) t)
+        (unless (eq ivy-exit 'done)
+          (swiper--cleanup)
+          (swiper--add-overlays (ivy--regex ivy-text)))))))
 
 ;; Ivy
 
@@ -254,24 +267,42 @@ To prevent this error we just wrap `describe-mode' to defeat the
                         (require (car repl))
                         (call-interactively (cdr repl))))))
 
-;; perspectives
+;; Evil
 
-(defun spacemacs/ivy-perspectives ()
-  "Control Panel for perspectives. Has many actions.
+(defun spacemacs/ivy-evil-registers ()
+  "Show evil registers"
+  (interactive)
+  (let ((ivy-height 24))
+    (ivy-read "Evil Registers:"
+              (cl-loop for (key . val) in (evil-register-list)
+                       collect (eval `(format "%s : %s" (propertize ,(char-to-string key) 'face 'font-lock-builtin-face)
+                                              ,(or (and val
+                                                        (stringp val)
+                                                        (replace-regexp-in-string "\n" "^J" val))
+                                                   ""))))
+              :action #'spacemacs/ivy-insert-evil-register)))
+
+(defun spacemacs/ivy-insert-evil-register (candidate)
+  (insert (replace-regexp-in-string "\\^J" "\n"
+                                    (substring-no-properties candidate 4))))
+
+;; Layouts
+
+(defun spacemacs/ivy-spacemacs-layouts ()
+  "Control Panel for Spacemacs layouts. Has many actions.
 If match is found
-\(default) Select perspective
-c: Close Perspective(s) <- mark with C-SPC to close more than one-window
-k: Kill Perspective(s)
+\(default) Select layout
+c: Close Layout(s) <- mark with C-SPC to close more than one-window
+k: Kill Layout(s)
 
 If match is not found
-<enter> Creates perspective
+<enter> Creates layout
 
-Closing doesn't kill buffers inside the perspective while killing
-perspectives does."
+Closing doesn't kill buffers inside the layout while killing layouts does."
   (interactive)
-  (ivy-read "Perspective: "
+  (ivy-read "Layouts: "
             (persp-names)
-            :caller 'spacemacs/ivy-perspectives
+            :caller 'spacemacs/ivy-spacemacs-layouts
             :action (lambda (name)
                       (let ((persp-reset-windows-on-nil-window-conf t))
                         (persp-switch name)
@@ -280,25 +311,25 @@ perspectives does."
                                     (persp-names-current-frame-fast-ordered))
                           (spacemacs/home))))))
 
-(defun spacemacs/ivy-persp-buffer ()
-  "Switch to perspective buffer using ivy."
+(defun spacemacs/ivy-spacemacs-layout-buffer ()
+  "Switch to layout buffer using ivy."
   (interactive)
   (let (ivy-use-virtual-buffers)
     (with-persp-buffer-list ()
                             (call-interactively 'ivy-switch-buffer))))
 
-(defun spacemacs/ivy-persp-close-other ()
-  "Kills perspectives without killing the buffers"
+(defun spacemacs/ivy-spacemacs-layout-close-other ()
+  "Kills layouts without killing the buffers"
   (interactive)
-  (ivy-read (format "Close perspective [current %s]: "
+  (ivy-read (format "Close layout [current %s]: "
                     (spacemacs//current-layout-name))
             (persp-names)
             :action 'persp-kill-without-buffers))
 
-(defun spacemacs/ivy-persp-kill-other ()
-  "Kills perspectives with all their buffers"
+(defun spacemacs/ivy-spacemacs-layout-kill-other ()
+  "Kills layouts with all their buffers"
   (interactive)
-  (ivy-read (format "Kill perspective [current %s]: "
+  (ivy-read (format "Kill layout [current %s]: "
                     (spacemacs//current-layout-name))
             (persp-names)
             :action 'persp-kill))

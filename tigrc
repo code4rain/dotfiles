@@ -20,6 +20,8 @@ bind status - !commit.sh
 bind status c !git checkout -p %(file)
 bind status C !git commit -s
 bind status p !commit_push.sh
+bind status t !git checkout --theirs %(file)
+bind status o !git checkout --ours %(file)
 bind generic X !git cl
 bind generic A !git am --resolved
 bind generic S !git am --skip

@@ -11,7 +11,7 @@ Please fork this repository and configure it for yourself:
 sudo apt-get install zsh
 chsh /usr/bin/zsh
 
-git clone http://10.252.250.74:3000/alex.jang/dotfiles.git ~/.dotfiles
+git clone https://git.sec.samsung.net/alex.jang/dotfiles ~/.dotfiles
 ~/.dotfiles/bin/dotfiles ~/.dotfiles
 ```
 

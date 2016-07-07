@@ -126,22 +126,22 @@ values."
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(afternoon
 			 spacemacs-dark
-                         tango
+			 tango
 			 spolsky
-                         junio
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         )
+			 junio
+			 spacemacs-light
+			 solarized-light
+			 solarized-dark
+			 )
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 20
-                               :weight normal
-                               :width normal
-                               :powerline-scale 1.3)
+			       :size 13
+			       :weight normal
+			       :width normal
+			       :powerline-scale 1.3)
    ;; The leader key
    dotspacemacs-leader-key "C-j"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -200,7 +200,7 @@ values."
    dotspacemacs-helm-no-header nil
    ;; define the position to display `helm', options are `bottom', `top',
    ;; `left', or `right'. (default 'bottom)
-   dotspacemacs-helm-position 'right
+   dotspacemacs-helm-position 'bottom
    ;; If non nil the paste micro-state is enabled. When enabled pressing `p`
    ;; several times cycle between the kill ring content. (default nil)
    dotspacemacs-enable-paste-transient-state t
@@ -211,7 +211,7 @@ values."
    ;; `right-then-bottom'. right-then-bottom tries to display the frame to the
    ;; right; if there is insufficient space it displays it at the bottom.
    ;; (default 'bottom)
-   dotspacemacs-which-key-position 'right
+   dotspacemacs-which-key-position 'bottom
    ;; If non nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
@@ -410,6 +410,12 @@ you should place your code here."
       (global-set-key (kbd "<C-S-mouse-4>") 'alex/line-spacing-increase)
       )
     )
+
+  ;; scroll one line at a time (less "jumpy" than defaults)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  (setq scroll-step 1) ;; keyboard scroll one line at a time
 
   ;; add <<, >> to cycle angle
   (define-typo-cycle typo-cycle-left-angle-brackets

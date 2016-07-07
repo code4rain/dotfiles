@@ -49,11 +49,15 @@ export ZSH=$HOME/.oh-my-zsh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=()
+# Autosuggestions
+# git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+plugins=(alias-tips zsh-autosuggestions)
 
+export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias tip: "
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+bindkey '^ ' autosuggest-accept
 
 export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
 # You may need to manually set your language environment

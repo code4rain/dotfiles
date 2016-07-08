@@ -51,9 +51,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Autosuggestions
 # git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
-plugins=(alias-tips zsh-autosuggestions)
+plugins=(zsh-autosuggestions)
 
-export ZSH_PLUGINS_ALIAS_TIPS_TEXT="Alias tip: "
 source $ZSH/oh-my-zsh.sh
 
 # User configuration

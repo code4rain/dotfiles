@@ -1,4 +1,5 @@
-﻿set nocompatible               " be iMproved
+﻿
+set nocompatible               " be iMproved
 " Plugins
 " https://github.com/junegunn/vim-plug
 " Download: curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -401,7 +402,7 @@ function! GtagsCommnad()
     execute "cd " . l:root_dir
     if filereadable("GPATH")
       nnoremap <C-\>^] :GtagsCursor<CR>
-      nnoremap <F7> :Gtags<space>
+      nnoremap <F7> :Ngtags<CR>
       nnoremap <M-h> :Gtags -gi<space>
       nnoremap <silent><M-n> :cn<CR>
       nnoremap <silent><M-m> :cp<CR>
@@ -431,6 +432,69 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+command! Recent call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+
+function! s:gtags_sink(line)
+  echom a:line
+  execute "cs find g " . substitute(a:line, '\n', '', '')
+endfunction
+
+function! s:tags()
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
+    if !filereadable("GPATH")
+      echohl WarningMsg
+      echom 'Preparing tags'
+      echohl None
+      call system('gtags')
+    endif
+
+    call fzf#run({
+    \ 'source':  'global -c',
+    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+    \ 'down':    '30%',
+    \ 'sink':    function('s:gtags_sink')})
+  endif
+endfunction
+
+command! Ngtags call s:tags()
+
+function! s:rgtags_sink(line)
+  echom a:line
+  let parts = split(a:line, '\s')
+  let excmd = matchstr(parts[2], '^[0-9]*\ze')
+  execute 'silent e' parts[3]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+endfunction
+
+function! s:rtags(find)
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
+    if !filereadable("GPATH")
+      echohl WarningMsg
+      echom 'Preparing tags'
+      echohl None
+      call system('gtags')
+    endif
+
+    call fzf#run({
+    \ 'source':  'global -rx ' . a:find,
+    \ 'options': '+m -d "\s" --with-nth 3..',
+    \ 'down':    '30%',
+    \ 'sink':    function('s:rgtags_sink')})
+  endif
+endfunction
+
+command! Rgtags call s:rtags(expand('<cword>'))
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -555,9 +619,9 @@ cnoremap <C-Q> <ESC>:q!<CR>
 
 inoremap <C-A> <Home>
 inoremap <C-E> <End>
-inoremap <C-L> <ESC>
 inoremap <C-Q> <ESC>:q!<CR>
 inoremap <C-S> <ESC>:w<CR>a
+inoremap <C-_> :Rgtags<CR>
 "inoremap <silent><C-K> <Esc>d$A
 inoremap <silent><F3> <Esc>:set paste<CR>"*gp:set nopaste<CR>a
 inoremap jk <Esc>
@@ -568,8 +632,8 @@ inoremap ㅓㅏ <ESC>
 map q: :q
 nmap <F2> "*yw
 nmap Y "*yw
-nnoremap <C-L> :Unite<CR>
-nnoremap <C-;> :Unite line<CR>
+nnoremap <C-L> :Recent<CR>
+nnoremap <C-_> :Rgtags<CR>
 nnoremap <silent> p p`]
 nnoremap tt diw"*P
 noremap <C-F> <PageUp>
@@ -585,7 +649,6 @@ noremap j gjzz
 noremap k gkzz
 vmap <F2> "*y
 vmap Y "*y
-vnoremap <C-L> <ESC>
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]
 
@@ -610,3 +673,5 @@ nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 " Stat functions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 au BufRead,BufNewFile *.cmm setfiletype trace
+
+" vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

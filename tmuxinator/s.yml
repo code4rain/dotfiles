@@ -27,5 +27,5 @@ windows:
   - Update:
       layout: even-horizontal
       panes:
-        - cd ~/MAIN_NILE && helsync
-        - cd ~/NILE_DEV && helsync
+        - cd ~/PERFORCE/NILE && helsync
+        - cd ~/PERFORCE/DEV && helsync

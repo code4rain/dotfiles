@@ -6,8 +6,10 @@ set nocompatible               " be iMproved
 
 call plug#begin('~/.vim/plugged')
 " The following are examples of different formats supported.
+
 " Language Support
 Plug 'tpope/vim-fugitive'
+Plug 'nvie/vim-flake8'
 
 " Expand Editor
 Plug 'Lokaltog/vim-easymotion'
@@ -92,7 +94,7 @@ if has("gui_running")
   if has("win32")
     set gfn=consolas:h11:cANSI
   elseif has("unix")
-    set gfn=Ubuntu\ Mono\ 11
+    set gfn=Source\ Code\ Pro\ 11
   else
     set gfn=consolas\ 11
   endif
@@ -163,9 +165,11 @@ endfunction
 
 " c, h 파일인 경우 80 column 이상인 경우 표시
 if exists('+colorcolumn')
+  autocmd BufWinEnter *.py set colorcolumn=80
   autocmd BufWinEnter *.c set colorcolumn=80
   autocmd BufWinEnter *.h set colorcolumn=80
 else
+  autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
   autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
   autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
@@ -634,8 +638,10 @@ nmap <F2> "*yw
 nmap Y "*yw
 nnoremap <C-L> :Recent<CR>
 nnoremap <C-_> :Rgtags<CR>
+nnoremap <F7> :Ngtags<CR>
 nnoremap <silent> p p`]
 nnoremap tt diw"*P
+nnoremap ; :
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>

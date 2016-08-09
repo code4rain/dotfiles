@@ -402,6 +402,7 @@ endif
 "---------------------------------------------------------------------
 function! GtagsCommnad()
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if filereadable("GPATH")
@@ -411,6 +412,7 @@ function! GtagsCommnad()
       nnoremap <silent><M-n> :cn<CR>
       nnoremap <silent><M-m> :cp<CR>
     endif
+    execute "cd " . l:cur
   endif
 endfunction
 autocmd BufReadPost * :call GtagsCommnad()
@@ -450,6 +452,7 @@ endfunction
 
 function! s:tags()
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if !filereadable("GPATH")
@@ -458,7 +461,7 @@ function! s:tags()
       echohl None
       call system('gtags')
     endif
-
+    execute "cd " . l:cur
     call fzf#run({
     \ 'source':  'global -c',
     \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
@@ -481,6 +484,7 @@ endfunction
 
 function! s:rtags(find)
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if !filereadable("GPATH")
@@ -489,7 +493,7 @@ function! s:rtags(find)
       echohl None
       call system('gtags')
     endif
-
+    execute "cd " . l:cur
     call fzf#run({
     \ 'source':  'global -rx ' . a:find,
     \ 'options': '+m -d "\s" --with-nth 3..',

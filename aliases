@@ -10,49 +10,32 @@ ee() {
 gg() {
 	git grep "$@"
 }
-subl_bg() {
-	subl "$@" > /dev/null 2>&1 &
-}
-bcompare_bg () {
-	bcompare "$@" > /dev/null 2>&1 &
-}
 add_project () {
 	task add project:"$@"
 }
-vim_gtags () {
-	vim '+Gtags "$@"'
-}
 v() {
   local files
-  files=$(grep '^>' ~/.viminfo | cut -c3- |
+  files=$(grep '^>' ~/.nviminfo | cut -c3- |
           while read line; do
             [ -f "${line/\~/$HOME}" ] && echo "$line"
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
 #Command
+alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
+alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
+alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
+alias e='emacsclient -t'
+alias ek="emacsclient -e '(kill-emacs)'"
+alias es='ee'
+alias ls='ls --color -h --group-directories-first'
+alias m='TERM=xterm-256color tmuxinator'
+alias mkdir='mkdir -p'
+alias p4diff='p4 diff -du | colordiff | less -R'
 alias pv='p4v &'
-alias pd='p4 diff -du'
 alias r='ranger_cd'
 alias ra='ranger'
-alias b='bcompare_bg'
-alias s='subl_bg'
-alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
-alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
-alias pdiff='p4 diff -du | colordiff | less -R'
-alias mkdir='mkdir -p'
-alias e='emacsclient -t'
-alias es='ee'
-alias ek="emacsclient -e '(kill-emacs)'"
-alias ls='ls --color -h --group-directories-first'
 alias tmux='TERM=xterm-256color tmux -2'
-alias tn='tmux attach -t normal'
-alias tm='tmux attach -t merge'
-alias m='TERM=xterm-256color tmuxinator'
 alias tmuxinator='TERM=xterm-256color tmuxinator'
-alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
-alias t='task'
-alias ta='add_project'
-alias vt='vim_gtags'
 alias vimdiff='nvim -d'
 
 alias conW='ssh -X $(whoami)@10.252.251.111'

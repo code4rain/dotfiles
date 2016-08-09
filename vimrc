@@ -640,6 +640,8 @@ inoremap ㅓㅏ <ESC>
 map q: :q
 nmap <F2> "*yw
 nmap Y "*yw
+vmap > >gv
+vmap < <gv
 nnoremap <C-L> :Recent<CR>
 nnoremap <C-_> :Rgtags<CR>
 nnoremap <F7> :Ngtags<CR>

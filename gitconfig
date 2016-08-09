@@ -68,3 +68,5 @@
 	templatedir = ~/.git_template
 [push]
 	default = simple
+[diff]
+	compactionHeuristic = true

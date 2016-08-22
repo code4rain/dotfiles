@@ -15,38 +15,40 @@
 (defconst dotspacemacs-test-results-buffer "*dotfile-test-results*"
   "Name of the buffer to display dotfile test results.")
 
-(defconst dotspacemacs-directory
-  (let* ((env (getenv "SPACEMACSDIR"))
-         (env-dir (when env (expand-file-name (concat env "/"))))
-         (no-env-dir-default (expand-file-name
-                              (concat user-home-directory
-                                      ".spacemacs.d/"))))
+(let* ((env (getenv "SPACEMACSDIR"))
+       (env-dir (when env (expand-file-name (concat env "/"))))
+       (env-init (and env-dir (expand-file-name "init.el" env-dir)))
+       (no-env-dir-default (expand-file-name
+                            (concat user-home-directory
+                                    ".spacemacs.d/")))
+       (default-init (expand-file-name ".spacemacs" user-home-directory)))
+  (defconst dotspacemacs-directory
     (cond
      ((and env (file-exists-p env-dir))
       env-dir)
      ((file-exists-p no-env-dir-default)
       no-env-dir-default)
      (t
-      nil)))
-  "Optional spacemacs directory, which defaults to
+      nil))
+    "Optional spacemacs directory, which defaults to
 ~/.spacemacs.d. This setting can be overridden using the
 SPACEMACSDIR environment variable. If neither of these
 directories exist, this variable will be nil.")
 
-(defconst dotspacemacs-filepath
-  (let* ((default (concat user-home-directory ".spacemacs"))
-         (spacemacs-dir-init (when dotspacemacs-directory
+  (defvar dotspacemacs-filepath
+    (let ((spacemacs-dir-init (when dotspacemacs-directory
                                  (concat dotspacemacs-directory
                                          "init.el"))))
-    (if (and (not (file-exists-p default))
-             dotspacemacs-directory
-             (file-exists-p spacemacs-dir-init))
-        spacemacs-dir-init
-      default))
-  "Filepath to the installed dotfile. If ~/.spacemacs exists,
-then this is used. If ~/.spacemacs does not exist, then check
-for init.el in dotspacemacs-directory and use this if it
-exists. Otherwise, fallback to ~/.spacemacs")
+      (cond
+       (env-init)
+       ((file-exists-p default-init) default-init)
+       ((and dotspacemacs-directory (file-exists-p spacemacs-dir-init)) spacemacs-dir-init)
+       (t default-init)))
+    "Filepath to the installed dotfile. If SPACEMACSDIR is given
+then SPACEMACSDIR/init.el is used. Otherwise, if ~/.spacemacs
+exists, then this is used. If ~/.spacemacs does not exist, then
+check for init.el in dotspacemacs-directory and use this if it
+exists. Otherwise, fallback to ~/.spacemacs"))
 
 (defvar dotspacemacs-distribution 'spacemacs
   "Base distribution to use. This is a layer contained in the directory
@@ -61,21 +63,25 @@ environment, otherwise it is strongly recommended to let it set to t.")
 (defvar dotspacemacs-elpa-timeout 5
   "Maximum allowed time in seconds to contact an ELPA repository.")
 
+(defvar dotspacemacs-elpa-subdirectory nil
+  "If non-nil, a form that evaluates to a package directory. For
+example, to use different package directories for different Emacs
+versions, set this to `emacs-version'.")
+
 (defvar dotspacemacs-configuration-layer-path '()
   "List of additional paths where to look for configuration layers.
 Paths must have a trailing slash (ie. `~/.mycontribs/')")
 
-(defvar dotspacemacs-download-packages 'used
-  "Defines the behaviour of Spacemacs when downloading packages.
-Possible values are `used', `used-but-keep-unused' and `all'. `used' will
-download only explicitly used packages and remove any unused packages as well as
-their dependencies. `used-but-keep-unused' will download only the used packages
-but won't delete them if they become unused. `all' will download all the
-packages regardless if they are used or not and packages won't be deleted by
-Spacemacs.")
+(defvar dotspacemacs-install-packages 'used-only
+  "Defines the behaviour of Spacemacs when installing packages.
+Possible values are `used-only', `used-but-keep-unused' and `all'. `used-only'
+installs only explicitly used packages and uninstall any unused packages as well
+as their unused dependencies. `used-but-keep-unused' installs only the used
+packages but won't uninstall them if they become unused. `all' installs *all*
+packages supported by Spacemacs and never uninstall them.")
 
 (defvar dotspacemacs-enable-lazy-installation 'unused
-  " Lazy installation of layers (i.e. layers are installed only when a file
+  "Lazy installation of layers (i.e. layers are installed only when a file
 with a supported type is opened). Possible values are `all', `unused' and `nil'.
 `unused' will lazy install only unused layers (i.e. layers not listed in
 variable `dotspacemacs-configuration-layers'), `all' will lazy install any layer
@@ -111,9 +117,11 @@ If the value is nil then no banner is displayed.")
 (defvar dotspacemacs-scratch-mode 'text-mode
   "Default major mode of the scratch buffer.")
 
-(defvar dotspacemacs-check-for-update t
+(defvar dotspacemacs-check-for-update nil
   "If non nil then spacemacs will check for updates at startup
-when the current branch is not `develop'")
+when the current branch is not `develop'. Note that checking for
+new versions works via git commands, thus it calls GitHub services
+whenever you start Emacs.")
 
 (defvar dotspacemacs-configuration-layers '(emacs-lisp)
   "List of configuration layers to load.")
@@ -160,7 +168,9 @@ emacs.")
                                     :powerline-scale 1.1)
   "Default font, or prioritized list of fonts. `powerline-scale'
 allows to quickly tweak the mode-line size to make separators
-look not too crappy.")
+look not too crappy.
+
+Has no effect when running Emacs in terminal.")
 
 (defvar dotspacemacs-remap-Y-to-y$ nil
   "If non nil `Y' is remapped to `y$' in Evil states.")
@@ -199,6 +209,11 @@ start.")
 
 (defvar dotspacemacs-helm-position 'bottom
   "Position in which to show the `helm' mini-buffer.")
+
+(defvar dotspacemacs-helm-use-fuzzy 'always
+  "Controls fuzzy matching in helm. If set to `always', force fuzzy matching
+  in all non-asynchronous sources. If set to `source', preserve individual
+  source settings. Else, disable fuzzy matching in all sources.")
 
 (defvar dotspacemacs-large-file-size 1
   "Size (in MB) above which spacemacs will prompt to open the large file
@@ -302,16 +317,18 @@ tool of the list. Supported tools are `ag', `pt', `ack' and `grep'.")
 specified with an installed package.
 NOT USED FOR NOW :-)")
 
-(defvar dotspacemacs-startup-lists '(recents projects)
-  "List of items to show in the startup buffer. If nil it is disabled.
-Possible values are: `recents' `bookmarks' `projects' `agenda' `todos'.")
-
-(defvar dotspacemacs-startup-recent-list-size 5
-  "Number of recent files to show in the startup buffer. Ignored if
-`dotspacemacs-startup-lists' doesn't include `recents'.")
+(defvar dotspacemacs-startup-lists '((recents  . 5)
+                                    (projects . 7))
+  "Association list of items to show in the startup buffer of the form
+`(list-type . list-size)`. If nil it is disabled.
+Possible values for list-type are:
+`recents' `bookmarks' `projects' `agenda' `todos'.")
 
 (defvar dotspacemacs-excluded-packages '()
   "A list of packages that will not be install and loaded.")
+
+(defvar dotspacemacs-frozen-packages '()
+  "A list of packages that cannot be updated.")
 
 ;; only for backward compatibility
 (defalias 'dotspacemacs-mode 'emacs-lisp-mode)
@@ -531,7 +548,7 @@ error recovery."
   (defadvice dotspacemacs/layers
       (after error-recover-preserve-packages activate)
     (progn
-      (setq-default dotspacemacs-download-packages 'used-but-keep-unused)
+      (setq-default dotspacemacs-install-packages 'used-but-keep-unused)
       (ad-disable-advice 'dotspacemacs/layers 'after
                          'error-recover-preserve-packages)
       (ad-activate 'dotspacemacs/layers)))
@@ -565,7 +582,7 @@ error recovery."
   ;; protect global values of these variables
   (let (dotspacemacs-configuration-layer-path dotspacemacs-configuration-layers
         dotspacemacs-additional-packages dotspacemacs-excluded-packages
-        dotspacemacs-download-packages
+        dotspacemacs-install-packages
         (passed-tests 0) (total-tests 0))
     (load dotspacemacs-filepath)
     (dotspacemacs/layers)
@@ -619,9 +636,19 @@ error recovery."
     (lambda (x) (member x '(all any current nil)))
     'dotspacemacs-highlight-delimiters "is one of \'all, \'any, \'current or nil")
    (spacemacs//test-list
-    (lambda (x) (member x '(recents bookmarks projects todos agenda)))
-    'dotspacemacs-startup-lists (concat "includes only \'recents, "
-                                        "\'bookmarks or \'projects"))
+    (lambda (x)
+      (let ((el (or (car-safe x) x))
+            (list-size (cdr-safe x)))
+      (member el '(recents bookmarks projects todos agenda))))
+    'dotspacemacs-startup-lists (concat "includes \'recents, "
+                              "\'bookmarks, \'todos, "
+                              "\'agenda or \'projects"))
+   (spacemacs//test-list
+    (lambda (x)
+      (let ((el (or (car-safe x) x))
+            (list-size (cdr-safe x)))
+        (or (null list-size)(numberp list-size))))
+    'dotspacemacs-startup-lists (concat "list size is a number"))
    (spacemacs//test-var 'stringp 'dotspacemacs-leader-key "is a string")
    (spacemacs//test-var 'stringp 'dotspacemacs-emacs-leader-key "is a string")
    (spacemacs//test-var
@@ -642,7 +669,7 @@ error recovery."
   "Test settings in dotfile for correctness.
  Return non-nil if all the tests passed."
   (interactive)
-  (setq configuration-layer-paths (configuration-layer//discover-layers))
+  (configuration-layer/discover-layers)
   (let ((min-version "0.0"))
     ;; dotspacemacs-version not implemented yet
     ;; (if (version< dotspacemacs-version min-version)

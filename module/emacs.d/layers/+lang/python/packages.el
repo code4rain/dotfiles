@@ -18,23 +18,26 @@
     eldoc
     evil-matchit
     flycheck
+    ggtags
     helm-cscope
+    helm-gtags
     (helm-pydoc :toggle (configuration-layer/package-usedp 'helm))
     hy-mode
     live-py-mode
     (nose :location local)
     org
     pip-requirements
+    py-isort
     pyenv-mode
     (pylookup :location local)
     pytest
     (python :location built-in)
     pyvenv
-    py-yapf
     semantic
     smartparens
     stickyfunc-enhance
     xcscope
+    yapfify
     ))
 
 (defun python/init-anaconda-mode ()
@@ -102,6 +105,12 @@
     :post-init
     (spacemacs/setup-helm-cscope 'python-mode)))
 
+(defun python/post-init-helm-gtags ()
+  (spacemacs/helm-gtags-define-keys-for-mode 'python-mode))
+
+(defun python/post-init-ggtags ()
+  (add-hook 'python-mode-hook #'spacemacs/ggtags-mode-enable))
+
 (defun python/init-helm-pydoc ()
   (use-package helm-pydoc
     :defer t
@@ -110,7 +119,21 @@
 
 (defun python/init-hy-mode ()
   (use-package hy-mode
-    :defer t))
+    :defer t
+    :init
+    (progn
+      (let ((hy-path (executable-find "hy")))
+        (when hy-path
+          (setq hy-mode-inferior-lisp-command (concat hy-path " --spy"))
+          (spacemacs/set-leader-keys-for-major-mode 'hy-mode
+            "si" 'inferior-lisp
+            "sb" 'lisp-load-file
+            "sB" 'switch-to-lisp
+            "se" 'lisp-eval-last-sexp
+            "sf" 'lisp-eval-defun
+            "sF" 'lisp-eval-defun-and-go
+            "sr" 'lisp-eval-region
+            "sR" 'lisp-eval-region-and-go))))))
 
 (defun python/init-live-py-mode ()
   (use-package live-py-mode
@@ -122,7 +145,8 @@
 
 (defun python/init-nose ()
   (use-package nose
-    :if (or (eq 'nose python-test-runner) (member 'nose python-test-runner))
+    :if (or (eq 'nose python-test-runner)
+            (if (listp python-test-runner) (member 'nose python-test-runner)))
     :commands (nosetests-one
                nosetests-pdb-one
                nosetests-all
@@ -155,6 +179,15 @@
       (push 'company-capf company-backends-pip-requirements-mode)
       (spacemacs|add-company-hook pip-requirements-mode))))
 
+(defun python/init-py-isort ()
+  (use-package py-isort
+    :defer t
+    :init
+    (progn
+      (add-hook 'before-save-hook 'spacemacs//python-sort-imports)
+      (spacemacs/set-leader-keys-for-major-mode 'python-mode
+        "rI" 'py-isort-buffer))))
+
 (defun python/init-pyenv-mode ()
   (use-package pyenv-mode
     :if (executable-find "pyenv")
@@ -163,10 +196,15 @@
     (progn
       (pcase python-auto-set-local-pyenv-version
        (`on-visit
-        (add-hook 'python-mode-hook 'spacemacs//pyenv-mode-set-local-version))
+        (spacemacs/add-to-hooks 'spacemacs//pyenv-mode-set-local-version
+                                '(python-mode-hook
+                                  hy-mode-hook)))
        (`on-project-switch
         (add-hook 'projectile-after-switch-project-hook
                   'spacemacs//pyenv-mode-set-local-version)))
+      ;; setup shell correctly on environment switch
+      (dolist (func '(pyenv-mode-set pyenv-mode-unset))
+        (advice-add func :after 'spacemacs/python-setup-shell))
       (spacemacs/set-leader-keys-for-major-mode 'python-mode
         "vu" 'pyenv-mode-unset
         "vs" 'pyenv-mode-set))))
@@ -175,10 +213,15 @@
   (use-package pyvenv
     :defer t
     :init
-    (spacemacs/set-leader-keys-for-major-mode 'python-mode
-      "Va" 'pyvenv-activate
-      "Vd" 'pyvenv-deactivate
-      "Vw" 'pyvenv-workon)))
+    (progn
+      (dolist (mode '(python-mode hy-mode))
+        (spacemacs/set-leader-keys-for-major-mode mode
+          "Va" 'pyvenv-activate
+          "Vd" 'pyvenv-deactivate
+          "Vw" 'pyvenv-workon))
+      ;; setup shell correctly on environment switch
+      (dolist (func '(pyvenv-activate pyvenv-deactivate pyvenv-workon))
+        (advice-add func :after 'spacemacs/python-setup-shell)))))
 
 (defun python/init-pylookup ()
   (use-package pylookup
@@ -198,7 +241,8 @@
 
 (defun python/init-pytest ()
   (use-package pytest
-    :if (or (eq 'pytest python-test-runner) (member 'pytest python-test-runner))
+    :if (or (eq 'pytest python-test-runner)
+            (if (listp python-test-runner) (member 'pytest python-test-runner)))
     :defer t
     :commands (pytest-one
                pytest-pdb-one
@@ -229,26 +273,14 @@
         ;; make C-j work the same way as RET
         (local-set-key (kbd "C-j") 'newline-and-indent))
 
-      (defun python-setup-shell ()
-        (if (executable-find "ipython")
-            (progn
-              (setq python-shell-interpreter "ipython")
-              (when (version< emacs-version "24.4")
-                ;; these settings are unnecessary and even counter-productive on emacs 24.4 and newer
-                (setq python-shell-prompt-regexp "In \\[[0-9]+\\]: "
-                      python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
-                      python-shell-completion-setup-code "from IPython.core.completerlib import module_completion"
-                      python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n"
-                      python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")))
-          (setq python-shell-interpreter "python")))
 
       (defun inferior-python-setup-hook ()
         (setq indent-tabs-mode t))
 
       (add-hook 'inferior-python-mode-hook #'inferior-python-setup-hook)
       (add-hook 'python-mode-hook #'python-default)
-      ;; call `python-setup-shell' once, don't put it in a hook (see issue #5988)
-      (python-setup-shell))
+      ;; call `spacemacs/python-setup-shell' once, don't put it in a hook (see issue #5988)
+      (spacemacs/python-setup-shell))
     :config
     (progn
       ;; add support for `ahs-range-beginning-of-defun' for python-mode
@@ -354,21 +386,13 @@
       (define-key inferior-python-mode-map
         (kbd "C-c M-l") 'spacemacs/comint-clear-buffer))))
 
-(defun python/init-py-yapf ()
-  (use-package py-yapf
-    :commands py-yapf-buffer
-    :init (spacemacs/set-leader-keys-for-major-mode 'python-mode
-            "=" 'py-yapf-buffer)
-    :config (when python-enable-yapf-format-on-save
-              (add-hook 'python-mode-hook 'py-yapf-enable-on-save))))
-
 (defun python/post-init-semantic ()
   (when (configuration-layer/package-usedp 'anaconda-mode)
       (add-hook 'python-mode-hook
                 'spacemacs//disable-semantic-idle-summary-mode t))
-  (add-hook 'python-mode-hook 'semantic-mode)
-  (add-hook 'python-mode-hook 'spacemacs//python-imenu-create-index-use-semantic)
-
+  (spacemacs/add-to-hook 'python-mode-hook
+                         '(semantic-mode
+                           spacemacs//python-imenu-create-index-use-semantic))
   (defadvice semantic-python-get-system-include-path
       (around semantic-python-skip-error-advice activate)
     "Don't cause error when Semantic cannot retrieve include
@@ -380,7 +404,8 @@ fix this issue."
       (error nil))))
 
 (defun python/post-init-smartparens ()
-  (add-hook 'inferior-python-mode-hook 'smartparens-mode)
+  (spacemacs/add-to-hooks 'smartparens-mode '(inferior-python-mode-hook
+                                              hy-mode-hook))
   (defadvice python-indent-dedent-line-backspace
       (around python/sp-backward-delete-char activate)
     (let ((pythonp (or (not smartparens-strict-mode)
@@ -395,4 +420,13 @@ fix this issue."
 (defun python/pre-init-xcscope ()
   (spacemacs|use-package-add-hook xcscope
     :post-init
-    (spacemacs/set-leader-keys-for-major-mode 'python-mode "gi" 'cscope/run-pycscope)))
+    (spacemacs/set-leader-keys-for-major-mode 'python-mode
+      "gi" 'cscope/run-pycscope)))
+
+(defun python/init-yapfify ()
+  (use-package yapfify
+    :defer t
+    :init (spacemacs/set-leader-keys-for-major-mode 'python-mode
+            "=" 'yapfify-buffer)
+    :config (when python-enable-yapf-format-on-save
+              (add-hook 'python-mode-hook 'yapf-mode))))

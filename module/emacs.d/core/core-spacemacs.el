@@ -16,7 +16,6 @@
 (require 'core-debug)
 (require 'core-command-line)
 (require 'core-dotspacemacs)
-(require 'core-emacs-backports)
 (require 'core-release-management)
 (require 'core-auto-completion)
 (require 'core-display-init)
@@ -131,8 +130,7 @@ the final step of executing code in `emacs-startup-hook'.")
                                       "with this build.")))
   ;; check for new version
   (if dotspacemacs-mode-line-unicode-symbols
-      (setq-default spacemacs-version-check-lighter "[⇪]"))
-  (spacemacs/set-new-version-lighter-mode-line-faces))
+      (setq-default spacemacs-version-check-lighter "[⇪]")))
 
 (defun spacemacs//removes-gui-elements ()
   "Remove the menu bar, tool bar and scroll bars."
@@ -188,7 +186,7 @@ defer call using `spacemacs-post-user-config-hook'."
        (with-current-buffer "*scratch*"
          (funcall dotspacemacs-scratch-mode)))
      (configuration-layer/display-summary emacs-start-time)
-     (spacemacs/check-for-new-version spacemacs-version-check-interval)
+     (spacemacs/check-for-new-version nil spacemacs-version-check-interval)
      (setq spacemacs-initialized t))))
 
 (defun spacemacs//describe-system-info-string ()
@@ -207,7 +205,7 @@ defer call using `spacemacs-post-user-config-hook'."
    system-type
    emacs-version
    spacemacs-version
-   (spacemacs/git-get-current-branch)
+   (spacemacs//git-get-current-branch)
    (spacemacs/git-get-current-branch-rev)
    (display-graphic-p)
    dotspacemacs-distribution

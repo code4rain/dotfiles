@@ -17,6 +17,8 @@
         (enh-ruby-mode :toggle ruby-enable-enh-ruby-mode)
         evil-matchit
         flycheck
+        ggtags
+        helm-gtags
         popwin
         rbenv
         robe
@@ -75,6 +77,12 @@
   (spacemacs/add-flycheck-hook 'ruby-mode)
   (spacemacs/add-flycheck-hook 'enh-ruby-mode))
 
+(defun ruby/post-init-ggtags ()
+  (add-hook 'ruby-mode-hook #'spacemacs/ggtags-mode-enable))
+
+(defun ruby/post-init-helm-gtags ()
+  (spacemacs/helm-gtags-define-keys-for-mode 'ruby-mode))
+
 (defun ruby/post-init-popwin ()
   (push '("*rspec-compilation*" :dedicated t :position bottom :stick t :noselect t :height 0.4)
         popwin:special-display-config)
@@ -125,9 +133,9 @@
     :defer t
     :init
     (progn
-      (spacemacs/add-to-hooks
-       'spacemacs//ruby-enable-rspec-mode '(ruby-mode-hook
-                                            enh-ruby-mode-hook))
+      (spacemacs/add-to-hooks 'spacemacs//ruby-enable-rspec-mode
+                              '(ruby-mode-local-vars-hook
+                                enh-ruby-mode-local-vars-hook))
       ;; remove hooks automatically added by rspec via autoload
       ;; because we want to be able to control when rspec-mode is
       ;; loaded based on the layer variable `ruby-test-runner'
@@ -196,9 +204,9 @@
   "Define keybindings for ruby test mode"
   (use-package ruby-test-mode)
     :defer t
-    :init (spacemacs/add-to-hooks
-           'spacemacs//ruby-enable-ruby-test-mode '(ruby-mode-hook
-                                                    enh-ruby-mode-hook))
+    :init (spacemacs/add-to-hooks 'spacemacs//ruby-enable-ruby-test-mode
+                                  '(ruby-mode-local-vars-hook
+                                    enh-ruby-mode-local-vars-hook))
     :config
     (progn
       ;; `ruby-test-mode' adds a hook to enable itself, this hack

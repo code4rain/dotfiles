@@ -18,8 +18,6 @@ my-org/
 org-files/
 semanticdb/
 edts/
-recentf
-recentf~
 .recentf
 .recentf~
 projectile.cache
@@ -37,13 +35,15 @@ tmp/
 .python-environments/
 server/
 /network-security.data
-*~
 *.elc
 *.pyc
 /*.zip
 *.db
 python-*-docs-html
 /.cask/
+/session.*
+/srecode-map.el
+/recentf
 
 # Private directory
 private/

@@ -12,7 +12,10 @@
 (setq spacemacs-base-packages
       '(
         (abbrev :location built-in)
+        ace-window
+        (archive-mode :location built-in)
         (bookmark :location built-in)
+        (centered-buffer-mode :location local)
         (dired :location built-in)
         (dired-x :location built-in)
         (electric-indent-mode :location built-in)
@@ -21,7 +24,9 @@
         evil-escape
         (evil-evilified-state :location local :step pre :protected t)
         evil-visualstar
-        exec-path-from-shell
+        ;; some packages need to look for binaries,
+        ;; which means the path must be ready by then
+        (exec-path-from-shell :step pre)
         help-fns+
         (hi-lock :location built-in)
         (holy-mode :location local :step pre)
@@ -51,6 +56,26 @@
 
 (defun spacemacs-base/init-abbrev ()
   (spacemacs|hide-lighter abbrev-mode))
+
+(defun spacemacs-base/init-ace-window ()
+  (use-package ace-window
+    :defer t
+    :init
+    (progn
+      (spacemacs/set-leader-keys
+        "bD" 'spacemacs/ace-kill-this-buffer
+        ;; FIXME: Needs new binding.
+        ;; "wC" 'spacemacs/ace-center-window
+        "wD" 'spacemacs/ace-delete-window
+        "wM" 'ace-swap-window
+        "wW" 'ace-window)
+      ;; set ace-window keys to home-row
+      (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l)))))
+
+(defun spacemacs-base/init-archive-mode ()
+  (evilified-state-evilify-map archive-mode-map
+    :mode archive-mode
+    :eval-after-load archive-mode))
 
 (defun spacemacs-base/init-bookmark ()
   (use-package bookmark
@@ -109,6 +134,9 @@
        ;; emacs is evil and decrees that vertical shall henceforth be horizontal
        ediff-split-window-function 'split-window-horizontally
        ediff-merge-split-window-function 'split-window-horizontally)
+      ;; show org ediffs unfolded
+      (require 'outline)
+      (add-hook 'ediff-prepare-buffer-hook #'show-all)
       ;; restore window layout when done
       (add-hook 'ediff-quit-hook #'winner-undo))))
 
@@ -364,34 +392,33 @@
       (setq spacemacs-theme-org-height t))))
 
 (defun spacemacs-base/init-subword ()
-  (unless (version< emacs-version "24.4")
-    (use-package subword
-      :defer t
-      :init
-      (progn
-        (unless (category-docstring ?U)
-          (define-category ?U "Uppercase")
-          (define-category ?u "Lowercase"))
-        (modify-category-entry (cons ?A ?Z) ?U)
-        (modify-category-entry (cons ?a ?z) ?u)
-        (make-variable-buffer-local 'evil-cjk-word-separating-categories)
-        (defun spacemacs//subword-enable-camel-case ()
-          "Add support for camel case to subword."
-          (if subword-mode
-              (push '(?u . ?U) evil-cjk-word-separating-categories)
-            (setq evil-cjk-word-separating-categories
-                  (default-value 'evil-cjk-word-separating-categories))))
-        (add-hook 'subword-mode-hook 'spacemacs//subword-enable-camel-case)
-        (spacemacs|add-toggle camel-case-motion
-          :mode subword-mode
-          :documentation "Toggle CamelCase motions."
-          :evil-leader "tc")
-        (spacemacs|add-toggle camel-case-motion-globally
-          :mode global-subword-mode
-          :documentation "Globally toggle CamelCase motions."
-          :evil-leader "t C-c"))
-      :config
-      (spacemacs|diminish subword-mode " ⓒ" " c"))))
+  (use-package subword
+    :defer t
+    :init
+    (progn
+      (unless (category-docstring ?U)
+        (define-category ?U "Uppercase")
+        (define-category ?u "Lowercase"))
+      (modify-category-entry (cons ?A ?Z) ?U)
+      (modify-category-entry (cons ?a ?z) ?u)
+      (make-variable-buffer-local 'evil-cjk-word-separating-categories)
+      (defun spacemacs//subword-enable-camel-case ()
+        "Add support for camel case to subword."
+        (if subword-mode
+            (push '(?u . ?U) evil-cjk-word-separating-categories)
+          (setq evil-cjk-word-separating-categories
+                (default-value 'evil-cjk-word-separating-categories))))
+      (add-hook 'subword-mode-hook 'spacemacs//subword-enable-camel-case)
+      (spacemacs|add-toggle camel-case-motion
+        :mode subword-mode
+        :documentation "Toggle CamelCase motions."
+        :evil-leader "tc")
+      (spacemacs|add-toggle camel-case-motion-globally
+        :mode global-subword-mode
+        :documentation "Globally toggle CamelCase motions."
+        :evil-leader "t C-c"))
+    :config
+    (spacemacs|diminish subword-mode " ⓒ" " c")))
 
 (defun spacemacs-base/init-tar-mode ()
   (evilified-state-evilify-map tar-mode-map
@@ -480,3 +507,5 @@
       (setq winner-boring-buffers
             (append winner-boring-buffers spacemacs/winner-boring-buffers))
       (winner-mode t))))
+
+(defun spacemacs-base/init-centered-buffer-mode ())

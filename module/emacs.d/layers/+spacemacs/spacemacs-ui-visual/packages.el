@@ -10,7 +10,9 @@
 ;;; License: GPLv3
 
 (setq spacemacs-ui-visual-packages
-      '(fancy-battery
+      '(
+        (ansi-colors :location built-in)
+        fancy-battery
         fill-column-indicator
         golden-ratio
         hl-todo
@@ -20,6 +22,10 @@
         (smooth-scrolling :location built-in)
         spaceline
         (zoom-frm :location local)))
+
+(defun spacemacs-ui-visual/init-ansi-colors ()
+  (add-hook 'compilation-filter-hook
+            'spacemacs-ui-visual//compilation-buffer-apply-ansi-colors))
 
 (defun spacemacs-ui-visual/init-fancy-battery ()
   (use-package fancy-battery
@@ -239,6 +245,9 @@
     :init
     (progn
       (add-hook 'spacemacs-post-user-config-hook 'spaceline-compile)
+      (add-hook 'spacemacs-post-theme-change-hook
+                'spacemacs/customize-powerline-faces)
+      (add-hook 'spacemacs-post-theme-change-hook 'powerline-reset)
       (setq-default powerline-default-separator 'utf-8)
       (spacemacs|do-after-display-system-init
        (when (and (eq 'utf-8 powerline-default-separator))
@@ -301,7 +310,8 @@
           (spacemacs-powerline-new-version
            (spacemacs/get-new-version-lighter-face
             spacemacs-version spacemacs-new-version))))
-      (spaceline-spacemacs-theme '(new-version :when active))
+      (apply #'spaceline-spacemacs-theme
+             spacemacs-spaceline-additional-segments)
       ;; Additional spacelines
       (when (package-installed-p 'helm)
         (spaceline-helm-mode t))

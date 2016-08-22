@@ -14,6 +14,7 @@
         auto-complete
         ac-ispell
         company
+        company-quickhelp
         company-statistics
         (helm-company :toggle (configuration-layer/package-usedp 'helm))
         (helm-c-yasnippet :toggle (configuration-layer/package-usedp 'helm))
@@ -22,10 +23,6 @@
         auto-yasnippet
         smartparens
         ))
-
-;; company-quickhelp from MELPA is not compatible with 24.3 anymore
-(unless (version< emacs-version "24.4")
-  (push 'company-quickhelp auto-completion-packages))
 
 ;; TODO replace by company-ispell which comes with company
 ;; to be moved to spell-checking layer as well
@@ -192,7 +189,7 @@
       (define-key yas-minor-mode-map (kbd "M-s-/") 'yas-next-field)
       ;; configure snippet directories
       (let* ((spacemacs--auto-completion-dir
-              (configuration-layer/get-layer-property 'auto-completion :dir))
+              (configuration-layer/get-layer-local-dir 'auto-completion))
              (private-yas-dir (if auto-completion-private-snippets-directory
                                   auto-completion-private-snippets-directory
                                 (concat
@@ -249,16 +246,7 @@
 
 (defun auto-completion/post-init-smartparens ()
   (with-eval-after-load 'smartparens
-    ;;  We need to know whether the smartparens was enabled, see
-    ;; `yas-before-expand-snippet-hook' below.
-    (defvar smartparens-enabled-initially t
-      "Stored whether smartparens is originally enabled or not.")
     (add-hook 'yas-before-expand-snippet-hook
-              (lambda ()
-                ;; If enabled, smartparens will mess snippets expanded by `hippie-expand`
-                (setq smartparens-enabled-initially smartparens-mode)
-                (smartparens-mode -1)))
+              #'spacemacs//smartparens-disable-before-expand-snippet)
     (add-hook 'yas-after-exit-snippet-hook
-              (lambda ()
-                (when smartparens-enabled-initially
-                  (smartparens-mode 1))))))
+              #'spacemacs//smartparens-restore-after-exit-snippet)))

@@ -18,7 +18,6 @@
                                        ("ai"  "irc")
                                        ("as"  "shells")
                                        ("b"   "buffers")
-                                       ("bm"  "move")
                                        ("c"   "compile/comments")
                                        ("C"   "capture/colors")
                                        ("e"   "errors")
@@ -117,17 +116,16 @@
   "au"  'undo-tree-visualize)
 ;; buffers --------------------------------------------------------------------
 (spacemacs/set-leader-keys
-  "bd"  'spacemacs/kill-this-buffer
   "TAB" 'spacemacs/alternate-buffer
-  "bh"  'spacemacs/home
+  "bd"  'spacemacs/kill-this-buffer
   "be"  'spacemacs/safe-erase-buffer
-  "bK"  'spacemacs/kill-other-buffers
-  "bk"  'ido-kill-buffer
-  "b C-k" 'spacemacs/kill-matching-buffers-rudely
-  "bP"  'spacemacs/copy-clipboard-to-whole-buffer
-  "bn"  'spacemacs/next-useful-buffer
+  "bh"  'spacemacs/home
+  "bk"  'spacemacs/kill-matching-buffers-rudely
+  "bn"  'next-buffer
+  "bm"  'spacemacs/kill-other-buffers
   "bN"  'spacemacs/new-empty-buffer
-  "bp"  'spacemacs/previous-useful-buffer
+  "bP"  'spacemacs/copy-clipboard-to-whole-buffer
+  "bp"  'previous-buffer
   "bR"  'spacemacs/safe-revert-buffer
   "bs"  'spacemacs/switch-to-scratch-buffer
   "bY"  'spacemacs/copy-whole-buffer-to-clipboard
@@ -139,6 +137,33 @@
   "en" 'spacemacs/next-error
   "eN" 'spacemacs/previous-error
   "ep" 'spacemacs/previous-error)
+(spacemacs|define-transient-state error
+  :title "Error transient state"
+  :hint-is-doc t
+  :dynamic-hint
+  (let ((sys (spacemacs//error-delegate)))
+    (cond
+     ((eq 'flycheck sys)
+      "\nBrowsing flycheck errors from this buffer.")
+     ((eq 'emacs sys)
+      (let ((buf (next-error-find-buffer)))
+        (if buf
+            (concat "\nBrowsing entries from \""
+                    (buffer-name buf)
+                    "\""
+                    (with-current-buffer buf
+                      (when spacemacs--gne-line-func
+                        (format " (%d of %d)"
+                                (max 1 (1+ (- spacemacs--gne-cur-line
+                                              spacemacs--gne-min-line)))
+                                (1+ (- spacemacs--gne-max-line
+                                       spacemacs--gne-min-line))))))
+          "\nNo next-error capable buffer found.")))))
+  :bindings
+  ("n" spacemacs/next-error "next")
+  ("p" spacemacs/previous-error "prev")
+  ("q" nil "quit" :exit t)
+  :evil-leader "e.")
 ;; file -----------------------------------------------------------------------
 (spacemacs/set-leader-keys
   "fc" 'spacemacs/copy-file
@@ -153,7 +178,7 @@
   "fg" 'rgrep
   "fl" 'find-file-literally
   "fE" 'spacemacs/sudo-edit
-  "fo" 'spacemacs/open-in-external-app
+  "fo" 'spacemacs/open-file-or-directory-in-external-app
   "fR" 'spacemacs/rename-current-buffer-file
   "fS" 'evil-write-all
   "fs" 'save-buffer
@@ -194,9 +219,11 @@
 (spacemacs/set-leader-keys
   "j0" 'spacemacs/push-mark-and-goto-beginning-of-line
   "j$" 'spacemacs/push-mark-and-goto-end-of-line
-  "jf" 'find-function-at-point
+  "jF" 'find-function-at-point
+  "jf" 'find-function
   "ji" 'spacemacs/jump-in-buffer
-  "jv" 'find-variable-at-point)
+  "jv" 'find-variable
+  "jV" 'find-variable-at-point)
 
 ;; Compilation ----------------------------------------------------------------
 (spacemacs/set-leader-keys
@@ -269,7 +296,6 @@
   :documentation "Display the current frame in full screen."
   :evil-leader "TF")
 (spacemacs|add-toggle maximize-frame
-  :if (version< "24.3.50" emacs-version)
   :status (eq (frame-parameter nil 'fullscreen) 'maximized)
   :on (toggle-frame-maximized)
   :off (toggle-frame-maximized)
@@ -292,7 +318,7 @@
   :documentation "Display the tool bar in GUI mode."
   :evil-leader "Tt")
 (spacemacs|add-toggle menu-bar
-  :if (or window-system (version<= "24.3.1" emacs-version))
+  :if window-system
   :mode menu-bar-mode
   :documentation "Display the menu bar."
   :evil-leader "Tm")
@@ -333,7 +359,7 @@
   "w2"  'spacemacs/layout-double-columns
   "w3"  'spacemacs/layout-triple-columns
   "wb"  'spacemacs/switch-to-minibuffer-window
-  "wd"  'delete-window
+  "wd"  'spacemacs/delete-window
   "wt"  'spacemacs/toggle-current-window-dedication
   "wf"  'follow-mode
   "wF"  'make-frame
@@ -354,7 +380,8 @@
   "wl"  'evil-window-right
   "w <right>"  'evil-window-right
   "wm"  'spacemacs/toggle-maximize-buffer
-  "wM"  'spacemacs-centered-buffer-mode
+  "wc"  'spacemacs/toggle-centered-buffer-mode
+  "wC"  'spacemacs/centered-buffer-mode-full-width
   "wo"  'other-frame
   "wr"  'spacemacs/rotate-windows
   "wR"  'spacemacs/rotate-windows-backward
@@ -367,7 +394,8 @@
   "wV"  'split-window-right-and-focus
   "ww"  'other-window
   "w/"  'split-window-right
-  "w="  'balance-windows)
+  "w="  'balance-windows
+  "w_"  'spacemacs/maximize-horizontally)
 ;; text -----------------------------------------------------------------------
 (defalias 'count-region 'count-words-region)
 
@@ -400,7 +428,14 @@
   "xtw" 'transpose-words
   "xU"  'upcase-region
   "xu"  'downcase-region
-  "xwc" 'spacemacs/count-words-analysis)
+  "xwc" 'spacemacs/count-words-analysis
+  "x TAB" 'indent-rigidly)
+
+(define-key indent-rigidly-map "h" 'indent-rigidly-left)
+(define-key indent-rigidly-map "l" 'indent-rigidly-right)
+(define-key indent-rigidly-map "H" 'indent-rigidly-left-to-tab-stop)
+(define-key indent-rigidly-map "L" 'indent-rigidly-right-to-tab-stop)
+
 ;; shell ----------------------------------------------------------------------
 (with-eval-after-load 'shell
   (evil-define-key 'insert comint-mode-map [up] 'comint-previous-input)
@@ -415,9 +450,9 @@
 (spacemacs|define-transient-state buffer
   :title "Buffer Selection Transient State"
   :bindings
-  ("n" spacemacs/next-useful-buffer "next")
-  ("N" spacemacs/previous-useful-buffer "previous")
-  ("p" spacemacs/previous-useful-buffer "previous")
+  ("n" next-buffer "next")
+  ("N" previous-buffer "previous")
+  ("p" previous-buffer "previous")
   ("K" spacemacs/kill-this-buffer "kill")
   ("q" nil "quit" :exit t))
 (spacemacs/set-leader-keys "b." 'spacemacs/buffer-transient-state/body)
@@ -453,8 +488,8 @@
  ──────^^^^───────────── ────^^^^───────────── ─────^^─────────────── ──────^^──────────────────── ─────^^──────────────────────────────
  [_j_/_k_] down/up       [_J_/_K_] down/up     [_s_] vertical         [_[_] shrink horizontally    [_q_] quit
  [_h_/_l_] left/right    [_H_/_L_] left/right  [_S_] vert & follow    [_]_] enlarge horizontally   [_u_] restore prev layout
- [_0_-_9_] window N      [_R_]^^   rotate      [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
- [_w_]^^   other window  ^^^^                  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
+ [_0_-_9_] window N      [_r_]^^   rotate fwd  [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
+ [_w_]^^   other window  [_R_]^^   rotate bwd  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
  [_o_]^^   other frame   ^^^^                  ^^                     ^^                           [_D_] close other
  ^^^^                    ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode"
   :bindings
@@ -495,7 +530,8 @@
   ("L" evil-window-move-far-right)
   ("<S-right>" evil-window-move-far-right)
   ("o" other-frame)
-  ("R" spacemacs/rotate-windows)
+  ("r" spacemacs/rotate-windows)
+  ("R" spacemacs/rotate-windows-backward)
   ("s" split-window-below)
   ("S" split-window-below-and-focus)
   ("u" winner-undo)

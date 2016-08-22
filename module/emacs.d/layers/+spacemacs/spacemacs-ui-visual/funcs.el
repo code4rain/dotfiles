@@ -91,7 +91,7 @@
   (setq scroll-conservatively 101))
 
 (defun spacemacs/disable-smooth-scrolling ()
-  "Enable smooth scrolling."
+  "Disable smooth scrolling."
   (interactive)
   (setq scroll-conservatively 0))
 
@@ -190,3 +190,10 @@
   (interactive)
   (spacemacs//zoom-frm-do 0)
   (spacemacs//zoom-frm-powerline-reset))
+
+
+;; ansi-colors
+
+(defun spacemacs-ui-visual//compilation-buffer-apply-ansi-colors ()
+  (let ((inhibit-read-only t))
+    (ansi-color-apply-on-region compilation-filter-start (point-max))))

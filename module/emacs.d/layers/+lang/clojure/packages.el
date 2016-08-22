@@ -7,6 +7,8 @@
     (clojure-snippets :toggle (configuration-layer/layer-usedp 'auto-completion))
     company
     eldoc
+    ggtags
+    helm-gtags
     popwin
     smartparens
     subword
@@ -237,14 +239,19 @@
               #'smartparens-mode)))
 
 (defun clojure/post-init-subword ()
-  (unless (version< emacs-version "24.4")
-    (add-hook 'cider-mode-hook 'subword-mode)))
+  (add-hook 'cider-mode-hook 'subword-mode))
 
 (defun clojure/post-init-company ()
   (push 'company-capf company-backends-cider-mode)
   (spacemacs|add-company-hook cider-mode)
   (push 'company-capf company-backends-cider-repl-mode)
   (spacemacs|add-company-hook cider-repl-mode))
+
+(defun clojure/post-init-ggtags ()
+  (add-hook 'clojure-mode-hook #'spacemacs/ggtags-mode-enable))
+
+(defun clojure/post-init-helm-gtags ()
+  (spacemacs/helm-gtags-define-keys-for-mode 'clojure-mode))
 
 (defun clojure/init-clojure-snippets ()
   (use-package clojure-snippets

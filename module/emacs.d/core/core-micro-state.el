@@ -34,6 +34,8 @@ Characters enclosed in `[]' will have this face applied to them."
                         :foreground err
                         :bold t)))
 (spacemacs/defface-micro-state-faces)
+(add-hook 'spacemacs-post-theme-change-hook
+          'spacemacs/defface-micro-state-faces)
 
 (defun spacemacs//micro-state-set-minibuffer-height (str)
   "Set the max mini windows size given a string STR."
@@ -164,17 +166,20 @@ used."
          (doc-body
           `((let ((bdoc ,@binding-doc)
                   (defdoc ,@default-doc))
-              (if bdoc
-                  (apply ',msg-func
-                         (list (spacemacs//micro-state-propertize-doc
-                                (format "%S: %s" ',name bdoc))))
-                (when (and defdoc
-                           ',wrapped (not (plist-get ',binding :exit)))
-                  (spacemacs//micro-state-set-minibuffer-height defdoc)
-                  (apply ',msg-func
-                         (list (spacemacs//micro-state-propertize-doc
-                                (format "%S: %s" ',name defdoc))))
-                  defdoc)))))
+              (cond
+               (bdoc
+                (apply ',msg-func
+                       (list (spacemacs//micro-state-propertize-doc
+                              (format "%S: %s" ',name bdoc))))
+                bdoc)
+               ((and defdoc
+                     ',wrapped
+                     (not (plist-get ',binding :exit)))
+                (spacemacs//micro-state-set-minibuffer-height defdoc)
+                (apply ',msg-func
+                       (list (spacemacs//micro-state-propertize-doc
+                              (format "%S: %s" ',name defdoc))))
+                defdoc)))))
          (wrapper-func
           (if (and (boundp wrapped)
                    (eval `(keymapp ,wrapped)))

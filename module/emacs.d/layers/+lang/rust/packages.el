@@ -11,13 +11,39 @@
 
 (setq rust-packages
   '(
+    cargo
     company
     racer
     flycheck
     (flycheck-rust :toggle (configuration-layer/package-usedp 'flycheck))
+    ggtags
+    helm-gtags
     rust-mode
     toml-mode
     ))
+
+(defun rust/init-cargo ()
+  (use-package cargo
+    :defer t
+    :init
+    (progn
+      (spacemacs/declare-prefix-for-mode 'rust-mode "mc" "cargo")
+      (spacemacs/set-leader-keys-for-major-mode 'rust-mode
+        "c." 'cargo-process-repeat
+        "cC" 'cargo-process-clean
+        "cX" 'cargo-process-run-example
+        "cc" 'cargo-process-build
+        "cd" 'cargo-process-doc
+        "ce" 'cargo-process-bench
+        "cf" 'cargo-process-current-test
+        "cf" 'cargo-process-fmt
+        "ci" 'cargo-process-init
+        "cn" 'cargo-process-new
+        "co" 'cargo-process-current-file-tests
+        "cs" 'cargo-process-search
+        "cu" 'cargo-process-update
+        "cx" 'cargo-process-run
+        "t" 'cargo-process-test))))
 
 (defun rust/post-init-flycheck ()
   (spacemacs/add-flycheck-hook 'rust-mode))
@@ -27,20 +53,18 @@
     :defer t
     :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
+(defun rust/post-init-ggtags ()
+  (add-hook 'rust-mode-hook #'spacemacs/ggtags-mode-enable))
+
+(defun rust/post-init-helm-gtags ()
+  (spacemacs/helm-gtags-define-keys-for-mode 'rust-mode))
+
 (defun rust/init-rust-mode ()
   (use-package rust-mode
     :defer t
-    :config
-    (progn
-      (spacemacs/declare-prefix-for-mode 'rust-mode "mc" "cargo")
-      (spacemacs/set-leader-keys-for-major-mode 'rust-mode
-        "="  'rust-format-buffer
-        "cC" 'spacemacs/rust-cargo-clean
-        "cc" 'spacemacs/rust-cargo-build
-        "cd" 'spacemacs/rust-cargo-doc
-        "cf" 'spacemacs/rust-cargo-fmt
-        "ct" 'spacemacs/rust-cargo-test
-        "cx" 'spacemacs/rust-cargo-run))))
+    :init
+    (spacemacs/set-leader-keys-for-major-mode 'rust-mode
+      "=" 'rust-format-buffer)))
 
 (defun rust/init-toml-mode ()
   (use-package toml-mode

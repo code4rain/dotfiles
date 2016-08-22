@@ -91,12 +91,12 @@
                                                 web-mode-hook))
     :config
     (progn
-      (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'emmet-expand-yas)
-      (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'emmet-expand-yas)
-      (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'emmet-expand-yas)
-      (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'emmet-expand-yas)
-      (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'emmet-expand-yas)
-      (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'emmet-expand-yas)
+      (evil-define-key 'insert emmet-mode-keymap (kbd "TAB") 'spacemacs/emmet-expand)
+      (evil-define-key 'insert emmet-mode-keymap (kbd "<tab>") 'spacemacs/emmet-expand)
+      (evil-define-key 'emacs emmet-mode-keymap (kbd "TAB") 'spacemacs/emmet-expand)
+      (evil-define-key 'emacs emmet-mode-keymap (kbd "<tab>") 'spacemacs/emmet-expand)
+      (evil-define-key 'hybrid emmet-mode-keymap (kbd "TAB") 'spacemacs/emmet-expand)
+      (evil-define-key 'hybrid emmet-mode-keymap (kbd "<tab>") 'spacemacs/emmet-expand)
       (spacemacs|hide-lighter emmet-mode))))
 
 (defun html/post-init-evil-matchit ()
@@ -176,6 +176,10 @@
     (push '(company-web-html company-css) company-backends-web-mode)
     :config
     (progn
+      (spacemacs/declare-prefix-for-mode 'web-mode "me" "errors")
+      (spacemacs/declare-prefix-for-mode 'web-mode "mg" "goto")
+      (spacemacs/declare-prefix-for-mode 'web-mode "mh" "dom")
+      (spacemacs/declare-prefix-for-mode 'web-mode "mr" "refactor")
       (spacemacs/set-leader-keys-for-major-mode 'web-mode
         "eh" 'web-mode-dom-errors-show
         "gb" 'web-mode-element-beginning
@@ -214,6 +218,7 @@
         :title "Web-mode Transient State"
         :columns 4
         :foreign-keys run
+        :evil-leader-for-mode (web-mode . ".")
         :bindings
         ("j" web-mode-element-next "next")
         ("J" web-mode-element-sibling-next "next sibling")
@@ -230,9 +235,7 @@
         ("w" web-mode-element-wrap "wrap")
         ("p" web-mode-dom-xpath "xpath")
         ("q" nil "quit" :exit t)
-        ("<escape>" nil nil :exit t))
-      (spacemacs/set-leader-keys-for-major-mode 'web-mode
-        "." 'spacemacs/web-mode-transient-state/body))
+        ("<escape>" nil nil :exit t)))
 
     :mode
     (("\\.phtml\\'"      . web-mode)

@@ -12,15 +12,21 @@
 (setq scala-packages
   '(
     ensime
+    flycheck
+    ggtags
+    helm-gtags
     noflet
-    sbt-mode
+    org
     scala-mode
+    sbt-mode
     ))
 
 (defun scala/init-ensime ()
   (use-package ensime
-    :commands (ensime-mode)
+    :defer t
     :init
+    ;; note ensime-mode is hooked to scala-mode-hook automatically by
+    ;; ensime-mode via an autoload
     (progn
       (spacemacs/register-repl 'ensime 'ensime-inf-switch "ensime")
       (when scala-enable-eldoc
@@ -188,8 +194,15 @@
       (when (configuration-layer/package-usedp 'expand-region)
         (require 'ensime-expand-region nil 'noerror)))))
 
+(defun scala/post-init-flycheck ()
+  (spacemacs/add-flycheck-hook 'scala-mode))
+
 (defun scala/init-noflet ()
   (use-package noflet))
+
+(defun scala/pre-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-config (add-to-list 'org-babel-load-languages '(scala . t))))
 
 (defun scala/init-sbt-mode ()
   (use-package sbt-mode
@@ -260,3 +273,9 @@ replace it with the unicode arrow."
       (setq scala-indent:align-forms t
             scala-indent:align-parameters t
             scala-indent:default-run-on-strategy scala-indent:operator-strategy))))
+
+(defun scala/post-init-ggtags ()
+  (add-hook 'scala-mode-hook #'spacemacs/ggtags-mode-enable))
+
+(defun scala/post-init-helm-gtags ()
+  (spacemacs/helm-gtags-define-keys-for-mode 'scala-mode))

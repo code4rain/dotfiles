@@ -61,19 +61,6 @@
   (let ((message-log-max nil))
     (apply 'message msg args)))
 
-(defun spacemacs/jump-in-buffer ()
-  (interactive)
-  (call-interactively
-   (cond
-    ((and (configuration-layer/layer-usedp 'helm)
-          (eq major-mode 'org-mode))
-     'helm-org-in-buffer-headings)
-    ((configuration-layer/layer-usedp 'helm)
-     'helm-semantic-or-imenu)
-    ((configuration-layer/layer-usedp 'ivy)
-     'counsel-imenu)
-    (t 'imenu))))
-
 (defun spacemacs/split-and-new-line ()
   "Split a quoted string or s-expression and insert a new line with
 auto-indent."
@@ -519,7 +506,7 @@ If the universal prefix argument is used then will the windows too."
   (delete-other-windows)
   (split-window-right))
 
-(defalias 'spacemacs/home 'spacemacs-buffer/goto-buffer
+(defalias 'spacemacs/home 'spacemacs-buffer/refresh
   "Go to home Spacemacs buffer")
 
 (defun spacemacs/home-delete-other-windows ()
@@ -762,10 +749,14 @@ If JUSTIFY-RIGHT is non nil justify to the right instead of the
 left. If AFTER is non-nil, add whitespace to the left instead of
 the right."
   (interactive "r\nsAlign regexp: ")
-  (let ((complete-regexp (if after
-                             (concat regexp "\\([ \t]*\\)")
-                           (concat "\\([ \t]*\\)" regexp)))
-        (group (if justify-right -1 1)))
+  (let* ((ws-regexp (if (string-empty-p regexp)
+                        "\\(\\s-+\\)"
+                      "\\(\\s-*\\)"))
+         (complete-regexp (if after
+                              (concat regexp ws-regexp)
+                            (concat ws-regexp regexp)))
+         (group (if justify-right -1 1)))
+    (message "%S" complete-regexp)
     (align-regexp start end complete-regexp group 1 t)))
 
 ;; Modified answer from http://emacs.stackexchange.com/questions/47/align-vertical-columns-of-numbers-on-the-decimal-point

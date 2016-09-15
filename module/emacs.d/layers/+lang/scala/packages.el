@@ -34,7 +34,8 @@
       (add-hook 'scala-mode-hook 'scala/configure-flyspell)
       (add-hook 'scala-mode-hook 'scala/configure-ensime)
       (when scala-auto-start-ensime
-        (add-hook 'scala-mode-hook 'scala/maybe-start-ensime)))
+        (add-hook 'scala-mode-hook 'scala/maybe-start-ensime))
+      (add-to-list 'spacemacs-jump-handlers-scala-mode 'ensime-edit-definition))
     :config
     (progn
       (setq user-emacs-ensime-directory ".cache/ensime")
@@ -136,7 +137,6 @@
         "el"     'ensime-show-all-errors-and-warnings
         "es"     'ensime-stacktrace-switch
 
-        "gg"     'ensime-edit-definition
         "gp"     'ensime-pop-find-definition-stack
         "gi"     'ensime-goto-impl
         "gt"     'ensime-goto-test
@@ -208,14 +208,16 @@
   (use-package sbt-mode
     :defer t
     :init (spacemacs/set-leader-keys-for-major-mode 'scala-mode
-            "bb" 'sbt-command)))
+            "bb" 'sbt-command
+            "bh" 'sbt-hydra)))
 
 (defun scala/init-scala-mode ()
   (use-package scala-mode
     :defer t
     :init
-    (dolist (ext '(".cfe" ".cfs" ".si" ".gen" ".lock"))
-      (add-to-list 'completion-ignored-extensions ext))
+    (progn
+      (dolist (ext '(".cfe" ".cfs" ".si" ".gen" ".lock"))
+        (add-to-list 'completion-ignored-extensions ext)))
     :config
     (progn
       ;; Automatically insert asterisk in a comment when enabled
@@ -275,7 +277,7 @@ replace it with the unicode arrow."
             scala-indent:default-run-on-strategy scala-indent:operator-strategy))))
 
 (defun scala/post-init-ggtags ()
-  (add-hook 'scala-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'scala-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun scala/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'scala-mode))

@@ -23,7 +23,7 @@
                  (company-quickhelp-mode -1))) t))
 
 (defun racket/post-init-ggtags ()
-  (add-hook 'racket-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'racket-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun racket/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'racket-mode))
@@ -31,7 +31,9 @@
 (defun racket/init-racket-mode ()
   (use-package racket-mode
     :defer t
-    :init (spacemacs/register-repl 'racket-mode 'racket-repl "racket")
+    :init
+    (progn
+      (spacemacs/register-repl 'racket-mode 'racket-repl "racket"))
     :config
     (progn
       ;; smartparens configuration
@@ -87,7 +89,6 @@
       (spacemacs/set-leader-keys-for-major-mode 'racket-mode
         ;; navigation
         "g`" 'racket-unvisit
-        "gg" 'racket-visit-definition
         "gm" 'racket-visit-module
         "gr" 'racket-open-require-path
         ;; doc

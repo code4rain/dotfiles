@@ -54,7 +54,7 @@
     :init (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)))
 
 (defun rust/post-init-ggtags ()
-  (add-hook 'rust-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'rust-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun rust/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'rust-mode))
@@ -63,8 +63,9 @@
   (use-package rust-mode
     :defer t
     :init
-    (spacemacs/set-leader-keys-for-major-mode 'rust-mode
-      "=" 'rust-format-buffer)))
+    (progn
+      (spacemacs/set-leader-keys-for-major-mode 'rust-mode
+        "=" 'rust-format-buffer))))
 
 (defun rust/init-toml-mode ()
   (use-package toml-mode
@@ -93,5 +94,4 @@
     (progn
       (spacemacs/add-to-hook 'rust-mode-hook '(racer-mode eldoc-mode))
       (spacemacs/declare-prefix-for-mode 'rust-mode "mg" "goto")
-      (spacemacs/set-leader-keys-for-major-mode 'rust-mode
-        "gg" 'racer-find-definition))))
+      (add-to-list 'spacemacs-jump-handlers-rust-mode 'racer-find-definition))))

@@ -24,8 +24,7 @@
         macrostep
         semantic
         smartparens
-        srefactor
-        ))
+        srefactor))
 
 (defun emacs-lisp/init-ielm ()
   (use-package ielm
@@ -81,8 +80,9 @@
         (spacemacs/declare-prefix-for-mode mode "mg" "find-symbol")
         (spacemacs/declare-prefix-for-mode mode "mh" "help")
         (spacemacs/set-leader-keys-for-major-mode mode
-          "gg" 'elisp-slime-nav-find-elisp-thing-at-point
-          "hh" 'elisp-slime-nav-describe-elisp-thing-at-point)))))
+          "hh" 'elisp-slime-nav-describe-elisp-thing-at-point)
+        (let ((jumpl (intern (format "spacemacs-jump-handlers-%S" mode))))
+          (add-to-list jumpl 'elisp-slime-nav-find-elisp-thing-at-point))))))
 
 (defun emacs-lisp/init-emacs-lisp ()
   (dolist (mode '(emacs-lisp-mode lisp-interaction-mode))
@@ -97,6 +97,7 @@
       "er" 'eval-region
       "ef" 'eval-defun
       "el" 'lisp-state-eval-sexp-end-of-line
+      "gG" 'spacemacs/nav-find-elisp-thing-at-point-other-window
       ","  'lisp-state-toggle-lisp-state
       "tb" 'spacemacs/ert-run-tests-buffer
       "tq" 'ert))
@@ -142,7 +143,7 @@
   (spacemacs/helm-gtags-define-keys-for-mode 'emacs-lisp-mode))
 
 (defun emacs-lisp/post-init-ggtags ()
-  (add-hook 'emacs-lisp-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'emacs-lisp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun emacs-lisp/post-init-semantic ()
   (add-hook 'emacs-lisp-mode-hook 'semantic-mode)

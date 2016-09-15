@@ -41,7 +41,7 @@
           (flycheck-ocaml-setup))))))
 
 (defun ocaml/post-init-ggtags ()
-  (add-hook 'ocaml-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'ocaml-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun ocaml/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'ocaml-mode))
@@ -51,6 +51,8 @@
     :defer t
     :init
     (progn
+      (add-to-list 'spacemacs-jump-handlers-tuareg-mode
+                'spacemacs/merlin-locate)
       (add-hook 'tuareg-mode-hook 'merlin-mode)
       (setq merlin-completion-with-doc t)
       (push 'merlin-company-backend company-backends-merlin-mode)
@@ -61,17 +63,11 @@
         "en" 'merlin-error-next
         "eN" 'merlin-error-prev
         "gb" 'merlin-pop-stack
-        "gg" #'(lambda ()
-                (interactive)
-                (let ((merlin-locate-in-new-window 'never))
-                  (merlin-locate)))
-        "gG" #'(lambda ()
-                (interactive)
-                (let ((merlin-locate-in-new-window 'always))
-                  (merlin-locate)))
+        "gG" 'spacemacs/merlin-locate-other-window
         "gl" 'merlin-locate-ident
         "gi" 'merlin-switch-to-ml
         "gI" 'merlin-switch-to-mli
+        "go" 'merlin-occurrences
         "hh" 'merlin-document
         "ht" 'merlin-type-enclosing
         "hT" 'merlin-type-expr
@@ -80,7 +76,7 @@
       (spacemacs/declare-prefix-for-mode 'tuareg-mode "me" "errors")
       (spacemacs/declare-prefix-for-mode 'tuareg-mode "mg" "goto")
       (spacemacs/declare-prefix-for-mode 'tuareg-mode "mh" "help")
-      (spacemacs/declare-prefix-for-mode 'tuareg-mode "mf" "refactor"))))
+      (spacemacs/declare-prefix-for-mode 'tuareg-mode "mr" "refactor"))))
 
 (defun ocaml/init-ocp-indent ()
   (use-package ocp-indent

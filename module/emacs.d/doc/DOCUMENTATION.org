@@ -89,10 +89,11 @@
      - [[#leader-key][Leader key]]
      - [[#additional-text-objects][Additional text objects]]
    - [[#reserved-prefix-command-for-user][Reserved prefix command for user]]
-   - [[#helm][Helm]]
-     - [[#c-z-and-tab-switch][C-z and Tab switch]]
-     - [[#helm-focus][Helm focus]]
-     - [[#helm-transient-state][Helm transient state]]
+   - [[#completion][Completion]]
+     - [[#helm][Helm]]
+       - [[#c-z-and-tab-switch][C-z and Tab switch]]
+       - [[#helm-focus][Helm focus]]
+       - [[#helm-transient-state][Helm transient state]]
    - [[#discovering][Discovering]]
      - [[#key-bindings][Key bindings]]
        - [[#which-key][Which-key]]
@@ -627,9 +628,32 @@ you can do it with the following layer declaration.
 (defun dotspacemacs/layers ()
   ;; List of configuration layers to load.
   (setq-default dotspacemacs-configuration-layers
-    '(org
+    '(org git
       (auto-completion :disabled-for org git))))
 #+END_SRC
+
+You can also use the =:enabled-for= construct to disable it for /all/ layers
+/except/ those explicitly identified.
+
+#+BEGIN_SRC emacs-lisp
+(defun dotspacemacs/layers ()
+  ;; List of configuration layers to load.
+  (setq-default dotspacemacs-configuration-layers
+    '(java python c-c++
+      (auto-completion :enabled-for java python))))
+#+END_SRC
+
+Note that =:enabled-for= may be an empty list.
+
+#+BEGIN_SRC emacs-lisp
+(defun dotspacemacs/layers ()
+  ;; List of configuration layers to load.
+  (setq-default dotspacemacs-configuration-layers
+    '(java python c-c++
+      (auto-completion :enabled-for))))
+#+END_SRC
+
+=:enabled-for= takes precedence over =:disabled-for= if both are present.
 
 *** Selecting/Ignoring packages of a layer
 By default a declared layer installs/configures all its associated packages. You
@@ -690,7 +714,7 @@ cannot be removed from Spacemacs.
 
 * Concepts
 ** Editing Styles
-   Spacemacs comes with several editing styles which can be switched dynamically
+Spacemacs comes with several editing styles which can be switched dynamically
 providing an easier way to do pair programming, for instance between a Vim user
 and an Emacs user.
 
@@ -950,7 +974,6 @@ Spacemacs has a minimalistic and distraction free graphical UI:
   - [[Errors handling][custom fringe bitmaps]] and error feedbacks for [[https://github.com/flycheck/flycheck][Flycheck]]
 
 ** Color themes
-
 The official Spacemacs theme is [[https://github.com/nashamri/spacemacs-theme][spacemacs-dark]] and it is the default theme
 installed when you first started Spacemacs. There are two variants of the
 theme, a dark one and a light one. Some aspect of these themes can be customized
@@ -1506,25 +1529,31 @@ these is *guaranteed* to never conflict with Spacemacs default key bindings.
 =dotspacemacs/user-config= in your =~/.spacemacs= file, to be able to use ~SPC o
 c~ to run org mode capture.
 
-** Helm
-Spacemacs is powered by [[https://github.com/emacs-helm/helm][Helm]] which is an incremental completion and selection
-narrowing framework.
+** Completion
+Spacemacs is powered by one of two incremental completion and selection
+narrowing frameworks: [[https://github.com/emacs-helm/helm][Helm]] (default) or [[https://github.com/abo-abo/swiper][Ivy]]. To use Ivy, add the =ivy= layer to
+your list of enabled layers. If the =ivy= layer is not enabled, Helm will be
+enabled automatically. (Please note that, as Helm is the more mature of the two,
+some functions may be unavailable if you choose Ivy.)
 
-=Helm= is the central control tower of Spacemacs, it is used to manage
-buffers, projects, search results, configuration layers, toggles and more...
+These completion systems are the central control towers of Spacemacs, they are
+used to manage buffers, projects, search results, configuration layers, toggles
+and more...
 
-Mastering =Helm= will make you a Spacemacs power user. Do not hesitate to read
-the [[https://github.com/emacs-helm/helm/wiki][Helm documentation wiki]].
+Mastering your choice of completion system will make you a Spacemacs power user.
 
-*** C-z and Tab switch
+*** Helm
+Do not hesitate to read the [[https://github.com/emacs-helm/helm/wiki][Helm documentation wiki]].
+
+**** C-z and Tab switch
 The command bound to ~C-z~ is much more useful than the one bound to Tab, so it
 makes sense to swap them. It's also recommended [[http://tuhdo.github.io/helm-intro.html][here]].
 
-*** Helm focus
+**** Helm focus
 If you find yourself unable to return focus to Helm (after a careless
 mouse-click for example), use ~SPC w b~ to return focus to the minibuffer.
 
-*** Helm transient state
+**** Helm transient state
 Spacemacs defines a [[Transient-states][transient state]] for =Helm= to make it work like [[https://github.com/Shougo/unite.vim][Vim's Unite]]
 plugin.
 
@@ -1787,8 +1816,7 @@ The ~SPC j~ prefix is for jumping, joining and splitting.
 | ~SPC j b~   | undo a jump (go back to previous location)                                        |
 | ~SPC j d~   | jump to a listing of the current directory                                        |
 | ~SPC j D~   | jump to a listing of the current directory (other window)                         |
-| ~SPC j f~   | jump to the definition of a function                                              |
-| ~SPC j F~   | jump to the definition of the function around point                               |
+| ~SPC j f~   | jump to the definition of an Emacs Lisp function                                  |
 | ~SPC j i~   | jump to a definition in buffer (imenu)                                            |
 | ~SPC j I~   | jump to a definition in any buffer (imenu)                                        |
 | ~SPC j j~   | jump to a character in the buffer (works as an evil motion)                       |
@@ -1796,8 +1824,7 @@ The ~SPC j~ prefix is for jumping, joining and splitting.
 | ~SPC j k~   | jump to next line and indent it using auto-indent rules                           |
 | ~SPC j l~   | jump to a line with avy (works as an evil motion)                                 |
 | ~SPC j u~   | jump to a URL in the current buffer                                               |
-| ~SPC j v~   | jump to the definition/declaration of a variable                                  |
-| ~SPC j V~   | jump to the definition/declaration of the variable around point                   |
+| ~SPC j v~   | jump to the definition/declaration of an Emacs Lisp variable                      |
 | ~SPC j w~   | jump to a word in the current buffer (works as an evil motion)                    |
 
 **** Joining and splitting
@@ -2093,17 +2120,17 @@ current state. With default =spacemacs-dark= theme:
 Navigation is centered on the ~hjkl~ keys with the hope of providing a fast
 navigation experience like in [[http://ranger.nongnu.org/][ranger]]:
 
-| Key Binding  | Description                                                            |
-|--------------+------------------------------------------------------------------------|
-| ~h~          | collapse expanded directory or go to parent node                       |
-| ~H~          | previous sibling                                                       |
-| ~j~          | next file or directory                                                 |
-| ~J~          | next expanded directory on level down                                  |
-| ~k~          | previous file or directory                                             |
-| ~K~          | parent directory, when reaching the root change it to parent directory |
-| ~l~ or ~RET~ | expand directory                                                       |
-| ~L~          | next sibling                                                           |
-| ~R~          | make a directory the root directory                                    |
+| Key Binding  | Description                                                                   |
+|--------------+-------------------------------------------------------------------------------|
+| ~h~          | collapse expanded directory or go to parent node                              |
+| ~H~          | select previous sibling                                                       |
+| ~j~          | select next file or directory                                                 |
+| ~J~          | select next expanded directory on level down                                  |
+| ~k~          | select previous file or directory                                             |
+| ~K~          | select parent directory, when reaching the root change it to parent directory |
+| ~l~ or ~RET~ | expand directory                                                              |
+| ~L~          | select next sibling                                                           |
+| ~R~          | make a directory the root directory                                           |
 
 *Note*: Point is automatically set to the first letter of a node for a smoother
 experience.
@@ -2132,6 +2159,7 @@ open the file in a split window with ~|~ and ~-~:
 | ~s~         | toggle showing of hidden files  |
 | ~q~ or ~fd~ | hide =NeoTree= buffer           |
 | ~r~         | rename a node                   |
+| ~?~         | show help                       |
 
 **** NeoTree mode-line
 The mode-line has the following format =[x/y] d (D:a, F:b)= where:
@@ -2919,6 +2947,7 @@ These commands automatically switch to =lisp state=.
 | Key Binding | Function                                           |
 |-------------+----------------------------------------------------|
 | ~SPC m g g~ | go to definition                                   |
+| ~SPC m g G~ | go to definition in another window                 |
 | ~SPC m h h~ | describe elisp thing at point (show documentation) |
 | ~SPC m t b~ | execute buffer tests                               |
 | ~SPC m t q~ | ask for test function to execute                   |
@@ -2954,7 +2983,8 @@ To search in a project see [[Searching in a project][project searching]].
 | ~SPC p D~   | open project root in =dired=                            |
 | ~SPC p f~   | find file                                               |
 | ~SPC p F~   | find file based on path around point                    |
-| ~SPC p G~   | regenerate the project's =etags= / =gtags=              |
+| ~SPC p g~   | find tags                                               |
+| ~SPC p C-g~ | regenerate the project's =etags= / =gtags=              |
 | ~SPC p h~   | find file using =helm=                                  |
 | ~SPC p I~   | invalidate the projectile cache                         |
 | ~SPC p k~   | kill all project buffers                                |
@@ -2965,7 +2995,6 @@ To search in a project see [[Searching in a project][project searching]].
 | ~SPC p t~   | open =NeoTree= in =projectile= root                     |
 | ~SPC p T~   | test project                                            |
 | ~SPC p v~   | open project root in =vc-dir= or =magit=                |
-| ~SPC p y~   | find tags                                               |
 | ~SPC /~     | search in project with the best search tool available   |
 | ~SPC s p~   | see [[Searching in a project][search in project]]                                   |
 | ~SPC s a p~ | run =ag=                                                |
@@ -3130,6 +3159,9 @@ with ~SPC SPC spacemacs/recompile-elpa~.
 | [[https://github.com/syl20bnr/spacemacs/pull/2000][2000th issue (PR)]]         | [[https://github.com/IvanMalison][IvanMalison]]  |
 | [[https://github.com/syl20bnr/spacemacs/pull/3000][3000th issue (issue)]]      | [[https://github.com/malchmih][malchmih]]     |
 | [[https://github.com/syl20bnr/spacemacs/pull/4000][4000th issue (issue)]]      | [[https://github.com/icymist][icymist]]      |
+| [[https://github.com/syl20bnr/spacemacs/pull/5000][5000th issue (issue)]]      | [[https://github.com/justbur][justbur]]      |
+| [[https://github.com/syl20bnr/spacemacs/pull/6000][6000th issue (issue)]]      | [[https://github.com/d12frosted][d12frosted]]   |
+| [[https://github.com/syl20bnr/spacemacs/pull/7000][7000th issue (issue)]]      | [[https://github.com/deb0ch][deb0ch]]       |
 
 ** Merged Pull Requests
 
@@ -3148,27 +3180,28 @@ with ~SPC SPC spacemacs/recompile-elpa~.
 
 ** Stars, forks and watchers
 
-| Achievements       | Account         |
-|--------------------+-----------------|
-| 100th watcher      | [[https://github.com/adouzzy][adouzzy]]         |
-| 100th fork         | [[https://github.com/balajisivaraman][balajisivaraman]] |
-| 200th fork         | [[https://github.com/alcol80][alcol80]]         |
-| 300th fork         | [[https://github.com/mlopes][mlopes]]          |
-| 2000th fork        | [[https://github.com/Gameguykiler][Gameguykiler]]    |
-| 100th star         | [[https://github.com/Jackneill][Jackneill]]       |
-| 200th star         | [[https://github.com/jb55][jb55]]            |
-| 400th star         | [[https://github.com/dbohdan][dbohdan]]         |
-| 600th star         | [[https://github.com/laat][laat]]            |
-| 700th star         | [[https://github.com/kendall][kendall]]         |
-| 800th star         | [[https://github.com/urso][urso]]            |
-| 900th star         | [[https://github.com/luisgerhorst][luisgerhorst]]    |
-| 1000th star!       | [[https://github.com/rashly][rashly]]          |
-| 2000th star!!      | [[https://github.com/stshine][stshine]]         |
-| 3000th star!!!     | [[https://github.com/TheBB][TheBB]]           |
-| 4000th star!!!!    | [[https://github.com/nixmaniack][nixmaniack]]      |
-| 5000th star!!!!!   | [[https://github.com/StreakyCobra][StreakyCobra]]    |
-| 6000th star!!!!!!  | [[https://github.com/NJBS][NJBS]]            |
-| 7000th star!!!!!!! | [[https://github.com/mukhali][mukhali]]         |
+| Achievements        | Account         |
+|---------------------+-----------------|
+| 100th watcher       | [[https://github.com/adouzzy][adouzzy]]         |
+| 100th fork          | [[https://github.com/balajisivaraman][balajisivaraman]] |
+| 200th fork          | [[https://github.com/alcol80][alcol80]]         |
+| 300th fork          | [[https://github.com/mlopes][mlopes]]          |
+| 2000th fork         | [[https://github.com/Gameguykiler][Gameguykiler]]    |
+| 100th star          | [[https://github.com/Jackneill][Jackneill]]       |
+| 200th star          | [[https://github.com/jb55][jb55]]            |
+| 400th star          | [[https://github.com/dbohdan][dbohdan]]         |
+| 600th star          | [[https://github.com/laat][laat]]            |
+| 700th star          | [[https://github.com/kendall][kendall]]         |
+| 800th star          | [[https://github.com/urso][urso]]            |
+| 900th star          | [[https://github.com/luisgerhorst][luisgerhorst]]    |
+| 1000th star!        | [[https://github.com/rashly][rashly]]          |
+| 2000th star!!       | [[https://github.com/stshine][stshine]]         |
+| 3000th star!!!      | [[https://github.com/TheBB][TheBB]]           |
+| 4000th star!!!!     | [[https://github.com/nixmaniack][nixmaniack]]      |
+| 5000th star!!!!!    | [[https://github.com/StreakyCobra][StreakyCobra]]    |
+| 6000th star!!!!!!   | [[https://github.com/NJBS][NJBS]]            |
+| 7000th star!!!!!!!  | [[https://github.com/mukhali][mukhali]]         |
+| 8000th star!!!!!!!! | [[https://github.com/shsteven][shsteven]]        |
 
 ** Gitter chat
 
@@ -3188,14 +3221,17 @@ with ~SPC SPC spacemacs/recompile-elpa~.
 
 ** Special Mentions
 
-| Reason                       | Account      |
-|------------------------------+--------------|
-| Autumnal Cleanup 2015 ([[https://github.com/syl20bnr/spacemacs/wiki/Autumnal-Cleanup-2015][wiki]]) | [[https://github.com/StreakyCobra][StreakyCobra]] |
-| Test and debug tools         | [[https://github.com/justbur][justbur]]      |
-| Integration of Ivy           | [[https://github.com/justbur][justbur]]      |
-| Transient States             | [[https://github.com/justbur][justbur]]      |
-| Integration of Persp-mode    | [[https://github.com/CestDiego][CestDiego]]    |
-| Cleanest PR ([[https://github.com/syl20bnr/spacemacs/pull/5545][PR #5545]])       | [[https://github.com/JAremko][JAremko]]      |
+| Reason                                                              | Account         |
+|---------------------------------------------------------------------+-----------------|
+| Autumnal Cleanup 2015 ([[https://github.com/syl20bnr/spacemacs/wiki/Autumnal-Cleanup-2015][wiki]])                                        | [[https://github.com/StreakyCobra][StreakyCobra]]    |
+| Test and debug tools                                                | [[https://github.com/justbur][justbur]]         |
+| Integration of Ivy                                                  | [[https://github.com/justbur][justbur]]         |
+| Transient States                                                    | [[https://github.com/justbur][justbur]]         |
+| Integration of Persp-mode                                           | [[https://github.com/CestDiego][CestDiego]]       |
+| Cleanest PR ([[https://github.com/syl20bnr/spacemacs/pull/5545][PR #5545]])                                              | [[https://github.com/JAremko][JAremko]]         |
+| Documentation tools and GitHub support                              | [[https://github.com/JAremko][JAremko]]         |
+| Code navigation improvement (jump handlers, generalized next error) | [[https://github.com/TheBB][TheBB]]           |
+| Better support for GUI using an Emacs daemon (after-display macro)  | [[https://github.com/travisbhartwell][travisbhartwell]] |
 
 ** Special Titles
 

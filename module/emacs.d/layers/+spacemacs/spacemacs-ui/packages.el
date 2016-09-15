@@ -163,9 +163,12 @@
     :init
     (setq open-junk-file-format (concat spacemacs-cache-directory "junk/%Y/%m/%d-%H%M%S."))
     (defun spacemacs/open-junk-file (&optional arg)
-      "Open junk file Open junk file using helm or ivy depending
-on whether the `ivy' layer is used or not, with
-`prefix-arg' search in junk files"
+      "Open junk file using helm or ivy.
+
+Interface choice depends on whether the `ivy' layer is used or
+not.
+
+When ARG is non-nil search in junk files."
       (interactive "P")
       (let* ((fname (format-time-string open-junk-file-format (current-time)))
              (rel-fname (file-name-nondirectory fname))
@@ -290,8 +293,15 @@ debug-init and load the given list of packages."
     (defun spacemacs//window-numbering-assign ()
       "Custom number assignment for neotree."
       (when (and (boundp 'neo-buffer-name)
-                 (string= (buffer-name) neo-buffer-name))
+                 (string= (buffer-name) neo-buffer-name)
+                 ;; in case there are two neotree windows. Example: when
+                 ;; invoking a transient state from neotree window, the new
+                 ;; window will show neotree briefly before displaying the TS,
+                 ;; causing an error message. the error is eliminated by
+                 ;; assigning 0 only to the top-left window
+                 (eq (selected-window) (window-at 0 0)))
         0))
+
     ;; using lambda to work-around a bug in window-numbering, see
     ;; https://github.com/nschum/window-numbering.el/issues/10
     (setq window-numbering-assign-func

@@ -88,6 +88,7 @@
 (defvar spacemacs--auto-completion-complete-last-candidate nil)
 (defvar spacemacs--auto-completion-shadowed-insert-binding nil)
 (defvar spacemacs--auto-completion-shadowed-emacs-binding nil)
+(defvar spacemacs--auto-completion-shadowed-hybrid-binding nil)
 
 (defun spacemacs//auto-completion-key-sequence-start ()
   "Initiate auto-completion sequence."
@@ -104,12 +105,18 @@
           (lookup-key evil-insert-state-map second-key))
     (setq spacemacs--auto-completion-shadowed-emacs-binding
           (lookup-key evil-emacs-state-map second-key))
+    (setq spacemacs--auto-completion-shadowed-hybrid-binding
+          (lookup-key evil-hybrid-state-map second-key))
     (define-key
       evil-insert-state-map
       second-key
       'spacemacs//auto-completion-key-sequence-end)
     (define-key
       evil-emacs-state-map
+      second-key
+      'spacemacs//auto-completion-key-sequence-end)
+    (define-key
+      evil-hybrid-state-map
       second-key
       'spacemacs//auto-completion-key-sequence-end))
   ;; set a timer to restore the old bindings
@@ -149,7 +156,11 @@
     (define-key
       evil-emacs-state-map
       second-key
-      spacemacs--auto-completion-shadowed-emacs-binding)))
+      spacemacs--auto-completion-shadowed-emacs-binding)
+    (define-key
+      evil-hybrid-state-map
+      second-key
+      spacemacs--auto-completion-shadowed-hybrid-binding)))
 
 
 ;; Editing style
@@ -163,7 +174,9 @@
     (let ((map company-active-map))
       (define-key map (kbd "C-j") 'company-select-next)
       (define-key map (kbd "C-k") 'company-select-previous)
-      (define-key map (kbd "C-l") 'company-complete-selection)))
+      (define-key map (kbd "C-l") 'company-complete-selection))
+    (when (require 'company-quickhelp nil 'noerror)
+      (evil-define-key 'insert company-quickhelp-mode-map (kbd "C-k") 'company-select-previous)))
    (t
     (let ((map company-active-map))
       (define-key map (kbd "C-n") 'company-select-next)

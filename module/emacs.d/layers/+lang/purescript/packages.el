@@ -62,6 +62,7 @@
       (customize-set-variable 'psc-ide-add-import-on-completion purescript-add-import-on-completion)
       (customize-set-variable 'psc-ide-rebuild-on-save purescript-enable-rebuild-on-save)
 
+      (add-to-list 'spacemacs-jump-handlers-purescript-mode 'psc-ide-goto-definition)
       (spacemacs/set-leader-keys-for-major-mode 'purescript-mode
         "mt"  'psc-ide-add-clause
         "mcs" 'psc-ide-case-split
@@ -72,8 +73,7 @@
         "mL"  'psc-ide-load-module
         "mia" 'psc-ide-add-import
         "mis" 'psc-ide-flycheck-insert-suggestion
-        "ht"  'psc-ide-show-type
-        "gg"  'psc-ide-goto-definition))))
+        "ht"  'psc-ide-show-type))))
 
 (defun purescript/pre-init-popwin ()
   (spacemacs|use-package-add-hook popwin

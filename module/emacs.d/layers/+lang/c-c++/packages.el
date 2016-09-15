@@ -34,7 +34,9 @@
   (use-package cc-mode
     :defer t
     :init
-    (add-to-list 'auto-mode-alist `("\\.h\\'" . ,c-c++-default-mode-for-headers))
+    (progn
+      (add-to-list 'auto-mode-alist
+                   `("\\.h\\'" . ,c-c++-default-mode-for-headers)))
     :config
     (progn
       (require 'compile)
@@ -92,8 +94,8 @@
     (spacemacs/add-to-hooks 'c-c++/load-clang-args '(c-mode-hook c++-mode-hook))))
 
 (defun c-c++/post-init-ggtags ()
-  (add-hook 'c-mode-hook #'spacemacs/ggtags-mode-enable)
-  (add-hook 'c++-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'c-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)
+  (add-hook 'c++-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun c-c++/init-gdb-mi ()
   (use-package gdb-mi
@@ -122,13 +124,12 @@
 
 (defun c-c++/post-init-ycmd ()
   (add-hook 'c++-mode-hook 'ycmd-mode)
-  (spacemacs/set-leader-keys-for-major-mode 'c++-mode
-    "gg" 'ycmd-goto
-    "gG" 'ycmd-goto-imprecise)
   (add-hook 'c-mode-hook 'ycmd-mode)
-  (spacemacs/set-leader-keys-for-major-mode 'c-mode
-    "gg" 'ycmd-goto
-    "gG" 'ycmd-goto-imprecise))
+  (add-to-list 'spacemacs-jump-handlers-c++-mode '(ycmd-goto :async t))
+  (add-to-list 'spacemacs-jump-handlers-c-mode '(ycmd-goto :async t))
+  (dolist (mode '(c++-mode c-mode))
+    (spacemacs/set-leader-keys-for-major-mode mode
+      "gG" 'ycmd-goto-imprecise)))
 
 (defun c-c++/post-init-company-ycmd ()
   (push 'company-ycmd company-backends-c-mode-common))

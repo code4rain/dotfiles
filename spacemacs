@@ -60,11 +60,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(
-				      tumblesocks
-				      olivetti
-				      focus)
-   ;; A list of packages that will not be install and loaded.
+   dotspacemacs-additional-packages '()
+   ;; A list of packages that cannot be updated.
+   dotspacemacs-frozen-packages '()
+   ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -94,7 +93,9 @@ values."
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    dotspacemacs-elpa-timeout 5
    ;; If non nil then spacemacs will check for updates at startup
-   ;; when the current branch is not `develop'. (default t)
+   ;; when the current branch is not `develop'. Note that checking for
+   ;; new versions works via git commands, thus it calls GitHub services
+   ;; whenever you start Emacs. (default nil)
    dotspacemacs-check-for-update nil
    ;; If non-nil, a form that evaluates to a package directory. For example, to
    ;; use different package directories for different Emacs versions, set this
@@ -120,19 +121,24 @@ values."
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
    ;; `recents' `bookmarks' `projects' `agenda' `todos'."
+   ;; List sizes may be nil, in which case
+   ;; `spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
                                 (projects . 7))
+   ;; True if the home buffer should respond to resize events.
+   dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'text-mode
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(afternoon
+   dotspacemacs-themes '(
+			 spacemacs-light
+			 afternoon
 			 spacemacs-dark
 			 tango
 			 spolsky
 			 junio
-			 spacemacs-light
 			 solarized-light
 			 solarized-dark
 			 )
@@ -141,8 +147,8 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
-                               :weight normal
+                               :size 14
+                               :weight light
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
@@ -463,7 +469,8 @@ you should place your code here."
 	org-ref-pdf-directory "~/Dropbox/bibliography/bibtex-pdfs/")
   (setq helm-bibtex-bibliography "~/Dropbox/bibliography/references.bib")
   (setq helm-bibtex-library-path "~/Dropbox/bibliography/bibtex-pdfs")
-
+  (global-set-key (kbd "<f12>")
+		  (lambda () (interactive) (find-file "~/Dropbox/org/gtd.org")))
   ;; ------------ ORG MODE -
 
   ;; olivetti
@@ -586,7 +593,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (org-projectile mwim git-link evil-unimpaired ivy flyspell-correct-helm biblio biblio-core xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks oauth toc-org tagedit spacemacs-theme spaceline powerline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox spinner page-break-lines orgit org-repo-todo helm-bibtex org-ref key-chord parsebib org-present org-pomodoro alert log4e gntp org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gtags helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md focus flyspell-correct flycheck-pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diminish define-word cython-mode company-web web-completion-data company-quickhelp pos-tip company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bind-map bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk anaconda-mode pythonic f dash s ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet undo-tree org-plus-contrib hydra ggtags diff-hl company-statistics company auctex async aggressive-indent adaptive-wrap ace-window avy))))
+    (dumb-jump org-projectile mwim git-link evil-unimpaired ivy flyspell-correct-helm biblio biblio-core xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks oauth toc-org tagedit spacemacs-theme spaceline powerline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox spinner page-break-lines orgit org-repo-todo helm-bibtex org-ref key-chord parsebib org-present org-pomodoro alert log4e gntp org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gtags helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md focus flyspell-correct flycheck-pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diminish define-word cython-mode company-web web-completion-data company-quickhelp pos-tip company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bind-map bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk anaconda-mode pythonic f dash s ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet undo-tree org-plus-contrib hydra ggtags diff-hl company-statistics company auctex async aggressive-indent adaptive-wrap ace-window avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -594,6 +601,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
  '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
- '(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
- '(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
- '(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro")))))
+ ;;'(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
+ ;;'(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
+ ;;'(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro"))))
+ )

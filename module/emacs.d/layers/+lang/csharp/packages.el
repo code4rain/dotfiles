@@ -12,6 +12,7 @@
 (setq csharp-packages
   '(
     company
+    csharp-mode
     evil-matchit
     ggtags
     helm-gtags
@@ -30,7 +31,9 @@
         ;; Note: if you are using a roslyn based omnisharp server you can
         ;; set back this variable to t.
         (setq omnisharp-auto-complete-want-documentation nil))
-      (push 'company-omnisharp company-backends-csharp-mode))
+      (push 'company-omnisharp company-backends-csharp-mode)
+      (add-to-list 'spacemacs-jump-handlers-csharp-mode
+                'omnisharp-go-to-definition))
     :config
     (progn
       (spacemacs/declare-prefix-for-mode 'csharp-mode "mc" "csharp/compile")
@@ -50,7 +53,6 @@
         "fR" 'omnisharp-remove-from-project-dired-selected-files
         "pl" 'omnisharp-add-reference
         ;; Navigation
-        "gg"   'omnisharp-go-to-definition
         "gG"   'omnisharp-go-to-definition-other-window
         "gu"   'omnisharp-helm-find-usages
         "gU"   'omnisharp-find-usages-with-ido
@@ -86,6 +88,10 @@
 (defun csharp/post-init-company ()
   (spacemacs|add-company-hook csharp-mode))
 
+(defun csharp/init-csharp-mode ()
+  (use-package csharp-mode
+    :defer t))
+
 (defun csharp/post-init-evil-matchit ()
   (with-eval-after-load 'evil-matchit
     (plist-put evilmi-plugins 'csharp-mode '((evilmi-simple-get-tag evilmi-simple-jump)
@@ -93,7 +99,7 @@
   (add-hook 'csharp-mode-hook 'turn-on-evil-matchit-mode))
 
 (defun csharp/post-init-ggtags ()
-  (add-hook 'csharp-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'csharp-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun csharp/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'csharp-mode))

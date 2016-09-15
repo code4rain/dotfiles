@@ -25,7 +25,13 @@
             cider-prompt-save-file-on-load nil
             cider-repl-use-clojure-font-lock t)
       (push "\\*cider-repl\.\+\\*" spacemacs-useful-buffers-regexp)
-      (add-hook 'clojure-mode-hook 'cider-mode))
+      (add-hook 'clojure-mode-hook 'cider-mode)
+      (dolist (x '(spacemacs-jump-handlers-clojure-mode
+                   spacemacs-jump-handlers-clojurec-mode
+                   spacemacs-jump-handlers-clojurescript-mode
+                   spacemacs-jump-handlers-clojurex-mode
+                   spacemacs-jump-handlers-cider-repl-mode))
+        (add-to-list x 'cider-find-var)))
     :config
     (progn
       ;; add support for golden-ratio
@@ -111,9 +117,11 @@
           "fb" 'cider-format-buffer
 
           "gb" 'cider-pop-back
+          "gC" 'cider-classpath
           "ge" 'cider-jump-to-compilation-error
-          "gg" 'cider-find-var
           "gr" 'cider-jump-to-resource
+          "gn" 'cider-browse-ns
+          "gN" 'cider-browse-ns-all
 
           "'"  'cider-jack-in
           "sb" 'cider-load-buffer
@@ -134,8 +142,10 @@
           "ss" 'cider-switch-to-repl-buffer
           "sx" 'cider-refresh
 
+          "Te" 'cider-enlighten-mode
           "Tf" 'spacemacs/cider-toggle-repl-font-locking
           "Tp" 'spacemacs/cider-toggle-repl-pretty-printing
+          "Tt" 'cider-auto-test-mode
 
           "ta" 'spacemacs/cider-test-run-all-tests
           "tb" 'cider-test-show-report
@@ -248,7 +258,7 @@
   (spacemacs|add-company-hook cider-repl-mode))
 
 (defun clojure/post-init-ggtags ()
-  (add-hook 'clojure-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'clojure-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun clojure/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'clojure-mode))

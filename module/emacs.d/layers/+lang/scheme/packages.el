@@ -24,7 +24,9 @@
 (defun scheme/init-geiser ()
   (use-package geiser
     :commands run-geiser
-    :init (spacemacs/register-repl 'geiser 'geiser-mode-switch-to-repl "geiser")
+    :init
+    (progn
+      (spacemacs/register-repl 'geiser 'geiser-mode-switch-to-repl "geiser"))
     :config
     (progn
       (spacemacs/declare-prefix-for-mode 'scheme-mode "mc" "compiling")
@@ -47,7 +49,6 @@
         "el" 'lisp-state-eval-sexp-end-of-line
         "er" 'geiser-eval-region
 
-        "gg" 'geiser-edit-symbol-at-point
         "gb" 'geiser-pop-symbol-stack
         "gm" 'geiser-edit-module
         "gn" 'next-error
@@ -76,7 +77,7 @@
         "ss" 'geiser-set-scheme))))
 
 (defun scheme/post-init-ggtags ()
-  (add-hook 'scheme-mode-hook #'spacemacs/ggtags-mode-enable))
+  (add-hook 'scheme-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
 
 (defun scheme/post-init-helm-gtags ()
   (spacemacs/helm-gtags-define-keys-for-mode 'scheme-mode))

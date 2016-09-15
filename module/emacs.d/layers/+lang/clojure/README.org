@@ -64,6 +64,12 @@ Or set this variable when loading the configuration layer:
 #+END_SRC
 
 ** CIDER and clj-refactor
+Note that recent versions of CIDER automatically inject the required
+dependencies into your boot or leiningen configuration when you connect to the
+REPL. Thus, the configuration instructions below only apply to CIDER 0.10 and
+older. Most users should be able to just run ~SPC m s i~ to connect to the CIDER
+REPL and skip the rest of this section.
+
 *** Quick Start with boot
 - Install =boot= (see https://github.com/boot-clj/boot#install)
 - Create a file =~/.boot/profile.boot= with the following content:
@@ -132,12 +138,15 @@ As this state works the same for all files, the documentation is in global
 
 *** Goto
 
-| Key Binding | Description   |
-|-------------+---------------|
-| ~SPC m g b~ | go back       |
-| ~SPC m g g~ | goto var      |
-| ~SPC m g e~ | goto error    |
-| ~SPC m g r~ | goto resource |
+| Key Binding | Description           |
+|-------------+-----------------------|
+| ~SPC m g b~ | go back               |
+| ~SPC m g C~ | browse classpath      |
+| ~SPC m g g~ | goto var              |
+| ~SPC m g e~ | goto error            |
+| ~SPC m g r~ | goto resource         |
+| ~SPC m g n~ | browse namespaces     |
+| ~SPC m g N~ | browse all namespaces |
 
 *** REPL
 
@@ -172,9 +181,11 @@ As this state works the same for all files, the documentation is in global
 
 | Key Binding | Description                 |
 |-------------+-----------------------------|
+| ~SPC m T e~ | toggle englighten mode      |
 | ~SPC m T f~ | toggle REPL font-locking    |
 | ~SPC m T p~ | toggle REPL pretty-printing |
 | ~SPC m T i~ | toggle indentation style    |
+| ~SPC m T t~ | toggle auto test mode       |
 
 *** Debugging
 

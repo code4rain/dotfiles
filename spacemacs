@@ -390,7 +390,7 @@ you should place your code here."
 
   ;; centered-cursor-mode set
   ;; (global-centered-cursor-mode +1)
-  (set-face-background 'hl-line "#402060")
+  ;; (set-face-background 'hl-line "#402060")
 
   (setq-default line-spacing 8)
   (defun alex/line-spacing-increase()

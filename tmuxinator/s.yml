@@ -23,9 +23,9 @@ pre:
 windows:
   - MAIN:
       panes:
-        - ranger
+        - r
   - Update:
       layout: even-horizontal
       panes:
         - cd ~/PERFORCE/NILE && helsync
-        - cd ~/PERFORCE/DEV && helsync
+        - cd ~/PERFORCE/DEV_N && helsync

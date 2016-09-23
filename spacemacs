@@ -133,10 +133,10 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+			 tango
 			 spacemacs-light
 			 afternoon
 			 spacemacs-dark
-			 tango
 			 spolsky
 			 junio
 			 solarized-light
@@ -425,6 +425,7 @@ you should place your code here."
       )
     )
 
+  (setq x-mouse-click-focus-ignore-position t)
   ;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
@@ -442,6 +443,12 @@ you should place your code here."
      If used with a numeric prefix argument N, N greater-than signs will be inserted."
     (">" ">>" "»" "›" ))
 
+  ;; quit ediff mode without y-or-n
+  (defun disable-y-or-n-p (orig-fun &rest args)
+    (cl-letf (((symbol-function 'y-or-n-p) (lambda (prompt) t)))
+      (apply orig-fun args)))
+
+  (advice-add 'ediff-quit :around #'disable-y-or-n-p)
   ;; ------------ ORG MODE +
   ;; enable org-indent-mode with org-mode
   (add-hook 'org-mode-hook 'my-org-mode-hook)
@@ -564,24 +571,24 @@ you should place your code here."
   (global-set-key [C-down-mouse-1] nil)
   (global-set-key [C-mouse-1] 'helm-gtags-dwim)
 
-  (defun helm-select-candidate-by-mouse (prefix event)
-    "Select helm candidate by using mouse(click).  With PREFIX, also execute its first action."
-    (interactive "P\ne")
-    (if (helm-alive-p)
-	(progn
-	  (with-helm-buffer
-	    (let* ((posn (elt event 1))
-		   (cursor (line-number-at-pos (point)))
-		   (pointer (line-number-at-pos (posn-point posn))))
-	      (helm--next-or-previous-line (if (> pointer cursor)
-					       'next
-					     'previous)
-					   (abs (- pointer cursor)))))
-	  (when prefix (helm-maybe-exit-minibuffer)))
-      (mouse-drag-region event)))
+  ;; (defun helm-select-candidate-by-mouse (prefix event)
+  ;;   "Select helm candidate by using mouse(click).  With PREFIX, also execute its first action."
+  ;;   (interactive "P\ne")
+  ;;   (if (helm-alive-p)
+  ;; 	(progn
+  ;; 	  (with-helm-buffer
+  ;; 	    (let* ((posn (elt event 1))
+  ;; 		   (cursor (line-number-at-pos (point)))
+  ;; 		   (pointer (line-number-at-pos (posn-point posn))))
+  ;; 	      (helm--next-or-previous-line (if (> pointer cursor)
+  ;; 					       'next
+  ;; 					     'previous)
+  ;; 					   (abs (- pointer cursor)))))
+  ;; 	  (when prefix (helm-maybe-exit-minibuffer)))
+  ;;     (mouse-drag-region event)))
 
-  (bind-key* "<down-mouse-1>" #'helm-select-candidate-by-mouse())
-  (bind-key* "<mouse-1>" #'ignore)
+  ;; (bind-key* "<down-mouse-1>" #'helm-select-candidate-by-mouse())
+  ;; (bind-key* "<mouse-1>" #'ignore)
   )
 
 ;; do not write anything past this comment. this is where emacs will
@@ -599,8 +606,8 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
+ ;;'(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ ;;'(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))
  ;;'(helm-selection ((t (:background "MediumPurple4" :distant-foreground "black"))))
  ;;'(helm-source-header ((t (:foreground "goldenrod" :background "black" :underline t :slant italic))))
  ;;'(mode-line ((t (:background "#14151E" :box (:line-width 1 :color "#eaeaea") :family "Source Code Pro"))))

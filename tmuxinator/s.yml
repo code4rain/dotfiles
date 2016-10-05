@@ -27,5 +27,5 @@ windows:
   - Update:
       layout: even-horizontal
       panes:
-        - cd ~/PERFORCE/NILE && helsync
-        - cd ~/PERFORCE/DEV_N && helsync
+        - cd ~/PERFORCE/NILE && p4sync
+        - cd ~/PERFORCE/DEV_N && p4sync

@@ -1,6 +1,6 @@
 snippet p4 "My Perforce Description" b
 $1:$2
-[Project] ${1:HERO}
+[Project] ${1:Build}
 [Title] ${2}
 [BinType] ${3:AP}
 [Customer] ${4:ALL}
@@ -10,20 +10,13 @@ $1:$2
 [Occurrence Version] ${7:Previous}
 
 [Problem] ${8}
-[Cause & Measure]
-Cause: ${9}
-Measure: ${10}
-[Checking Method] ${11}
-[TARGET MODEL] gracelte_00
+[Cause & Measure] ${9}
+[Checking Method] ${10}
 
 [Team] BSP R&D Group
 [Developer] Alex Kyoungdon Jang
 [Solution company] Samsung Electronics.
-[Change Type] ${12:BUG Fix}
-[Fast Desktop check] : ${13:3} (Select one from following objective item)
-  (1) Pass
-  (2) N/A - Uses Android Studio
-  (3) N/A - Feature can not use Fast Desktop
+[Change Type] ${11:BUG Fix}
 
 endsnippet
 

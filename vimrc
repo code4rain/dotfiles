@@ -26,6 +26,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'w0ng/vim-hybrid'
 
 " Framework
 Plug 'UltiSnips'
@@ -104,7 +105,8 @@ set background=dark
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme PaperColor
+"colorscheme PaperColor
+colorscheme hybrid
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 "Enable Word wrap
@@ -269,7 +271,7 @@ autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
-autocmd BufWritePre * if &modifiable | %s/\s\+$//e | endif
+"autocmd BufWritePre * if &modifiable | %s/\s\+$//e | endif
 "autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -356,13 +358,22 @@ endfunc
 function! s:P4_revert_current( )
   execute "!p4 revert " . expand("%")
 endfunc
+function! s:P4_add_current( )
+  execute "!p4 add " . expand("%")
+endfunc
+function! s:P4_change( )
+  execute "!p4 change"
+endfunc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CMD alias
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
 command! -bang Q quitall<bang>
-command! PerforceEdit call <SID>P4_edit_current()
-command! PerforceRevert call <SID>P4_revert_current()
+command! SpaceIndent set ts=4 sw=4 sws=4 expandtab
+command! EP4 call <SID>P4_edit_current()
+command! RP4 call <SID>P4_revert_current()
+command! XP4 call <SID>P4_add_current()
+command! NP4 call <SID>P4_change()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Cscope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

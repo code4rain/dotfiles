@@ -527,6 +527,37 @@ function! s:rtags(find)
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
+
+function! s:search_sink(line)
+  echom a:line
+  let parts = split(a:line, ':')
+  let excmd = matchstr(parts[1], '^[0-9]*\ze')
+  execute 'silent e' parts[0]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
+endfunction
+
+function! s:search_project(find)
+  if filereadable("GPATH")
+    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  else
+    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  endif
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  if isdirectory(l:root_dir)
+    execute "cd " . l:root_dir
+    execute "cd " . l:cur
+    call fzf#run({
+    \ 'source':  'ag --nogroup --column --color ' . a:find,
+    \ 'options': '+m -d "\s" --ansi --with-nth 1..',
+    \ 'down':    '30%',
+    \ 'sink':    function('s:search_sink')})
+  endif
+endfunction
+command! SearchProject call s:search_project(expand('<cword>'))
+noremap <C-\> :SearchProject<CR>
+
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

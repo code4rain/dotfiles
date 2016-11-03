@@ -442,6 +442,10 @@ let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------
+let g:fzf_layout = s 'window': '-tabnew' }
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
 noremap <silent> <M-o> :FZF<CR>
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -551,7 +555,7 @@ function! s:search_project(find)
     call fzf#run({
     \ 'source':  'ag --nogroup --column --color ' . a:find,
     \ 'options': '+m -d "\s" --ansi --with-nth 1..',
-    \ 'down':    '30%',
+    \ 'window' : '-tabnew',
     \ 'sink':    function('s:search_sink')})
   endif
 endfunction

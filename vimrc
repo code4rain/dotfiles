@@ -36,6 +36,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Mizuchi/vim-ranger'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -412,7 +413,11 @@ endif
 " GTAGS
 "---------------------------------------------------------------------
 function! GtagsCommnad()
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if filereadable("GPATH")
+    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  else
+    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  endif
   let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
@@ -462,7 +467,11 @@ function! s:gtags_sink(line)
 endfunction
 
 function! s:tags()
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if filereadable("GPATH")
+    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  else
+    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  endif
   let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
@@ -486,15 +495,19 @@ command! Ngtags call s:tags()
 function! s:rgtags_sink(line)
   echom a:line
   let parts = split(a:line, '\s')
-  let excmd = matchstr(parts[2], '^[0-9]*\ze')
-  execute 'silent e' parts[3]
+  let excmd = matchstr(parts[3], '^[0-9]*\ze')
+  execute 'silent e' parts[4]
   let [magic, &magic] = [&magic, 0]
   execute excmd
   let &magic = magic
 endfunction
 
 function! s:rtags(find)
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  if filereadable("GPATH")
+    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  else
+    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+  endif
   let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
@@ -622,6 +635,10 @@ vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 vnoremap q <ESC>
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-cpp-enhanced-highlight
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"let g:cpp_class_scope_highlight = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 그외 단축키 설정
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

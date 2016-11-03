@@ -442,7 +442,7 @@ let GtagsCscope_Quiet = 1
 "---------------------------------------------------------------------
 " FZF
 "---------------------------------------------------------------------
-let g:fzf_layout = s 'window': '-tabnew' }
+let g:fzf_layout = { 'window': '-tabnew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 

@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
 " Language Support
 Plug 'tpope/vim-fugitive'
 Plug 'nvie/vim-flake8'
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
 
 " Expand Editor
 Plug 'Lokaltog/vim-easymotion'
@@ -23,7 +25,7 @@ Plug 'kana/vim-textobj-line'
 Plug 'terryma/vim-expand-region'
 
 " UI (Colorscheme and so on)
-Plug 'NLKNguyen/papercolor-theme'
+"Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'w0ng/vim-hybrid'
@@ -498,9 +500,9 @@ command! Ngtags call s:tags()
 
 function! s:rgtags_sink(line)
   echom a:line
-  let parts = split(a:line, '\s')
-  let excmd = matchstr(parts[3], '^[0-9]*\ze')
-  execute 'silent e' parts[4]
+  let parts = split(a:line)
+  let excmd = matchstr(parts[1], '^[0-9]*\ze')
+  execute 'silent e' parts[2]
   let [magic, &magic] = [&magic, 0]
   execute excmd
   let &magic = magic

@@ -123,9 +123,7 @@
         "dB"     'ensime-db-clear-break
         "dC"     'ensime-db-clear-all-breaks
         "dc"     'ensime-db-continue
-        "dd"     'ensime-db-start
         "di"     'ensime-db-inspect-value-at-point
-        "dl"     'ensime-db-list-locals
         "dn"     'ensime-db-next
         "do"     'ensime-db-step-out
         "dq"     'ensime-db-quit
@@ -208,8 +206,8 @@
   (use-package sbt-mode
     :defer t
     :init (spacemacs/set-leader-keys-for-major-mode 'scala-mode
-            "bb" 'sbt-command
-            "bh" 'sbt-hydra)))
+            "b." 'sbt-hydra
+            "bb" 'sbt-command)))
 
 (defun scala/init-scala-mode ()
   (use-package scala-mode

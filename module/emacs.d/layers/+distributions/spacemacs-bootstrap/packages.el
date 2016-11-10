@@ -46,6 +46,10 @@
   ;; work properly sometimes.
   (require 'evil)
   (evil-mode 1)
+
+  ;; Use evil as a default jump handler
+  (push 'evil-goto-definition spacemacs-default-jump-handlers)
+
   (require 'cl)
   ;; State cursors
   (defvar spacemacs-evil-cursors '(("normal" "DarkGoldenrod2" box)
@@ -79,6 +83,10 @@
   ;; https://bitbucket.org/lyro/evil/issue/502/cursor-is-not-refreshed-in-some-cases
   ;; (add-hook 'post-command-hook 'evil-refresh-cursor)
 
+  ;; evil ex-command
+  (define-key evil-normal-state-map (kbd dotspacemacs-ex-command-key) 'evil-ex)
+  (define-key evil-visual-state-map (kbd dotspacemacs-ex-command-key) 'evil-ex)
+  (define-key evil-motion-state-map (kbd dotspacemacs-ex-command-key) 'evil-ex)
   (setq evil-ex-substitute-global dotspacemacs-ex-substitute-global)
 
   ;; evil-want-Y-yank-to-eol must be set via customize to have an effect
@@ -126,7 +134,7 @@
   (evil-ex-define-cmd "enew" 'spacemacs/new-empty-buffer)
 
   (define-key evil-normal-state-map (kbd "K") 'spacemacs/evil-smart-doc-lookup)
-  (define-key evil-normal-state-map (kbd "gd") 'spacemacs/evil-smart-goto-definition)
+  (define-key evil-normal-state-map (kbd "gd") 'spacemacs/jump-to-definition)
 
   ;; scrolling transient state
   (spacemacs|define-transient-state scroll

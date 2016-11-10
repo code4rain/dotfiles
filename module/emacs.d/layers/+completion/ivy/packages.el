@@ -12,6 +12,7 @@
 (setq ivy-packages
       '(
         auto-highlight-symbol
+        bookmark
         counsel
         (counsel-projectile :toggle (configuration-layer/package-usedp 'projectile))
         evil
@@ -112,11 +113,12 @@
       (progn
         (setq projectile-switch-project-action 'counsel-projectile-find-file)
         (spacemacs/set-leader-keys
-          "pb" 'counsel-projectile-switch-to-buffer
-          "pd" 'counsel-projectile-find-dir
-          "pp" 'counsel-projectile
-          "pf" 'counsel-projectile-find-file
-          "pr" 'projectile-recentf)))))
+          "p SPC" 'counsel-projectile
+          "pb"    'counsel-projectile-switch-to-buffer
+          "pd"    'counsel-projectile-find-dir
+          "pp"    'counsel-projectile-switch-project
+          "pf"    'counsel-projectile-find-file
+          "pr"    'projectile-recentf)))))
 
 (defun ivy/post-init-evil ()
   (spacemacs/set-leader-keys
@@ -174,15 +176,26 @@
   (use-package ivy-hydra))
 
 (defun ivy/post-init-persp-mode ()
+  ;; based on https://gist.github.com/Bad-ptr/1aca1ec54c3bdb2ee80996eb2b68ad2d#file-persp-ivy-el
+  (add-hook 'ivy-ignore-buffers #'spacemacs//layout-not-contains-buffer-p)
+  (setq ivy-sort-functions-alist
+        (append ivy-sort-functions-alist
+                '((persp-kill-buffer . nil)
+                  (persp-remove-buffer . nil)
+                  (persp-add-buffer . nil)
+                  (persp-switch . nil)
+                  (persp-window-switch . nil)
+                  (persp-frame-switch . nil))))
+
   (ivy-set-actions
    'spacemacs/ivy-spacemacs-layouts
    '(("c" persp-kill-without-buffers "Close layout(s)")
      ("k" persp-kill  "Kill layout(s)")))
   (setq spacemacs-layouts-transient-state-remove-bindings
-        '("b" "l" "C" "X"))
+        '("C" "X"))
   (setq spacemacs-layouts-transient-state-add-bindings
-        '(("b" spacemacs/ivy-spacemacs-layout-buffer)
-          ("l" spacemacs/ivy-spacemacs-layouts)
+        '(("b" spacemacs/ivy-spacemacs-layout-buffer :exit t)
+          ("l" spacemacs/ivy-spacemacs-layouts :exit t)
           ("C" spacemacs/ivy-spacemacs-layout-close-other :exit t)
           ("X" spacemacs/ivy-spacemacs-layout-kill-other :exit t))))
 
@@ -190,6 +203,9 @@
   (setq projectile-completion-system 'ivy)
   (spacemacs/set-leader-keys
     "pv"  'projectile-vc))
+
+(defun ivy/post-init-bookmark ()
+  (spacemacs/set-leader-keys "fb" 'counsel-bookmark))
 
 (defun ivy/init-smex ()
   (use-package smex

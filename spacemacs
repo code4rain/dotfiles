@@ -152,19 +152,19 @@ values."
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
-   dotspacemacs-leader-key "C-j"
+   dotspacemacs-leader-key "C-k"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "C-j"
+   dotspacemacs-emacs-leader-key "C-k"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key "C-k"
+   dotspacemacs-major-mode-leader-key "C-h"
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m)
-   dotspacemacs-major-mode-emacs-leader-key "C-k"
+   dotspacemacs-major-mode-emacs-leader-key "C-h"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
    ;; (default "SPC")
-   dotspacemacs-emacs-command-key "C-j"
+   dotspacemacs-emacs-command-key "C-k"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
    ;; Setting it to a non-nil value, allows for separate commands under <C-i>
@@ -603,7 +603,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (blank-mode dumb-jump org-projectile mwim git-link evil-unimpaired ivy flyspell-correct-helm biblio biblio-core xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks oauth toc-org tagedit spacemacs-theme spaceline powerline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox spinner page-break-lines orgit org-repo-todo helm-bibtex org-ref key-chord parsebib org-present org-pomodoro alert log4e gntp org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gtags helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md focus flyspell-correct flycheck-pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diminish define-word cython-mode company-web web-completion-data company-quickhelp pos-tip company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bind-map bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk anaconda-mode pythonic f dash s ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet undo-tree org-plus-contrib hydra ggtags diff-hl company-statistics company auctex async aggressive-indent adaptive-wrap ace-window avy))))
+    (org pcache pug-mode hide-comnt helm-purpose window-purpose imenu-list blank-mode dumb-jump org-projectile mwim git-link evil-unimpaired ivy flyspell-correct-helm biblio biblio-core xterm-color ws-butler window-numbering which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package typo tumblesocks oauth toc-org tagedit spacemacs-theme spaceline powerline smooth-scrolling smeargle slim-mode shell-pop scss-mode sass-mode restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox spinner page-break-lines orgit org-repo-todo helm-bibtex org-ref key-chord parsebib org-present org-pomodoro alert log4e gntp org-download org-bullets open-junk-file olivetti neotree multi-term move-text mmm-mode markdown-toc markdown-mode magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint leuven-theme less-css-mode jade-mode info+ indent-guide ido-vertical-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make projectile helm-gtags helm-gitignore request helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haml-mode google-translate golden-ratio gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md focus flyspell-correct flycheck-pos-tip flycheck pkg-info epl flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit magit magit-popup git-commit with-editor evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg eval-sexp-fu highlight eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav disaster diminish define-word cython-mode company-web web-completion-data company-quickhelp pos-tip company-c-headers company-auctex company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format buffer-move bind-map bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile packed auctex-latexmk anaconda-mode pythonic f dash s ace-link ace-jump-helm-line helm helm-core ac-ispell auto-complete popup yasnippet undo-tree org-plus-contrib hydra ggtags diff-hl company-statistics company auctex async aggressive-indent adaptive-wrap ace-window avy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

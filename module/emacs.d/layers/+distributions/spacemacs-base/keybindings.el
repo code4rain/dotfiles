@@ -116,20 +116,24 @@
   "au"  'undo-tree-visualize)
 ;; buffers --------------------------------------------------------------------
 (spacemacs/set-leader-keys
-  "TAB" 'spacemacs/alternate-buffer
-  "bd"  'spacemacs/kill-this-buffer
-  "be"  'spacemacs/safe-erase-buffer
-  "bh"  'spacemacs/home
-  "bk"  'spacemacs/kill-matching-buffers-rudely
-  "bn"  'next-buffer
-  "bm"  'spacemacs/kill-other-buffers
-  "bN"  'spacemacs/new-empty-buffer
-  "bP"  'spacemacs/copy-clipboard-to-whole-buffer
-  "bp"  'previous-buffer
-  "bR"  'spacemacs/safe-revert-buffer
-  "bs"  'spacemacs/switch-to-scratch-buffer
-  "bY"  'spacemacs/copy-whole-buffer-to-clipboard
-  "bw"  'read-only-mode)
+  "TAB"   'spacemacs/alternate-buffer
+  "bd"    'spacemacs/kill-this-buffer
+  "be"    'spacemacs/safe-erase-buffer
+  "bh"    'spacemacs/home
+  "b C-d" 'spacemacs/kill-matching-buffers-rudely
+  "bn"    'next-buffer
+  "bm"    'spacemacs/kill-other-buffers
+  "bN"    'spacemacs/new-empty-buffer
+  "bP"    'spacemacs/copy-clipboard-to-whole-buffer
+  "bp"    'previous-buffer
+  "bR"    'spacemacs/safe-revert-buffer
+  "bs"    'spacemacs/switch-to-scratch-buffer
+  "bY"    'spacemacs/copy-whole-buffer-to-clipboard
+  "bw"    'read-only-mode)
+(dotimes (i 9)
+  (let ((n (+ i 1)))
+    (spacemacs/set-leader-keys (format "b%i" n)
+      (intern (format "buffer-to-window-%s" n)))))
 ;; Cycling settings -----------------------------------------------------------
 (spacemacs/set-leader-keys "Tn" 'spacemacs/cycle-spacemacs-theme)
 ;; errors ---------------------------------------------------------------------
@@ -141,7 +145,7 @@
   :title "Error transient state"
   :hint-is-doc t
   :dynamic-hint
-  (let ((sys (spacemacs//error-delegate)))
+  (let ((sys (spacemacs/error-delegate)))
     (cond
      ((eq 'flycheck sys)
       "\nBrowsing flycheck errors from this buffer.")
@@ -303,7 +307,15 @@
   :on (hidden-mode-line-mode -1)
   :off (hidden-mode-line-mode)
   :documentation "Toggle the visibility of modeline."
+  :evil-leader "tmT")
+(spacemacs|add-toggle display-time
+  :mode display-time-mode
+  :documentation "Display time in modeline."
   :evil-leader "tmt")
+(spacemacs|add-toggle syntax-highlighting
+  :mode font-lock-mode
+  :documentation "Toggle syntax highlighting."
+  :evil-leader "ths")
 (spacemacs|add-toggle transparent-frame
   :status nil
   :on (spacemacs/toggle-transparency)
@@ -380,7 +392,7 @@
   "wc"  'spacemacs/toggle-centered-buffer-mode
   "wC"  'spacemacs/centered-buffer-mode-full-width
   "wo"  'other-frame
-  "wr"  'spacemacs/rotate-windows
+  "wr"  'spacemacs/rotate-windows-forward
   "wR"  'spacemacs/rotate-windows-backward
   "ws"  'split-window-below
   "wS"  'split-window-below-and-focus
@@ -418,6 +430,7 @@
   "xjl" 'set-justification-left
   "xjn" 'set-justification-none
   "xjr" 'set-justification-right
+  "xld" 'spacemacs/duplicate-line-or-region
   "xls" 'spacemacs/sort-lines
   "xlu" 'spacemacs/uniquify-lines
   "xtc" 'transpose-chars
@@ -480,15 +493,17 @@
 
 (spacemacs|define-transient-state window-manipulation
   :title "Window Manipulation Transient State"
-  :doc "
+  :doc (concat "
  Select^^^^              Move^^^^              Split^^                Resize^^                     Other^^
  ──────^^^^───────────── ────^^^^───────────── ─────^^─────────────── ──────^^──────────────────── ─────^^──────────────────────────────
  [_j_/_k_] down/up       [_J_/_K_] down/up     [_s_] vertical         [_[_] shrink horizontally    [_q_] quit
  [_h_/_l_] left/right    [_H_/_L_] left/right  [_S_] vert & follow    [_]_] enlarge horizontally   [_u_] restore prev layout
  [_0_-_9_] window N      [_r_]^^   rotate fwd  [_v_] horizontal       [_{_] shrink vertically      [_U_] restore next layout
  [_w_]^^   other window  [_R_]^^   rotate bwd  [_V_] horiz & follow   [_}_] enlarge vertically     [_d_] close current
- [_o_]^^   other frame   ^^^^                  ^^                     ^^                           [_D_] close other
- ^^^^                    ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode"
+ [_o_]^^   other frame   ^^^^                  ^^                     ^^                           [_D_] close other"
+               (if (configuration-layer/package-usedp 'golden-ratio)
+                   "\n ^^^^                    ^^^^                  ^^                     ^^                           [_g_] golden-ratio %`golden-ratio-mode"
+                 ""))
   :bindings
   ("q" nil :exit t)
   ("0" select-window-0)
@@ -509,7 +524,6 @@
   ("}" spacemacs/enlarge-window)
   ("d" delete-window)
   ("D" delete-other-windows)
-  ("g" spacemacs/toggle-golden-ratio)
   ("h" evil-window-left)
   ("<left>" evil-window-left)
   ("j" evil-window-down)
@@ -527,7 +541,7 @@
   ("L" evil-window-move-far-right)
   ("<S-right>" evil-window-move-far-right)
   ("o" other-frame)
-  ("r" spacemacs/rotate-windows)
+  ("r" spacemacs/rotate-windows-forward)
   ("R" spacemacs/rotate-windows-backward)
   ("s" split-window-below)
   ("S" split-window-below-and-focus)
@@ -584,11 +598,11 @@ otherwise it is scaled down."
 
 ;; Transparency transient-state
 
-(defun spacemacs/toggle-transparency ()
-  "Toggle between transparent or opaque display."
+(defun spacemacs/toggle-transparency (&optional frame)
+  "Toggle between transparent and opaque state for FRAME.
+If FRAME is nil, it defaults to the selected frame."
   (interactive)
-  (let* ((frame (selected-frame))
-         (alpha (frame-parameter frame 'alpha))
+  (let* ((alpha (frame-parameter frame 'alpha))
          (dotfile-setting (cons dotspacemacs-active-transparency
                                 dotspacemacs-inactive-transparency)))
     (set-frame-parameter
@@ -597,22 +611,24 @@ otherwise it is scaled down."
          dotfile-setting
        '(100 . 100)))))
 
-(defun spacemacs/increase-transparency ()
-  "Increase transparency of current frame."
+(defun spacemacs/increase-transparency (&optional frame)
+  "Increase transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame."
   (interactive)
-  (let* ((current-alpha (car (frame-parameter (selected-frame) 'alpha)))
+  (let* ((current-alpha (car (frame-parameter frame 'alpha)))
          (increased-alpha (- current-alpha 5)))
     (when (>= increased-alpha frame-alpha-lower-limit)
-      (set-frame-parameter (selected-frame) 'alpha
+      (set-frame-parameter frame 'alpha
                            (cons increased-alpha increased-alpha)))))
 
-(defun spacemacs/decrease-transparency ()
-  "Decrease transparency of current frame."
+(defun spacemacs/decrease-transparency (&optional frame)
+  "Decrease transparency for FRAME.
+If FRAME is nil, it defaults to the selected frame."
   (interactive)
-  (let* ((current-alpha (car (frame-parameter (selected-frame) 'alpha)))
+  (let* ((current-alpha (car (frame-parameter frame 'alpha)))
          (decreased-alpha (+ current-alpha 5)))
     (when (<= decreased-alpha 100)
-      (set-frame-parameter (selected-frame) 'alpha
+      (set-frame-parameter frame 'alpha
                            (cons decreased-alpha decreased-alpha)))))
 
 (spacemacs|define-transient-state scale-transparency

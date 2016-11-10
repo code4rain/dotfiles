@@ -126,6 +126,9 @@ whenever you start Emacs.")
 (defvar dotspacemacs-configuration-layers '(emacs-lisp)
   "List of configuration layers to load.")
 
+(defvar dotspacemacs--configuration-layers-saved nil
+  "Saved value of `dotspacemacs-configuration-layers' after sync.")
+
 (defvar dotspacemacs-themes '(spacemacs-dark
                               spacemacs-light)
   "List of themes, the first of the list is loaded when spacemacs starts.
@@ -147,6 +150,9 @@ pressing `<leader> m`. Set it to `nil` to disable it.")
 
 (defvar dotspacemacs-major-mode-emacs-leader-key "C-M-m"
   "Major mode leader key accessible in `emacs state' and `insert state'")
+
+(defvar dotspacemacs-ex-command-key ":"
+  "The key used for Vim Ex commands.")
 
 (defvar dotspacemacs-command-key "SPC"
   "The key used for Emacs commands (M-x) (after pressing on the leader key).")
@@ -229,6 +235,10 @@ Default value is `cache'.")
 (defvar dotspacemacs-enable-paste-transient-state t
   "If non nil the paste transient-state is enabled. While enabled pressing `p`
 several times cycle between the kill ring content.'")
+(defvaralias
+  'dotspacemacs-enable-paste-micro-state
+  'dotspacemacs-enable-paste-transient-state
+  "Old name of `dotspacemacs-enable-paste-transient-state'.")
 
 (defvar dotspacemacs-which-key-delay 0.4
   "Delay in seconds starting from the last keystroke after which
@@ -240,6 +250,14 @@ key sequence. Setting this variable is equivalent to setting
   "Location of the which-key popup buffer. Possible choices are bottom,
 right, and right-then-bottom. The last one will display on the
 right if possible and fallback to bottom if not.")
+
+(defvar dotspacemacs-switch-to-buffer-prefers-purpose nil
+  "Control where `switch-to-buffer' displays the buffer.
+If nil, `switch-to-buffer' displays the buffer in the current
+window even if another same-purpose window is available. If non
+nil, `switch-to-buffer' displays the buffer in a same-purpose
+window even if the buffer can be displayed in the current
+window.")
 
 (defvar dotspacemacs-loading-progress-bar t
   "If non nil a progress bar is displayed when spacemacs is loading. This
@@ -355,6 +373,16 @@ are caught and signalled to user in spacemacs buffer."
                                            (error-message-string err))
                                    t))))))
 
+(defun dotspacemacs//check-layers-changed ()
+  "Check if the value of `dotspacemacs-configuration-layers'
+changed, and issue a warning if it did."
+  (unless (eq dotspacemacs-configuration-layers
+              dotspacemacs--configuration-layers-saved)
+    (spacemacs-buffer/warning
+     "`dotspacemacs-configuration-layers' was changed outside of `dotspacemacs/layers'.")))
+(add-hook 'spacemacs-post-user-config-hook
+          'dotspacemacs//check-layers-changed)
+
 (defun dotspacemacs//read-editing-style-config (config)
   "Read editing style CONFIG: apply variables and return the editing style.
 CONFIG can be the symbol of an editing style or a list where the car is
@@ -459,7 +487,7 @@ before copying the file if the destination already exists."
   (interactive)
   (let* ((copy? (if (file-exists-p dotspacemacs-filepath)
                     (y-or-n-p
-                     (format "%s already exists. Do you want to overwite it ? "
+                     (format "%s already exists. Do you want to overwrite it ? "
                              dotspacemacs-filepath)) t)))
     (when copy?
       (copy-file (concat dotspacemacs-template-directory
@@ -522,26 +550,22 @@ If ARG is non nil then Ask questions to the user before installing the dotfile."
       (let ((install
              (if (file-exists-p dotspacemacs-filepath)
                  (y-or-n-p
-                  (format "%s already exists. Do you want to overwite it ? "
+                  (format "%s already exists. Do you want to overwrite it ? "
                           dotspacemacs-filepath)) t)))
         (when install
           (write-file dotspacemacs-filepath)
           (message "%s has been installed." dotspacemacs-filepath)
           t))))
-  (load-file dotspacemacs-filepath))
-
-(defun dotspacemacs//install-and-replace (&optional values)
-  "Install the dotfile and replace its content according to VALUES.
-
-VALUES is an alist where the key is the text to replace and value is the new
-value."
-  )
+  (dotspacemacs/load-file)
+  ;; force new wizard values to be applied
+  (dotspacemacs/init))
 
 (defun dotspacemacs/load-file ()
   "Load ~/.spacemacs if it exists."
   (let ((dotspacemacs (dotspacemacs/location)))
     (if (file-exists-p dotspacemacs)
-        (unless (with-demoted-errors "Error loading .spacemacs: %S" (load dotspacemacs))
+        (unless (with-demoted-errors "Error loading .spacemacs: %S"
+                  (load dotspacemacs))
           (dotspacemacs/safe-load)))))
 
 (defun dotspacemacs/safe-load ()

@@ -1,4 +1,4 @@
-;;; funcs.el --- Better Emacs Defaults Layer key bindings File
+;;; keybindings.el --- Better Emacs Defaults Layer key bindings File
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
@@ -10,3 +10,4 @@
 ;;; License: GPLv3
 
 (global-set-key (kbd "C-w") 'spacemacs/backward-kill-word-or-region)
+(global-set-key [remap fill-paragraph] #'spacemacs/fill-or-unfill)

@@ -183,7 +183,9 @@ LAYER has to be installed for this method to work properly."
              "If non-nil this package is excluded from all layers.")))
 
 (defmethod cfgl-package-enabledp ((pkg cfgl-package) &optional inhibit-messages)
-  "Evaluate the `toggle' slot of passed PKG."
+  "Evaluate the `toggle' slot of passed PKG.
+If INHIBIT-MESSAGES is non nil then any message emitted by the toggle evaluation
+is ignored."
   (let ((message-log-max (unless inhibit-messages message-log-max))
         (toggle (oref pkg :toggle)))
     (eval toggle)))
@@ -304,18 +306,21 @@ The returned list has a `package-archives' compliant format."
   (mapcar
    (lambda (x)
      (cons (car x)
-           (if (string-match-p "http" (cdr x))
+           (if (or (string-match-p "http" (cdr x))
+                   (string-prefix-p "/" (cdr x)))
                (cdr x)
-             (concat (if (and dotspacemacs-elpa-https
-                              (not spacemacs-insecure)
-                              ;; for now org ELPA repository does
-                              ;; not support HTTPS
-                              ;; TODO when org ELPA repo support
-                              ;; HTTPS remove the check
-                              ;; `(not (equal "org" (car x)))'
-                              (not (equal "org" (car x))))
-                         "https://"
-                       "http://") (cdr x)))))
+             (concat
+              (if (and dotspacemacs-elpa-https
+                       (not spacemacs-insecure)
+                       ;; for now org ELPA repository does
+                       ;; not support HTTPS
+                       ;; TODO when org ELPA repo support
+                       ;; HTTPS remove the check
+                       ;; `(not (equal "org" (car x)))'
+                       (not (equal "org" (car x))))
+                  "https://"
+                "http://")
+              (cdr x)))))
    archives))
 
 (defun configuration-layer/retrieve-package-archives (&optional quiet force)
@@ -372,6 +377,8 @@ refreshed during the current session."
   "Synchronize declared layers in dotfile with spacemacs.
 If NO-INSTALL is non nil then install steps are skipped."
   (dotspacemacs|call-func dotspacemacs/layers "Calling dotfile layers...")
+  (setq dotspacemacs--configuration-layers-saved
+        dotspacemacs-configuration-layers)
   (when (spacemacs-buffer//choose-banner)
     (spacemacs-buffer//inject-version))
   ;; declare used layers then packages as soon as possible to resolve
@@ -578,7 +585,9 @@ If TOGGLEP is nil then `:toggle' parameter is ignored."
       (cfgl-package-set-property obj :min-version (version-to-list min-version)))
     (when step (cfgl-package-set-property obj :step step))
     (when toggle (cfgl-package-set-property obj :toggle toggle))
-    (cfgl-package-set-property obj :excluded (or excluded (oref obj :excluded)))
+    (cfgl-package-set-property obj :excluded
+                               (and (configuration-layer/layer-usedp layer-name)
+                                    (or excluded (oref obj :excluded))))
     (when location
       (if (and (listp location)
                (eq (car location) 'recipe)
@@ -897,9 +906,7 @@ variable as well."
       (dolist (pkg (cfgl-layer-get-packages layer))
         (let* ((pkg-name (if (listp pkg) (car pkg) pkg))
                (obj (configuration-layer/get-package pkg-name)))
-          (if obj
-              (setq obj (configuration-layer/make-package pkg layer-name obj))
-            (setq obj (configuration-layer/make-package pkg layer-name)))
+          (setq obj (configuration-layer/make-package pkg layer-name obj))
           (configuration-layer//add-package
            obj (and (cfgl-package-get-safe-owner obj) usedp)))))))
 
@@ -927,17 +934,20 @@ USEDP if non-nil indicates that made packages are used packages."
     (let ((extensions (spacemacs/mplist-get props :extensions)))
       (when (configuration-layer/layer-usedp layer-name)
         (let* ((layer (configuration-layer/get-layer layer-name))
-               (packages (when layer (cfgl-layer-owned-packages layer))))
+               (packages (when layer (cfgl-layer-owned-packages layer)))
+               (package-names (mapcar (lambda (x) (oref x :name)) packages)))
           ;; set lazy install flag for a layer if and only if its owned
           ;; distant packages are all not already installed
           (let ((lazy (cl-reduce
                        (lambda (x y) (and x y))
-                       (mapcar (lambda (p)
-                                 (or (not (eq layer-name (car (oref p :owners))))
-                                     (null (package-installed-p
-                                            (oref p :name)))))
-                               (configuration-layer//get-distant-packages
-                                packages t))
+                       (mapcar
+                        (lambda (p)
+                          (let ((pkg (configuration-layer/get-package p)))
+                            (or (not (eq layer-name (car (oref pkg :owners))))
+                                (null (package-installed-p
+                                       (oref pkg :name))))))
+                        (configuration-layer//get-distant-packages
+                         package-names t))
                        :initial-value t)))
             (oset layer :lazy-install lazy)
             (dolist (pkg packages)
@@ -955,31 +965,31 @@ USEDP if non-nil indicates that made packages are used packages."
 (defun configuration-layer//auto-mode (layer-name mode)
   "Auto mode support of lazily installed layers."
   (let ((layer (configuration-layer/get-layer layer-name)))
-    (when (or (null layer)
-              (oref layer :lazy-install))
+    (when (or (oref layer :lazy-install)
+              (not (configuration-layer/layer-usedp layer-name)))
       (configuration-layer//lazy-install-packages layer-name mode)))
   (when (fboundp mode) (funcall mode)))
 
 (defun configuration-layer/filter-objects (objects ffunc)
   "Return a filtered OBJECTS list where each element satisfies FFUNC."
-  (reverse (cl-reduce (lambda (acc x)
-                     (if (funcall ffunc x) (push x acc) acc))
-                   objects
-                   :initial-value nil)))
+  (reverse (cl-reduce (lambda (acc x) (if (funcall ffunc x) (push x acc) acc))
+                      objects
+                      :initial-value nil)))
 
 (defun configuration-layer//get-distant-packages (packages usedp)
   "Return the distant packages (ie to be intalled).
 If USEDP is non nil then returns only the used packages; if it is nil then
 return both used and unused packages."
   (configuration-layer/filter-objects
-   packages (lambda (x)
-              (let ((pkg (configuration-layer/get-package x)))
-                (and (not (memq (oref pkg :location) '(built-in site local)))
-                     (not (stringp (oref pkg :location)))
-                     (or (null usedp)
-                         (and (not (null (oref pkg :owners)))
-                              (cfgl-package-enabledp pkg)
-                              (not (oref pkg :excluded)))))))))
+   packages
+   (lambda (x)
+     (let ((pkg (configuration-layer/get-package x)))
+       (and (not (memq (oref pkg :location) '(built-in site local)))
+            (not (stringp (oref pkg :location)))
+            (or (null usedp)
+                (and (not (null (oref pkg :owners)))
+                     (not (oref pkg :excluded))
+                     (cfgl-package-enabledp pkg t))))))))
 
 (defun configuration-layer//get-private-layer-dir (name)
   "Return an absolute path to the private configuration layer string NAME."
@@ -1083,7 +1093,7 @@ Returns nil if the directory is not a category."
                   (if indexed-layer
                       ;; the same layer may have been discovered twice,
                       ;; in which case we don't need a warning
-                      (unless (string-equal (oref indexed-layer :dir) sub)
+                      (unless (string-equal (directory-file-name (oref indexed-layer :dir)) (directory-file-name sub))
                         (configuration-layer//warning
                          (concat
                           "Duplicated layer %s detected in directory \"%s\", "
@@ -1173,11 +1183,6 @@ wether the declared layer is an used one or not."
   "Return non-nil if LAYER-NAME is the name of a used layer."
   (let ((obj (configuration-layer/get-layer layer-name)))
     (when obj (memq layer-name configuration-layer--used-layers))))
-
-(defun  configuration-layer/layer-lazy-installp (layer-name)
-  "Return non-nil if LAYER-NAME is the name of a layer to be lazily installed."
-  (let ((obj (configuration-layer/get-layer layer-name)))
-    (when obj (oref obj :lazy-install))))
 
 (defun configuration-layer/package-usedp (name)
   "Return non-nil if NAME is the name of a used package."
@@ -1294,25 +1299,21 @@ wether the declared layer is an used one or not."
             (delq nil
                   (mapcar
                    (lambda (x)
-                     (and (memq x configuration-layer--used-distant-packages)
-                          (configuration-layer/get-package x)))
-                   (oref layer :packages))))
-           (config-pkgs
-            (delq nil (mapcar
-                       (lambda (x)
-                         (let ((pkg (configuration-layer/get-package x)))
-                           (cfgl-package-set-property pkg :lazy-install nil)
-                           pkg))
-                       (oref layer :packages)))))
+                     (let* ((pkg-name (if (listp x) (car x) x))
+                            (pkg (configuration-layer/get-package pkg-name)))
+                       (cfgl-package-set-property pkg :lazy-install nil)
+                       (when (memq pkg-name
+                                   configuration-layer--used-distant-packages)
+                         pkg-name)))
+                   (oref layer :packages)))))
       (let ((last-buffer (current-buffer))
-            (sorted-inst (configuration-layer//sort-packages inst-pkgs))
-            (sorted-config (configuration-layer//sort-packages config-pkgs)))
+            (sorted-pkg (configuration-layer//sort-packages inst-pkgs)))
         (spacemacs-buffer/goto-buffer)
         (goto-char (point-max))
-        (oset layer :lazy-install nil)
-        (configuration-layer//install-packages sorted-inst)
-        (configuration-layer//configure-packages sorted-config)
+        (configuration-layer//install-packages sorted-pkg)
+        (configuration-layer//configure-packages sorted-pkg)
         (configuration-layer//load-layer-files layer '("keybindings.el"))
+        (oset layer :lazy-install nil)
         (switch-to-buffer last-buffer)))))
 
 (defun configuration-layer//install-packages (packages)
@@ -1416,18 +1417,18 @@ wether the declared layer is an used one or not."
     (when pkg
       (let ((location (oref pkg :location)))
         (when (and (listp location) (eq 'recipe (car location)))
-          location)))))
+          (cons pkg-name (cdr location)))))))
 
 (defun configuration-layer//new-version-available-p (pkg-name)
   "Return non nil if there is a new version available for PKG-NAME."
   (let ((recipe (configuration-layer//get-package-recipe pkg-name))
         (cur-version (configuration-layer//get-package-version-string pkg-name))
+        (quelpa-upgrade-p t)
         new-version)
     (when cur-version
       (setq new-version
             (if recipe
-                (quelpa-checkout recipe (expand-file-name (symbol-name pkg-name)
-                                                          quelpa-build-dir))
+                (or (quelpa-checkout recipe (expand-file-name (symbol-name pkg-name) quelpa-build-dir)) cur-version)
               (configuration-layer//get-latest-package-version-string
                pkg-name)))
       ;; (message "%s: %s > %s ?" pkg-name cur-version new-version)
@@ -1483,7 +1484,7 @@ wether the declared layer is an used one or not."
        ((null (oref pkg :owners))
         (spacemacs-buffer/message
          (format "%S ignored since it has no owner layer." pkg-name)))
-       ((not (cfgl-package-enabledp pkg t))
+       ((not (cfgl-package-enabledp pkg))
         (spacemacs-buffer/message (format "%S is toggled off." pkg-name)))
        (t
         ;; load-path

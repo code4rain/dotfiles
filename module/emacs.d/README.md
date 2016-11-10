@@ -13,7 +13,7 @@
 |
 <b><a href="CONTRIBUTING.org">contribute</a></b>
 |
-<b><a href="http://spacemacs.org/doc/DOCUMENTATION#orgheadline187">achievements</a></b>
+<b><a href="http://spacemacs.org/doc/DOCUMENTATION#achievements">achievements</a></b>
 |
 <b><a href="http://spacemacs.org/doc/FAQ">FAQ</a></b>
 </p>
@@ -23,6 +23,7 @@
 <a href="https://travis-ci.org/syl20bnr/spacemacs"><img src="https://travis-ci.org/syl20bnr/spacemacs.svg" alt="Build Status"></a>
 <a href="https://waffle.io/syl20bnr/spacemacs"><img src="https://badge.waffle.io/syl20bnr/spacemacs.png?label=Merging...&title=Merging" alt="PR being merged"></a>
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ESFVNPKP4Y742"><img src="https://img.shields.io/badge/Paypal-Donate-blue.svg" alt="Donate"></a>
+<a href="https://shop.spreadshirt.com/spacemacs-shop"><img src="https://img.shields.io/badge/Shop-T--Shirts-blue.svg" alt="Donate"></a>
 <a href="http://www.slant.co/topics/12/~what-are-the-best-programming-text-editors"><img src="https://img.shields.io/badge/Slant-Recommend-ff69b4.svg" alt="Recommend it"></a>
 </p>
 ***
@@ -41,7 +42,7 @@
 - [Prerequisites](#prerequisites)
     - [Emacs](#emacs)
         - [Linux distros](#linux-distros)
-        - [OS X](#os-x)
+        - [macOS](#macos)
         - [Windows](#windows)
 - [Install](#install)
     - [Default installation](#default-installation)
@@ -100,10 +101,8 @@ organised in configuration layers following a set of
 Comprehensive documentation is available for each layer by pressing
 <kbd>SPC h SPC</kbd>.
 
-To go to the general documentation [click here][DOCUMENTATION.org].
-
-You can also check the [Quick Start guide][QUICK_START.org] and the
-[FAQ][FAQ.org].
+You can also check the [general documentation][DOCUMENTATION.org],
+[quick start guide][QUICK_START.org] and the [FAQ][FAQ.org].
 
 # Getting Help
 
@@ -117,9 +116,9 @@ If you prefer IRC, connect to the [Gitter Chat IRC server][] and join the
 
 ## Emacs
 
-Spacemacs requires Emacs 24.4 or above. The next Emacs major release, Emacs 25,
-is not *officially* supported but is partially working (i.e. bugs should be
-expected).
+Spacemacs requires Emacs 24.4 or above. The development version of Emacs (at the
+time of writing, this is 25.2) is not *officially* supported, but should
+nevertheless be expected to work.
 
 Some modes require third-party tools that you'll have to install via your
 favorite package manager.
@@ -137,25 +136,28 @@ available. You have to [build from source][build_source] Emacs 24.4 or greater,
 as Spacemacs won't work with 24.3. The same may be true for other distributions
 as well.
 
-### OS X
+### macOS
 
-The recommended way of installing Emacs on OS X is using [homebrew][]:
+The recommended way of installing Emacs on macOS is using [homebrew][]:
 
 ```sh
 $ brew tap d12frosted/emacs-plus
-$ brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon
+$ brew install emacs-plus
 $ brew linkapps emacs-plus
 ```
 
-*Note:* these homebrew commands will install Emacs, and link it to your
+*Note:* these homebrew commands will install GNU Emacs, and link it to your
 `/Applications` directory. You still need to run the `git clone` mentioned at
-the start of this file. That will populate your `~/.emacs.d` directory, which
-is what transforms a regular Emacs into Spacemacs.
+the start of this file. That will populate your `~/.emacs.d` directory, which is
+what transforms a regular GNU Emacs into Spacemacs.
 
-*Note:* the proposed `emacs-plus` tap is identical to the `emacs` formulae,
-it just defines some additional options like `--with-spacemacs-icon`.
+*Note:* the proposed `emacs-plus` tap is identical to the `emacs` formulae, it
+just builds GNU Emacs with support of several features by default along with
+providing Spacemacs icon.
+See [emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus) for more
+information.
 
-*Note:* after you have completed the [install process below](#install), it is
+*Note:* after you have completed the [install process](#install) below, it is
 also recommended to add the [osx layer][] to your [dotfile][]. Install
 instructions are available in the [osx layer][] documentation.
 
@@ -182,8 +184,8 @@ section in [Documentation][DOCUMENTATION.org].
 
 ### Windows
 
-Good quality builds can be found [on this page][emacs-for-windows]. It is
-recommended to install the most stable build.
+You can download good quality builds from the [emacs-w64 project][emacs-for-windows].
+It is recommended to install the most recent [stable build][emacs-for-windows-stable].
 
 Be sure to declare a environment variable named `HOME` pointing to your user
 directory `C:\Users\<username>`. Then you can clone Spacemacs in this directory.
@@ -200,7 +202,7 @@ To fix it change the owner of the directory `~/.emacs.d/server`:
   - select the Tab “Owner”
   - change the owner to your account name
 
-Source: [Stackoverflow][so-server-unsafe]
+Source: [Stack Overflow][so-server-unsafe]
 
 For efficient searches we recommend to install `pt` ([the platinum searcher][]).
 `pt` version 1.7.7 or higher is required.
@@ -288,12 +290,11 @@ Say you cloned Spacemacs in `~/.emacs.d/spacemacs/` then drop these lines in
 
 ## Spacemacs logo
 
-If you are using Ubuntu and Unity then you can add the Spacemacs logo by
-following the instructions [here][cpaulik-unity-icon].
+For Ubuntu users, follow this guide to
+[change the logo in Unity][cpaulik-unity-icon].
 
-If you're on a mac follow [these instructions][icon-mac-instructions]. You can
-find an .icns version of the logo by [Nasser Alshammari](http://www.nass3r.com)
-in [his repository][icon-repository].
+For Mac users, you need to [download the .icns version of the logo][icon-repository],
+then [change the logo on Dock][icon-mac-instructions].
 
 # Update
 
@@ -394,6 +395,9 @@ For the packages shipped in this repository you can refer to the files header.
 The best way to support Spacemacs is to contribute to it either by reporting
 bugs, helping the community on the [Gitter Chat][] or sending pull requests.
 
+You can show your love for the project by getting cool Spacemacs t-shirts, mugs
+and more in the [Spacemacs Shop][].
+
 If you want to show your support financially you can contribute to [Bountysource][] or buy a drink for the
 maintainer by clicking on the [Paypal badge](#top).
 
@@ -428,11 +432,12 @@ Thank you!
 [FAQ.org]: http://spacemacs.org/doc/FAQ
 [VIMUSERS.org]: http://spacemacs.org/doc/VIMUSERS
 [dotfile]: http://spacemacs.org/doc/DOCUMENTATION#orgheadline45
-[osx layer]: http://spacemacs.org/layers/osx/README
+[osx layer]: http://spacemacs.org/layers/+os/osx/README.html
 [Gitter Chat]: https://gitter.im/syl20bnr/spacemacs
 [Gitter Chat IRC server]: https://irc.gitter.im/
 [homebrew]: http://brew.sh
 [emacs-for-windows]: http://emacsbinw64.sourceforge.net/
+[emacs-for-windows-stable]: https://sourceforge.net/projects/emacsbinw64/files/release/
 [the platinum searcher]: https://github.com/monochromegane/the_platinum_searcher
 [so-server-unsafe]: http://stackoverflow.com/questions/885793/emacs-error-when-calling-server-start
 [Spacemacs logo]: https://github.com/nashamri/spacemacs-logo
@@ -447,3 +452,4 @@ Thank you!
 [build_source]: https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html
 [Bountysource]: https://salt.bountysource.com/teams/spacemacs
 [Source Code Pro]: https://github.com/adobe-fonts/source-code-pro
+[Spacemacs Shop]: https://shop.spreadshirt.com/spacemacs-shop

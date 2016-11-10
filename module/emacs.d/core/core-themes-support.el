@@ -96,6 +96,8 @@
     (sanityinc-tomorrow-day      . color-theme-sanityinc-tomorrow)
     (sanityinc-tomorrow-eighties . color-theme-sanityinc-tomorrow)
     (sanityinc-tomorrow-night    . color-theme-sanityinc-tomorrow)
+    (doom-one     . doom-themes)
+    (doom-molokai . doom-themes)
     (solarized-light . solarized-theme)
     (solarized-dark . solarized-theme)
     (spacemacs-light . spacemacs-theme)
@@ -207,8 +209,11 @@ package name does not match theme name + `-theme' suffix.")
           (or (cdr (memq spacemacs--cur-theme dotspacemacs-themes))
               dotspacemacs-themes)))
   (setq spacemacs--cur-theme (pop spacemacs--cycle-themes))
-  (message "Loading theme %s..." spacemacs--cur-theme)
-  (spacemacs/load-theme spacemacs--cur-theme))
+  (let ((progress-reporter
+         (make-progress-reporter
+          (format "Loading theme %s..." spacemacs--cur-theme))))
+    (spacemacs/load-theme spacemacs--cur-theme)
+    (progress-reporter-done progress-reporter)))
 
 (defadvice load-theme (after spacemacs/load-theme-adv activate)
   "Perform post load processing."

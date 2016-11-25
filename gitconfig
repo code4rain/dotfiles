@@ -6,43 +6,41 @@
 	status = auto
 	branch = auto
 [alias]
+	b ="!tig blame"
+	bb = "!git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);(%(color:green)%(committerdate:relative)%(color:reset));%(authorname);%(contents:subject)' | column -t -s ';'"
+	cl = clean -df
+	clf = clean -fX
+	distclean = clean -dfX
+	gtags = !.git/hooks/gtags
+	l = !tig
+	pl = !git tag --force _ribbon HEAD && git pull --rebase && tig _ribbon..HEAD
+	pr = !git tag --force _ribbon HEAD && git pull --rebase
+	rb = "!f() { git rebase -i HEAD~$1; }; f"
+	ri = tag --force _ribbon HEAD
+	rst = reset --hard HEAD^
+	rt = reset --hard HEAD
+	s ="!tig status"
+	sh = !tig show
+	sl = !tig _ribbon..HEAD
+	ss = stash
+	ssh = stash show -p
+	ssl = stash list
+	ssv = stash save
+	sub = !git submit
+	tl = !tig $(git show-ref --tags --abbrev=0 | grep -w -B 1 $(git describe) | head -1 | cut -d ' ' -f1)..HEAD
+	ts ="!tig stash"
         br = branch -av
         ci = commit -v -s
         cm = commit -v -s -a -m
         co = checkout
-        dc = diff -b --cached
         d = diff -b
+        dc = diff -b --cached
         fix = commit -s --amend -C HEAD
         glog = log --graph --abbrev-commit --decorate=full --stat
         lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
         ll = log --abbrev-commit --decorate=full --stat
         st = status
         top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration
-	sh = !tig show
-	b = branch
-	rst = reset --hard HEAD^
-	rt = reset --hard HEAD
-	l = !tig
-	s ="!tig status"
-	ts ="!tig stash"
-	b ="!tig blame"
-	ss = stash
-	ssh = stash show -p
-	ssl = stash list
-	ssv = stash save
-	cl = clean -df
-	clf = clean -fX
-	distclean = clean -dfX
-	pp = pull --rebase
-	ri = tag --force _ribbon HEAD
-	pr = !git tag --force _ribbon HEAD && git pull --rebase
-	pl = !git tag --force _ribbon HEAD && git pull --rebase && tig _ribbon..HEAD
-	sl = !tig _ribbon..HEAD
-	tl = !tig $(git show-ref --tags --abbrev=0 | grep -w -B 1 $(git describe) | head -1 | cut -d ' ' -f1)..HEAD
-	po = push origin master
-	rb = "!f() { git rebase -i HEAD~$1; }; f"
-	gtags = !.git/hooks/gtags
-	sub = !git submit
 [core]
 	editor = vim
 	quotepath = off

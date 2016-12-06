@@ -704,6 +704,7 @@ inoremap ㅓㅏ <ESC>
 "map <silent><C-U> d^
 map q: :q
 nmap <F2> "*yw
+nmap <F3> "*p
 nmap Y "*yw
 vmap > >gv
 vmap < <gv
@@ -725,6 +726,7 @@ noremap gV `[v`]
 noremap j gjzz
 noremap k gkzz
 vmap <F2> "*y
+vmap <F3> "*p
 vmap Y "*y
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]

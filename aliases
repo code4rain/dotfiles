@@ -48,5 +48,6 @@ alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6
 alias -g X48='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-'
 alias -g X49='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
 alias -g XC='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/toolchain/bin/aarch64-linux-android-'
+alias -g gr='$(git rev-parse --show-toplevel)'
 
 alias rake="noglob rake"

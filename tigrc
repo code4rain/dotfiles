@@ -1,10 +1,17 @@
 set refresh-mode = auto          # Enum: manual, auto, after-command, period
 set main-view = id:width=7 date:default author:full,width=14 commit-title:yes,graph=yes,refs=yes,overflow=no
+set diff-highlight = true
+set wrap-lines = yes
+set wrap-search = no
+set main-options = -n 5000
+set show-changes = no
+set commit-order = default
+
 bind branch 3 !git rebase -i %(branch)
 bind generic I !git add -i %(file)
 bind generic T !git notes edit %(commit)
 bind generic 9 !@sh -c "echo -n %(commit) | xclip -selection c"
-bind generic + !git commit -s --amend -C HEAD
+bind generic + !git commit -s -v --amend -C HEAD
 bind generic 0 !git format-patch -1 %(commit)
 bind generic <F10> !git format-patch %(commit)~1
 bind main R !@git revert %(commit)
@@ -19,10 +26,10 @@ bind main p !bash -c "~/.git_template/hooks/checkpatch.pl --no-signoff --max-lin
 bind generic U !git checkout -- %(file)
 bind status - !commit.sh
 bind status c !git checkout -p %(file)
-bind status C !git commit -s
-bind status p !commit_push.sh
+bind status C !git commit -s -v
 bind status t !git checkout --theirs %(file)
 bind status o !git checkout --ours %(file)
+bind status p !bash -c "git diff --cached | ~/.git_template/hooks/checkpatch.pl --no-signoff -max-line-length=120 --show-types -q - | less -R"
 bind generic X !git cl
 bind generic A !git am --resolved
 bind generic S !git am --skip

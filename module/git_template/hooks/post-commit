@@ -1,2 +1,4 @@
 #!/bin/sh
 .git/hooks/gtags >/dev/null 2>&1 &
+exec git diff --cached | .git/hooks/cleanpatch
+exec git diff --cached | .git/hooks/checkpatch.pl --no-signoff --max-line-length=120 --ignore UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --show-types --no-tree -q -

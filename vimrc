@@ -545,24 +545,22 @@ function! s:search_sink(line)
 endfunction
 
 function! s:search_project(find)
-  if filereadable("GPATH")
-    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-  else
-    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  endif
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
+  else
+    let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
     execute "cd " . l:cur
-    call fzf#run({
-    \ 'source':  'ag --nogroup --column --color ' . a:find,
-    \ 'options': '+m -d "\s" --ansi --with-nth 1..',
-    \ 'window' : '-tabnew',
-    \ 'sink':    function('s:search_sink')})
   endif
+  call fzf#run({
+  \ 'source':  'ag --nogroup --column --color ' . a:find,
+  \ 'options': '+m -d "\s" --ansi --with-nth 1..',
+  \ 'window' : '-tabnew',
+  \ 'sink':    function('s:search_sink')})
 endfunction
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>
+command! -bang -nargs=* S  call s:search_project(<q-args>)
 
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>

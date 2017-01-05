@@ -1,1 +1,3 @@
 #!/bin/bash
+exec git diff --cached | .git/hooks/cleanpatch
+

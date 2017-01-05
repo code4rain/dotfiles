@@ -313,7 +313,7 @@ source ~/.tmuxinator/tmuxinator.zsh
 export P4MERGE=p4merge
 export LESSGLOBALTAGS=global
 
-export TERM='xterm-256color'
+# export TERM='xterm-256color'
 
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 

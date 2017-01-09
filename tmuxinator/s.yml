@@ -25,11 +25,6 @@ windows:
       panes:
         - r
   - Update:
-      layout: even-horizontal
-      panes:
-        - cd ~/PERFORCE/KERNEL && p4sync
-        - cd ~/PERFORCE/NILE && p4sync
-        - cd ~/PERFORCE/KERNEL/4.4.git && gp4 rebase
   - Cherry:
       layout: even-horizontal
       panes:

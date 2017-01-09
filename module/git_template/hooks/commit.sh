@@ -1,6 +1,5 @@
 #!/bin/bash
-FILES=$(git status)
-echo "${FILES}"
+git status
 echo -n "Input commit message: "
 echo -n -e '\e[0;33m'
 read input

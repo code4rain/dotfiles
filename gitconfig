@@ -67,8 +67,6 @@
 	showDirtyState = true
 [init]
 	templatedir = ~/.git_template
-[commit]
-	template = ~/.git_template/commit_message.template
 [push]
 	default = simple
 [diff]

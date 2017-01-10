@@ -1,6 +1,6 @@
 snippet p4 "My Perforce Description" b
 $1:$2
-[Project] ${1:Build}
+[Project] ${1/([0-9]{4})/(?1:Exynos\$1)/}
 [Title] ${2}
 [BinType] ${3:AP}
 [Customer] ${4:ALL}
@@ -9,7 +9,7 @@ $1:$2
 [Request] ${6:Self}
 [Occurrence Version] ${7:Previous}
 
-[Problem] ${8}
+[Problem] $2
 [Cause & Measure] ${9}
 [Checking Method] ${10}
 
@@ -19,7 +19,6 @@ $1:$2
 [Change Type] ${11:BUG Fix}
 
 endsnippet
-
 snippet pbs "PBS link" b
 ***** PBS Success at : ${0} *****
 endsnippet

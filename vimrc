@@ -1,6 +1,11 @@
-﻿
+﻿" Preamble ---------------------------------------------------------------- {{{
+if !has('nvim')
+  set shell=/bin/bash
+endif
+
 set nocompatible               " be iMproved
-" Plugins
+" }}}
+" Plugins  ---------------------------------------------------------------- {{{
 " https://github.com/junegunn/vim-plug
 " Download: curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -53,276 +58,56 @@ Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
 
 call plug#end()
-
-if !has('nvim')
-  set shell=/bin/bash
-endif
-
+" }}}
+" Basic options ----------------------------------------------------------- {{{
 let mapleader = "\<Space>"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 보기 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use 256 colours (Use this setting only if your terminal supports 256
-" colours)
-set t_Co=256
-
-"에러 발생시에 소리대신 화면이 깜빡이도록함 (disable)
-"set visualbell
-
-" 커서의 위치를 항상 보이게 함.
-set ruler
-
-" 줄 번호 표시
-set number
-
-" 줄 번호 표시 너비 설정
-set nuw=5
-
-" 현재 커서 줄 강조
-set cursorline
-
-" 항상 status 라인을 표시하도록 함.
-set laststatus=2
-
-" Status Line 설정
-set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
-
-if has("gui_running")
-  set lines=150
-  set co=171
-  winp 580 4
-endif
-
-" 폰트 설정
-if has("gui_running")
-  if has("win32")
-    set gfn=consolas:h11:cANSI
-  elseif has("unix")
-    set gfn=Source\ Code\ Pro\ 11
-  else
-    set gfn=consolas\ 11
-  endif
-endif
-
-set background=dark
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colorscheme
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"colorscheme PaperColor
-colorscheme hybrid
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"Enable Word wrap
-set wrap
-set linebreak
-
-" 특수문자(tab, line ending) 표시 안함
-set nolist
-" tab/End of line characters 설정
-set listchars=tab:>-,eol:$
-
-" 괄호의 짝을 Highlight
-set showmatch
-set matchtime=3
-
-set showmode
-set lazyredraw
-set ttyfast
-set scrolloff=4
-set sidescrolloff=2
-set cmdheight=1
-
-set foldlevel=5
-set foldcolumn=1
-set numberwidth=6
-
-" Focus Mode View
-function! ToggleFocusMode()
-  if (&foldcolumn != 8)
-    set numberwidth=10
-    set foldcolumn=8
-    set noruler
-    set nonumber
-    Limelight
-  else
-    set numberwidth=4
-    set foldcolumn=1
-    set ruler
-    set number
-    Limelight!
-  endif
-endfunc
-function! FocusModeOff()
-  set numberwidth=4
-  set foldcolumn=2
-  set ruler
-endfunc
-
-nnoremap <F1> :call ToggleFocusMode()<cr>
-
-" For Folding
-set foldtext=MyFoldText()
-function! MyFoldText()
-  let line = getline(v:foldstart)
-  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
-  return v:folddashes . sub
-endfunction
-
-" c, h 파일인 경우 80 column 이상인 경우 표시
-if exists('+colorcolumn')
-  autocmd BufWinEnter *.py set colorcolumn=80
-  autocmd BufWinEnter *.c set colorcolumn=80
-  autocmd BufWinEnter *.h set colorcolumn=80
-else
-  autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-  autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-  autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 편집 기능 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 명령어 기록을 남길 갯수 지정
-set history=1000
-"백스페이스 사용
-set backspace=indent,eol,start
-
-"백업파일을 만들지 않음
-set nobackup
-set nowritebackup
-set noswapfile
-
-" 완성중인 명령을 표시
-set showcmd
-
-" 탭 크기 설정
-set tabstop=8
-set shiftwidth=8
-set softtabstop=0
-
-" 탭 -> 공백 변환 기능 (사용 안함)
-" set noexpandtab
-
-" gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
-" xterm_clipboard 기능이 있을 때에도 매핑 가능
-if has("gui_running") || has("xterm_clipboard")
-        set clipboard+=unnamed
-        set clipboard+=unnamedplus
-endif
-if !has('nvim')
-  if !has("gui_running")
-    set clipboard+=exclude:.*
-  endif
-endif
-
-" magic 기능 사용 Allows pattern matching with special characters
-set magic
-
-" 여러 가지 이동 동작시 줄의 시작으로 자동 이동 안함
-set nostartofline
-
-" 비주얼 모드에서의 동작 설정
-set sel=inclusive
-
-" SHIFT 키로 선택 영역을 만드는 것을 허용
-" 영역 상태에서 Ctrl+F,B 로 이동하면 영역이 해제되어 버려서 해제
-set km=startsel,stopsel
-
-" 괄호짝 찾기 기능에 사용자 괄호 종류를 더한다.
-set matchpairs+=<:>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 검색 기능 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" 검색어 강조 기능
-set hlsearch
-
-" 검색시 파일 끝에서 처음으로 되돌리기 안함
-set nowrapscan
-
-" 검색시 대소문자를 구별하지 않음
-set ignorecase
-
-" 괄호가 매치하는 위치를 보여주는 기능
-set showmatch
-
-" Increase Search
-set incsearch
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" filetype 기능 & Syntax Highlighting 기능
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 파일의 종류를 자동으로 인식
-filetype plugin indent on
-
-" 파일 형식에 따른 Syntax Highlighting 기능을 켠다
-syntax enable
+set hidden "새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지않아도(hidden) 된다
+filetype plugin indent on " 파일의 종류를 자동으로 인식
+syntax enable " 파일 형식에 따른 Syntax Highlighting 기능을 켠다
 filetype on
-
-if has("syntax")
-  syntax on
-endif
-
-" 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
-autocmd FileType javascript setlocal cindent
-autocmd Filetype python setlocal tabstop=4 shiftwidth=4 sts=4 expandtab
-autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
-autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType c,cpp,java set mps+==:;
-autocmd FileType mkd setlocal nosmartindent noautoindent
-"autocmd BufWritePre * if &modifiable | %s/\s\+$//e | endif
-"autocmd BufReadPost * if &modifiable | %s/\n\{3,}/\r\r/e | endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" indent 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 자동 들여쓰기 사용
-set autoindent
-" C indent 사용
-set cindent
-"Smart indent 사용
-set smartindent
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 편리한 기능
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지않아도(hidden) 된다
-set hidden
+set comments=sl:/*,mb:\ *,elx:*/
+set showcmd " 완성중인 명령을 표시
+set magic " magic 기능 사용 Allows pattern matching with special characters
+" Wildmenu completion {{{
 
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wildmenu
-
 " File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
-set wildmode=list:longest,full
+set wildmode=list:longest
 
-" /를 입력하여 검색을 시작할 때 자동으로 영문상태로 만들어준다
-"set iminsert=1
-"set imsearch=0
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
 
-set comments=sl:/*,mb:\ *,elx:*/
+set wildignore+=*.luac                           " Lua byte code
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mouse 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set mouse=a
-  if !has('nvim')
-  set ttymouse=xterm
+set wildignore+=migrations                       " Django migrations
+set wildignore+=*.pyc                            " Python byte code
 
-  function! ShowMouseMode()
-    if (&mouse == 'a')
-      echo "mouse-vim"
-    else
-      echo "mouse-xterm"
-    endif
-  endfunction
-endif
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 자주 틀리는 글자 수정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set wildignore+=*.orig                           " Merge resolution files
+
+" Clojure/Leiningen
+set wildignore+=classes
+set wildignore+=lib
+
+" }}}
+" Line Return {{{
+" Make sure Vim returns to the same line when you reopen a file.
+" Thanks, Amit
+augroup line_return
+    autocmd!
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+" }}}
+" }}}
+" Abbreviations ----------------------------------------------------------- {{{
 ab fucntion function
 ab calss class
 ab functio function
@@ -354,7 +139,279 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+" }}}
+" View -------------------------------------------------------------------- {{{
+set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
+set ruler " 커서의 위치를 항상 보이게 함.
+set number " 줄 번호 표시
+set nuw=5 " 줄 번호 표시 너비 설정
+set cursorline " 현재 커서 줄 강조
+set laststatus=2 " 항상 status 라인을 표시하도록 함.
+" Status Line 설정
+set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
+" Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800
+
+"Enable Word wrap
+set wrap
+set linebreak
+
+" 특수문자(tab, line ending) 표시 안함
+set nolist
+" tab/End of line characters 설정
+set listchars=tab:>-,eol:$
+
+" 괄호의 짝을 Highlight
+set showmatch
+set matchtime=3
+
+" Color scheme {{{
+set t_Co=256
+set background=dark
+syntax on
+colorscheme hybrid
+" }}}
+set showmode
+set lazyredraw
+set ttyfast
+set scrolloff=4
+set sidescrolloff=2
+set cmdheight=1
+
+set numberwidth=6
+set splitbelow
+set splitright
+" Folding ----------------------------------------------------------------- {{{
+set foldlevel=5
+set foldcolumn=1
+set foldlevelstart=0
+" Space to toggle folds.
+nnoremap , za
+vnoremap , za
+
+" Make zO recursively open whatever fold we're in, even if it's partially open.
+nnoremap zO zczO
+
+" "Focus" the current line.  Basically:
+"
+" 1. Close all folds.
+" 2. Open just the folds containing the current line.
+" 3. Move the line to a little bit (15 lines) above the center of the screen.
+" 4. Pulse the cursor line.  My eyes are bad.
+"
+" This mapping wipes out the z mark, which I never use.
+"
+" I use :sus for the rare times I want to actually background Vim.
+nnoremap <leader>z mzzMzvzz15<c-e>`z:Pulse<cr>
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '¡¦' . repeat(" ",fillcharcount) . foldedlinecount . '¡¦' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+" Focus Mode View {{{
+function! ToggleFocusMode()
+  if (&foldcolumn != 8)
+    set numberwidth=10
+    set foldcolumn=8
+    set noruler
+    set nonumber
+    Limelight
+  else
+    set numberwidth=4
+    set foldcolumn=1
+    set ruler
+    set number
+    Limelight!
+  endif
+endfunc
+function! FocusModeOff()
+  set numberwidth=4
+  set foldcolumn=2
+  set ruler
+endfunc " }}}
+nnoremap <F1> :call ToggleFocusMode()<cr>
+" }}}
+" Error MSG --------------------------------------------------------------- {{{
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+" c, h 파일인 경우 80 column 이상인 경우 표시
+if exists('+colorcolumn')
+  autocmd BufWinEnter *.py set colorcolumn=80
+  autocmd BufWinEnter *.c set colorcolumn=80
+  autocmd BufWinEnter *.h set colorcolumn=80
+else
+  autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+  autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+endif
+" Highlight VCS conflict markers
+" }}}
+" GUI ---------------------------------------------------------------------- {{{
+if has("gui_running")
+  set lines=150
+  set co=171
+  winp 580 4
+endif
+
+" 폰트 설정
+if has("gui_running")
+  if has("win32")
+    set gfn=consolas:h11:cANSI
+  elseif has("unix")
+    set gfn=Source\ Code\ Pro\ 11
+  else
+    set gfn=consolas\ 11
+  endif
+endif
+" }}}
+" }}}
+" Filetype-specific ------------------------------------------------------- {{{
+" Diff {{{
+
+" This is from https://github.com/sgeb/vim-diff-fold/ without the extra
+" settings crap.  Just the folding expr.
+
+function! DiffFoldLevel()
+    let l:line=getline(v:lnum)
+
+    if l:line =~# '^\(diff\|Index\)'     " file
+        return '>1'
+    elseif l:line =~# '^\(@@\|\d\)'  " hunk
+        return '>2'
+    elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
+        return '>2'
+    elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
+        return '>2'
+    else
+        return '='
+    endif
+endfunction
+
+augroup ft_diff
+    au!
+    autocmd FileType diff setlocal foldmethod=expr
+    autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
+augroup END
+
+" }}}
+" Vim {{{
+augroup ft_vim
+    au!
+
+    au FileType vim setlocal foldmethod=marker keywordprg=:help
+    au FileType help setlocal textwidth=78
+    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+augroup END
+
+" }}}
+" 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
+autocmd FileType javascript setlocal cindent
+autocmd Filetype python setlocal tabstop=4 shiftwidth=4 sts=4 expandtab
+autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
+autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType c,cpp,java set mps+==:;
+autocmd FileType mkd setlocal nosmartindent noautoindent
+autocmd BufRead,BufNewFile *.cmm setfiletype trace
+" }}}
+" Edit Preference --------------------------------------------------------- {{{
+set history=1000 " 명령어 기록을 남길 갯수 지정
+set undofile
+set undoreload=10000
+set backspace=indent,eol,start " 백스페이스 사용 제한사항 해제
+
+" Backups {{{
+set backup                        " enable backups
+set noswapfile                    " it's 2013, Vim.
+
+set undodir=/tmp/vim/undo//     " undo files
+set backupdir=/tmp/vim/backup// " backups
+set directory=/tmp/vim/swap//   " swap files
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+" }}}
+" indent & tab size {{{
+set autoindent " 자동 들여쓰기 사용
+set cindent " C indent 사용
+set smartindent " Smart indent 사용
+" Tab size
+set tabstop=8
+set shiftwidth=8
+set softtabstop=0
+" disable tab to space
+set noexpandtab
+" }}}
+set formatoptions=qrn1j
+set colorcolumn=+1
+" gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
+" xterm_clipboard 기능이 있을 때에도 매핑 가능
+if has("gui_running") || has("xterm_clipboard")
+  set clipboard+=unnamed
+  set clipboard+=unnamedplus
+endif
+if !has('nvim')
+  if !has("gui_running")
+    set clipboard+=exclude:.*
+  endif
+endif
+set nostartofline " 여러 가지 이동 동작시 줄의 시작으로 자동 이동 안함
+set sel=inclusive " 비주얼 모드에서의 동작 설정
+
+" SHIFT 키로 선택 영역을 만드는 것을 허용
+" 영역 상태에서 Ctrl+F,B 로 이동하면 영역이 해제되어 버려서 해제
+set km=startsel,stopsel
+" }}}
+" Search and Replace ------------------------------------------------------ {{{
+set nohlsearch " 검색어 강조 기능끔
+set nowrapscan " 검색시 파일 끝에서 처음으로 되돌리기 안함
+set ignorecase " 검색시 대소문자를 구별하지 않음
+set showmatch " 괄호가 매치하는 위치를 보여주는 기능
+set incsearch " Increase Search
+
+" /를 입력하여 검색을 시작할 때 자동으로 영문상태로 만들어준다
+set iminsert=1
+set imsearch=0
+set matchpairs+=<:> " 괄호짝 찾기 기능에 사용자 괄호 종류를 더한다.
+" }}}
+" Mouse ------------------------------------------------------------------- {{{
+set mouse=a
+  if !has('nvim')
+  set ttymouse=xterm
+
+  function! ShowMouseMode()
+    if (&mouse == 'a')
+      echo "mouse-vim"
+    else
+      echo "mouse-xterm"
+    endif
+  endfunction
+endif
+" }}}
+" Plugin Settings --------------------------------------------------------- {{{
+" Perforce {{{
 function! s:P4_edit_current( )
   execute "!p4 edit " . expand("%")
 endfunc
@@ -367,19 +424,12 @@ endfunc
 function! s:P4_change( )
   execute "!p4 change"
 endfunc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CMD alias
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" command! -bang -range=% -complete=file -nargs=* W <line1>,<line2>write<bang> <args>
-command! -bang Q quitall<bang>
-command! SpaceIndent set ts=4 sw=4 sws=4 expandtab
 command! EP4 call <SID>P4_edit_current()
 command! RP4 call <SID>P4_revert_current()
 command! XP4 call <SID>P4_add_current()
 command! NP4 call <SID>P4_change()
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Cscope
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" Cscope {{{
 function! SetCscope()
   let curdir = getcwd()
 
@@ -410,10 +460,8 @@ if has('cscope')
   cnoreabbrev csh cs help
   call SetCscope()
 endif
-
-"---------------------------------------------------------------------
-" GTAGS
-"---------------------------------------------------------------------
+" }}}
+" GTAGS {{{
 function! GtagsCommnad()
   if filereadable("GPATH")
     let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
@@ -434,16 +482,14 @@ function! GtagsCommnad()
   endif
 endfunction
 autocmd BufReadPost * :call GtagsCommnad()
-"---------------------------------------------------------------------
-" gtags-cscope.vim
-"---------------------------------------------------------------------
+" }}}
+" gtags-cscope.vim {{{
 let GtagsCscope_Auto_Load = 1
 "let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Keep_Alive = 1
 let GtagsCscope_Quiet = 1
-"---------------------------------------------------------------------
-" FZF
-"---------------------------------------------------------------------
+" }}}
+" FZF {{{
 let g:fzf_layout = { 'window': '-tabnew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
@@ -564,9 +610,8 @@ command! -bang -nargs=* S  call s:search_project(<q-args>)
 
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" Tagbar {{{
 let g:tagbar_left = 1
 let g:tagbar_show_linenumbers = 0
 let g:tagbar_autopreview = 1
@@ -577,9 +622,8 @@ let g:tagbar_indent = 1
 "autocmd BufEnter * nested :call tagbar#autoopen(0)
 "autocmd FileType * nested :call tagbar#autoopen(0)
 nmap <M-l> :TagbarToggle<CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-quickhl
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" vim-quickhl {{{
 nmap <leader>h <Plug>(quickhl-manual-this)
 xmap <leader>h <Plug>(quickhl-manual-this)
 nmap <leader>H <Plug>(quickhl-manual-reset)
@@ -587,21 +631,19 @@ xmap <leader>H <Plug>(quickhl-manual-reset)
 
 nmap <leader>t <Plug>(quickhl-cword-toggle)
 nmap <leader>] <Plug>(quickhl-tag-toggle)
-map H <Plug>(operator-quickhl-manual-this-motion)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Fugitive
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" map H <Plug>(operator-quickhl-manual-this-motion)
+nnoremap <silent> * :call quickhl#manual#this('n')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+vnoremap <silent> * :call quickhl#manual#this('v')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+" "}}}
+" Fugitive {{{
 nnoremap <silent> <F4>hh :help my_git<CR>
 nnoremap <silent> <F4> :Gstatus<CR>
 nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
 nnoremap <silent> <F4>l :Git l %<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" easymotion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" easymotion {{{
 let g:EasyMotion_leader_key = '<,>'
 " nmap s <Plug>(easymotion-s1)
 " Turn on case sensitive feature
@@ -609,10 +651,8 @@ let g:EasyMotion_smartcase = 1
 nmap <Leader>w <Plug>(easymotion-w)
 nmap <Leader><leader> <Plug>(easymotion-bd-w)
 nmap <Leader>b <Plug>(easymotion-b)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Signify
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" Signify {{{
 let g:signify_vcs_list = [ 'git' ]
 let g:signify_sign_overwrite = 1
 let g:signify_update_on_focusgained = 1
@@ -620,40 +660,29 @@ let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
 map <silent><M-j> <Plug>(signify-next-hunk)
 map <silent><M-k> <Plug>(signify-prev-hunk)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Rainbow parentheses
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" Rainbow parentheses {{{
 augroup rainbow
   autocmd!
   autocmd VimEnter & RainbowParentheses
 augroup END
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" EasyAlign
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" EasyAlign {{{
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" UltiSnips {{{
 let g:UltiSnipsExpandTrigger="<Tab>"
 let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YCM
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" YCM {{{
 let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" expand-region
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" expand-region {{{
 let g:expand_region_text_objects = {
       \ 'iw'  :0,
       \ 'iW'  :0,
@@ -669,20 +698,20 @@ let g:expand_region_text_objects = {
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 vnoremap q <ESC>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-cpp-enhanced-highlight
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:cpp_class_scope_highlight = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 그외 단축키 설정
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+" vim-cpp-enhanced-highlight {{{
+" let g:cpp_class_scope_highlight = 1
+" }}}
+" }}}
+" Convenience mappings ---------------------------------------------------- {{{
+command! -bang Q quitall<bang>
+command! SpaceIndent set ts=4 sw=4 sws=4 expandtab
 
 cnoreab W w
 cnoreab Wq wq
 cnoreab q q!
 cnoreab rmblank g/^$/d
-cnoreab w!! w !sudo tee > /dev/null %
+cnoreab <silent> w!! w !sudo tee > /dev/null %
 
 cnoremap <C-A> <Home>
 cnoremap <C-E> <End>
@@ -721,34 +750,44 @@ noremap <silent><C-E> $
 noremap <silent><F3> <ESC>:set paste<CR>"*gp:set nopaste<CR>
 noremap <up> gk
 noremap gV `[v`]
-noremap j gjzz
-noremap k gkzz
 vmap <F2> "*y
 vmap <F3> "*p
-vmap Y "*y
+vmap Y "*ygv
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]
 
-nnoremap n nzz
-nnoremap N Nzz
+noremap j gjzz
+noremap k gkzz
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
-"if has("multi_byte")
-"  set encoding=utf-8
-"  setglobal fileencoding=utf-8
-"  "setglobal bomb
-"  set fileencodings=ucs-bom,utf-8,latin1
-"endif
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+nnoremap <c-]> <c-]>zz
 
-" 마지막 편집 위치 복원 기능
-au BufReadPost *
-      \ if line("'\"")>0 && line("'\"") <= line("$") |
-      \ exe "norm g'\"" |
-      \ endif
+" Source
+vnoremap <leader>S y:@"<CR>
+nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 
-nnoremap <leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Stat functions
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
-au BufRead,BufNewFile *.cmm setfiletype trace
+" Insert Mode Completion {{{
 
+inoremap <c-f> <c-x><c-f>
+inoremap <c-]> <c-x><c-]>
+inoremap <c-l> <c-x><c-l>
+
+" }}}
+" Easier to type, and I never use the default behavior.
+noremap H ^
+noremap L $
+vnoremap L g_
+
+inoremap <c-a> <home>
+inoremap <c-e> <end>
+
+nnoremap <M-,> `[
+nnoremap <M-.> `]
+" }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

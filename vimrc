@@ -139,6 +139,7 @@ ab retrun return
 ab retunr return
 ab htis this
 ab erturn return
+ab unsinged unsigned
 " }}}
 " View -------------------------------------------------------------------- {{{
 set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
@@ -217,8 +218,9 @@ function! MyFoldText() " {{{
     let line = substitute(line, '\t', onetab, 'g')
 
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '¡¦' . repeat(" ",fillcharcount) . foldedlinecount . '¡¦' . ' '
+    let fill_start_count = 10 - len(foldedlinecount)
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count 
+    return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
 endfunction " }}}
 set foldtext=MyFoldText()
 " Focus Mode View {{{
@@ -258,7 +260,7 @@ else
 endif
 " Highlight VCS conflict markers
 " }}}
-" GUI ---------------------------------------------------------------------- {{{
+" GUI --------------------------------------------------------------------- {{{
 if has("gui_running")
   set lines=150
   set co=171
@@ -303,6 +305,26 @@ augroup ft_diff
     au!
     autocmd FileType diff setlocal foldmethod=expr
     autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
+augroup END
+
+" }}}
+" C {{{
+let c_no_comment_fold=1
+let c_no_if0_fold=1
+let c_no_block_fold=1
+augroup ft_c
+    au!
+    au FileType c setlocal foldmethod=marker foldmarker={,}
+    au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
+augroup END
+
+" }}}
+" C++ {{{
+
+augroup ft_cpp
+    au!
+    au FileType cpp setlocal foldmethod=marker foldmarker={,}
+    au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
@@ -385,7 +407,7 @@ set sel=inclusive " 비주얼 모드에서의 동작 설정
 set km=startsel,stopsel
 " }}}
 " Search and Replace ------------------------------------------------------ {{{
-set nohlsearch " 검색어 강조 기능끔
+set hlsearch " 검색어 강조 기능끔
 set nowrapscan " 검색시 파일 끝에서 처음으로 되돌리기 안함
 set ignorecase " 검색시 대소문자를 구별하지 않음
 set showmatch " 괄호가 매치하는 위치를 보여주는 기능
@@ -463,12 +485,13 @@ endif
 " }}}
 " GTAGS {{{
 function! GtagsCommnad()
+  let l:cur = expand('%:p:h')
+  execute "cd " . l:cur
   if filereadable("GPATH")
     let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   else
     let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   endif
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if filereadable("GPATH")
@@ -478,7 +501,6 @@ function! GtagsCommnad()
       nnoremap <silent><M-n> :cn<CR>
       nnoremap <silent><M-m> :cp<CR>
     endif
-    execute "cd " . l:cur
   endif
 endfunction
 autocmd BufReadPost * :call GtagsCommnad()
@@ -519,12 +541,12 @@ function! s:gtags_sink(line)
 endfunction
 
 function! s:tags()
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if filereadable("GPATH")
-    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+    let l:root_dir = expand('%:p:h')
   else
     let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   endif
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if !filereadable("GPATH")
@@ -533,12 +555,12 @@ function! s:tags()
       echohl None
       call system('gtags')
     endif
-    execute "cd " . l:cur
     call fzf#run({
     \ 'source':  'global -c',
     \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
     \ 'down':    '30%',
     \ 'sink':    function('s:gtags_sink')})
+    execute "cd " . l:cur
   endif
 endfunction
 
@@ -555,12 +577,12 @@ function! s:rgtags_sink(line)
 endfunction
 
 function! s:rtags(find)
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if filereadable("GPATH")
-    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+    let l:root_dir = expand('%:p:h')
   else
     let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   endif
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
     if !filereadable("GPATH")
@@ -569,40 +591,28 @@ function! s:rtags(find)
       echohl None
       call system('gtags')
     endif
-    execute "cd " . l:cur
     call fzf#run({
     \ 'source':  'global -rx ' . a:find,
     \ 'options': '+m -d "\s" --with-nth 3..',
     \ 'down':    '30%',
     \ 'sink':    function('s:rgtags_sink')})
   endif
+  execute "cd " . l:cur
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
 
-function! s:search_sink(line)
-  echom a:line
-  let parts = split(a:line, ':')
-  let excmd = matchstr(parts[1], '^[0-9]*\ze')
-  execute 'silent e' parts[0]
-  let [magic, &magic] = [&magic, 0]
-  execute excmd
-  let &magic = magic
-endfunction
-
+let g:search_result = "/tmp/alex.jang/search_result"
 function! s:search_project(find)
+  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
   if isdirectory(l:root_dir)
     execute "cd " . l:root_dir
   else
-    let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-    execute "cd " . l:cur
+    execute "cd " . expand('%:p:h')
   endif
-  call fzf#run({
-  \ 'source':  'ag --nogroup --column --color ' . a:find,
-  \ 'options': '+m -d "\s" --ansi --with-nth 1..',
-  \ 'window' : '-tabnew',
-  \ 'sink':    function('s:search_sink')})
+  call fzf#vim#ag(a:find, 0)
+  execute "cd " . l:cur
 endfunction
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>

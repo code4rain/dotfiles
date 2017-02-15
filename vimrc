@@ -28,6 +28,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 "Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
+Plug 'vim-scripts/Quich-Filter'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -56,6 +57,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 't9md/vim-quickhl'
 Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
+Plug 'Chiel92/vim-autoformat'
 
 call plug#end()
 " }}}
@@ -99,8 +101,8 @@ set wildignore+=lib
 " Make sure Vim returns to the same line when you reopen a file.
 " Thanks, Amit
 augroup line_return
-    autocmd!
-    autocmd BufReadPost *
+  autocmd!
+  autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \     execute 'normal! g`"zvzz' |
         \ endif
@@ -207,20 +209,20 @@ nnoremap zO zczO
 nnoremap <leader>z mzzMzvzz15<c-e>`z:Pulse<cr>
 
 function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fill_start_count = 10 - len(foldedlinecount)
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count 
-    return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fill_start_count = 10 - len(foldedlinecount)
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
+  return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
 endfunction " }}}
 set foldtext=MyFoldText()
 " Focus Mode View {{{
@@ -286,25 +288,25 @@ endif
 " settings crap.  Just the folding expr.
 
 function! DiffFoldLevel()
-    let l:line=getline(v:lnum)
+  let l:line=getline(v:lnum)
 
-    if l:line =~# '^\(diff\|Index\)'     " file
-        return '>1'
-    elseif l:line =~# '^\(@@\|\d\)'  " hunk
-        return '>2'
-    elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
-        return '>2'
-    elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
-        return '>2'
-    else
-        return '='
-    endif
+  if l:line =~# '^\(diff\|Index\)'     " file
+    return '>1'
+  elseif l:line =~# '^\(@@\|\d\)'  " hunk
+    return '>2'
+  elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
+    return '>2'
+  elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
+    return '>2'
+  else
+    return '='
+  endif
 endfunction
 
 augroup ft_diff
-    au!
-    autocmd FileType diff setlocal foldmethod=expr
-    autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
+  au!
+  autocmd FileType diff setlocal foldmethod=expr
+  autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
 augroup END
 
 " }}}
@@ -313,28 +315,28 @@ let c_no_comment_fold=1
 let c_no_if0_fold=1
 let c_no_block_fold=1
 augroup ft_c
-    au!
-    au FileType c setlocal foldmethod=marker foldmarker={,}
-    au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
+  au!
+  au FileType c setlocal foldmethod=marker foldmarker={,}
+  au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " C++ {{{
 
 augroup ft_cpp
-    au!
-    au FileType cpp setlocal foldmethod=marker foldmarker={,}
-    au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
+  au!
+  au FileType cpp setlocal foldmethod=marker foldmarker={,}
+  au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " Vim {{{
 augroup ft_vim
-    au!
+  au!
 
-    au FileType vim setlocal foldmethod=marker keywordprg=:help
-    au FileType help setlocal textwidth=78
-    au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+  au FileType vim setlocal foldmethod=marker keywordprg=:help
+  au FileType help setlocal textwidth=78
+  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
 " }}}
@@ -366,13 +368,13 @@ set directory=/tmp/vim/swap//   " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 " }}}
 " indent & tab size {{{
@@ -420,7 +422,7 @@ set matchpairs+=<:> " 괄호짝 찾기 기능에 사용자 괄호 종류를 더�
 " }}}
 " Mouse ------------------------------------------------------------------- {{{
 set mouse=a
-  if !has('nvim')
+if !has('nvim')
   set ttymouse=xterm
 
   function! ShowMouseMode()
@@ -486,7 +488,7 @@ endif
 " GTAGS {{{
 function! GtagsCommnad()
   let l:cur = expand('%:p:h')
-  execute "cd " . l:cur
+  " execute "cd " . l:cur
   if filereadable("GPATH")
     let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
   else
@@ -529,10 +531,10 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 command! Recent call fzf#run({
-\  'source':  v:oldfiles,
-\  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s',
+      \  'down':    '40%'})
 
 
 function! s:gtags_sink(line)
@@ -556,11 +558,11 @@ function! s:tags()
       call system('gtags')
     endif
     call fzf#run({
-    \ 'source':  'global -c',
-    \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-    \ 'down':    '30%',
-    \ 'sink':    function('s:gtags_sink')})
-    execute "cd " . l:cur
+          \ 'source':  'global -c',
+          \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+          \ 'down':    '30%',
+          \ 'sink':    function('s:gtags_sink')})
+    " execute "cd " . l:cur
   endif
 endfunction
 
@@ -592,12 +594,12 @@ function! s:rtags(find)
       call system('gtags')
     endif
     call fzf#run({
-    \ 'source':  'global -rx ' . a:find,
-    \ 'options': '+m -d "\s" --with-nth 3..',
-    \ 'down':    '30%',
-    \ 'sink':    function('s:rgtags_sink')})
+          \ 'source':  'global -rx ' . a:find,
+          \ 'options': '+m -d "\s" --with-nth 3..',
+          \ 'down':    '30%',
+          \ 'sink':    function('s:rgtags_sink')})
   endif
-  execute "cd " . l:cur
+  " execute "cd " . l:cur
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
@@ -612,7 +614,7 @@ function! s:search_project(find)
     execute "cd " . expand('%:p:h')
   endif
   call fzf#vim#ag(a:find, 0)
-  execute "cd " . l:cur
+  " execute "cd " . l:cur
 endfunction
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>
@@ -712,6 +714,58 @@ vnoremap q <ESC>
 " vim-cpp-enhanced-highlight {{{
 " let g:cpp_class_scope_highlight = 1
 " }}}
+" Quich-Filter {{{
+let g:filtering_object = {}
+let g:filtering_keywords = []
+"function! Open_filtering_search()
+"  let g:filtering_object = []
+"endfunction
+"augroup open_filter_object
+"autocmd! BufReadPost,FileReadPost * :call Open_filtering_search()
+"augroup END
+
+function! Append_search_string()
+  if empty(g:filtering_object)
+    let g:filtering_object = FilteringNew()
+  else
+    call g:filtering_object.destruct()
+    let g:filtering_object = FilteringNew()
+  endif
+
+  for i in g:filtering_keywords
+    call g:filtering_object.addToParameter('alt', i)
+  endfor
+
+  call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
+  let g:filtering_keywords = g:filtering_object.alt
+  call g:filtering_object.run()
+endfunction
+
+function! Clear_run_search()
+  if empty(g:filtering_object)
+    let g:filtering_object = FilteringNew()
+  else
+    call g:filtering_object.destruct()
+    let g:filtering_object = FilteringNew()
+  endif
+
+  call g:filtering_object.addInputToParameter('alt', 'Search:')
+  let g:filtering_keywords = g:filtering_object.alt
+  call g:filtering_object.run()
+endfunction
+
+function! Clear_search()
+  if !empty(g:filtering_object)
+    call g:filtering_object.destruct()
+  endif
+endfunction
+nnoremap <silent><M-f> :call Append_search_string()<CR>
+nnoremap <silent><M-g> :call Clear_run_search()<CR>
+nnoremap <silent><M-c> :call Clear_search()<CR>
+" }}}
+" AutoFormat {{{
+let g:autoformat_verbosemode=1
+" }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{
 command! -bang Q quitall<bang>
@@ -799,5 +853,6 @@ inoremap <c-e> <end>
 
 nnoremap <M-,> `[
 nnoremap <M-.> `]
+
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

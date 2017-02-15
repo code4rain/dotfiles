@@ -725,46 +725,49 @@ let g:filtering_keywords = []
 "augroup END
 
 function! Append_search_string()
-  if empty(g:filtering_object)
-    let g:filtering_object = FilteringNew()
-  else
-    call g:filtering_object.destruct()
-    let g:filtering_object = FilteringNew()
-  endif
+	if empty(g:filtering_object)
+		let g:filtering_object = FilteringNew()
+	else
+		call g:filtering_object.destruct()
+		let g:filtering_object = FilteringNew()
+	endif
 
-  for i in g:filtering_keywords
-    call g:filtering_object.addToParameter('alt', i)
-  endfor
+	for i in g:filtering_keywords
+		call g:filtering_object.addToParameter('alt', i)
+	endfor
 
-  call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
-  let g:filtering_keywords = g:filtering_object.alt
-  call g:filtering_object.run()
+	call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
+	let g:filtering_keywords = g:filtering_object.alt
+	call g:filtering_object.run()
 endfunction
 
 function! Clear_run_search()
-  if empty(g:filtering_object)
-    let g:filtering_object = FilteringNew()
-  else
-    call g:filtering_object.destruct()
-    let g:filtering_object = FilteringNew()
-  endif
+	if empty(g:filtering_object)
+		let g:filtering_object = FilteringNew()
+	else
+		call g:filtering_object.destruct()
+		let g:filtering_object = FilteringNew()
+	endif
 
-  call g:filtering_object.addInputToParameter('alt', 'Search:')
-  let g:filtering_keywords = g:filtering_object.alt
-  call g:filtering_object.run()
+	call g:filtering_object.addInputToParameter('alt', 'Search:')
+	let g:filtering_keywords = g:filtering_object.alt
+	call g:filtering_object.run()
 endfunction
 
 function! Clear_search()
-  if !empty(g:filtering_object)
-    call g:filtering_object.destruct()
-  endif
+	if !empty(g:filtering_object)
+		call g:filtering_object.destruct()
+	endif
 endfunction
 nnoremap <silent><M-f> :call Append_search_string()<CR>
 nnoremap <silent><M-g> :call Clear_run_search()<CR>
 nnoremap <silent><M-c> :call Clear_search()<CR>
 " }}}
 " AutoFormat {{{
-let g:autoformat_verbosemode=1
+let g:autoformat_verbosemode=0
+nnoremap <C-M-L> :Autoformat<CR>
+inoremap <C-M-L> :Autoformat<CR>
+vnoremap <C-M-L> :Autoformat<CR>
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

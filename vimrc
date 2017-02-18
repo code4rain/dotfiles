@@ -1,6 +1,6 @@
 ﻿" Preamble ---------------------------------------------------------------- {{{
 if !has('nvim')
-  set shell=/bin/bash
+	set shell=/bin/bash
 endif
 
 set nocompatible               " be iMproved
@@ -101,11 +101,11 @@ set wildignore+=lib
 " Make sure Vim returns to the same line when you reopen a file.
 " Thanks, Amit
 augroup line_return
-  autocmd!
-  autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     execute 'normal! g`"zvzz' |
-        \ endif
+	autocmd!
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\     execute 'normal! g`"zvzz' |
+				\ endif
 augroup END
 " }}}
 " }}}
@@ -209,42 +209,42 @@ nnoremap zO zczO
 nnoremap <leader>z mzzMzvzz15<c-e>`z:Pulse<cr>
 
 function! MyFoldText() " {{{
-  let line = getline(v:foldstart)
+	let line = getline(v:foldstart)
 
-  let nucolwidth = &fdc + &number * &numberwidth
-  let windowwidth = winwidth(0) - nucolwidth - 3
-  let foldedlinecount = v:foldend - v:foldstart
+	let nucolwidth = &fdc + &number * &numberwidth
+	let windowwidth = winwidth(0) - nucolwidth - 3
+	let foldedlinecount = v:foldend - v:foldstart
 
-  " expand tabs into spaces
-  let onetab = strpart('          ', 0, &tabstop)
-  let line = substitute(line, '\t', onetab, 'g')
+	" expand tabs into spaces
+	let onetab = strpart('          ', 0, &tabstop)
+	let line = substitute(line, '\t', onetab, 'g')
 
-  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fill_start_count = 10 - len(foldedlinecount)
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
-  return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
+	let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+	let fill_start_count = 10 - len(foldedlinecount)
+	let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
+	return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
 endfunction " }}}
 set foldtext=MyFoldText()
 " Focus Mode View {{{
 function! ToggleFocusMode()
-  if (&foldcolumn != 8)
-    set numberwidth=10
-    set foldcolumn=8
-    set noruler
-    set nonumber
-    Limelight
-  else
-    set numberwidth=4
-    set foldcolumn=1
-    set ruler
-    set number
-    Limelight!
-  endif
+	if (&foldcolumn != 8)
+		set numberwidth=10
+		set foldcolumn=8
+		set noruler
+		set nonumber
+		Limelight
+	else
+		set numberwidth=4
+		set foldcolumn=1
+		set ruler
+		set number
+		Limelight!
+	endif
 endfunc
 function! FocusModeOff()
-  set numberwidth=4
-  set foldcolumn=2
-  set ruler
+	set numberwidth=4
+	set foldcolumn=2
+	set ruler
 endfunc " }}}
 nnoremap <F1> :call ToggleFocusMode()<cr>
 " }}}
@@ -252,32 +252,32 @@ nnoremap <F1> :call ToggleFocusMode()<cr>
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " c, h 파일인 경우 80 column 이상인 경우 표시
 if exists('+colorcolumn')
-  autocmd BufWinEnter *.py set colorcolumn=80
-  autocmd BufWinEnter *.c set colorcolumn=80
-  autocmd BufWinEnter *.h set colorcolumn=80
+	autocmd BufWinEnter *.py set colorcolumn=80
+	autocmd BufWinEnter *.c set colorcolumn=80
+	autocmd BufWinEnter *.h set colorcolumn=80
 else
-  autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-  autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-  autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+	autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+	autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+	autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
 " Highlight VCS conflict markers
 " }}}
 " GUI --------------------------------------------------------------------- {{{
 if has("gui_running")
-  set lines=150
-  set co=171
-  winp 580 4
+	set lines=150
+	set co=171
+	winp 580 4
 endif
 
 " 폰트 설정
 if has("gui_running")
-  if has("win32")
-    set gfn=consolas:h11:cANSI
-  elseif has("unix")
-    set gfn=Source\ Code\ Pro\ 11
-  else
-    set gfn=consolas\ 11
-  endif
+	if has("win32")
+		set gfn=consolas:h11:cANSI
+	elseif has("unix")
+		set gfn=Source\ Code\ Pro\ 11
+	else
+		set gfn=consolas\ 11
+	endif
 endif
 " }}}
 " }}}
@@ -288,25 +288,25 @@ endif
 " settings crap.  Just the folding expr.
 
 function! DiffFoldLevel()
-  let l:line=getline(v:lnum)
+	let l:line=getline(v:lnum)
 
-  if l:line =~# '^\(diff\|Index\)'     " file
-    return '>1'
-  elseif l:line =~# '^\(@@\|\d\)'  " hunk
-    return '>2'
-  elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
-    return '>2'
-  elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
-    return '>2'
-  else
-    return '='
-  endif
+	if l:line =~# '^\(diff\|Index\)'     " file
+		return '>1'
+	elseif l:line =~# '^\(@@\|\d\)'  " hunk
+		return '>2'
+	elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
+		return '>2'
+	elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
+		return '>2'
+	else
+		return '='
+	endif
 endfunction
 
 augroup ft_diff
-  au!
-  autocmd FileType diff setlocal foldmethod=expr
-  autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
+	au!
+	autocmd FileType diff setlocal foldmethod=expr
+	autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
 augroup END
 
 " }}}
@@ -315,28 +315,28 @@ let c_no_comment_fold=1
 let c_no_if0_fold=1
 let c_no_block_fold=1
 augroup ft_c
-  au!
-  au FileType c setlocal foldmethod=marker foldmarker={,}
-  au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
+	au!
+	au FileType c setlocal foldmethod=marker foldmarker={,}
+	au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " C++ {{{
 
 augroup ft_cpp
-  au!
-  au FileType cpp setlocal foldmethod=marker foldmarker={,}
-  au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
+	au!
+	au FileType cpp setlocal foldmethod=marker foldmarker={,}
+	au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " Vim {{{
 augroup ft_vim
-  au!
+	au!
 
-  au FileType vim setlocal foldmethod=marker keywordprg=:help
-  au FileType help setlocal textwidth=78
-  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+	au FileType vim setlocal foldmethod=marker keywordprg=:help
+	au FileType help setlocal textwidth=78
+	au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
 " }}}
@@ -368,13 +368,13 @@ set directory=/tmp/vim/swap//   " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), "p")
+	call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-  call mkdir(expand(&backupdir), "p")
+	call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-  call mkdir(expand(&directory), "p")
+	call mkdir(expand(&directory), "p")
 endif
 " }}}
 " indent & tab size {{{
@@ -393,13 +393,13 @@ set colorcolumn=+1
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
 if has("gui_running") || has("xterm_clipboard")
-  set clipboard+=unnamed
-  set clipboard+=unnamedplus
+	set clipboard+=unnamed
+	set clipboard+=unnamedplus
 endif
 if !has('nvim')
-  if !has("gui_running")
-    set clipboard+=exclude:.*
-  endif
+	if !has("gui_running")
+		set clipboard+=exclude:.*
+	endif
 endif
 set nostartofline " 여러 가지 이동 동작시 줄의 시작으로 자동 이동 안함
 set sel=inclusive " 비주얼 모드에서의 동작 설정
@@ -423,30 +423,30 @@ set matchpairs+=<:> " 괄호짝 찾기 기능에 사용자 괄호 종류를 더�
 " Mouse ------------------------------------------------------------------- {{{
 set mouse=a
 if !has('nvim')
-  set ttymouse=xterm
+	set ttymouse=xterm
 
-  function! ShowMouseMode()
-    if (&mouse == 'a')
-      echo "mouse-vim"
-    else
-      echo "mouse-xterm"
-    endif
-  endfunction
+	function! ShowMouseMode()
+		if (&mouse == 'a')
+			echo "mouse-vim"
+		else
+			echo "mouse-xterm"
+		endif
+	endfunction
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
 " Perforce {{{
 function! s:P4_edit_current( )
-  execute "!p4 edit " . expand("%")
+	execute "!p4 edit " . expand("%")
 endfunc
 function! s:P4_revert_current( )
-  execute "!p4 revert " . expand("%")
+	execute "!p4 revert " . expand("%")
 endfunc
 function! s:P4_add_current( )
-  execute "!p4 add " . expand("%")
+	execute "!p4 add " . expand("%")
 endfunc
 function! s:P4_change( )
-  execute "!p4 change"
+	execute "!p4 change"
 endfunc
 command! EP4 call <SID>P4_edit_current()
 command! RP4 call <SID>P4_revert_current()
@@ -455,55 +455,54 @@ command! NP4 call <SID>P4_change()
 " }}}
 " Cscope {{{
 function! SetCscope()
-  let curdir = getcwd()
+	let curdir = getcwd()
+	while !filereadable("cscope.out") && getcwd() != "/"
+		cd ..
+	endwhile
 
-  while !filereadable("cscope.out") && getcwd() != "/"
-    cd ..
-  endwhile
+	if filereadable("cscope.out")
+		execute "silent cs add " . getcwd() . "/cscope.out"
+		"echo \"Load CSCOPE DONE\"
+	endif
 
-  if filereadable("cscope.out")
-    execute "silent cs add " . getcwd() . "/cscope.out"
-    "echo \"Load CSCOPE DONE\"
-  endif
-
-  execute "cd " . curdir
+	execute "cd " . curdir
 endfunction
 
 "cscope file-searching alternative
 if has('cscope')
-  set cscopetag cscopeverbose
+	set cscopetag cscopeverbose
 
-  if has('quickfix')
-    set cscopequickfix=s-,c-,d-,i-,t-,e-
-  endif
-  cnoreabbrev csa cs add
-  cnoreabbrev csf cs find
-  cnoreabbrev csk cs kill
-  cnoreabbrev csr cs reset
-  cnoreabbrev css cs show
-  cnoreabbrev csh cs help
-  call SetCscope()
+	if has('quickfix')
+		set cscopequickfix=s-,c-,d-,i-,t-,e-
+	endif
+	cnoreabbrev csa cs add
+	cnoreabbrev csf cs find
+	cnoreabbrev csk cs kill
+	cnoreabbrev csr cs reset
+	cnoreabbrev css cs show
+	cnoreabbrev csh cs help
+	call SetCscope()
 endif
 " }}}
 " GTAGS {{{
 function! GtagsCommnad()
-  let l:cur = expand('%:p:h')
-  " execute "cd " . l:cur
-  if filereadable("GPATH")
-    let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-  else
-    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  endif
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-    if filereadable("GPATH")
-      nnoremap <C-\>^] :GtagsCursor<CR>
-      nnoremap <F7> :Ngtags<CR>
-      nnoremap <M-h> :Gtags -gi<space>
-      nnoremap <silent><M-n> :cn<CR>
-      nnoremap <silent><M-m> :cp<CR>
-    endif
-  endif
+	let l:cur = expand('%:p:h')
+	" execute "cd " . l:cur
+	if filereadable("GPATH")
+		let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+	else
+		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+	endif
+	if isdirectory(l:root_dir)
+		execute "cd " . l:root_dir
+		if filereadable("GPATH")
+			nnoremap <C-\>^] :GtagsCursor<CR>
+			nnoremap <F7> :Ngtags<CR>
+			nnoremap <M-h> :Gtags -gi<space>
+			nnoremap <silent><M-n> :cn<CR>
+			nnoremap <silent><M-m> :cp<CR>
+		endif
+	endif
 endfunction
 autocmd BufReadPost * :call GtagsCommnad()
 " }}}
@@ -531,90 +530,90 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 command! Recent call fzf#run({
-      \  'source':  v:oldfiles,
-      \  'sink':    'e',
-      \  'options': '-m -x +s',
-      \  'down':    '40%'})
+			\  'source':  v:oldfiles,
+			\  'sink':    'e',
+			\  'options': '-m -x +s',
+			\  'down':    '40%'})
 
 
 function! s:gtags_sink(line)
-  echom a:line
-  execute "cs find g " . substitute(a:line, '\n', '', '')
+	echom a:line
+	execute "cs find g " . substitute(a:line, '\n', '', '')
 endfunction
 
 function! s:tags()
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-  if filereadable("GPATH")
-    let l:root_dir = expand('%:p:h')
-  else
-    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  endif
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-    if !filereadable("GPATH")
-      echohl WarningMsg
-      echom 'Preparing tags'
-      echohl None
-      call system('gtags')
-    endif
-    call fzf#run({
-          \ 'source':  'global -c',
-          \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-          \ 'down':    '30%',
-          \ 'sink':    function('s:gtags_sink')})
-    " execute "cd " . l:cur
-  endif
+	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+	if filereadable("GPATH")
+		let l:root_dir = expand('%:p:h')
+	else
+		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+	endif
+	if isdirectory(l:root_dir)
+		execute "cd " . l:root_dir
+		if !filereadable("GPATH")
+			echohl WarningMsg
+			echom 'Preparing tags'
+			echohl None
+			call system('gtags')
+		endif
+		call fzf#run({
+					\ 'source':  'global -c',
+					\ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+					\ 'down':    '30%',
+					\ 'sink':    function('s:gtags_sink')})
+		" execute "cd " . l:cur
+	endif
 endfunction
 
 command! Ngtags call s:tags()
 
 function! s:rgtags_sink(line)
-  echom a:line
-  let parts = split(a:line)
-  let excmd = matchstr(parts[1], '^[0-9]*\ze')
-  execute 'silent e' parts[2]
-  let [magic, &magic] = [&magic, 0]
-  execute excmd
-  let &magic = magic
+	echom a:line
+	let parts = split(a:line)
+	let excmd = matchstr(parts[1], '^[0-9]*\ze')
+	execute 'silent e' parts[2]
+	let [magic, &magic] = [&magic, 0]
+	execute excmd
+	let &magic = magic
 endfunction
 
 function! s:rtags(find)
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-  if filereadable("GPATH")
-    let l:root_dir = expand('%:p:h')
-  else
-    let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  endif
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-    if !filereadable("GPATH")
-      echohl WarningMsg
-      echom 'Preparing tags'
-      echohl None
-      call system('gtags')
-    endif
-    call fzf#run({
-          \ 'source':  'global -rx ' . a:find,
-          \ 'options': '+m -d "\s" --with-nth 3..',
-          \ 'down':    '30%',
-          \ 'sink':    function('s:rgtags_sink')})
-  endif
-  " execute "cd " . l:cur
+	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+	if filereadable("GPATH")
+		let l:root_dir = expand('%:p:h')
+	else
+		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+	endif
+	if isdirectory(l:root_dir)
+		execute "cd " . l:root_dir
+		if !filereadable("GPATH")
+			echohl WarningMsg
+			echom 'Preparing tags'
+			echohl None
+			call system('gtags')
+		endif
+		call fzf#run({
+					\ 'source':  'global -rx ' . a:find,
+					\ 'options': '+m -d "\s" --with-nth 3..',
+					\ 'down':    '30%',
+					\ 'sink':    function('s:rgtags_sink')})
+	endif
+	" execute "cd " . l:cur
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
 
 let g:search_result = "/tmp/alex.jang/search_result"
 function! s:search_project(find)
-  let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-  let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-  if isdirectory(l:root_dir)
-    execute "cd " . l:root_dir
-  else
-    execute "cd " . expand('%:p:h')
-  endif
-  call fzf#vim#ag(a:find, 0)
-  " execute "cd " . l:cur
+	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+	let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+	if isdirectory(l:root_dir)
+		execute "cd " . l:root_dir
+	else
+		execute "cd " . expand('%:p:h')
+	endif
+	call fzf#vim#ag(a:find, 0)
+	" execute "cd " . l:cur
 endfunction
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>
@@ -675,8 +674,8 @@ map <silent><M-k> <Plug>(signify-prev-hunk)
 " }}}
 " Rainbow parentheses {{{
 augroup rainbow
-  autocmd!
-  autocmd VimEnter & RainbowParentheses
+	autocmd!
+	autocmd VimEnter & RainbowParentheses
 augroup END
 " }}}
 " EasyAlign {{{
@@ -696,17 +695,17 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " }}}
 " expand-region {{{
 let g:expand_region_text_objects = {
-      \ 'iw'  :0,
-      \ 'iW'  :0,
-      \ 'i"'  :1,
-      \ 'i''' :1,
-      \ 'i]'  :1,
-      \ 'ib'  :1,
-      \ 'iB'  :1,
-      \ 'il'  :1,
-      \ 'ip'  :1,
-      \ 'ie'  :1,
-      \ }
+			\ 'iw'  :0,
+			\ 'iW'  :0,
+			\ 'i"'  :1,
+			\ 'i''' :1,
+			\ 'i]'  :1,
+			\ 'ib'  :1,
+			\ 'iB'  :1,
+			\ 'il'  :1,
+			\ 'ip'  :1,
+			\ 'ie'  :1,
+			\ }
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 vnoremap q <ESC>
@@ -768,6 +767,9 @@ let g:autoformat_verbosemode=0
 nnoremap <C-M-L> :Autoformat<CR>
 inoremap <C-M-L> :Autoformat<CR>
 vnoremap <C-M-L> :Autoformat<CR>
+" }}}
+" Surround z{{{
+xmap s <plug>VSurround
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

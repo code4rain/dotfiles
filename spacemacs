@@ -141,7 +141,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
                                :size 16
-                               :weight normal
+                               :weight light
                                :width normal
                                :powerline-scale 1.3)
    ;; The leader key
@@ -153,13 +153,13 @@ values."
    dotspacemacs-ex-command-key ":"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "M-m"
+   dotspacemacs-emacs-leader-key "C-h"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key ","
+   dotspacemacs-major-mode-leader-key "C-k"
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-M-m"
+   dotspacemacs-major-mode-emacs-leader-key "C-k"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
    ;; Setting it to a non-nil value, allows for separate commands under <C-i>
@@ -272,14 +272,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative nil
-			       :disabled-for-modes dired-mode
-					 doc-view-mode
-					 markdown-mode
-					 org-mode
-					 pdf-view-mode
-					 text-mode
-					 :size-limit-kb 1000)
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -339,10 +332,11 @@ you should place your code here."
   ;; Kill current buffer
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
+  (define-key evil-hybrid-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
-  (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "j") (lambda () (interactive) (call-interactively 'evil-next-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
+  (define-key evil-motion-state-map (kbd "k") (lambda () (interactive) (call-interactively 'evil-previous-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
   ;; (define-key evil-motion-state-map (kbd "j") (kbd "gjzz"))
   ;; (define-key evil-motion-state-map (kbd "k") (kbd "gkzz"))
 
@@ -357,6 +351,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "\C-e") 'evil-end-of-line)
   (define-key evil-insert-state-map (kbd "\C-e") 'end-of-line)
   (define-key evil-visual-state-map (kbd "\C-e") 'evil-end-of-line)
+  (define-key evil-hybrid-state-map (kbd "\C-e") 'evil-end-of-line)
   (define-key evil-motion-state-map (kbd "\C-e") 'evil-end-of-line)
   ;; exit with <C-g>
   (global-set-key (kbd "C-g") 'evil-escape)
@@ -616,7 +611,26 @@ you should place your code here."
   ;; (bind-key* "<mouse-1>" #'ignore)
   ;; python -------------------------
   (setq py-autopep8-options '("--max-line-length=100"))
+  (custom-set-faces
+   (if (not window-system)
+       '(default ((t (:background "nil"))))))
+  (custom-theme-set-faces
+   'subatomic
+   '(font-lock-comment-face ((t (:foreground "#DFAF8F"))))
+   '(font-lock-comment-delimiter-face ((t (:foreground "#DFAF8F")))))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+)
+)

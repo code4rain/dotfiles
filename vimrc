@@ -35,6 +35,8 @@ Plug 'vim-scripts/Quich-Filter'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'w0ng/vim-hybrid'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Framework
 Plug 'UltiSnips'
@@ -45,6 +47,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'Mizuchi/vim-ranger'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'lucapette/vim-textobj-underscore'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -58,6 +61,7 @@ Plug 't9md/vim-quickhl'
 Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
 Plug 'Chiel92/vim-autoformat'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 " }}}
@@ -768,8 +772,14 @@ nnoremap <C-M-L> :Autoformat<CR>
 inoremap <C-M-L> :Autoformat<CR>
 vnoremap <C-M-L> :Autoformat<CR>
 " }}}
-" Surround z{{{
+" Surround {{{
 xmap s <plug>VSurround
+" }}}
+" Airline {{{f
+let g:airline_theme='powerlineish'
+let g:airline_extensions = ['branch']
+let g:airline_left_sep = "\uE0B8"
+let g:airline_right_sep = "\uE0BE"
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

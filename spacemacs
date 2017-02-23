@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     gnus
+     vimscript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -141,7 +143,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
                                :size 16
-                               :weight light
+                               :weight normal
                                :width normal
                                :powerline-scale 1.3)
    ;; The leader key
@@ -153,13 +155,13 @@ values."
    dotspacemacs-ex-command-key ":"
    ;; The leader key accessible in `emacs state' and `insert state'
    ;; (default "M-m")
-   dotspacemacs-emacs-leader-key "C-h"
+   dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key "C-k"
+   dotspacemacs-major-mode-leader-key "C-h"
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m")
-   dotspacemacs-major-mode-emacs-leader-key "C-k"
+   dotspacemacs-major-mode-emacs-leader-key "C-h"
    ;; These variables control whether separate commands are bound in the GUI to
    ;; the key pairs C-i, TAB and C-m, RET.
    ;; Setting it to a non-nil value, allows for separate commands under <C-i>
@@ -335,8 +337,10 @@ you should place your code here."
   (define-key evil-hybrid-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-visual-state-map (kbd "C-q") 'kill-this-buffer)
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
-  (define-key evil-motion-state-map (kbd "j") (lambda () (interactive) (call-interactively 'evil-next-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
-  (define-key evil-motion-state-map (kbd "k") (lambda () (interactive) (call-interactively 'evil-previous-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
+  (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
+  ;; (define-key evil-motion-state-map (kbd "j") (lambda () (interactive) (call-interactively 'evil-next-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
+  ;; (define-key evil-motion-state-map (kbd "k") (lambda () (interactive) (call-interactively 'evil-previous-visual-line) (evil-scroll-line-to-center (line-number-at-pos))))
   ;; (define-key evil-motion-state-map (kbd "j") (kbd "gjzz"))
   ;; (define-key evil-motion-state-map (kbd "k") (kbd "gkzz"))
 
@@ -409,8 +413,7 @@ you should place your code here."
   (setq-default evil-symbol-word-search t)
 
   ;; centered-cursor-mode set
-  ;; (global-centered-cursor-mode +1)
-  ;; (set-face-background 'hl-line "#402060")
+  (global-centered-cursor-mode +1)
 
   (setq-default line-spacing 2)
   (defun alex/line-spacing-increase()
@@ -480,7 +483,7 @@ you should place your code here."
   (font-lock-add-keywords 'org-mode
 			  '(("^ +\\([-*]\\) "
 			     (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-  (setq org-bullets-bullet-list '( "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "✡" "✽" "■" "◆" "▼" "●" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
+  (setq org-bullets-bullet-list '( "■" "◆" "▼" "●" "✲" "✱" "✻" "✼" "✽" "✾" "✿" "❀" "✡" "✽" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
   (setq org-default-notes-file "~/Dropbox/org/notes.org")
   (global-set-key (kbd "C-0") 'org-capture)
   (setq org-capture-templates
@@ -531,24 +534,25 @@ you should place your code here."
 				    helm-source-buffer-not-found))
 
   ;; Hangul(한글)
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  ;; (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
-  (if (daemonp)
-      (progn
-	(add-hook 'after-make-frame-functions
-		  (lambda (frame)
-		    (with-selected-frame frame
-		      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-					'("NanumGothicCoding" . "iso10646-1"))
-		      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-					'("NanumGothicCoding" . "iso10646-1"))
-		      )))
-	)
-    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-		      '("NanumGothicCoding" . "iso10646-1"))
-    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-		      '("NanumGothicCoding" . "iso10646-1"))
-    )
+  ;; (if (daemonp)
+  ;;     (progn
+  ;; 	(add-hook 'after-make-frame-functions
+  ;; 		  (lambda (frame)
+  ;; 				   (with-selected-frame frame
+  ;; 				     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+  ;; 						       '("NanumGothicCoding" . "iso10646-1"))
+  ;; 				     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+  ;; 						       '("NanumGothicCoding" . "iso10646-1"))
+  ;; 				     )))
+  ;; 	)
+  ;;     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+  ;; 			'("NanumGothicCoding" . "iso10646-1"))
+  ;;     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+  ;; 			'("NanumGothicCoding" . "iso10646-1"))
+  ;;   )
+
   ;; C mode hack
   (defun my-c-mode-font-lock-if0 (limit)
     (save-restriction
@@ -611,14 +615,60 @@ you should place your code here."
   ;; (bind-key* "<mouse-1>" #'ignore)
   ;; python -------------------------
   (setq py-autopep8-options '("--max-line-length=100"))
-  (custom-set-faces
-   (if (not window-system)
-       '(default ((t (:background "nil"))))))
+
   (custom-theme-set-faces
    'subatomic
    '(font-lock-comment-face ((t (:foreground "#DFAF8F"))))
-   '(font-lock-comment-delimiter-face ((t (:foreground "#DFAF8F")))))
+   '(font-lock-comment-delimiter-face ((t (:foreground "#DFAF8F"))))
+   )
+
+  (add-hook 'after-make-frame-functions (lambda (frame) (when (not (display-graphic-p frame))
+							  (custom-set-faces
+							   '(default ((t (:background "unspecified-bg"))))
+							   '(hl-line ((t (:background "black"))))
+							   '(powerline-active2 ((t (:background "unspecified-bg" :foreground "yellow"))))
+							   '(powerline-active1 ((t (:background "#000000" :foreground "yellow"))))
+							   '(powerline-inactive1 ((t (:background "unspecified-bg" :foreground "yellow"))))
+							   '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "yellow"))))
+							   '(mode-line ((t (:background "#303030") :foreground "yellow")))
+							   '(linum ((t (:background "unspecified-bg"))))
+							   )))
+	    )
+  ;; GNUS
+  ;; Send email via Gmail:
+  (setq message-send-mail-function 'smtpmail-send-it
+	smtpmail-default-smtp-server "203.254.227.42")
+
+  ;; Ranger
+  (setq ranger-cleanup-eagerly t)
+  (setq ranger-show-dotfiles nil)
+  (setq ranger-max-preview-size 10)
+  (setq ranger-dont-show-binary t)
+
+
+  ;; mode-line
+  ;; (setq powerline-default-separator 'slant)
+  (setq spaceline-which-function-p nil)
+  (setq spaceline-minor-modes-p nil)
+  (setq spaceline-separator-dir-left '(left . left))
+  (setq spaceline-separator-dir-right '(right . right))
+  (defun spaceline--unicode-number (str)
+    "Return a nice unicode representation of a single-digit number STR."
+    (cond
+     ((string= "1" str) "(1)")
+     ((string= "2" str) "(2)")
+     ((string= "3" str) "(3)")
+     ((string= "4" str) "(4)")
+     ((string= "5" str) "(5)")
+     ((string= "6" str) "(6)")
+     ((string= "7" str) "(7)")
+     ((string= "8" str) "(8)")
+     ((string= "9" str) "(9)")
+     ((string= "10" str) "(10)")
+     (t str)))
   )
+
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -632,5 +682,13 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ '(package-selected-packages
+   (quote
+    (winum web-mode use-package restart-emacs mmm-mode live-py-mode info+ indent-guide git-link expand-region evil-nerd-commenter ace-window evil yasnippet company helm helm-core magit async yapfify xterm-color ws-butler which-key volatile-highlights vimrc-mode vi-tilde-fringe uuidgen unfill undo-tree typo toc-org tagedit subatomic-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort py-autopep8 pug-mode popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint less-css-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dts-mode disaster diminish diff-hl define-word dactyl-mode cython-mode company-web company-statistics company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 )

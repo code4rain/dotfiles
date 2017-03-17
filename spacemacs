@@ -554,44 +554,45 @@ you should place your code here."
   ;;   )
 
   ;; C mode hack
-  (defun my-c-mode-font-lock-if0 (limit)
-    (save-restriction
-      (widen)
-      (save-excursion
-	(goto-char (point-min))
-	(let ((depth 0) str start start-depth)
-	  (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
-	    (setq str (match-string 1))
-	    (if (string= str "if")
-		(progn
-		  (setq depth (1+ depth))
-		  (when (and (null start) (looking-at "\\s-+0"))
-		    (setq start (match-end 0)
-			  start-depth depth)))
-	      (when (and start (= depth start-depth))
-		(c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
-		(setq start nil))
-	      (when (string= str "endif")
-		(setq depth (1- depth)))))
-	  (when (and start (> depth 0))
-	    (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
-    nil)
+  ;; (defun my-c-mode-font-lock-if0 (limit)
+  ;;   (save-restriction
+  ;;     (widen)
+  ;;     (save-excursion
+  ;; 	(goto-char (point-min))
+  ;; 	(let ((depth 0) str start start-depth)
+  ;; 	  (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
+  ;; 	    (setq str (match-string 1))
+  ;; 	    (if (string= str "if")
+  ;; 		(progn
+  ;; 		  (setq depth (1+ depth))
+  ;; 		  (when (and (null start) (looking-at "\\s-+0"))
+  ;; 		    (setq start (match-end 0)
+  ;; 			  start-depth depth)))
+  ;; 	      (when (and start (= depth start-depth))
+  ;; 		(c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
+  ;; 		(setq start nil))
+  ;; 	      (when (string= str "endif")
+  ;; 		(setq depth (1- depth)))))
+  ;; 	  (when (and start (> depth 0))
+  ;; 	    (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
+  ;;   nil)
 
-  (defun my-c-mode-common-hook ()
-    (font-lock-add-keywords
-     nil
-     '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
+  ;; (defun my-c-mode-common-hook ()
+  ;;   (font-lock-add-keywords
+  ;;    nil
+  ;;    '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
 
-  (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-  ;;
-  (add-hook 'c-mode-common-hook
-	    (lambda ()
-	      (font-lock-add-keywords nil
-				      '(("\\<\\(FIXME\\|TODO\\|HACK\\|fixme\\|todo\\|hack\\)" 1
-					 font-lock-warning-face t)))))
-  (font-lock-add-keywords
-   'c-mode
-   '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+  ;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+  ;; ;;
+  ;; (add-hook 'c-mode-common-hook
+  ;; 	    (lambda ()
+  ;; 	      (font-lock-add-keywords nil
+  ;; 				      '(("\\<\\(FIXME\\|TODO\\|HACK\\|fixme\\|todo\\|hack\\)" 1
+  ;; 					 font-lock-warning-face t)))))
+  ;; (font-lock-add-keywords
+  ;;  'c-mode
+  ;;  '(("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-name-face)))
+
   (global-set-key [C-down-mouse-1] nil)
   (global-set-key [C-mouse-1] 'helm-gtags-dwim)
 
@@ -623,17 +624,19 @@ you should place your code here."
    )
 
   (add-hook 'after-make-frame-functions (lambda (frame) (when (not (display-graphic-p frame))
-							  (custom-set-faces
-							   '(default ((t (:background "unspecified-bg"))))
-							   '(hl-line ((t (:background "black"))))
-							   '(powerline-active2 ((t (:background "unspecified-bg" :foreground "yellow"))))
-							   '(powerline-active1 ((t (:background "#000000" :foreground "yellow"))))
-							   '(powerline-inactive1 ((t (:background "unspecified-bg" :foreground "yellow"))))
-							   '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "yellow"))))
-							   '(mode-line ((t (:background "#303030") :foreground "yellow")))
-							   '(linum ((t (:background "unspecified-bg"))))
-							   )))
-	    )
+  							  (custom-set-faces
+  							   '(default ((t (:background "unspecified-bg"))))
+  							   '(hl-line ((t (:background "black"))))
+  							   '(powerline-active2 ((t (:background "unspecified-bg" :weight light))))
+  							   '(powerline-active1 ((t (:background "#CC1133" :foreground "#EEEEEE"  :weight light))))
+  							   '(powerline-inactive2 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
+  							   '(powerline-inactive1 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
+  							   '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "cyan"  :weight light))))
+  							   '(mode-line ((t (:background "#B5E61D" :foreground "#001111"  :weight light))))
+  							   '(linum ((t (:background "unspecified-bg"))))
+  							   )))
+  	    )
+
   ;; GNUS
   ;; Send email via Gmail:
   (setq message-send-mail-function 'smtpmail-send-it
@@ -647,11 +650,9 @@ you should place your code here."
 
 
   ;; mode-line
-  ;; (setq powerline-default-separator 'slant)
+  ;;(setq powerline-default-separator nil)
   (setq spaceline-which-function-p nil)
   (setq spaceline-minor-modes-p nil)
-  (setq spaceline-separator-dir-left '(left . left))
-  (setq spaceline-separator-dir-right '(right . right))
   (defun spaceline--unicode-number (str)
     "Return a nice unicode representation of a single-digit number STR."
     (cond
@@ -666,6 +667,8 @@ you should place your code here."
      ((string= "9" str) "(9)")
      ((string= "10" str) "(10)")
      (t str)))
+  (setq powerline-utf-8-separator-left #xe0b8)  ;; 
+  (setq powerline-utf-8-separator-right #xe0be) ;; 
   )
 
 

@@ -48,6 +48,7 @@ Plug 'majutsushi/tagbar'
 Plug 'Mizuchi/vim-ranger'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'lucapette/vim-textobj-underscore'
+Plug 'svermeulen/vim-easyclip'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -62,6 +63,7 @@ Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdcommenter'
 
 call plug#end()
 " }}}
@@ -489,30 +491,30 @@ if has('cscope')
 endif
 " }}}
 " GTAGS {{{
-function! GtagsCommnad()
-	let l:cur = expand('%:p:h')
-	" execute "cd " . l:cur
-	if filereadable("GPATH")
-		let l:root_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-	else
-		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-	endif
-	if isdirectory(l:root_dir)
-		execute "cd " . l:root_dir
-		if filereadable("GPATH")
-			nnoremap <C-\>^] :GtagsCursor<CR>
-			nnoremap <F7> :Ngtags<CR>
-			nnoremap <M-h> :Gtags -gi<space>
-			nnoremap <silent><M-n> :cn<CR>
-			nnoremap <silent><M-m> :cp<CR>
-		endif
-	endif
-endfunction
-autocmd BufReadPost * :call GtagsCommnad()
+" function! GtagsCommnad()
+"   let l:cur = expand('%:p:h')
+"   " execute "cd " . l:cur
+"   if filereadable("GTAGS")
+"     let l:gtags_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
+"   else
+"     let l:gtags_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
+"   endif
+"   if isdirectory(l:root_dir)
+"     if filereadable("GTAGS")
+"       nnoremap <C-\>^] :GtagsCursor<CR>
+"       nnoremap <F7> :Ngtags<CR>
+"       nnoremap <M-h> :Gtags -gi<space>
+"       nnoremap <silent><M-n> :cn<CR>
+"       nnoremap <silent><M-m> :cp<CR>
+"     endif
+"   endif
+" endfunction
+" autocmd BufReadPost * :call GtagsCommnad()
 " }}}
 " gtags-cscope.vim {{{
+let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Load = 1
-"let GtagsCscope_Auto_Map = 1
+let GtagsCscope_Auto_Map = 1
 let GtagsCscope_Keep_Alive = 1
 let GtagsCscope_Quiet = 1
 " }}}
@@ -533,12 +535,29 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+let g:fzf_action = {
+\ 'ctrl-t': 'tab split',
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit' }
 command! Recent call fzf#run({
 			\  'source':  v:oldfiles,
 			\  'sink':    'e',
 			\  'options': '-m -x +s',
 			\  'down':    '40%'})
 
+function! s:GtagsCscope_GtagsRoot()
+    let cmd = "global -pq"
+    let cmd_output = system(cmd)
+    if v:shell_error != 0
+        if v:shell_error == 3
+            call s:Error('GTAGS not found.')
+        else
+            call s:Error('global command failed. command line: ' . cmd)
+        endif
+        return ''
+    endif
+    return strpart(cmd_output, 0, strlen(cmd_output) - 1)
+endfunction
 
 function! s:gtags_sink(line)
 	echom a:line
@@ -546,20 +565,8 @@ function! s:gtags_sink(line)
 endfunction
 
 function! s:tags()
-	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-	if filereadable("GPATH")
-		let l:root_dir = expand('%:p:h')
-	else
-		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-	endif
-	if isdirectory(l:root_dir)
-		execute "cd " . l:root_dir
-		if !filereadable("GPATH")
-			echohl WarningMsg
-			echom 'Preparing tags'
-			echohl None
-			call system('gtags')
-		endif
+  let gtagsroot = s:GtagsCscope_GtagsRoot()
+	if isdirectory(gtagsroot)
 		call fzf#run({
 					\ 'source':  'global -c',
 					\ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
@@ -582,43 +589,31 @@ function! s:rgtags_sink(line)
 endfunction
 
 function! s:rtags(find)
-	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-	if filereadable("GPATH")
-		let l:root_dir = expand('%:p:h')
-	else
-		let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-	endif
-	if isdirectory(l:root_dir)
-		execute "cd " . l:root_dir
-		if !filereadable("GPATH")
-			echohl WarningMsg
-			echom 'Preparing tags'
-			echohl None
-			call system('gtags')
-		endif
+  let gtagsroot = s:GtagsCscope_GtagsRoot()
+	if isdirectory(gtagsroot)
 		call fzf#run({
 					\ 'source':  'global -rx ' . a:find,
 					\ 'options': '+m -d "\s" --with-nth 3..',
 					\ 'down':    '30%',
 					\ 'sink':    function('s:rgtags_sink')})
 	endif
-	" execute "cd " . l:cur
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
 
 let g:search_result = "/tmp/alex.jang/search_result"
+
 function! s:search_project(find)
-	let l:cur = substitute(system("pwd 2>/dev/null"), '\n', '', '')
 	let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
 	if isdirectory(l:root_dir)
-		execute "cd " . l:root_dir
+		call fzf#vim#grep('git grep --line-number '.shellescape(a:find), 0)
 	else
-		execute "cd " . expand('%:p:h')
+		call fzf#vim#ag(a:find, 0)
 	endif
-	call fzf#vim#ag(a:find, 0)
-	" execute "cd " . l:cur
 endfunction
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>
 command! -bang -nargs=* S  call s:search_project(<q-args>)
@@ -780,6 +775,56 @@ let g:airline_theme='powerlineish'
 let g:airline_extensions = ['branch']
 let g:airline_left_sep = "\uE0B8"
 let g:airline_right_sep = "\uE0BE"
+" }}}
+" NerdComment {{{
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' },
+      \ 'python': { 'left': '#', 'leftAlt': '# ' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+function! SavePos()
+  let s:left_cur = getpos("'<")
+  let s:right_cur = getpos("'>")
+  let s:v_cur = getpos("v")
+  let g:cur = s:v_cur
+  "echom s:left_cur[1] . ":" . s:right_cur[1] . ":" . s:v_cur[1]
+  if s:left_cur[1] == s:v_cur[1]
+	  let g:cur[1] = s:v_cur[1] - 1
+  endif
+  if s:right_cur[1] == s:v_cur[1]
+	  let g:cur[1] = s:v_cur[1] + 1
+  endif
+endfunc
+
+function! MoveBelow()
+  let s:cur = g:cur
+  call setpos(".", s:cur)
+endfunc
+
+nmap <M-;> <plug>NERDCommenterToggle <bar> j
+vmap <silent><M-;> :call SavePos()<CR>gv <Bar> <plug>NERDCommenterToggle <bar> :call MoveBelow()<CR>
+" }}}
+" Multiple-Cursors {{{
+let g:EasyClipUseSubstituteDefaults = 1
+" Map start key separately from next key
+" let g:multi_cursor_start_key='<C-x>'
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

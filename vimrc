@@ -107,11 +107,11 @@ set wildignore+=lib
 " Make sure Vim returns to the same line when you reopen a file.
 " Thanks, Amit
 augroup line_return
-	autocmd!
-	autocmd BufReadPost *
-				\ if line("'\"") > 0 && line("'\"") <= line("$") |
-				\     execute 'normal! g`"zvzz' |
-				\ endif
+  autocmd!
+  autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
 augroup END
 " }}}
 " }}}
@@ -180,6 +180,8 @@ set t_Co=256
 set background=dark
 syntax on
 colorscheme hybrid
+" IF hybrid!!
+highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
 " }}}
 set showmode
 set lazyredraw
@@ -254,19 +256,9 @@ function! FocusModeOff()
 endfunc " }}}
 nnoremap <F1> :call ToggleFocusMode()<cr>
 " }}}
-" Error MSG --------------------------------------------------------------- {{{
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
-" c, h 파일인 경우 80 column 이상인 경우 표시
-if exists('+colorcolumn')
-	autocmd BufWinEnter *.py set colorcolumn=80
-	autocmd BufWinEnter *.c set colorcolumn=80
-	autocmd BufWinEnter *.h set colorcolumn=80
-else
-	autocmd BufWinEnter *.py let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-	autocmd BufWinEnter *.c let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-	autocmd BufWinEnter *.h let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-endif
-" Highlight VCS conflict markers
+" Column Over ------------------------------------------------------------- {{{
+highlight ColorColumn ctermbg=red
+call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " GUI --------------------------------------------------------------------- {{{
 if has("gui_running")
@@ -395,7 +387,6 @@ set softtabstop=0
 set noexpandtab
 " }}}
 set formatoptions=qrn1j
-set colorcolumn=+1
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
 if has("gui_running") || has("xterm_clipboard")
@@ -639,11 +630,11 @@ xmap <leader>h <Plug>(quickhl-manual-this)
 nmap <leader>H <Plug>(quickhl-manual-reset)
 xmap <leader>H <Plug>(quickhl-manual-reset)
 
-nmap <leader>t <Plug>(quickhl-cword-toggle)
+nmap <leader>t <Plug>(quickhl-manual-toggle)
 nmap <leader>] <Plug>(quickhl-tag-toggle)
 " map H <Plug>(operator-quickhl-manual-this-motion)
-nnoremap <silent> * :call quickhl#manual#this('n')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
-vnoremap <silent> * :call quickhl#manual#this('v')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+"nnoremap <silent> * :call quickhl#manual#this('n')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
+"vnoremap <silent> * :call quickhl#manual#this('v')<CR>:let stay_star_view = winsaveview()<cr>*:call winrestview(stay_star_view)<cr>
 " "}}}
 " Fugitive {{{
 nnoremap <silent> <F4>hh :help my_git<CR>

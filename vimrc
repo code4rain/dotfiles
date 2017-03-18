@@ -1,6 +1,8 @@
 ﻿" Preamble ---------------------------------------------------------------- {{{
+if !has('win32')
 if !has('nvim')
 	set shell=/bin/bash
+endif
 endif
 
 set nocompatible               " be iMproved
@@ -8,8 +10,11 @@ set nocompatible               " be iMproved
 " Plugins  ---------------------------------------------------------------- {{{
 " https://github.com/junegunn/vim-plug
 " Download: curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+if has('win32')
+call plug#begin(expand('~').'/vimfiles/plugged')
+else
 call plug#begin('~/.vim/plugged')
+endif
 " The following are examples of different formats supported.
 
 " Language Support
@@ -26,7 +31,7 @@ Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
-"Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
 Plug 'vim-scripts/Quich-Filter'
 
@@ -39,13 +44,16 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Framework
-Plug 'UltiSnips'
 Plug 'honza/vim-snippets'
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'}
+if !has('win32')
+Plug 'UltiSnips'
+Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/fzf.vim'
+"Plug 'Mizuchi/vim-ranger'
+endif
 Plug 'majutsushi/tagbar'
-Plug 'Mizuchi/vim-ranger'
+
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'svermeulen/vim-easyclip'
@@ -90,12 +98,9 @@ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
 set wildignore+=*.DS_Store                       " OSX bullshit
-
 set wildignore+=*.luac                           " Lua byte code
-
 set wildignore+=migrations                       " Django migrations
 set wildignore+=*.pyc                            " Python byte code
-
 set wildignore+=*.orig                           " Merge resolution files
 
 " Clojure/Leiningen
@@ -152,6 +157,7 @@ ab unsinged unsigned
 " View -------------------------------------------------------------------- {{{
 set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
 set ruler " 커서의 위치를 항상 보이게 함.
+set relativenumber "
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
 set cursorline " 현재 커서 줄 강조
@@ -182,6 +188,7 @@ syntax on
 colorscheme hybrid
 " IF hybrid!!
 highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
+highlight LineNr ctermfg=143 guifg=#373b41
 " }}}
 set showmode
 set lazyredraw
@@ -261,21 +268,17 @@ highlight ColorColumn ctermbg=red
 call matchadd('ColorColumn', '\%81v', 100)
 " }}}
 " GUI --------------------------------------------------------------------- {{{
-if has("gui_running")
-	set lines=150
-	set co=171
-	winp 580 4
-endif
-
 " 폰트 설정
 if has("gui_running")
 	if has("win32")
-		set gfn=consolas:h11:cANSI
+		set gfn=FantasqueSansMono\ Nerd\ Font:h11:cANSI
 	elseif has("unix")
 		set gfn=Source\ Code\ Pro\ 11
 	else
 		set gfn=consolas\ 11
 	endif
+elseif has("win32")
+  hi CursorLine ctermbg=129
 endif
 " }}}
 " }}}
@@ -419,6 +422,7 @@ set matchpairs+=<:> " 괄호짝 찾기 기능에 사용자 괄호 종류를 더�
 " }}}
 " Mouse ------------------------------------------------------------------- {{{
 set mouse=a
+if !has('win32')
 if !has('nvim')
 	set ttymouse=xterm
 
@@ -429,6 +433,7 @@ if !has('nvim')
 			echo "mouse-xterm"
 		endif
 	endfunction
+endif
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
@@ -450,37 +455,7 @@ command! RP4 call <SID>P4_revert_current()
 command! XP4 call <SID>P4_add_current()
 command! NP4 call <SID>P4_change()
 " }}}
-" Cscope {{{
-function! SetCscope()
-	let curdir = getcwd()
-	while !filereadable("cscope.out") && getcwd() != "/"
-		cd ..
-	endwhile
 
-	if filereadable("cscope.out")
-		execute "silent cs add " . getcwd() . "/cscope.out"
-		"echo \"Load CSCOPE DONE\"
-	endif
-
-	execute "cd " . curdir
-endfunction
-
-"cscope file-searching alternative
-if has('cscope')
-	set cscopetag cscopeverbose
-
-	if has('quickfix')
-		set cscopequickfix=s-,c-,d-,i-,t-,e-
-	endif
-	cnoreabbrev csa cs add
-	cnoreabbrev csf cs find
-	cnoreabbrev csk cs kill
-	cnoreabbrev csr cs reset
-	cnoreabbrev css cs show
-	cnoreabbrev csh cs help
-	call SetCscope()
-endif
-" }}}
 " GTAGS {{{
 " function! GtagsCommnad()
 "   let l:cur = expand('%:p:h')
@@ -764,8 +739,14 @@ xmap s <plug>VSurround
 " Airline {{{f
 let g:airline_theme='powerlineish'
 let g:airline_extensions = ['branch']
-let g:airline_left_sep = "\uE0B8"
-let g:airline_right_sep = "\uE0BE"
+if has('win32')
+let g:airline_left_sep = ""
+let g:airline_right_sep = ""
+else
+let g:airline_left_sep = "\uE0B0"
+let g:airline_right_sep = "\uE0B2"
+endif
+
 " }}}
 " NerdComment {{{
 " Add spaces after comment delimiters by default
@@ -816,6 +797,10 @@ vmap <silent><M-;> :call SavePos()<CR>gv <Bar> <plug>NERDCommenterToggle <bar> :
 let g:EasyClipUseSubstituteDefaults = 1
 " Map start key separately from next key
 " let g:multi_cursor_start_key='<C-x>'
+" }}}
+" peekaroo {{{
+let g:peekaboo_window="bo 25new"
+let g:peekaboo_compact=1
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

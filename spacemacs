@@ -133,19 +133,19 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(subatomic
+   dotspacemacs-themes '(
+			 spacemacs-light
 			 spacemacs-dark
-                         spacemacs-light
-			 )
+			 subatomic)
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("FantasqueSansMono Nerd Font"
                                :size 16
                                :weight normal
                                :width normal
-                               :powerline-scale 1.3)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -274,7 +274,14 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers '(:relative t
+					 :disabled-for-modes dired-mode
+					 doc-view-mode
+					 markdown-mode
+					 org-mode
+					 pdf-view-mode
+					 text-mode
+					 :size-limit-kb 1000)
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -316,7 +323,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq evil-want-C-i-jump t)
-  (setq helm-gtags-maximum-candidates 500)
+  (setq helm-gtags-maximum-candidates 50000)
   )
 
 (defun dotspacemacs/user-config ()
@@ -623,19 +630,21 @@ you should place your code here."
    '(font-lock-comment-delimiter-face ((t (:foreground "#DFAF8F"))))
    )
 
-  (add-hook 'after-make-frame-functions (lambda (frame) (when (not (display-graphic-p frame))
-  							  (custom-set-faces
-  							   '(default ((t (:background "unspecified-bg"))))
-  							   '(hl-line ((t (:background "black"))))
-  							   '(powerline-active2 ((t (:background "unspecified-bg" :weight light))))
-  							   '(powerline-active1 ((t (:background "#CC1133" :foreground "#EEEEEE"  :weight light))))
-  							   '(powerline-inactive2 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
-  							   '(powerline-inactive1 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
-  							   '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "cyan"  :weight light))))
-  							   '(mode-line ((t (:background "#B5E61D" :foreground "#001111"  :weight light))))
-  							   '(linum ((t (:background "unspecified-bg"))))
-  							   )))
-  	    )
+  (add-hook 'after-make-frame-functions
+	    (lambda (frame)
+	      (when (not (display-graphic-p frame))
+		(custom-set-faces
+		 '(default ((t (:background "unspecified-bg"))))
+		 '(hl-line ((t (:background "black"))))
+		 '(powerline-active2 ((t (:background "unspecified-bg" :weight light))))
+		 '(powerline-active1 ((t (:background "#CC1133" :foreground "#EEEEEE"  :weight light))))
+		 '(powerline-inactive2 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
+		 '(powerline-inactive1 ((t (:background "unspecified-bg" :foreground "yellow"  :weight light))))
+		 '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "cyan"  :weight light))))
+		 '(mode-line ((t (:background "#B5E61D" :foreground "#001111"  :weight light))))
+		 '(linum ((t (:background "unspecified-bg"))))
+		 )))
+	    )
 
   ;; GNUS
   ;; Send email via Gmail:
@@ -669,6 +678,9 @@ you should place your code here."
      (t str)))
   (setq powerline-utf-8-separator-left #xe0b8)  ;; 
   (setq powerline-utf-8-separator-right #xe0be) ;; 
+
+  ;; line number format
+  (setq linum-relative-format "%4s  ")
   )
 
 
@@ -687,7 +699,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (winum web-mode use-package restart-emacs mmm-mode live-py-mode info+ indent-guide git-link expand-region evil-nerd-commenter ace-window evil yasnippet company helm helm-core magit async yapfify xterm-color ws-butler which-key volatile-highlights vimrc-mode vi-tilde-fringe uuidgen unfill undo-tree typo toc-org tagedit subatomic-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort py-autopep8 pug-mode popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint less-css-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dts-mode disaster diminish diff-hl define-word dactyl-mode cython-mode company-web company-statistics company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-link ace-jump-helm-line ac-ispell))))
+    (markdown-mode packed anaconda-mode smartparens highlight flycheck alert projectile magit-popup git-commit winum web-mode use-package restart-emacs mmm-mode live-py-mode info+ indent-guide git-link expand-region evil-nerd-commenter ace-window evil yasnippet company helm helm-core magit async yapfify xterm-color ws-butler which-key volatile-highlights vimrc-mode vi-tilde-fringe uuidgen unfill undo-tree typo toc-org tagedit subatomic-theme spaceline smeargle slim-mode shell-pop scss-mode sass-mode ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort py-autopep8 pug-mode popwin pip-requirements persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint less-css-mode hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag goto-chg google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dts-mode disaster diminish diff-hl define-word dactyl-mode cython-mode company-web company-statistics company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bind-key auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

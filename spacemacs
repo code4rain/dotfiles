@@ -20,10 +20,10 @@ values."
    ;; installation feature and you have to explicitly list a layer in the
    ;; variable `dotspacemacs-configuration-layers' to install it.
    ;; (default 'unused)
-   dotspacemacs-enable-lazy-installation 'unused
+   dotspacemacs-enable-lazy-installation 'nil
    ;; If non-nil then Spacemacs will ask for confirmation before installing
    ;; a layer lazily. (default t)
-   dotspacemacs-ask-for-lazy-installation t
+   dotspacemacs-ask-for-lazy-installation nil
    ;; If non-nil layers with lazy install support are lazy installed.
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
@@ -142,7 +142,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("FantasqueSansMono Nerd Font"
-                               :size 16
+                               :size 13
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -508,6 +508,9 @@ you should place your code here."
   (setq helm-bibtex-library-path "~/Dropbox/bibliography/bibtex-pdfs")
   (global-set-key (kbd "<f12>")
 		  (lambda () (interactive) (find-file "~/Dropbox/org/gtd.org")))
+  (define-key evil-motion-state-map (kbd "<backspace>") 'widen)
+  (define-key evil-normal-state-map (kbd "<backspace>") 'widen)
+
   ;; ------------ ORG MODE -
 
   ;; olivetti
@@ -541,24 +544,24 @@ you should place your code here."
 				    helm-source-buffer-not-found))
 
   ;; Hangul(한글)
-  ;; (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
 
-  ;; (if (daemonp)
-  ;;     (progn
-  ;; 	(add-hook 'after-make-frame-functions
-  ;; 		  (lambda (frame)
-  ;; 				   (with-selected-frame frame
-  ;; 				     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  ;; 						       '("NanumGothicCoding" . "iso10646-1"))
-  ;; 				     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  ;; 						       '("NanumGothicCoding" . "iso10646-1"))
-  ;; 				     )))
-  ;; 	)
-  ;;     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  ;; 			'("NanumGothicCoding" . "iso10646-1"))
-  ;;     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  ;; 			'("NanumGothicCoding" . "iso10646-1"))
-  ;;   )
+  (if (daemonp)
+      (progn
+  	(add-hook 'after-make-frame-functions
+  		  (lambda (frame)
+  				   (with-selected-frame frame
+  				     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+  						       '("NanumGothicCoding". "iso10646-1"))
+  				     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+  						       '("NanumGothicCoding". "iso10646-1"))
+  				     )))
+  	)
+      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+  			'("NanumGothicCoding". "iso10646-1"))
+      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+  			'("NanumGothicCoding". "iso10646-1"))
+    )
 
   ;; C mode hack
   ;; (defun my-c-mode-font-lock-if0 (limit)
@@ -643,7 +646,9 @@ you should place your code here."
 		 '(modeline-inactive ((t (:background "unspecified-bg"  :foreground "cyan"  :weight light))))
 		 '(mode-line ((t (:background "#B5E61D" :foreground "#001111"  :weight light))))
 		 '(linum ((t (:background "unspecified-bg"))))
-		 )))
+		 )
+		)
+	      )
 	    )
 
   ;; GNUS

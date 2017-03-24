@@ -1,8 +1,8 @@
 ﻿" Preamble ---------------------------------------------------------------- {{{
 if !has('win32')
-if !has('nvim')
-	set shell=/bin/bash
-endif
+  if !has('nvim')
+    set shell=/bin/bash
+  endif
 endif
 
 set nocompatible               " be iMproved
@@ -11,9 +11,9 @@ set nocompatible               " be iMproved
 " https://github.com/junegunn/vim-plug
 " Download: curl -fLo ~/.vim/autoload/plug.vim --create-dir https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if has('win32')
-call plug#begin(expand('~').'/vimfiles/plugged')
+  call plug#begin(expand('~').'/vimfiles/plugged')
 else
-call plug#begin('~/.vim/plugged')
+  call plug#begin('~/.vim/plugged')
 endif
 " The following are examples of different formats supported.
 
@@ -46,11 +46,11 @@ Plug 'vim-airline/vim-airline-themes'
 " Framework
 Plug 'honza/vim-snippets'
 if !has('win32')
-Plug 'UltiSnips'
-Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
-Plug 'junegunn/fzf.vim'
-"Plug 'Mizuchi/vim-ranger'
+  Plug 'UltiSnips'
+  Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+  Plug 'junegunn/fzf.vim'
+  "Plug 'Mizuchi/vim-ranger'
 endif
 Plug 'majutsushi/tagbar'
 
@@ -89,7 +89,7 @@ set magic " magic 기능 사용 Allows pattern matching with special characters
 " Tab 자동 완성시 가능한 목록을 보여줌
 set wildmenu
 " File open등에서 자동완성 기능 사용시 bash와 유사하게 동작하도록 변경함
-set wildmode=list:longest
+set wildmode=longest:list,full
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
@@ -224,42 +224,42 @@ nnoremap zO zczO
 nnoremap <leader>z mzzMzvzz15<c-e>`z:Pulse<cr>
 
 function! MyFoldText() " {{{
-	let line = getline(v:foldstart)
+  let line = getline(v:foldstart)
 
-	let nucolwidth = &fdc + &number * &numberwidth
-	let windowwidth = winwidth(0) - nucolwidth - 3
-	let foldedlinecount = v:foldend - v:foldstart
+  let nucolwidth = &fdc + &number * &numberwidth
+  let windowwidth = winwidth(0) - nucolwidth - 3
+  let foldedlinecount = v:foldend - v:foldstart
 
-	" expand tabs into spaces
-	let onetab = strpart('          ', 0, &tabstop)
-	let line = substitute(line, '\t', onetab, 'g')
+  " expand tabs into spaces
+  let onetab = strpart('          ', 0, &tabstop)
+  let line = substitute(line, '\t', onetab, 'g')
 
-	let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-	let fill_start_count = 10 - len(foldedlinecount)
-	let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
-	return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
+  let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+  let fill_start_count = 10 - len(foldedlinecount)
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
+  return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
 endfunction " }}}
 set foldtext=MyFoldText()
 " Focus Mode View {{{
 function! ToggleFocusMode()
-	if (&foldcolumn != 8)
-		set numberwidth=10
-		set foldcolumn=8
-		set noruler
-		set nonumber
-		Limelight
-	else
-		set numberwidth=4
-		set foldcolumn=1
-		set ruler
-		set number
-		Limelight!
-	endif
+  if (&foldcolumn != 8)
+    set numberwidth=10
+    set foldcolumn=8
+    set noruler
+    set nonumber
+    Limelight
+  else
+    set numberwidth=4
+    set foldcolumn=1
+    set ruler
+    set number
+    Limelight!
+  endif
 endfunc
 function! FocusModeOff()
-	set numberwidth=4
-	set foldcolumn=2
-	set ruler
+  set numberwidth=4
+  set foldcolumn=2
+  set ruler
 endfunc " }}}
 nnoremap <F1> :call ToggleFocusMode()<cr>
 " }}}
@@ -270,13 +270,13 @@ call matchadd('ColorColumn', '\%81v', 100)
 " GUI --------------------------------------------------------------------- {{{
 " 폰트 설정
 if has("gui_running")
-	if has("win32")
-		set gfn=FantasqueSansMono\ Nerd\ Font:h11:cANSI
-	elseif has("unix")
-		set gfn=Source\ Code\ Pro\ 11
-	else
-		set gfn=consolas\ 11
-	endif
+  if has("win32")
+    set gfn=FantasqueSansMono\ Nerd\ Font:h11:cANSI
+  elseif has("unix")
+    set gfn=Source\ Code\ Pro\ 11
+  else
+    set gfn=consolas\ 11
+  endif
 elseif has("win32")
   hi CursorLine ctermbg=129
 endif
@@ -289,25 +289,25 @@ endif
 " settings crap.  Just the folding expr.
 
 function! DiffFoldLevel()
-	let l:line=getline(v:lnum)
+  let l:line=getline(v:lnum)
 
-	if l:line =~# '^\(diff\|Index\)'     " file
-		return '>1'
-	elseif l:line =~# '^\(@@\|\d\)'  " hunk
-		return '>2'
-	elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
-		return '>2'
-	elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
-		return '>2'
-	else
-		return '='
-	endif
+  if l:line =~# '^\(diff\|Index\)'     " file
+    return '>1'
+  elseif l:line =~# '^\(@@\|\d\)'  " hunk
+    return '>2'
+  elseif l:line =~# '^\*\*\* \d\+,\d\+ \*\*\*\*$' " context: file1
+    return '>2'
+  elseif l:line =~# '^--- \d\+,\d\+ ----$'     " context: file2
+    return '>2'
+  else
+    return '='
+  endif
 endfunction
 
 augroup ft_diff
-	au!
-	autocmd FileType diff setlocal foldmethod=expr
-	autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
+  au!
+  autocmd FileType diff setlocal foldmethod=expr
+  autocmd FileType diff setlocal foldexpr=DiffFoldLevel()
 augroup END
 
 " }}}
@@ -316,28 +316,28 @@ let c_no_comment_fold=1
 let c_no_if0_fold=1
 let c_no_block_fold=1
 augroup ft_c
-	au!
-	au FileType c setlocal foldmethod=marker foldmarker={,}
-	au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
+  au!
+  au FileType c setlocal foldmethod=marker foldmarker={,}
+  au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " C++ {{{
 
 augroup ft_cpp
-	au!
-	au FileType cpp setlocal foldmethod=marker foldmarker={,}
-	au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
+  au!
+  au FileType cpp setlocal foldmethod=marker foldmarker={,}
+  au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
 " }}}
 " Vim {{{
 augroup ft_vim
-	au!
+  au!
 
-	au FileType vim setlocal foldmethod=marker keywordprg=:help
-	au FileType help setlocal textwidth=78
-	au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
+  au FileType vim setlocal foldmethod=marker keywordprg=:help
+  au FileType help setlocal textwidth=78
+  au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
 
 " }}}
@@ -369,13 +369,13 @@ set directory=/tmp/vim/swap//   " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-	call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-	call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-	call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 " }}}
 " indent & tab size {{{
@@ -393,13 +393,13 @@ set formatoptions=qrn1j
 " gVim 을 사용중일 경우 클립보드를 unnamed 레지스터로 매핑
 " xterm_clipboard 기능이 있을 때에도 매핑 가능
 if has("gui_running") || has("xterm_clipboard")
-	set clipboard+=unnamed
-	set clipboard+=unnamedplus
+  set clipboard+=unnamed
+  set clipboard+=unnamedplus
 endif
 if !has('nvim')
-	if !has("gui_running")
-		set clipboard+=exclude:.*
-	endif
+  if !has("gui_running")
+    set clipboard+=exclude:.*
+  endif
 endif
 set nostartofline " 여러 가지 이동 동작시 줄의 시작으로 자동 이동 안함
 set sel=inclusive " 비주얼 모드에서의 동작 설정
@@ -423,32 +423,32 @@ set matchpairs+=<:> " 괄호짝 찾기 기능에 사용자 괄호 종류를 더�
 " Mouse ------------------------------------------------------------------- {{{
 set mouse=a
 if !has('win32')
-if !has('nvim')
-	set ttymouse=xterm
+  if !has('nvim')
+    set ttymouse=xterm
 
-	function! ShowMouseMode()
-		if (&mouse == 'a')
-			echo "mouse-vim"
-		else
-			echo "mouse-xterm"
-		endif
-	endfunction
-endif
+    function! ShowMouseMode()
+      if (&mouse == 'a')
+        echo "mouse-vim"
+      else
+        echo "mouse-xterm"
+      endif
+    endfunction
+  endif
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
 " Perforce {{{
 function! s:P4_edit_current( )
-	execute "!p4 edit " . expand("%")
+  execute "!p4 edit " . expand("%")
 endfunc
 function! s:P4_revert_current( )
-	execute "!p4 revert " . expand("%")
+  execute "!p4 revert " . expand("%")
 endfunc
 function! s:P4_add_current( )
-	execute "!p4 add " . expand("%")
+  execute "!p4 add " . expand("%")
 endfunc
 function! s:P4_change( )
-	execute "!p4 change"
+  execute "!p4 change"
 endfunc
 command! EP4 call <SID>P4_edit_current()
 command! RP4 call <SID>P4_revert_current()
@@ -502,83 +502,91 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 let g:fzf_action = {
-\ 'ctrl-t': 'tab split',
-\ 'ctrl-x': 'split',
-\ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
 command! Recent call fzf#run({
-			\  'source':  v:oldfiles,
-			\  'sink':    'e',
-			\  'options': '-m -x +s',
-			\  'down':    '40%'})
+      \  'source':  v:oldfiles,
+      \  'sink':    'e',
+      \  'options': '-m -x +s',
+      \  'down':    '40%'})
 
 function! s:GtagsCscope_GtagsRoot()
-    let cmd = "global -pq"
-    let cmd_output = system(cmd)
-    if v:shell_error != 0
-        if v:shell_error == 3
-            call s:Error('GTAGS not found.')
-        else
-            call s:Error('global command failed. command line: ' . cmd)
-        endif
-        return ''
+  let cmd = "global -pq"
+  let cmd_output = system(cmd)
+  if v:shell_error != 0
+    if v:shell_error == 3
+      call s:Error('GTAGS not found.')
+    else
+      call s:Error('global command failed. command line: ' . cmd)
     endif
-    return strpart(cmd_output, 0, strlen(cmd_output) - 1)
+    return ''
+  endif
+  return strpart(cmd_output, 0, strlen(cmd_output) - 1)
 endfunction
 
 function! s:gtags_sink(line)
-	echom a:line
-	execute "cs find g " . substitute(a:line, '\n', '', '')
+  echom a:line
+  execute "cs find g " . substitute(a:line, '\n', '', '')
 endfunction
 
 function! s:tags()
   let gtagsroot = s:GtagsCscope_GtagsRoot()
-	if isdirectory(gtagsroot)
-		call fzf#run({
-					\ 'source':  'global -c',
-					\ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
-					\ 'down':    '30%',
-					\ 'sink':    function('s:gtags_sink')})
-		" execute "cd " . l:cur
-	endif
+  if isdirectory(gtagsroot)
+    call fzf#run({
+          \ 'source':  'global -c',
+          \ 'options': '+m -d "\t" --with-nth 1,4.. -n 1 --tiebreak=index',
+          \ 'down':    '30%',
+          \ 'sink':    function('s:gtags_sink')})
+    " execute "cd " . l:cur
+  endif
 endfunction
 
 command! Ngtags call s:tags()
 
 function! s:rgtags_sink(line)
-	echom a:line
-	let parts = split(a:line)
-	let excmd = matchstr(parts[1], '^[0-9]*\ze')
-	execute 'silent e' parts[2]
-	let [magic, &magic] = [&magic, 0]
-	execute excmd
-	let &magic = magic
+  echom a:line
+  let parts = split(a:line)
+  let excmd = matchstr(parts[1], '^[0-9]*\ze')
+  execute 'silent e' parts[2]
+  let [magic, &magic] = [&magic, 0]
+  execute excmd
+  let &magic = magic
 endfunction
 
 function! s:rtags(find)
   let gtagsroot = s:GtagsCscope_GtagsRoot()
-	if isdirectory(gtagsroot)
-		call fzf#run({
-					\ 'source':  'global -rx ' . a:find,
-					\ 'options': '+m -d "\s" --with-nth 3..',
-					\ 'down':    '30%',
-					\ 'sink':    function('s:rgtags_sink')})
-	endif
+  if isdirectory(gtagsroot)
+    call fzf#run({
+          \ 'source':  'global -rx ' . a:find,
+          \ 'options': '+m -d "\s" --with-nth 3..',
+          \ 'down':    '30%',
+          \ 'sink':    function('s:rgtags_sink')})
+  endif
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
 
 let g:search_result = "/tmp/alex.jang/search_result"
 
+" --column: Show column number
+" --line-number: Show line number
+" --no-heading: Do not show file headings in results
+" --fixed-strings: Search term as a literal string
+" --ignore-case: Case insensitive search
+" --no-ignore: Do not respect .gitignore, etc...
+" --hidden: Search hidden files and folders
+" --follow: Follow symlinks
+" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+" --color: Search color options
+
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
 function! s:search_project(find)
-	let l:root_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-	if isdirectory(l:root_dir)
-		call fzf#vim#grep('git grep --line-number '.shellescape(a:find), 0)
-	else
-		call fzf#vim#ag(a:find, 0)
-	endif
+  call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:find),0)
 endfunction
 command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
+      \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
 command! SearchProject call s:search_project(expand('<cword>'))
 noremap <C-\> :SearchProject<CR>
@@ -639,8 +647,8 @@ map <silent><M-k> <Plug>(signify-prev-hunk)
 " }}}
 " Rainbow parentheses {{{
 augroup rainbow
-	autocmd!
-	autocmd VimEnter & RainbowParentheses
+  autocmd!
+  autocmd VimEnter & RainbowParentheses
 augroup END
 " }}}
 " EasyAlign {{{
@@ -660,17 +668,17 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 " }}}
 " expand-region {{{
 let g:expand_region_text_objects = {
-			\ 'iw'  :0,
-			\ 'iW'  :0,
-			\ 'i"'  :1,
-			\ 'i''' :1,
-			\ 'i]'  :1,
-			\ 'ib'  :1,
-			\ 'iB'  :1,
-			\ 'il'  :1,
-			\ 'ip'  :1,
-			\ 'ie'  :1,
-			\ }
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :1,
+      \ 'i''' :1,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :1,
+      \ 'ip'  :1,
+      \ 'ie'  :1,
+      \ }
 vmap v <Plug>(expand_region_expand)
 vmap V <Plug>(expand_region_shrink)
 vnoremap q <ESC>
@@ -681,47 +689,67 @@ vnoremap q <ESC>
 " Quich-Filter {{{
 let g:filtering_object = {}
 let g:filtering_keywords = []
-"function! Open_filtering_search()
-"  let g:filtering_object = []
-"endfunction
-"augroup open_filter_object
-"autocmd! BufReadPost,FileReadPost * :call Open_filtering_search()
-"augroup END
+let g:filtering_kernel_log_keywords = ['PC is at', 'S-Boot', 'CHIP_ID', 's5p_check_keypad', 'Kernel panic', 'Bad mode', 'Check LPI timeout status = 0x0020ffff', 'LPI timeout is occurred']
 
-function! Append_search_string()
-	if empty(g:filtering_object)
-		let g:filtering_object = FilteringNew()
-	else
-		call g:filtering_object.destruct()
-		let g:filtering_object = FilteringNew()
-	endif
+function! Kernel_search_string(search)
+  if empty(g:filtering_object)
+    let g:filtering_object = FilteringNew()
+  else
+    call g:filtering_object.destruct()
+    let g:filtering_object = FilteringNew()
+  endif
 
-	for i in g:filtering_keywords
-		call g:filtering_object.addToParameter('alt', i)
-	endfor
-
-	call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
-	let g:filtering_keywords = g:filtering_object.alt
-	call g:filtering_object.run()
+  for i in g:filtering_kernel_log_keywords
+    call g:filtering_object.addToParameter('alt', i)
+  endfor
+  if empty(a:search)
+    call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
+  else
+    call g:filtering_object.addToParameter('alt', a:search)
+  endif
+  let g:filtering_keywords = g:filtering_object.alt
+  call g:filtering_object.run()
 endfunction
 
-function! Clear_run_search()
-	if empty(g:filtering_object)
-		let g:filtering_object = FilteringNew()
-	else
-		call g:filtering_object.destruct()
-		let g:filtering_object = FilteringNew()
-	endif
+function! Append_search_string(search)
+  if empty(g:filtering_object)
+    let g:filtering_object = FilteringNew()
+  else
+    call g:filtering_object.destruct()
+    let g:filtering_object = FilteringNew()
+  endif
 
-	call g:filtering_object.addInputToParameter('alt', 'Search:')
-	let g:filtering_keywords = g:filtering_object.alt
-	call g:filtering_object.run()
+  for i in g:filtering_keywords
+    call g:filtering_object.addToParameter('alt', i)
+  endfor
+  if empty(a:search)
+    call g:filtering_object.addInputToParameter('alt', string(g:filtering_object.alt) . ' Append:')
+  else
+    call g:filtering_object.addToParameter('alt', a:search)
+  endif
+  let g:filtering_keywords = g:filtering_object.alt
+  call g:filtering_object.run()
+endfunction
+command! -bang -nargs=* F call Append_search_string(<q-args>)
+command! -bang -nargs=* K call Kernel_search_string(<q-args>)
+
+function! Clear_run_search()
+  if empty(g:filtering_object)
+    let g:filtering_object = FilteringNew()
+  else
+    call g:filtering_object.destruct()
+    let g:filtering_object = FilteringNew()
+  endif
+
+  call g:filtering_object.addInputToParameter('alt', 'Search:')
+  let g:filtering_keywords = g:filtering_object.alt
+  call g:filtering_object.run()
 endfunction
 
 function! Clear_search()
-	if !empty(g:filtering_object)
-		call g:filtering_object.destruct()
-	endif
+  if !empty(g:filtering_object)
+    call g:filtering_object.destruct()
+  endif
 endfunction
 nnoremap <silent><M-f> :call Append_search_string()<CR>
 nnoremap <silent><M-g> :call Clear_run_search()<CR>
@@ -738,13 +766,16 @@ xmap s <plug>VSurround
 " }}}
 " Airline {{{f
 let g:airline_theme='powerlineish'
-let g:airline_extensions = ['branch']
+let g:airline_extensions = ['branch', 'tabline']
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
 if has('win32')
-let g:airline_left_sep = ""
-let g:airline_right_sep = ""
+  let g:airline_left_sep = ""
+  let g:airline_right_sep = ""
 else
-let g:airline_left_sep = "\uE0B0"
-let g:airline_right_sep = "\uE0B2"
+  let g:airline_left_sep = "\uE0B0"
+  let g:airline_right_sep = "\uE0B2"
 endif
 
 " }}}
@@ -778,10 +809,10 @@ function! SavePos()
   let g:cur = s:v_cur
   "echom s:left_cur[1] . ":" . s:right_cur[1] . ":" . s:v_cur[1]
   if s:left_cur[1] == s:v_cur[1]
-	  let g:cur[1] = s:v_cur[1] - 1
+    let g:cur[1] = s:v_cur[1] - 1
   endif
   if s:right_cur[1] == s:v_cur[1]
-	  let g:cur[1] = s:v_cur[1] + 1
+    let g:cur[1] = s:v_cur[1] + 1
   endif
 endfunc
 
@@ -798,9 +829,33 @@ let g:EasyClipUseSubstituteDefaults = 1
 " Map start key separately from next key
 " let g:multi_cursor_start_key='<C-x>'
 " }}}
-" peekaroo {{{
-let g:peekaboo_window="bo 25new"
-let g:peekaboo_compact=1
+" MyToHtml {{{
+function! MyToHtml(line1, line2)
+  " make sure to generate in the correct format
+  let old_css = 1
+  if exists('g:html_use_css')
+    let old_css = g:html_use_css
+  endif
+  let g:html_use_css = 0
+  let old_number_lines = 1
+  if exists('g:html_number_lines')
+    let old_number_lines = g:html_number_lines
+  endif
+  let g:html_number_lines = 0
+
+  " generate and delete unneeded lines
+  exec a:line1.','.a:line2.'TOhtml'
+  %g/<body/normal k$dgg
+
+  " convert body to a table
+  %s/<body\s*\(bgcolor="[^"]*"\)\s*text=\("[^"]*"\)\s*.*>/<table \1 cellPadding=0><tr><td><font color=\2>/
+  %s#</body>\(.\|\n\)*</html>#\='</font></td></tr></table>'#i
+
+  " restore old setting
+  let g:html_use_css = old_css
+  let g:html_number_lines = 0
+endfunction
+command! -range=% MyToHtml :call MyToHtml(<line1>,<line2>)
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

@@ -136,7 +136,7 @@ values."
    dotspacemacs-themes '(
 			 spacemacs-light
 			 spacemacs-dark
-			 subatomic)
+			 )
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -544,7 +544,7 @@ you should place your code here."
 				    helm-source-buffer-not-found))
 
   ;; Hangul(한글)
-  (set-fontset-font t 'hangul (font-spec :name "NanumGothicCoding"))
+  (set-fontset-font t 'hangul (font-spec :name "Binggrae"))
 
   (if (daemonp)
       (progn
@@ -552,15 +552,15 @@ you should place your code here."
   		  (lambda (frame)
   				   (with-selected-frame frame
   				     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  						       '("NanumGothicCoding". "iso10646-1"))
+  						       '("Binggrae". "iso10646-1"))
   				     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  						       '("NanumGothicCoding". "iso10646-1"))
+  						       '("Binggrae". "iso10646-1"))
   				     )))
   	)
       (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  			'("NanumGothicCoding". "iso10646-1"))
+  			'("Binggrae". "iso10646-1"))
       (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  			'("NanumGothicCoding". "iso10646-1"))
+  			'("Binggrae". "iso10646-1"))
     )
 
   ;; C mode hack
@@ -626,12 +626,6 @@ you should place your code here."
   ;; (bind-key* "<mouse-1>" #'ignore)
   ;; python -------------------------
   (setq py-autopep8-options '("--max-line-length=100"))
-
-  (custom-theme-set-faces
-   'subatomic
-   '(font-lock-comment-face ((t (:foreground "#DFAF8F"))))
-   '(font-lock-comment-delimiter-face ((t (:foreground "#DFAF8F"))))
-   )
 
   (add-hook 'after-make-frame-functions
 	    (lambda (frame)

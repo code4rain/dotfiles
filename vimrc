@@ -235,9 +235,9 @@ function! MyFoldText() " {{{
   let line = substitute(line, '\t', onetab, 'g')
 
   let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-  let fill_start_count = 10 - len(foldedlinecount)
-  let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 10 - fill_start_count
-  return line . " /" .repeat("*", fill_start_count) . ' ' . foldedlinecount . ' lines: ' . repeat("*",fillcharcount) . "/"
+  let fill_start_count = 7 - len(foldedlinecount)
+  let fillcharcount = windowwidth - len(line) - len(foldedlinecount) - 7 - fill_start_count
+  return line . " " . repeat("", fill_start_count) . foldedlinecount . ' lines ' . repeat("",fillcharcount) . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 " Focus Mode View {{{
@@ -456,33 +456,13 @@ command! XP4 call <SID>P4_add_current()
 command! NP4 call <SID>P4_change()
 " }}}
 
-" GTAGS {{{
-" function! GtagsCommnad()
-"   let l:cur = expand('%:p:h')
-"   " execute "cd " . l:cur
-"   if filereadable("GTAGS")
-"     let l:gtags_dir = substitute(system("pwd 2>/dev/null"), '\n', '', '')
-"   else
-"     let l:gtags_dir = substitute(system("git rev-parse --show-toplevel 2>/dev/null"), '\n', '', '')
-"   endif
-"   if isdirectory(l:root_dir)
-"     if filereadable("GTAGS")
-"       nnoremap <C-\>^] :GtagsCursor<CR>
-"       nnoremap <F7> :Ngtags<CR>
-"       nnoremap <M-h> :Gtags -gi<space>
-"       nnoremap <silent><M-n> :cn<CR>
-"       nnoremap <silent><M-m> :cp<CR>
-"     endif
-"   endif
-" endfunction
-" autocmd BufReadPost * :call GtagsCommnad()
-" }}}
 " gtags-cscope.vim {{{
 let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Load = 1
-let GtagsCscope_Auto_Map = 1
+let GtagsCscope_Auto_Map = 0
 let GtagsCscope_Keep_Alive = 1
 let GtagsCscope_Quiet = 1
+set cscopetag
 " }}}
 " FZF {{{
 let g:fzf_layout = { 'window': '-tabnew' }

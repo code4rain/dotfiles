@@ -50,7 +50,7 @@ if !has('win32')
   Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
-  "Plug 'Mizuchi/vim-ranger'
+  Plug 'Mizuchi/vim-ranger'
 endif
 Plug 'majutsushi/tagbar'
 
@@ -560,7 +560,20 @@ let g:search_result = "/tmp/alex.jang/search_result"
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+function! s:wrap_fzf_grep(args, bang)
+  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:args)
+  let result = split(system(cmd), '.\n')
+  call writefile(result, ".search_history", "a")
+  call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:args), 1, a:bang)
+endfunction
+
+function! s:show_search_history()
+  call fzf#vim#grep('cat .search_history', 1, 0)
+endfunction
+
+command! -bang SH call s:show_search_history()
+"command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Find call s:wrap_fzf_grep(<q-args>, <bang>0)
 
 function! s:search_project(find)
   call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:find),0)
@@ -568,9 +581,9 @@ endfunction
 command! -bang -nargs=* GGrep
       \ call fzf#vim#grep('git grep --line-number '.shellescape(<q-args>), 0, <bang>0)
 
-command! SearchProject call s:search_project(expand('<cword>'))
+command! -bang -nargs=* SearchProject call s:wrap_fzf_grep(expand('<cword>'), <bang>0)
 noremap <C-\> :SearchProject<CR>
-command! -bang -nargs=* S  call s:search_project(<q-args>)
+command! -bang -nargs=* S  call s:wrap_fzf_grep(<q-args>, <bang>0)
 
 " Advanced customization using autoload functions
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})<Paste>

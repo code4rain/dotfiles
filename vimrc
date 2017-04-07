@@ -33,6 +33,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
+Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/Quich-Filter'
 
 " UI (Colorscheme and so on)
@@ -55,8 +56,7 @@ endif
 Plug 'majutsushi/tagbar'
 
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'lucapette/vim-textobj-underscore'
-Plug 'svermeulen/vim-easyclip'
+" Plug 'svermeulen/vim-easyclip'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -564,14 +564,19 @@ function! s:wrap_fzf_grep(args, bang)
   let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:args)
   let result = split(system(cmd), '.\n')
   call writefile(result, ".search_history", "a")
-  call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:args), 1, a:bang)
+  call fzf#vim#grep('cat .search_history', 1, a:bang)
 endfunction
 
-function! s:show_search_history()
-  call fzf#vim#grep('cat .search_history', 1, 0)
+function! s:show_search_history(filter, bang)
+  if empty(a:filter)
+    call fzf#vim#grep('cat .search_history', 1, a:bang)
+  else
+    call fzf#vim#grep('cat .search_history | rg ' . a:filter, 1, a:bang)
+  fi
 endfunction
 
-command! -bang SH call s:show_search_history()
+command! -bang -nargs=* SH call s:show_search_history(<q-args>, <bang>0)
+command! -bang -nargs=* SearchHistory call s:show_search_history(<q-args>, <bang>0)
 "command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Find call s:wrap_fzf_grep(<q-args>, <bang>0)
 

@@ -572,7 +572,7 @@ function! s:show_search_history(filter, bang)
     call fzf#vim#grep('cat .search_history', 1, a:bang)
   else
     call fzf#vim#grep('cat .search_history | rg ' . a:filter, 1, a:bang)
-  fi
+  endif
 endfunction
 
 command! -bang -nargs=* SH call s:show_search_history(<q-args>, <bang>0)

@@ -203,7 +203,7 @@ set splitright
 " Folding ----------------------------------------------------------------- {{{
 set foldlevel=5
 set foldcolumn=1
-set foldlevelstart=0
+set foldlevelstart=-1
 " Space to toggle folds.
 nnoremap , za
 vnoremap , za
@@ -313,7 +313,7 @@ augroup END
 " }}}
 " C {{{
 let c_no_comment_fold=1
-let c_no_if0_fold=1
+let c_no_if0_fold=0
 let c_no_block_fold=1
 augroup ft_c
   au!

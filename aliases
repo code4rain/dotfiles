@@ -21,6 +21,11 @@ v() {
             [ -f "${line/\~/$HOME}" ] && echo "$line"
           done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
 }
+h() {
+  history_command=$(echo $(history | fzf-tmux --tac +s) | cut -d' ' -f2- )
+  echo $history_command
+  echo $history_command | xclip
+}
 #Command
 alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'

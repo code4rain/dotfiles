@@ -331,3 +331,5 @@ export PATH=~/bin/.anaconda2/bin:$PATH
 export PATH=/home/alex.jang/@Work/ahbuild:$PATH
 export BOOT_COMPILE_64=/opt/toolchains/arm-eabi-4.9/bin/aarch64-linux-android-
 export BOOT_COMPILE_32=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-
+
+[[ $TMUX = "" ]] && export TERM="xterm-256color"

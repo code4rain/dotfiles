@@ -766,9 +766,11 @@ xmap s <plug>VSurround
 " }}}
 " Airline {{{f
 let g:airline_theme='powerlineish'
-let g:airline_extensions = ['branch', 'tabline']
+let g:airline_extensions = ['branch', 'tabline', 'tagbar']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 
 if has('win32')
   let g:airline_left_sep = ""

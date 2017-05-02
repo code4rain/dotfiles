@@ -315,9 +315,27 @@ augroup END
 let c_no_comment_fold=1
 let c_no_if0_fold=0
 let c_no_block_fold=1
+function! CFold()
+    if getline(v:lnum - 1) =~ '^}\\s*$'
+        return '<1'
+    elseif getline(v:lnum + 1) =~ '^{\\s*$'
+        return '>1'
+    elseif getline(v:lnum + 2) =~ '^{\\s*$'
+        return '>1'
+    elseif getline(v:lnum + 3) =~ '^{\\s*$'
+        return '>1'
+    endif
+    return '='
+endfunction
+
+function! CFoldText()
+    let line = getline(v:foldstart)
+    let sub = substitute(line, '.*\<\(\w\+\)(.*).*', '\1(...)', 'g')
+    return '+-- ' . sub . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'
+  endfunction
 augroup ft_c
   au!
-  au FileType c setlocal foldmethod=marker foldmarker={,}
+  au FileType c setlocal foldmethod=expr foldexpr=CFold() foldtext=CFoldText() fillchars-=fold:-
   au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
 
@@ -561,7 +579,7 @@ let g:search_result = "/tmp/alex.jang/search_result"
 " --color: Search color options
 
 function! s:wrap_fzf_grep(args, bang)
-  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(a:args)
+  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --ignore-file .search_history --color "always" '.shellescape(a:args)
   let result = split(system(cmd), '.\n')
   call writefile(result, ".search_history", "a")
   call fzf#vim#grep('cat .search_history', 1, a:bang)

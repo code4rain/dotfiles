@@ -25,9 +25,11 @@ Plug 'tpope/vim-speeddating'
 
 " Expand Editor
 Plug 'Lokaltog/vim-easymotion'
-Plug 'repeat.vim'
-Plug 'surround.vim'
-Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'cohama/lexima.vim'
+" Use lexima instead
+" Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
@@ -47,7 +49,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Framework
 Plug 'honza/vim-snippets'
 if !has('win32')
-  Plug 'UltiSnips'
+  Plug 'SirVer/ultisnips'
   Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
@@ -62,7 +64,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'junegunn/vim-peekaboo' "Show registers for paste text
-Plug 'gtags.vim'
+Plug 'vim-scripts/gtags.vim'
 
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
@@ -965,5 +967,6 @@ inoremap <c-e> <end>
 nnoremap <M-,> `[
 nnoremap <M-.> `]
 
+nnoremap - <end>
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

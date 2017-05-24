@@ -24,7 +24,6 @@ Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 
 " Expand Editor
-Plug 'Lokaltog/vim-easymotion'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'cohama/lexima.vim'
@@ -37,6 +36,10 @@ Plug 'kana/vim-textobj-entire'
 Plug 'terryma/vim-expand-region'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/Quich-Filter'
+Plug 'easymotion/vim-easymotion'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'haya14busa/incsearch-easymotion.vim'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -652,9 +655,30 @@ let g:EasyMotion_leader_key = '<,>'
 " nmap s <Plug>(easymotion-s1)
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
-nmap <Leader>w <Plug>(easymotion-w)
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
 nmap <Leader><leader> <Plug>(easymotion-bd-w)
 nmap <Leader>b <Plug>(easymotion-b)
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+" }}}
+" incsearch / incsearch-fuzzy {{{
+map / <Plug>(incsearch-forward)
+map ? <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map z? <Plug>(incsearch-fuzzy-?)
+map zg/ <Plug>(incsearch-fuzzy-stay)
+map <space>/ <Plug>(incsearch-easymotion-/)
+map <space>? <Plug>(incsearch-easymotion-?)
+map <space>g/ <Plug>(incsearch-easymotion-stay)
 " }}}
 " Signify {{{
 let g:signify_vcs_list = [ 'git' ]

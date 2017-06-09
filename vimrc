@@ -53,7 +53,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 if !has('win32')
   Plug 'SirVer/ultisnips'
-  Plug 'Valloric/YouCompleteMe', {'do': 'python install.py'}
+  Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
   Plug 'Mizuchi/vim-ranger'
@@ -707,8 +707,16 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 " }}}
 " YCM {{{
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
+let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_min_num_of_chars_for_completion=3
+let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_complete_in_comments=0
+let g:ycm_cache_omnifunc=0
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
+let g:ycm_key_list_previous_completion = ['<Up>', 'S-<TAB>']
 " }}}
 " expand-region {{{
 let g:expand_region_text_objects = {

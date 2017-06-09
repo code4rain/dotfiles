@@ -50,6 +50,7 @@ alias conW='ssh -X $(whoami)@10.252.251.111'
 alias conX='ssh -X $(whoami)@10.252.251.137'
 alias conY='ssh -X $(whoami)@10.252.251.188'
 alias conZ='ssh -X $(whoami)@10.252.250.74'
+alias conV='ssh -X root@10.252.230.46'
 
 alias -g X44='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.4.3/bin/arm-eabi-'
 alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-'

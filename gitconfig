@@ -12,6 +12,7 @@
 	br = branch -av
 	cch = !~/.git_template/hooks/checkpatch.pl --no-tree --file
 	ch = !git diff --cached | ~/.git_template/hooks/checkpatch.pl --max-line-length=120 --showtypes -q -
+	check = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --git
 	ci = commit -v -s
 	cl = clean -df
 	clf = clean -fX
@@ -71,9 +72,18 @@
 	default = simple
 [diff]
 	compactionHeuristic = true # 똑똑한 diff
+	tool = bc3
 [pager] # diff시 diff-highligher사용
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
 [interactive]
 	diffFilter = diff-highlight
+[merge]
+	tool = bc3
+[difftool "bcompare"]
+	trustExitCode = true
+[difftool "bc3"]
+	trustExitCode = true
+[mergetool "bc3"]
+	trustExitCode = true

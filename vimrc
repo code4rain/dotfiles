@@ -488,7 +488,7 @@ let GtagsCscope_Quiet = 1
 set cscopetag
 " }}}
 " FZF {{{
-let g:fzf_layout = { 'window': '-tabnew' }
+" let g:fzf_layout = { 'window': '-tabnew' }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
@@ -508,6 +508,7 @@ let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
       \ 'ctrl-v': 'vsplit' }
+
 command! Recent call fzf#run({
       \  'source':  v:oldfiles,
       \  'sink':    'e',
@@ -561,16 +562,14 @@ function! s:rtags(find)
   let gtagsroot = s:GtagsCscope_GtagsRoot()
   if isdirectory(gtagsroot)
     call fzf#run({
-          \ 'source':  'global -rx ' . a:find,
-          \ 'options': '+m -d "\s" --with-nth 3..',
+          \ 'source':  'global -rx --color=always ' . a:find,
+          \ 'options': '--ansi +m -d "\s" --with-nth 3.. --prompt "Reference> " --reverse --tabstop=1 ',
           \ 'down':    '30%',
           \ 'sink':    function('s:rgtags_sink')})
   endif
 endfunction
 
 command! Rgtags call s:rtags(expand('<cword>'))
-
-let g:search_result = "/tmp/alex.jang/search_result"
 
 " --column: Show column number
 " --line-number: Show line number
@@ -584,23 +583,42 @@ let g:search_result = "/tmp/alex.jang/search_result"
 " --color: Search color options
 
 function! s:wrap_fzf_grep(args, bang)
-  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --ignore-file .search_history --color "always" '.shellescape(a:args)
+  let gtagsroot = s:GtagsCscope_GtagsRoot()
+  if isdirectory(gtagsroot)
+    let directory = gtagsroot
+  else
+    let directory = getcwd()
+  endif
+  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --type-add "history:.search_history" --type-not history --color "always" '. shellescape(a:args)
+  echom cmd
   let result = split(system(cmd), '.\n')
-  call writefile(result, ".search_history", "a")
-  call fzf#vim#grep('cat .search_history', 1, a:bang)
+  call writefile(result, directory . "/.search_history")
+  call fzf#vim#grep('cat ' . directory . '/.search_history', 1, a:bang)
 endfunction
 
 function! s:show_search_history(filter, bang)
-  if empty(a:filter)
-    call fzf#vim#grep('cat .search_history', 1, a:bang)
+  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
+  if isdirectory(s:gtagsroot)
+    let s:directory = s:gtagsroot
   else
-    call fzf#vim#grep('cat .search_history | rg ' . a:filter, 1, a:bang)
+    let s:directory = getcwd()
+  endif
+  if empty(a:filter)
+    call fzf#vim#grep('cat ' . s:directory . '/.search_history', 1, a:bang)
+  else
+    call fzf#vim#grep('cat ' s:directory . '/.search_history | rg ' . a:filter, 1, a:bang)
   endif
 endfunction
 
 function! s:clear_history()
+  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
+  if isdirectory(s:gtagsroot)
+    let s:directory = s:gtagsroot
+  else
+    let s:directory = getcwd()
+  endif
   echom "Clear All Search History"
-  call delete(".search_history")
+  call delete(s:directory . "/.search_history")
 endfunction
 
 command! -bang -nargs=* SH call s:show_search_history(<q-args>, <bang>0)
@@ -711,12 +729,13 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {}
 let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
 let g:ycm_collect_identifiers_from_tags_files=1
-let g:ycm_min_num_of_chars_for_completion=3
+let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=0
 let g:ycm_cache_omnifunc=0
-let g:ycm_key_list_select_completion = ['<TAB>', '<Down>', '<Enter>']
+let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>', 'S-<TAB>']
+" let g:ycm_key_invoke_completion = '<Enter>'
 " }}}
 " expand-region {{{
 let g:expand_region_text_objects = {

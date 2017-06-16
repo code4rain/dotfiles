@@ -9,34 +9,36 @@ set show-changes = no
 set commit-order = default
 
 bind branch 3 !git rebase -i %(branch)
-bind generic I !git add -i %(file)
-bind generic T !git notes edit %(commit)
-bind generic 9 !@sh -c "echo -n %(commit) | xsel -selection c"
 bind generic + !git commit -s -v --amend -C HEAD
 bind generic 0 !git format-patch -1 %(commit)
-bind generic <F10> !git format-patch %(commit)~1
-bind main R !@git revert %(commit)
-bind main <F11> !git rebase -i %(commit)
-bind main x @!git reset --hard HEAD^
-bind main o refresh
-bind main a !git notes append %(commit)
-bind main e @!git notes remove %(commit)
-bind main H !@git reset --hard %(commit)
-bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
-bind main p !bash -c "~/.git_template/hooks/checkpatch.pl --no-signoff --max-line-length=120 --show-types -q --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --git %(commit) | less -R"
-bind generic U !git checkout -- %(file)
-bind status - !commit.sh
-bind status c !git checkout -p %(file)
-bind status C !git commit -s -v
-bind status t !git checkout --theirs %(file)
-bind status o !git checkout --ours %(file)
-bind status p !bash -c "git diff --cached | ~/.git_template/hooks/checkpatch.pl --no-signoff -max-line-length=120 --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --show-types -q - | less -R"
-bind generic X !git cl
-bind generic A !git am --resolved
-bind generic S !git am --skip
 bind generic 1 !@git checkout --ours %(file)
 bind generic 2 !@git checkout --theirs %(file)
+bind generic 9 !@sh -c "echo -n %(commit) | xsel -selection c"
+bind generic <F10> !git format-patch %(commit)~1
 bind generic <F12> !gp4 rebase
+bind generic A !git am --resolved
+bind generic I !git add -i %(file)
+bind generic S !git am --skip
+bind generic T !git notes edit %(commit)
+bind generic U !git checkout -- %(file)
+bind generic X !git cl
 bind generic v !git describe %(commit)
+bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
+bind main <F11> !git rebase -i %(commit)
+bind main H !@git reset --hard %(commit)
+bind main R !@git revert %(commit)
+bind main a !git notes append %(commit)
+bind main e @!git notes remove %(commit)
+bind main o refresh
+bind main p !bash -c "~/.git_template/hooks/checkpatch.pl --no-signoff --max-line-length=120 --show-types -q --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --git %(commit) | less -R"
+bind main x @!git reset --hard HEAD^
+bind status - !commit.sh
+bind status C !git commit -s -v
+bind status c !git checkout -p %(file)
+bind status f !git fix
+bind status o !git checkout --ours %(file)
+bind status g !git push origin HEAD:rerfs/for/%(branch)
+bind status p !bash -c "git diff --cached | ~/.git_template/hooks/checkpatch.pl --no-signoff -max-line-length=120 --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --show-types -q - | less -R"
+bind status t !git checkout --theirs %(file)
 bind status x !@rm -f %(file)
 bind tree l !tig %(file)

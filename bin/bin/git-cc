@@ -1,0 +1,104 @@
+#! /usr/bin/env python
+from __future__ import print_function
+import sys, re, tty, termios
+from subprocess import call
+import textwrap
+
+def syntax_highlight(input):
+    stripped = input.rstrip(':')
+    return stripped + u"\u001b[41m" + ":" *  (len(input) - len(stripped)) + u"\u001b[0m"
+
+def check_title(input, index):
+    input = check_capital(input)
+    input, index = check_semicolon_before(input, index)
+    input, index = check_semicolon_after(input, index)
+    input, index = check_braket(input, index)
+    return input, index
+
+def check_desc(input):
+    input = textwrap.fill(input, 75)
+    return input
+
+def colored(input):
+    return u"\u001b[33;1m" + input + u"\u001b[0m"
+
+def command_line(prompt, transform=None):
+    old_settings = termios.tcgetattr(sys.stdin)
+    tty.setraw(sys.stdin)
+    input = ""
+    index = 0
+    sys.stdout.write(u"\u001b[1000D")
+    sys.stdout.write(prompt)
+    while True: # loop for each character
+        char = ord(sys.stdin.read(1)) # read one char and get char code
+
+        # Manage internal data-model
+        if char == 3: # CTRL-C
+            termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+            return
+        elif 32 <= char <= 126:
+            if transform:
+                input, index = transform(input, index)
+            input = input[:index] + chr(char) + input[index:]
+            index += 1
+        elif char in {10, 13}:
+            break
+        elif char == 27:
+            next1, next2 = ord(sys.stdin.read(1)), ord(sys.stdin.read(1))
+            if next1 == 91:
+                if next2 == 68: # Left
+                    index = max(0, index - 1)
+                elif next2 == 67: # Right
+                    index = min(len(input), index + 1)
+        elif char == 127:
+            if index > 0:
+                input = input[:index-1] + input[index:]
+                index -= 1
+        # Print current input-string
+        sys.stdout.write(u"\u001b[1000D") # Move to left 1000 character
+        sys.stdout.write(u"\u001b[0K") # Remove from cursor to end
+        sys.stdout.write(prompt) # write prompt
+        sys.stdout.write(colored(syntax_highlight(input)))
+        sys.stdout.write(u"\u001b[1000D")
+        if index + len(prompt) > 0:
+            sys.stdout.write(u"\u001b[" + str(index + len(prompt)) + "C")
+        sys.stdout.flush()
+    sys.stdout.write(u"\u001b[1000D")
+    sys.stdout.write('\n')
+    termios.tcsetattr(sys.stdin, termios.TCSADRAIN, old_settings)
+    return input
+
+call(["git", "status"])
+
+def check_semicolon_before(title, index):
+    return re.sub(r'\s*:', r':', title), len(title)
+def check_semicolon_after(title, index):
+    return re.sub(r':(\S)', r': \1', title), len(title)
+def check_braket(title, index):
+    return re.sub('(\[|\])', '', title), len(title)
+def lower_repl(m):
+     return m.group(1) + m.group(2).lower() + m.group(3)
+def check_capital(title):
+    return re.sub(r'(.*: )([A-Z])([a-z].*)', lower_repl, title)
+
+def check_plm(description):
+    r = re.findall(r"(plm: (p|P)[0-9\-]+))(.*)")
+    if r:
+        return r.upper()
+    else:
+        return 
+
+
+
+title = command_line("Title: ", check_title)
+# title = check_semicolon_after(check_semicolon_before(check_braket(check_capital(title))))
+descs = []
+while 1:
+    desc = command_line("Description: ")
+    if desc:
+        descs.append("-m")
+        descs.append(check_desc(desc))
+    else:
+        break
+
+call(["git", "commit", "-s", "-m", title] + descs)

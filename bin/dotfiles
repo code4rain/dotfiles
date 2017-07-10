@@ -49,7 +49,38 @@ BACKDIR="$DOTHOME/backup/dotfiles/$(date "+%Y_%m_%d-%H_%M_%S")/"
 
 run() {
   link_dotfiles
+  copy_binaries
   print_messages
+}
+
+add_directory_path() {
+  e_header "Add to \$PATH"
+  if [[ "$PATH" == *"$1"* ]]
+  then
+    e_arrow "Already in the \$PATH"
+  else
+    if [ -e ~/.bashrc ]
+    then
+      echo "export PATH=$1:\$PATH" >> ~/.bashrc
+      e_success "Add PATH to .bashrc"
+    fi
+
+    if [ -e ~/.zshrc ]
+    then
+      echo "export PATH=$1:\$PATH" >> ~/.zshrc
+      e_success "Add \$PATH to .zshrc"
+    fi
+  fi
+}
+
+copy_binaries() {
+  if [[ ! -e $HOME/bin ]]
+  then
+    e_header "Make $HOME/bin"
+    mkdir -p $HOME/bin
+  fi
+  cp -R $DOTHOME/bin/bin/* $HOME/bin/
+  add_directory_path "$HOME/bin"
 }
 
 link_dotfiles() {

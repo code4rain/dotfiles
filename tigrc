@@ -32,7 +32,7 @@ bind main e @!git notes remove %(commit)
 bind main o refresh
 bind main p !bash -c "~/.git_template/hooks/checkpatch.pl --no-signoff --max-line-length=120 --show-types -q --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --git %(commit) | less -R"
 bind main x @!git reset --hard HEAD^
-bind status - !commit.py
+bind status - !git cc
 bind status C !git commit -s -v
 bind status c !git checkout -p %(file)
 bind status f !git fix

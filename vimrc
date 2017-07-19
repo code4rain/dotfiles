@@ -732,7 +732,7 @@ let g:ycm_min_num_of_chars_for_completion=2
 let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=0
 let g:ycm_cache_omnifunc=0
-let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>', 'S-<TAB>']
 " let g:ycm_key_invoke_completion = '<Enter>'
 " }}}

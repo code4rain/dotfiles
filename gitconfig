@@ -9,7 +9,7 @@
 	b ="!tig blame"
 	bb = "!git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);(%(color:green)%(committerdate:relative)%(color:reset));%(authorname);%(contents:subject)' | column -t -s ';'"
 	bf = !tig refs
-	br = branch -av
+	br = branch -avv
 	cch = !~/.git_template/hooks/checkpatch.pl --no-tree --file
 	ch = !git diff --cached | ~/.git_template/hooks/checkpatch.pl --max-line-length=120 --showtypes -q -
 	check = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --git

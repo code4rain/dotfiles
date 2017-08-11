@@ -38,6 +38,7 @@ Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
+Plug 'tpope/vim-obsession'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -832,9 +833,9 @@ vnoremap <C-M-L> :Autoformat<CR>
 " Surround {{{
 xmap s <plug>VSurround
 " }}}
-" Airline {{{f
-let g:airline_theme='powerlineish'
-let g:airline_extensions = ['branch', 'tabline', 'tagbar']
+" Airline {{{
+let g:airline_theme='cool'
+let g:airline_extensions = ['branch', 'tabline', 'tagbar', 'obsession']
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#tabline#left_sep = ''

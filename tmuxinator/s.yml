@@ -27,7 +27,7 @@ windows:
         - r
   - Update:
   - Cherry:
-      layout: even-horizontal
+      layout: main-horizontal
       panes:
         - cd ~/CHERRY/1716
         - cd ~/bin/cherrypicker

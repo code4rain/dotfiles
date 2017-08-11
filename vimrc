@@ -26,9 +26,7 @@ Plug 'tpope/vim-speeddating'
 " Expand Editor
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'cohama/lexima.vim'
-" Use lexima instead
-" Plug 'Raimondi/delimitMate' "automatic close parens, brackets...
+Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
@@ -900,6 +898,11 @@ vmap <silent><M-;> :call SavePos()<CR>gv <Bar> <plug>NERDCommenterToggle <bar> :
 let g:EasyClipUseSubstituteDefaults = 1
 " Map start key separately from next key
 " let g:multi_cursor_start_key='<C-x>'
+" }}}
+" Auto-Pair {{{
+let b:autopairs_enabled = 0
+inoremap <buffer> <silent><S-TAB> <ESC>:call AutoPairsJump()<CR>a
+let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 " }}}
 " MyToHtml {{{
 function! MyToHtml(line1, line2)

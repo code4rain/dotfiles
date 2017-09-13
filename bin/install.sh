@@ -58,8 +58,6 @@ clone_or_update() {
   fi
 }
 
-echo "Copy binaries to $HOME/bin"
-cp -r $DOT_DIR/module/bin/* $HOME/bin
 source $HOME/bin/color.sh
 msg_green
 echo "Install Essential packages - $INSTALL_PACKAGES"

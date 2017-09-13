@@ -51,6 +51,7 @@ run() {
   link_dotfiles
   copy_binaries
   print_messages
+  $DOTHOME/bin/install.sh
 }
 
 add_directory_path() {
@@ -79,7 +80,7 @@ copy_binaries() {
     e_header "Make $HOME/bin"
     mkdir -p $HOME/bin
   fi
-  cp -R $DOTHOME/bin/bin/* $HOME/bin/
+  cp -R $DOTHOME/module/bin/* $HOME/bin/
   add_directory_path "$HOME/bin"
 }
 

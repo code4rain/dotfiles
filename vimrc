@@ -192,7 +192,7 @@ syntax on
 colorscheme hybrid
 " IF hybrid!!
 highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
-highlight LineNr ctermfg=143 guifg=#373b41
+" highlight LineNr ctermfg=143 guifg=#373b41
 " }}}
 set showmode
 set lazyredraw

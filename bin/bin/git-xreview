@@ -1,0 +1,90 @@
+#! /usr/bin/env python
+
+from __future__ import print_function
+import argparse
+import sys
+import subprocess
+# To avoid generating .pyc
+sys.dont_write_bytecode = True
+
+CEND      = '\33[0m'
+CBLACK  = '\33[30m'
+CRED    = '\33[31m'
+CGREEN  = '\33[32m'
+CYELLOW = '\33[33m'
+CBLUE   = '\33[34m'
+CVIOLET = '\33[35m'
+CBEIGE  = '\33[36m'
+CWHITE  = '\33[37m'
+
+def pr_info(s):
+    print(CGREEN + s + CEND)
+def pr_err(s):
+    print(CRED + s + CEND)
+
+def main():
+    default_reviewers = ["sangmoon.kim", "dh0703.kim", "anthony.hong",
+                         "soohyung75.lee", "jell.lee", "jhez.kim",
+                         "eunseok.hong", "jordan.lim"]
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--topic', help='gerrit push with topic',
+                        dest="topic", default="")
+    parser.add_argument(help='add more reviewers. please add single id without @samsung.com',
+                        dest='reviewers', nargs='*', default=default_reviewers)
+    parser.add_argument('-r', '--reviewer', dest='remote', action='store', default=None,
+                        help='set remote repository name like moaa or origin')
+    parser.add_argument('-b', '--branch', dest='branch', action='store', default=None,
+                        help='set remote branch name like main/linux4.9/exynos9810')
+    parser.add_argument('-v', dest='verbose', action='store_true', default=False,
+                        help='show more logs')
+    args = parser.parse_args()
+
+    if not args.remote:
+        p = subprocess.Popen(['git','remote'], stdout=subprocess.PIPE)
+        args.remote, err = p.communicate()
+        args.remote = args.remote.strip()
+        if args.verbose:
+            pr_info("Remote Repository: {}".format(args.remote))
+
+    p = subprocess.Popen(['git', 'symbolic-ref', 'HEAD'], stdout=subprocess.PIPE)
+    local_branch, err = p.communicate()
+    local_branch = "/".join(local_branch.split('/')[2:]).strip()
+    if args.verbose:
+        pr_info("Local branch: {}".format(local_branch))
+
+    if not args.branch:
+        p = subprocess.Popen(['git', 'config', '--get',
+            'branch.{}.merge'.format(local_branch)], stdout=subprocess.PIPE)
+        args.branch, err = p.communicate()
+        if not args.branch:
+            print("There is no tracking information for the current branch.")
+            print("If you wish to set tracking information for this branch you can do so with:")
+            print("")
+            print("    git branch --set-upstream-to {} <remote>/<branch>".format(local_branch))
+            return
+        args.branch = "/".join(args.branch.split('/')[2:]).strip()
+        if args.verbose:
+            pr_info("Remote branch: {}".format(args.branch))
+
+    reviewers = "%" + ",".join(["r={}@samsung.com".format(r) for r in args.reviewers])
+
+    if args.verbose:
+        pr_info("Reviews: {}".format(reviewers))
+
+    if args.topic:
+        topic = ",topic=" + args.topic
+        if args.verbose:
+            pr_info("Topic: {}".format(topic))
+    else:
+        topic = ""
+
+    if args.verbose:
+        pr_err(" ".join(['git', 'push', args.remote, "HEAD:refs/for/{}{}{}".format(args.branch, reviewers, topic)])) 
+    p = subprocess.Popen(['git', 'push', args.remote, "HEAD:refs/for/{}{}{}".format(args.branch, reviewers, topic)], stdout=subprocess.PIPE)
+ 
+    out, err = p.communicate()
+    print(out)
+
+
+if __name__ == '__main__':
+    main()

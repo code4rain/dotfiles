@@ -1,0 +1,2 @@
+#! /bin/bash
+p4 describe -S -du $* | colordiff | diff-highlight | less -R

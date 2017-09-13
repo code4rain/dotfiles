@@ -1,0 +1,121 @@
+#!/bin/bash
+# P4 sync for each directory
+
+current=`pwd`
+P4=$(dirname $0)/p4
+#CFLAGS=-f
+CFLAGS=""
+cur_path=`pwd`
+config_file_path=$cur_path/.p4config
+
+if [ -f $config_file_path ]
+then
+	export P4CONFIG=$config_file_path
+	source $config_file_path
+else
+	while [ -O $cur_path ]
+	do
+		#               echo $cur_path
+		if [ -f $cur_path"/.p4config" ]
+		then
+			export P4CONFIG=$cur_path"/.p4config"
+			source $cur_path/.p4config
+			break
+		fi
+		cur_path=`cd $cur_path && cd .. && pwd`
+	done
+fi
+
+usage()
+{
+cat << EOF
+usage: $0 options
+
+This script will sync your P4CLIENT at current position
+(with parallel threads )
+
+* SHOULD be setup .p4config first *
+
+OPTIONS:
+   -h      Show this message
+   -f      Force sync
+   -c      Only sync current directory
+   -n      Sync with specific CL number
+   -s      Status -A (Reconcile and Add, Edit, Delete)
+   -v      Verbose
+EOF
+}
+FORCE=""
+UPDATEPATH=""
+CLNUM=""
+RECON=""
+
+while getopts “hfcsn:v” OPTION
+do
+	case $OPTION in
+		h)
+			usage
+			exit 1
+			;;
+		f)
+			FORCE="-f "
+			;;
+		c)
+			UPDATEPATH=`pwd`
+			;;
+		n)
+			CLNUM="@$OPTARG"
+			;;
+    s)
+      RECON=1
+      ;;
+		v)
+			VERBOSE=1
+			;;
+		?)
+			usage
+			exit
+			;;
+	esac
+done
+
+echo "------------------------------------------------------------------"
+
+COUNT=0
+
+if [[ "$UPDATEPATH" != "" ]]
+then
+	if [ $VERBOSE ]
+	then
+		echo "$P4 sync --parallel=4 $FORCE $view$CLNUM"
+	fi
+	$P4 sync --parallel=4 $FORCE "$UPDATEPATH/..."$CLNUM
+	exit
+fi
+
+for view in `$P4 client -o`
+do
+	if [[ $view != //$P4CLIENT* ]] && [[ $view == //* ]]
+	then
+		if [ $VERBOSE ]
+		then
+			echo "$P4 sync --parallel=4 $FORCE $view$CLNUM"
+		fi
+    if [ "$RECON" = "1" ]
+    then
+      $P4 status -A $view
+    else
+      $P4 sync --parallel=4 $FORCE $view$CLNUM
+    fi
+		COUNT=$[$COUNT + 1]
+		if [[ $(($COUNT % 20)) == 0 ]]
+		then
+			echo "Lets take a break"
+			sleep 2
+		fi
+	fi
+done
+echo "------------------------------------------------------------------"
+echo "Done"
+
+exit 0

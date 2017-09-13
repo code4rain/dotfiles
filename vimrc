@@ -385,9 +385,9 @@ set backspace=indent,eol,start " 백스페이스 사용 제한사항 해제
 set backup                        " enable backups
 set noswapfile                    " it's 2013, Vim.
 
-set undodir=/tmp/vim/undo//     " undo files
-set backupdir=/tmp/vim/backup// " backups
-set directory=/tmp/vim/swap//   " swap files
+set undodir=~/.tmp/vim/undo//     " undo files
+set backupdir=~/.tmp/vim/backup// " backups
+set directory=~/.tmp/vim/swap//   " swap files
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))

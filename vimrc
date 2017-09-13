@@ -44,7 +44,7 @@ Plug 'tpope/vim-obsession'
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'w0ng/vim-hybrid'
+Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 

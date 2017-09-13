@@ -3,22 +3,22 @@
 DOT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 OH_MY_ZSH_DIR="$HOME/.oh-my-zsh"
 OH_MY_ZSH_GITHUB="https://github.com/robbyrussell/oh-my-zsh.git"
+OH_MY_ZSH_AUTOSUGGESTION_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+OH_MY_ZSH_AUTOSUGGESTION_GITHUB="https://github.com/zsh-users/zsh-autosuggestions.git"
 
-TIG_DIR="$HOME/clone/tig"
+TIG_DIR="$HOME/@WORK/tig"
 TIG_GITHUB="https://github.com/jonas/tig.git"
 TIG_BUILD="sudo apt-get install -y automake libncurses5-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
 
-RANGER_DIR="$HOME/clone/ranger"
+RANGER_DIR="$HOME/@WORK/ranger"
 RANGER_GITHUB="https://github.com/hut/ranger.git"
 RANGER_BUILD="sudo apt-get install -y automake libncurses5-dev && sudo make install"
 
-AG_DIR="$HOME/clone/ag"
-AG_GITHUB="https://github.com/ggreer/the_silver_searcher.git"
-AG_BUILD="sudo apt-get install -y automake pkg-config libpcre3-dev zlib1g-dev liblzma-dev && ./build.sh && sudo make install"
-
-TMUX_DIR="$HOME/clone/tmux"
+TMUX_DIR="$HOME/@WORK/tmux"
 TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
 TMUX_BUILD="sudo apt-get install -y libevent-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
+
+INSTALL_PACKAGES="build-essential automake libncurses5-dev"
 
 clone_or_update() {
   if [ -d "$2" ]
@@ -57,15 +57,28 @@ clone_or_update() {
     fi
   fi
 }
-# Check essential
-sudo apt-get install build-essential automake libncurses5-dev
+
+echo "Copy binaries to $HOME/bin"
 cp -r $DOT_DIR/module/bin/* $HOME/bin
 source $HOME/bin/color.sh
+msg_green
+echo "Install Essential packages - $INSTALL_PACKAGES"
+# Check essential
+sudo apt-get install $INSTALL_PACKAGES
+msg_nc
+msg_blue
+echo "Install neovim"
+msg_nc
+$DOT_DIR/bin/scripts/nvim_install.sh
+msg_green
+echo "Install neovim done"
+msg_nc
+
 pushd .
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
+clone_or_update $OH_MY_ZSH_AUTOSUGGESTION_GITHUB $OH_MY_ZSH_AUTOSUGGESTION_DIR
 clone_or_update $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"
 clone_or_update $RANGER_GITHUB $RANGER_DIR "${RANGER_BUILD}"
-clone_or_update $AG_GITHUB $AG_DIR "${AG_BUILD}"
 clone_or_update $TMUX_GITHUB $TMUX_DIR "${TMUX_BUILD}"
 popd
 msg_green

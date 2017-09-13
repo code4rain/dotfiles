@@ -1,0 +1,35 @@
+From 0d95036843de02034ac853994d51a7cc379500f8 Mon Sep 17 00:00:00 2001
+From: Alex Kyoungdon Jang <alex.jang@samsung.com>
+Date: Wed, 5 Apr 2017 13:20:56 +0900
+Subject: [PATCH 1/2] change bg color
+
+Signed-off-by: Alex Kyoungdon Jang <alex.jang@samsung.com>
+---
+ colors/hybrid.vim | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/colors/hybrid.vim b/colors/hybrid.vim
+index 21f020a..00e1125 100644
+--- a/colors/hybrid.vim
++++ b/colors/hybrid.vim
+@@ -148,7 +148,7 @@ else
+   let s:cterm_delbg      = "167"
+ endif
+ 
+-let s:palette.cterm.background = { 'dark' : "234"              , 'light' : "254" }
++let s:palette.cterm.background = { 'dark' : "NONE"              , 'light' : "254" }
+ let s:palette.cterm.foreground = { 'dark' : s:cterm_foreground , 'light' : "16"  }
+ let s:palette.cterm.window     = { 'dark' : "236"              , 'light' : "247" }
+ let s:palette.cterm.selection  = { 'dark' : s:cterm_selection  , 'light' : "250" }
+@@ -161,7 +161,7 @@ let s:palette.cterm.green      = { 'dark' : s:cterm_green      , 'light' : "22"
+ let s:palette.cterm.aqua       = { 'dark' : s:cterm_aqua       , 'light' : "23"  }
+ let s:palette.cterm.blue       = { 'dark' : s:cterm_blue       , 'light' : "17"  }
+ let s:palette.cterm.purple     = { 'dark' : s:cterm_purple     , 'light' : "53"  }
+-let s:palette.cterm.darkcolumn = { 'dark' : "234"              , 'light' : "244" }
++let s:palette.cterm.darkcolumn = { 'dark' : "NONE"              , 'light' : "244" }
+ let s:palette.cterm.addbg      = { 'dark' : "65"               , 'light' : "194" }
+ let s:palette.cterm.addfg      = { 'dark' : "193"              , 'light' : "22"  }
+ let s:palette.cterm.changebg   = { 'dark' : "60"               , 'light' : "189" }
+-- 
+2.14.1
+

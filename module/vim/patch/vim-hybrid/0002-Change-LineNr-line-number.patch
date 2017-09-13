@@ -1,0 +1,28 @@
+From 2754fab51d4eee9ac5270e336d1f09d8c3551fa1 Mon Sep 17 00:00:00 2001
+From: Alex Kyoungdon Jang <alex.jang@samsung.com>
+Date: Wed, 13 Sep 2017 22:39:49 +0900
+Subject: [PATCH 2/2] Change LineNr (line number)
+
+same as comment color
+
+Signed-off-by: Alex Kyoungdon Jang <alex.jang@samsung.com>
+---
+ colors/hybrid.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/colors/hybrid.vim b/colors/hybrid.vim
+index 00e1125..5155b7f 100644
+--- a/colors/hybrid.vim
++++ b/colors/hybrid.vim
+@@ -300,7 +300,7 @@ exe "hi! Folded"        .s:fg_comment     .s:bg_darkcolumn  .s:fmt_none
+ exe "hi! FoldColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
+ exe "hi! SignColumn"    .s:fg_none        .s:bg_darkcolumn  .s:fmt_none
+ "   Incsearch"
+-exe "hi! LineNr"        .s:fg_selection   .s:bg_none        .s:fmt_none
++exe "hi! LineNr"        .s:fg_comment     .s:bg_none        .s:fmt_none
+ exe "hi! CursorLineNr"  .s:fg_yellow      .s:bg_none        .s:fmt_none
+ exe "hi! MatchParen"    .s:fg_background  .s:bg_changebg    .s:fmt_none
+ exe "hi! ModeMsg"       .s:fg_green       .s:bg_none        .s:fmt_none
+-- 
+2.14.1
+

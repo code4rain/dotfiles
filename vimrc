@@ -177,9 +177,9 @@ set wrap
 set linebreak
 
 " 특수문자(tab, line ending) 표시 안함
-set nolist
+set list
 " tab/End of line characters 설정
-set listchars=tab:>-,eol:$
+set listchars=tab:>-,trail:-
 
 " 괄호의 짝을 Highlight
 set showmatch

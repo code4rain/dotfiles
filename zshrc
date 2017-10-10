@@ -127,7 +127,7 @@ prompt_end() {
 		echo -n "%{%k%}"
 	fi
 	echo "%{%f%}\n"
-	echo "::"
+	echo -n "%{%F{red}%}>%{%f%}"
 	CURRENT_BG=''
 }
 prompt_context() {
@@ -198,7 +198,7 @@ simple_prompt() {
 		echo -n "\nSYMLINK: %F{cyan}$(readlink $(pwd))%{%f%}"
 	fi
 	echo "%{%F{magenta}%}$(__git_ps1 '\n(%s)')%{%f%}"
-	echo -n "::"
+	echo -n "%{%F{red}%}>%{%f%}"
 }
 # Set the prompt
 #PROMPT='%{%f%b%k%}$(build_prompt) '

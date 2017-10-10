@@ -177,7 +177,7 @@ set wrap
 set linebreak
 
 " 특수문자(tab, line ending) 표시 안함
-set list
+set nolist
 " tab/End of line characters 설정
 set listchars=tab:>-,trail:-
 
@@ -370,7 +370,7 @@ autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType sh setlocal ts=8 sts=8 sw=8 expandtab
+autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufRead,BufNewFile *.cmm setfiletype trace

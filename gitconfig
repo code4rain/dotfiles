@@ -27,8 +27,8 @@
 	l = !tig
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
 	ll = log --abbrev-commit --decorate=full --stat
-	pl = !git tag --force _ribbon HEAD && git pull --rebase=preserve && tig _ribbon..HEAD
-	pr = !git tag --force _ribbon HEAD && git pull --rebase=preserve
+	# pl = !git tag --force _ribbon HEAD && git pull --rebase=preserve && tig _ribbon..HEAD
+	# pr = !git tag --force _ribbon HEAD && git pull --rebase=preserve
 	rb = "!f() { git rebase -p -i HEAD~$1; }; f"
 	ri = tag --force _ribbon HEAD
 	rst = reset --hard HEAD^

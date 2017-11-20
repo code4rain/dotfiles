@@ -30,7 +30,7 @@
 	# pl = !git tag --force _ribbon HEAD && git pull --rebase=preserve && tig _ribbon..HEAD
 	# pr = !git tag --force _ribbon HEAD && git pull --rebase=preserve
 	reword = commit -s --amend
-	rb = "!f() { git rebase -p -i HEAD~$1; }; f"
+	rb = "!f() { git rebase -i HEAD~$1; }; f"
 	ri = tag --force _ribbon HEAD
 	rst = reset --hard HEAD^
 	rt = reset --hard HEAD

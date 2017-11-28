@@ -13,7 +13,7 @@ bind generic + !git commit -s -v --amend -C HEAD
 bind generic 0 !git format-patch -1 %(commit)
 bind generic 1 !@git checkout --ours %(file)
 bind generic 2 !@git checkout --theirs %(file)
-bind generic 9 !@sh -c "echo -n %(commit) | xsel -selection c"
+bind generic 9 !@sh -c "echo -n %(commit) | xclip"
 bind generic <F10> !git format-patch %(commit)~1
 bind generic <F12> !gp4 rebase
 bind generic A !git am --resolved

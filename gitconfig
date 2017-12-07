@@ -10,8 +10,8 @@
 	bb = "!git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);(%(color:green)%(committerdate:relative)%(color:reset));%(authorname);%(contents:subject)' | column -t -s ';'"
 	bf = !tig refs
 	br = branch -avv
-	cch = !~/.git_template/hooks/checkpatch.pl --no-tree --file
-	ch = !git diff --cached | ~/.git_template/hooks/checkpatch.pl --max-line-length=120 --showtypes -q -
+	cch = !~/.git_template/hooks/checkpatch.pl --no-tree -g HEAD
+	ch = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --show-types -g HEAD
 	check = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --git
 	ci = commit -v -s
 	cl = clean -df
@@ -28,10 +28,9 @@
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%ae>%Creset' --abbrev-commit --date=relative
 	ll = log --abbrev-commit --decorate=full --stat
 	# pl = !git tag --force _ribbon HEAD && git pull --rebase=preserve && tig _ribbon..HEAD
-	pr = "!f() { P=$(git rev-list -n 1 HEAD); git pull --rebase=preserve; C=$(git rev-list -n 1 HEAD); if [ "$P" != "$C" ]; then echo '-------------------'; git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-walk ${P}; git log --color --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --no-walk ${C}; git tag --force _ribbon "$P"; fi }; f"
+	pr = "!f() { P=$(git rev-list -n 1 HEAD); git pull --rebase=preserve; C=$(git rev-list -n 1 HEAD); if [ "$P" != "$C" ]; then echo '-------------------'; git log --color --pretty=format:'%Cred%<(13)%h%Creset%Cgreen%<(18)%cr%C(bold blue)%<(30)%ae%Creset%s' --no-walk ${C}; git log --color --pretty=format:'%Cred%<(13)%h%Creset%Cgreen%<(18)%cr%C(bold blue)%<(30)%ae%Creset%s' --no-walk ${P}; git tag --force _ribbon "$P"; fi }; f"
 	reword = commit -s --amend
 	rb = "!f() { git rebase -i HEAD~$1; }; f"
-	ri = tag --force _ribbon HEAD
 	rst = reset --hard HEAD^
 	rt = reset --hard HEAD
 	s ="!tig status"
@@ -42,7 +41,6 @@
 	ssl = stash list
 	ssv = stash save
 	st = status
-	sub = !git submit
 	tl = !tig $(git show-ref --tags --abbrev=0 | grep -w -B 1 $(git describe) | head -1 | cut -d ' ' -f1)..HEAD
 	top = log --graph --abbrev-commit --decorate=full --branches --simplify-by-decoration
 	ts ="!tig stash"

@@ -4,7 +4,7 @@ set line-graphics = default
 set diff-highlight = true
 set wrap-lines = yes
 set wrap-search = no
-set main-options = -n 7000
+set main-options = -n 70000
 set show-changes = no
 set commit-order = default
 

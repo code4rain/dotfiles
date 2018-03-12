@@ -664,7 +664,7 @@ nnoremap <silent> <F4> :Gstatus<CR>
 nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
-nnoremap <silent> <F4>l :Git l %<CR>
+nnoremap <silent> <F4>l :Glog<CR>
 " }}}
 " easymotion {{{
 let g:EasyMotion_leader_key = '<,>'

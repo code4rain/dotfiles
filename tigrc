@@ -41,4 +41,5 @@ bind status g !git push origin HEAD:rerfs/for/%(branch)
 bind status p !bash -c "git diff --cached | ~/.git_template/hooks/checkpatch.pl --no-signoff -max-line-length=120 --ignore  GERRIT_CHANGE_ID,UNDOCUMENTED_DT_STRING,FILE_PATH_CHANGES --show-types -q - | less -R"
 bind status t !git checkout --theirs %(file)
 bind status x !@rm -f %(file)
+bind status d !@git rm %(file)
 bind tree l !tig %(file)

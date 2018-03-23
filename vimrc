@@ -39,6 +39,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-obsession'
+Plug 'svermeulen/vim-easyclip'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -67,6 +68,7 @@ Plug 'vim-scripts/IndentConsistencyCop'
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'junegunn/vim-peekaboo' "Show registers for paste text
 Plug 'vim-scripts/gtags.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
@@ -161,7 +163,7 @@ ab unsinged unsigned
 " View -------------------------------------------------------------------- {{{
 set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
 set ruler " 커서의 위치를 항상 보이게 함.
-set relativenumber "
+"set relativenumber "
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
 set cursorline " 현재 커서 줄 강조
@@ -459,6 +461,10 @@ if !has('win32')
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
+" vim-easyclip {{
+imap <c-v> <plug>EasyClipInsertModePaste
+cmap <c-v> <plug>EasyClipCommandModePaste
+" }}}
 " Perforce {{{
 function! s:P4_edit_current( )
   execute "!p4 edit " . expand("%")
@@ -969,8 +975,8 @@ vmap < <gv
 nnoremap <C-L> :Recent<CR>
 nnoremap <C-_> :Rgtags<CR>
 nnoremap <F7> :Ngtags<CR>
-nnoremap <silent> p p`]
-nnoremap tt diw"*P
+" nnoremap <silent> p p`]
+nnoremap t diw"*P
 nnoremap ; :
 noremap <C-F> <PageUp>
 noremap <C-Q> <ESC>:q!<CR>
@@ -983,7 +989,7 @@ noremap <up> gk
 noremap gV `[v`]
 vmap <F2> "*y
 vmap <F3> "*p
-vmap Y "*ygv
+vmap Y "*yg
 vnoremap <silent> p p`]
 vnoremap <silent> y y`]
 
@@ -1020,7 +1026,8 @@ inoremap <c-e> <end>
 
 nnoremap <M-,> `[
 nnoremap <M-.> `]
-
+nmap 1 <home>
+nmap 0 <end>
 nnoremap - <end>
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

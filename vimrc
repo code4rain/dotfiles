@@ -39,7 +39,7 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-obsession'
-Plug 'svermeulen/vim-easyclip'
+Plug 'vim-scripts/YankRing.vim'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -461,10 +461,6 @@ if !has('win32')
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
-" vim-easyclip {{
-imap <c-v> <plug>EasyClipInsertModePaste
-cmap <c-v> <plug>EasyClipCommandModePaste
-" }}}
 " Perforce {{{
 function! s:P4_edit_current( )
   execute "!p4 edit " . expand("%")

@@ -42,4 +42,5 @@ bind status p !bash -c "git diff --cached | ~/.git_template/hooks/checkpatch.pl 
 bind status t !git checkout --theirs %(file)
 bind status x !@rm -f %(file)
 bind status d !@git rm %(file)
+bind status r !@git checkout -- %(file)
 bind tree l !tig %(file)

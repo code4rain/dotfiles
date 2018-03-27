@@ -521,9 +521,9 @@ function! s:GtagsCscope_GtagsRoot()
   let cmd_output = system(cmd)
   if v:shell_error != 0
     if v:shell_error == 3
-      call s:Error('GTAGS not found.')
+      echom 'GTAGS not found.'
     else
-      call s:Error('global command failed. command line: ' . cmd)
+      echom 'global command failed. command line: ' . cmd
     endif
     return ''
   endif
@@ -590,7 +590,7 @@ function! s:wrap_fzf_grep(args, bang)
   else
     let directory = getcwd()
   endif
-  let cmd = 'rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --type-add "history:.search_history" --type-not history --color "always" '. shellescape(a:args)
+  let cmd = 'rg -j 32 --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --type-add "history:.search_history" --type-not history --color "always" '. shellescape(a:args)
   let result = split(system(cmd), '.\n')
   call writefile(result, directory . "/.search_history")
   call fzf#vim#grep('cat ' . directory . '/.search_history', 1, a:bang)
@@ -606,7 +606,7 @@ function! s:show_search_history(filter, bang)
   if empty(a:filter)
     call fzf#vim#grep('cat ' . s:directory . '/.search_history', 1, a:bang)
   else
-    call fzf#vim#grep('cat ' s:directory . '/.search_history | rg ' . a:filter, 1, a:bang)
+    call fzf#vim#grep('cat ' s:directory . '/.search_history | rg -j 32 ' . a:filter, 1, a:bang)
   endif
 endfunction
 

@@ -6,6 +6,15 @@ set assumed_charset="iso-8859-1"
 # make sure Vim knows Mutt is a mail client and that we compose an UTF-8 encoded message
 set editor="vim -c 'set syntax=mail ft=mail enc=utf-8'"
 
+set beep = no
+set edit_headers   = yes       # Show headers when composing mail
+set fast_reply     = yes       # Skip asking for address and subject when replying
+set forward_format = "FW: %s" # Subject of forwarded mails
+set forward_decode = yes       # Decode on forwarding
+set reply_to       = yes
+set reverse_name   = yes
+set include        = yes                    # Include message in replies
+
 # just scroll one line instead of full page
 set menu_scroll=yes
 # make default search pattern to search in To, Cc and Subject
@@ -77,11 +86,12 @@ bind pager R  group-reply
 macro index / '<search>~b '
 macro index <f2> '<limit>~B '
 macro index <f3> '<limit>all<enter>'
+set query_command= "abook --mutt-query '%s'"
 # set query_command = "goobook query '%s'"
 # set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"
 # macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
-# bind editor <Tab> complete-query
-# bind editor ^T    complete
+bind editor <Tab> complete-query
+bind editor ^T    complete
 
 bind index <space>  collapse-thread
 
@@ -91,5 +101,13 @@ set reverse_alias=yes
 source $alias_file
 
 set display_filter=~/bin/mutt_alias.sh
+set index_format="mutt-fmt-date %[%s] |"
 
 set signature="~/.signature"
+
+set nosmart_wrap                          # Don't want smart wrapping.
+set nomarkers                             # Don't want any wrap markers.
+
+set nostrict_threads                      # Lets have some fuzzy threading.
+
+set mailcap_path=~/.mutt/mailcap:/usr/local/etc/mailcap:/etc/mailcap

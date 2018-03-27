@@ -1,21 +1,54 @@
-alias 홍의석 <anthony.hong@samsung.com>
-alias 장경돈 <alex.jang@samsung.com>
-alias 전민구 <mingu85.jeon@samsung.com>
-alias 김지홍 <jhez.kim@samsung.com>
-alias 금재왕 <jaewang.keum@samsung.com>
-alias 셜록 <sherlock.sec@samsung.com>
-alias kernel alex.jang@samsung.com, jhez.kim@samsung.com, dh0703.kim@samsung.com, jell.lee@samsung.com, seo0.jung@samsung.com, anthony.hong@samsung.com, zilfin@samsung.com, jammer@samsung.com
-alias electronics-youngho YoungHo Cho/System R&D Group 1/Senior Engineer/Samsung Electronics <notice.scm@samsung.com>
-alias 성기훈 <jason.seong@samsung.com>
-alias 김정호 <jammer@samsung.com>
-alias 이종주 <biam.lee@samsung.com>
-alias 이준석 <junesok.lee@samsung.com>
-alias 김봉섭 <yaroji.kim@samsung.com>
-alias electronics-kyoungho KyoungHo Yun/Visual S/W R&D Group/Assistant Engineer/Samsung Electronics <notice.scm@samsung.com>
-alias ??t-l??ng L??ng B? ??t <ba.dat@samsung.com>
-alias notice-scm SCM NOTICE <notice.scm@samsung.com>
-alias electronics-hyeong-rak Hyeong-Rak Son/Sensor R&D Group/Engineer/Samsung Electronics <notice.scm@samsung.com>
-alias 최재균 <jaegyun.choi@samsung.com>
-alias biswas-neel Neel Biswas <neel.b@samsung.com>
+alias electronics-sunggeun SUNGGEUN YIM/Visual S/W R&D Group/Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias 남정우 <asickid@samsung.com>
+alias 김태호 <teho.kim@samsung.com>
 alias autobot.sec@samsung.com autobot.sec@samsung.com
+alias yeo-inpyo INPYO YEO <ingpyo.yeo@samsung.com>
+alias 디지털시티 <digitalcity@samsung.com>
+alias 사회공헌사무국 <sec.samsung1004@samsung.com>
+alias electronics-jinmo Jinmo Yang/Mobile Security Technologies Group/Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias notice-scm SCM NOTICE <notice.scm@samsung.com>
+alias 김철민 <cmlaika.kim@samsung.com>
+alias electronics-jingyu jingyu lee/Sensor R&D Group/Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias yeom-george George Yeom <snow.yeom@samsung.com>
 alias anh-ph?m Ph?m ??c Th? Anh <theanh.duc@samsung.com>
+alias anh-ho?ng Ho?ng Anh <hoang.anh@samsung.com>
+alias 아밋쿠마르 <g1.amit@samsung.com>
+alias 무선시료실사 <sample.mgt03@samsung.com>
+alias 정영훈 <jungyh@samsung.com>
+alias (jira)-임진호 임진호 System개발2그룹(무선) / Jinho Lim / jordan.lim (JIRA) <dpi.sec@samsung.com>
+alias 박유식 <andypark@samsung.com>
+alias 안드로이드CM <cm.sec@samsung.com>
+alias 김도형 <dh0703.kim@samsung.com>
+alias 신승민 <sm94.shin@samsung.com>
+alias 시료운영 <sample.mgt02@samsung.com>
+alias 셜록 <sherlock.sec@samsung.com>
+alias 황선호 <shhwang@samsung.com>
+alias 정서영 <seo0.jeong@samsung.com>
+alias 김병우 <bye0418@samsung.com>
+alias electronics-rakie Rakie Kim/Multimedia Development Team/Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias electronics-kyoungho KyoungHo Yun/Visual S/W R&D Group/Assistant Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias 민준기 <junki671.min@samsung.com>
+alias 정건현 <tohyun@samsung.com>
+alias 조승빈 <seungbin.cho@samsung.com>
+alias 박동준 <dongjun.park@samsung.com>
+alias 오창민 <cmoh@samsung.com>
+alias electronics-do Do Hyoung Kim/System R&D Group 2/Senior Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias 최재균 <jaegyun.choi@samsung.com>
+alias 김정호 <jammer@samsung.com>
+alias 최예빈 <ybella.choi@partner.samsung.com>
+alias 장경돈 <alex.jang@samsung.com>
+alias 홍의석 <anthony.hong@samsung.com>
+alias 우종수 <jongsoo.woo@samsung.com>
+alias 이승엽 <andrea_lee@samsung.com>
+alias 김성식 <sungsiki.kim@samsung.com>
+alias 이상범 <leesbk@samsung.com>
+alias 김봉섭 <yaroji.kim@samsung.com>
+alias 양준영 <jun0.yang@samsung.com>
+alias electronics-hyunkyu Hyunkyu Lee/System R&D Group 2/Associate/Samsung Electronics <notice.scm@samsung.com>
+alias 김민주 <minju1029.kim@samsung.com>
+alias 고승권 <skwon.ko@samsung.com>
+alias biswas-neel Neel Biswas <neel.b@samsung.com>
+alias 성기훈 <jason.seong@samsung.com>
+alias electronics-hyeong-rak Hyeong-Rak Son/Sensor R&D Group/Engineer/Samsung Electronics <notice.scm@samsung.com>
+alias ??t-l??ng L??ng B? ??t <ba.dat@samsung.com>
+alias 김지홍 <jhez.kim@samsung.com>

@@ -1019,11 +1019,10 @@ vnoremap L g_
 
 inoremap <c-a> <home>
 inoremap <c-e> <end>
+inoremap <c-v> <c-r>"
 
 nnoremap <M-,> `[
 nnoremap <M-.> `]
-nmap 1 <home>
-nmap 0 <end>
 nnoremap - <end>
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

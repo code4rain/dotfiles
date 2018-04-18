@@ -330,3 +330,6 @@ export BOOT_COMPILE_64=/opt/toolchains/arm-eabi-4.9/bin/aarch64-linux-android-
 export BOOT_COMPILE_32=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-
 
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+export RIPGREP_CONFIG_PATH=${HOME}/.ripgreprc
+

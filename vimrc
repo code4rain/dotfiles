@@ -48,6 +48,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'mhartington/oceanic-next'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -706,6 +707,9 @@ let g:signify_update_on_bufenter = 1
 let g:signify_line_highlight = 0
 map <silent><M-j> <Plug>(signify-next-hunk)
 map <silent><M-k> <Plug>(signify-prev-hunk)
+" }}}
+" Yankring {{{
+let g:yankring_history_file = '.yankring_history'
 " }}}
 " Rainbow parentheses {{{
 augroup rainbow

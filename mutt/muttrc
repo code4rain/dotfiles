@@ -15,8 +15,21 @@ set reply_to       = yes
 set reverse_name   = yes
 set include        = yes                    # Include message in replies
 
-# just scroll one line instead of full page
-set menu_scroll=yes
+set wait_key = no        # shut up, mutt
+set mbox_type = Maildir  # mailbox type
+set timeout = 3          # idle time before scanning
+set mail_check = 0       # minimum time between scans
+unset move               # gmail does that
+set delete               # don't ask, just do
+unset confirmappend      # don't ask, just do!
+set quit                 # don't ask, just do!!
+unset mark_old           # read/new is good enough for me
+
+unset menu_move_off			# Don't let last items of menus scroll up past the bottom of the screen.
+unset menu_scroll				# Scroll line by line when reaching end of page.
+set menu_context=10			# Lines of context
+set pager_context=1			# Lines of context
+
 # make default search pattern to search in To, Cc and Subject
 set simple_search="~f %s | ~C %s | ~s %s"
 
@@ -58,7 +71,7 @@ color bold        brightyellow   default
 # if you don't like the black progress bar at the bottom of the screen,
 # comment out the following line
 # color progress    white          black
-set wrap=200
+set wrap=300
 
 set from="Alex Kyoungdon Jang <alex.jang@samsung.com>"
 
@@ -66,11 +79,12 @@ set pop_host=v7pop3.samsung.com
 # set pop_port=110
 set pop_user=alex.jang
 set pop_delete=no
-set pop_pass=\#wkdrudehs00
+set pop_pass=
 set smtp_url=smtp://203.254.227.42
 auto_view text/html
 alternative_order text/plain text/enriched text/html
 
+# use even lower value for reading even slower remote POP folders
 # use headercache for IMAP (make sure this is a directory for performance!)
 set header_cache="~/@Sync/Maildir/cache"
 set mbox_type=Maildir
@@ -86,6 +100,7 @@ bind pager R  group-reply
 macro index / '<search>~b '
 macro index <f2> '<limit>~B '
 macro index <f3> '<limit>all<enter>'
+macro index G "!fetchmail\n"
 set query_command= "abook --mutt-query '%s'"
 # set query_command = "goobook query '%s'"
 # set query_format="%4c %t %-70.70a %-70.70n %?e?(%e)?"

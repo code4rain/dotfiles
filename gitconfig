@@ -47,7 +47,7 @@
 [core]
 	editor = vim #vi을 editor로 설정
 	quotepath = off
-	pager = diff-highlight | less
+	pager = diff-highlight | less --tabs=8 -RFX
 [i18n]
 	logOutputEncoding = utf8
 	commitEncoding = utf8

@@ -26,6 +26,21 @@ h() {
   echo $history_command
   echo $history_command | xclip
 }
+
+g() {
+  local file_line
+  local file
+  local line
+
+  file_line=$(rg -j 32 --no-heading -n --color ansi $@ | fzf -0 -1 --ansi | awk -F: '{print $1 "+" $2}')
+  file=${file_line%%+*}
+  line=${file_line##*+}
+
+  if [[ -n $file ]]
+  then
+    vi $file +$line
+  fi
+}
 #Command
 alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
@@ -45,7 +60,6 @@ alias r3='rg -j 32 -C 3'
 alias ra='ranger'
 alias rg='rg -j 32'
 alias kg='rg -j 32 -t kconf'
-alias g='rg -j 32'
 alias t='mutt'
 alias tmux='tmux -2'
 alias tmuxinator='tmuxinator'

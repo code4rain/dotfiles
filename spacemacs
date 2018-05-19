@@ -432,12 +432,24 @@ you should place your code here."
     (setq line-spacing (max 0
 			    (- line-spacing 1))))
 
+
+  (setq mouse-click-focus-ignore-position t)
+  ;; scroll one line at a time (less "jumpy" than defaults)
+  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+  (setq scroll-step 1) ;; keyboard scroll one line at a time
+  (setq select-enable-primary t)
+  (setq mouse-drag-copy-region t)
+
   (if (eq system-type 'windows-nt)
       (progn
 	(global-unset-key (kbd "<C-wheel-down>"))
 	(global-unset-key (kbd "<C-wheel-up>"))
 	(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
 	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+	(define-key evil-motion-state-map (kbd "<C-wheel-down>") 'text-scale-decrease)
+	(define-key evil-motion-state-map (kbd "<C-wheel-up>") 'text-scale-increase)
 	(global-unset-key (kbd "<C-S-wheel-down>"))
 	(global-unset-key (kbd "<C-S-wheel-up>"))
 	(global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
@@ -448,19 +460,14 @@ you should place your code here."
       (global-unset-key (kbd "<C-mouse-4>"))
       (global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
       (global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+      (define-key evil-motion-state-map (kbd "<C-mouse-5>") 'text-scale-decrease)
+      (define-key evil-motion-state-map (kbd "<C-mouse-4>") 'text-scale-increase)
       (global-unset-key (kbd "<C-S-mouse-5>"))
       (global-unset-key (kbd "<C-S-mouse-4>"))
       (global-set-key (kbd "<C-S-mouse-5>") 'alex/line-spacing-decrease)
       (global-set-key (kbd "<C-S-mouse-4>") 'alex/line-spacing-increase)
       )
     )
-
-  (setq x-mouse-click-focus-ignore-position t)
-  ;; scroll one line at a time (less "jumpy" than defaults)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
-  (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
-  (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
-  (setq scroll-step 1) ;; keyboard scroll one line at a time
 
   ;; add <<, >> to cycle angle
   (define-typo-cycle typo-cycle-left-angle-brackets

@@ -61,7 +61,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(py-autopep8 dts-mode)
+   dotspacemacs-additional-packages '(py-autopep8 dts-mode easy-hugo)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -134,15 +134,15 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
-			 spacemacs-light
 			 spacemacs-dark
+			 spacemacs-light
 			 )
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("FantasqueSansMono Nerd Font"
-                               :size 13
+   dotspacemacs-default-font '("Source Code Variable"
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -191,7 +191,7 @@ values."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 10
+   dotspacemacs-large-file-size 1
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -260,7 +260,7 @@ values."
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling t
+   dotspacemacs-smooth-scrolling nil
    ;; Control line numbers activation.
    ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
    ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
@@ -274,7 +274,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers '(:relative t
+   dotspacemacs-line-numbers '(:relative nil
 					 :disabled-for-modes dired-mode
 					 doc-view-mode
 					 markdown-mode
@@ -439,7 +439,6 @@ you should place your code here."
   (setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
   (setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
   (setq scroll-step 1) ;; keyboard scroll one line at a time
-  (setq select-enable-primary t)
   (setq mouse-drag-copy-region t)
 
   (if (eq system-type 'windows-nt)
@@ -470,15 +469,15 @@ you should place your code here."
     )
 
   ;; add <<, >> to cycle angle
-  (define-typo-cycle typo-cycle-left-angle-brackets
-    "Cycle through the less-than sign and guillemet quotation marks.
-     If used with a numeric prefix argument N, N less-than signs will be inserted."
-    ("<" "<<" "«" "‹"))
+  ;; (define-typo-cycle typo-cycle-left-angle-brackets
+  ;;   "Cycle through the less-than sign and guillemet quotation marks.
+  ;;    If used with a numeric prefix argument N, N less-than signs will be inserted."
+  ;;   ("<" "<<" "«" "‹"))
 
-  (define-typo-cycle typo-cycle-right-angle-brackets
-    "Cycle through the greater-than sign and guillemet quotation marks.
-     If used with a numeric prefix argument N, N greater-than signs will be inserted."
-    (">" ">>" "»" "›" ))
+  ;; (define-typo-cycle typo-cycle-right-angle-brackets
+  ;;   "Cycle through the greater-than sign and guillemet quotation marks.
+  ;;    If used with a numeric prefix argument N, N greater-than signs will be inserted."
+  ;;   (">" ">>" "»" "›" ))
 
   ;; quit ediff mode without y-or-n
   (defun disable-y-or-n-p (orig-fun &rest args)
@@ -551,7 +550,7 @@ you should place your code here."
 				    helm-source-buffer-not-found))
 
   ;; Hangul(한글)
-  (set-fontset-font t 'hangul (font-spec :name "Binggrae"))
+  (set-fontset-font t 'hangul (font-spec :name "Noto Serif CJK KR Black"))
 
   (if (daemonp)
       (progn
@@ -559,15 +558,15 @@ you should place your code here."
   		  (lambda (frame)
   				   (with-selected-frame frame
   				     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  						       '("Binggrae". "iso10646-1"))
+  						       '("Noto Serif CJK KR Black". "iso10646-1"))
   				     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  						       '("Binggrae". "iso10646-1"))
+  						       '("Noto Serif CJK KR Black". "iso10646-1"))
   				     )))
   	)
       (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-  			'("Binggrae". "iso10646-1"))
+  			'("Noto Serif CJK KR Black". "iso10646-1"))
       (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-  			'("Binggrae". "iso10646-1"))
+  			'("Noto Serif CJK KR Black". "iso10646-1"))
     )
 
   ;; C mode hack
@@ -686,7 +685,24 @@ you should place your code here."
   (setq powerline-utf-8-separator-right #xe0be) ;; 
 
   ;; line number format
-  (setq linum-relative-format "%4s  ")
+  ;; (setq linum-relative-format "%4s  ")
+  (with-eval-after-load "linum"
+    ;; set `linum-delay' so that linum uses `linum-schedule' to update linums.
+    (setq linum-delay t)
+
+    ;; create a new var to keep track of the current update timer.
+    (defvar-local my-linum-current-timer nil)
+
+    ;; rewrite linum-schedule so it waits for 1 second of idle time
+    ;; before updating, and so it only keeps one active idle timer going
+    (defun linum-schedule ()
+      (when (timerp my-linum-current-timer)
+	(cancel-timer my-linum-current-timer))
+      (setq my-linum-current-timer
+	    (run-with-idle-timer 0.2 nil #'linum-update-current))))
+
+  ;; custom-set-variable에 추가되는 것을 막아보자
+  (setq custom-file (make-temp-file "emacs-custom"))
   )
 
 

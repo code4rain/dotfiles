@@ -134,7 +134,7 @@ It should only modify the values of Spacemacs settings."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style 'vim
+   dotspacemacs-editing-style 'hybrid
 
    ;; If non-nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
@@ -455,6 +455,8 @@ before packages are loaded."
   (set-language-environment "Korean")
   (prefer-coding-system 'utf-8) ; utf-8 환경 설정
 
+  ;; follow link? 물음 무시
+  (setq vc-follow-symlinks nil)
   ;; coding
   ;; tab width set
   (setq-default tab-width 8)
@@ -489,6 +491,26 @@ before packages are loaded."
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-hybrid-state-map (kbd "C-q") 'kill-this-buffer)
+
+  ;; windows control
+  (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
+  (define-key evil-motion-state-map (kbd "C-j h") 'evil-window-left)
+  (define-key evil-motion-state-map (kbd "C-j l") 'evil-window-right)
+  (define-key evil-motion-state-map (kbd "C-j \\") 'evil-window-vsplit)
+  (define-key evil-motion-state-map (kbd "C-j |") 'evil-window-vsplit)
+  (define-key evil-motion-state-map (kbd "C-j -") 'evil-window-split)
+  (define-key evil-insert-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
+  (define-key evil-insert-state-map (kbd "C-j h") 'evil-window-left)
+  (define-key evil-insert-state-map (kbd "C-j l") 'evil-window-right)
+  (define-key evil-insert-state-map (kbd "C-j \\") 'evil-window-vsplit)
+  (define-key evil-insert-state-map (kbd "C-j |") 'evil-window-vsplit)
+  (define-key evil-insert-state-map (kbd "C-j -") 'evil-window-split)
+  (define-key evil-hybrid-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
+  (define-key evil-hybrid-state-map (kbd "C-j h") 'evil-window-left)
+  (define-key evil-hybrid-state-map (kbd "C-j l") 'evil-window-right)
+  (define-key evil-hybrid-state-map (kbd "C-j \\") 'evil-window-vsplit)
+  (define-key evil-hybrid-state-map (kbd "C-j |") 'evil-window-vsplit)
+  (define-key evil-hybrid-state-map (kbd "C-j -") 'evil-window-split)
 
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
   (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
@@ -532,6 +554,7 @@ before packages are loaded."
   (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
   (define-key evil-hybrid-state-map (kbd "C-l") 'helm-mini)
   (define-key evil-hybrid-state-map (kbd "M-l") 'helm-gtags-parse-file)
+
 
   ;;;; mouse ;;;;
   (setq-default line-spacing 2)

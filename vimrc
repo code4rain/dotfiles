@@ -49,6 +49,8 @@ Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhartington/oceanic-next'
+Plug 'justinmk/vim-syntax-extra'
+Plug 'jaxbot/semantic-highlight.vim'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -61,7 +63,6 @@ if !has('win32')
 endif
 Plug 'majutsushi/tagbar'
 
-Plug 'octol/vim-cpp-enhanced-highlight'
 " Plug 'svermeulen/vim-easyclip'
 
 " Background executed
@@ -910,6 +911,10 @@ let g:EasyClipUseSubstituteDefaults = 1
 let b:autopairs_enabled = 0
 inoremap <buffer> <silent><S-TAB> <ESC>:call AutoPairsJump()<CR>a
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
+" }}}
+" semantic-highlight {{{
+let g:semanticTermColors = [100,1,2,3,4,5,6,7,24,9,10,106,12,13,14,15,214,125,124,44]
+:nnoremap <Leader>s :SemanticHighlightToggle<cr>
 " }}}
 " MyToHtml {{{
 function! MyToHtml(line1, line2)

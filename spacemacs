@@ -43,13 +43,13 @@ This function should only modify configuration layer settings."
      auto-completion
      better-defaults
      emacs-lisp
-     ;; git
+     git
      markdown
      neotree
      org
      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
+	     shell-default-height 30
+	     shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
      version-control
@@ -154,7 +154,7 @@ It should only modify the values of Spacemacs settings."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+				(projects . 7))
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -170,7 +170,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+			 spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -187,11 +187,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("FuraCode NF"
-                               :size 16
-                               :weight normal
-                               :width normal
-			       :powerline-scale 0.8)
+   dotspacemacs-default-font '("Source Code Pro"
+			       :size 16
+			       :weight normal
+			       :width normal
+			       :powerline-scale 1.1)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -463,32 +463,33 @@ before packages are loaded."
   (setq-default c-default-style "linux")
 
   ;; UI
+  (setq powerline-default-separator 'slant)
   ;; Font
   ;; Hangul(한글)
   (set-fontset-font t 'hangul (font-spec :name "Noto Serif CJK KR SemiBold"))
 
   (if (daemonp)
       (progn
-        (add-hook 'after-make-frame-functions
-                  (lambda (frame)
-                    (with-selected-frame frame
-                      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                                        '("Noto Serif CJK KR SemiBold". "iso10646-1"))
-                      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-                                        '("Noto Serif CJK KR SemiBold". "iso10646-1"))
-                      )))
-        )
+	(add-hook 'after-make-frame-functions
+		  (lambda (frame)
+		    (with-selected-frame frame
+		      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+		      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+		      )))
+	)
     (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-                      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
     (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-                      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
     )
 
   ;;;; EVIL keymap ;;;;
   (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
   (define-key evil-hybrid-state-map (kbd "C-q") 'kill-this-buffer)
-  
+
   ;; Make evil-mode up/down operate in screen lines instead of logical lines
   (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
@@ -537,11 +538,11 @@ before packages are loaded."
   (defun alex/line-spacing-increase()
     (interactive)
     (setq line-spacing (min 40
-                            (+ line-spacing 1))))
+			    (+ line-spacing 1))))
   (defun alex/line-spacing-decrease()
     (interactive)
     (setq line-spacing (max 0
-                            (- line-spacing 1))))
+			    (- line-spacing 1))))
   (setq mouse-click-focus-ignore-position t)
   ;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -553,17 +554,17 @@ before packages are loaded."
 
   (if (eq system-type 'windows-nt)
       (progn
-        (global-unset-key (kbd "<C-wheel-down>"))
-        (global-unset-key (kbd "<C-wheel-up>"))
-        (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-        (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-        (define-key evil-motion-state-map (kbd "<C-wheel-down>") 'text-scale-decrease)
-        (define-key evil-motion-state-map (kbd "<C-wheel-up>") 'text-scale-increase)
-        (global-unset-key (kbd "<C-S-wheel-down>"))
-        (global-unset-key (kbd "<C-S-wheel-up>"))
-        (global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
-        (global-set-key (kbd "<C-S-wheel-up>") 'alex/line-spacing-increase)
-        )
+	(global-unset-key (kbd "<C-wheel-down>"))
+	(global-unset-key (kbd "<C-wheel-up>"))
+	(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+	(define-key evil-motion-state-map (kbd "<C-wheel-down>") 'text-scale-decrease)
+	(define-key evil-motion-state-map (kbd "<C-wheel-up>") 'text-scale-increase)
+	(global-unset-key (kbd "<C-S-wheel-down>"))
+	(global-unset-key (kbd "<C-S-wheel-up>"))
+	(global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
+	(global-set-key (kbd "<C-S-wheel-up>") 'alex/line-spacing-increase)
+	)
     (progn
       (global-unset-key (kbd "<C-mouse-5>"))
       (global-unset-key (kbd "<C-mouse-4>"))
@@ -600,7 +601,9 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(package-selected-packages
+   (quote
+    (org-plus-contrib yasnippet-snippets yapfify xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle shell-pop restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer org-pomodoro org-mime org-download org-bullets open-junk-file neotree nameless mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint indent-guide importmagic hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav editorconfig easy-hugo dumb-jump disaster diminish diff-hl define-word cython-mode counsel-projectile company-statistics company-rtags company-c-headers company-anaconda column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

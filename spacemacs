@@ -46,7 +46,7 @@ This function should only modify configuration layer settings."
      git
      markdown
      neotree
-     org
+     spacemacs-org
      (shell :variables
 	     shell-default-height 30
 	     shell-default-position 'bottom)
@@ -191,7 +191,7 @@ It should only modify the values of Spacemacs settings."
 			       :size 16
 			       :weight normal
 			       :width normal
-			       :powerline-scale 1.1)
+			       :powerline-scale 0.9)
 
    ;; The leader key (default "SPC")
    dotspacemacs-leader-key "SPC"
@@ -438,8 +438,6 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
-  ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
-  (setq undo-tree-auto-save-history t)
   ;; gtag사용시 너무 많은 tag로 인해 검색이 안되는 문제가 있음. tag search개수를 제한
   (setq helm-gtags-maximum-candidates 50000)
   )
@@ -464,6 +462,9 @@ before packages are loaded."
   (setq-default indent-tabs-mode t)
   (setq-default c-default-style "linux")
 
+  ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
+  (setq undo-tree-auto-save-history t)
+
   ;; UI
   (setq powerline-default-separator 'slant)
   ;; Font
@@ -472,89 +473,47 @@ before packages are loaded."
 
   (if (daemonp)
       (progn
-	(add-hook 'after-make-frame-functions
-		  (lambda (frame)
-		    (with-selected-frame frame
-		      (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
-					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
-		      (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
-					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
-		      )))
-	)
-    (set-fontset-font "fontset-default" '(#x1100 . #xffdc)
+  	(add-hook 'after-make-frame-functions
+  		  (lambda (frame)
+  		    (with-selected-frame frame
+  		      (set-fontset-font "fontset-default" '(#x1100 . #x11ff)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#x302e . #x318f)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#x3200 . #x321e)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#x3260 . #x327f)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#xa960 . #xa97f)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#xac00 . #xd7ff)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      (set-fontset-font "fontset-default" '(#xffa0 . #xffdc)
+  					'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      ;; (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+  		      ;; 			'("Noto Serif CJK KR SemiBold". "iso10646-1"))
+  		      )))
+  	)
+    (set-fontset-font "fontset-default" '(#x1100 . #x11ff)
 		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
-    (set-fontset-font "fontset-default" '(#xe0bc . #xf66e)
+    (set-fontset-font "fontset-default" '(#x302e . #x318f)
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#x3200 . #x321e)
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#x3260 . #x327f)
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#xa960 . #xa97f)
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#xac00 . #xd7ff)
+		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
+    (set-fontset-font "fontset-default" '(#xffa0 . #xffdc)
 		      '("Noto Serif CJK KR SemiBold". "iso10646-1"))
     )
 
-  ;;;; EVIL keymap ;;;;
-  (define-key evil-normal-state-map (kbd "C-q") 'kill-this-buffer)
-  (define-key evil-insert-state-map (kbd "C-q") 'kill-this-buffer)
-  (define-key evil-hybrid-state-map (kbd "C-q") 'kill-this-buffer)
-
-  ;; windows control
-  (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
-  (define-key evil-motion-state-map (kbd "C-j h") 'evil-window-left)
-  (define-key evil-motion-state-map (kbd "C-j l") 'evil-window-right)
-  (define-key evil-motion-state-map (kbd "C-j \\") 'evil-window-vsplit)
-  (define-key evil-motion-state-map (kbd "C-j |") 'evil-window-vsplit)
-  (define-key evil-motion-state-map (kbd "C-j -") 'evil-window-split)
-  (define-key evil-insert-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
-  (define-key evil-insert-state-map (kbd "C-j h") 'evil-window-left)
-  (define-key evil-insert-state-map (kbd "C-j l") 'evil-window-right)
-  (define-key evil-insert-state-map (kbd "C-j \\") 'evil-window-vsplit)
-  (define-key evil-insert-state-map (kbd "C-j |") 'evil-window-vsplit)
-  (define-key evil-insert-state-map (kbd "C-j -") 'evil-window-split)
-  (define-key evil-hybrid-state-map (kbd "C-j C-j") 'evil-window-rotate-upwards)
-  (define-key evil-hybrid-state-map (kbd "C-j h") 'evil-window-left)
-  (define-key evil-hybrid-state-map (kbd "C-j l") 'evil-window-right)
-  (define-key evil-hybrid-state-map (kbd "C-j \\") 'evil-window-vsplit)
-  (define-key evil-hybrid-state-map (kbd "C-j |") 'evil-window-vsplit)
-  (define-key evil-hybrid-state-map (kbd "C-j -") 'evil-window-split)
-
-  ;; Make evil-mode up/down operate in screen lines instead of logical lines
-  (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "k") 'evil-previous-visual-line)
-  ;; Also in visual mode
-  (define-key evil-visual-state-map (kbd "j") 'evil-next-visual-line)
-  (define-key evil-visual-state-map (kbd "k") 'evil-previous-visual-line)
-  ;; exit with <C-g>
-  (global-set-key (kbd "C-g") 'evil-escape)
-  (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
-  ;; ex mode
-  (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
-  (evil-ex-define-cmd "W[rite]" 'evil-write)
-  (evil-ex-define-cmd "Wq" 'evil-save-and-quit)
-
-  (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
-  (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
-  (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
-  (define-key evil-motion-state-map (kbd "C-b") 'bookmark-set)
-  (define-key evil-motion-state-map (kbd "C-S-b") 'bookmark-delete)
-  (define-key evil-motion-state-map (kbd "M-l") 'helm-gtags-parse-file)
-  (define-key evil-motion-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
-
-  (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
-  (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
-  (define-key evil-visual-state-map (kbd "M-l") 'helm-gtags-parse-file)
-  (define-key evil-visual-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
-
-  (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
-  (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
-  (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
-  (define-key evil-insert-state-map (kbd "C-l") 'helm-mini)
-  (define-key evil-insert-state-map (kbd "M-l") 'helm-gtags-parse-file)
-
-  (define-key evil-hybrid-state-map (kbd "C-]") 'helm-gtags-find-tag)
-  (define-key evil-hybrid-state-map (kbd "<f7>") 'helm-gtags-select)
-  (define-key evil-hybrid-state-map (kbd "M-o") 'helm-projectile-find-file)
-  (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
-  (define-key evil-hybrid-state-map (kbd "C-l") 'helm-mini)
-  (define-key evil-hybrid-state-map (kbd "M-l") 'helm-gtags-parse-file)
-
+  ;; EVIL
+  (defconst local-evil-el-path "~/.spacemacs.evil.el")
+  (when (file-exists-p local-evil-el-path)
+    (load-file local-evil-el-path))
 
   ;;;; mouse ;;;;
   (setq-default line-spacing 2)
@@ -603,10 +562,15 @@ before packages are loaded."
     )
 
   ;; Ranger
-  (setq ranger-cleanup-eagerly t)
-  (setq ranger-show-dotfiles nil)
-  (setq ranger-max-preview-size 10)
-  (setq ranger-dont-show-binary t)
+  (use-package ranger
+    :init
+    (setq ranger-cleanup-eagerly t)
+    (setq ranger-show-hidden nil)
+    (setq ranger-max-preview-size 10)
+    (setq ranger-dont-show-binary t)
+    :ensure t
+    :config (ranger-override-dired-mode t)
+    )
 
   ;; custom-set-variable에 추가되는 것을 막아보자
   (setq custom-file (make-temp-file "emacs-custom"))

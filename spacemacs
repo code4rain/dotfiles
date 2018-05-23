@@ -65,7 +65,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(easy-hugo centered-window)
+   dotspacemacs-additional-packages '(easy-hugo centered-window esh-autosuggest)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -462,6 +462,17 @@ before packages are loaded."
   (setq-default indent-tabs-mode t)
   (setq-default c-default-style "linux")
 
+  ;; eshell
+  (use-package esh-autosuggest
+    :hook (eshell-mode . esh-autosuggest-mode)
+    ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
+    ;; line below instead:
+    ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
+    :bind (:map esh-autossugest-active-map
+		("C-<SPC>" . company-complete-selection)
+		)
+    :ensure t)
+
   ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
   (use-package undo-tree
   :config
@@ -478,7 +489,7 @@ before packages are loaded."
 
       ;; Persistent undo-tree history across emacs sessions
       (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
-                                                          "undo-tree-history/")))
+                                                          "private/undo-tree-history/")))
                                          (make-directory dir :parents)
                                          dir))
       (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
@@ -495,7 +506,7 @@ before packages are loaded."
       (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
       (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
 
-    (modi/undo-tree-disable-save-history)
+    (modi/undo-tree-enable-save-history)
 
     (global-undo-tree-mode 1)))
 
@@ -522,9 +533,9 @@ before packages are loaded."
     (load-file local-evil-el-path))
 
   ;; Helm
-  (defconst local-evil-el-path "~/.spacemacs.evil.el")
-  (when (file-exists-p local-evil-el-path)
-    (load-file local-evil-el-path))
+  (defconst local-helm-el-path "~/.spacemacs.helm.el")
+  (when (file-exists-p local-helm-el-path)
+    (load-file local-helm-el-path))
 
   ;;;; mouse ;;;;
   (setq-default line-spacing 2)

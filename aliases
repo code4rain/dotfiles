@@ -47,7 +47,7 @@ alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias e='emacsclient -ct -s terminal'
 alias ek="emacsclient -e '(kill-emacs)'"
-alias es='ee'
+# alias es='ee'
 alias ls='ls --color -h --group-directories-first'
 # alias m='TERM=xterm-256color tmuxinator'
 alias m='TERM=screen-256color tmuxinator'

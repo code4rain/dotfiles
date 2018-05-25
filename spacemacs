@@ -190,7 +190,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Fira Code"
 			       :size 16
 			       :weight normal
 			       :width normal
@@ -442,7 +442,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; gtag사용시 너무 많은 tag로 인해 검색이 안되는 문제가 있음. tag search개수를 제한
-  (setq helm-gtags-maximum-candidates 50000)
+  (setq helm-gtags-maximum-candidates 500)
   )
 
 (defun dotspacemacs/user-config ()

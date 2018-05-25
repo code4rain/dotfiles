@@ -44,6 +44,7 @@ This function should only modify configuration layer settings."
      better-defaults
      emacs-lisp
      git
+     gtags
      markdown
      neotree
      spacemacs-org
@@ -65,7 +66,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(easy-hugo esh-autosuggest)
+   dotspacemacs-additional-packages '(easy-hugo doom-theme writeroom-mode esh-autosuggest visual-fill-column)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -100,7 +101,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Maximum allowed time in seconds to contact an ELPA repository.
    ;; (default 5)
-   dotspacemacs-elpa-timeout 5
+   dotspacemacs-elpa-timeout 1
 
    ;; Set `gc-cons-threshold' and `gc-cons-percentage' when startup finishes.
    ;; This is an advanced option and should not be changed unless you suspect
@@ -169,8 +170,10 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-			 spacemacs-light)
+   dotspacemacs-themes '(doom-one
+                         seti
+                         spacemacs-dark
+                         spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
@@ -179,7 +182,7 @@ It should only modify the values of Spacemacs settings."
    ;; to create your own spaceline theme. Value can be a symbol or list with\
    ;; additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.2)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -457,10 +460,63 @@ before packages are loaded."
   (setq vc-follow-symlinks nil)
   ;; coding
   ;; tab width set
-  (setq-default tab-width 8)
-  (setq-default c-basic-offset 8)
-  (setq-default indent-tabs-mode t)
-  (setq-default c-default-style "linux")
+  (defun c-lineup-arglist-tabs-only (ignored)
+    "Line up argument lists by tabs, not spaces"
+    (let* ((anchor (c-langelem-pos c-syntactic-element))
+           (column (c-langelem-2nd-pos c-syntactic-element))
+           (offset (- (1+ column) anchor))
+           (steps (floor offset c-basic-offset)))
+      (* (max steps 1)
+         c-basic-offset)))
+  (c-add-style "linux-kernel"
+               '("linux" (c-offsets-alist
+                          (arglist-cont-nonempty
+                           c-lineup-gcc-asm-reg
+                           c-lineup-arglist-tabs-only))))
+  (add-hook 'c-mode-hook
+    '(lambda()
+      (setq c-basic-offset 8)
+      (setq tab-width 8)
+      (setq indent-tabs-mode t)
+      (setq show-trailing-whitespace t)
+      (c-set-style "linux-kernel")
+      (message "Setting up indentation for the linux kernel")))
+
+  (defun font-lock-comment-annotations ()
+    "Highlight a bunch of well known comment annotations.
+This functions should be added to the hooks of major modes for programming."
+    (font-lock-add-keywords
+     nil
+     '(("\\<\\(FIX\\(ME\\)?\\|BUG\\|HACK\\):" 1 font-lock-warning-face t)
+       ("\\<\\(NOTE\\):" 1 'org-level-2 t)
+       ("\\<\\(TODO\\):" 1 'org-todo t)
+       ("\\<\\(DONE\\):" 1 'org-done t))
+     ))
+
+  (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
+
+  (use-package cwarn
+    :ensure t
+    :config
+    (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1)))) 
+
+  (add-hook 'c-mode-common-hook '(lambda () (hide-ifdef-mode 1)))
+
+  (dolist (m '(c-mode c++-mode))
+    (font-lock-add-keywords
+     m
+     '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
+
+  (use-package helm-gtags
+    :config
+    (global-set-key [C-down-mouse-1] nil)
+    (global-set-key [C-mouse-1] 'helm-gtags-dwim)
+  )
+
+  (use-package org
+    :config
+    (setq org-bullets-bullet-list '( "■" "◆" "▼" "●" "✲" "✱" "✻" "✾" "✿" "❀" "✡" "◉" "◎" "○" "◦" "⊙" "⊚" "⊛" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
+    )
 
   ;; eshell
   (use-package esh-autosuggest
@@ -468,47 +524,45 @@ before packages are loaded."
     ;; If you have use-package-hook-name-suffix set to nil, uncomment and use the
     ;; line below instead:
     ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
-    :bind (:map shell-mode-map
-		("C-<SPC>" . helm-esh-pcomplete)
-		)
+    :bind (:map shell-mode-map ("C-SPC" . helm-esh-pcomplete))
     :ensure t)
 
   ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
   (use-package undo-tree
-  :config
-  (progn
-    (defun modi/undo-tree-enable-save-history ()
-      "Enable auto saving of the undo history."
-      (interactive)
+    :config
+    (progn
+      (defun modi/undo-tree-enable-save-history ()
+        "Enable auto saving of the undo history."
+        (interactive)
 
-      (setq undo-tree-auto-save-history t)
+        (setq undo-tree-auto-save-history t)
 
-      ;; Compress the history files as .gz files
-      ;; (advice-add 'undo-tree-make-history-save-file-name :filter-return
-      ;;             (lambda (return-val) (concat return-val ".gz")))
+        ;; Compress the history files as .gz files
+        ;; (advice-add 'undo-tree-make-history-save-file-name :filter-return
+        ;;             (lambda (return-val) (concat return-val ".gz")))
 
-      ;; Persistent undo-tree history across emacs sessions
-      (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
-                                                          "private/undo-tree-history/")))
-                                         (make-directory dir :parents)
-                                         dir))
-      (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
+        ;; Persistent undo-tree history across emacs sessions
+        (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
+                                                            "private/undo-tree-history/")))
+                                           (make-directory dir :parents)
+                                           dir))
+        (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
 
-      (add-hook 'write-file-functions #'undo-tree-save-history-hook)
-      (add-hook 'find-file-hook #'undo-tree-load-history-hook))
+        (add-hook 'write-file-functions #'undo-tree-save-history-hook)
+        (add-hook 'find-file-hook #'undo-tree-load-history-hook))
 
-    (defun modi/undo-tree-disable-save-history ()
-      "Disable auto saving of the undo history."
-      (interactive)
+      (defun modi/undo-tree-disable-save-history ()
+        "Disable auto saving of the undo history."
+        (interactive)
 
-      (setq undo-tree-auto-save-history nil)
+        (setq undo-tree-auto-save-history nil)
 
-      (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
-      (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
+        (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
+        (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
 
-    (modi/undo-tree-enable-save-history)
-
-    (global-undo-tree-mode 1)))
+      (modi/undo-tree-enable-save-history)
+      (global-undo-tree-mode 1)
+      ))
 
 
   ;; eshell
@@ -516,11 +570,12 @@ before packages are loaded."
 
   ;; scroll
   (setq scroll-margin 5
-	scroll-conservatively 9999
-	scroll-step 1)
+        scroll-conservatively 9999
+        scroll-step 1)
 
   ;; UI
   (setq powerline-default-separator 'slant)
+
   ;; Font
   ;; Hangul(한글)
   (defconst local-hangul-el-path "~/.spacemacs.hangul.el")
@@ -542,11 +597,11 @@ before packages are loaded."
   (defun alex/line-spacing-increase()
     (interactive)
     (setq line-spacing (min 40
-			    (+ line-spacing 1))))
+                            (+ line-spacing 1))))
   (defun alex/line-spacing-decrease()
     (interactive)
     (setq line-spacing (max 0
-			    (- line-spacing 1))))
+                            (- line-spacing 1))))
   (setq mouse-click-focus-ignore-position t)
   ;; scroll one line at a time (less "jumpy" than defaults)
   (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
@@ -557,17 +612,17 @@ before packages are loaded."
 
   (if (eq system-type 'windows-nt)
       (progn
-	(global-unset-key (kbd "<C-wheel-down>"))
-	(global-unset-key (kbd "<C-wheel-up>"))
-	(global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
-	(global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
-	(define-key evil-motion-state-map (kbd "<C-wheel-down>") 'text-scale-decrease)
-	(define-key evil-motion-state-map (kbd "<C-wheel-up>") 'text-scale-increase)
-	(global-unset-key (kbd "<C-S-wheel-down>"))
-	(global-unset-key (kbd "<C-S-wheel-up>"))
-	(global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
-	(global-set-key (kbd "<C-S-wheel-up>") 'alex/line-spacing-increase)
-	)
+        (global-unset-key (kbd "<C-wheel-down>"))
+        (global-unset-key (kbd "<C-wheel-up>"))
+        (global-set-key (kbd "<C-wheel-down>") 'text-scale-decrease)
+        (global-set-key (kbd "<C-wheel-up>") 'text-scale-increase)
+        (define-key evil-motion-state-map (kbd "<C-wheel-down>") 'text-scale-decrease)
+        (define-key evil-motion-state-map (kbd "<C-wheel-up>") 'text-scale-increase)
+        (global-unset-key (kbd "<C-S-wheel-down>"))
+        (global-unset-key (kbd "<C-S-wheel-up>"))
+        (global-set-key (kbd "<C-S-wheel-down>") 'alex/line-spacing-decrease)
+        (global-set-key (kbd "<C-S-wheel-up>") 'alex/line-spacing-increase)
+        )
     (progn
       (global-unset-key (kbd "<C-mouse-5>"))
       (global-unset-key (kbd "<C-mouse-4>"))
@@ -581,7 +636,6 @@ before packages are loaded."
       (global-set-key (kbd "<C-S-mouse-4>") 'alex/line-spacing-increase)
       )
     )
-
 
   ;; Ranger
   (use-package ranger
@@ -621,9 +675,10 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (writeroom-mode yasnippet-snippets yapfify xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle shell-pop restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer org-bullets open-junk-file neotree nameless mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint indent-guide importmagic hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help esh-autosuggest elisp-slime-nav editorconfig easy-hugo dumb-jump disaster diminish diff-hl define-word cython-mode counsel-projectile company-statistics company-rtags company-c-headers company-anaconda column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (hide-ifdef-mode yasnippet-snippets yapfify xterm-color ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle shell-pop seti-theme restart-emacs ranger rainbow-delimiters pyvenv pytest pyenv-mode py-isort popwin pippel pipenv pip-requirements persp-mode pcre2el password-generator paradox overseer org-bullets open-junk-file neotree nameless mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint indent-guide importmagic hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-pydoc helm-purpose helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help esh-autosuggest elisp-slime-nav editorconfig easy-hugo dumb-jump doom-themes disaster diminish diff-hl define-word cython-mode counsel-projectile company-statistics company-rtags company-c-headers company-anaconda column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -3,6 +3,10 @@
 (define-key evil-insert-state-map (kbd "C-q") 'evil-window-delete)
 (define-key evil-hybrid-state-map (kbd "C-q") 'evil-window-delete)
 
+(define-key evil-normal-state-map (kbd "-") 'hide-ifdef-block)
+(define-key evil-normal-state-map (kbd "=") 'show-ifdef-block)
+(define-key evil-normal-state-map (kbd "_") 'hide-ifdefs)
+(define-key evil-normal-state-map (kbd "+") 'show-ifdefs)
 ;; windows control
 (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-prev)
 (define-key evil-motion-state-map (kbd "C-j h") 'evil-window-left)
@@ -11,6 +15,10 @@
 (define-key evil-motion-state-map (kbd "C-j |") 'evil-window-vsplit)
 (define-key evil-motion-state-map (kbd "C-j -") 'evil-window-split)
 (define-key evil-motion-state-map (kbd "C-j z") 'maximize-window)
+(define-key evil-motion-state-map (kbd "-") 'hide-ifdef-block)
+(define-key evil-motion-state-map (kbd "=") 'show-ifdef-block)
+(define-key evil-motion-state-map (kbd "_") 'hide-ifdefs)
+(define-key evil-motion-state-map (kbd "+") 'show-ifdefs)
 
 (define-key evil-insert-state-map (kbd "C-j C-j") 'evil-window-prev)
 (define-key evil-insert-state-map (kbd "C-j h") 'evil-window-left)
@@ -43,6 +51,7 @@
 (evil-ex-define-cmd "Wq" 'evil-save-and-quit)
 
 (define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
+(define-key evil-motion-state-map (kbd "C-o") 'helm-gtags-pop-stack)
 (define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
@@ -52,12 +61,14 @@
 (define-key evil-motion-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
 
 (define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
+(define-key evil-visual-state-map (kbd "C-o") 'helm-gtags-pop-stack)
 (define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-visual-state-map (kbd "M-l") 'helm-gtags-parse-file)
 (define-key evil-visual-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
 
 (define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
+(define-key evil-insert-state-map (kbd "C-o") 'helm-gtags-pop-stack)
 (define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
@@ -65,6 +76,7 @@
 (define-key evil-insert-state-map (kbd "M-l") 'helm-gtags-parse-file)
 
 (define-key evil-hybrid-state-map (kbd "C-]") 'helm-gtags-find-tag)
+(define-key evil-hybrid-state-map (kbd "C-o") 'helm-gtags-pop-stack)
 (define-key evil-hybrid-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-hybrid-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)

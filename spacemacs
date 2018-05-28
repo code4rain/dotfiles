@@ -66,7 +66,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(easy-hugo doom-themes writeroom-mode esh-autosuggest visual-fill-column)
+   dotspacemacs-additional-packages '(easy-hugo doom-themes writeroom-mode esh-autosuggest visual-fill-column all-the-icons)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -658,6 +658,10 @@ This functions should be added to the hooks of major modes for programming."
     (setq writeroom-width 120)
     (setq writeroom-fullscreen-effect nil)
     (setq writeroom-mode-line t)
+    )
+  (use-package all-the-icons
+    :init
+    (setq neo-theme 'icons)
     )
   ;; custom-set-variable에 추가되는 것을 막아보자
   (setq custom-file (make-temp-file "emacs-custom"))

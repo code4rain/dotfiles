@@ -529,41 +529,15 @@ This functions should be added to the hooks of major modes for programming."
 
   ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
   (use-package undo-tree
+    :ensure t
     :config
-    (progn
-      (defun modi/undo-tree-enable-save-history ()
-        "Enable auto saving of the undo history."
-        (interactive)
-
-        (setq undo-tree-auto-save-history t)
-
-        ;; Compress the history files as .gz files
-        ;; (advice-add 'undo-tree-make-history-save-file-name :filter-return
-        ;;             (lambda (return-val) (concat return-val ".gz")))
-
-        ;; Persistent undo-tree history across emacs sessions
-        (setq modi/undo-tree-history-dir (let ((dir (concat user-emacs-directory
-                                                            "private/undo-tree-history/")))
-                                           (make-directory dir :parents)
-                                           dir))
-        (setq undo-tree-history-directory-alist `(("." . ,modi/undo-tree-history-dir)))
-
-        (add-hook 'write-file-functions #'undo-tree-save-history-hook)
-        (add-hook 'find-file-hook #'undo-tree-load-history-hook))
-
-      (defun modi/undo-tree-disable-save-history ()
-        "Disable auto saving of the undo history."
-        (interactive)
-
-        (setq undo-tree-auto-save-history nil)
-
-        (remove-hook 'write-file-functions #'undo-tree-save-history-hook)
-        (remove-hook 'find-file-hook #'undo-tree-load-history-hook))
-
-      (modi/undo-tree-enable-save-history)
-      (global-undo-tree-mode 1)
-      ))
-
+      (setq undo-tree-auto-save-history t
+            undo-tree-history-directory-alist
+            `(("." . ,"~/.emacs.d/private/undo-tree-history/")))
+      (unless (file-exists-p "~/.emacs.d/private/undo-tree-history/")
+      (make-directory "~/.emacs.d/private/undo-tree-history/")
+      (global-undo-tree-mode t))
+      )
 
   ;; eshell
   (setq eshell-cmpl-ignore-case t)

@@ -15,6 +15,7 @@
 (define-key evil-motion-state-map (kbd "C-j |") 'evil-window-vsplit)
 (define-key evil-motion-state-map (kbd "C-j -") 'evil-window-split)
 (define-key evil-motion-state-map (kbd "C-j z") 'maximize-window)
+(define-key evil-motion-state-map (kbd "C-j x") 'evil-window-delete)
 (define-key evil-motion-state-map (kbd "-") 'hide-ifdef-block)
 (define-key evil-motion-state-map (kbd "=") 'show-ifdef-block)
 (define-key evil-motion-state-map (kbd "_") 'hide-ifdefs)
@@ -27,6 +28,7 @@
 (define-key evil-insert-state-map (kbd "C-j |") 'evil-window-vsplit)
 (define-key evil-insert-state-map (kbd "C-j -") 'evil-window-split)
 (define-key evil-insert-state-map (kbd "C-j z") 'maximize-window)
+(define-key evil-insert-state-map (kbd "C-j x") 'evil-window-delete)
 
 (define-key evil-hybrid-state-map (kbd "C-j C-j") 'evil-window-prev)
 (define-key evil-hybrid-state-map (kbd "C-j h") 'evil-window-left)
@@ -35,6 +37,7 @@
 (define-key evil-hybrid-state-map (kbd "C-j |") 'evil-window-vsplit)
 (define-key evil-hybrid-state-map (kbd "C-j -") 'evil-window-split)
 (define-key evil-hybrid-state-map (kbd "C-j z") 'maximize-window)
+(define-key evil-hybrid-state-map (kbd "C-j x") 'evil-window-delete)
 
 ;; Make evil-mode up/down operate in screen lines instead of logical lines
 (define-key evil-motion-state-map (kbd "j") 'evil-next-visual-line)

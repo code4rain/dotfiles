@@ -632,6 +632,7 @@ This functions should be added to the hooks of major modes for programming."
     (setq writeroom-width 120)
     (setq writeroom-fullscreen-effect nil)
     (setq writeroom-mode-line t)
+    (setq writeroom-maximize-window nil)
     )
   (use-package all-the-icons
     :init

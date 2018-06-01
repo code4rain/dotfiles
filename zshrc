@@ -233,7 +233,6 @@ autoload bashcompinit
 bashcompinit
 
 source ~/.gp4_completion
-source ~/.build_completion
 
 setopt                  \
     aliases             \

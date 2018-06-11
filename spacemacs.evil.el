@@ -3,6 +3,9 @@
 (define-key evil-insert-state-map (kbd "C-q") 'evil-window-delete)
 (define-key evil-hybrid-state-map (kbd "C-q") 'evil-window-delete)
 
+(define-key evil-insert-state-map (kbd "TAB") 'self-insert-command)
+(define-key evil-hybrid-state-map (kbd "TAB") 'self-insert-command)
+
 (define-key evil-normal-state-map (kbd "-") 'hide-ifdef-block)
 (define-key evil-normal-state-map (kbd "=") 'show-ifdef-block)
 (define-key evil-normal-state-map (kbd "_") 'hide-ifdefs)

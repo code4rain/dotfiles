@@ -273,7 +273,7 @@ nnoremap <F1> :call ToggleFocusMode()<cr>
 " }}}
 " Column Over ------------------------------------------------------------- {{{
 highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
+call matchadd('ColorColumn', '\%121v', 100)
 " }}}
 " GUI --------------------------------------------------------------------- {{{
 " 폰트 설정

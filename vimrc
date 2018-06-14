@@ -45,12 +45,13 @@ Plug 'vim-scripts/YankRing.vim'
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
+" Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhartington/oceanic-next'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
+Plug 'joshdick/onedark.vim'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -59,7 +60,6 @@ if !has('win32')
   Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
-  Plug 'Mizuchi/vim-ranger'
   Plug 'francoiscabrol/ranger.vim'
   Plug 'rbgrouleff/bclose.vim'
 endif
@@ -82,6 +82,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 " }}}
@@ -173,7 +174,7 @@ set nuw=5 " 줄 번호 표시 너비 설정
 set cursorline " 현재 커서 줄 강조
 set laststatus=2 " 항상 status 라인을 표시하도록 함.
 " Status Line 설정
-set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
+" set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
 " Don't try to highlight lines longer than 800 characters.
 set synmaxcol=800
@@ -195,9 +196,12 @@ set matchtime=3
 set t_Co=256
 set background=dark
 syntax on
-colorscheme hybrid
+if (has("termguicolors"))
+  set termguicolors
+endif
+" colorscheme hybrid
 " IF hybrid!!
-highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
+" highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
 " highlight LineNr ctermfg=143 guifg=#373b41
 " }}}
 set showmode
@@ -465,6 +469,9 @@ if !has('win32')
 endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
+" onedark {{{
+colorscheme onedark
+" }}}
 " Perforce {{{
 function! s:P4_edit_current( )
   execute "!p4 edit " . expand("%")
@@ -483,7 +490,6 @@ command! RP4 call <SID>P4_revert_current()
 command! XP4 call <SID>P4_add_current()
 command! NP4 call <SID>P4_change()
 " }}}
-
 " gtags-cscope.vim {{{
 let GtagsCscope_Ignore_Case = 1
 let GtagsCscope_Auto_Load = 1
@@ -911,12 +917,12 @@ let g:EasyClipUseSubstituteDefaults = 1
 " }}}
 " Auto-Pair {{{
 let b:autopairs_enabled = 0
-inoremap <buffer> <silent><S-TAB> <ESC>:call AutoPairsJump()<CR>a
+inoremap <buffer> <silent><M-,> <ESC>:call AutoPairsJump()<CR>a
 let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 " }}}
 " semantic-highlight {{{
 let g:semanticTermColors = [100,1,2,3,4,5,6,7,24,9,10,106,12,13,14,15,214,125,124,44]
-:nnoremap <Leader>s :SemanticHighlightToggle<cr>
+nnoremap <Leader>s :SemanticHighlightToggle<cr>
 " }}}
 " MyToHtml {{{
 function! MyToHtml(line1, line2)
@@ -945,6 +951,9 @@ function! MyToHtml(line1, line2)
   let g:html_number_lines = 0
 endfunction
 command! -range=% MyToHtml :call MyToHtml(<line1>,<line2>)
+" }}}
+" Ranger {{{
+let g:ranger_replace_netrw = 1 "open ranger when vim open a directory
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

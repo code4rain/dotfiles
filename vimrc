@@ -60,6 +60,8 @@ if !has('win32')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
   Plug 'Mizuchi/vim-ranger'
+  Plug 'francoiscabrol/ranger.vim'
+  Plug 'rbgrouleff/bclose.vim'
 endif
 Plug 'majutsushi/tagbar'
 

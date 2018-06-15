@@ -52,6 +52,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'joshdick/onedark.vim'
+Plug 'ryanoasis/vim-devicons'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -87,6 +88,7 @@ Plug 'junegunn/goyo.vim'
 call plug#end()
 " }}}
 " Basic options ----------------------------------------------------------- {{{
+set noimd
 let mapleader = "\<Space>"
 set hidden "새로운 buffer를 열기전에 이전 buffer를 반드시 저장하지않아도(hidden) 된다
 filetype plugin indent on " 파일의 종류를 자동으로 인식

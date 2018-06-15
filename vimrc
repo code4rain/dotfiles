@@ -198,9 +198,9 @@ set matchtime=3
 set t_Co=256
 set background=dark
 syntax on
-if (has("termguicolors"))
-  set termguicolors
-endif
+" if (has("termguicolors"))
+"   set termguicolors
+" endif
 " colorscheme hybrid
 " IF hybrid!!
 " highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674

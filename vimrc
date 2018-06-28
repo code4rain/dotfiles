@@ -40,6 +40,7 @@ Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-obsession'
 Plug 'vim-scripts/YankRing.vim'
+Plug 'tpope/vim-endwise'
 
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
@@ -52,7 +53,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -65,6 +66,7 @@ if !has('win32')
   Plug 'rbgrouleff/bclose.vim'
 endif
 Plug 'majutsushi/tagbar'
+Plug 'yuttie/comfortable-motion.vim'
 
 " Plug 'svermeulen/vim-easyclip'
 
@@ -956,6 +958,10 @@ command! -range=% MyToHtml :call MyToHtml(<line1>,<line2>)
 " }}}
 " Ranger {{{
 let g:ranger_replace_netrw = 1 "open ranger when vim open a directory
+" }}}
+" Comfortable-motion {{{
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

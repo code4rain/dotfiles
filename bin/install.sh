@@ -73,6 +73,7 @@ echo "Install neovim done"
 msg_nc
 
 pushd .
+./instGlobal.sh
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
 clone_or_update $OH_MY_ZSH_AUTOSUGGESTION_GITHUB $OH_MY_ZSH_AUTOSUGGESTION_DIR
 clone_or_update $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"

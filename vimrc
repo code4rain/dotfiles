@@ -46,7 +46,7 @@ Plug 'tpope/vim-endwise'
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
 Plug 'junegunn/rainbow_parentheses.vim'
-" Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
+Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhartington/oceanic-next'
@@ -54,6 +54,7 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'joshdick/onedark.vim'
 "Plug 'ryanoasis/vim-devicons'
+Plug 'ayu-theme/ayu-vim' " or other package manager
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -86,6 +87,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/goyo.vim'
+Plug 'apalmer1377/factorus'
 
 call plug#end()
 " }}}
@@ -200,13 +202,19 @@ set matchtime=3
 set t_Co=256
 set background=dark
 syntax on
-" if (has("termguicolors"))
-"   set termguicolors
-" endif
-" colorscheme hybrid
+if exists('$TMUX')
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+colorscheme hybrid
 " IF hybrid!!
-" highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
-" highlight LineNr ctermfg=143 guifg=#373b41
+highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
+highlight LineNr ctermfg=143 guifg=#373b41
 " }}}
 set showmode
 set lazyredraw
@@ -334,23 +342,23 @@ let c_no_comment_fold=1
 let c_no_if0_fold=0
 let c_no_block_fold=1
 function! CFold()
-    if getline(v:lnum - 1) =~ '^}\\s*$'
-        return '<1'
-    elseif getline(v:lnum + 1) =~ '^{\\s*$'
-        return '>1'
-    elseif getline(v:lnum + 2) =~ '^{\\s*$'
-        return '>1'
-    elseif getline(v:lnum + 3) =~ '^{\\s*$'
-        return '>1'
-    endif
-    return '='
+  if getline(v:lnum - 1) =~ '^}\\s*$'
+    return '<1'
+  elseif getline(v:lnum + 1) =~ '^{\\s*$'
+    return '>1'
+  elseif getline(v:lnum + 2) =~ '^{\\s*$'
+    return '>1'
+  elseif getline(v:lnum + 3) =~ '^{\\s*$'
+    return '>1'
+  endif
+  return '='
 endfunction
 
 function! CFoldText()
-    let line = getline(v:foldstart)
-    let sub = substitute(line, '.*\<\(\w\+\)(.*).*', '\1(...)', 'g')
-    return '+-- ' . sub . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'
-  endfunction
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '.*\<\(\w\+\)(.*).*', '\1(...)', 'g')
+  return '+-- ' . sub . ' (' . (v:foldend - v:foldstart + 1) . ' lines)'
+endfunction
 augroup ft_c
   au!
   au FileType c setlocal foldmethod=expr foldexpr=CFold() foldtext=CFoldText() fillchars-=fold:-
@@ -474,7 +482,7 @@ endif
 " }}}
 " Plugin Settings --------------------------------------------------------- {{{
 " onedark {{{
-colorscheme onedark
+" colorscheme onedark
 " }}}
 " Perforce {{{
 function! s:P4_edit_current( )
@@ -507,6 +515,7 @@ set cscopetag
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
+noremap <silent> <C-k> :Buffers<CR>
 noremap <silent> <M-o> :FZF<CR>
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -735,6 +744,7 @@ augroup END
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
 " }}}
 " UltiSnips {{{
 let g:UltiSnipsExpandTrigger="<Tab>"
@@ -742,12 +752,12 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 " }}}
 " YCM {{{
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-let g:ycm_semantic_triggers = {}
-let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
-let g:ycm_collect_identifiers_from_tags_files=1
+" let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+" let g:ycm_semantic_triggers = {}
+" let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
+" let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_min_num_of_chars_for_completion=2
-let g:ycm_seed_identifiers_with_syntax=1
+" let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=0
 let g:ycm_cache_omnifunc=0
 let g:ycm_key_list_select_completion = ['<Down>']
@@ -818,10 +828,10 @@ function! Append_search_string(search)
   let g:filtering_keywords = g:filtering_object.alt
   call g:filtering_object.run()
 endfunction
-command! -bang -nargs=* F call Append_search_string(<q-args>)
+command! -bang -nargs=* G call Append_search_string(<q-args>)
 command! -bang -nargs=* K call Kernel_search_string(<q-args>)
 
-function! Clear_run_search()
+function! Clear_run_search(search)
   if empty(g:filtering_object)
     let g:filtering_object = FilteringNew()
   else
@@ -829,7 +839,11 @@ function! Clear_run_search()
     let g:filtering_object = FilteringNew()
   endif
 
-  call g:filtering_object.addInputToParameter('alt', 'Search:')
+  if empty(a:search)
+    call g:filtering_object.addInputToParameter('alt', 'Search:')
+  else
+    call g:filtering_object.addToParameter('alt', a:search)
+  endif
   let g:filtering_keywords = g:filtering_object.alt
   call g:filtering_object.run()
 endfunction
@@ -839,8 +853,8 @@ function! Clear_search()
     call g:filtering_object.destruct()
   endif
 endfunction
-nnoremap <silent><M-f> :call Append_search_string()<CR>
-nnoremap <silent><M-g> :call Clear_run_search()<CR>
+command! -bang -nargs=* F call Clear_run_search(<q-args>)<CR>
+nnoremap <silent><M-f> :call Clear_run_search("")<CR>
 nnoremap <silent><M-c> :call Clear_search()<CR>
 " }}}
 " AutoFormat {{{

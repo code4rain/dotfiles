@@ -31,6 +31,19 @@
 import os
 import ycm_core
 
+from subprocess import check_output, CalledProcessError
+
+def root():
+    ''' returns the absolute path of the repository root '''
+    try:
+        base = check_output('git rev-parse --show-toplevel', shell=True)
+    except CalledProcessError:
+        base = check_output('pwd', shell=True)
+    finally:
+        return base.decode('utf-8').strip()
+
+current_root = root()
+
 # These are the compilation flags that will be used in case there's no
 # compilation database set (by default, one is not set).
 # CHANGE THIS LIST OF FLAGS. YES, THIS IS THE DROID YOU HAVE BEEN LOOKING FOR.
@@ -80,6 +93,10 @@ flags = [
 './tests/gmock',
 '-isystem',
 './tests/gmock/include',
+'-I',
+'./include',
+'-I',
+current_root + '/include'
 ]
 
 

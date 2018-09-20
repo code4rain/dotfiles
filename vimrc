@@ -55,6 +55,9 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'joshdick/onedark.vim'
 "Plug 'ryanoasis/vim-devicons'
 Plug 'ayu-theme/ayu-vim' " or other package manager
+Plug 'srcery-colors/srcery-vim'
+Plug 'tjammer/blayu.vim'
+Plug 'sts10/vim-pink-moon'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -209,12 +212,21 @@ if exists('$TMUX')
 endif
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
-colorscheme hybrid
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
+
+"let g:srcery_italic = 1
+"let g:srcery_inverse_match_paren = 1
+"colorscheme srcery
+
+"colorscheme blayu
+
+"colorscheme orange-moon
+
+" colorscheme hybrid
 " IF hybrid!!
-highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
-highlight LineNr ctermfg=143 guifg=#373b41
+"highlight Search ctermbg=54 ctermfg=11 guifg=#1d1f21 guibg=#f0c674
+"highlight LineNr ctermfg=143 guifg=#373b41
 " }}}
 set showmode
 set lazyredraw
@@ -752,12 +764,12 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 " }}}
 " YCM {{{
-" let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-" let g:ycm_semantic_triggers = {}
-" let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
-" let g:ycm_collect_identifiers_from_tags_files=1
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+let g:ycm_semantic_triggers = {}
+let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
+let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_min_num_of_chars_for_completion=2
-" let g:ycm_seed_identifiers_with_syntax=1
+let g:ycm_seed_identifiers_with_syntax=1
 let g:ycm_complete_in_comments=0
 let g:ycm_cache_omnifunc=0
 let g:ycm_key_list_select_completion = ['<Down>']

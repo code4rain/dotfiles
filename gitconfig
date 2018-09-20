@@ -73,6 +73,7 @@
 [diff]
 	compactionHeuristic = true # 똑똑한 diff
 	tool = bc3
+	algorithm = histogram
 [pager] # diff시 diff-highligher사용
 	log = diff-highlight | less
 	show = diff-highlight | less

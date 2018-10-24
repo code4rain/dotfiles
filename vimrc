@@ -45,7 +45,8 @@ Plug 'tpope/vim-endwise'
 " UI (Colorscheme and so on)
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
-Plug 'junegunn/rainbow_parentheses.vim'
+"Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'luochen1990/rainbow'
 Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -213,7 +214,13 @@ endif
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+if has("gui_running")
+  colorscheme blayu
+else
+  colorscheme ayu
+endif
+" If ayu!
+highlight visual guifg=Black guibg=LightBlue gui=none
 
 "let g:srcery_italic = 1
 "let g:srcery_inverse_match_paren = 1
@@ -746,10 +753,33 @@ map <silent><M-k> <Plug>(signify-prev-hunk)
 let g:yankring_history_file = '.yankring_history'
 " }}}
 " Rainbow parentheses {{{
-augroup rainbow
-  autocmd!
-  autocmd VimEnter & RainbowParentheses
-augroup END
+" augroup rainbow
+"   autocmd!
+"   autocmd VimEnter & RainbowParentheses
+" augroup END
+let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+	let g:rainbow_conf = {
+	\	'guifgs': ['orchid', 'LawnGreen', 'DodgerBlue', 'salmon', 'LightYellow', 'MediumSlateBlue'],
+	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	\	'operators': '_,_',
+	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	\	'separately': {
+	\		'*': {},
+	\		'tex': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	\		},
+	\		'lisp': {
+	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	\		},
+	\		'vim': {
+	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	\		},
+	\		'html': {
+	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	\		},
+	\		'css': 0,
+	\	}
+	\}
 " }}}
 " EasyAlign {{{
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)

@@ -1,0 +1,26 @@
+From 501c3c70cc09badd2a956953dbf2aa6af53dd56b Mon Sep 17 00:00:00 2001
+From: Alex Kyoungdon Jang <alex.jang@samsung.com>
+Date: Thu, 20 Sep 2018 14:19:12 +0900
+Subject: [PATCH] change background
+
+Signed-off-by: Alex Kyoungdon Jang <alex.jang@samsung.com>
+---
+ colors/ayu.vim | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/colors/ayu.vim b/colors/ayu.vim
+index 585a4db..b2ae839 100644
+--- a/colors/ayu.vim
++++ b/colors/ayu.vim
+@@ -83,7 +83,7 @@ exe "let s:fmt_revb = ' gui=NONE".s:r.s:b.  " cterm=NONE".s:r.s:b.  " term=NONE"
+ 
+ " Vim Highlighting: (see :help highlight-groups)"{{{
+ " ----------------------------------------------------------------------------
+-exe "hi! Normal"        .s:fg_fg          .s:bg_bg          .s:fmt_none
++exe "hi! Normal"        .s:fg_fg          .s:bg_none        .s:fmt_none
+ exe "hi! ColorColumn"   .s:fg_none        .s:bg_line        .s:fmt_none
+ " Conceal, Cursor, CursorIM
+ exe "hi! CursorColumn"  .s:fg_none        .s:bg_line        .s:fmt_none
+-- 
+2.19.0
+

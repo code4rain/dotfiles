@@ -10,6 +10,10 @@
 (define-key evil-normal-state-map (kbd "=") 'show-ifdef-block)
 (define-key evil-normal-state-map (kbd "_") 'hide-ifdefs)
 (define-key evil-normal-state-map (kbd "+") 'show-ifdefs)
+
+;; layout control
+(global-set-key (kbd "C-k") 'spacemacs/layouts-transient-state/body)
+
 ;; windows control
 (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-prev)
 (define-key evil-motion-state-map (kbd "C-j h") 'evil-window-left)

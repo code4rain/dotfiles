@@ -11,8 +11,11 @@
 (define-key evil-normal-state-map (kbd "_") 'hide-ifdefs)
 (define-key evil-normal-state-map (kbd "+") 'show-ifdefs)
 
+
 ;; layout control
-(global-set-key (kbd "C-k") 'spacemacs/layouts-transient-state/body)
+(define-key evil-motion-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
+(define-key evil-insert-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
+(define-key evil-hybrid-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
 
 ;; windows control
 (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-prev)

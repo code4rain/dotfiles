@@ -2,6 +2,8 @@
 if !has('win32')
   if !has('nvim')
     set shell=/bin/bash
+  else
+    set sh=zsh
   endif
 endif
 
@@ -704,11 +706,11 @@ nmap <leader>] <Plug>(quickhl-tag-toggle)
 " "}}}
 " Fugitive {{{
 nnoremap <silent> <F4>hh :help my_git<CR>
-nnoremap <silent> <F4> :Gstatus<CR>
+nnoremap <silent> <F4> :Git s<CR>
 nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
-nnoremap <silent> <F4>l :Glog<CR>
+nnoremap <silent> <F4>l :Git ll %<CR>
 " }}}
 " easymotion {{{
 let g:EasyMotion_leader_key = '<,>'
@@ -759,7 +761,7 @@ let g:yankring_history_file = '.yankring_history'
 " augroup END
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 	let g:rainbow_conf = {
-	\	'guifgs': ['orchid', 'LawnGreen', 'DodgerBlue', 'salmon', 'LightYellow', 'MediumSlateBlue'],
+	\	'guifgs': ['orchid', 'khaki1',  'salmon', 'SteelBlue3', 'LightYellow', 'MediumSlateBlue'],
 	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 	\	'operators': '_,_',
 	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],

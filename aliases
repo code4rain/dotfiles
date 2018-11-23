@@ -15,11 +15,7 @@ add_project () {
 	task add project:"$@"
 }
 v() {
-  local files
-  files=$(grep '^>' ~/.nviminfo | cut -c3- |
-          while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+	vim $(fzf)
 }
 h() {
   history_command=$(echo $(history | fzf-tmux --tac +s) | cut -d' ' -f2- )

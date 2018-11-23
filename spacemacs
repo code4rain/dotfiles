@@ -184,13 +184,13 @@ It should only modify the values of Spacemacs settings."
                          spacemacs-light)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
-   ;; `all-the-icons', `custom', `vim-powerline' and `vanilla'. The first three
-   ;; are spaceline themes. `vanilla' is default Emacs mode-line. `custom' is a
-   ;; user defined themes, refer to the DOCUMENTATION.org for more info on how
-   ;; to create your own spaceline theme. Value can be a symbol or list with\
-   ;; additional properties.
+   ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
+   ;; first three are spaceline themes. `doom' is the doom-emacs mode-line.
+   ;; `vanilla' is default Emacs mode-line. `custom' is a user defined themes,
+   ;; refer to the DOCUMENTATION.org for more info on how to create your own
+   ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons :separator slant :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(all-the-icons :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -202,6 +202,7 @@ It should only modify the values of Spacemacs settings."
 			       :size 16
 			       :weight normal
 			       :width normal
+			       :powerline-scale 1.5
 			       )
 
    ;; The leader key (default "SPC")
@@ -263,10 +264,10 @@ It should only modify the values of Spacemacs settings."
    ;; Maximum number of rollback slots to keep in the cache. (default 5)
    dotspacemacs-max-rollback-slots 5
 
-   ;; If non-nil, the paste transient-state is enabled. While enabled, pressing
-   ;; `p' several times cycles through the elements in the `kill-ring'.
-   ;; (default nil)
-   dotspacemacs-enable-paste-transient-state t
+   ;; If non-nil, the paste transient-state is enabled. While enabled, after you
+   ;; paste something, pressing `C-j' and `C-k' several times cycles through the
+   ;; elements in the `kill-ring'. (default nil)
+   dotspacemacs-enable-paste-transient-state nil
 
    ;; Which-key delay in seconds. The which-key buffer is the popup listing
    ;; the commands bound to the current keystroke sequence. (default 0.4)
@@ -288,7 +289,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil a progress bar is displayed when spacemacs is loading. This
    ;; may increase the boot time on some systems and emacs builds, set it to
    ;; nil to boost the loading time. (default t)
-   dotspacemacs-loading-progress-bar nil
+   dotspacemacs-loading-progress-bar t
 
    ;; If non-nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
@@ -428,7 +429,7 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; gtag사용시 너무 많은 tag로 인해 검색이 안되는 문제가 있음. tag search개수를 제한
-  (setq helm-gtags-maximum-candidates 500)
+  ;; (setq helm-gtags-maximum-candidates 9000)
   (modify-all-frames-parameters '((inhibit-double-buffering . t)))
   )
 
@@ -462,7 +463,7 @@ before packages are loaded."
   (setq auto-save-default nil)
 
   ;; follow link? 물음 무시
-  (setq vc-follow-symlinks nil)
+  (setq vc-follow-symlinks t)
 
   ;; coding
   ;; tab width set
@@ -513,11 +514,6 @@ This functions should be added to the hooks of major modes for programming."
      m
      '(("\\<\\(int8_t\\|int16_t\\|int32_t\\|int64_t\\|uint8_t\\|uint16_t\\|uint32_t\\|uint64_t\\)\\>" . font-lock-keyword-face))))
 
-  (use-package helm-gtags
-    :config
-    (global-set-key [C-down-mouse-1] nil)
-    (global-set-key [C-mouse-1] 'helm-gtags-dwim)
-  )
 
   (use-package org
     :config
@@ -557,7 +553,7 @@ This functions should be added to the hooks of major modes for programming."
         scroll-step 1)
 
   ;; UI
-  (setq powerline-default-separator 'slant)
+  ;; (setq powerline-default-separator 'slant)
 
   ;; Font
   ;; Hangul(한글)
@@ -574,6 +570,20 @@ This functions should be added to the hooks of major modes for programming."
   (defconst local-helm-el-path "~/.spacemacs.helm.el")
   (when (file-exists-p local-helm-el-path)
     (load-file local-helm-el-path))
+
+  (use-package helm-gtags
+    :config
+    (add-hook 'c-mode-hook 'helm-gtags-mode)
+    (add-hook 'c++-mode-hook 'helm-gtags-mode)
+    (add-hook 'asm-mode-hook 'helm-gtags-mode)
+    (add-hook 'makefile-mode-hook 'helm-gtags-mode)
+
+    (global-set-key [C-down-mouse-1] nil)
+    (global-set-key [C-mouse-1] 'helm-gtags-dwim)
+    ); Allow very large database files
+  (setq ggtags-oversize-limit 104857600)
+  (setq ggtags-sort-by-nearness t)
+
 
   ;;;; mouse ;;;;
   (setq-default line-spacing 2)
@@ -638,7 +648,7 @@ This functions should be added to the hooks of major modes for programming."
     (add-hook 'text-mode-hook 'writeroom-mode)
     (add-hook 'org-mode-hook 'writeroom-mode)
     :config
-    (setq writeroom-width 120)
+    (setq writeroom-width 160)
     (setq writeroom-fullscreen-effect nil)
     (setq writeroom-mode-line t)
     (setq writeroom-maximize-window nil)
@@ -668,7 +678,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(orgit org-projectile org-category-capture org-present org-brain org-plus-contrib yasnippet-snippets xterm-color ws-butler writeroom-mode winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org symon string-inflection spaceline-all-the-icons smeargle shell-pop seti-theme restart-emacs ranger rainbow-delimiters popwin persp-mode pcre2el password-generator paradox overseer org-pomodoro org-mime org-download org-bullets open-junk-file neotree nameless mwim multi-term move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-make helm-gtags helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help esh-autosuggest elisp-slime-nav editorconfig easy-hugo dumb-jump dotenv-mode doom-themes doom-modeline disaster diminish diff-hl define-word counsel-projectile company-statistics company-rtags company-c-headers column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-link ace-jump-helm-line ac-ispell)))
+   '(yasnippet-snippets winum toc-org paradox org-brain neotree mwim hl-todo helm-make git-timemachine git-link ggtags evil-matchit editorconfig easy-hugo doom-themes doom-modeline ace-link counsel swiper ivy iedit smartparens company rtags helm helm-core markdown-mode projectile magit git-commit ghub with-editor which-key use-package hydra evil org-plus-contrib xterm-color ws-butler writeroom-mode volatile-highlights vi-tilde-fringe uuidgen unfill undo-tree treepy symon string-inflection spinner spaceline-all-the-icons smeargle shrink-path shell-pop seti-theme restart-emacs ranger rainbow-delimiters popwin persp-mode pcre2el password-generator overseer orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file nameless multi-term move-text mmm-mode markdown-toc magit-svn magit-gitflow macrostep lorem-ipsum link-hint indent-guide hungry-delete htmlize highlight-parentheses highlight-numbers highlight-indentation helm-xref helm-themes helm-swoop helm-rtags helm-purpose helm-projectile helm-org-rifle helm-mode-manager helm-gtags helm-gitignore helm-git-grep helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag graphql goto-chg google-translate google-c-style golden-ratio gnuplot gitignore-templates gitconfig-mode gitattributes-mode git-messenger git-gutter-fringe git-gutter-fringe+ gh-md fuzzy font-lock+ flycheck-rtags flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-org evil-numbers evil-nerd-commenter evil-mc evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help esh-autosuggest elisp-slime-nav eldoc-eval dumb-jump dotenv-mode disaster diminish diff-hl define-word counsel-projectile company-statistics company-rtags company-c-headers column-enforce-mode clean-aindent-mode clang-format centered-cursor-mode browse-at-remote bind-key auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ace-window ace-jump-helm-line ac-ispell)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

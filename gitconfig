@@ -93,3 +93,8 @@
 	trustExitCode = true
 [mergetool "bc3"]
 	trustExitCode = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

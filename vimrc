@@ -66,7 +66,7 @@ Plug 'sts10/vim-pink-moon'
 Plug 'honza/vim-snippets'
 if !has('win32')
   Plug 'SirVer/ultisnips'
-  Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang'}
+  Plug 'Valloric/YouCompleteMe', {'do': 'python3 install.py --clang-completer'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
   Plug 'francoiscabrol/ranger.vim'
@@ -184,6 +184,7 @@ set ruler " 커서의 위치를 항상 보이게 함.
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
 set cursorline " 현재 커서 줄 강조
+set cursorcolumn " 현재 커서 줄 강조
 set laststatus=2 " 항상 status 라인을 표시하도록 함.
 " Status Line 설정
 " set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)

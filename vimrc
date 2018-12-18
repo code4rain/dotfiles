@@ -3,11 +3,10 @@ if !has('win32')
   if !has('nvim')
     set shell=/bin/bash
   else
-    set sh=zsh
+    set sh=/usr/bin/zsh
   endif
 endif
-
-set nocompatible               " be iMproved
+set nocompatible " be iMproved
 " }}}
 " Plugins  ---------------------------------------------------------------- {{{
 " https://github.com/junegunn/vim-plug
@@ -20,10 +19,8 @@ endif
 " The following are examples of different formats supported.
 
 " Language Support
-Plug 'tpope/vim-fugitive'
 Plug 'nvie/vim-flake8'
 Plug 'jceb/vim-orgmode'
-Plug 'tpope/vim-speeddating'
 
 " Expand Editor
 Plug 'tpope/vim-repeat'
@@ -41,26 +38,17 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-obsession'
-"Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-endwise'
 
 " UI (Colorscheme and so on)
-"Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
-"Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
-Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'joshdick/onedark.vim'
-"Plug 'ryanoasis/vim-devicons'
 Plug 'ayu-theme/ayu-vim' " or other package manager
-Plug 'srcery-colors/srcery-vim'
 Plug 'tjammer/blayu.vim'
-Plug 'sts10/vim-pink-moon'
 
 " Framework
 Plug 'honza/vim-snippets'
@@ -75,7 +63,7 @@ endif
 Plug 'majutsushi/tagbar'
 Plug 'yuttie/comfortable-motion.vim'
 
-" Plug 'svermeulen/vim-easyclip'
+Plug 'ajh17/VimCompletesMe'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -87,14 +75,14 @@ Plug 'airblade/vim-gitgutter'
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
 Plug 't9md/vim-quickhl'
-Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
-Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/goyo.vim'
-Plug 'apalmer1377/factorus'
 
+" Disabled
+" Plug 'tpope/vim-speeddating' "날짜에 커서를 놓고 일자 증가를 시켜주는 스크립트 ex) 1999-12-31 → (C-A) → 2000-01-01
+" Plug 'junegunn/limelight.vim' "현재 편집 중인 줄 외에는 회색으로 처리해주는 플러그인
 call plug#end()
 " }}}
 " Basic options ----------------------------------------------------------- {{{
@@ -143,50 +131,17 @@ augroup line_return
 augroup END
 " }}}
 " }}}
-" Abbreviations ----------------------------------------------------------- {{{
-ab fucntion function
-ab calss class
-ab functio function
-ab dunction function
-ab functuin function
-ab dunction function
-ab functuin function
-ab functopn function
-ab fumction function
-ab vlass class
-ab xlass class
-ab classs class
-ab forarch foreach
-ab inser insert
-ab insertt insert
-ab quewrty query
-ab ovject object
-ab objectr object
-ab evho echo
-ab printr print_r
-ab prit print
-ab fales false
-ab treu true
-ab teur true
-ab ture true
-ab nulll null
-ab nuii null
-ab retrun return
-ab retunr return
-ab htis this
-ab erturn return
-ab unsinged unsigned
-" }}}
 " View -------------------------------------------------------------------- {{{
 set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
 set ruler " 커서의 위치를 항상 보이게 함.
 "set relativenumber "
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
-set cursorline " 현재 커서 줄 강조
-set cursorcolumn " 현재 커서 줄 강조
+set cursorline " 현재 커서 행 강조
+set cursorcolumn " 현재 커서 열 강조
 set laststatus=2 " 항상 status 라인을 표시하도록 함.
-" Status Line 설정
+set modelines=2
+" Status Line 설정 - powerline enable로 주석처리함
 " set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
 " Don't try to highlight lines longer than 800 characters.
@@ -196,8 +151,8 @@ set synmaxcol=800
 set wrap
 set linebreak
 
-" 특수문자(tab, line ending) 표시 안함
-set nolist
+" 특수문자(tab, line ending) 표시
+set list
 " tab/End of line characters 설정
 set listchars=tab:>-,trail:-
 
@@ -248,6 +203,7 @@ set cmdheight=1
 set numberwidth=6
 set splitbelow
 set splitright
+" }}}
 " Folding ----------------------------------------------------------------- {{{
 set foldlevel=5
 set foldcolumn=1
@@ -288,29 +244,6 @@ function! MyFoldText() " {{{
   return line . " " . repeat("", fill_start_count) . foldedlinecount . ' lines ' . repeat("",fillcharcount) . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-" Focus Mode View {{{
-function! ToggleFocusMode()
-  if (&foldcolumn != 8)
-    set numberwidth=10
-    set foldcolumn=8
-    set noruler
-    set nonumber
-    Limelight
-  else
-    set numberwidth=4
-    set foldcolumn=1
-    set ruler
-    set number
-    Limelight!
-  endif
-endfunc
-function! FocusModeOff()
-  set numberwidth=4
-  set foldcolumn=2
-  set ruler
-endfunc " }}}
-nnoremap <F1> :call ToggleFocusMode()<cr>
-" }}}
 " Column Over ------------------------------------------------------------- {{{
 highlight ColorColumn ctermbg=red
 call matchadd('ColorColumn', '\%121v', 100)
@@ -335,7 +268,6 @@ endif
 
 " This is from https://github.com/sgeb/vim-diff-fold/ without the extra
 " settings crap.  Just the folding expr.
-
 function! DiffFoldLevel()
   let l:line=getline(v:lnum)
 
@@ -386,26 +318,21 @@ augroup ft_c
   au FileType c setlocal foldmethod=expr foldexpr=CFold() foldtext=CFoldText() fillchars-=fold:-
   au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
-
 " }}}
 " C++ {{{
-
 augroup ft_cpp
   au!
   au FileType cpp setlocal foldmethod=marker foldmarker={,}
   au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
-
 " }}}
 " Vim {{{
 augroup ft_vim
   au!
-
   au FileType vim setlocal foldmethod=marker keywordprg=:help
   au FileType help setlocal textwidth=78
   au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
-
 " }}}
 " 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
 autocmd FileType javascript setlocal cindent
@@ -414,7 +341,7 @@ autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufRead,BufNewFile *.cmm setfiletype trace
@@ -505,6 +432,12 @@ endif
 " Plugin Settings --------------------------------------------------------- {{{
 " onedark {{{
 " colorscheme onedark
+" }}}
+" Goyo {{{
+let g:goyo_width="160"
+let g:goyo_height="95%"
+let g:goyo_linenr=1
+noremap <silent> <F1> :Goyo<CR>
 " }}}
 " Perforce {{{
 function! s:P4_edit_current( )
@@ -1111,5 +1044,39 @@ inoremap <c-v> <c-r>"
 nnoremap <M-,> `[
 nnoremap <M-.> `]
 nnoremap - <end>
+" }}}
+" Abbreviations ----------------------------------------------------------- {{{
+ab fucntion function
+ab calss class
+ab functio function
+ab dunction function
+ab functuin function
+ab dunction function
+ab functuin function
+ab functopn function
+ab fumction function
+ab vlass class
+ab xlass class
+ab classs class
+ab forarch foreach
+ab inser insert
+ab insertt insert
+ab quewrty query
+ab ovject object
+ab objectr object
+ab evho echo
+ab printr print_r
+ab prit print
+ab fales false
+ab treu true
+ab teur true
+ab ture true
+ab nulll null
+ab nuii null
+ab retrun return
+ab retunr return
+ab htis this
+ab erturn return
+ab unsinged unsigned
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

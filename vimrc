@@ -152,7 +152,7 @@ set wrap
 set linebreak
 
 " 특수문자(tab, line ending) 표시
-set list
+set nolist
 " tab/End of line characters 설정
 set listchars=tab:>-,trail:-
 

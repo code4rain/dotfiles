@@ -29,9 +29,3 @@ update_display() {
   good_display=${good_display: -2}
   export DISPLAY=${HOSTNAME}:${good_display}.0
 }
-
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-# export PATH="$HOME/.cargo/bin:$PATH"

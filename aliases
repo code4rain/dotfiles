@@ -1,21 +1,20 @@
-#suffix alias
-alias -s pl=perl
 ranger_cd () {
-	command ranger --choosedir=${HOME}/.lastdir &&
-	cd $(cat ${HOME}/.lastdir)
+  command ranger --choosedir=${HOME}/.lastdir &&
+  cd $(cat ${HOME}/.lastdir)
 }
 ee() {
-	emacsclient-snapshot -s guidaemon -c "$@" &
+  emacsclient-snapshot -s guidaemon -c "$@" &
 }
 
 gg() {
-	git grep "$@"
+  git grep "$@"
 }
+
 add_project () {
-	task add project:"$@"
+  task add project:"$@"
 }
 v() {
-	vim $(fzf)
+  vim $(fzf)
 }
 h() {
   history_command=$(echo $(history | fzf-tmux --tac +s) | cut -d' ' -f2- )
@@ -43,6 +42,11 @@ bp() {
 }
 
 #Command
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
@@ -86,12 +90,17 @@ alias auto18='ssh -X autobot18@10.253.104.232'
 alias auto25='ssh -X autobot25@10.253.105.246'
 alias auto26='ssh -X autobot26@10.253.106.32'
 
-alias -g X44='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.4.3/bin/arm-eabi-'
-alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-'
-alias -g X48='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-'
+if [ "$SHELL" = "/bin/zsh" ]
+then
+  #suffix alias
+  alias -s pl=perl
+  alias -g X44='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.4.3/bin/arm-eabi-'
+  alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-'
+  alias -g X48='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-'
 # alias -g X49='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
-alias -g X49='ARCH=arm64 CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
-alias -g XC='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/toolchain/bin/aarch64-linux-android-'
-alias -g gr='$(git rev-parse --show-toplevel)'
+  alias -g X49='ARCH=arm64 CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
+  alias -g XC='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/toolchain/bin/aarch64-linux-android-'
+  alias -g gr='$(git rev-parse --show-toplevel)'
+fi
 
 alias rake="noglob rake"

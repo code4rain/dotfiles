@@ -1,0 +1,4 @@
+--type-add
+kconf:{Kconfig,Kconfig.*}
+--type-add
+bb:{*.bb,*.bbappend}

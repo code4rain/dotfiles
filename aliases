@@ -9,7 +9,6 @@ ee() {
 gg() {
   git grep "$@"
 }
-
 add_project () {
   task add project:"$@"
 }

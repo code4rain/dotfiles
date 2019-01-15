@@ -51,7 +51,7 @@ Plug 'ayu-theme/ayu-vim' " or other package manager
 Plug 'tjammer/blayu.vim'
 
 " Framework
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 if !has('win32')
   Plug 'SirVer/ultisnips'
   Plug 'Valloric/YouCompleteMe', {'do': 'python3 install.py --clang-completer'}

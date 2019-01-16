@@ -1,4 +1,4 @@
 --type-add
 kconf:{Kconfig,Kconfig.*}
 --type-add
-bb:{*.bb,*.bbappend}
+bb:{*.bb,*.bbappend,*.bbclass}

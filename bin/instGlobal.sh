@@ -35,16 +35,12 @@ echo "install GNU global..."
 wget ftp.gnu.org/pub/gnu/global/global-6.6.2.tar.gz
 tar zxvf global-6.6.2.tar.gz
 cd global-6.6.2
-./configure --with-universal-ctags=/usr/local/bin/ctags
+./configure
 make -j $CORE
 sudo make install
-read -p "Do you want to update globalrc for ctgags?(If not sure, select Y)" -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-	cp gtags.conf ~/.globalrc
-	sed -i 's/tc=native/tc=new-ctags/g' ~/.globalrc
-fi
+sudo -H pip install Pygments
+cp gtags.conf ~/.globalrc
+sed -i 's/tc=native/tc=native:tc=pygments/g' ~/.globalrc
 
 cd $CUR
 read -p "Remove all download files?" -n 1 -r

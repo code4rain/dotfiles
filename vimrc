@@ -21,6 +21,7 @@ endif
 " Language Support
 Plug 'nvie/vim-flake8'
 Plug 'jceb/vim-orgmode'
+Plug 'kergoth/vim-bitbake'
 
 " Expand Editor
 Plug 'tpope/vim-repeat'

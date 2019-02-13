@@ -232,8 +232,6 @@ zstyle ':completion:*:functions' ignored-patters '_*'
 autoload bashcompinit
 bashcompinit
 
-source ~/.gp4_completion
-
 setopt                  \
     aliases             \
     NO_all_export       \

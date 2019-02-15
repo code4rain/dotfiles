@@ -66,8 +66,8 @@ export PATH="${HOME}/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin
 # export LANG=en_US.UTF-8
 
 HISTFILE=~/.histfile
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=500000
+SAVEHIST=500000
 DIRSTACKSIZE=50
 cdpath=(. ~)
 

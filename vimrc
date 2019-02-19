@@ -1045,6 +1045,9 @@ inoremap <c-v> <c-r>"
 nnoremap <M-,> `[
 nnoremap <M-.> `]
 nnoremap - <end>
+
+nnoremap <C-Space> a
+inoremap <C-Space> <ESC>
 " }}}
 " Abbreviations ----------------------------------------------------------- {{{
 ab fucntion function

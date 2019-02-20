@@ -366,6 +366,24 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  (setq use-package-always-ensure t)
+  (use-package auto-compile
+    :config (auto-compile-on-load-mode))
+
+  (global-prettify-symbols-mode t)
+
+  (setq scroll-conservatively 100)
+
+  (use-package diff-hl
+    :config
+    (add-hook 'prog-mode-hook 'turn-on-diff-hl-mode)
+    (add-hook 'vc-dir-mode-hook 'turn-on-diff-hl-mode))
+
+  (add-hook 'sh-mode-hook
+            (lambda ()
+              (setq sh-basic-offset 2
+                    sh-indentation 2)))
+  (setq org-ellipsis "⤵")
   ;; General
   (set-language-environment "Korean")
   (prefer-coding-system 'utf-8) ; utf-8 환경 설정
@@ -422,7 +440,6 @@ This functions should be added to the hooks of major modes for programming."
   (add-hook 'prog-mode-hook 'font-lock-comment-annotations)
 
   (use-package cwarn
-    :ensure t
     :config
     (add-hook 'c-mode-common-hook '(lambda () (cwarn-mode 1))))
 
@@ -436,7 +453,8 @@ This functions should be added to the hooks of major modes for programming."
 
   (use-package org
     :config
-    (setq org-bullets-bullet-list '("⊙" "■" "◉" "⊚" "◆" "▼" "●" "✲" "✱" "✻" "✾" "✿" "❀" "✡" "◎" "○" "◦" "⊛" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
+    (setq org-bullets-bullet-list '("⊙" "■" "◉" "⊚" "◆" "▼" "●" "✲" "✱" "✻" "✾" "✿" "❀"
+                                    "✡" "◎" "○" "◦" "⊛" "❁" "❂" "❃" "❄" "❅" "❆" "❇"))
     )
 
   ;; eshell
@@ -446,11 +464,10 @@ This functions should be added to the hooks of major modes for programming."
     ;; line below instead:
     ;; :hook (eshell-mode-hook . esh-autosuggest-mode)
     :bind (:map shell-mode-map ("C-SPC" . helm-esh-pcomplete))
-    :ensure t)
+    )
 
   ;; Persistent undos - undos are saved even beyond closing down emacs, and can be revisited with undo-tree-load-history
   (use-package undo-tree
-    :ensure t
     :config
       (setq undo-tree-auto-save-history t
             undo-tree-history-directory-alist
@@ -524,7 +541,6 @@ This functions should be added to the hooks of major modes for programming."
 
   ;; default-text-scale
   (use-package default-text-scale
-    :ensure t
     :config
     (setq default-text-scale-mode t))
 
@@ -561,12 +577,10 @@ This functions should be added to the hooks of major modes for programming."
     (setq ranger-show-hidden nil)
     (setq ranger-max-preview-size 10)
     (setq ranger-dont-show-binary t)
-    :ensure t
     :config (ranger-override-dired-mode t)
     )
 
   (use-package writeroom-mode
-    :ensure nil
     :init
     (add-hook 'prog-mode-hook 'writeroom-mode)
     (add-hook 'text-mode-hook 'writeroom-mode)
@@ -588,6 +602,13 @@ This functions should be added to the hooks of major modes for programming."
 
   (setq backward-delete-char-untabify-method nil)
   (setq pixel-scroll-mode t)
+
+  (use-package whitespace
+    :config
+    (set-face-attribute 'whitespace-space nil :background nil :foreground "gray25")
+    (setq whitespace-line-column 120)
+    (global-whitespace-mode 1)
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

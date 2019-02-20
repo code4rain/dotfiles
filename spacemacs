@@ -58,6 +58,7 @@ This function should only modify configuration layer settings."
      c-c++
      ;;python
      ranger
+     org
      )
 
    ;; List of additional packages that will be installed without being
@@ -67,7 +68,7 @@ This function should only modify configuration layer settings."
    ;; To use a local version of a package, use the `:location' property:
    ;; '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages '(easy-hugo doom-themes writeroom-mode esh-autosuggest visual-fill-column all-the-icons default-text-scale)
+   dotspacemacs-additional-packages '(ox-hugo easy-hugo doom-themes writeroom-mode esh-autosuggest visual-fill-column all-the-icons default-text-scale)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -158,7 +159,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(doom-one
+   dotspacemacs-themes '(
+                         doom-one
                          seti
                          spacemacs-dark
                          spacemacs-light)
@@ -212,7 +214,7 @@ values."
    dotspacemacs-retain-visual-state-on-shift t
    ;; If non-nil, J and K move lines up and down when in visual mode.
    ;; (default nil)
-   dotspacemacs-visual-line-move-text nil
+   dotspacemacs-visual-line-move-text t
    ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
    ;; (default nil)
    dotspacemacs-ex-substitute-global nil
@@ -585,6 +587,7 @@ This functions should be added to the hooks of major modes for programming."
   (setq frame-resize-pixelwise t)
 
   (setq backward-delete-char-untabify-method nil)
+  (setq pixel-scroll-mode t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

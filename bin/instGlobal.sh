@@ -32,9 +32,9 @@ echo "install pygments..."
 sudo -H pip -U install pygments
 
 echo "install GNU global..."
-wget ftp.gnu.org/pub/gnu/global/global-6.6.2.tar.gz
-tar zxvf global-6.6.2.tar.gz
-cd global-6.6.2
+wget ftp.gnu.org/pub/gnu/global/global-6.6.3.tar.gz
+tar zxvf global-6.6.3.tar.gz
+cd global-6.6.3
 ./configure
 make -j $CORE
 sudo make install

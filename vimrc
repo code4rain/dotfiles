@@ -996,7 +996,6 @@ nnoremap <F7> :Ngtags<CR>
 nnoremap t diw"*P
 nnoremap ; :
 noremap <C-F> <PageUp>
-noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>
 noremap <down> gj
 noremap <silent><C-A> ^
@@ -1041,6 +1040,12 @@ vnoremap L g_
 inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <c-v> <c-r>"
+vnoremap <C-c> "+yi
+vnoremap <C-x> "+c
+vnoremap <C-v> c<ESC>"+p
+inoremap <C-v> <C-r><C-o>+
+nnoremap <C-v> a<C-r><C-o>+<ESC>
+nnoremap <C-q> <C-v>
 
 nnoremap <M-,> `[
 nnoremap <M-.> `]

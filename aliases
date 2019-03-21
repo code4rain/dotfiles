@@ -3,7 +3,7 @@ ranger_cd () {
   cd $(cat ${HOME}/.lastdir)
 }
 ee() {
-  emacsclient-snapshot -s guidaemon -c "$@" &
+  emacsclient -s guidaemon -c "$@" &
 }
 
 gg() {
@@ -49,8 +49,8 @@ alias ......='cd ../../../../..'
 alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
-alias e='emacsclient-snapshot -nw -s terminal'
-alias ek="emacsclient-snapshot -e '(kill-emacs)'"
+alias e='emacsclient -nw -s terminal'
+alias ek="emacsclient -e '(kill-emacs)'"
 # alias es='ee'
 alias ls='ls --color -h --group-directories-first'
 # alias m='TERM=xterm-256color tmuxinator'

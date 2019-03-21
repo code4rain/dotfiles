@@ -343,6 +343,7 @@ autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufRead,BufNewFile *.cmm setfiletype trace

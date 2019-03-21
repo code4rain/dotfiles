@@ -19,8 +19,8 @@ windows:
       panes:
         - r
   - Update:
-  - Cherry:
-      layout: main-horizontal
+  - 2pane:
+      layout: main-vertical
       panes:
         - cd ~
         - cd ~

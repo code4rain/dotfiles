@@ -557,12 +557,11 @@ command! Rgtags call s:rtags(expand('<cword>'))
 " --no-heading: Do not show file headings in results
 " --fixed-strings: Search term as a literal string
 " --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
 " --hidden: Search hidden files and folders
 " --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
+let g:last_keyword = 'Not ready for search'
 function! s:wrap_fzf_grep(args, bang)
   let gtagsroot = s:GtagsCscope_GtagsRoot()
   if isdirectory(gtagsroot)
@@ -570,41 +569,26 @@ function! s:wrap_fzf_grep(args, bang)
   else
     let directory = getcwd()
   endif
-  let cmd = 'rg -j 32 --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --type-add "history:.search_history" --type-not history --color "always" '. shellescape(a:args)
-  let result = split(system(cmd), '.\n')
-  call writefile(result, directory . "/.search_history")
-  call fzf#vim#grep('cat ' . directory . '/.search_history', 1, a:bang)
+  g:last_keyword = shellescape(a:args)
+  let cmd = 'rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescape(a:args) . ' ' . directory
+  let result = system(cmd . ' --color "never"')
+  cgetexpr split(result, "\n")
+  call fzf#vim#grep(cmd, 1, a:bang)
 endfunction
 
 function! s:show_search_history(filter, bang)
-  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
-  if isdirectory(s:gtagsroot)
-    let s:directory = s:gtagsroot
-  else
-    let s:directory = getcwd()
-  endif
   if empty(a:filter)
-    call fzf#vim#grep('cat ' . s:directory . '/.search_history', 1, a:bang)
+    call s:wrap_fzf_grep(g:last_keyword, a:bang)
   else
-    call fzf#vim#grep('cat ' s:directory . '/.search_history | rg -j 32 ' . a:filter, 1, a:bang)
+    let cmd = 'rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescape(g:last_keyword) . ' ' . directory . ' | rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescap(a:filter)
+    let result = system(cmd . ' --color "never"')
+    cgetexpr split(result, "\n")
+    call fzf#vim#grep(cmd, 1, a:bang)
   endif
-endfunction
-
-function! s:clear_history()
-  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
-  if isdirectory(s:gtagsroot)
-    let s:directory = s:gtagsroot
-  else
-    let s:directory = getcwd()
-  endif
-  echom "Clear All Search History"
-  call delete(s:directory . "/.search_history")
 endfunction
 
 command! -bang -nargs=* SH call s:show_search_history(<q-args>, <bang>0)
 command! -bang -nargs=* SearchHistory call s:show_search_history(<q-args>, <bang>0)
-command! -bang -nargs=* CH call s:clear_history()
-command! -bang -nargs=* ClearHistory call s:clear_history()
 
 command! -bang -nargs=* SearchProject call s:wrap_fzf_grep(expand('<cword>'), <bang>0)
 noremap <C-\> :SearchProject<CR>

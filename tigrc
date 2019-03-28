@@ -23,6 +23,7 @@ bind generic T !git notes edit %(commit)
 bind generic U !git checkout -- %(file)
 bind generic X !git cl
 bind generic v !git describe %(commit)
+bind generic w !git commit -s --amend
 bind main - !sh -c "git diff %(commit)..HEAD > %(prompt).patch"
 bind main <F11> !git rebase -i %(commit)
 bind main H !@git reset --hard %(commit)

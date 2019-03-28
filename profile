@@ -21,7 +21,7 @@
 #     PATH="$HOME/bin:$PATH"
 # fi
 
-FZF_DEFAULT_COMMAND='ag -l -g ""'
+FZF_DEFAULT_COMMAND='rg -l -g ""'
 stty -ixon
 
 update_display() {

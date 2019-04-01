@@ -941,6 +941,10 @@ let g:ranger_replace_netrw = 1 "open ranger when vim open a directory
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 " }}}
+" vim-better-whitespace {{{
+let g:show_spaces_that_precede_tabs=1
+highlight ExtraWhitespace ctermbg=89 guibg=#87005f
+" }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{
 command! -bang Q quitall<bang>

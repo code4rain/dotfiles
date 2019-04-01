@@ -1,25 +1,19 @@
-#suffix alias
-alias -s pl=perl
 ranger_cd () {
-	command ranger --choosedir=${HOME}/.lastdir &&
-	cd $(cat ${HOME}/.lastdir)
+  command ranger --choosedir=${HOME}/.lastdir &&
+  cd $(cat ${HOME}/.lastdir)
 }
 ee() {
-	emacsclient-snapshot -s guidaemon -c "$@" &
+  emacsclient -s guidaemon -c "$@" &
 }
 
 gg() {
-	git grep "$@"
+  git grep "$@"
 }
 add_project () {
-	task add project:"$@"
+  task add project:"$@"
 }
 v() {
-  local files
-  files=$(grep '^>' ~/.nviminfo | cut -c3- |
-          while read line; do
-            [ -f "${line/\~/$HOME}" ] && echo "$line"
-          done | fzf-tmux -d -m -q "$*" -1) && vim ${files//\~/$HOME}
+  vim $(fzf)
 }
 h() {
   history_command=$(echo $(history | fzf-tmux --tac +s) | cut -d' ' -f2- )
@@ -47,11 +41,16 @@ bp() {
 }
 
 #Command
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
 alias ,,='cd $(git rev-parse --show-toplevel 2>/dev/null)'
 alias aa='ag -a --color-line="2;32" --color-match="2;33" --color-path="4;36"'
 alias ag='ag --color-line="2;32" --color-match="2;33" --color-path="4;36"'
-alias e='emacsclient-snapshot -nw -s terminal'
-alias ek="emacsclient-snapshot -e '(kill-emacs)'"
+alias e='emacsclient -nw -s terminal'
+alias ek="emacsclient -e '(kill-emacs)'"
 # alias es='ee'
 alias ls='ls --color -h --group-directories-first'
 # alias m='TERM=xterm-256color tmuxinator'
@@ -70,33 +69,23 @@ alias tmux='tmux -2'
 alias tmuxinator='tmuxinator'
 alias vimdiff='nvim -d'
 
-alias conW='ssh -X $(whoami)@10.252.251.111'
-alias conX='ssh -X $(whoami)@10.252.251.137'
+alias conX='ssh -X $(whoami)@10.252.251.111'
 alias conY='ssh -X $(whoami)@10.252.251.188'
 alias conZ='ssh -X $(whoami)@10.252.250.74'
-alias conV='ssh -X root@10.252.230.46'
+alias conV='ssh -X $(whoami)@10.253.240.39'
 alias conJ='ssh -X jenkins@10.252.250.74'
 
-alias auto198='ssh -X autobot11@10.253.105.198'
-alias auto195='ssh -X autobot17@10.253.105.195'
-alias auto248='ssh -X autobot19@10.253.104.248'
-alias auto232='ssh -X autobot18@10.253.104.232'
-alias auto246='ssh -X autobot25@10.253.105.246'
-alias auto32='ssh -X autobot26@10.253.106.32'
-
-alias auto11='ssh -X autobot11@10.253.105.198'
-alias auto17='ssh -X autobot17@10.253.105.195'
-alias auto19='ssh -X autobot19@10.253.104.248'
-alias auto18='ssh -X autobot18@10.253.104.232'
-alias auto25='ssh -X autobot25@10.253.105.246'
-alias auto26='ssh -X autobot26@10.253.106.32'
-
-alias -g X44='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.4.3/bin/arm-eabi-'
-alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-'
-alias -g X48='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-'
+if [ "$SHELL" = "/bin/zsh" ]
+then
+  #suffix alias
+  alias -s pl=perl
+  alias -g X44='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.4.3/bin/arm-eabi-'
+  alias -g X46='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-'
+  alias -g X48='ARCH=arm SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/arm-eabi-4.8/bin/arm-eabi-'
 # alias -g X49='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
-alias -g X49='ARCH=arm64 CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
-alias -g XC='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/toolchain/bin/aarch64-linux-android-'
-alias -g gr='$(git rev-parse --show-toplevel)'
+  alias -g X49='ARCH=arm64 CROSS_COMPILE=/opt/toolchains/aarch64-linux-android-4.9/bin/aarch64-linux-android-'
+  alias -g XC='ARCH=arm64 SUBARCH=exynos CROSS_COMPILE=/opt/toolchains/toolchain/bin/aarch64-linux-android-'
+  alias -g gr='$(git rev-parse --show-toplevel)'
+fi
 
 alias rake="noglob rake"

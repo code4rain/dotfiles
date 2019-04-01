@@ -2,10 +2,11 @@
 if !has('win32')
   if !has('nvim')
     set shell=/bin/bash
+  else
+    set sh=/usr/bin/zsh
   endif
 endif
-
-set nocompatible               " be iMproved
+set nocompatible " be iMproved
 " }}}
 " Plugins  ---------------------------------------------------------------- {{{
 " https://github.com/junegunn/vim-plug
@@ -18,10 +19,9 @@ endif
 " The following are examples of different formats supported.
 
 " Language Support
-Plug 'tpope/vim-fugitive'
 Plug 'nvie/vim-flake8'
 Plug 'jceb/vim-orgmode'
-Plug 'tpope/vim-speeddating'
+Plug 'kergoth/vim-bitbake'
 
 " Expand Editor
 Plug 'tpope/vim-repeat'
@@ -39,32 +39,23 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 Plug 'tpope/vim-obsession'
-Plug 'vim-scripts/YankRing.vim'
 Plug 'tpope/vim-endwise'
 
 " UI (Colorscheme and so on)
-"Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhinz/vim-signify'
-"Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
-Plug 'w0ng/vim-hybrid', { 'do': 'git am ~/.dotfiles/vim/patch/vim-hybrid/*.patch' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'mhartington/oceanic-next'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'joshdick/onedark.vim'
-"Plug 'ryanoasis/vim-devicons'
 Plug 'ayu-theme/ayu-vim' " or other package manager
-Plug 'srcery-colors/srcery-vim'
 Plug 'tjammer/blayu.vim'
-Plug 'sts10/vim-pink-moon'
 
 " Framework
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
 if !has('win32')
   Plug 'SirVer/ultisnips'
-  Plug 'Valloric/YouCompleteMe', {'do': 'python install.py --clang-completer --system-libclang'}
+  Plug 'Valloric/YouCompleteMe', {'do': 'python3 install.py --clang-completer'}
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
   Plug 'junegunn/fzf.vim'
   Plug 'francoiscabrol/ranger.vim'
@@ -73,7 +64,7 @@ endif
 Plug 'majutsushi/tagbar'
 Plug 'yuttie/comfortable-motion.vim'
 
-" Plug 'svermeulen/vim-easyclip'
+Plug 'ajh17/VimCompletesMe'
 
 " Background executed
 Plug 'vim-scripts/IndentConsistencyCop'
@@ -85,14 +76,14 @@ Plug 'airblade/vim-gitgutter'
 " Executed Plugin
 Plug 'ntpeters/vim-better-whitespace'
 Plug 't9md/vim-quickhl'
-Plug 'junegunn/limelight.vim' "Focus for writer
 Plug 'junegunn/vim-easy-align'
-Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/goyo.vim'
-Plug 'apalmer1377/factorus'
 
+" Disabled
+" Plug 'tpope/vim-speeddating' "날짜에 커서를 놓고 일자 증가를 시켜주는 스크립트 ex) 1999-12-31 → (C-A) → 2000-01-01
+" Plug 'junegunn/limelight.vim' "현재 편집 중인 줄 외에는 회색으로 처리해주는 플러그인
 call plug#end()
 " }}}
 " Basic options ----------------------------------------------------------- {{{
@@ -141,49 +132,17 @@ augroup line_return
 augroup END
 " }}}
 " }}}
-" Abbreviations ----------------------------------------------------------- {{{
-ab fucntion function
-ab calss class
-ab functio function
-ab dunction function
-ab functuin function
-ab dunction function
-ab functuin function
-ab functopn function
-ab fumction function
-ab vlass class
-ab xlass class
-ab classs class
-ab forarch foreach
-ab inser insert
-ab insertt insert
-ab quewrty query
-ab ovject object
-ab objectr object
-ab evho echo
-ab printr print_r
-ab prit print
-ab fales false
-ab treu true
-ab teur true
-ab ture true
-ab nulll null
-ab nuii null
-ab retrun return
-ab retunr return
-ab htis this
-ab erturn return
-ab unsinged unsigned
-" }}}
 " View -------------------------------------------------------------------- {{{
 set novisualbell " 에러 발생시에 소리대신 화면 블링크(disable)
 set ruler " 커서의 위치를 항상 보이게 함.
 "set relativenumber "
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
-set cursorline " 현재 커서 줄 강조
+set cursorline " 현재 커서 행 강조
+set cursorcolumn " 현재 커서 열 강조
 set laststatus=2 " 항상 status 라인을 표시하도록 함.
-" Status Line 설정
+set modelines=2
+" Status Line 설정 - powerline enable로 주석처리함
 " set statusline=\ %F\ %m%r%h%y\ %w\%=\Line:\%8.(%l%)/%-8.(%L%)\ Colume\ %4.(%c%)%6.([%p%%]%)
 
 " Don't try to highlight lines longer than 800 characters.
@@ -193,7 +152,7 @@ set synmaxcol=800
 set wrap
 set linebreak
 
-" 특수문자(tab, line ending) 표시 안함
+" 특수문자(tab, line ending) 표시
 set nolist
 " tab/End of line characters 설정
 set listchars=tab:>-,trail:-
@@ -245,6 +204,7 @@ set cmdheight=1
 set numberwidth=6
 set splitbelow
 set splitright
+" }}}
 " Folding ----------------------------------------------------------------- {{{
 set foldlevel=5
 set foldcolumn=1
@@ -285,29 +245,6 @@ function! MyFoldText() " {{{
   return line . " " . repeat("", fill_start_count) . foldedlinecount . ' lines ' . repeat("",fillcharcount) . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
-" Focus Mode View {{{
-function! ToggleFocusMode()
-  if (&foldcolumn != 8)
-    set numberwidth=10
-    set foldcolumn=8
-    set noruler
-    set nonumber
-    Limelight
-  else
-    set numberwidth=4
-    set foldcolumn=1
-    set ruler
-    set number
-    Limelight!
-  endif
-endfunc
-function! FocusModeOff()
-  set numberwidth=4
-  set foldcolumn=2
-  set ruler
-endfunc " }}}
-nnoremap <F1> :call ToggleFocusMode()<cr>
-" }}}
 " Column Over ------------------------------------------------------------- {{{
 highlight ColorColumn ctermbg=red
 call matchadd('ColorColumn', '\%121v', 100)
@@ -332,7 +269,6 @@ endif
 
 " This is from https://github.com/sgeb/vim-diff-fold/ without the extra
 " settings crap.  Just the folding expr.
-
 function! DiffFoldLevel()
   let l:line=getline(v:lnum)
 
@@ -383,26 +319,21 @@ augroup ft_c
   au FileType c setlocal foldmethod=expr foldexpr=CFold() foldtext=CFoldText() fillchars-=fold:-
   au FileType c setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
-
 " }}}
 " C++ {{{
-
 augroup ft_cpp
   au!
   au FileType cpp setlocal foldmethod=marker foldmarker={,}
   au FileType cpp setlocal ts=8 sts=8 sw=8 noexpandtab
 augroup END
-
 " }}}
 " Vim {{{
 augroup ft_vim
   au!
-
   au FileType vim setlocal foldmethod=marker keywordprg=:help
   au FileType help setlocal textwidth=78
   au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
-
 " }}}
 " 내장된 indent 파일이 없어서 C indent 를 사용하는 경우
 autocmd FileType javascript setlocal cindent
@@ -411,7 +342,8 @@ autocmd BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
 autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-autocmd FileType sh setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufRead,BufNewFile *.cmm setfiletype trace
@@ -502,6 +434,12 @@ endif
 " Plugin Settings --------------------------------------------------------- {{{
 " onedark {{{
 " colorscheme onedark
+" }}}
+" Goyo {{{
+let g:goyo_width="160"
+let g:goyo_height="95%"
+let g:goyo_linenr=1
+noremap <silent> <F1> :Goyo<CR>
 " }}}
 " Perforce {{{
 function! s:P4_edit_current( )
@@ -619,12 +557,11 @@ command! Rgtags call s:rtags(expand('<cword>'))
 " --no-heading: Do not show file headings in results
 " --fixed-strings: Search term as a literal string
 " --ignore-case: Case insensitive search
-" --no-ignore: Do not respect .gitignore, etc...
 " --hidden: Search hidden files and folders
 " --follow: Follow symlinks
-" --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
+let g:last_keyword = 'Not ready for search'
 function! s:wrap_fzf_grep(args, bang)
   let gtagsroot = s:GtagsCscope_GtagsRoot()
   if isdirectory(gtagsroot)
@@ -632,41 +569,26 @@ function! s:wrap_fzf_grep(args, bang)
   else
     let directory = getcwd()
   endif
-  let cmd = 'rg -j 32 --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --type-add "history:.search_history" --type-not history --color "always" '. shellescape(a:args)
-  let result = split(system(cmd), '.\n')
-  call writefile(result, directory . "/.search_history")
-  call fzf#vim#grep('cat ' . directory . '/.search_history', 1, a:bang)
+  g:last_keyword = shellescape(a:args)
+  let cmd = 'rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescape(a:args) . ' ' . directory
+  let result = system(cmd . ' --color "never"')
+  cgetexpr split(result, "\n")
+  call fzf#vim#grep(cmd, 1, a:bang)
 endfunction
 
 function! s:show_search_history(filter, bang)
-  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
-  if isdirectory(s:gtagsroot)
-    let s:directory = s:gtagsroot
-  else
-    let s:directory = getcwd()
-  endif
   if empty(a:filter)
-    call fzf#vim#grep('cat ' . s:directory . '/.search_history', 1, a:bang)
+    call s:wrap_fzf_grep(g:last_keyword, a:bang)
   else
-    call fzf#vim#grep('cat ' s:directory . '/.search_history | rg -j 32 ' . a:filter, 1, a:bang)
+    let cmd = 'rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescape(g:last_keyword) . ' ' . directory . ' | rg -j 32 --column --line-number --no-heading --ignore-case --follow --color "always" ' . shellescap(a:filter)
+    let result = system(cmd . ' --color "never"')
+    cgetexpr split(result, "\n")
+    call fzf#vim#grep(cmd, 1, a:bang)
   endif
-endfunction
-
-function! s:clear_history()
-  let s:gtagsroot = s:GtagsCscope_GtagsRoot()
-  if isdirectory(s:gtagsroot)
-    let s:directory = s:gtagsroot
-  else
-    let s:directory = getcwd()
-  endif
-  echom "Clear All Search History"
-  call delete(s:directory . "/.search_history")
 endfunction
 
 command! -bang -nargs=* SH call s:show_search_history(<q-args>, <bang>0)
 command! -bang -nargs=* SearchHistory call s:show_search_history(<q-args>, <bang>0)
-command! -bang -nargs=* CH call s:clear_history()
-command! -bang -nargs=* ClearHistory call s:clear_history()
 
 command! -bang -nargs=* SearchProject call s:wrap_fzf_grep(expand('<cword>'), <bang>0)
 noremap <C-\> :SearchProject<CR>
@@ -704,11 +626,11 @@ nmap <leader>] <Plug>(quickhl-tag-toggle)
 " "}}}
 " Fugitive {{{
 nnoremap <silent> <F4>hh :help my_git<CR>
-nnoremap <silent> <F4> :Gstatus<CR>
+nnoremap <silent> <F4> :Git s<CR>
 nnoremap <silent> <F4>s :Gstatus<CR>
 nnoremap <silent> <F4>b :Gblame<CR>
 nnoremap <silent> <F4>c :Gcommit<CR>
-nnoremap <silent> <F4>l :Glog<CR>
+nnoremap <silent> <F4>l :Git ll %<CR>
 " }}}
 " easymotion {{{
 let g:EasyMotion_leader_key = '<,>'
@@ -759,7 +681,7 @@ let g:yankring_history_file = '.yankring_history'
 " augroup END
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 	let g:rainbow_conf = {
-	\	'guifgs': ['orchid', 'LawnGreen', 'DodgerBlue', 'salmon', 'LightYellow', 'MediumSlateBlue'],
+	\	'guifgs': ['orchid', 'khaki1',  'salmon', 'SteelBlue3', 'LightYellow', 'MediumSlateBlue'],
 	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
 	\	'operators': '_,_',
 	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
@@ -1019,6 +941,10 @@ let g:ranger_replace_netrw = 1 "open ranger when vim open a directory
 let g:comfortable_motion_scroll_down_key = "j"
 let g:comfortable_motion_scroll_up_key = "k"
 " }}}
+" vim-better-whitespace {{{
+let g:show_spaces_that_precede_tabs=1
+highlight ExtraWhitespace ctermbg=89 guibg=#87005f
+" }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{
 command! -bang Q quitall<bang>
@@ -1059,7 +985,6 @@ nnoremap <F7> :Ngtags<CR>
 nnoremap t diw"*P
 nnoremap ; :
 noremap <C-F> <PageUp>
-noremap <C-Q> <ESC>:q!<CR>
 noremap <C-S> <ESC>:w<CR>
 noremap <down> gj
 noremap <silent><C-A> ^
@@ -1104,9 +1029,52 @@ vnoremap L g_
 inoremap <c-a> <home>
 inoremap <c-e> <end>
 inoremap <c-v> <c-r>"
+vnoremap <C-c> "+yi
+vnoremap <C-x> "+c
+vnoremap <C-v> c<ESC>"+p
+inoremap <C-v> <C-r><C-o>+
+nnoremap <C-v> a<C-r><C-o>+<ESC>
+nnoremap <C-q> <C-v>
 
 nnoremap <M-,> `[
 nnoremap <M-.> `]
 nnoremap - <end>
+
+nnoremap <C-Space> a
+inoremap <C-Space> <ESC>
+" }}}
+" Abbreviations ----------------------------------------------------------- {{{
+ab fucntion function
+ab calss class
+ab functio function
+ab dunction function
+ab functuin function
+ab dunction function
+ab functuin function
+ab functopn function
+ab fumction function
+ab vlass class
+ab xlass class
+ab classs class
+ab forarch foreach
+ab inser insert
+ab insertt insert
+ab quewrty query
+ab ovject object
+ab objectr object
+ab evho echo
+ab printr print_r
+ab prit print
+ab fales false
+ab treu true
+ab teur true
+ab ture true
+ab nulll null
+ab nuii null
+ab retrun return
+ab retunr return
+ab htis this
+ab erturn return
+ab unsinged unsigned
 " }}}
 " vim: tabstop=2: softtabstop=2: shiftwidth=2: expandtab

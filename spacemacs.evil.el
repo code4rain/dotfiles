@@ -11,8 +11,11 @@
 (define-key evil-normal-state-map (kbd "_") 'hide-ifdefs)
 (define-key evil-normal-state-map (kbd "+") 'show-ifdefs)
 
+
 ;; layout control
-(global-set-key (kbd "C-k") 'spacemacs/layouts-transient-state/body)
+(define-key evil-motion-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
+(define-key evil-insert-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
+(define-key evil-hybrid-state-map (kbd "C-j j") 'spacemacs/layouts-transient-state/body)
 
 ;; windows control
 (define-key evil-motion-state-map (kbd "C-j C-j") 'evil-window-prev)
@@ -56,39 +59,56 @@
 (global-set-key (kbd "C-g") 'evil-escape)
 (define-key evil-visual-state-map (kbd "v") 'er/expand-region)
 ;; ex mode
+(evil-ex-define-cmd "q" 'kill-buffer-and-window)
 (evil-ex-define-cmd "Q[uit]" 'evil-quit-all)
 (evil-ex-define-cmd "W[rite]" 'evil-write)
 (evil-ex-define-cmd "Wq" 'evil-save-and-quit)
 
-(define-key evil-motion-state-map (kbd "C-]") 'helm-gtags-find-tag)
-(define-key evil-motion-state-map (kbd "C-o") 'helm-gtags-pop-stack)
-(define-key evil-motion-state-map (kbd "<f7>") 'helm-gtags-select)
+
 (define-key evil-motion-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-motion-state-map (kbd "C-l") 'helm-mini)
 (define-key evil-motion-state-map (kbd "C-b") 'bookmark-set)
 (define-key evil-motion-state-map (kbd "C-S-b") 'bookmark-delete)
-(define-key evil-motion-state-map (kbd "M-l") 'helm-gtags-parse-file)
 (define-key evil-motion-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
 
-(define-key evil-visual-state-map (kbd "C-]") 'helm-gtags-find-tag)
-(define-key evil-visual-state-map (kbd "C-o") 'helm-gtags-pop-stack)
-(define-key evil-visual-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-visual-state-map (kbd "M-o") 'helm-projectile-find-file)
-(define-key evil-visual-state-map (kbd "M-l") 'helm-gtags-parse-file)
 (define-key evil-visual-state-map (kbd "SPC") 'evil-avy-goto-word-or-subword-1)
 
-(define-key evil-insert-state-map (kbd "C-]") 'helm-gtags-find-tag)
-(define-key evil-insert-state-map (kbd "C-o") 'helm-gtags-pop-stack)
-(define-key evil-insert-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-insert-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-insert-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
 (define-key evil-insert-state-map (kbd "C-l") 'helm-mini)
-(define-key evil-insert-state-map (kbd "M-l") 'helm-gtags-parse-file)
 
-(define-key evil-hybrid-state-map (kbd "C-]") 'helm-gtags-find-tag)
-(define-key evil-hybrid-state-map (kbd "C-o") 'helm-gtags-pop-stack)
-(define-key evil-hybrid-state-map (kbd "<f7>") 'helm-gtags-select)
 (define-key evil-hybrid-state-map (kbd "M-o") 'helm-projectile-find-file)
 (define-key evil-hybrid-state-map (kbd "C-v") 'spacemacs/paste-transient-state/evil-paste-after)
 (define-key evil-hybrid-state-map (kbd "C-l") 'helm-mini)
-(define-key evil-hybrid-state-map (kbd "M-l") 'helm-gtags-parse-file)
+
+(evil-define-key 'normal helm-gtags-mode-map
+  (kbd "C-]") 'helm-gtags-find-tag
+  (kbd "C-o") 'helm-gtags-pop-stack
+  (kbd "<f7>") 'helm-gtags-select
+  (kbd "M-l") 'helm-gtags-parse-file
+  )
+(evil-define-key 'insert helm-gtags-mode-map
+  (kbd "C-]") 'helm-gtags-find-tag
+  (kbd "C-o") 'helm-gtags-pop-stack
+  (kbd "<f7>") 'helm-gtags-select
+  (kbd "M-l") 'helm-gtags-parse-file
+  )
+(evil-define-key 'visual helm-gtags-mode-map
+  (kbd "C-]") 'helm-gtags-find-tag
+  (kbd "C-o") 'helm-gtags-pop-stack
+  (kbd "<f7>") 'helm-gtags-select
+  (kbd "M-l") 'helm-gtags-parse-file
+  )
+(evil-define-key 'motion helm-gtags-mode-map
+  (kbd "C-]") 'helm-gtags-find-tag
+  (kbd "C-o") 'helm-gtags-pop-stack
+  (kbd "<f7>") 'helm-gtags-select
+  (kbd "M-l") 'helm-gtags-parse-file
+  )
+(evil-define-key 'hybrid helm-gtags-mode-map
+  (kbd "C-]") 'helm-gtags-find-tag
+  (kbd "C-o") 'helm-gtags-pop-stack
+  (kbd "<f7>") 'helm-gtags-select
+  (kbd "M-l") 'helm-gtags-parse-file
+  )

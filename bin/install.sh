@@ -1,20 +1,20 @@
 #! /usr/bin/env bash
-
+GIT_ROOT_DIR="$HOME/External"
 DOT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 OH_MY_ZSH_DIR="$HOME/.oh-my-zsh"
 OH_MY_ZSH_GITHUB="https://github.com/robbyrussell/oh-my-zsh.git"
 OH_MY_ZSH_AUTOSUGGESTION_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 OH_MY_ZSH_AUTOSUGGESTION_GITHUB="https://github.com/zsh-users/zsh-autosuggestions.git"
 
-TIG_DIR="$HOME/@WORK/tig"
+TIG_DIR="$GIT_ROOT_DIR/tig"
 TIG_GITHUB="https://github.com/jonas/tig.git"
-TIG_BUILD="sudo apt-get install -y automake libncurses5-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
+TIG_BUILD="sudo apt-get install -y automake libncurses5-dev libncursesw5-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
 
-RANGER_DIR="$HOME/@WORK/ranger"
+RANGER_DIR="$GIT_ROOT_DIR/ranger"
 RANGER_GITHUB="https://github.com/hut/ranger.git"
-RANGER_BUILD="sudo apt-get install -y automake libncurses5-dev && sudo make install"
+RANGER_BUILD="sudo apt-get install -y automake libncurses5-dev libncursesw5-dev && sudo make install"
 
-TMUX_DIR="$HOME/@WORK/tmux"
+TMUX_DIR="$GIT_ROOT_DIR/tmux"
 TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
 TMUX_BUILD="sudo apt-get install -y libevent-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
 
@@ -73,7 +73,7 @@ echo "Install neovim done"
 msg_nc
 
 pushd .
-./instGlobal.sh
+$DOT_DIR/bin/instGlobal.sh
 clone_or_update $OH_MY_ZSH_GITHUB $OH_MY_ZSH_DIR
 clone_or_update $OH_MY_ZSH_AUTOSUGGESTION_GITHUB $OH_MY_ZSH_AUTOSUGGESTION_DIR
 clone_or_update $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"

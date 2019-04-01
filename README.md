@@ -5,13 +5,21 @@ This dotfiles are meant to be used with bash and zsh.
 Please fork this repository and configure it for yourself:
 
 
+### Install zsh (Optional)
+> if zsh is not installed.
+> Recommand.. not requirement
 ```
-# if zsh is not installed.
-# Recommand.. not requirement
 sudo apt-get install zsh
 chsh /usr/bin/zsh
+```
 
+### cloning the repository
+
+```
 git clone https://git.sec.samsung.net/alex.jang/dotfiles ~/.dotfiles
+```
+
+### Run install command
 ~/.dotfiles/bin/dotfiles ~/.dotfiles
 ```
 
@@ -26,7 +34,6 @@ The `install` command will clone and build useful tools from each repository.
 And make the symbolic link in your  `~/bin`
 * ranger
 * tig
-* the silver searcher
 * oh-my-zsh
 * tmux
 

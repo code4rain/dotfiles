@@ -96,6 +96,7 @@ alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -CF'
 
+export SHELL=/bin/bash
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -116,50 +117,12 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# TO DO TEXT CLI
-#export TODOTXT_DEFAULT_ACTION=ls
-#export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
-#export TODOTXT_DATE_ON_ADD=1
-#alias t='todo.sh -d ~/bin/todo/todo.cfg'
-#if [ -f ~/bin/todo/todo_completion ]; then
-#    . ~/bin/todo/todo_completion
-#    complete -F _todo t
-#fi
-#export PATH=${PATH}:${HOME}/bin/todo # TO DO TEXT CLI
-
-# Korean Language Setting
-#LANG="ko_KR.UTF-8"
-#LANG="en_US.UTF-8"
-
-# export JAVA_HOME=/usr/lib/jvm/jdk1.7.0_51
-# export CLASSPATH=.:$JAVA_HOME/lib
-# export ANDROID_JAVA_HOME=$JAVA_HOME
-# export PATH=$ANDROID_JAVA_HOME/bin:/usr/local/bin:$PATH
-# export PATH=${HOME}/bin:${PATH}:${HOME}/p4utils:${HOME}/p4utils/lib
-
-# export PATH=${PATH}:~/usr/lib
-# export PATH=${PATH}:~/android-sdks/platform-tools
-# export ARCH=arm
-# export CROSS_COMPILE=$SEC_KERNEL_COMPILER/arm-none-linux-gnueabi-
-# export CROSS_COMPILE="/usr/local/arm/arm-eabi-4.6/bin/arm-eabi-"
-# export TOOLCHAIN=/usr/local/arm/arm-eabi-4.6/
-# export LD_LIBRARY_PATH=$TOOLCHAIN/mpfr/lib:$TOOLCHAIN/gmp/lib:/usr/local/libiconv/lib:$LD_LIBRARY_PATH
-# export SEC_KERNEL_COMPILER=/opt/toolchains/arm-2009q3/bin
-
-# Sets the Mail Environment Variable
-
-# MAIL=/var/spool/mail/alex.jang && export MAIL
-
-# For kernel standalone build
-# export ARCH=arm
-# export SUBARCH=exynos
-
 # Using cd history
 source ~/bin/cd_func.sh
 
 export USE_CCACHE=1
 
-GIT_PROXY_COMMAND=/home/alex/bin/gitproxy
+# GIT_PROXY_COMMAND=/home/alex/bin/gitproxy
 
 export P4EDITOR=vim
 export P4MERGE=p4merge
@@ -170,11 +133,40 @@ ranger_cd () {
 }
 # source ~/.fzf.bash
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-# Enable programmable sdb completion features.
-if [ -f ~/.sdb/.sdb-completion.bash ]; then
- source ~/.sdb/.sdb-completion.bash
+
+# HSTR configuration - add this to ~/.bashrc
+alias hh=hstr                    # hh to be alias for hstr
+export HSTR_CONFIG=hicolor       # get more colors
+shopt -s histappend              # append new history items to .bash_history
+export HISTCONTROL=ignorespace   # leading space hides commands from history
+export HISTFILESIZE=500000       # increase history file size (default is 500)
+export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
+# ensure synchronization between Bash memory and history file
+export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
+# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
+if [[ $- =~ .*i.* ]]; then bind '"\C-r": "\C-a hstr -- \C-j"'; fi
+# if this is interactive shell, then bind 'kill last command' to Ctrl-x k
+if [[ $- =~ .*i.* ]]; then bind '"\C-xk": "\C-a hstr -k \C-j"'; fi
+
+bind '"\C-r": "\C-x1\e^\er"'
+bind -x '"\C-x1": __fzf_history';
+
+__fzf_history ()
+{
+__ehc $(history | fzf --tac --tiebreak=index --height=20% | perl -ne 'm/^\s*([0-9]+)/ and print "!$1"')
+}
+
+__ehc()
+{
+if
+        [[ -n $1 ]]
+then
+        bind '"\er": redraw-current-line'
+        bind '"\e^": magic-space'
+        READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${1}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+        READLINE_POINT=$(( READLINE_POINT + ${#1} ))
+else
+        bind '"\er":'
+        bind '"\e^":'
 fi
-export PATH=/home/alex.jang/@Work/ahbuild:$PATH
-export BOOT_COMPILE_64=/opt/toolchains/arm-eabi-4.9/bin/aarch64-linux-android-
-export BOOT_COMPILE_32=/opt/toolchains/arm-eabi-4.6/bin/arm-eabi-
+}

@@ -19,7 +19,7 @@ endif
 " The following are examples of different formats supported.
 
 " Language Support
-Plug 'nvie/vim-flake8'
+Plug 'neomake/neomake' "python flake8 적용
 Plug 'jceb/vim-orgmode'
 Plug 'kergoth/vim-bitbake'
 
@@ -50,6 +50,8 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'jaxbot/semantic-highlight.vim'
 Plug 'ayu-theme/ayu-vim' " or other package manager
 Plug 'tjammer/blayu.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'rakr/vim-one'
 
 " Framework
 " Plug 'honza/vim-snippets'
@@ -63,7 +65,6 @@ if !has('win32')
 endif
 Plug 'majutsushi/tagbar'
 Plug 'yuttie/comfortable-motion.vim'
-
 Plug 'ajh17/VimCompletesMe'
 
 " Background executed
@@ -176,18 +177,11 @@ let ayucolor="dark"   " for dark version of theme
 if has("gui_running")
   colorscheme blayu
 else
-  colorscheme ayu
+  colorscheme one
 endif
 " If ayu!
-highlight visual guifg=Black guibg=LightBlue gui=none
+" highlight visual guifg=Black guibg=LightBlue gui=none
 
-"let g:srcery_italic = 1
-"let g:srcery_inverse_match_paren = 1
-"colorscheme srcery
-
-"colorscheme blayu
-
-"colorscheme orange-moon
 
 " colorscheme hybrid
 " IF hybrid!!
@@ -252,9 +246,7 @@ call matchadd('ColorColumn', '\%121v', 100)
 " GUI --------------------------------------------------------------------- {{{
 " 폰트 설정
 if has("gui_running")
-  if has("win32")
-    set gfn=FantasqueSansMono\ Nerd\ Font:h11:cANSI
-  elseif has("unix")
+  if has("unix")
     set gfn=Source\ Code\ Pro\ 11
   else
     set gfn=consolas\ 11
@@ -861,7 +853,7 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDAltDelims_java = 1
 
 " Add your own custom formats or override the defaults
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' },
+let g:NERDCustomDelimiters = { 'c': { 'left': '//' },
       \ 'python': { 'left': '#', 'leftAlt': '# ' } }
 
 " Allow commenting and inverting empty lines (useful when commenting a region)
@@ -893,9 +885,6 @@ nmap <M-;> <plug>NERDCommenterToggle <bar> j
 vmap <silent><M-;> :call SavePos()<CR>gv <Bar> <plug>NERDCommenterToggle <bar> :call MoveBelow()<CR>
 " }}}
 " Multiple-Cursors {{{
-let g:EasyClipUseSubstituteDefaults = 1
-" Map start key separately from next key
-" let g:multi_cursor_start_key='<C-x>'
 " }}}
 " Auto-Pair {{{
 let b:autopairs_enabled = 0
@@ -944,6 +933,11 @@ let g:comfortable_motion_scroll_up_key = "k"
 " vim-better-whitespace {{{
 let g:show_spaces_that_precede_tabs=1
 highlight ExtraWhitespace ctermbg=89 guibg=#87005f
+" }}}
+" neomake {{{
+call neomake#configure#automake('w')
+call neomake#configure#automake('nw', 750)
+call neomake#configure#automake('rw', 1000)
 " }}}
 " }}}
 " Convenience mappings ---------------------------------------------------- {{{

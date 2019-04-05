@@ -40,7 +40,7 @@ make -j $CORE
 sudo make install
 sudo -H pip install Pygments
 cp gtags.conf ~/.globalrc
-sed -i 's/tc=native/tc=native:tc=pygments/g' ~/.globalrc
+# sed -i 's/tc=native/tc=native:tc=pygments/g' ~/.globalrc
 
 cd $CUR
 read -p "Remove all download files?" -n 1 -r

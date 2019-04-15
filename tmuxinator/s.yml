@@ -20,7 +20,3 @@ windows:
         - r
   - Update:
   - 2pane:
-      layout: main-vertical
-      panes:
-        - cd ~
-        - cd ~

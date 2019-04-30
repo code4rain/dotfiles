@@ -52,6 +52,8 @@ Plug 'ayu-theme/ayu-vim' " or other package manager
 Plug 'tjammer/blayu.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'rakr/vim-one'
+Plug 'BarretRen/vim-colorscheme' "PaperColor
+Plug 'nanotech/jellybeans.vim'
 
 " Framework
 " Plug 'honza/vim-snippets'
@@ -140,7 +142,7 @@ set ruler " 커서의 위치를 항상 보이게 함.
 set number " 줄 번호 표시
 set nuw=5 " 줄 번호 표시 너비 설정
 set cursorline " 현재 커서 행 강조
-set cursorcolumn " 현재 커서 열 강조
+" set cursorcolumn " 현재 커서 열 강조
 set laststatus=2 " 항상 status 라인을 표시하도록 함.
 set modelines=2
 " Status Line 설정 - powerline enable로 주석처리함
@@ -177,7 +179,7 @@ let ayucolor="dark"   " for dark version of theme
 if has("gui_running")
   colorscheme blayu
 else
-  colorscheme one
+  colorscheme jellybeans
 endif
 " If ayu!
 " highlight visual guifg=Black guibg=LightBlue gui=none
@@ -200,7 +202,7 @@ set splitbelow
 set splitright
 " }}}
 " Folding ----------------------------------------------------------------- {{{
-set foldlevel=5
+set foldlevel=999
 set foldcolumn=1
 set foldlevelstart=-1
 " Space to toggle folds.
@@ -335,7 +337,7 @@ autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
 autocmd FileType sh setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab foldmethod=syntax
 autocmd FileType c,cpp,java set mps+==:;
 autocmd FileType mkd setlocal nosmartindent noautoindent
 autocmd BufRead,BufNewFile *.cmm setfiletype trace
@@ -708,7 +710,7 @@ let g:UltiSnipsJumpForwardTrigger="<Tab>"
 let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
 " }}}
 " YCM {{{
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 let g:ycm_semantic_triggers = {}
 let g:ycm_semantic_triggers.c = ['->', '.', '(', '[', '&']
 let g:ycm_collect_identifiers_from_tags_files=1

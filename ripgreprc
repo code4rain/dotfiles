@@ -2,3 +2,5 @@
 kconf:{Kconfig,Kconfig.*}
 --type-add
 bb:{*.bb,*.bbappend,*.bbclass}
+--type-add
+dts:{*.dts,*.dtsi}

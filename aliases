@@ -89,3 +89,4 @@ then
 fi
 
 alias rake="noglob rake"
+alias lego="cd ~/LEGO/lego.git"

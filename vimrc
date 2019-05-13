@@ -22,6 +22,7 @@ endif
 Plug 'neomake/neomake' "python flake8 적용
 Plug 'jceb/vim-orgmode'
 Plug 'kergoth/vim-bitbake'
+Plug 'tell-k/vim-autopep8'
 
 " Expand Editor
 Plug 'tpope/vim-repeat'

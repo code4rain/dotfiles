@@ -1039,6 +1039,14 @@ nnoremap - <end>
 
 nnoremap <C-Space> a
 inoremap <C-Space> <ESC>
+
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+inoremap <S-Tab> <C-D>
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+vnoremap > >gv
+vnoremap < <gv
 " }}}
 " Abbreviations ----------------------------------------------------------- {{{
 ab fucntion function

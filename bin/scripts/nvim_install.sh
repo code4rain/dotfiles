@@ -5,14 +5,14 @@ if [ "$(id -u)" != "0" ]; then
     exit 1
 fi
 
-apt-get install python-dev python-pip python3-dev python3-pip
-add-apt-repository ppa:neovim-ppa/unstable
+apt-get install -y python-dev python-pip python3-dev python3-pip
+add-apt-repository -y ppa:neovim-ppa/unstable
 apt-get update
-apt-get install neovim
+apt-get install -y neovim
 pip3 install neovim
 update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
-update-alternatives --config vi
+update-alternatives --auto vi
 update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
-update-alternatives --config vim
+update-alternatives --auto vim
 update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
-update-alternatives --config editor
+update-alternatives --auto editor

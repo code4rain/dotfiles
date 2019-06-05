@@ -50,26 +50,9 @@ BACKDIR="$DOTHOME/backup/dotfiles/$(date "+%Y_%m_%d-%H_%M_%S")/"
 run() {
   link_dotfiles
   copy_binaries
-  install_programs
   $DOTHOME/bin/install.sh
   print_messages
 
-}
-
-install_tmuxinator() {
-  sudo apt-get install -y rubygems || sudo apt-get install -y rubygems-integration;
-  sudo -H gem install tmuxinator
-}
-
-install_rg() {
-  curl -LO https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb
-  sudo dpkg -i ripgrep_0.10.0_amd64.deb
-  rm -f ripgrep_0.10.0_amd64.deb
-}
-
-install_programs() {
-  install_tmuxinator
-  install_rg
 }
 
 add_directory_path() {

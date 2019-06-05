@@ -6,13 +6,22 @@
 	status = auto
 	branch = auto
 [alias]
+	a = "! # add files with fzf preview diffs; \n\
+		f() { \
+		    _height=$(stty size | awk '{print $1}');\
+		    git status -s | sort -r | fzf -m --preview \"git diff {2} | head -n $_height | pygmentize\" | awk '{print $2}' | xargs git add; \
+		}; f"
 	b ="!tig blame"
 	bb = "!git for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:red)%(objectname:short)%(color:reset);%(color:yellow)%(refname:short)%(color:reset);(%(color:green)%(committerdate:relative)%(color:reset));%(authorname);%(contents:subject)' | column -t -s ';'"
 	bf = !tig refs
 	br = branch -avv
 	cch = !~/.git_template/hooks/checkpatch.pl --no-tree -g HEAD
-	ch = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --show-types -g HEAD
-	check = !~/.git_template/hooks/checkpatch.pl --max-line-length=120 --git
+	ch = "!git checkout $(git bselect)"
+	bselect = "! # select branch with preview; \n\
+		f() { \
+			_height=$(stty size | awk '{print $1}');\
+			git branch | egrep -v '^\\*' | fzf --preview \"git l {1} | head -n $_height\"; \
+		}; f"
 	ci = commit -v -s
 	cl = clean -df
 	clf = "!f() { cd $(git rev-parse --show-toplevel); git clean -dfx ; cd $GIT_PREFIX; }; f"

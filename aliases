@@ -1,7 +1,8 @@
 ranger_cd () {
-  command ranger --choosedir=${HOME}/.lastdir &&
+  ranger --choosedir=${HOME}/.lastdir &&
   cd $(cat ${HOME}/.lastdir)
 }
+
 ee() {
   emacsclient -s guidaemon -c "$@" &
 }
@@ -9,12 +10,15 @@ ee() {
 gg() {
   git grep "$@"
 }
+
 add_project () {
   task add project:"$@"
 }
+
 v() {
   vim $(fzf)
 }
+
 h() {
   history_command=$(echo $(history | fzf-tmux --tac +s) | cut -d' ' -f2- )
   echo $history_command

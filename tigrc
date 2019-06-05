@@ -2,7 +2,7 @@ set refresh-mode = auto          # Enum: manual, auto, after-command, period
 set main-view = id:width=7 date:default,local=yes author:full,width=14 commit-title:yes,graph=v1,refs=yes,overflow=no
 set line-graphics = default
 set diff-highlight = true
-set wrap-lines = yes
+# set wrap-lines = yes
 set wrap-search = no
 set main-options = -n 70000
 set show-changes = no

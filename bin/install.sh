@@ -2,6 +2,8 @@
 
 set -e
 
+source $HOME/bin/color.sh
+
 BUILD_ROOT_DIR="$HOME/External"
 DOT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
@@ -23,6 +25,13 @@ TMUX_DIR="$BUILD_ROOT_DIR/tmux"
 TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
 TMUX_BUILD="sudo apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev byacc && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
 
+CTAG_DIR="$BUILD_ROOT_DIR/ctag"
+CTAG_GITHUB="https://github.com/universal-ctags/ctags.git"
+CTAG_BUILD="sudo apt-get install -y curl wget ncurses-dev python git && ./autogen.sh && ./configure && make -j32 && sudo make install"
+
+GLOBAL_TAR_URL="ftp.gnu.org/pub/gnu/global/global-6.6.3.tar.gz"
+GLOBAL_BUILD="sh reconf.sh && .configure && make -j 32 && sudo make install && cp gtags.conf ~/.globalrc"
+
 INSTALL_PACKAGES="build-essential automake cmake libncurses5-dev libncursesw5-dev colordiff python-pip python3-pip"
 
 install_tmuxinator() {
@@ -33,20 +42,63 @@ install_tmuxinator() {
 install_deb_from_github() {
   local URL=$(curl -s https://api.github.com/repos/$1/releases/latest | grep "browser_download_url.*_amd64.deb" | cut -d : -f 2,3 | tr -d \")
   local PACKAGE=$(basename ${URL})
-  [ -f "/tmp/$PACKAGE" ] || echo "Already installed $PACKAGE" && return
-  wget -q --show-progress ${URL} /tmp/$PACKAGE
+  if [ -f "/tmp/$PACKAGE" ] 
+  then
+    msg_cyan
+    echo "Already installed $PACKAGE"
+    msg_nc
+    return
+  fi
+
+  msg_cyan
+  echo ">> wget -q --show-progress ${URL} /tmp/$PACKAGE <<"
+  wget -q --show-progress ${URL} -O /tmp/$PACKAGE
+  msg_green
+  echo ">> Let's Install! <<"
+  msg_blue
+  echo ">> sudo dpkg -i /tmp/$PACKAGE <<"
   sudo dpkg -i /tmp/$PACKAGE
+  msg_nc
 }
 
 install_pip() {
   sudo -H pip3 install --upgrade $1
   sudo -H pip2 install --upgrade $1
 }
-install_programs() {
-  install_tmuxinator
-  install_deb_from_github "BurntSushi/ripgrep"
-  install_deb_from_github "sharkdp/bat"
-  install_pip "prompt_toolkit"
+
+install_targz() {
+  local URL=$1
+  local BUILDCMD=$2
+  local PACKAGE=$(basename ${URL})
+  if [ -f "/tmp/$PACKAGE" ]
+  then
+    msg_cyan
+    echo "Already installed $PACKAGE"
+    msg_nc
+    return
+  fi
+  wget -q --show-progress ${URL} -O /tmp/$PACKAGE
+  tar zxf /tmp/$PACKAGE
+  msg_green
+  echo ">> Let's build! <<"
+  msg_cyan
+  echo ">>> Move ${PACKAGE/.tar.gz/} <<<"
+  cd ${PACKAGE/.tar.gz/}
+  msg_blue
+  echo ">> $BUILDCMD <<"
+  eval $BUILDCMD
+  result=$?
+  if [ "0" != "$result" ]
+  then
+    msg_red
+    echo ">> Failed!! ${PACKAGE}: Result=$result <<"
+    msg_nc
+    exit 1
+  else
+    msg_green
+    echo ">> Sucess!! $PACKAGE <<"
+    msg_nc
+  fi
 }
 
 clone_or_update_and_build() {
@@ -57,6 +109,7 @@ clone_or_update_and_build() {
     echo ">> Run git pull for $2 <<"
     msg_nc
     cd $2
+    git stash
     git pull --rebase
   else
     git clone $1 $2
@@ -88,7 +141,16 @@ clone_or_update_and_build() {
   fi
 }
 
-source $HOME/bin/color.sh
+install_programs() {
+  install_tmuxinator
+  install_deb_from_github "BurntSushi/ripgrep"
+  install_deb_from_github "sharkdp/bat"
+  install_pip "prompt_toolkit"
+  install_pip "pygments"
+  clone_or_update_and_build $CTAG_GITHUB $CTAG_DIR "$CTAG_BUILD"
+  install_targz "$GLOBAL_TAR_URL" "$GLOBAL_BUILD"
+}
+
 msg_green
 echo "Install Essential packages - ${INSTALL_PACKAGES}"
 # Check essential
@@ -104,7 +166,6 @@ echo "Install neovim done"
 msg_nc
 
 pushd .
-# $DOT_DIR/bin/instGlobal.sh
 clone_or_update_and_build $POWERLEVEL10K_GITHUB $POWERLEVEL10K_DIR
 clone_or_update_and_build $ZSH_AUTOSUGGESTION_GITHUB $ZSH_AUTOSUGGESTION_DIR
 clone_or_update_and_build $TIG_GITHUB $TIG_DIR "${TIG_BUILD}"

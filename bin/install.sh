@@ -4,6 +4,8 @@ set -e
 
 source $HOME/bin/color.sh
 
+CORE=`cat /proc/cpuinfo | grep processor | tail -n 1 | cut -d' ' -f 2`
+
 BUILD_ROOT_DIR="$HOME/External"
 DOT_DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
 
@@ -15,7 +17,7 @@ ZSH_AUTOSUGGESTION_GITHUB="https://github.com/zsh-users/zsh-autosuggestions.git"
 
 TIG_DIR="$BUILD_ROOT_DIR/tig"
 TIG_GITHUB="https://github.com/jonas/tig.git"
-TIG_BUILD="sudo apt-get install -y automake libncurses5-dev libncursesw5-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
+TIG_BUILD="sudo apt-get install -y automake libncurses5-dev libncursesw5-dev && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j $CORE && echo 'systemwide install' && sudo make install"
 
 RANGER_DIR="$BUILD_ROOT_DIR/ranger"
 RANGER_GITHUB="https://github.com/hut/ranger.git"
@@ -23,14 +25,14 @@ RANGER_BUILD="sudo apt-get install -y automake libncurses5-dev libncursesw5-dev 
 
 TMUX_DIR="$BUILD_ROOT_DIR/tmux"
 TMUX_GITHUB="https://github.com/ThomasAdam/tmux.git"
-TMUX_BUILD="sudo apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev byacc && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j32 && echo 'systemwide install' && sudo make install"
+TMUX_BUILD="sudo apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev byacc && sh autogen.sh && echo 'configure' && ./configure && echo 'make' && make -j $CORE && echo 'systemwide install' && sudo make install"
 
 CTAG_DIR="$BUILD_ROOT_DIR/ctag"
 CTAG_GITHUB="https://github.com/universal-ctags/ctags.git"
-CTAG_BUILD="sudo apt-get install -y curl wget ncurses-dev python git && ./autogen.sh && ./configure && make -j32 && sudo make install"
+CTAG_BUILD="sudo apt-get install -y curl wget ncurses-dev python git && ./autogen.sh && ./configure && make -j $CORE && sudo make install"
 
 GLOBAL_TAR_URL="ftp.gnu.org/pub/gnu/global/global-6.6.3.tar.gz"
-GLOBAL_BUILD="sh reconf.sh && .configure && make -j 32 && sudo make install && cp gtags.conf ~/.globalrc"
+GLOBAL_BUILD="sudo apt-get install -y bison && sh reconf.sh && .configure && make -j $CORE && sudo make install && cp gtags.conf ~/.globalrc"
 
 INSTALL_PACKAGES="build-essential automake cmake libncurses5-dev libncursesw5-dev colordiff python-pip python3-pip"
 

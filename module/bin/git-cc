@@ -1,0 +1,53 @@
+#! /usr/bin/env python3
+from __future__ import unicode_literals
+from __future__ import print_function
+from prompt_toolkit import prompt
+from subprocess import call
+import textwrap
+
+
+def check_title(input, index):
+    input = check_capital(input)
+    input, index = check_semicolon_before(input, index)
+    input, index = check_semicolon_after(input, index)
+    input, index = check_braket(input, index)
+    return input, index
+
+def check_desc(input):
+    input = textwrap.fill(input, 75)
+    return input
+
+def check_semicolon_before(title, index):
+    return re.sub(r'\s*:', r':', title), len(title)
+def check_semicolon_after(title, index):
+    return re.sub(r':(\S)', r': \1', title), len(title)
+def check_braket(title, index):
+    return re.sub('(\[|\])', '', title), len(title)
+def lower_repl(m):
+     return m.group(1) + m.group(2).lower() + m.group(3)
+def check_capital(title):
+    return re.sub(r'(.*: )([A-Z])([a-z].*)', lower_repl, title)
+
+def check_plm(description):
+    r = re.findall(r"(plm: (p|P)[0-9\-]+))(.*)")
+    if r:
+        return r.upper()
+    else:
+        return
+
+if __name__ == '__main__':
+    # title = command_line("Title: ", check_title)
+    # title = check_semicolon_after(check_semicolon_before(check_braket(check_capital(title))))
+    call(["git", "status"])
+    title = prompt('Title: ')
+    descs = []
+    while 1:
+        # desc = command_line("Description: ")
+        desc = prompt('Description: ')
+        if desc:
+            descs.append(check_desc(desc))
+        else:
+            break
+    description = '\n'.join(descs)
+
+    call(["git", "commit", "-s", "-m", title, "-m", description])

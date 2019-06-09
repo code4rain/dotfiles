@@ -14,7 +14,7 @@ def check_title(input, index):
     return input, index
 
 def check_desc(input):
-    input = textwrap.fill(input, 75)
+    input = textwrap.fill(input, 79)
     return input
 
 def check_semicolon_before(title, index):
@@ -45,9 +45,9 @@ if __name__ == '__main__':
         # desc = command_line("Description: ")
         desc = prompt('Description: ')
         if desc:
-            descs.append(check_desc(desc))
+            descs.append(desc)
         else:
             break
-    description = '\n'.join(descs)
+    description = check_desc('\n'.join(descs))
 
     call(["git", "commit", "-s", "-m", title, "-m", description])

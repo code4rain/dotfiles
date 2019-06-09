@@ -32,7 +32,7 @@ CTAG_GITHUB="https://github.com/universal-ctags/ctags.git"
 CTAG_BUILD="sudo apt-get install -y curl wget ncurses-dev python git && ./autogen.sh && ./configure && make -j $CORE && sudo make install"
 
 GLOBAL_TAR_URL="ftp.gnu.org/pub/gnu/global/global-6.6.3.tar.gz"
-GLOBAL_BUILD="sudo apt-get install -y bison && sh reconf.sh && .configure && make -j $CORE && sudo make install && cp gtags.conf ~/.globalrc"
+GLOBAL_BUILD="sudo apt-get install -y bison flex && sh reconf.sh && .configure && make -j $CORE && sudo make install && cp gtags.conf ~/.globalrc"
 
 INSTALL_PACKAGES="build-essential automake cmake libncurses5-dev libncursesw5-dev colordiff python-pip python3-pip"
 
